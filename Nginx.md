@@ -1,3 +1,12 @@
+---
+title: "Nginx"
+date: 2024-03-25
+categories:
+  - Web
+tags:
+  - 反向代理
+---
+
 # 安装
 
 最流行的web服务器软件
@@ -201,129 +210,3 @@ https://47.115.215.143
 
 root跟打包好的vue目录
 
-# hexo搭建github博客网页
-
-新建仓库，仓库名字 用户名.github.io,勾选readme
-
-这时在网站上可以直接访问到
-
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240325085453572.png" alt="image-20240325085453572" style="zoom:33%;" />
-
-
-
-
-
-cd在之前的nginx/bolg文件夹中
-
-~~~
-[root@iZf8zeh9f5g1mo4rk51t4pZ blog]# hexo new "tutu's personal blog"
-INFO  Validating config
-INFO  Created: ~/nginx/blog/source/_posts/tutu-s-personal-blog.md
-hexo generate
-hexo deploy
-~~~
-
-编辑_config.yml
-
-~~~
-deploy:
-  type: git
-  repo: git@github.com:你的用户名/你的用户名.github.io.git
-  branch: master
-~~~
-
-下载插件npm install hexo-deployer-git --save
-
-git config --global user.email tutu2061867903@gmail.com
-
-git config --global user.name tutuLP
-
-地址改用以下：
-
-git@github.com:tutuLP/tutuLP.github.io.git 可能需要打开端口22 9418
-
-https://github.com/tutuLP/tutuLP.github.io.git
-
-
-
-hexo deploy
-
-进入GitHub仓库的设置页面，找到GitHub Pages选项，并将源设置为`master branch`。
-
-再次访问即可成功
-
-
-
-
-
-1. **选择一个新主题**：
-
-   - 在Hexo官方网站或GitHub上找到你喜欢的主题。确保主题与你的博客风格和需求相匹配。
-
-2. **安装主题**：
-
-   - 使用npm或者直接从GitHub克隆主题的仓库到你的Hexo博客目录。具体操作取决于主题作者提供的安装方式。
-
-3. **配置主题**：
-
-   - 打开Hexo博客的配置文件（_config.yml），找到并修改
-
-     ```
-     theme
-     ```
-
-     项，将其值设置为你安装的主题的名称。例如：
-
-     ```
-     makefileCopy code
-     theme: your-theme-name
-     ```
-
-4. **根据主题文档进行配置**：
-
-   - 主题通常会有自己的配置选项和文档。根据主题作者提供的文档进行配置，以满足你的需求。
-
-5. **重新生成和部署博客**：
-
-   - 在完成主题的安装和配置后，运行以下命令重新生成静态文件并部署博客：
-
-     ```
-     Copy codehexo clean
-     hexo generate
-     hexo deploy
-     ```
-
-
-
-1. **在云服务器上安装Nginx**：
-
-   - 首先确保你的云服务器上已经安装了Nginx。你可以使用包管理器（如apt、yum等）来安装。
-
-2. **克隆你的Hexo仓库到云服务器**：
-
-   - 在云服务器上克隆你的Hexo仓库，确保你已经安装了Git。
-
-3. **配置Nginx**：
-
-   - 编辑Nginx的配置文件，将Hexo博客的路径指向你克隆的Hexo仓库的public目录。配置类似于以下内容：
-
-     ```
-     arduinoCopy codeserver {
-         listen 80;
-         server_name your-domain.com;
-         location / {
-             root /path/to/your/hexo/public;
-             index index.html;
-         }
-     }
-     ```
-
-   - 确保替换your-domain.com为你的域名，/path/to/your/hexo/public为你Hexo博客的public目录的路径。
-
-4. **重启Nginx服务**：
-
-   - 在完成配置后，重启Nginx服务以使更改生效。
-
-5. **设置域名解析**：
-
-   - 如果你使用了自定义域名，确保将域名解析指向你的云服务器的IP地址。
