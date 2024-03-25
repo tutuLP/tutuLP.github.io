@@ -1,14 +1,11 @@
 ---
-
 title: "hexo"
 date: 2024-03-25
 categories:
-
   - Web
 tags:
   - Node.js
   - 静态网站生成器
-
 ---
 
 # hexo搭建github博客网页
@@ -80,7 +77,7 @@ git branch --set-upstream-to=origin/main master 本地master分支与远程main�
 
 git pull origin main --allow-unrelated-histories 拉取-运行历史不同步
 
-然后回到blog hexo generate hexo deploy 可以简写成hexo c hexo d
+然后回到blog `hexo generate`       `hexo deploy/hexo d`
 
 
 
