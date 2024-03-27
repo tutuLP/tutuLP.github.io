@@ -12,7 +12,7 @@ tags:
 
 安装请看Nginx基础篇
 
-新建仓库，仓库名字 用户名.github.io,勾选readme
+新建仓库-仓库名字：用户名.github.io,勾选readme
 
 这时在网站上可以直接访问到
 
@@ -77,7 +77,7 @@ git branch --set-upstream-to=origin/main master 本地master分支与远程main�
 
 git pull origin main --allow-unrelated-histories 拉取-运行历史不同步
 
-然后回到blog `hexo generate`       `hexo deploy/hexo d`
+然后回到blog `hexo generate`       `hexo deploy`
 
 
 
@@ -131,3 +131,20 @@ blog/_config.stellar.ymlopen_graph:
   twitter_id: # for open_graph meta
 ```
 
+## 管理构建好的静态网页
+
+hexo generate后生成的资源存放在public文件夹中
+
+当我测试时创建的分类和标签会永远存在，即使我删除.md文档重新构建也依旧存在
+
+cd /public/categories 
+
+rm -rf
+
+然后清除临时文件 生成 推送
+
+hexo clean
+
+hexo generate
+
+hexo deploy
