@@ -209,4 +209,3 @@ https://47.115.215.143
 <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240320193831477.png" alt="image-20240320193831477" style="zoom:33%;" />
 
 root跟打包好的vue目录
-

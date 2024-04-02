@@ -300,3 +300,386 @@ nginxCopy codeserver {
 ```
 
 保存并重新加载 Nginx 配置，然后访问 `http://your_server_domain.com/api/hello`，你应该能够看到 "Hello, World!" 的响应。
+
+
+
+# Step by Step
+
+~~~c++
+#include "oatpp/web/server/HttpConnectionHandler.hpp"
+
+#include "oatpp/network/Server.hpp"
+#include "oatpp/network/tcp/server/ConnectionProvider.hpp"
+
+void run() {
+
+	/* Create Router for HTTP requests routing */
+	auto router = oatpp::web::server::HttpRouter::createShared();//Http请求的路由，url映射到端点处理程序，现在没有声明端点，返回404
+
+	/* Create HTTP connection handler with router *///http连接处理，每一个连接一个线程
+	auto connectionHandler = oatpp::web::server::HttpConnectionHandler::createShared(router);
+
+	/* Create TCP connection provider *///tcp连接，绑定一个端口
+	auto connectionProvider = oatpp::network::tcp::server::ConnectionProvider::createShared({ "localhost", 8000, oatpp::network::Address::IP_4 });
+
+	/* Create server which takes provided TCP connections and passes them to HTTP connection handler */
+	oatpp::network::Server server(connectionProvider, connectionHandler);//server运行一个循环，获取tcp连接，传到连接处理
+
+	/* Print info about server port */
+	OATPP_LOGI("MyApp", "Server running on port %s", connectionProvider->getProperty("port").getData());
+
+	/* Run server */
+	server.run();
+}
+int main() {
+	/* Init oatpp Environment */
+	oatpp::base::Environment::init();
+	/* Run App */
+	run();
+	/* Destroy oatpp Environment */
+	oatpp::base::Environment::destroy();
+	return 0;
+
+}
+~~~
+
+###添加请求处理程序
+
+当url /hello请求做出处理
+
+访问http:/localhost:8000/hello 返回hello world消息
+
+~~~c++
+class Handler : public oatpp::web::server::HttpRequestHandler {
+public:
+  std::shared_ptr<OutgoingResponse> handle(const std::shared_ptr<IncomingRequest>& request) override {
+    return ResponseFactory::createResponse(Status::CODE_200, "Hello World!");
+  }
+};
+
+void run(){
+	router->route("GET", "/hello", std::make_shared<Handler>());
+}
+~~~
+
+### 使用JSON对象进行响应
+
+为了序列化/反序列化对象，oatpp 使用特殊的[数据传输对象(DTO)和ObjectMappers
+
+~~~c++
+#include "oatpp/parser/json/mapping/ObjectMapper.hpp"
+#include "oatpp/core/macro/codegen.hpp"
+
+/* Begin DTO code-generation */
+#include OATPP_CODEGEN_BEGIN(DTO)
+
+/**
+ * Message Data-Transfer-Object
+ */
+class MessageDto : public oatpp::DTO {
+
+  DTO_INIT(MessageDto, DTO /* Extends */)
+
+  DTO_FIELD(Int32, statusCode);   // Status code field
+  DTO_FIELD(String, message);     // Message field
+
+};
+
+/* End DTO code-generation */
+#include OATPP_CODEGEN_END(DTO)
+
+class Handler : public oatpp::web::server::HttpRequestHandler {
+private:
+  std::shared_ptr<oatpp::data::mapping::ObjectMapper> m_objectMapper;
+public:
+
+  /**
+   * Constructor with object mapper.
+   * @param objectMapper - object mapper used to serialize objects.
+   */
+  Handler(const std::shared_ptr<oatpp::data::mapping::ObjectMapper>& objectMapper)
+    : m_objectMapper(objectMapper)
+  {}
+
+  /**
+   * Handle incoming request and return outgoing response.
+   */
+  std::shared_ptr<OutgoingResponse> handle(const std::shared_ptr<IncomingRequest>& request) override {
+    auto message = MessageDto::createShared();
+    message->statusCode = 1024;
+    message->message = "Hello DTO!";
+    return ResponseFactory::createResponse(Status::CODE_200, message, m_objectMapper);
+  }
+
+};
+
+void run() {
+
+  /* Create json object mapper */
+  auto objectMapper = oatpp::parser::json::mapping::ObjectMapper::createShared();
+
+  /* Create Router for HTTP requests routing */
+  auto router = oatpp::web::server::HttpRouter::createShared();
+
+  /* Route GET - "/hello" requests to Handler */
+  router->route("GET", "/hello", std::make_shared<Handler>(objectMapper /* json object mapper */ ));
+  }
+~~~
+
+## oatpp的结构
+
+DTO 数据传输对象 定义了数据的格式
+
+controller 使用api controller 端点处理程序(处理路由请求) 使用dto中的类封装消息
+
+AppComponent.hpp 定义必须的组件(HTTP连接，请求路由，TCP连接，ObjectMapper)
+
+App.cpp main 路由器(请求) 获取上述组件中的路由-获取controller中的处理程序-建立路由到处理程序的映射
+
+​						  获取HTTP连接-获取TCP连接-建立服务-从TCP连接提供者发送消息到http连接处理
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240328095617737.png" alt="image-20240328095617737" style="zoom:33%;" />
+
+### 代码
+
+DTOs.hpp
+
+~~~c++
+#ifndef DTOs_hpp
+#define DTOs_hpp
+
+#include "oatpp/core/data/mapping/type/Object.hpp"
+#include "oatpp/core/macro/codegen.hpp"
+#include "oatpp/parser/json/mapping/ObjectMapper.hpp"
+
+#include "oatpp/web/server/HttpConnectionHandler.hpp"
+
+#include "oatpp/network/Server.hpp"
+#include "oatpp/network/tcp/server/ConnectionProvider.hpp"
+
+/* Begin DTO code-generation */
+#include OATPP_CODEGEN_BEGIN(DTO)
+
+/**
+ * Message Data-Transfer-Object
+ */
+class MessageDto : public oatpp::DTO {
+
+	DTO_INIT(MessageDto, DTO /* Extends */)
+
+		DTO_FIELD(Int32, statusCode);   // Status code field
+	DTO_FIELD(String, message);     // Message field
+
+};
+
+/* TODO - Add more DTOs here */
+
+/* End DTO code-generation */
+#include OATPP_CODEGEN_END(DTO)
+
+#endif /* DTOs_hpp */
+~~~
+
+MyController.hpp
+
+~~~c++
+#ifndef MyController_hpp
+#define MyController_hpp
+
+#include "dto/DTOs.hpp"
+
+#include "oatpp/web/server/api/ApiController.hpp"
+#include "oatpp/core/macro/codegen.hpp"
+#include "oatpp/core/macro/component.hpp"
+
+#include OATPP_CODEGEN_BEGIN(ApiController) ///< Begin Codegen
+
+/**
+ * Sample Api Controller.
+ */
+class MyController : public oatpp::web::server::api::ApiController {
+public:
+    /**
+     * Constructor with object mapper.
+     * @param objectMapper - default object mapper used to serialize/deserialize DTOs.
+     */
+    MyController(OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper))
+        : oatpp::web::server::api::ApiController(objectMapper)
+    {}
+public:
+
+    ENDPOINT("GET", "/hello", root) {
+        auto dto = MessageDto::createShared();
+        dto->statusCode = 200;
+        dto->message = "Hello World!";
+        return createDtoResponse(Status::CODE_200, dto);
+    }
+
+    // TODO Insert Your endpoints here !!!
+
+};
+
+#include OATPP_CODEGEN_END(ApiController) ///< End Codegen
+
+#endif /* MyController_hpp */
+~~~
+
+AppComponent.hpp
+
+~~~cpp
+#ifndef AppComponent_hpp
+#define AppComponent_hpp
+
+#include "oatpp/parser/json/mapping/ObjectMapper.hpp"
+#include "oatpp/web/server/HttpConnectionHandler.hpp"
+#include "oatpp/network/tcp/server/ConnectionProvider.hpp"
+#include "oatpp/core/macro/component.hpp"
+
+/**
+ *  Class which creates and holds Application components and registers components in oatpp::base::Environment
+ *  Order of components initialization is from top to bottom
+ */
+class AppComponent {
+public:
+    /**
+     *  Create ConnectionProvider component which listens on the port
+     */
+    OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::network::ServerConnectionProvider>, serverConnectionProvider)([] {
+        return oatpp::network::tcp::server::ConnectionProvider::createShared({ "localhost", 8000, oatpp::network::Address::IP_4 });
+        }());
+
+    /**
+     *  Create Router component
+     */
+    OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::web::server::HttpRouter>, httpRouter)([] {
+        return oatpp::web::server::HttpRouter::createShared();
+        }());
+
+    /**
+     *  Create ConnectionHandler component which uses Router component to route requests
+     */
+    OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::network::ConnectionHandler>, serverConnectionHandler)([] {
+        OATPP_COMPONENT(std::shared_ptr<oatpp::web::server::HttpRouter>, router); // get Router component
+        return oatpp::web::server::HttpConnectionHandler::createShared(router);
+        }());
+
+    /**
+     *  Create ObjectMapper component to serialize/deserialize DTOs in Contoller's API
+     */
+    OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::data::mapping::ObjectMapper>, apiObjectMapper)([] {
+        return oatpp::parser::json::mapping::ObjectMapper::createShared();
+        }());
+
+};
+
+#endif /* AppComponent_hpp */
+~~~
+
+App.cpp
+
+~~~cpp
+#include "controller/MyController.hpp"
+#include "AppComponent.hpp"
+#include "oatpp/network/Server.hpp"
+
+void run() {
+
+	/* Register Components in scope of run() method */
+	AppComponent components;
+
+	/* Get router component */
+	OATPP_COMPONENT(std::shared_ptr<oatpp::web::server::HttpRouter>, router);
+
+	/* Create MyController and add all of its endpoints to router */
+	auto myController = std::make_shared<MyController>();
+	router->addController(myController);
+
+	/* Get connection handler component */
+	OATPP_COMPONENT(std::shared_ptr<oatpp::network::ConnectionHandler>, connectionHandler);
+
+	/* Get connection provider component */
+	OATPP_COMPONENT(std::shared_ptr<oatpp::network::ServerConnectionProvider>, connectionProvider);
+
+	/* Create server which takes provided TCP connections and passes them to HTTP connection handler */
+	oatpp::network::Server server(connectionProvider, connectionHandler);
+
+	/* Priny info about server port */
+	OATPP_LOGI("MyApp", "Server running on port %s", connectionProvider->getProperty("port").getData());
+
+	/* Run server */
+	server.run();
+
+}
+
+int main(int argc, const char* argv[]) {
+
+	/* Init oatpp Environment */
+	oatpp::base::Environment::init();
+
+	/* Run App */
+	run();
+
+	/* Destroy oatpp Environment */
+	oatpp::base::Environment::destroy();
+
+	return 0;
+}
+~~~
+
+
+
+~~~cpp
+#ifndef MyController_hpp
+#define MyController_hpp
+
+#include "dto/DTOs.hpp"
+#include "oatpp/web/server/api/ApiController.hpp"
+#include "oatpp/core/macro/codegen.hpp"
+#include "oatpp/core/macro/component.hpp"
+
+#include OATPP_CODEGEN_BEGIN(ApiController) ///< Begin Codegen
+
+/**
+ * Sample Api Controller.
+ */
+class MyController : public oatpp::web::server::api::ApiController {
+public:
+    /**
+     * Constructor with object mapper.
+     * @param objectMapper - default object mapper used to serialize/deserialize DTOs.
+     */
+    MyController(OATPP_COMPONENT(std::shared_ptr<oatpp::data::mapping::ObjectMapper>, objectMapper))
+        : oatpp::web::server::api::ApiController(objectMapper)
+    {}
+
+public:
+
+    ENDPOINT("GET", "/hello", roothello) {
+        auto dto = MessageDto::createShared();
+        dto->statusCode = 200;
+        dto->message = "Hello World!";
+        return createDtoResponse(Status::CODE_200, dto);
+    }
+
+    // TODO Insert Your endpoints here !!!
+    ENDPOINT("GET", "/", root) {
+        auto response = createResponse(Status::CODE_200, "<html><body><form action=\"/submit\" method=\"post\"><input type=\"text\" name=\"input\" placeholder=\"Enter something\"><button type=\"submit\">Submit</button></form></body></html>");
+        response->putHeader(oatpp::web::protocol::http::Header::CONTENT_TYPE, "text/html");
+        return response;
+    }
+
+    ENDPOINT("POST", "/submit", submit, BODY_STRING(String, body)) {
+        OATPP_LOGI("MyController", "Received input: %s", body->c_str());
+        auto response = createResponse(Status::CODE_200, "Received input: " + *body);
+        response->putHeader(oatpp::web::protocol::http::Header::CONTENT_TYPE, "text/plain");
+        return response;
+    }
+
+};
+
+#include OATPP_CODEGEN_END(ApiController) ///< End Codegen
+
+#endif /* MyController_hpp */
+
+~~~
+
