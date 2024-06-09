@@ -148,3 +148,19 @@ hexo clean
 hexo generate
 
 hexo deploy
+
+
+
+
+
+https://tutulp.github.io/
+
+是的，你可以通过将自定义域名（例如你拥有的域名）映射到你的GitHub Pages网站来实现这一目标。以下是一些步骤：
+
+1. **购买域名**：首先，你需要购买一个域名，例如`yourdomain.com`。你可以通过注册商（例如GoDaddy、Namecheap等）购买域名。
+2. **配置DNS记录**：登录到你的域名注册商的控制面板，并配置DNS记录，将你的域名指向GitHub Pages。通常，你需要添加一个CNAME记录，将域名指向你的GitHub Pages用户名，例如`yourusername.github.io`。具体的步骤可能会因注册商而异，你可以参考GitHub Pages提供的文档或向注册商寻求帮助。
+3. **在GitHub设置中配置自定义域名**：登录到GitHub，进入你的仓库设置页面，将你的自定义域名添加到"Custom domain"字段中。
+4. **等待DNS生效**：一旦你配置了DNS记录并保存了更改，你需要等待一段时间（通常几小时至48小时），直到DNS记录生效。一旦生效，你的域名就会指向你的GitHub Pages网站。
+5. **HTTPS支持**：GitHub Pages支持HTTPS，但你需要确保你的域名有有效的SSL证书。你可以使用GitHub提供的自动生成的SSL证书，或者使用其他证书颁发机构提供的证书。
+
+通过这些步骤，你就可以将你的GitHub Pages网站与你自己的域名关联起来，使访问者在浏览器中看到你的域名，但实际上打开的是GitHub Pages上托管的网站。

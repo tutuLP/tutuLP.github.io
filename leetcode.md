@@ -1,3 +1,12 @@
+---
+title: "力扣面试50题"
+date: 2024-06-09
+categories:
+  - 刷题
+---
+
+# 数组/字符串
+
 ### 88 合并两个有序数组
 
 非递减顺序：从小到大排列
@@ -1060,6 +1069,8 @@ public:
 
 # 双指针
 
+核心思想：创建两个指针，一个指向头，一个指尾，根据条件遍历
+
 ### 15 三数之和
 
 给你一个整数数组 `nums` ，判断是否存在三元组 `[nums[i], nums[j], nums[k]]` 满足 `i != j`、`i != k` 且 `j != k` ，同时还满足 `nums[i] + nums[j] + nums[k] == 0` 。请
@@ -1124,9 +1135,9 @@ public:
 };
 ~~~
 
+##滑动窗口
 
-
-# 滑动窗口
+双指针的基础上，像一个窗口一样滑动遍历
 
 ### 209 长度最小的子数组
 
@@ -1313,6 +1324,32 @@ public:
 
 # 哈希表
 
+使用unordered_map
+
+### 205同构字符串
+
+~~~c++
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        unordered_map<char, char> s2t;
+        unordered_map<char, char> t2s;
+        int len = s.length();
+        for (int i = 0; i < len; ++i) {
+            char x = s[i], y = t[i];
+            if ((s2t.count(x) && s2t[x] != y) || (t2s.count(y) && t2s[y] != x)) {
+                return false;
+            }
+            s2t[x] = y;
+            t2s[y] = x;
+        }
+        return true;
+    }
+};
+~~~
+
+
+
 ### 383 赎金信
 
 给你两个字符串：`ransomNote` 和 `magazine` ，判断 `ransomNote` 能不能由 `magazine` 里面的字符构成。
@@ -1364,4 +1401,170 @@ public:
 排序->遍历,下一个是前一位+1继续,遍历的下一位是不是前一位+1 O(n)
 
 哈希表 O(1)
+
+
+
+# 栈
+
+stk
+
+
+
+# 回溯-一种递归思路
+
+类似深度优先
+
+### 17 电话号码的字母组合
+
+myidea：用二维数组存储映射关系，下标为数字
+
+~~~c++
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        vector<string> combinations;//存储所有字母组合
+        if (digits.empty()) {
+            return combinations;
+        }
+        unordered_map<char, string> phoneMap{//哈希表存储映射关系
+            {'2', "abc"},
+            {'3', "def"},
+            {'4', "ghi"},
+            {'5', "jkl"},
+            {'6', "mno"},
+            {'7', "pqrs"},
+            {'8', "tuv"},
+            {'9', "wxyz"}
+        };
+        string combination;//临时字母组合
+        backtrack(combinations, phoneMap, digits, 0, combination);
+        return combinations;
+    }
+
+    void backtrack(vector<string>& combinations, const unordered_map<char, string>& phoneMap, const string& digits, int index, string& combination) {
+        if (index == digits.length()) {
+            combinations.push_back(combination);
+        } else {
+            char digit = digits[index];//获取当前字数字
+            const string& letters = phoneMap.at(digit);//当前数字对应的字母
+            for (const char& letter: letters) {
+                combination.push_back(letter);
+                backtrack(combinations, phoneMap, digits, index + 1, combination);//递归
+                combination.pop_back();
+            }
+        }
+    }
+};
+~~~
+
+~~~c++
+class Solution {
+    string MAPPING[10] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+public:
+    vector<string> letterCombinations(string digits) {
+        int n = digits.length();//数字长度
+        if (n == 0) return {};
+        vector<string> ans;
+        string path(n, 0); // 临时存储和字母组合
+        function<void(int)> dfs = [&](int i) {
+            if (i == n) {
+                ans.emplace_back(path);//一般用于不创建临时对象，此处用push_back效果一样
+                return;//出口
+            }
+            for (char c : MAPPING[digits[i] - '0']) {//char->int,遍历该数字对应的每个字符
+                path[i] = c; // 直接覆盖
+                dfs(i + 1);//递归
+            }
+        };
+        dfs(0);//调用函数，传入i=0
+        return ans;
+    }
+};
+~~~
+
+- `function<void(int)> dfs = [&](int i)`：定义了一个名为 `dfs` 的函数对象，其参数类型为 `int`，返回类型为 `void`。它使用了 Lambda 表达式 `&` 捕获了当前作用域内的所有变量，这样可以访问外部的变量。
+
+总体来说，这段代码的作用是对输入的数字字符串 `digits` 进行深度优先搜索，生成所有可能的字母组合，并将结果存储在 `ans` 中。
+
+### 77 组合
+
+比上一题多一步，就是解决重复的组合
+
+给定两个整数 `n` 和 `k`，返回范围 `[1, n]` 中所有可能的 `k` 个数的组合。你可以按 **任何顺序** 返回答案。
+
+```
+输入：n = 4, k = 2
+输出：
+[
+  [2,4],
+  [3,4],
+  [2,3],
+  [1,2],
+  [1,3],
+  [1,4],
+]
+```
+
+~~~c++
+class Solution {
+public:
+    vector<vector<int>> combine(int n, int k) {
+        if(n==0) return{};
+        vector<int> nums(n);
+        for(int i=0;i<n;i++){
+            nums[i]=i+1;
+        }
+        vector<vector<int>> ans;
+        vector<int> path(k);
+        function<void(int, int)> dfs = [&](int start, int i) {
+            if(i==k){
+                ans.push_back(path);
+                return ;
+            }
+            for(int j = start; j < nums.size(); j++){
+                path[i] = nums[j];
+                dfs(j + 1, i + 1);
+            }
+        };
+        dfs(0, 0);
+        return ans;
+    }
+};
+
+~~~
+
+
+
+### 46 全排列
+
+传统回溯会有重复情况,用一个数组来标记是否已经被标记，递归完后要回溯标记为false
+
+~~~c++
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        int n = nums.size();
+        if (n == 0) return {};
+        vector<int> temp(n);
+        vector<vector<int>> ans;
+        vector<bool> used(n, false); // 记录数字是否被使用过
+        function<void(int)> dfs = [&](int i) {
+            if (i == n) {
+                ans.push_back(temp);
+                return;
+            }
+            for (int j = 0; j < n; ++j) {
+                if (!used[j]) {
+                    temp[i] = nums[j];
+                    used[j] = true;
+                    dfs(i + 1);
+                    used[j] = false; // 回溯，恢复状态
+                }
+            }
+        };
+        dfs(0);
+        return ans;
+    }
+};
+~~~
 
