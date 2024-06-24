@@ -11,15 +11,13 @@ tags:
 
 最流行的web服务器软件
 
-`yum install nginx`
+安装 `yum install nginx`
 
-启动
+启动 `nginx`  
 
-`nginx`  `nginx -s stop`
+关闭 `nginx -s stop`
 
-查看端口占用情况
-
-`lsof -i:80` 查看80号端口的情况
+查看80号端口占用情况 `lsof -i:80` 
 
 阿里云上打开这个端口，关闭防火墙，访问ip
 
@@ -43,25 +41,31 @@ nginx -s reopen   # 重新打开⽇志⽂件
 
 # Hexo静态站点部署
 
-`nginx -V` 查看安装目录 --prefix=/usr/share/nginx    编译参数 配置文件/日志 位置
+查看安装目录 `nginx -V`  --prefix=/usr/share/nginx    
 
-配置文件位置 nginx.conf    --conf-path=/etc/nginx/nginx.conf
+配置文件nginx.conf位置   --conf-path=/etc/nginx/nginx.conf
 
-或只用`nginx -t`查看
+​                      或`nginx -t`
 
-`code /etc/nginx/nginx.conf` 直接在vscode上打开或者ctrl+左键
+​                      /etc/nginx/nginx.conf 直接在vscode上打开或者ctrl+左键
 
-输入地址展示的默认网页在安装位置中html文件夹里index.html
+默认网页是 安装位置/usr/share/nginx 中html文件夹里的index.html
 
 
 
 用Hexo生成一个简单的静态博客网站-然后部署在nginx里面
 
-可以把markdown格式文档转化成静态界面、
+可以把markdown格式文档转化成静态界面
 
-安装Nodejs和git后执行install
 
-`yum install nodejs` 建议直接看后面安装最新版
+
+##安装Nodejs
+
+安装git
+
+建议直接看后面安装最新版
+
+`yum install nodejs`
 
 `npm install hexo-cli -g`
 
@@ -73,17 +77,23 @@ cd nginx
 
 hexo init blog
 
-cd blog   hexo g生成一个静态站点，把markdown文件转化为静态页面放到public文件夹下 hexo s启动本地服务器
+cd blog   
 
+hexo g 生成一个静态站点，把markdown文件转化为静态页面放到public文件夹下 
 
+hexo s 启动本地服务器
 
 如果失败node版本不够
 
+### 安装新版Nodejs
+
 `node --version` 版本过低
 
-使用官方提供的`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
+使用官方提供的方法安装安装nvm
 
-或`wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`安装nvm
+`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
+
+或`wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
 
 重新启动终端或者执行 `source ~/.bashrc` 或 `source ~/.bash_profile` 来使 nvm 生效
 
@@ -97,9 +107,11 @@ node --version
 
 把public目录下的所有内容复制到html目录下
 
-cd public 
+​	cd public 
 
-cp -rf * /usr/share/nginx/html 或者hexo d一键完成部署
+​	cp -rf * /usr/share/nginx/html 
+
+或者hexo d一键完成部署
 
 # 配置文件
 

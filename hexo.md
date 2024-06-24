@@ -22,14 +22,16 @@ tags:
 
 
 
-cd在之前的nginx/bolg文件夹中
+cd在之前的nginx/bolg文件夹中或者自己创建一个文件夹
+
+`hexo new "tutu's personal blog"`
 
 ~~~
 [root@iZf8zeh9f5g1mo4rk51t4pZ blog]# hexo new "tutu's personal blog"
 INFO  Validating config
 INFO  Created: ~/nginx/blog/source/_posts/tutu-s-personal-blog.md
 hexo generate #生成静态网页文件
-hexo deploy #部署
+hexo deploy   #部署
 ~~~
 
 编辑_config.yml
@@ -41,7 +43,9 @@ deploy:
   branch: master
 ~~~
 
-下载插件npm install hexo-deployer-git --save
+下载插件
+
+npm install hexo-deployer-git --save
 
 git config --global user.email tutu2061867903@gmail.com
 
@@ -151,7 +155,25 @@ hexo deploy
 
 
 
+##部署的时候提示需要输入账号密码
 
+1. cd ~/.ssh 
+
+ssh-keygen -t rsa -b 2048 -C 'github注册邮箱'
+
+2. ssh-keygen -t rsa -b 2048 -C 'tutu2061867903@gmail.com' 一路回车即可
+3. 粘贴.pub文件的内容到SSH keys
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240609211058663.png" alt="image-20240609211058663" style="zoom:33%;" />
+
+4. 进入hexo项目根目录 cd blog
+5. 删除文件 .deploy_git
+6. 修改_config.yml
+7. repo:项目的SSH地址
+
+
+
+## 自定义域名
 
 https://tutulp.github.io/
 
