@@ -1,0 +1,785 @@
+
+<!DOCTYPE html><html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 7.1.1">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>hexo - blog of tutuLP</title>
+
+  
+    <meta name="description" content="下载 npm install hexo-cli -g  cd   (当前用户的目录)  hexo init blog  用hexo搭建一个文件夹  cd blog     hexo g 生成一个静态站点，把markdown文件转化为静态页面放到public文件夹下   hexo s 启动本地服务器 访问4000号端口就可以看到构建的网页   使用nginx代理网页把public目录下的所有内容复制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo">
+<meta property="og:url" content="http://example.com/2024/03/25/tutuLP.github.io/Linux/hexo/index.html">
+<meta property="og:site_name" content="blog of tutuLP">
+<meta property="og:description" content="下载 npm install hexo-cli -g  cd   (当前用户的目录)  hexo init blog  用hexo搭建一个文件夹  cd blog     hexo g 生成一个静态站点，把markdown文件转化为静态页面放到public文件夹下   hexo s 启动本地服务器 访问4000号端口就可以看到构建的网页   使用nginx代理网页把public目录下的所有内容复制">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240609211058663.png">
+<meta property="article:published_time" content="2024-03-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-28T10:55:44.421Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="静态网站生成器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240609211058663.png">
+  
+  
+  
+  <meta name="keywords" content="Node.js,静态网站生成器">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+    <link rel="shortcut icon" href="/image/32x32.png">
+  
+
+  
+
+  
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/me-512x512.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">blog of tutuLP</div><div class="sub normal cap">从此天边尽沉云</div><div class="sub hover cap" style="opacity:0"> Designed by tutulp</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="Search"></form><div id="search-result"></div><div class="search-no-result">No Results!</div></div>
+
+
+<nav class="menu dis-select"></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">Recent Update</span></div><div class="widget-body fs14"><a class="item title" href="/2024/06/09/tutuLP.github.io/%E9%9D%A2%E8%AF%95/Qt%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/"><span class="title">Qt面试</span></a><a class="item title" href="/2024/06/09/tutuLP.github.io/%E9%9D%A2%E8%AF%95/%E6%A0%A1%E5%9B%AD%E6%8B%9B%E8%81%98/"><span class="title">校招一览</span></a><a class="item title" href="/2024/03/25/tutuLP.github.io/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/git/"><span class="title">git</span></a><a class="item title" href="/2024/03/25/tutuLP.github.io/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/vscode/"><span class="title">vscode</span></a><a class="item title" href="/2024/06/24/tutuLP.github.io/%E6%97%85%E6%B8%B8/%E5%B9%BF%E8%A5%BF/"><span class="title">广西旅游</span></a><a class="item title" href="/2024/06/09/tutuLP.github.io/%E6%9C%9F%E6%9C%AB%E5%A4%87%E8%80%83/%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91/"><span class="title">数字逻辑概论</span></a><a class="item title" href="/2024/06/09/tutuLP.github.io/%E6%9C%9F%E6%9C%AB%E5%A4%87%E8%80%83/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/"><span class="title">概率统计期末快速复习</span></a><a class="item title" href="/2024/06/09/tutuLP.github.io/%E9%9D%A2%E8%AF%95/C++%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/"><span class="title">c++面试</span></a><a class="item title" href="/2024/06/09/tutuLP.github.io/%E5%88%B7%E9%A2%98/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%88%B7%E9%A2%98/"><span class="title">14届蓝桥杯c/c++b组</span></a><a class="item title" href="/2024/06/09/tutuLP.github.io/%E5%89%8D%E7%AB%AF/Web%20HTML5%20CSS3/"><span class="title">HTML+CSS</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">Blog</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Web/">Web</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">Posted on: <time datetime="2024-03-24T16:00:00.000Z">2024-03-25</time></span><span class="sep updated"></span><span class="text updated">Updated on: <time datetime="2024-08-28T10:55:44.421Z">2024-08-28</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>hexo</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><ul>
+<li><p>npm install hexo-cli -g</p>
+</li>
+<li><p>cd   (当前用户的目录)</p>
+</li>
+<li><p>hexo init blog  用hexo搭建一个文件夹</p>
+</li>
+<li><p>cd blog   </p>
+</li>
+<li><p>hexo g 生成一个静态站点，把markdown文件转化为静态页面放到public文件夹下 </p>
+</li>
+<li><p>hexo s 启动本地服务器 访问4000号端口就可以看到构建的网页</p>
+</li>
+</ul>
+<h1 id="使用nginx代理网页"><a href="#使用nginx代理网页" class="headerlink" title="使用nginx代理网页"></a>使用nginx代理网页</h1><p>把public目录下的所有内容复制到nginx的html目录下</p>
+<ul>
+<li><p>cd public </p>
+</li>
+<li><p>cp -rf * &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html</p>
+</li>
+</ul>
+<h1 id="使用github云代理网页"><a href="#使用github云代理网页" class="headerlink" title="使用github云代理网页"></a>使用github云代理网页</h1><ul>
+<li>新建仓库</li>
+</ul>
+<p>新建仓库-仓库名字：用户名.github.io,勾选readme</p>
+<p>仓库的main分支用来存源笔记文件 master分支用来存前端文件</p>
+<ul>
+<li>编辑_config.yml</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:你的用户名/你的用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>下载插件</li>
+</ul>
+<p>npm install hexo-deployer-git –save</p>
+<p>git config –global user.email <a href="mailto:&#116;&#x75;&#116;&#x75;&#50;&#48;&#54;&#49;&#56;&#x36;&#x37;&#57;&#x30;&#x33;&#x40;&#x67;&#109;&#x61;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#109;">&#116;&#x75;&#116;&#x75;&#50;&#48;&#54;&#49;&#56;&#x36;&#x37;&#57;&#x30;&#x33;&#x40;&#x67;&#109;&#x61;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#109;</a></p>
+<p>git config –global user.name tutuLP</p>
+<p>地址改用以下：</p>
+<p><a href="mailto:&#x67;&#105;&#116;&#x40;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#46;&#x63;&#111;&#x6d;">&#x67;&#105;&#116;&#x40;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#46;&#x63;&#111;&#x6d;</a>:tutuLP&#x2F;tutuLP.github.io.git 可能需要打开端口22 9418</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tutuLP/tutuLP.github.io.git">https://github.com/tutuLP/tutuLP.github.io.git</a></p>
+<ul>
+<li>修改仓库配置</li>
+</ul>
+<p>进入GitHub仓库的设置页面-Pages-GitHub Pages选项 将源设置为master分支</p>
+<ul>
+<li>这时得到网址 <a target="_blank" rel="noopener" href="https://tutulp.github.io/">https://tutulp.github.io/</a></li>
+</ul>
+<p>hexo deploy 部署到github服务器平台</p>
+<p>以上只是构建本地的文件生成静态网站上传到github服务器</p>
+<p>现在我们pull仓库中的文件进行构建</p>
+<p>cd source&#x2F;_posts</p>
+<p>git init 我这里生成的分治是master比较古老</p>
+<p>git remote add origin <a target="_blank" rel="noopener" href="https://github.com/tutuLP/tutuLP.github.io.git">https://github.com/tutuLP/tutuLP.github.io.git</a> 建立关联</p>
+<p>git remote add origin <a href="mailto:&#x67;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#x63;&#x6f;&#x6d;</a>:tutuLP&#x2F;tutuLP.github.io.git</p>
+<p>git pull origin main –allow-unrelated-histories 拉取-运行历史不同步</p>
+<p>git branch –set-upstream-to&#x3D;origin&#x2F;main master 本地master分支与远程main关联</p>
+<p>然后回到blog <code>hexo generate</code>       <code>hexo deploy</code></p>
+<p>pull进来的文件不会自动拿文件名作为标题，我们需要在文档前面加上一段Front Matter，用于指定文章元数据的YAML格式的内容</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">&quot;文章标题&quot;</span></span><br><span class="line"><span class="attr">date:</span> <span class="string">YYYY-MM-DD</span> <span class="string">HH:MM:SS</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">分类1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">分类2</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">标签1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">标签2</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="主题stellar"><a href="#主题stellar" class="headerlink" title="主题stellar"></a>主题stellar</h2><p>来源：<a target="_blank" rel="noopener" href="https://xaoxuu.com/wiki/stellar/#start">Stellar：开始您全新的博客之旅 - XAOXUU</a></p>
+<p>还可在上方网页上搜索Volantis另一个主题</p>
+<p>进入blog  </p>
+<p>npm i hexo-theme-stellar</p>
+<p>在 _config.yml 文件中找到并修改： theme: stellar</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">title: 您的网站名称</span><br><span class="line">avatar: 您的头像链接</span><br><span class="line">favicon: 您的网站icon</span><br><span class="line"># subtitle: # subtitle 已移至主题配置中</span><br><span class="line"># 多语言</span><br><span class="line">language:</span><br><span class="line">  - zh-CN</span><br><span class="line">  - en</span><br></pre></td></tr></table></figure>
+
+<p><code>_config.yml</code> 文件旁边新建一个文件： <code>_config.stellar.yml</code> ，在这个文件中的配置信息优先级高于主题文件夹中的配置文件。</p>
+<p>默认生成 Open Graph 标签，如果您不希望生成它，可以在主题配置文件中关闭：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">blog/_config.stellar.ymlopen_graph:</span><br><span class="line">  enable: true</span><br><span class="line">  twitter_id: # for open_graph meta</span><br></pre></td></tr></table></figure>
+
+<h2 id="管理构建好的静态网页"><a href="#管理构建好的静态网页" class="headerlink" title="管理构建好的静态网页"></a>管理构建好的静态网页</h2><p>hexo generate后生成的资源存放在public文件夹中</p>
+<p>当我测试时创建的分类和标签会永远存在，即使我删除.md文档重新构建也依旧存在</p>
+<p>cd &#x2F;public&#x2F;categories </p>
+<p>rm -rf</p>
+<p>然后清除临时文件 生成 推送</p>
+<p>hexo clean</p>
+<p>hexo generate</p>
+<p>hexo deploy</p>
+<p>##部署的时候提示需要输入账号密码</p>
+<ol>
+<li>cd ~&#x2F;.ssh</li>
+</ol>
+<p>ssh-keygen -t rsa -b 2048 -C ‘github注册邮箱’</p>
+<ol start="2">
+<li>ssh-keygen -t rsa -b 2048 -C ‘<a href="mailto:&#x74;&#x75;&#116;&#x75;&#50;&#x30;&#54;&#49;&#x38;&#54;&#x37;&#57;&#48;&#x33;&#64;&#103;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#111;&#109;">&#x74;&#x75;&#116;&#x75;&#50;&#x30;&#54;&#49;&#x38;&#54;&#x37;&#57;&#48;&#x33;&#64;&#103;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#111;&#109;</a>‘ 一路回车即可</li>
+<li>粘贴.pub文件的内容到SSH keys</li>
+</ol>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240609211058663.png" alt="image-20240609211058663" style="zoom:33%;" />
+
+<ol start="4">
+<li>进入hexo项目根目录 cd blog</li>
+<li>删除文件 .deploy_git</li>
+<li>修改_config.yml</li>
+<li>repo:项目的SSH地址</li>
+</ol>
+<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><p><a target="_blank" rel="noopener" href="https://tutulp.github.io/">https://tutulp.github.io/</a></p>
+<p>是的，你可以通过将自定义域名（例如你拥有的域名）映射到你的GitHub Pages网站来实现这一目标。以下是一些步骤：</p>
+<ol>
+<li><strong>购买域名</strong>：首先，你需要购买一个域名，例如<code>yourdomain.com</code>。你可以通过注册商（例如GoDaddy、Namecheap等）购买域名。</li>
+<li><strong>配置DNS记录</strong>：登录到你的域名注册商的控制面板，并配置DNS记录，将你的域名指向GitHub Pages。通常，你需要添加一个CNAME记录，将域名指向你的GitHub Pages用户名，例如<code>yourusername.github.io</code>。具体的步骤可能会因注册商而异，你可以参考GitHub Pages提供的文档或向注册商寻求帮助。</li>
+<li><strong>在GitHub设置中配置自定义域名</strong>：登录到GitHub，进入你的仓库设置页面，将你的自定义域名添加到”Custom domain”字段中。</li>
+<li><strong>等待DNS生效</strong>：一旦你配置了DNS记录并保存了更改，你需要等待一段时间（通常几小时至48小时），直到DNS记录生效。一旦生效，你的域名就会指向你的GitHub Pages网站。</li>
+<li><strong>HTTPS支持</strong>：GitHub Pages支持HTTPS，但你需要确保你的域名有有效的SSL证书。你可以使用GitHub提供的自动生成的SSL证书，或者使用其他证书颁发机构提供的证书。</li>
+</ol>
+<p>通过这些步骤，你就可以将你的GitHub Pages网站与你自己的域名关联起来，使访问者在浏览器中看到你的域名，但实际上打开的是GitHub Pages上托管的网站。</p>
+<h2 id="后续更新博客"><a href="#后续更新博客" class="headerlink" title="后续更新博客"></a>后续更新博客</h2><ol>
+<li>提交并push到github</li>
+<li>cd &#x2F;root&#x2F;nginx&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;</li>
+<li>git pull</li>
+<li>hexo generate</li>
+<li>hexo deploy</li>
+</ol>
+<h2 id="自定义主题样式"><a href="#自定义主题样式" class="headerlink" title="自定义主题样式"></a>自定义主题样式</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">您的网站名称</span></span><br><span class="line"><span class="attr">avatar:</span> <span class="string">您的头像链接</span> <span class="comment"># 这个我用的png 512x512</span></span><br><span class="line"><span class="attr">favicon:</span> <span class="string">您的网站icon</span> <span class="comment"># 32x32 png</span></span><br><span class="line"><span class="comment"># subtitle: # subtitle 已移至主题配置中</span></span><br><span class="line"><span class="comment"># 多语言</span></span><br><span class="line"><span class="attr">language:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">zh-CN</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">en</span></span><br></pre></td></tr></table></figure>
+
+<p>icon生成网址：<a target="_blank" rel="noopener" href="https://www.logosc.cn/favicon-generator">https://www.logosc.cn/favicon-generator</a></p>
+<p>网站图标的在线链接一直显示不了，在blog&#x2F;public文件下创建image文件夹，里面放入图片，然后配置文件中 favicon: ‘&#x2F;image&#x2F;32x32.png’ 即可</p>
+<p>在博客根目录的 <code>_config.yml</code> 文件旁边新建一个文件： <code>_config.stellar.yml</code> 这个文件配置优先级高</p>
+<h3 id="文章封面"><a href="#文章封面" class="headerlink" title="文章封面"></a>文章封面</h3><p>根据 tags 作为关键词为每一篇文章在线搜索封面</p>
+<p>或者在文章开头给关键词</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">blog/_config.stellar.yml</span></span><br><span class="line"><span class="attr">article:</span></span><br><span class="line">  <span class="attr">auto_cover:</span> <span class="literal">true</span></span><br><span class="line">  </span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">cover:</span> <span class="string">workout,strava</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置摘要"><a href="#设置摘要" class="headerlink" title="设置摘要"></a>设置摘要</h3><p>自动</p>
+<p>手动</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">article:</span></span><br><span class="line">  <span class="attr">auto_excerpt:</span> <span class="number">200</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">cover:</span> <span class="string">/assets/xaoxuu/blog/2020-0927a@1x.svg</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="string">在心率管家默默无闻地上线了一年多之后，现在终于打算来好好聊聊关于手机摄像头测量心率的那些事。本文参考了很多前辈的文章，将在文末列出。</span></span><br><span class="line"></span><br><span class="line"><span class="string">&lt;!--</span> <span class="string">more</span> <span class="string">--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="string">后面是正文部分，在主页看不到。</span></span><br></pre></td></tr></table></figure>
+
+<p>AI摘要 基于 tianli_gpt 前端项目 <a target="_blank" rel="noopener" href="https://github.com/qxchuckle/Post-Summary-AI">Post-Summary-AI</a></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">_config.stellar.yml</span></span><br><span class="line"><span class="comment"># AI 摘要</span></span><br><span class="line"><span class="comment"># https://github.com/qxchuckle/Post-Summary-AI</span></span><br><span class="line"><span class="attr">tianli_gpt:</span> </span><br><span class="line">  <span class="attr">enable:</span> <span class="comment">#true</span></span><br><span class="line">  <span class="attr">js:</span> <span class="string">https://jsd.onmicrosoft.cn/gh/qxchuckle/Post-Summary-AI@6.0/chuckle-post-ai.min.js</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span> <span class="comment"># all, post, wiki</span></span><br><span class="line">  <span class="attr">key:</span> <span class="string">5Q5mpqRK5DkwT1X9Gi5e</span> <span class="comment"># tianli_gpt key</span></span><br><span class="line">  <span class="attr">total_length:</span> <span class="number">1000</span> <span class="comment"># 设置提交的字数限制，默认为1000字，上限为5000，超过5000字符将被截断</span></span><br><span class="line">  <span class="attr">typewriter:</span> <span class="literal">true</span> <span class="comment"># 打字机动画 </span></span><br><span class="line">  <span class="attr">summary_directly:</span> <span class="literal">true</span> <span class="comment"># 是否直接显示摘要，否则显示 AI 简介</span></span><br><span class="line">  <span class="attr">rec_method:</span> <span class="string">all</span> <span class="comment"># all, web # 文章推荐方式，all：匹配数据库内所有文章进行推荐，web：仅当前站内的文章，默认all</span></span><br><span class="line">  <span class="attr">hide_shuttle:</span> <span class="literal">true</span> <span class="comment"># 是否隐藏矩阵穿梭</span></span><br><span class="line">  <span class="attr">summary_toggle:</span> <span class="literal">false</span> <span class="comment"># 是否开启切换简介功能，经过一些处理后，重新生成一份简介，这将消耗key字数</span></span><br><span class="line">  <span class="attr">interface:</span> <span class="comment"># AI 信息展示</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">AI摘要</span></span><br><span class="line">    <span class="attr">introduce:</span> <span class="string">&#x27;我是文章辅助AI: QX-AI，点击下方的按钮，让我生成本文简介、推荐相关文章等。&#x27;</span></span><br><span class="line">    <span class="attr">version:</span> <span class="string">TianliGPT</span></span><br><span class="line">    <span class="attr">button:</span> [<span class="string">&quot;介绍自己&quot;</span>, <span class="string">&quot;推荐文章&quot;</span>, <span class="string">&quot;生成摘要&quot;</span>, <span class="string">&quot;矩阵穿梭&quot;</span>] <span class="comment"># 底部按钮文字</span></span><br></pre></td></tr></table></figure>
+
+<p>如何获取 <code>tianliGPT_key</code>：到 <a target="_blank" rel="noopener" href="https://afdian.net/item/f18c2e08db4411eda2f25254001e7c00">爱发电</a> 中购买，购买完成后，进入 <a target="_blank" rel="noopener" href="https://summary.zhheo.com/">网页后台管理</a> 绑定key并添加自己的站点</p>
+<p>key与博客地址为绑定状态，所以本地调试时是无法接收到数据的。</p>
+<h3 id="获取文章开头内容"><a href="#获取文章开头内容" class="headerlink" title="获取文章开头内容"></a>获取文章开头内容</h3><p>根目录下 scaffolds 文件夹中编辑 post.md 的 font-matter，根据自己的需要增加你想要配置的内容</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="comment"># 基本信息</span></span><br><span class="line"><span class="attr">title:</span> &#123;&#123; <span class="string">title</span> &#125;&#125;</span><br><span class="line"><span class="attr">date:</span> &#123;&#123; <span class="string">date</span> &#125;&#125;</span><br><span class="line"><span class="attr">tags:</span> []</span><br><span class="line"><span class="attr">categories:</span> []   <span class="comment">#categories: [设计开发, iOS开发] 两级分类</span></span><br><span class="line"><span class="attr">description:</span> <span class="comment"># excerpt 也可 </span></span><br><span class="line"><span class="comment"># 封面</span></span><br><span class="line"><span class="attr">cover:</span> </span><br><span class="line"><span class="attr">banner:</span> </span><br><span class="line"><span class="attr">poster:</span> <span class="comment"># 海报（可选，全图封面卡片）</span></span><br><span class="line">  <span class="attr">topic:</span> <span class="string">标题上方的小字</span> <span class="comment"># 可选</span></span><br><span class="line">  <span class="attr">headline:</span> <span class="string">大标题</span> <span class="comment"># 必选</span></span><br><span class="line">  <span class="attr">caption:</span> <span class="string">标题下方的小字</span> <span class="comment"># 可选</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">标题颜色</span> <span class="comment"># 可选</span></span><br><span class="line"><span class="comment"># 插件</span></span><br><span class="line"><span class="attr">sticky:</span> <span class="comment"># 数字越大越靠前</span></span><br><span class="line"><span class="attr">mermaid:</span></span><br><span class="line"><span class="attr">katex:</span> </span><br><span class="line"><span class="attr">mathjax:</span> </span><br><span class="line"><span class="comment"># 可选</span></span><br><span class="line"><span class="attr">topic:</span> <span class="comment"># 专栏 id</span></span><br><span class="line"><span class="attr">author:</span> </span><br><span class="line"><span class="attr">references:</span></span><br><span class="line"><span class="attr">comments:</span> <span class="comment"># 设置 false 禁止评论</span></span><br><span class="line"><span class="attr">indexing:</span> <span class="comment"># 设置 false 避免被搜索</span></span><br><span class="line"><span class="attr">breadcrumb:</span> <span class="comment"># 设置 false 隐藏面包屑导航</span></span><br><span class="line"><span class="attr">leftbar:</span> </span><br><span class="line"><span class="attr">rightbar:</span></span><br><span class="line"><span class="attr">h1:</span> <span class="comment"># 设置为 &#x27;&#x27; 隐藏标题</span></span><br><span class="line"><span class="attr">type:</span> <span class="comment"># tech/story</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="相关文章推荐"><a href="#相关文章推荐" class="headerlink" title="相关文章推荐"></a>相关文章推荐</h3><p>安装插件 <code>npm i hexo-related-popular-posts</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">article:</span></span><br><span class="line">  <span class="comment"># npm i hexo-related-popular-posts</span></span><br><span class="line">  <span class="attr">related_posts:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">title:</span> <span class="string">您可能感兴趣的文章</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">references:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">&#x27;[心跳之旅—💗—iOS用手机摄像头检测心率(PPG)](https://punmy.cn/2016/07/28/15231176397746.html)&#x27;</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">&#x27;[PPG光电容积脉搏波描记法技术概况](https://www.jianshu.com/p/695c131abfa5)&#x27;</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="许可协议"><a href="#许可协议" class="headerlink" title="许可协议"></a>许可协议</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">article:</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">&#x27;本文采用 [署名-非商业性使用-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议，转载请注明出处。&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>若你配置了作者数据 _data&#x2F;authors.yml 和文章作者，可以在 license 中使用 {author.name} 来自动替换为当前文章作者名字。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">article:</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">&#x27;本文由&#123;author.name&#125;编写，采用...&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="分享链接"><a href="#分享链接" class="headerlink" title="分享链接"></a>分享链接</h3><p>分享至微信会生成对应的页面二维码，weibo 和 email 会自动跳转到对应软件或网页，link 会拷贝当前页面链接至剪切板。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">article:</span></span><br><span class="line">  <span class="attr">share:</span> <span class="comment"># [wechat, weibo, email, link]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="覆盖-OpenGraph"><a href="#覆盖-OpenGraph" class="headerlink" title="覆盖 OpenGraph"></a>覆盖 OpenGraph</h3><p>如果分享到社交平台的缩略图不理想，可以通过这个特性覆盖为自己想要的：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">open_graph:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">/assets/xaoxuu/blog/2022-1029a@2x.webp</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置导航栏"><a href="#设置导航栏" class="headerlink" title="设置导航栏"></a>设置导航栏</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menubar:</span></span><br><span class="line">  <span class="attr">columns:</span> <span class="number">4</span> <span class="comment"># 一行多少个</span></span><br><span class="line">  <span class="attr">items:</span> <span class="comment"># 可按照自己需求增加，符合以下格式即可</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">more</span></span><br><span class="line">      <span class="attr">theme:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">      <span class="attr">title:</span> <span class="string">更多</span></span><br><span class="line">      <span class="attr">icon:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">/more/</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logo:</span></span><br><span class="line">  <span class="attr">subtitle:</span> <span class="string">&#x27;&#x27;</span> <span class="comment"># &#x27;文字1 | 文字2&#x27; (鼠标放上去会切换到文字2)         设置鼠标指上 subtitle 后翻转另一行字  记得使用utf-8编码</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">#背景</span></span><br><span class="line"><span class="attr">style:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">  <span class="attr">leftbar:</span></span><br><span class="line">    <span class="attr">background-image:</span> <span class="string">url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.13/image/sidebar-bg1@small.jpg)</span></span><br><span class="line">    <span class="attr">blur-px:</span> <span class="string">100px</span> <span class="comment"># 模糊半径</span></span><br><span class="line">    <span class="attr">blur-bg:</span> <span class="string">var(--alpha60)</span> <span class="comment"># 模糊颜色</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字体设置"><a href="#字体设置" class="headerlink" title="字体设置"></a>字体设置</h3><ul>
+<li>第一步：_config.yml 文件中，最后一行加入以下指令</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">inject: head:</span> <span class="string">-(</span></span><br><span class="line">  <span class="string">&lt;link</span></span><br><span class="line">    <span class="string">rel=&quot;stylesheet&quot;</span></span><br><span class="line">    <span class="string">href=&quot;https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css&quot;</span></span><br><span class="line">    <span class="string">media=&quot;all&quot;</span></span><br><span class="line">  <span class="string">/&gt;</span></span><br><span class="line"><span class="string">);</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第二步：在_config.stellar.yml 中找到 style.font-family，修改以下内容：</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">style:</span></span><br><span class="line">    <span class="attr">font-family:</span></span><br><span class="line">        <span class="attr">logo:</span> <span class="string">&#x27;&quot;LXGW WenKai Screen&quot;, ...</span></span><br><span class="line"><span class="string">        body: &#x27;</span><span class="string">&quot;LXGW WenKai Screen&quot;</span><span class="string">,</span> <span class="string">...</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">inject: </span><br><span class="line">  head: </span><br><span class="line">    - |</span><br><span class="line">      &lt;link</span><br><span class="line">        rel=&quot;stylesheet&quot;</span><br><span class="line">        href=&quot;https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css&quot;</span><br><span class="line">        media=&quot;all&quot;</span><br><span class="line">      /&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">font-family:</span><br><span class="line">    # logo: &#x27;system-ui, &quot;LXGW WenKai Screen&quot;, &quot;Microsoft Yahei&quot;, &quot;Segoe UI&quot;, -apple-system, Roboto, Ubuntu, &quot;Helvetica Neue&quot;, Arial, &quot;WenQuanYi Micro Hei&quot;, sans-serif&#x27;</span><br><span class="line">  # body: &#x27;system-ui, &quot;LXGW WenKai Screen&quot;, &quot;Microsoft Yahei&quot;, &quot;Segoe UI&quot;, -apple-system, Roboto, Ubuntu, &quot;Helvetica Neue&quot;, Arial, &quot;WenQuanYi Micro Hei&quot;, sans-serif&#x27;</span><br><span class="line">  # logo: &quot;LXGW WenKai Screen&quot;</span><br><span class="line">  # body: &quot;LXGW WenKai Screen&quot;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p><code>source</code>目录下新建文件夹<code>css</code>，在 CSS 目录下新建我们自定义文件 <code>my.css</code></p>
+</li>
+<li><p>博客配置文件<code>_config.yml</code>中引入 CSS 文件，CSS 文件一般在<code>head</code>引入，JS 文件一般在<code>script</code>里引入</p>
+</li>
+</ol>
+<p>打开控制面板 —  程序和功能  —  打开或关闭Windows功能  —-  勾选上Internet Informent Services</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>hexo generate后</p>
+<p>hexo server</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:4000/%E6%9F%A5%E7%9C%8B%E7%BB%93%E6%9E%9C">http://localhost:4000/查看结果</a></p>
+<p>达到效果后再deploy</p>
+<h1 id="Linux系统更换后移植"><a href="#Linux系统更换后移植" class="headerlink" title="Linux系统更换后移植"></a>Linux系统更换后移植</h1><ul>
+<li>保存配置文件</li>
+</ul>
+<p>_config.yml</p>
+<p>_config.stellar.yml</p>
+<p>scaffolds</p>
+<p>public文件下image</p>
+<p>删除原来的仓库新建仓库重新配置一遍</p>
+
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>License</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">Newer</div><a href="/2024/03/25/tutuLP.github.io/Linux/Nginx/">Nginx</a></div><div class="item" id="next"><div class="note">Older</div><a href="/2024/03/25/tutuLP.github.io/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/git/">git</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。<br><span class="jinrishici-sentence"></span></p>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">On This Page</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD"><span class="toc-text">下载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8nginx%E4%BB%A3%E7%90%86%E7%BD%91%E9%A1%B5"><span class="toc-text">使用nginx代理网页</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8github%E4%BA%91%E4%BB%A3%E7%90%86%E7%BD%91%E9%A1%B5"><span class="toc-text">使用github云代理网页</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98stellar"><span class="toc-text">主题stellar</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E6%9E%84%E5%BB%BA%E5%A5%BD%E7%9A%84%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5"><span class="toc-text">管理构建好的静态网页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">自定义域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD%E6%9B%B4%E6%96%B0%E5%8D%9A%E5%AE%A2"><span class="toc-text">后续更新博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F"><span class="toc-text">自定义主题样式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2"><span class="toc-text">文章封面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%91%98%E8%A6%81"><span class="toc-text">设置摘要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E7%AB%A0%E5%BC%80%E5%A4%B4%E5%86%85%E5%AE%B9"><span class="toc-text">获取文章开头内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%96%87%E7%AB%A0%E6%8E%A8%E8%8D%90"><span class="toc-text">相关文章推荐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE"><span class="toc-text">许可协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E4%BA%AB%E9%93%BE%E6%8E%A5"><span class="toc-text">分享链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%86%E7%9B%96-OpenGraph"><span class="toc-text">覆盖 OpenGraph</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%AF%BC%E8%88%AA%E6%A0%8F"><span class="toc-text">设置导航栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE"><span class="toc-text">字体设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux%E7%B3%BB%E7%BB%9F%E6%9B%B4%E6%8D%A2%E5%90%8E%E7%A7%BB%E6%A4%8D"><span class="toc-text">Linux系统更换后移植</span></a></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>Scroll to Top</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `Just`,
+      min: `minutes ago`,
+      hour: `hours ago`,
+      day: `days ago`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://cdn.jsdelivr.net/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `Switched to Light Mode`,
+      dark: `Switched to Dark Mode`,
+      auto: `Switched to Auto Mode`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>
