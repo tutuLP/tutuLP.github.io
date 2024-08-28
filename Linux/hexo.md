@@ -47,47 +47,40 @@ deploy:
   branch: master
 ~~~
 
+这里可以使用ssh也可以使用http 使用ssh要先配置密钥
+
+git@github.com:tutuLP/tutuLP.github.io.git  
+
+https://github.com/tutuLP/tutuLP.github.io.git
+
 * 下载插件
 
 npm install hexo-deployer-git --save
+
+* 配置
 
 git config --global user.email tutu2061867903@gmail.com
 
 git config --global user.name tutuLP
 
-地址改用以下：
-
-git@github.com:tutuLP/tutuLP.github.io.git 可能需要打开端口22 9418
-
-https://github.com/tutuLP/tutuLP.github.io.git
+可能需要打开端口22 9418
 
 * 修改仓库配置
 
 进入GitHub仓库的设置页面-Pages-GitHub Pages选项 将源设置为master分支
 
-* 这时得到网址 https://tutulp.github.io/
+这时得到网址 https://tutulp.github.io/
 
-hexo deploy 部署到github服务器平台
+* hexo deploy 部署到github服务器平台
 
-
+## 拉取云端文件构建并部署
 
 以上只是构建本地的文件生成静态网站上传到github服务器
 
-现在我们pull仓库中的文件进行构建
+* cd source/_posts
+* git clone (地址)
 
-cd source/_posts
-
-git init 我这里生成的分治是master比较古老
-
-git remote add origin https://github.com/tutuLP/tutuLP.github.io.git 建立关联
-
-git remote add origin git@github.com:tutuLP/tutuLP.github.io.git
-
-git pull origin main --allow-unrelated-histories 拉取-运行历史不同步
-
-git branch --set-upstream-to=origin/main master 本地master分支与远程main关联
-
-然后回到blog `hexo generate`       `hexo deploy`
+* 然后回到blog hexo generate     hexo deploy
 
 
 
@@ -106,21 +99,15 @@ tags:
 ---
 ```
 
-
-
-## 主题stellar
+#主题stellar
 
 来源：[Stellar：开始您全新的博客之旅 - XAOXUU](https://xaoxuu.com/wiki/stellar/#start)
 
 还可在上方网页上搜索Volantis另一个主题
 
+* 进入blog  npm i hexo-theme-stellar
 
-
-进入blog  
-
-npm i hexo-theme-stellar
-
-在 _config.yml 文件中找到并修改： theme: stellar
+* 在 _config.yml 文件中找到并修改： theme: stellar
 
 ~~~
 title: 您的网站名称
@@ -142,66 +129,6 @@ blog/_config.stellar.ymlopen_graph:
   enable: true
   twitter_id: # for open_graph meta
 ```
-
-## 管理构建好的静态网页
-
-hexo generate后生成的资源存放在public文件夹中
-
-当我测试时创建的分类和标签会永远存在，即使我删除.md文档重新构建也依旧存在
-
-cd /public/categories 
-
-rm -rf
-
-然后清除临时文件 生成 推送
-
-hexo clean
-
-hexo generate
-
-hexo deploy
-
-
-
-##部署的时候提示需要输入账号密码
-
-1. cd ~/.ssh 
-
-ssh-keygen -t rsa -b 2048 -C 'github注册邮箱'
-
-2. ssh-keygen -t rsa -b 2048 -C 'tutu2061867903@gmail.com' 一路回车即可
-3. 粘贴.pub文件的内容到SSH keys
-
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240609211058663.png" alt="image-20240609211058663" style="zoom:33%;" />
-
-4. 进入hexo项目根目录 cd blog
-5. 删除文件 .deploy_git
-6. 修改_config.yml
-7. repo:项目的SSH地址
-
-
-
-## 自定义域名
-
-https://tutulp.github.io/
-
-是的，你可以通过将自定义域名（例如你拥有的域名）映射到你的GitHub Pages网站来实现这一目标。以下是一些步骤：
-
-1. **购买域名**：首先，你需要购买一个域名，例如`yourdomain.com`。你可以通过注册商（例如GoDaddy、Namecheap等）购买域名。
-2. **配置DNS记录**：登录到你的域名注册商的控制面板，并配置DNS记录，将你的域名指向GitHub Pages。通常，你需要添加一个CNAME记录，将域名指向你的GitHub Pages用户名，例如`yourusername.github.io`。具体的步骤可能会因注册商而异，你可以参考GitHub Pages提供的文档或向注册商寻求帮助。
-3. **在GitHub设置中配置自定义域名**：登录到GitHub，进入你的仓库设置页面，将你的自定义域名添加到"Custom domain"字段中。
-4. **等待DNS生效**：一旦你配置了DNS记录并保存了更改，你需要等待一段时间（通常几小时至48小时），直到DNS记录生效。一旦生效，你的域名就会指向你的GitHub Pages网站。
-5. **HTTPS支持**：GitHub Pages支持HTTPS，但你需要确保你的域名有有效的SSL证书。你可以使用GitHub提供的自动生成的SSL证书，或者使用其他证书颁发机构提供的证书。
-
-通过这些步骤，你就可以将你的GitHub Pages网站与你自己的域名关联起来，使访问者在浏览器中看到你的域名，但实际上打开的是GitHub Pages上托管的网站。
-
-## 后续更新博客
-
-1. 提交并push到github
-2. cd /root/nginx/blog/source/_posts/
-3. git pull
-4. hexo generate
-5. hexo deploy
 
 ## 自定义主题样式
 
@@ -449,8 +376,6 @@ inject:
       />
 ~~~
 
-
-
 ~~~
   font-family:
     # logo: 'system-ui, "LXGW WenKai Screen", "Microsoft Yahei", "Segoe UI", -apple-system, Roboto, Ubuntu, "Helvetica Neue", Arial, "WenQuanYi Micro Hei", sans-serif'
@@ -465,9 +390,25 @@ inject:
 
 打开控制面板 ---  程序和功能  ---  打开或关闭Windows功能  ----  勾选上Internet Informent Services
 
+# 管理
 
+hexo generate后生成的资源存放在public文件夹中
 
-### 测试
+当我测试时创建的分类和标签会永远存在，即使我删除.md文档重新构建也依旧存在
+
+cd /public/categories  tags
+
+rm -rf *
+
+然后清除临时文件 生成 推送
+
+hexo clean
+
+hexo generate
+
+hexo deploy
+
+##测试
 
 hexo generate后
 
@@ -476,6 +417,43 @@ hexo server
 http://localhost:4000/查看结果
 
 达到效果后再deploy
+
+## 后续更新博客
+
+1. 提交并push到github
+2. cd /root/nginx/blog/source/_posts/
+3. git pull
+4. hexo generate
+5. hexo deploy
+
+## 自定义域名
+
+https://tutulp.github.io/
+
+是的，你可以通过将自定义域名（例如你拥有的域名）映射到你的GitHub Pages网站来实现这一目标。以下是一些步骤：
+
+1. **购买域名**：首先，你需要购买一个域名，例如`yourdomain.com`。你可以通过注册商（例如GoDaddy、Namecheap等）购买域名。
+2. **配置DNS记录**：登录到你的域名注册商的控制面板，并配置DNS记录，将你的域名指向GitHub Pages。通常，你需要添加一个CNAME记录，将域名指向你的GitHub Pages用户名，例如`yourusername.github.io`。具体的步骤可能会因注册商而异，你可以参考GitHub Pages提供的文档或向注册商寻求帮助。
+3. **在GitHub设置中配置自定义域名**：登录到GitHub，进入你的仓库设置页面，将你的自定义域名添加到"Custom domain"字段中。
+4. **等待DNS生效**：一旦你配置了DNS记录并保存了更改，你需要等待一段时间（通常几小时至48小时），直到DNS记录生效。一旦生效，你的域名就会指向你的GitHub Pages网站。
+5. **HTTPS支持**：GitHub Pages支持HTTPS，但你需要确保你的域名有有效的SSL证书。你可以使用GitHub提供的自动生成的SSL证书，或者使用其他证书颁发机构提供的证书。
+
+##shell脚本自动化
+
+/root下新建blog.sh
+
+~~~
+#!/bin/bash  
+cd /root/hexo/blog_new/source/_posts/tutuLP.github.io || exit  
+git pull  
+cd .. 
+cd ..  
+hexo generate  
+hexo deploy  
+echo "博客部署完成！"
+~~~
+
+bash blog.sh
 
 # Linux系统更换后移植
 
@@ -489,4 +467,39 @@ scaffolds
 
 public文件下image
 
-删除原来的仓库新建仓库重新配置一遍
+npm需要的插件
+
+//删除原来的仓库新建仓库重新配置一遍  可能不需要
+
+~~~
+theme: stellar
+
+# Deployment
+## Docs: https://hexo.io/docs/one-command-deployment
+deploy:
+  type: git
+  repo: git@github.com:tutuLP/tutuLP.github.io.git
+  branch: master
+~~~
+
+~~~
+article:
+  share: # [wechat, weibo, email, link]
+
+logo:
+  subtitle: '从此天边尽沉云 | Designed by tutulp'
+  
+style:
+  site:
+    blur-px: 100px # 模糊半径
+    blur-bg: var(--alpha75) # 模糊颜色
+  leftbar:
+    blur-px: 100px # 模糊半径
+    blur-bg: var(--alpha60) # 模糊颜色
+footer:
+  content: | # 支持 Markdown 格式
+    本博客所有文章除特别声明外，均采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议，转载请注明出处。
+    <span class="jinrishici-sentence"></span>
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+~~~
+
