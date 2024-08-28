@@ -1,0 +1,696 @@
+
+<!DOCTYPE html><html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 7.1.1">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>oatpp-nginx - blog of tutuLP</title>
+
+  
+    <meta name="description" content="安装oatpp我先在oatpp的github的官方网站上找到windows的下载方式 官方网站：https:&#x2F;&#x2F;github.com&#x2F;oatpp&#x2F;oatpp 下载方式：https:&#x2F;&#x2F;oatpp.io&#x2F;docs&#x2F;installation&#x2F;windows&#x2F;   而后我尝试进行下载，第一次我忽略了下方的cmake参数，下面我整理了完整指令，在想要安装oatpp的地方cmd输入指令 123456git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="oatpp-nginx">
+<meta property="og:url" content="http://example.com/2024/03/27/%E5%90%8E%E7%AB%AF/oatpp+nginx/index.html">
+<meta property="og:site_name" content="blog of tutuLP">
+<meta property="og:description" content="安装oatpp我先在oatpp的github的官方网站上找到windows的下载方式 官方网站：https:&#x2F;&#x2F;github.com&#x2F;oatpp&#x2F;oatpp 下载方式：https:&#x2F;&#x2F;oatpp.io&#x2F;docs&#x2F;installation&#x2F;windows&#x2F;   而后我尝试进行下载，第一次我忽略了下方的cmake参数，下面我整理了完整指令，在想要安装oatpp的地方cmd输入指令 123456git">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327161303655.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240326205418158.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240326205448363.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240326221209405.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327163552082.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327163852259.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327163753697.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327163935539.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240328095617737.png">
+<meta property="article:published_time" content="2024-03-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-28T09:03:16.590Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="HTTP 请求处理、路由、JSON 序列化">
+<meta property="article:tag" content="Web开发框架">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327161303655.png">
+  
+  
+  
+  <meta name="keywords" content="HTTP 请求处理、路由、JSON 序列化,Web开发框架">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+    <link rel="shortcut icon" href="/image/32x32.png">
+  
+
+  
+
+  
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/me-512x512.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">blog of tutuLP</div><div class="sub normal cap">从此天边尽沉云</div><div class="sub hover cap" style="opacity:0"> Designed by tutulp</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="Search"></form><div id="search-result"></div><div class="search-no-result">No Results!</div></div>
+
+
+<nav class="menu dis-select"></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">Recent Update</span></div><div class="widget-body fs14"><a class="item title" href="/2024/06/09/%E9%9D%A2%E8%AF%95/C++%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/"><span class="title">c++面试</span></a><a class="item title" href="/2024/06/09/%E9%9D%A2%E8%AF%95/Qt%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/"><span class="title">Qt面试</span></a><a class="item title" href="/2024/06/09/%E9%9D%A2%E8%AF%95/%E6%A0%A1%E5%9B%AD%E6%8B%9B%E8%81%98/"><span class="title">校招一览</span></a><a class="item title" href="/2024/06/09/%E6%9C%9F%E6%9C%AB%E5%A4%87%E8%80%83/%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91/"><span class="title">数字逻辑概论</span></a><a class="item title" href="/2024/06/09/%E6%9C%9F%E6%9C%AB%E5%A4%87%E8%80%83/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/"><span class="title">概率统计期末快速复习</span></a><a class="item title" href="/2024/06/24/%E6%97%85%E6%B8%B8/%E5%B9%BF%E8%A5%BF/"><span class="title">广西旅游</span></a><a class="item title" href="/2024/03/25/%E5%90%8E%E7%AB%AF/Nginx/"><span class="title">Nginx</span></a><a class="item title" href="/2024/03/25/%E5%90%8E%E7%AB%AF/hexo/"><span class="title">hexo</span></a><a class="item title" href="/2024/03/27/%E5%90%8E%E7%AB%AF/oatpp+nginx/"><span class="title">oatpp-nginx</span></a><a class="item title" href="/2024/06/09/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/VMware%20win11/"><span class="title">windows虚拟机</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">Blog</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Web/">Web</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">Posted on: <time datetime="2024-03-26T16:00:00.000Z">2024-03-27</time></span><span class="sep updated"></span><span class="text updated">Updated on: <time datetime="2024-08-28T09:03:16.590Z">2024-08-28</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>oatpp-nginx</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="安装oatpp"><a href="#安装oatpp" class="headerlink" title="安装oatpp"></a>安装oatpp</h1><p>我先在oatpp的github的官方网站上找到windows的下载方式</p>
+<p>官方网站：<a target="_blank" rel="noopener" href="https://github.com/oatpp/oatpp">https://github.com/oatpp/oatpp</a></p>
+<p>下载方式：<a target="_blank" rel="noopener" href="https://oatpp.io/docs/installation/windows/">https://oatpp.io/docs/installation/windows/</a></p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327161303655.png" alt="image-20240327161303655" style="zoom:33%;" />
+
+<p>而后我尝试进行下载，第一次我忽略了下方的cmake参数，下面我整理了完整指令，在想要安装oatpp的地方cmd输入指令</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/oatpp/oatpp.git</span><br><span class="line"><span class="built_in">cd</span> oatpp</span><br><span class="line"><span class="built_in">MD</span> build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=OFF ..#更多参数可选项根据需求，我觉得这两个是必须的</span><br><span class="line">cmake --build . --target INSTALL</span><br></pre></td></tr></table></figure>
+
+<p>此处建议直接跳转到<strong>链接方法</strong></p>
+<p>既然库安好了，我开始想通过VS新建CMake项目链接库进行，但是我一直尝试都没有成功，文档放在这个最后(直接忽略)</p>
+<p>目录结构为外层lib-oatpp test[代码存放] CMakelists.txt lib-oatpp中还有cmakelists test中有src-include-cmakelists</p>
+<p>而后我又想直接把oatpp的源码放进项目中但是一直提示无法打开文件&#x2F;或找不到文件</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240326205418158.png" alt="image-20240326205418158" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240326205448363.png" alt="image-20240326205448363" style="zoom:33%;" />
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240326221209405.png" alt="image-20240326221209405"></p>
+<p>历尽千辛万苦我终于知道如何链接了</p>
+<p>##链接方法</p>
+<p>找到之前下载的oatpp&#x2F;src的位置”D:\oatpp\src”填入 右键项目-属性-c&#x2F;c++-附加包含目录</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327163552082.png" alt="image-20240327163552082" style="zoom:33%;" />
+
+<p>找到D:\oatpp\build\src\Debug 填入下图，里面有四个库文件</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327163852259.png" alt="image-20240327163852259" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327163753697.png" alt="image-20240327163753697" style="zoom:33%;" />
+
+<p>填入四个库</p>
+<p><code>oatpp-test.lib oatpp.lib wsock32.lib ws2_32.lib</code></p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327163935539.png" alt="image-20240327163935539" style="zoom:33%;" />
+
+<p>然后完事</p>
+<p>##CMakelistst(忽略)</p>
+<p>以后也许我会再次尝试</p>
+<p>顶层cmake文件，执行全局配置</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span> (VERSION <span class="number">3.8</span>)</span><br><span class="line"><span class="keyword">project</span> (<span class="string">&quot;cmake-oatpp-nginx&quot;</span>)</span><br><span class="line"><span class="keyword">set</span> (CMAKE_CXX_STANDARD <span class="number">17</span>)</span><br><span class="line"><span class="keyword">set</span> (CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">ON</span>) <span class="comment">#严格遵循c++标准</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加宏定义</span></span><br><span class="line"><span class="keyword">if</span> (ZO_BT <span class="keyword">STREQUAL</span> <span class="string">&quot;r&quot;</span>)</span><br><span class="line">	<span class="keyword">add_definitions</span>(-DOATPP_DISABLE_ENV_OBJECT_COUNTERS)</span><br><span class="line">	<span class="keyword">message</span> (STATUS <span class="string">&quot;Build type release&quot;</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"><span class="keyword">if</span> (UNIX)</span><br><span class="line">	<span class="keyword">add_definitions</span>(-D_CRT_SECURE_NO_WARNINGS -D_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS)</span><br><span class="line">	<span class="keyword">add_definitions</span>(-DCPP_JWT_USE_VENDORED_NLOHMANN_JSON)</span><br><span class="line">	<span class="keyword">add_definitions</span>(-DLINUX)</span><br><span class="line">	<span class="keyword">add_definitions</span>(-DCHECK_TOKEN)</span><br><span class="line">	<span class="keyword">add_definitions</span>(-DSTOP_PWD=<span class="string">&quot;01star&quot;</span>)</span><br><span class="line">	<span class="keyword">add_definitions</span>(-DOATPP_SWAGGER_SERVICE_NAME=<span class="string">&quot;$&#123;PROJECT_NAME&#125; for linux&quot;</span>)</span><br><span class="line">	<span class="keyword">add_definitions</span>(-DOATPP_SWAGGER_RES_PATH=<span class="string">&quot;res&quot;</span>)</span><br><span class="line">	<span class="keyword">add_definitions</span>(-DBSONCXX_STATIC -DMONGOCXX_STATIC -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=<span class="keyword">OFF</span>)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">	<span class="keyword">add_definitions</span>(-DOATPP_SWAGGER_SERVICE_NAME=<span class="string">&quot;$&#123;PROJECT_NAME&#125; for windows&quot;</span>)</span><br><span class="line">	<span class="keyword">add_definitions</span>(-DOATPP_SWAGGER_RES_PATH=<span class="string">&quot;res&quot;</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在camke .. 的时候会输出提示目录路径</span></span><br><span class="line"><span class="keyword">message</span> (STATUS <span class="string">&quot;Prefix dir is $&#123;CMAKE_INSTALL_PREFIX&#125;&quot;</span>) <span class="comment">#安装</span></span><br><span class="line"><span class="keyword">message</span> (STATUS <span class="string">&quot;Binary dir is $&#123;PROJECT_BINARY_DIR&#125;&quot;</span>) <span class="comment">#二进制</span></span><br><span class="line"><span class="keyword">message</span> (STATUS <span class="string">&quot;Source dir is $&#123;PROJECT_SOURCE_DIR&#125;&quot;</span>) <span class="comment">#源代码</span></span><br><span class="line"><span class="keyword">message</span> (STATUS <span class="string">&quot;Build type is $&#123;CMAKE_BUILD_TYPE&#125;&quot;</span>) <span class="comment">#构建类型</span></span><br><span class="line"><span class="keyword">message</span> (STATUS <span class="string">&quot;Platform for x64 = $&#123;CMAKE_CL_64&#125;&quot;</span>) <span class="comment">#平台</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个预编译标头宏</span></span><br><span class="line"><span class="keyword">MACRO</span>(ADD_MSVC_PRECOMPILED_HEADER PrecompiledHeader PrecompiledSource SourcesVar)</span><br><span class="line">  <span class="keyword">IF</span>(MSVC)</span><br><span class="line">    <span class="keyword">GET_FILENAME_COMPONENT</span>(PrecompiledBasename <span class="variable">$&#123;PrecompiledHeader&#125;</span> NAME_WE)</span><br><span class="line">    <span class="keyword">SET</span>(PrecompiledBinary <span class="string">&quot;$&#123;CMAKE_CURRENT_BINARY_DIR&#125;/$&#123;PrecompiledBasename&#125;.pch&quot;</span>)</span><br><span class="line">    <span class="keyword">SET</span>(Sources <span class="variable">$&#123;$&#123;SourcesVar&#125;</span>&#125;)</span><br><span class="line">    <span class="keyword">SET_SOURCE_FILES_PROPERTIES</span>(<span class="variable">$&#123;PrecompiledSource&#125;</span></span><br><span class="line">                                PROPERTIES COMPILE_FLAGS <span class="string">&quot;/Yc\&quot;$&#123;PrecompiledHeader&#125;\&quot; /Fp\&quot;$&#123;PrecompiledBinary&#125;\&quot;&quot;</span></span><br><span class="line">                                           OBJECT_OUTPUTS <span class="string">&quot;$&#123;PrecompiledBinary&#125;&quot;</span>)</span><br><span class="line">    <span class="keyword">SET_SOURCE_FILES_PROPERTIES</span>(<span class="variable">$&#123;Sources&#125;</span></span><br><span class="line">                                PROPERTIES COMPILE_FLAGS <span class="string">&quot;/Yu\&quot;$&#123;PrecompiledHeader&#125;\&quot; /FI\&quot;$&#123;PrecompiledHeader&#125;\&quot; /Fp\&quot;$&#123;PrecompiledBinary&#125;\&quot;&quot;</span></span><br><span class="line">                                           OBJECT_DEPENDS <span class="string">&quot;$&#123;PrecompiledBinary&#125;&quot;</span>) </span><br><span class="line">    <span class="keyword">LIST</span>(APPEND <span class="variable">$&#123;SourcesVar&#125;</span> <span class="variable">$&#123;PrecompiledSource&#125;</span>)</span><br><span class="line">  <span class="keyword">ENDIF</span>(MSVC)</span><br><span class="line"><span class="keyword">ENDMACRO</span>(ADD_MSVC_PRECOMPILED_HEADER)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_subdirectory</span> (<span class="string">&quot;lib-oatpp&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_subdirectory</span> (<span class="string">&quot;test&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>test目录下cmakelists</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span> (VERSION <span class="number">3.8</span>)</span><br><span class="line"><span class="keyword">set</span> (appName <span class="keyword">test</span>)</span><br><span class="line"><span class="keyword">include_directories</span> (<span class="string">&quot;./&quot;</span>)</span><br><span class="line"><span class="keyword">include_directories</span> (<span class="string">&quot;../lib-oatpp/include&quot;</span>)</span><br><span class="line"><span class="comment"># 链接库路径，程序运行的时候也在这里找</span></span><br><span class="line"><span class="keyword">link_directories</span> (<span class="variable">$&#123;PROJECT_BINARY_DIR&#125;</span>/lib-oatpp)</span><br><span class="line"><span class="comment">#链接库的搜索路径</span></span><br><span class="line"><span class="keyword">if</span>(UNIX)</span><br><span class="line">	<span class="keyword">link_directories</span> (<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/lib-oatpp/lib64)</span><br><span class="line"><span class="comment"># 如果是Windows环境</span></span><br><span class="line"><span class="keyword">elseif</span>(WIN32)</span><br><span class="line">	<span class="keyword">if</span> (CMAKE_CL_64)</span><br><span class="line">		<span class="keyword">link_directories</span> (<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/lib-oatpp/lib64/openssl)</span><br><span class="line">		<span class="keyword">if</span>(ZO_BT <span class="keyword">STREQUAL</span> <span class="string">&quot;r&quot;</span>)</span><br><span class="line">			<span class="keyword">link_directories</span> (<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/lib-oatpp/lib64)</span><br><span class="line">		<span class="keyword">else</span>()</span><br><span class="line">			<span class="keyword">link_directories</span> (<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/lib-oatpp/lib64/debug)</span><br><span class="line">		<span class="keyword">endif</span>()</span><br><span class="line">	<span class="keyword">else</span>()</span><br><span class="line">		<span class="keyword">link_directories</span> (<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/lib-oatpp/lib/openssl)</span><br><span class="line">		<span class="keyword">if</span>(ZO_BT <span class="keyword">STREQUAL</span> <span class="string">&quot;r&quot;</span>)</span><br><span class="line">			<span class="keyword">link_directories</span> (<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/lib-oatpp/lib)</span><br><span class="line">		<span class="keyword">else</span>()</span><br><span class="line">			<span class="keyword">link_directories</span> (<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/lib-oatpp/lib/debug)</span><br><span class="line">		<span class="keyword">endif</span>()</span><br><span class="line">	<span class="keyword">endif</span>()</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取要编译的源代码</span></span><br><span class="line"><span class="keyword">file</span> (GLOB_RECURSE SC_FILES ./*.cpp) <span class="comment">#通配符-当前目录以及子目录下所有的.cpp文件</span></span><br><span class="line"><span class="keyword">list</span> (REMOVE_ITEM SC_FILES <span class="string">&quot;$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/./stdafx.cpp&quot;</span>) <span class="comment">#从列表SC_FILES中移除指定文件-预编译头文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置预编译标头</span></span><br><span class="line"><span class="keyword">if</span>(WIN32)</span><br><span class="line">	ADD_MSVC_PRECOMPILED_HEADER(<span class="string">&quot;stdafx.h&quot;</span> <span class="string">&quot;stdafx.cpp&quot;</span> SC_FILES)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译可执行文件</span></span><br><span class="line"><span class="keyword">add_executable</span> (<span class="variable">$&#123;appName&#125;</span> <span class="variable">$&#123;SC_FILES&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 链接库</span></span><br><span class="line"><span class="keyword">target_link_libraries</span> (<span class="variable">$&#123;appName&#125;</span> <span class="string">&quot;lib-oatpp&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Window平台复制dll文件到可执行文件目录</span></span><br><span class="line"><span class="keyword">if</span>(WIN32)</span><br><span class="line">	<span class="keyword">file</span> (GLOB_RECURSE dycopy <span class="variable">$&#123;ZO_DY_DIR&#125;</span>/*.dll)</span><br><span class="line">	<span class="keyword">file</span> (COPY <span class="variable">$&#123;dycopy&#125;</span> DESTINATION <span class="string">&quot;$&#123;PROJECT_BINARY_DIR&#125;/$&#123;appName&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"><span class="comment"># Window平台复制项目配置到可执行文件目录</span></span><br><span class="line"><span class="keyword">if</span>(WIN32)</span><br><span class="line">	<span class="keyword">file</span> (GLOB conf <span class="string">&quot;conf/*&quot;</span>)</span><br><span class="line">	<span class="keyword">file</span> (COPY <span class="variable">$&#123;conf&#125;</span> DESTINATION <span class="variable">$&#123;PROJECT_BINARY_DIR&#125;</span>/<span class="variable">$&#123;appName&#125;</span>/conf)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装文件</span></span><br><span class="line"><span class="comment"># public目录</span></span><br><span class="line"><span class="keyword">if</span>(IS_ARCH_DEMO)</span><br><span class="line">	<span class="keyword">install</span> (DIRECTORY <span class="string">&quot;public&quot;</span> DESTINATION <span class="variable">$&#123;appName&#125;</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"><span class="comment"># 可执行文件</span></span><br><span class="line"><span class="keyword">install</span> (TARGETS <span class="variable">$&#123;appName&#125;</span> RUNTIME DESTINATION <span class="variable">$&#123;appName&#125;</span>)</span><br><span class="line"><span class="comment"># Window平台复制项目配置到可执行文件目录</span></span><br><span class="line"><span class="keyword">if</span>(WIN32)</span><br><span class="line">	<span class="keyword">install</span> (DIRECTORY <span class="string">&quot;conf&quot;</span> DESTINATION <span class="variable">$&#123;appName&#125;</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">// main.cpp</span><br><span class="line"></span><br><span class="line">#include &quot;oatpp/web/server/HttpConnectionHandler.hpp&quot;</span><br><span class="line">#include &quot;oatpp/web/server/HttpRouter.hpp&quot;</span><br><span class="line">#include &quot;oatpp/web/server/HttpRequestHandler.hpp&quot;</span><br><span class="line">#include &quot;oatpp/web/protocol/http/outgoing/ResponseFactory.hpp&quot;</span><br><span class="line">#include &quot;oatpp/network/tcp/server/ConnectionProvider.hpp&quot;</span><br><span class="line">#include &quot;oatpp/core/macro/component.hpp&quot;</span><br><span class="line"></span><br><span class="line">class MyController : public oatpp::web::server::HttpRequestHandler &#123;</span><br><span class="line">public:</span><br><span class="line">  /**</span><br><span class="line">   * Handle incoming HTTP request</span><br><span class="line">   */</span><br><span class="line">  std::shared_ptr&lt;OutgoingResponse&gt; handle(const std::shared_ptr&lt;IncomingRequest&gt;&amp; /*request*/) override &#123;</span><br><span class="line">    // Return &quot;Hello, World!&quot; response</span><br><span class="line">    return oatpp::web::protocol::http::outgoing::ResponseFactory::createResponse(Status::CODE_200, &quot;Hello, World!&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  Example ConnectionProvider component that listens on port 8080</span><br><span class="line"> */</span><br><span class="line">OATPP_CREATE_COMPONENT(std::shared_ptr&lt;oatpp::network::ServerConnectionProvider&gt;, serverConnectionProvider)([] &#123;</span><br><span class="line">  return oatpp::network::tcp::server::ConnectionProvider::createShared(&#123; &quot;0.0.0.0&quot;, 8080, oatpp::network::Address::IP_4 &#125;);</span><br><span class="line">&#125;());</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  Example Router component</span><br><span class="line"> */</span><br><span class="line">OATPP_CREATE_COMPONENT(std::shared_ptr&lt;oatpp::web::server::HttpRouter&gt;, httpRouter)([] &#123;</span><br><span class="line">  auto router = oatpp::web::server::HttpRouter::createShared();</span><br><span class="line">  router-&gt;route(&quot;GET&quot;, &quot;/api/hello&quot;, std::make_shared&lt;MyController&gt;());</span><br><span class="line">  return router;</span><br><span class="line">&#125;());</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  Example ConnectionHandler component that combines ConnectionProvider and Router</span><br><span class="line"> */</span><br><span class="line">OATPP_CREATE_COMPONENT(std::shared_ptr&lt;oatpp::network::ConnectionHandler&gt;, serverConnectionHandler)([] &#123;</span><br><span class="line">  OATPP_COMPONENT(std::shared_ptr&lt;oatpp::network::ServerConnectionProvider&gt;, connectionProvider); // get ConnectionProvider component</span><br><span class="line">  OATPP_COMPONENT(std::shared_ptr&lt;oatpp::web::server::HttpRouter&gt;, router); // get Router component</span><br><span class="line"></span><br><span class="line">  auto connectionHandler = oatpp::web::server::HttpConnectionHandler::createShared(router);</span><br><span class="line">  connectionHandler-&gt;setConnectionProvider(connectionProvider);</span><br><span class="line">  return connectionHandler;</span><br><span class="line">&#125;());</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">  OATPP_COMPONENT(std::shared_ptr&lt;oatpp::network::ServerConnectionProvider&gt;, connectionProvider);</span><br><span class="line">  OATPP_COMPONENT(std::shared_ptr&lt;oatpp::network::ConnectionHandler&gt;, connectionHandler);</span><br><span class="line"></span><br><span class="line">  oatpp::network::Server server(connectionProvider, connectionHandler);</span><br><span class="line"></span><br><span class="line">  // Print info about server port</span><br><span class="line">  OATPP_LOGI(&quot;MyApp&quot;, &quot;Server running on port %s&quot;, connectionProvider-&gt;getProperty(&quot;port&quot;).toString()-&gt;c_str());</span><br><span class="line"></span><br><span class="line">  // Run server</span><br><span class="line">  server.run();</span><br><span class="line"></span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个示例中，我们创建了一个名为 <code>MyController</code> 的类，用于处理 HTTP 请求，并返回 “Hello, World!” 消息。然后，我们定义了一个 HTTP 路由，将 <code>/api/hello</code> 路径映射到 <code>MyController</code> 类。最后，我们创建了一个 HTTP 服务器，监听在 8080 端口上，并将路由和连接提供器与之关联。</p>
+<p>编译并运行这个程序，它将启动一个 HTTP 服务器，监听在 8080 端口上。接下来，你需要配置 Nginx，将 <code>/api/hello</code> 请求代理到这个端口上。在 Nginx 的配置文件中，你可以添加类似以下的配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nginxCopy codeserver &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name your_server_domain.com;</span><br><span class="line"></span><br><span class="line">    location /api/hello &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8080;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>保存并重新加载 Nginx 配置，然后访问 <code>http://your_server_domain.com/api/hello</code>，你应该能够看到 “Hello, World!” 的响应。</p>
+<h1 id="Step-by-Step"><a href="#Step-by-Step" class="headerlink" title="Step by Step"></a>Step by Step</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/web/server/HttpConnectionHandler.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/network/Server.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/network/tcp/server/ConnectionProvider.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Create Router for HTTP requests routing */</span></span><br><span class="line">	<span class="keyword">auto</span> router = oatpp::web::server::HttpRouter::<span class="built_in">createShared</span>();<span class="comment">//Http请求的路由，url映射到端点处理程序，现在没有声明端点，返回404</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Create HTTP connection handler with router */</span><span class="comment">//http连接处理，每一个连接一个线程</span></span><br><span class="line">	<span class="keyword">auto</span> connectionHandler = oatpp::web::server::HttpConnectionHandler::<span class="built_in">createShared</span>(router);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Create TCP connection provider */</span><span class="comment">//tcp连接，绑定一个端口</span></span><br><span class="line">	<span class="keyword">auto</span> connectionProvider = oatpp::network::tcp::server::ConnectionProvider::<span class="built_in">createShared</span>(&#123; <span class="string">&quot;localhost&quot;</span>, <span class="number">8000</span>, oatpp::network::Address::IP_4 &#125;);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Create server which takes provided TCP connections and passes them to HTTP connection handler */</span></span><br><span class="line">	oatpp::<span class="function">network::Server <span class="title">server</span><span class="params">(connectionProvider, connectionHandler)</span></span>;<span class="comment">//server运行一个循环，获取tcp连接，传到连接处理</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Print info about server port */</span></span><br><span class="line">	<span class="built_in">OATPP_LOGI</span>(<span class="string">&quot;MyApp&quot;</span>, <span class="string">&quot;Server running on port %s&quot;</span>, connectionProvider-&gt;<span class="built_in">getProperty</span>(<span class="string">&quot;port&quot;</span>).<span class="built_in">getData</span>());</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Run server */</span></span><br><span class="line">	server.<span class="built_in">run</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">/* Init oatpp Environment */</span></span><br><span class="line">	oatpp::base::Environment::<span class="built_in">init</span>();</span><br><span class="line">	<span class="comment">/* Run App */</span></span><br><span class="line">	<span class="built_in">run</span>();</span><br><span class="line">	<span class="comment">/* Destroy oatpp Environment */</span></span><br><span class="line">	oatpp::base::Environment::<span class="built_in">destroy</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>###添加请求处理程序</p>
+<p>当url &#x2F;hello请求做出处理</p>
+<p>访问http:&#x2F;localhost:8000&#x2F;hello 返回hello world消息</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Handler</span> : <span class="keyword">public</span> oatpp::web::server::HttpRequestHandler &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function">std::shared_ptr&lt;OutgoingResponse&gt; <span class="title">handle</span><span class="params">(<span class="type">const</span> std::shared_ptr&lt;IncomingRequest&gt;&amp; request)</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ResponseFactory::<span class="built_in">createResponse</span>(Status::CODE_200, <span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">	router-&gt;<span class="built_in">route</span>(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/hello&quot;</span>, std::<span class="built_in">make_shared</span>&lt;Handler&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用JSON对象进行响应"><a href="#使用JSON对象进行响应" class="headerlink" title="使用JSON对象进行响应"></a>使用JSON对象进行响应</h3><p>为了序列化&#x2F;反序列化对象，oatpp 使用特殊的[数据传输对象(DTO)和ObjectMappers</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/parser/json/mapping/ObjectMapper.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/core/macro/codegen.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Begin DTO code-generation */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> OATPP_CODEGEN_BEGIN(DTO)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Message Data-Transfer-Object</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MessageDto</span> : <span class="keyword">public</span> oatpp::DTO &#123;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">DTO_INIT</span>(MessageDto, DTO <span class="comment">/* Extends */</span>)</span><br><span class="line"></span><br><span class="line">  <span class="built_in">DTO_FIELD</span>(Int32, statusCode);   <span class="comment">// Status code field</span></span><br><span class="line">  <span class="built_in">DTO_FIELD</span>(String, message);     <span class="comment">// Message field</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* End DTO code-generation */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> OATPP_CODEGEN_END(DTO)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Handler</span> : <span class="keyword">public</span> oatpp::web::server::HttpRequestHandler &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  std::shared_ptr&lt;oatpp::data::mapping::ObjectMapper&gt; m_objectMapper;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Constructor with object mapper.</span></span><br><span class="line"><span class="comment">   * @param objectMapper - object mapper used to serialize objects.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="built_in">Handler</span>(<span class="type">const</span> std::shared_ptr&lt;oatpp::data::mapping::ObjectMapper&gt;&amp; objectMapper)</span><br><span class="line">    : <span class="built_in">m_objectMapper</span>(objectMapper)</span><br><span class="line">  &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Handle incoming request and return outgoing response.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function">std::shared_ptr&lt;OutgoingResponse&gt; <span class="title">handle</span><span class="params">(<span class="type">const</span> std::shared_ptr&lt;IncomingRequest&gt;&amp; request)</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> message = MessageDto::<span class="built_in">createShared</span>();</span><br><span class="line">    message-&gt;statusCode = <span class="number">1024</span>;</span><br><span class="line">    message-&gt;message = <span class="string">&quot;Hello DTO!&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> ResponseFactory::<span class="built_in">createResponse</span>(Status::CODE_200, message, m_objectMapper);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Create json object mapper */</span></span><br><span class="line">  <span class="keyword">auto</span> objectMapper = oatpp::parser::json::mapping::ObjectMapper::<span class="built_in">createShared</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Create Router for HTTP requests routing */</span></span><br><span class="line">  <span class="keyword">auto</span> router = oatpp::web::server::HttpRouter::<span class="built_in">createShared</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Route GET - &quot;/hello&quot; requests to Handler */</span></span><br><span class="line">  router-&gt;<span class="built_in">route</span>(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/hello&quot;</span>, std::<span class="built_in">make_shared</span>&lt;Handler&gt;(objectMapper <span class="comment">/* json object mapper */</span> ));</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="oatpp的结构"><a href="#oatpp的结构" class="headerlink" title="oatpp的结构"></a>oatpp的结构</h2><p>DTO 数据传输对象 定义了数据的格式</p>
+<p>controller 使用api controller 端点处理程序(处理路由请求) 使用dto中的类封装消息</p>
+<p>AppComponent.hpp 定义必须的组件(HTTP连接，请求路由，TCP连接，ObjectMapper)</p>
+<p>App.cpp main 路由器(请求) 获取上述组件中的路由-获取controller中的处理程序-建立路由到处理程序的映射</p>
+<p>​						  获取HTTP连接-获取TCP连接-建立服务-从TCP连接提供者发送消息到http连接处理</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240328095617737.png" alt="image-20240328095617737" style="zoom:33%;" />
+
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>DTOs.hpp</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> DTOs_hpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DTOs_hpp</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/core/data/mapping/type/Object.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/core/macro/codegen.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/parser/json/mapping/ObjectMapper.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/web/server/HttpConnectionHandler.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/network/Server.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/network/tcp/server/ConnectionProvider.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Begin DTO code-generation */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> OATPP_CODEGEN_BEGIN(DTO)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Message Data-Transfer-Object</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MessageDto</span> : <span class="keyword">public</span> oatpp::DTO &#123;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">DTO_INIT</span>(MessageDto, DTO <span class="comment">/* Extends */</span>)</span><br><span class="line"></span><br><span class="line">		<span class="built_in">DTO_FIELD</span>(Int32, statusCode);   <span class="comment">// Status code field</span></span><br><span class="line">	<span class="built_in">DTO_FIELD</span>(String, message);     <span class="comment">// Message field</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* TODO - Add more DTOs here */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* End DTO code-generation */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> OATPP_CODEGEN_END(DTO)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* DTOs_hpp */</span></span></span><br></pre></td></tr></table></figure>
+
+<p>MyController.hpp</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> MyController_hpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MyController_hpp</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;dto/DTOs.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/web/server/api/ApiController.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/core/macro/codegen.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/core/macro/component.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> OATPP_CODEGEN_BEGIN(ApiController) <span class="comment">///&lt; Begin Codegen</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Sample Api Controller.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyController</span> : <span class="keyword">public</span> oatpp::web::server::api::ApiController &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Constructor with object mapper.</span></span><br><span class="line"><span class="comment">     * @param objectMapper - default object mapper used to serialize/deserialize DTOs.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="built_in">MyController</span>(<span class="built_in">OATPP_COMPONENT</span>(std::shared_ptr&lt;ObjectMapper&gt;, objectMapper))</span><br><span class="line">        : oatpp::web::server::api::<span class="built_in">ApiController</span>(objectMapper)</span><br><span class="line">    &#123;&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="built_in">ENDPOINT</span>(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/hello&quot;</span>, root) &#123;</span><br><span class="line">        <span class="keyword">auto</span> dto = MessageDto::<span class="built_in">createShared</span>();</span><br><span class="line">        dto-&gt;statusCode = <span class="number">200</span>;</span><br><span class="line">        dto-&gt;message = <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">createDtoResponse</span>(Status::CODE_200, dto);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO Insert Your endpoints here !!!</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> OATPP_CODEGEN_END(ApiController) <span class="comment">///&lt; End Codegen</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* MyController_hpp */</span></span></span><br></pre></td></tr></table></figure>
+
+<p>AppComponent.hpp</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> AppComponent_hpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> AppComponent_hpp</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/parser/json/mapping/ObjectMapper.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/web/server/HttpConnectionHandler.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/network/tcp/server/ConnectionProvider.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/core/macro/component.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  Class which creates and holds Application components and registers components in oatpp::base::Environment</span></span><br><span class="line"><span class="comment"> *  Order of components initialization is from top to bottom</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AppComponent</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  Create ConnectionProvider component which listens on the port</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="built_in">OATPP_CREATE_COMPONENT</span>(std::shared_ptr&lt;oatpp::network::ServerConnectionProvider&gt;, serverConnectionProvider)([] &#123;</span><br><span class="line">        <span class="keyword">return</span> oatpp::network::tcp::server::ConnectionProvider::<span class="built_in">createShared</span>(&#123; <span class="string">&quot;localhost&quot;</span>, <span class="number">8000</span>, oatpp::network::Address::IP_4 &#125;);</span><br><span class="line">        &#125;());</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  Create Router component</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="built_in">OATPP_CREATE_COMPONENT</span>(std::shared_ptr&lt;oatpp::web::server::HttpRouter&gt;, httpRouter)([] &#123;</span><br><span class="line">        <span class="keyword">return</span> oatpp::web::server::HttpRouter::<span class="built_in">createShared</span>();</span><br><span class="line">        &#125;());</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  Create ConnectionHandler component which uses Router component to route requests</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="built_in">OATPP_CREATE_COMPONENT</span>(std::shared_ptr&lt;oatpp::network::ConnectionHandler&gt;, serverConnectionHandler)([] &#123;</span><br><span class="line">        <span class="built_in">OATPP_COMPONENT</span>(std::shared_ptr&lt;oatpp::web::server::HttpRouter&gt;, router); <span class="comment">// get Router component</span></span><br><span class="line">        <span class="keyword">return</span> oatpp::web::server::HttpConnectionHandler::<span class="built_in">createShared</span>(router);</span><br><span class="line">        &#125;());</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  Create ObjectMapper component to serialize/deserialize DTOs in Contoller&#x27;s API</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="built_in">OATPP_CREATE_COMPONENT</span>(std::shared_ptr&lt;oatpp::data::mapping::ObjectMapper&gt;, apiObjectMapper)([] &#123;</span><br><span class="line">        <span class="keyword">return</span> oatpp::parser::json::mapping::ObjectMapper::<span class="built_in">createShared</span>();</span><br><span class="line">        &#125;());</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* AppComponent_hpp */</span></span></span><br></pre></td></tr></table></figure>
+
+<p>App.cpp</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;controller/MyController.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;AppComponent.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/network/Server.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Register Components in scope of run() method */</span></span><br><span class="line">	AppComponent components;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Get router component */</span></span><br><span class="line">	<span class="built_in">OATPP_COMPONENT</span>(std::shared_ptr&lt;oatpp::web::server::HttpRouter&gt;, router);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Create MyController and add all of its endpoints to router */</span></span><br><span class="line">	<span class="keyword">auto</span> myController = std::<span class="built_in">make_shared</span>&lt;MyController&gt;();</span><br><span class="line">	router-&gt;<span class="built_in">addController</span>(myController);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Get connection handler component */</span></span><br><span class="line">	<span class="built_in">OATPP_COMPONENT</span>(std::shared_ptr&lt;oatpp::network::ConnectionHandler&gt;, connectionHandler);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Get connection provider component */</span></span><br><span class="line">	<span class="built_in">OATPP_COMPONENT</span>(std::shared_ptr&lt;oatpp::network::ServerConnectionProvider&gt;, connectionProvider);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Create server which takes provided TCP connections and passes them to HTTP connection handler */</span></span><br><span class="line">	oatpp::<span class="function">network::Server <span class="title">server</span><span class="params">(connectionProvider, connectionHandler)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Priny info about server port */</span></span><br><span class="line">	<span class="built_in">OATPP_LOGI</span>(<span class="string">&quot;MyApp&quot;</span>, <span class="string">&quot;Server running on port %s&quot;</span>, connectionProvider-&gt;<span class="built_in">getProperty</span>(<span class="string">&quot;port&quot;</span>).<span class="built_in">getData</span>());</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Run server */</span></span><br><span class="line">	server.<span class="built_in">run</span>();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span>* argv[])</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Init oatpp Environment */</span></span><br><span class="line">	oatpp::base::Environment::<span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Run App */</span></span><br><span class="line">	<span class="built_in">run</span>();</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Destroy oatpp Environment */</span></span><br><span class="line">	oatpp::base::Environment::<span class="built_in">destroy</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> MyController_hpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MyController_hpp</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;dto/DTOs.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/web/server/api/ApiController.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/core/macro/codegen.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;oatpp/core/macro/component.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> OATPP_CODEGEN_BEGIN(ApiController) <span class="comment">///&lt; Begin Codegen</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Sample Api Controller.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyController</span> : <span class="keyword">public</span> oatpp::web::server::api::ApiController &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Constructor with object mapper.</span></span><br><span class="line"><span class="comment">     * @param objectMapper - default object mapper used to serialize/deserialize DTOs.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="built_in">MyController</span>(<span class="built_in">OATPP_COMPONENT</span>(std::shared_ptr&lt;oatpp::data::mapping::ObjectMapper&gt;, objectMapper))</span><br><span class="line">        : oatpp::web::server::api::<span class="built_in">ApiController</span>(objectMapper)</span><br><span class="line">    &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="built_in">ENDPOINT</span>(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/hello&quot;</span>, roothello) &#123;</span><br><span class="line">        <span class="keyword">auto</span> dto = MessageDto::<span class="built_in">createShared</span>();</span><br><span class="line">        dto-&gt;statusCode = <span class="number">200</span>;</span><br><span class="line">        dto-&gt;message = <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">createDtoResponse</span>(Status::CODE_200, dto);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO Insert Your endpoints here !!!</span></span><br><span class="line">    <span class="built_in">ENDPOINT</span>(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/&quot;</span>, root) &#123;</span><br><span class="line">        <span class="keyword">auto</span> response = <span class="built_in">createResponse</span>(Status::CODE_200, <span class="string">&quot;&lt;html&gt;&lt;body&gt;&lt;form action=\&quot;/submit\&quot; method=\&quot;post\&quot;&gt;&lt;input type=\&quot;text\&quot; name=\&quot;input\&quot; placeholder=\&quot;Enter something\&quot;&gt;&lt;button type=\&quot;submit\&quot;&gt;Submit&lt;/button&gt;&lt;/form&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span>);</span><br><span class="line">        response-&gt;<span class="built_in">putHeader</span>(oatpp::web::protocol::http::Header::CONTENT_TYPE, <span class="string">&quot;text/html&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> response;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">ENDPOINT</span>(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;/submit&quot;</span>, submit, <span class="built_in">BODY_STRING</span>(String, body)) &#123;</span><br><span class="line">        <span class="built_in">OATPP_LOGI</span>(<span class="string">&quot;MyController&quot;</span>, <span class="string">&quot;Received input: %s&quot;</span>, body-&gt;<span class="built_in">c_str</span>());</span><br><span class="line">        <span class="keyword">auto</span> response = <span class="built_in">createResponse</span>(Status::CODE_200, <span class="string">&quot;Received input: &quot;</span> + *body);</span><br><span class="line">        response-&gt;<span class="built_in">putHeader</span>(oatpp::web::protocol::http::Header::CONTENT_TYPE, <span class="string">&quot;text/plain&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> response;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> OATPP_CODEGEN_END(ApiController) <span class="comment">///&lt; End Codegen</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* MyController_hpp */</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>License</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">Newer</div><a href="/2024/06/09/%E6%9C%9F%E6%9C%AB%E5%A4%87%E8%80%83/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/">概率统计期末快速复习</a></div><div class="item" id="next"><div class="note">Older</div><a href="/2024/03/25/%E5%90%8E%E7%AB%AF/Nginx/">Nginx</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。<br><span class="jinrishici-sentence"></span></p>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">On This Page</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85oatpp"><span class="toc-text">安装oatpp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Step-by-Step"><span class="toc-text">Step by Step</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8JSON%E5%AF%B9%E8%B1%A1%E8%BF%9B%E8%A1%8C%E5%93%8D%E5%BA%94"><span class="toc-text">使用JSON对象进行响应</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#oatpp%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-text">oatpp的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-text">代码</span></a></li></ol></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>Scroll to Top</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `Just`,
+      min: `minutes ago`,
+      hour: `hours ago`,
+      day: `days ago`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://cdn.jsdelivr.net/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `Switched to Light Mode`,
+      dark: `Switched to Dark Mode`,
+      auto: `Switched to Auto Mode`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

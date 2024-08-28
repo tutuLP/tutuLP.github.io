@@ -1,0 +1,922 @@
+
+<!DOCTYPE html><html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 7.1.1">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>数字逻辑概论 - blog of tutuLP</title>
+
+  
+    <meta name="description" content="数字逻辑概论##数制转换 一位十六进制等效于四位二进制 ##码制转换 &#x3D;&#x3D;8421BCD码&#x3D;&#x3D; 每一个数字用四位二进制数表示   数字的&#x3D;&#x3D;ASCII码&#x3D;&#x3D;表示，低位是对应的四位二进制，高位是011   &#x3D;&#x3D;格雷码&#x3D;&#x3D;   1+1 保留0舍去进位1   ##逻辑运算及逻辑门 列真">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字逻辑概论">
+<meta property="og:url" content="http://example.com/2024/06/09/%E6%9C%9F%E6%9C%AB%E5%A4%87%E8%80%83/%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91/index.html">
+<meta property="og:site_name" content="blog of tutuLP">
+<meta property="og:description" content="数字逻辑概论##数制转换 一位十六进制等效于四位二进制 ##码制转换 &#x3D;&#x3D;8421BCD码&#x3D;&#x3D; 每一个数字用四位二进制数表示   数字的&#x3D;&#x3D;ASCII码&#x3D;&#x3D;表示，低位是对应的四位二进制，高位是011   &#x3D;&#x3D;格雷码&#x3D;&#x3D;   1+1 保留0舍去进位1   ##逻辑运算及逻辑门 列真">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401213619311.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401213903737.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401214340095.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401214609706.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401215517034.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401215942734.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401220739388.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401222634249.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401223816578.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240406200136140.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240406200831445.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407151824325.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407152033455.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407153314661.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407153637853.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407153717012.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407154107100.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407213135826.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407213359481.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408083308248.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408083940418.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408084325216.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408084512152.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408084817809.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408085536053.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408085803928.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408085900535.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408090012797.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408090239920.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408090339840.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408090459934.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408091306164.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408091756451.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408092147642.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408092232756.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408092343413.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408092420841.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408092654255.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408093151336.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408093456031.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408093559383.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240415090134758.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240415090701800.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240415091000624.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240415091409226.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240415092212580.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240415092813392.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240416082212703.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240416082335259.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240416082853480.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240416083054512.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240416084251923.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240416084636915.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417105029365.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417111953379.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417112007975.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417112906057.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417113114053.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417113125948.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417113152425.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417113552418.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417114107990.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417114516147.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417114545157.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417114715556.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417114842368.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417132806129.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417133929421.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417134147753.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417134400244.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417134957477.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417135205353.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417135458878.png">
+<meta property="og:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417135858160.png">
+<meta property="article:published_time" content="2024-06-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-28T09:03:16.592Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数字逻辑概论">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401213619311.png">
+  
+  
+  
+  <meta name="keywords" content="数字逻辑概论">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+    <link rel="shortcut icon" href="/image/32x32.png">
+  
+
+  
+
+  
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/me-512x512.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">blog of tutuLP</div><div class="sub normal cap">从此天边尽沉云</div><div class="sub hover cap" style="opacity:0"> Designed by tutulp</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="Search"></form><div id="search-result"></div><div class="search-no-result">No Results!</div></div>
+
+
+<nav class="menu dis-select"></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">Recent Update</span></div><div class="widget-body fs14"><a class="item title" href="/2024/06/09/%E9%9D%A2%E8%AF%95/C++%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/"><span class="title">c++面试</span></a><a class="item title" href="/2024/06/09/%E9%9D%A2%E8%AF%95/Qt%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/"><span class="title">Qt面试</span></a><a class="item title" href="/2024/06/09/%E9%9D%A2%E8%AF%95/%E6%A0%A1%E5%9B%AD%E6%8B%9B%E8%81%98/"><span class="title">校招一览</span></a><a class="item title" href="/2024/06/09/%E6%9C%9F%E6%9C%AB%E5%A4%87%E8%80%83/%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91/"><span class="title">数字逻辑概论</span></a><a class="item title" href="/2024/06/09/%E6%9C%9F%E6%9C%AB%E5%A4%87%E8%80%83/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/"><span class="title">概率统计期末快速复习</span></a><a class="item title" href="/2024/06/24/%E6%97%85%E6%B8%B8/%E5%B9%BF%E8%A5%BF/"><span class="title">广西旅游</span></a><a class="item title" href="/2024/03/25/%E5%90%8E%E7%AB%AF/Nginx/"><span class="title">Nginx</span></a><a class="item title" href="/2024/03/25/%E5%90%8E%E7%AB%AF/hexo/"><span class="title">hexo</span></a><a class="item title" href="/2024/03/27/%E5%90%8E%E7%AB%AF/oatpp+nginx/"><span class="title">oatpp-nginx</span></a><a class="item title" href="/2024/06/09/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/VMware%20win11/"><span class="title">windows虚拟机</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">Blog</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E5%A4%A7%E5%AD%A6%E8%AF%BE%E7%A8%8B/">大学课程</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">Posted on: <time datetime="2024-06-08T16:00:00.000Z">2024-06-09</time></span><span class="sep updated"></span><span class="text updated">Updated on: <time datetime="2024-08-28T09:03:16.592Z">2024-08-28</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>数字逻辑概论</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="数字逻辑概论"><a href="#数字逻辑概论" class="headerlink" title="数字逻辑概论"></a>数字逻辑概论</h1><p>##数制转换</p>
+<p>一位十六进制等效于四位二进制</p>
+<p>##码制转换</p>
+<p>&#x3D;&#x3D;8421BCD码&#x3D;&#x3D;</p>
+<p>每一个数字用四位二进制数表示</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401213619311.png" alt="image-20240401213619311" style="zoom:33%;" />
+
+<p>数字的&#x3D;&#x3D;ASCII码&#x3D;&#x3D;表示，低位是对应的四位二进制，高位是011</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401213903737.png" alt="image-20240401213903737" style="zoom:33%;" />
+
+<p>&#x3D;&#x3D;格雷码&#x3D;&#x3D;</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401214340095.png" alt="image-20240401214340095" style="zoom:33%;" />
+
+<p>1+1 保留0舍去进位1</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401214609706.png" alt="image-20240401214609706" style="zoom: 33%;" />
+
+<p>##逻辑运算及逻辑门</p>
+<p>列真值表分三列-一组-两组-四组</p>
+<p>第一列00001111</p>
+<p>第二列00110011</p>
+<p>第三列01010101</p>
+<p>输入组合为2^n</p>
+<p>与(同时为1才是1-并)   或(有1为1-交) +   与非(与相反)    或非</p>
+<p>下方是波形</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401215517034.png" alt="image-20240401215517034" style="zoom:33%;" />
+
+<p>异或(相同为0) <strong>同或</strong></p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401215942734.png" alt="image-20240401215942734" style="zoom:33%;" />
+
+<p>##使用逻辑门的电路举例</p>
+<p>&#x3D;&#x3D;真值表-&gt;逻辑函数表达式&#x3D;&#x3D;</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401220739388.png" alt="image-20240401220739388" style="zoom:50%;" />
+
+<p>写与或表达式(先*后+)-先看L1-四个为1的数-001看作-A非B非C-为1</p>
+<p>&#x3D;&#x3D;逻辑函数表达式-&gt;真值表&#x3D;&#x3D;</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401222634249.png" alt="image-20240401222634249" style="zoom:33%;" />
+
+<p>异或</p>
+<p>&#x3D;&#x3D;逻辑图-&gt;逻辑函数表达式&#x3D;&#x3D;</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240401223816578.png" alt="image-20240401223816578" style="zoom:33%;" />
+
+<p>c前面的圆圈代表c要去三个地方</p>
+<h1 id="逻辑代数"><a href="#逻辑代数" class="headerlink" title="逻辑代数"></a>逻辑代数</h1><p>##逻辑代数的基本公式和规则</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240406200136140.png" alt="image-20240406200136140" style="zoom:33%;" />
+
+<p>&#x3D;&#x3D;列真值表证明表达式&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;同逻辑代数定理证明等式&#x3D;&#x3D;</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240406200831445.png" alt="image-20240406200831445" style="zoom:33%;" />
+
+<p>反演规则：+ * 互变 每个取非 0 1互换</p>
+<p>对偶规则：+ * 互变 0 1互换</p>
+<p>##逻辑函数的最简形式</p>
+<p>与或表达式 部分与整体和 AB+CD</p>
+<p>或与表达式 </p>
+<p>与非-与非</p>
+<p>或非-或非</p>
+<p>与-或-非</p>
+<p>&#x3D;&#x3D;用代数法化简最简与或表达式&#x3D;&#x3D;</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407151824325.png" alt="image-20240407151824325" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407152033455.png" alt="image-20240407152033455" style="zoom:33%;" />
+
+<h2 id="逻辑函数表达式的两种标准形式"><a href="#逻辑函数表达式的两种标准形式" class="headerlink" title="逻辑函数表达式的两种标准形式"></a>逻辑函数表达式的两种标准形式</h2><p>最小项：一个乘积包含所有变量以原变量或非变量的形式 ABC</p>
+<p>n个变量的最小项有2^n个 用mi表示 </p>
+<p>最小项编号：原变量用1非变量用0 例如编号011十进制是3表示为m3</p>
+<p><strong>最小项表达式</strong>&#x2F;<strong>标准与或表达式</strong>：若干最小项相或</p>
+<p>最大项：相加 (A+B)</p>
+<p>最小项和最大项取非相等</p>
+<p>最大项只有一组取值值为0</p>
+<p>任意两个最大想之和为1</p>
+<p>所有最大项之积为0</p>
+<p>&#x3D;&#x3D;求最小项表达式&#x3D;&#x3D;</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407153314661.png" alt="image-20240407153314661" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407153637853.png" alt="image-20240407153637853" style="zoom: 33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407153717012.png" alt="image-20240407153717012" style="zoom:33%;" />
+
+<h2 id="逻辑函数卡诺图化简法"><a href="#逻辑函数卡诺图化简法" class="headerlink" title="逻辑函数卡诺图化简法"></a>逻辑函数卡诺图化简法</h2><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407154107100.png" alt="image-20240407154107100" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407213135826.png" alt="image-20240407213135826" style="zoom:33%;" />
+
+<p>&#x3D;&#x3D;用卡诺图化简式子&#x3D;&#x3D;</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240407213359481.png" alt="image-20240407213359481" style="zoom:33%;" />
+
+<p>先求最简与或表达式-画图-得出式子</p>
+<p>d代表无关项-随意选择为多少</p>
+<h1 id="组合逻辑电路"><a href="#组合逻辑电路" class="headerlink" title="组合逻辑电路"></a>组合逻辑电路</h1><h2 id="组合逻辑电路分析"><a href="#组合逻辑电路分析" class="headerlink" title="组合逻辑电路分析"></a>组合逻辑电路分析</h2><p>输出状态只取决于同一时刻的输入，没有反馈延迟通路</p>
+<p>电路中不含记忆功能的元件</p>
+<ol>
+<li>逐级写逻辑表达式，直到写出输入和输出的逻辑表达式</li>
+<li>化简得到最简表达式</li>
+<li>列真值表</li>
+<li>确定功能</li>
+</ol>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408083308248.png" alt="image-20240408083307001" style="zoom:33%;" />
+
+<p>最后一步化简没看懂</p>
+<h2 id="组合逻辑电路的设计"><a href="#组合逻辑电路的设计" class="headerlink" title="组合逻辑电路的设计"></a>组合逻辑电路的设计</h2><ol>
+<li>真值表	</li>
+<li>卡诺图</li>
+<li>最简表达式</li>
+<li>画逻辑图</li>
+</ol>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408083940418.png" alt="image-20240408083940418" style="zoom:33%;" />
+
+<h2 id="组合逻辑电路的竞争-冒险"><a href="#组合逻辑电路的竞争-冒险" class="headerlink" title="组合逻辑电路的竞争-冒险"></a>组合逻辑电路的竞争-冒险</h2><h2 id="优先编码器CD4532"><a href="#优先编码器CD4532" class="headerlink" title="优先编码器CD4532"></a>优先编码器CD4532</h2><p>多对少</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408084325216.png" alt="image-20240408084325216" style="zoom:33%;" />
+
+<p>普通编码器允许一个输入信号有效，优先编码器允许多个有效，输出优先级高的</p>
+<p>CD4532：8线-3线的优先编码器</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408084512152.png" alt="image-20240408084512152" style="zoom:33%;" />
+
+<p>译码器</p>
+<p>反过来的</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408084817809.png" alt="image-20240408084817809" style="zoom:33%;" />
+
+<p>##74HC138译码器</p>
+<h1 id="锁存器和触发器"><a href="#锁存器和触发器" class="headerlink" title="锁存器和触发器"></a>锁存器和触发器</h1><h2 id="锁存器"><a href="#锁存器" class="headerlink" title="锁存器"></a>锁存器</h2><p>基本SR锁存器的工作基本原理</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408085536053.png" alt="image-20240408085536053" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408085803928.png" alt="image-20240408085803928" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408085900535.png" alt="image-20240408085900535" style="zoom:33%;" />
+
+<h2 id="门控SR锁存器"><a href="#门控SR锁存器" class="headerlink" title="门控SR锁存器"></a>门控SR锁存器</h2><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408090012797.png" alt="image-20240408090012797" style="zoom:33%;" />
+
+
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408090239920.png" alt="image-20240408090239920" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408090339840.png" alt="image-20240408090339840" style="zoom:33%;" />
+
+<p>特性表</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408090459934.png" alt="image-20240408090459934" style="zoom:33%;" />
+
+<h2 id="锁存器和触发器-1"><a href="#锁存器和触发器-1" class="headerlink" title="锁存器和触发器"></a>锁存器和触发器</h2><p>对上升沿或者下降沿敏感的叫触发器</p>
+<p>主从D触发器的电路结构和工作原理</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408091306164.png" alt="image-20240408091306164" style="zoom:33%;" />
+
+<p>左边cp端有圈是对下降沿敏感的</p>
+<p>先分析右边的对上升沿敏感的Q2，开始状态是0，当cp上升时D为0，所以状态不改变，第二次上升时D为1改变，下一次改变又看上升沿D的状态</p>
+<p>频率之间的关系</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408091756451.png" alt="image-20240408091756451" style="zoom:33%;" />
+
+<h2 id="D触发器"><a href="#D触发器" class="headerlink" title="D触发器"></a>D触发器</h2><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408092147642.png" alt="image-20240408092147642" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408092232756.png" alt="image-20240408092232756" style="zoom:33%;" />
+
+<h2 id="JK触发器"><a href="#JK触发器" class="headerlink" title="JK触发器"></a>JK触发器</h2><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408092343413.png" alt="image-20240408092343413" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408092420841.png" alt="image-20240408092420841" style="zoom:33%;" />
+
+<h2 id="T触发器"><a href="#T触发器" class="headerlink" title="T触发器"></a>T触发器</h2><p>T&#x3D;0保持 T&#x3D;1翻转</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408092654255.png" alt="image-20240408092654255" style="zoom:33%;" />
+
+
+
+<h1 id="时序逻辑电路"><a href="#时序逻辑电路" class="headerlink" title="时序逻辑电路"></a>时序逻辑电路</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408093151336.png" alt="image-20240408093151336" style="zoom:33%;" />
+
+<h3 id="米利型时序电路"><a href="#米利型时序电路" class="headerlink" title="米利型时序电路"></a>米利型时序电路</h3><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408093456031.png" alt="image-20240408093456031" style="zoom:33%;" />
+
+<p>输出信号随时可能受到非时钟同步的输入信号改变，影响同步性</p>
+<h3 id="穆尔型"><a href="#穆尔型" class="headerlink" title="穆尔型"></a>穆尔型</h3><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240408093559383.png" alt="image-20240408093559383" style="zoom:33%;" />
+
+<p>同步性不受影响</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240415090134758.png" alt="image-20240415090134758" style="zoom:33%;" />
+
+<p>同步：C1受到同一个输入CP影响</p>
+<p>摩尔型：输出只与Q有关</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240415090701800.png" alt="image-20240415090701800" style="zoom: 25%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240415091000624.png" alt="image-20240415091000624" style="zoom:25%;" />
+
+<p>现态为1时，当输入为10，会变为次态1，同时输出1</p>
+<p>当为摩尔型时可以将输出也画在圈内</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240415091409226.png" alt="image-20240415091409226" style="zoom:33%;" />
+
+<p>(触发器的)激励方程组-&gt;特征方程-&gt;转换方程组-&gt;输出方程组-&gt;转换表&#x2F;状态表-&gt;状态图-&gt;时序图</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240415092212580.png" alt="image-20240415092212580" style="zoom:33%;" />
+
+<p>D触发器：Q^n+1&#x3D;D</p>
+<p>JK触发器:Q^n+1&#x3D;JQ^n非+K非Q^n</p>
+<h2 id="设计同步时序逻辑电路"><a href="#设计同步时序逻辑电路" class="headerlink" title="设计同步时序逻辑电路"></a>设计同步时序逻辑电路</h2><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240415092813392.png" alt="image-20240415092813392" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240416082212703.png" alt="image-20240416082212703" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240416082335259.png" alt="image-20240416082335259" style="zoom:50%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240416082853480.png" alt="image-20240416082853480" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240416083054512.png" alt="image-20240416083054512" style="zoom:50%;" />
+
+<h2 id="寄存器和移位寄存器"><a href="#寄存器和移位寄存器" class="headerlink" title="寄存器和移位寄存器"></a>寄存器和移位寄存器</h2><p>存储N位二进制数据的寄存器需要N个触发器</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240416084251923.png" alt="image-20240416084251923" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240416084636915.png" alt="image-20240416084636915" style="zoom:33%;" />
+
+
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417105029365.png" alt="image-20240417105029365" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417111953379.png" alt="image-20240417111953379" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417112007975.png" alt="image-20240417112007975" style="zoom:33%;" />
+
+
+
+<h2 id="计数器的分析与设计"><a href="#计数器的分析与设计" class="headerlink" title="计数器的分析与设计"></a>计数器的分析与设计</h2><p>模M：计数器开始运行从某一状态依次遍历不不重复的各个状态后完成循环经过的状态总数</p>
+<p>在n个状态下循环：模n计数器&#x2F;M&#x3D;n计数器&#x2F;n进制计数器</p>
+<p>N位二进制计数器 模为2^n，N个触发器</p>
+<p><strong>确定模</strong></p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417112906057.png" alt="image-20240417112906057" style="zoom:33%;" />
+
+<p><strong>画逻辑图</strong></p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417113114053.png" alt="image-20240417113114053" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417113125948.png" alt="image-20240417113125948" style="zoom: 25%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417113152425.png" alt="image-20240417113152425" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417113552418.png" alt="image-20240417113552418" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417114107990.png" alt="image-20240417114107990" style="zoom:33%;" />
+
+<p>cr清零端，cp</p>
+<p><strong>图的分析</strong></p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417114516147.png" alt="image-20240417114516147" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417114545157.png" alt="image-20240417114545157" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417114715556.png" alt="image-20240417114715556" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417114842368.png" alt="image-20240417114842368" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417132806129.png" alt="image-20240417132806129" style="zoom:33%;" />
+
+<h2 id="集成同步二进制计数器74LVC161"><a href="#集成同步二进制计数器74LVC161" class="headerlink" title="集成同步二进制计数器74LVC161"></a>集成同步二进制计数器74LVC161</h2><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417133929421.png" alt="image-20240417133929421" style="zoom:33%;" />
+
+<p>cet cep：使能端</p>
+<p>低电平有效预制端PE，低电平有效清零端CR</p>
+<p>D0-3预制数据输入端</p>
+<p>TC进位端</p>
+<p>CP时钟脉冲输入端</p>
+<p>Q0-3输出端</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417134147753.png" alt="image-20240417134147753" style="zoom:33%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417134400244.png" alt="image-20240417134400244" style="zoom:33%;" />
+
+<p>###反馈清零法</p>
+<p>异步清零功能，只要cr&#x3D;0，瞬间输出端回到0000 （74LVC163是同步清0）</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417134957477.png" alt="image-20240417134957477" style="zoom:33%;" />
+
+<p>当计数到1001时自动清零回到0000</p>
+<p>模为9，9进制计数器0000-1000(9) ？？？？</p>
+<h3 id="反馈置数法"><a href="#反馈置数法" class="headerlink" title="反馈置数法"></a>反馈置数法</h3><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417135205353.png" alt="image-20240417135205353" style="zoom:33%;" />
+
+<p>当Q3&#x3D;1，这时等待一个时间脉冲后(同步)置入0000</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417135458878.png" alt="image-20240417135458878" style="zoom:33%;" />
+
+<p>当输出1111进位TC&#x3D;1</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240417135858160.png" alt="image-20240417135858160" style="zoom:33%;" />
+
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>License</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">Newer</div><a href="/2024/06/09/%E9%9D%A2%E8%AF%95/%E6%A0%A1%E5%9B%AD%E6%8B%9B%E8%81%98/">校招一览</a></div><div class="item" id="next"><div class="note">Older</div><a href="/2024/06/09/%E6%9C%9F%E6%9C%AB%E5%A4%87%E8%80%83/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/">概率统计期末快速复习</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。<br><span class="jinrishici-sentence"></span></p>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">On This Page</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E6%A6%82%E8%AE%BA"><span class="toc-text">数字逻辑概论</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E4%BB%A3%E6%95%B0"><span class="toc-text">逻辑代数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A0%87%E5%87%86%E5%BD%A2%E5%BC%8F"><span class="toc-text">逻辑函数表达式的两种标准形式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E5%87%BD%E6%95%B0%E5%8D%A1%E8%AF%BA%E5%9B%BE%E5%8C%96%E7%AE%80%E6%B3%95"><span class="toc-text">逻辑函数卡诺图化简法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF"><span class="toc-text">组合逻辑电路</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-text">组合逻辑电路分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-text">组合逻辑电路的设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%E7%9A%84%E7%AB%9E%E4%BA%89-%E5%86%92%E9%99%A9"><span class="toc-text">组合逻辑电路的竞争-冒险</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%85%88%E7%BC%96%E7%A0%81%E5%99%A8CD4532"><span class="toc-text">优先编码器CD4532</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%94%81%E5%AD%98%E5%99%A8%E5%92%8C%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="toc-text">锁存器和触发器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81%E5%AD%98%E5%99%A8"><span class="toc-text">锁存器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%A8%E6%8E%A7SR%E9%94%81%E5%AD%98%E5%99%A8"><span class="toc-text">门控SR锁存器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81%E5%AD%98%E5%99%A8%E5%92%8C%E8%A7%A6%E5%8F%91%E5%99%A8-1"><span class="toc-text">锁存器和触发器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="toc-text">D触发器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JK%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="toc-text">JK触发器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#T%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="toc-text">T触发器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF"><span class="toc-text">时序逻辑电路</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%B3%E5%88%A9%E5%9E%8B%E6%97%B6%E5%BA%8F%E7%94%B5%E8%B7%AF"><span class="toc-text">米利型时序电路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%86%E5%B0%94%E5%9E%8B"><span class="toc-text">穆尔型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E5%90%8C%E6%AD%A5%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF"><span class="toc-text">设计同步时序逻辑电路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E5%92%8C%E7%A7%BB%E4%BD%8D%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-text">寄存器和移位寄存器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E6%95%B0%E5%99%A8%E7%9A%84%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1"><span class="toc-text">计数器的分析与设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E5%90%8C%E6%AD%A5%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%AE%A1%E6%95%B0%E5%99%A874LVC161"><span class="toc-text">集成同步二进制计数器74LVC161</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E9%A6%88%E7%BD%AE%E6%95%B0%E6%B3%95"><span class="toc-text">反馈置数法</span></a></li></ol></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>Scroll to Top</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `Just`,
+      min: `minutes ago`,
+      hour: `hours ago`,
+      day: `days ago`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://cdn.jsdelivr.net/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `Switched to Light Mode`,
+      dark: `Switched to Dark Mode`,
+      auto: `Switched to Auto Mode`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>
