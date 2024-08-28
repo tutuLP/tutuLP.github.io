@@ -7,22 +7,17 @@ tags:
   - 反向代理
 ---
 
-# 安装
+# 安装Nginx
 
-最流行的web服务器软件
+(最流行的web服务器软件)
 
-安装 `yum install nginx`
+* 安装 yum install nginx
 
-启动 `nginx`  
+* 启动 nginx
 
-关闭 `nginx -s stop`
+* 关闭 nginx -s stop
 
-查看80号端口占用情况 `lsof -i:80` 
-
-阿里云上打开这个端口，关闭防火墙，访问ip
-
-* 关闭linux防火墙 root下 cd /bin  `systemctl stop firewalld.service`
-* 关闭防火墙自启 `systemctl stop firewalld.service` 然后重启虚拟机
+* 关闭防火墙后访问ip，会使用linux的80号端口，云服务器记得在规则中打开80 出现如下代表服务启动成功
 
 <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240319160124855.png" alt="image-20240319160124855" style="zoom: 25%;" />
 
@@ -39,79 +34,21 @@ nginx -s reload   # 重新加载配置⽂件
 nginx -s reopen   # 重新打开⽇志⽂件
 ~~~
 
-# Hexo静态站点部署
+* 查看安装目录  nginx -V  
 
-查看安装目录 `nginx -V`  --prefix=/usr/share/nginx    
+--prefix=/usr/share/nginx    
 
-配置文件nginx.conf位置   --conf-path=/etc/nginx/nginx.conf
+* 配置文件nginx.conf位置   
 
-​                      或`nginx -t`
+--conf-path=/etc/nginx/nginx.conf
 
-​                      /etc/nginx/nginx.conf 直接在vscode上打开或者ctrl+左键
+* 查看配置文件状态和位置  nginx -t
 
-默认网页是 安装位置/usr/share/nginx 中html文件夹里的index.html
+/etc/nginx/nginx.conf
 
+* 默认网页位置
 
-
-用Hexo生成一个简单的静态博客网站-然后部署在nginx里面
-
-可以把markdown格式文档转化成静态界面
-
-
-
-##安装Nodejs
-
-安装git
-
-建议直接看后面安装最新版
-
-`yum install nodejs`
-
-`npm install hexo-cli -g`
-
-cd 
-
-mkdir nginx
-
-cd nginx
-
-hexo init blog
-
-cd blog   
-
-hexo g 生成一个静态站点，把markdown文件转化为静态页面放到public文件夹下 
-
-hexo s 启动本地服务器
-
-如果失败node版本不够
-
-### 安装新版Nodejs
-
-`node --version` 版本过低
-
-使用官方提供的方法安装安装nvm
-
-`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
-
-或`wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
-
-重新启动终端或者执行 `source ~/.bashrc` 或 `source ~/.bash_profile` 来使 nvm 生效
-
-nvm install node
-
-nvm alias default node
-
-node --version
-
-浏览器上输入localhost:4000展示网页
-
-把public目录下的所有内容复制到html目录下
-
-​	cd public 
-
-​	cp -rf * /usr/share/nginx/html 
-
-或者hexo d一键完成部署
+安装位置/usr/share/nginx 中html文件夹里的index.html
 
 # 配置文件
 

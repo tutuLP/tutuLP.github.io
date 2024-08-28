@@ -8,33 +8,37 @@ tags:
   - 静态网站生成器
 ---
 
-# hexo搭建github博客网页
+# 下载
 
-安装请看Nginx基础篇
+* npm install hexo-cli -g
+
+* cd   (当前用户的目录)
+
+* hexo init blog  用hexo搭建一个文件夹
+
+* cd blog   
+
+* hexo g 生成一个静态站点，把markdown文件转化为静态页面放到public文件夹下 
+
+* hexo s 启动本地服务器 访问4000号端口就可以看到构建的网页
+
+# 使用nginx代理网页
+
+把public目录下的所有内容复制到nginx的html目录下
+
+* cd public 
+
+* cp -rf * /usr/share/nginx/html 
+
+# 使用github云代理网页
+
+* 新建仓库
 
 新建仓库-仓库名字：用户名.github.io,勾选readme
 
-这时在网站上可以直接访问到
+仓库的main分支用来存源笔记文件 master分支用来存前端文件
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240325085453572.png" alt="image-20240325085453572" style="zoom:33%;" />
-
-
-
-
-
-cd在之前的nginx/bolg文件夹中或者自己创建一个文件夹
-
-`hexo new "tutu's personal blog"`
-
-~~~
-[root@iZf8zeh9f5g1mo4rk51t4pZ blog]# hexo new "tutu's personal blog"
-INFO  Validating config
-INFO  Created: ~/nginx/blog/source/_posts/tutu-s-personal-blog.md
-hexo generate #生成静态网页文件
-hexo deploy   #部署
-~~~
-
-编辑_config.yml
+* 编辑_config.yml
 
 ~~~
 deploy:
@@ -43,7 +47,7 @@ deploy:
   branch: master
 ~~~
 
-下载插件
+* 下载插件
 
 npm install hexo-deployer-git --save
 
@@ -57,13 +61,13 @@ git@github.com:tutuLP/tutuLP.github.io.git 可能需要打开端口22 9418
 
 https://github.com/tutuLP/tutuLP.github.io.git
 
- 
+* 修改仓库配置
+
+进入GitHub仓库的设置页面-Pages-GitHub Pages选项 将源设置为master分支
+
+* 这时得到网址 https://tutulp.github.io/
 
 hexo deploy 部署到github服务器平台
-
-进入GitHub仓库的设置页面，找到GitHub Pages选项，并将源设置为`master branch`。
-
-再次访问即可成功
 
 
 
@@ -77,9 +81,11 @@ git init 我这里生成的分治是master比较古老
 
 git remote add origin https://github.com/tutuLP/tutuLP.github.io.git 建立关联
 
-git branch --set-upstream-to=origin/main master 本地master分支与远程main关联
+git remote add origin git@github.com:tutuLP/tutuLP.github.io.git
 
 git pull origin main --allow-unrelated-histories 拉取-运行历史不同步
+
+git branch --set-upstream-to=origin/main master 本地master分支与远程main关联
 
 然后回到blog `hexo generate`       `hexo deploy`
 
@@ -470,3 +476,17 @@ hexo server
 http://localhost:4000/查看结果
 
 达到效果后再deploy
+
+# Linux系统更换后移植
+
+* 保存配置文件
+
+_config.yml
+
+_config.stellar.yml
+
+scaffolds
+
+public文件下image
+
+删除原来的仓库新建仓库重新配置一遍
