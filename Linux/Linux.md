@@ -1118,3 +1118,24 @@ int main() {
 
 **C/C++ Linux 服务器开发高级架构学习视频点击**https://ke.qq.com/course/417774?flowToken=1013189
 
+选择哪个框架取决于你的具体需求和项目背景。如果你需要一个跨平台的解决方案，Boost.Asio可能是最佳选择；如果你需要一个功能齐全且易于使用的库，Poco是一个好选择；而如果你正在构建高性能的Linux服务器应用，MUDuo则非常合适。
+
+
+
+
+
+- 《unix环境高级编程》
+- 《unix网络编程》
+
+如果你要写一个WebServer，入门的书籍当然最好是游双的《Linux高性能服务器编程》(读书笔记:https://github.com/HiganFish/Notes-HighPerformanceLinuxServerProgramming)了，当这本内容基本都掌握后，如果有能力还可以再去看一下陈硕大佬的《Linux多线程服务器编程》使用muduo C++网络库，去阅读源码，自制一个属于自己的网络库，相信对你的coding能力是一个很大的提升。
+
+
+祖师爷[GitHub - qinguoyi/TinyWebServer: :fire: Linux下C++轻量级WebServer服务器](https://github.com/qinguoyi/TinyWebServer)
+
+师叔[GitHub - markparticle/WebServer: C++ Linux WebServer服务器](https://github.com/markparticle/WebServer)
+
+师哥https://love6.blog.csdn.net/article/details/123754194 源码https://github.com/Cooi-Boi/High-Performance-WebServer
+
+师弟https://blog.csdn.net/weixin_51322383/article/details/130464403 源码https://github.com/JehanRio/TinyWebServer?tab=readme-ov-file
+
+c++网络编程三大框架对比https://zhuanlan.zhihu.com/p/714229209
