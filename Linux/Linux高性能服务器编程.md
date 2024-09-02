@@ -1,8 +1,8 @@
-Linux高性能服务器编程  -游双著
+						Linux高性能服务器编程  -游双著
 
-作者充分理解巨作《TCP/IP协议详解》（三卷本），以及《UNIX网络编程》（两卷本）后融入自己的理解编写
+​						作者充分理解巨作《TCP/IP协议详解》（三卷本），以及《UNIX网络编程》（两卷本）后融入自己的理解编写
 
-主题：==如何通过各种手段编写高性能的服务器程序==
+​						主题：==如何通过各种手段编写高性能的服务器程序==
 
 *如何提高服务器程序性能？*
 
@@ -14,25 +14,31 @@ Linux高性能服务器编程  -游双著
 
 为了帮助读者进一步把书中的知识融汇到实际项目中，笔者还特意编写了一个较为完整的负载均衡服务器程序springsnail。该程序能从所有逻辑服务器中选取负荷最小的一台来处理新到的客户连接。在这个程序中，使用了进程池、有限状态机、高效数据结构来提高其性能；同时，细致地封装了每个函数和模块，使之更符合实际工程项目。由于篇幅的限制，笔者未将该程序的源代码列在书中，读者可从华章网站www.hzbook.com。
 
+
+
+以上内容整本书阅读完之后再看吧
+
+最开始的目的是写一个起码是先看懂tinywebserver这个项目
+
+然后了解到要先看这本书，现在可谓是0基础开始
+
+先安装两台虚拟机用于测试，我打算一台Anolis OS一台Ubuntu Ubuntu正在安，出了点状况，安装界面会一直卡住
+
+
+
 #TCP/IP协议详解
 
 ## TCP/IP协议族
-
-**TCP/IP协议族**包含众多协议，我们无法一一讨论。本书将在后续章节详细讨论**IP协议**和**TCP协议**
-
-ICMP协议 ARP协议 DNS协议
 
 ### TCP/IP协议族体系结构以及主要协议
 
 TCP/IP协议族是一个四层协议系统，自底而上分别是数据链路层、网络层、传输层和应用层
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830171024950.png" alt="image-20240830171024950" style="zoom:33%;" />
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830171024950.png" alt="image-20240830171024950" style="zoom: 50%;" />
 
 ####数据链路层
 
-实现了网卡接口的网络驱动程序 以处理数据在物理媒介（比如以太网、令牌环等）上的传输 
-
-网络驱动程序隐藏了这些细节为上层协议提供一个统一的接口
+实现了网卡接口的网络驱动程序 以处理数据在物理媒介（比如以太网、令牌环等）上的传输 网络驱动程序隐藏了这些细节为上层协议提供一个统一的接口
 
 * 协议
 
@@ -257,7 +263,7 @@ nameserver 219.239.26.42  nameserver 124.207.160.106
 Linux下一个常用的访问DNS服务器的客户端程序是host ？？？，比如下面的命令是向首选DNS服务器219.239.26.42查询机器www.baidu.com的IP地址：
 
 ~~~powershell
-$host-t A www.baidu.com
+$host -t A www.baidu.com
 www.baidu.com is an alias for www.a.shifen.com.
 www.a.shifen.com has address 119.75.217.56
 www.a.shifen.com has address 119.75.218.77
@@ -335,11 +341,665 @@ IP协议是TCP/IP协议族的动力，它为上层协议提供无状态、无连
 
 ##TCP协议详解
 
+* TCP头部信息。源端端口号、目的端端口号，管理TCP连接，控制两个方向的数据流
+* TCP状态转移过程。TCP连接的任意一端都是一个状态机。在TCP连接从建立到断开的整个过程中，连接两端的状态机将经历不同的状态变迁。
+* TCP数据流。交互数据流和成块数据流。TCP数据流中有一种特殊的数据，称为紧急数据
+* TCP数据流的控制。为了可靠和通信质量 超时重传和拥塞控制。
+
 ### TCP服务的特点
 
+与UDP的区别：
 
+* 建立连接 全双工：双方数据读写通过一个连接进行     UDP适合多播和广播
+
+* 字节流  数据报  编程中，体现为通信双方是否必须执行相同次数的读、写操作  
+
+* * 当发送端应用程序连续执行多次写操作时，TCP模块先将这些数据放入TCP发送缓冲区中。真正开始发送数据时，发送缓冲区中这些等待发送的数据可能被封装成一个或多个TCP报文段发出。因此，TCP模块发送出的TCP报文段的个数和应用程序执行的写操作次数之间没有固定的数量关系。
+  * 当接收端收到一个或多个TCP报文段后，TCP模块将它们携带的应用程序数据按照TCP报文段的序号依次放入TCP接收缓冲区中，并通知应用程序读取数据。接收端应用程序可以一次性将TCP接收缓冲区中的数据全部读出，也可以分多次读取，这取决于用户指定的应用程序读缓冲区的大小。因此，应用程序执行的读操作次数和TCP模块接收到的TCP报文段个数之间也没有固定的数量关系。
+  * UDP则不然。每执行一次写操作，UDP模块就将其封装成一个UDP数据报并发送。接收端必须及时针对每一个UDP数据报执行读操作，否则就会丢包。并且，如果用户没有足够的应用程序缓冲区来读取UDP数据，则UDP数据将被截断
+
+* 可靠  
+
+* * TCP协议采用发送应答机制，即发送端发送的每个TCP报文段都必须得到接收方的应答，才认为这个TCP报文段传输成功
+  
+  * 用超时重传机制 定时器时间内没有收到应答重发报文段
+  * 收到的IP数据报可能乱序，重复，tcp协议会整理之后再交付
+  * UDP和IP都是不可靠的
+
+###TCP头部
+
+  #### 固定头部结构
+
+ 				 <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831202716941.png" alt="image-20240831202716941" style="zoom:50%;" />
+
+* 16位端口号：报文的源端口和目的端口 
+
+(客户端通常使用系统自动选择的临时端口号，而服务器则使用知名服务端口号。知名服务使用的端口号都定义在/etc/services文件中)
+
+* 32位序号（sequence number）：一次TCP通信过程中某一个传输方向上的字节流的每个字节的编号。A发送给B的第一个TCP报文段中，序号值被系统初始化为某个随机值ISN（Initial Sequence Number，初始序号值）。那么在该传输方向上（从A到B），后续的TCP报文段中序号值将被系统设置成ISN加上该报文段所携带数据的第一个字节在整个字节流中的偏移。例如，某个TCP报文段传送的数据是字节流中的第1025～2048字节，那么该报文段的序号值就是ISN+1025。
+* 32位确认号（acknowledgement number）：用作对另一方发送来的TCP报文段的响应。其值是收到的TCP报文段的序号值加1。
+* 4位头部长度（header length）：标识该TCP头部有多少个32bit字（4字节）。因为4位最大能表示15，所以TCP头部最长是60字节。？？？
+
+* * URG标志，表示紧急指针（urgent pointer）是否有效。
+  * ACK标志，表示确认号是否有效。我们称携带ACK标志的TCP报文段为**确认报文段**。
+  * PSH标志，提示接收端应用程序应该立即从TCP接收缓冲区中读走数据，为接收后续数据腾出空间（如果应用程序不将接收到的数据读走，它们就会一直停留在TCP接收缓冲区中）。
+  * RST标志，表示要求对方重新建立连接。我们称携带RST标志的TCP报文段为**复位报文段**。
+  * SYN标志，表示请求建立一个连接。我们称携带SYN标志的TCP报文段为**同步报文段**
+  * FIN标志，表示通知对方本端要关闭连接了。我们称携带FIN标志的TCP报文段为**结束报文段**。
+* 16位窗口大小（window size）：是TCP流量控制的一个手段。这里说的窗口，指的是接收通告窗口（Receiver Window，RWND）。它告诉对方本端的TCP接收缓冲区还能容纳多少字节的数据，这样对方就可以控制发送数据的速度。
+* 16位校验和（TCP checksum）：由发送端填充，接收端对TCP报文段执行CRC算法以检验TCP报文段在传输过程中是否损坏。注意，这个校验不仅包括TCP头部，也包括数据部分。这也是TCP可靠传输的一个重要保障。
+* 16位紧急指针（urgent pointer）：是一个正的偏移量。它和序号字段的值相加表示最后一个紧急数据的下一字节的序号。因此，确切地说，这个字段是紧急指针相对当前序号的偏移，不妨称之为紧急偏移。TCP的紧急指针是发送端向接收端发送紧急数据的方法。
+* TCP头部的最后一个选项字段（options）是可变长的可选信息。这部分最多包含40字节，因为TCP头部最长是60字节（其中还包含20字节的固定部分）。
+
+结构 kind(1字节)+length(1字节)+info(n字节)
+
+选项的第一个字段kind说明选项的类型。有的TCP选项没有后面两个字段，仅包含1字节的kind字段。第二个字段length指定该选项的总长度，该长度包括kind字段和length字段占据的2字节。第三个字段info是选项的具体信息。常见的TCP选项有7种
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902113213630.png" alt="image-20240902113213630" style="zoom:50%;" />
+
+没看完。。。
+
+#### 使用tcpdump观察TCP头部信息
+
+~~~
+IP 127.0.0.1.41621＞127.0.0.1.23 :Flags[S],seq 3499745539,win 32792,
+options[mss 16396,sackOK,TS val 40781017 ecr 0,nop,wscale 6],length 0
+0x0000:4510 003c a5da 4000 4006 96cf 7f00 0001
+0x0010:7f00 0001 a295 0017 d099 e103 0000 0000
+0x0020:a002 8018 fe30 0000 0204 400c 0402 080a
+0x0030:026e 44d9 0000 0000 0103 0306
+~~~
+
+* tcpdump输出Flags[S]，表示该TCP报文段包含SYN标志，因此它是一个同步报文段。
+* seq是序号值。第一个tcp报文是初始的ISN值，且没有确认号
+* win是接收通告窗口的大小。因为这是一个同步报文段，所以win值反映的是总共的接收通告窗口大小
+* options是TCP选项。mss是发送端通告的最大报文段长度。通过ifconfig命令查看回路接口的MTU为16436字节，因此可以预想到TCP报文段的MSS为16396（16436-40）字节。sackOK表示发送端支持并同意使用SACK选项。TS val是发送端的时间戳。ecr是时间戳回显应答。因为这是一次TCP通信的第一个TCP报文段，所以它针对对方的时间戳的应答为0（尚未收到对方的时间戳）。紧接着的nop是一个空操作选项。wscale指出发送端使用的窗口扩大因子为6。
+* 们分析tcpdump输出的字节码中TCP头部对应的信息，它从第21字节开始
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902113917873.png" alt="image-20240902113917873" style="zoom:50%;" />
+
+
+
+###TCP连接的建立和关闭
+
+  #### 使用tcpdump观察TCP连接的建立和关闭
+
+  从ernest-laptop上执行telnet命令登录Kongming20的80端口，然后抓取这一过程中客户端和服务器交换的TCP报文段。
+
+  ~~~
+  $sudo tcpdump-i eth0-nt '(src 192.168.1.109 and dst 192.168.1.108)or(src 192.168.1.108 and dst 192.168.1.109)'
+  //新开一个终端
+  $telnet 192.168.1.109 80
+  
+  Trying 192.168.1.109...
+  Connected to 192.168.1.109.
+  Escape character is'^]'.      #输入ctrl+]并回车
+  telnet＞quit					#结束tcp连接
+  Connection closed.
+  ~~~
+
+  ~~~
+  1.IP 192.168.1.108.60871＞192.168.1.109.80:Flags[S],seq 535734930,win 5840,length 0
+  2.IP 192.168.1.109.80＞192.168.1.108.60871:Flags[S.],seq 2159701207,ack 535734931,win 5792,length 0
+  3.IP 192.168.1.108.60871＞192.168.1.109.80:Flags[.],ack 1,win 92,length 0
+  
+  4.IP 192.168.1.108.60871＞192.168.1.109.80:Flags[F.],seq 1,ack 1,win 92,length 0
+  5.IP 192.168.1.109.80＞192.168.1.108.60871:Flags[.],ack 2,win 91,length 0
+  6.IP 192.168.1.109.80＞192.168.1.108.60871:Flags[F.],seq 1,ack 2,win 91,length 0
+  7.IP 192.168.1.108.60871＞192.168.1.109.80:Flags[.],ack 2,win 92,length 0
+  ~~~
+
+* length 0 没有应用层数据
+
+​                   <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240901223148455.png" alt="image-20240901223148455" style="zoom:50%;" />
+
+* 第1个TCP报文段包含SYN标志，因此它是一个同步报文段，即发起连接请求。同时，该同步报文段包含一个ISN值为535734930的序号。
+* 第2个TCP报文段也是同步报文段，表示同意建立连接。同时它发送自己的ISN值为2159701207的序号，并对第1个同步报文段进行确认。确认值是535734931，即第1个同步报文段的序号值加1。**同步报文段比较特殊，即使它并没有携带任何应用程序数据，它也要占用一个序号值**。
+* 第3个TCP报文段是对第2个同步报文段的确认。至此，TCP连接就建立起来了。
+
+建立TCP连接的这3个步骤被称为TCP三次握手
+
+从第3个TCP报文段开始，tcpdump输出的序号值和确认值都是相对初始ISN值的偏移。当然，我们可以开启tcpdump的-S选项来选择打印序号的绝对值。
+
+* 第4个TCP报文段包含FIN标志，因此它是一个结束报文段，即要求关闭连接。**结束报文段和同步报文段一样，也要占用一个序号值**。
+* 报文段5来确认该结束报文段。
+* 紧接着发送自己的结束报文段6
+* TCP报文段7给予确认。
+
+实际上，仅用于确认目的的确认报文段5是可以省略的，因为结束报文段6也携带了该确认信息。确认报文段5是否出现在连接断开的过程中，取决于TCP的延迟确认特性。延迟确认将在后面讨论。
+
+  
+
+  我自己尝试
+
+  先安装 tcpdump 和 telnet
+
+  tcpdump -i ens160 '(src 192.168.6.208 and dst 192.168.6.131)or(src 192.168.6.131 and dst 192.168.6.208)'
+
+  ~~~
+  [root@localhost ~]# telnet 192.168.6.131 80
+  Trying 192.168.6.131...
+  telnet: connect to address 192.168.6.131: Connection refused
+  
+  [root@localhost ~]# telnet 192.168.6.131 80
+  Trying 192.168.6.131...
+  telnet: connect to address 192.168.6.131: No route to host
+  ~~~
+
+
+~~~
+[root@localhost .ssh]# tcpdump -i ens160 '(src 192.168.6.208 and dst 192.168.6.131)or(src 192.168.6.131 and dst 192.168.6.208)'
+
+22:27:14.825789 IP localhost.localdomain.58904 > 192.168.6.131.http: Flags [S], seq 865449386, win 64240, options [mss 1460,sackOK,TS val 1199749114 ecr 0,nop,wscale 7], length 0
+22:27:14.826569 IP 192.168.6.131 > localhost.localdomain: ICMP host 192.168.6.131 unreachable - admin prohibited filter, length 68
+
+22:27:20.093253 ARP, Request who-has localhost.localdomain tell 192.168.6.131, length 46
+22:27:20.093275 ARP, Reply localhost.localdomain is-at 00:0c:29:a0:76:f3 (oui Unknown), length 28
+22:27:20.196832 ARP, Request who-has 192.168.6.131 tell localhost.localdomain, length 28
+22:27:20.197899 ARP, Reply 192.168.6.131 is-at 00:0c:29:1f:61:5b (oui Unknown), length 46
+~~~
+
+#### 半关闭状态
+
+通信的一端可以发送结束报文段给对方，告诉它本端已经完成了数据的发送，但允许继续接收来自对方的数据，直到对方也发送结束报文段以关闭连接
+
+服务器和客户端应用程序判断对方是否已经关闭连接的方法是：read系统调用返回0（收到结束报文段）
+
+很少使用半关闭的程序
+
+#### 连接超时
+
+客户端发送出的同步报文段没有应答
+
+对于提供可靠服务的TCP来说，它必然是先进行重连（可能执行多次），如果重连仍然无效，则通知应用程序连接超时。
+
+$sudo iptables-F
+
+$sudo iptables-I INPUT-p tcp--syn-i eth0-j DROP
+
+iptable命令用于过滤数据包，这里我们利用它来丢弃所有接收到的连接请求（丢弃所有同步报文段，这样客户端就无法得到任何确认报文段）。
+
+~~~
+$sudo tcpdump-n-i eth0 port 23		#仅抓取telnet客户端和服务器交换的数据包
+$date;telnet 192.168.1.108;date		#在telnet命令前后都执行date命令，以计算超时时间
+Mon Jun 11 21:23:35 CST 2012
+Trying 192.168.1.108...
+telnet:connect to address 192.168.1.108:Connection timed out
+Mon Jun 11 21:24:38 CST 2012
+~~~
+
+建立TCP连接的超时时间是63s
+
+~~~
+1.21:23:35.612136 IP 192.168.1.109.39385＞
+192.168.1.108.telnet:Flags[S],seq 1355982096，length 0
+2.21:23:36.613146 IP 192.168.1.109.39385＞
+192.168.1.108.telnet:Flags[S],seq 1355982096,length 0
+3.21:23:38.617279 IP 192.168.1.109.39385＞
+192.168.1.108.telnet:Flags[S],seq 1355982096,length 0
+4.21:23:42.625140 IP 192.168.1.109.39385＞
+192.168.1.108.telnet:Flags[S],seq 1355982096,length 0
+5.21:23:50.641344 IP 192.168.1.109.39385＞
+192.168.1.108.telnet:Flags[S],seq 1355982096,length 0
+6.21:24:06.673331 IP 192.168.1.109.39385＞
+192.168.1.108.telnet:Flags[S],seq 1355982096,length 0
+~~~
+
+保留了tcpdump输出的时间戳 不使用-t
+
+后面五个都是超时重连报文 第一次2s 每次增倍时间
+
+### TCP状态转移
+
+TCP连接的任意一端在任一时刻都处于某种状态，当前状态可以通过netstat命令查看
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902115504980.png" alt="image-20240902115504980" style="zoom:50%;" />
+
+粗虚线表示典型的服务器端连接的状态转移
+
+粗实线表示典型的客户端连接的状态转移。
+
+CLOSED是一个假想的起始点，并不是一个实际的状态。
+
+#### TCP状态转移总图
+
+先从CLOSED开始沿着虚线走一遍就是服务器的状态转移过程  先主动调用listen进入被动连接状态
+
+
+
+客户端通过connect系统调用主动与服务器建立连接。connect系统调用首先给服务器发送一个同步报文段，使连接转移到SYN_SENT状态。此后，connect系统调用可能因为如下两个原因失败
+
+* 如果connect连接的目标端口不存在（未被任何进程监听），或者该端口仍被处于TIME_WAIT状态的连接所占用，则服务器将给客户端发送一个复位报文段，connect调用失败。
+
+* 如果目标端口存在，但connect在超时时间内未收到服务器的确认报文段，则connect调用失败。
+
+connect调用失败将使连接立即返回到初始的CLOSED状态。如果客户端成功收到服务器的同步报文段和确认，则connect调用成功返回，连接转移至ESTABLISHED状态。
+
+
+
+当客户端执行主动关闭时，它将向服务器发送一个结束报文段，同时连接进入FIN_WAIT_1状态。若此时客户端收到服务器专门用于确认目的的确认报文段，则连接转移至FIN_WAIT_2状态。当客户端处于FIN_WAIT_2状态时，服务器处于CLOSE_WAIT状态，这一对状态是可能发生半关闭的状态。此时如果服务器也关闭连接（发送结束报文段），则客户端将给予确认并进入TIME_WAIT状态。
+
+客户端从FIN_WAIT_1状态直接进入TIME_WAIT状态，前提是处于FIN_WAIT_1状态的服务器直接收到带确认信息的结束报文段（而不是先收到确认报文段，再收到结束报文段）。
+
+前面说过，处于FIN_WAIT_2状态的客户端需要等待服务器发送结束报文段，才能转移至TIME_WAIT状态，否则它将一直停留在这个状态。如果不是为了在半关闭状态下继续接收数据，连接长时间地停留在FIN_WAIT_2状态并无益处。连接停留在FIN_WAIT_2状态的情况可能发生在：客户端执行半关闭后，未等服务器关闭连接就强行退出了。此时客户端连接由内核来接管，可称之为孤儿连接（和孤儿进程类似）。Linux为了防止孤儿连接长时间存留在内核中，定义了两个内核变量：/proc/sys/net/ipv4/tcp_max_orphans和/proc/sys/net/ipv4/tcp_fin_timeout。前者指定内核能接管的孤儿连接数目，后者指定孤儿连接在内核中生存的时间。
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902121020622.png" alt="image-20240902121020622" style="zoom:50%;" />
+
+### TIME_WAIT状态
+
+客户端连接在收到服务器的结束报文段（TCP报文段6）之后，并没有直接进入CLOSED状态，而是转移到TIME_WAIT状态。在这个状态，客户端连接要等待一段长为2MSL（Maximum Segment Life，报文段最大生存时间）的时间，才能完全关闭。MSL是TCP报文段在网络中的最大生存时间，标准文档RFC 1122的建议值是2min
+
+原因
+
+* 可靠地终止TCP连接。
+
+假设文段7丢失，那么服务器将重发结束报文段。因此客户端需要停留在某个状态以处理重复收到的结束报文段（即向服务器发送确认报文段）。否则，客户端将以复位报文段来回应服务器，服务器则认为这是一个错误，因为它期望的是一个像TCP报文段7那样的确认报文段。
+
+* 保证让迟来的TCP报文段有足够的时间被识别并丢弃
+
+在Linux系统上，一个TCP端口不能被同时打开多次（两次及以上）。当一个TCP连接处于TIME_WAIT状态时，我们将无法立即使用该连接占用着的端口来建立一个新连接。反过来思考，如果不存在TIME_WAIT状态，则应用程序能够立即建立一个和刚关闭的连接相似的连接（这里说的相似，是指它们具有相同的IP地址和端口号）。这个新的、和原来相似的连接被称为原来的连接的化身（incarnation）。新的化身可能接收到属于原来的连接的、携带应用程序数据的TCP报文段（迟到的报文段），这显然是不应该发生的。
+
+另外，因为TCP报文段的最大生存时间是MSL，所以坚持2MSL时间的TIME_WAIT状态能够确保网络上两个传输方向上尚未被接收到的、迟到的TCP报文段都已经消失（被中转路由器丢弃）。因此，一个连接的新的化身可以在2MSL时间之后安全地建立，而绝对不会接收到属于原来连接的应用程序数据，这就是TIME_WAIT状态要持续2MSL时间的原因。
+
+有时候我们希望**避免TIME_WAIT状态**，因为当程序退出后，我们希望能够立即重启它。但由于处在TIME_WAIT状态的连接还占用着端口，程序将无法启动（直到2MSL超时时间结束）。考虑一个例子：在测试机器ernest-laptop上以客户端方式运行nc（用于创建网络连接的工具，见第17章）命令，登录本机的Web服务，且明确指定客户端使用12345端口与服务器通信。然后从终端输入Ctrl+C终止客户端程序，接着又立即重启nc程序，以完全相同的方式再次连接本机的Web服务。具体操作如下：
+
+~~~
+$nc-p 12345 192.168.1.108 80
+ctrl+C#中断客户端程序
+$nc-p 12345 192.168.1.108 80#重启客户端程序，重新建立连接
+nc:bind failed:Address already in use#输出显示连接失败，因为12345端口
+仍被占用
+$netstat-nat#用netstat命令查看连接状态
+Proto Recv-Q Send-Q Local Address Foreign Address State
+tcp 0 0 192.168.1.108:12345 192.168.1.108:80 TIME_WAIT
+~~~
+
+* 一般客户端使用系统自动分配的随机端口，我们强制使用12345号端口才会有这样的问题
+* 但如果是服务器主动关闭连接后异常终止，则因为它总是使用同一个知名服务端口号，所以连接的TIME_WAIT状态将导致它不能立即重启。不过，我们可以通过socket选项SO_REUSEADDR来强制进程立即使用处于TIME_WAIT状态的连接占用的端口    一个服务器可以接收多少tcp连接？
+
+### 复位报文段
+
+TCP连接的一端会向另一端发送携带RST标志的报文段，即复位报文段，以通知对方关闭连接或重新建立连接
+
+#### 访问不存在的端口
+
+会发送复位报文段
+
+~~~
+$sudo tcpdump-nt-i eth0 port 54321#仅抓取发送至和来自54321端口的TCP
+报文段
+$telnet 192.168.1.108 54321
+Trying 192.168.1.108...
+telnet:connect to address 192.168.1.108:Connection refused
+
+1.IP 192.168.1.109.42001＞192.168.1.108.54321:Flags[S],seq 21621375,win 14600,length 0
+2.IP 192.168.1.108.54321＞192.168.1.109.42001:Flags[R.],seq 0,ack 21621376,win 0,length 0
+~~~
+
+回复一个复位报文段R 接收通告窗口为0，所以收到复位的一方不能回应并且应该关闭或重新连接
+
+当客户端程序向服务器的某个端口发起连接，而该端口仍被处于TIME_WAIT状态的连接所占用时，客户端程序也将收到复位报文段
+
+#### 异常终止连接
+
+TCP提供了异常终止一个连接的方法，即给对方发送一个复位报文段。一旦发送了复位报文段，发送端所有排队等待发送的数据都将被丢弃。
+
+应用程序可以使用socket选项SO_LINGER来发送复位报文段，以异常终止一个连接。
+
+#### 处理半打开连接
+
+服务器（或客户端）关闭或者异常终止了连接，而对方没有接收到结束报文段（比如发生了网络故障），此时，客户端（或服务器）还维持着原来的连接，而服务器（或客户端）即使重启，也已经没有该连接的任何信息了。我们将这种状态称为半打开状态，处于这种状态的连接称为半打开连接。如果客户端（或服务器）往处于半打开状态的连接写入数据，则对方将回应一个复位报文段。
+
+举例来说，我们在Kongming20上使用nc命令模拟一个服务器程序，使之监听12345端口，然后从ernest-laptop运行telnet命令登录到该端口上，接着拔掉ernest-laptop的网线，并在Kongming20上中断服务器程序。显然，此时ernest-laptop上运行的telnet客户端程序维持着一个半打开连接。然后接上ernest-laptop的网线，并从客户端程序往半打开连接写入1字节的数据“a”。同时，运行tcpdump程序抓取整个过程中telnet客户端和nc服务器交换的TCP报文段。具体操作过程如下：
+
+~~~
+$nc-l 12345#在Kongming20上运行服务器程序
+$sudo tcpdump-nt-i eth0 port 12345
+$telnet 192.168.1.109 12345#在ernest-laptop上运行客户端程序
+Trying 192.168.1.109...
+Connected to 192.168.1.109.
+Escape character is'^]'.#此时断开ernest-laptop的网线，并重启服务器
+a（回车）#向半打开连接输入字符a
+Connection closed by foreign host.
+
+1.IP 192.168.1.108.55100＞192.168.1.109.12345:Flags[S],seq 3093809365,length 0
+2.IP 192.168.1.109.12345＞192.168.1.108.55100:Flags[S.],seq 1495337791,ack 3093809366,length 0
+3.IP 192.168.1.108.55100＞192.168.1.109.12345:Flags[.],ack 1,length 0
+4.IP 192.168.1.108.55100＞192.168.1.109.12345:Flags[P.],seq 1:4,ack 1,length 3
+5.IP 192.168.1.109.12345＞192.168.1.108.55100:Flags[R],seq 1495337792,length 0
+~~~
+
+该输出内容中，前3个TCP报文段是正常建立TCP连接的3次握手的过程。
+
+第4个TCP报文段由客户端发送给服务器，它携带了3字节的应用程序数据，这3字节依次是：字母“a”、回车符“\r”和换行符“\n”。不过因为服务器程序已经被中断，所以Kongming20对客户端发送的数据回应了一个复位报文段5。
+
+### TCP交互数据流
+
+TCP报文段所携带的应用程序数据按照长度分为两种：**交互数据**和**成块数据**。交互数据仅包含很少的字节。
+
+使用交互数据的应用程序（或协议）对实时性要求高，比如telnet、ssh等。成块数据的长度则通常为TCP报文段允许的最大数据长度。使用成块数据的应用程序（或协议）对传输效率要求高，比如ftp。
+
+
+
+考虑如下情况：在ernest-laptop上执行telnet命令登录到本机，然后在shell命令提示符后执行ls命令，同时用tcpdump抓取这一过程中telnet客户端和telnet服务器交换的TCP报文段。具体操作过程如下：
+
+~~~
+$tcpdump-nt-i lo port 23
+$telnet 127.0.0.1
+Trying 127.0.0.1...
+Connected to 127.0.0.1.
+Escape character is'^]'.
+Ubuntu 9.10
+ernest-laptop login:ernest（回车）  #输入用户名并回车
+Password:（回车）  #输入密码并回车
+ernest@ernest-laptop:～$ls（回车）
+
+1.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[P.],seq 1408334812:1408334813,ack 1415955507,win 613,length 1
+2.IP 127.0.0.1.23＞127.0.0.1.58130:Flags[P.],seq 1:2,ack 1,win 512,length 1
+3.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[.],ack 2,win 613,length 0
+4.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[P.],seq 1:2,ack 2,win 613,length 1
+5.IP 127.0.0.1.23＞127.0.0.1.58130:Flags[P.],seq 2:3,ack 2,win 512,length 1
+6.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[.],ack 3,win 613,length 0
+7.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[P.],seq 2:4,ack 3,win 613,length 2
+8.IP 127.0.0.1.23＞127.0.0.1.58130:Flags[P.],seq 3:176,ack 4,win 512,length 173
+9.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[.],ack 176,win 630,length 0
+10.IP 127.0.0.1.23＞127.0.0.1.58130:Flags[P.],seq 176:228,ack 4,win 512,length 52
+11.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[.],ack 228,win 630,length 0
+~~~
+
+TCP报文段1由客户端发送给服务器，它携带1个字节的应用程序数据，即字母“l”。TCP报文段2是服务器对TCP报文段1的确认，同时回显字母“l”。TCP报文段3是客户端对TCP报文段2的确认。第4～6个TCP报文段是针对字母“s”的上述过程。TCP报文段7传送的2字节数据分别是：客户端键入的回车符和流结束符（EOF，本例中是0x00）。TCP报文段8携带服务器返回的客户查询的目录的内容（ls命令的输出），包括该目录下文件的文件名及其显示控制参数。TCP报文段9是客户端对TCP报文段8的确认。TCP报文段10携带的也是服务器返回给客户端的数据，包括一个回车符、一个换行符、客户端登录用户的PS1环境变量（第一级命令提示符）。TCP报文段11是客户端对TCP报文段10的确认。
+
+在上述过程中，客户端针对服务器返回的数据所发送的确认报文段（TCP报文段6、9和11）都不携带任何应用程序数据（长度为0），而服务器每次发送的确认报文段（TCP报文段2、5、8和10）都包含它需要发送的应用程序数据。服务器的这种处理方式称为**延迟确认**，即它不马上确认上次收到的数据，而是在一段延迟时间后查看本端是否有数据需要发送，如果有，则和确认信息一起发出。因为服务器对客户请求处理得很快，所以它发送确认报文段的时候总是有数据一起发送。延迟确认可以减少发送TCP报文段的数量。而由于用户的输入速度明显慢于客户端程序的处理速度，所以客户端的确认报文段总是不携带任何应用程序数据。
+
+前文曾提到，在TCP连接的建立和断开过程中，也可能发生延迟确认。上例是在本地回路运行的结果，在局域网中也能得到基本相同的结果，但在广域网就未必如此了。广域网上的交互数据流可能经受很大的延迟，并且，携带交互数据的微小TCP报文段数量一般很多（一个按键输入就导致一个TCP报文段），这些因素都可能导致拥塞发生。解决该问题的一个简单有效的方法是使用**Nagle算法**。Nagle算法要求一个TCP连接的通信双方在任意时刻都最多只能发送一个未被确认的TCP报文段，在该TCP报文段的确认到达之前不能发送其他TCP报文段。另一方面，发送方在等待确认的同时收集本端需要发送的微量数据，并在确认到来时以一个TCP报文段将它们全部发出。这样就极大地减少了网络上的微小TCP报文段的数量。该算法的另一个优点在于其自适应性：确认到达得越快，数据也就发送得越快。
+
+#### TCP成块数据流
+
+下面考虑用FTP协议传输一个大文件。在ernest-laptop上启动一个vsftpd服务器程序（升级的、安全版的ftp服务器程序），并执行ftp命令登录该服务器上，然后在ftp命令提示符后输入get命令，从服务器下载一个几百兆的大文件。同时用tcpdump抓取这一个过程中ftp客户端和vsftpd服务器交换的TCP报文段。具体操作过程如下：
+
+~~~
+$sudo tcpdump-nt-i eth0 port 20#vsftpd服务器程序使用端口号20
+$ftp 127.0.0.1
+Connected to 127.0.0.1.
+220(vsFTPd 2.3.0)
+Name(127.0.0.1:ernest):ernest（回车）#输入用户名并回车
+331 Please specify the password.
+Password:（回车）		#输入密码并回车
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp＞get bigfile（回车）		#获取大文件bigfile
+
+1.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205783041:205799425,ack 1,win 513,length 16384
+2.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205799425:205815809,ack 1,win 513,length 16384
+3.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205815809:205832193,ack 1,win 513,length 16384
+4.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[P.],seq 205832193:205848577,ack 1,win 513,length 16384
+5.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205848577:205864961,ack 1,win 513,length 16384
+6.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205864961:205881345,ack 1,win 513,length 16384
+7.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205881345:205897729,ack 1,win 513,length 16384
+8.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[P.],seq 205897729:205914113,ack 1,win 513,length 16384
+9.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205914113:205930497,ack 1,win 513,length 16384
+10.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205930497:205946881,ack 1,win 513,length 16384
+11.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205946881:205963265,ack 1,win 513,length 16384
+12.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[P.],seq 205963265:205979649,ack 1,win 513,length 16384
+13.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205979649:205996033,ack 1,win 513,length 16384
+14.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205996033:206012417,ack 1,win 513,length 16384
+15.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 206012417:206028801,ack 1,win 513,length 16384
+16.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[P.],seq 206028801:206045185,ack 1,win 513,length 16384
+17.IP 127.0.0.1.39651＞127.0.0.1.20:Flags[.],ack 205815809,win 30084,length 0
+18.IP 127.0.0.1.39651＞127.0.0.1.20:Flags[.],ack 206045185,win 27317,length 0
+~~~
+
+注意，客户端发送的最后两个TCP报文段17和18，它们分别是对TCP报文段2和16的确认（从序号值和确认值来判断）。由此可见，当传输大量大块数据的时候，发送方会连续发送多个TCP报文段，接收方可以一次确认所有这些报文段。那么发送方在收到上一次确认后，能连续发送多少个TCP报文段呢？这是由接收通告窗口（还需要考虑拥塞窗口，见后文）的大小决定的。TCP报文段17说明客户端还能接收30 084×64字节（本例中窗口扩大因子为6），即1 925 376字节的数据。而在TCP报文段18中，接收通告窗口大小为1 748 288字节，即客户端能接收的数据量变小了。这表明客户端的TCP接收缓冲区有更多的数据未被应用程序读取而停留在其中，这些数据都来自TCP报文段3～16中的一部分。服务器收到TCP报文段18后，它至少（因为接收通告窗口可能扩大）还能连续发送的未被确认的报文段数量是1 748288/16 384个，即106个（但一般不会连续发送这么多）。其中，16384是成块数据的长度（见TCP报文段1～16的length值），很显然它小于但接近MSS规定的16 396字节。
+
+另外一个值得注意的地方是，服务器每发送4个TCP报文段就传送一个PSH标志（tcpdump输出标志P）给客户端，以通知客户端的应用程序尽快读取数据。不过这对服务器来说显然不是必需的，因为它知道客户端的TCP接收缓冲区中还有空闲空间（接收通告窗口大小不为0）。
+
+下面我们修改系统的TCP接收缓冲区和TCP发送缓冲区的大小，使之都为4096字节，然后重启vsftpd服务器，并再次执行上述操作。
+
+~~~
+1.IP 127.0.0.1.20＞127.0.0.1.45227:Flags[.],seq 5195777:5197313,ack 1,win 3072,length 1536
+2.IP 127.0.0.1.20＞127.0.0.1.45227:Flags[.],seq 5197313:5198849,ack 1,win 3072,length 1536
+3.IP 127.0.0.1.45227＞127.0.0.1.20:Flags[.],ack 5198849,win 3072,length 0
+4.IP 127.0.0.1.20＞127.0.0.1.45227:Flags[P.],seq 5198849:5200385,ack 1,win 3072,length 1536
+5.IP 127.0.0.1.45227＞127.0.0.1.20:Flags[.],ack 5200385,win 3072,length 0
+~~~
+
+从同步报文段（未在代码中列出）得知在这次通信过程中，客户端和服务器的窗口扩大因子都为0，因而客户端和服务器每次通告的窗口大小都是3072字节（没超过4096字节，预料之中）。因为每个成块数据的长度为1536字节，所以服务器在收到上一个TCP报文段的确认之前最多还能再发送1个TCP报文段，这正是TCP报文段1～3描述的情形。
+
+### 带外数据
+
+实际应用中，带外数据的使用很少见，已知的仅有telnet、ftp等远程非活跃程序。
+
+### TCP超时重传
+
+异常网络状况下（开始出现超时或丢包），TCP如何控制数据传输以保证其承诺的可靠服务。
+
+TCP服务必须能够重传超时时间内未收到确认的TCP报文段。为此，TCP模块为每个TCP报文段都维护一个重传定时器，该定时器在TCP报文段第一次被发送时启动。如果超时时间内未收到接收方的应答，TCP模块将重传TCP报文段并重置定时器。至于下次重传的超时时间如何选择，以及最多执行多少次重传，就是TCP的重传策略。
+
+我们通过实例来研究Linux下TCP的超时重传策略。在ernest-laptop上启动iperf服务器程序，然后从Kongming20上执行telnet命令登录该服务器程序。接下来，从telnet客户端发送一些数据（此处是“1234”）给服务器，然后断开服务器的网线并再次从客户端发送一些数据给服务器（此处是“12”）。同时，用tcpdump抓取这一过程中客户端和服务器交换的TCP报文段。具体操作过程如下：
+
+~~~
+$sudo tcpdump-n-i eth0 port 5001
+$iperf-s					  #在ernest-laptop上执行
+$telnet 192.168.1.108 5001		#在Kongming20上执行
+Trying 192.168.1.108...
+Connected to 192.168.1.108.
+Escape character is'^]'.
+1234#发送完之后断开服务器网线
+12
+Connection closed by foreign host
+~~~
+
+iperf是一个测量网络状况的工具，-s选项表示将其作为服务器运行。iperf默认监听5001端口，并丢弃该端口上接收到的所有数据，相当于一个discard服务器。
+
+代码就不展示了
+
+TCP报文段1～3是三次握手建立连接的过程，TCP报文段4～5是客户端发送数据“1234”（应用程序数据长度为6，包括回车、换行两个字符，后同）及服务器确认的过程。TCP报文段6是客户端第一次发送数据“12”的过程。因为服务器的网线被断开，所以客户端无法收到TCP报文段6的确认报文段。此后，*客户端对TCP报文段6执行了5次重传*，它们是TCP报文段7～11，这可以从每个TCP报文段的序号得知。此后，数据包12～23都是ARP模块的输出内容，即Kongming20查询ernest-laptop的MAC地址。
+
+我们保留了tcpdump输出的时间戳，以便推理TCP的超时重传策略。观察TCP报文段6～11被发送的时间间隔，它们分别为0.2 s、0.4s、0.8 s、1.6 s和3.2 s。由此可见，TCP一共执行5次重传，每次重传超时时间都增加一倍（因此，和TCP超时重连的策略相似）。在5次重传均失败的情况下，底层的IP和ARP开始接管，直到telnet客户端放弃连接为止。
+
+Linux有两个重要的内核参数与TCP超时重传相关：/proc/sys/net/ipv4/tcp_retries1和/proc/sys/net/ipv4/tcp_retries2。前者指定在底层IP接管之前TCP最少执行的重传次数，默认值是3。后者指定连接放弃前TCP最多可以执行的重传次数，默认值是15（一般对应13～30 min）。在我们的实例中，TCP超时重传发生了5次，连接坚持的时间是15 min（可以用date命令来测量）。虽然超时会导致TCP报文段重传，但TCP报文段的重传可以发生在超时之前，即快速重传
+
+### 拥塞控制
+
+TCP模块还有一个重要的任务，就是提高网络利用率，降低丢包率，并保证网络资源对每条数据流的公平性。这就是所谓的拥塞控制。
+
+TCP拥塞控制的标准文档是RFC 5681，其中详细介绍了拥塞控制的四个部分：慢启动（slow start）、拥塞避免（congestion avoidance）、快速重传（fast retransmit）和快速恢复（fast recovery）。拥塞控制算法在Linux下有多种实现，比如reno算法、vegas算法和cubic算法等。它们或者部分或者全部实现了上述四个部分。/proc/sys/net/ipv4/tcp_congestion_control文件指示机器当前所使用的拥塞控制算法。
+
+...
 
 ##TCP/IP通信案例：访问Internet上的Web服务器
+
+Web客户端和服务器之间使用HTTP协议通信
+
+### 实例总图
+
+在Kongming20上运行wget客户端程序，在ernest-laptop上运行squid代理服务器程序。客户端通过代理服务器的中转，获取Internet上的主机www.baidu.com的首页文档index.html
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902175244566.png" alt="image-20240902175244566" style="zoom:50%;" />
+
+wget客户端程序和代理服务器之间，以及代理服务器与Web服务器之间都是使用HTTP协议通信的。HTTP协议是一种应用层协议，它默认使用的传输层协议是TCP协议。
+
+* 将ernest-laptop设置为Kongming20的HTTP代理服务器，在Kongming20上设置环境变量http_proxy：
+
+$export http_proxy="ernest-laptop:3128"
+
+3128是squid服务器默认使用的端口号（可以通过lsof命令查看服务器程序监听的端口号）。设置好环境变量之后，Kongming20访问任何Internet上的Web服务器时，其HTTP请求都将首先发送至ernest-laptop的3128端口。
+
+squid代理服务器接收到wget客户端的HTTP请求之后，将简单地修改这个请求，然后把它发送给最终的目标Web服务器。代理服务器访问的是Internet上的机器，可以预见它发送的IP数据报都将经过路由器的中转
+
+### 部署代理服务器
+
+由于通信实例中使用了HTTP代理服务器（squid程序），所以先简单介绍一下HTTP代理服务器的工作原理，以及如何部署squid代理服务器
+
+#### HTTP代理服务器的工作原理
+
+在HTTP通信链上，一个HTTP请求可能被多个代理服务器转发，后面的服务器称为前面服务器的上游服务器。代理服务器按照其使用方式和作用，
+
+* **正向代理**要求客户端自己设置代理服务器的地址。客户的每次请求都将直接发送到该代理服务器，并由代理服务器来请求目标资源。比如处于防火墙内的局域网机器要访问Internet，或者要访问一些被屏蔽掉的国外网站，就需要使用正向代理服务器
+
+* **反向代理**则被设置在服务器端，因而客户端无须进行任何设置。反向代理是指用代理服务器来接收Internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从内部服务器上得到的结果返回给客户端。这种情况下，代理服务器对外就表现为一个真实的服务器。各大网站通常分区域设置了多个代理服务器，所以在不同的地方ping同一个域名可能得到不同的IP地址，因为这些IP地址实际上是代理服务器的IP地址。
+
+* **透明代理**只能设置在网关上。用户访问Internet的数据报必然都经过网关，如果在网关上设置代理，则该代理对用户来说显然是透明的。透明代理可以看作正向代理的一种特殊情况
+
+代理服务器通常还提供缓存目标资源的功能（可选），这样用户下次访问同一资源时速度将很快。优秀的开源软件squid、varnish都是提供了缓存能力的代理服务器软件，其中squid支持所有代理方式，而varnish仅能用作反向代理
+
+#### 部署squid代理服务器
+
+现在我们在ernest-laptop上部署squid代理服务器。
+
+* 修改squid服务器的配置文件/etc/squid3/squid.conf
+
+~~~
+acl localnet src 192.168.1.0/24
+http_access allow localnet
+~~~
+
+这两行代码的含义是：允许网络192.168.1.0上的所有机器通过该代理服务器来访问Web服务器。
+
+我们通过上面的两行代码简单地配置了squid的访问控制。但实际应用中，squid提供更多、更安全的配置，比如用户验证等。
+
+* 重启squid服务器：
+
+$sudo service squid3 restart
+
+service是一个脚本程序（/usr/sbin/service），它为/etc/init.d/目录下的众多服务器程序（比如httpd、vsftpd、sshd和mysqld等）的启动（start）、停止（stop）和重启（restart）等动作提供了一个统一的管理。现在，Linux程序员已经越来越偏向于使用service脚本来管理服务器程序了
+
+#### 使用tcpdump抓取传输数据包
+
+在执行wget命令前，我们首先应删除ernest-laptop的ARP高速缓存中路由器对应的项，以便观察TCP/IP通信过程中ARP协议何时起作用。然后，使用tcpdump命令抓取整个通信过程中传输的数据包。
+
+~~~
+$sudo arp-d 192.168.1.1
+$sudo tcpdump-s 2000-i eth0-ntX'(src 192.168.1.108)or(dst 192.168.1.108)or(arp)'
+$wget--header="Connection:close"http://www.baidu.com/index.html
+--2012-07-03 00:51:12--http://www.baidu.com/index.html
+Resolving ernest-laptop...192.168.1.108
+Connecting to ernest-laptop|192.168.1.108|:3128...connected.
+Proxy request sent,awaiting response...200 OK
+Length:8024(7.8K)[text/html]
+Saving to:“index.html”
+100%[=======================＞]8,024--.-K/s in 0.001s
+2012-07-03 00:51:12(8.76 MB/s)-“index.html”saved[8024/8024]
+~~~
+
+wget命令的输出显示，HTTP请求确实是先被送至代理服务器的3128端口，并且代理服务器正确地返回了文件index.html的内容。
+
+43个数据包这里没有显示
+
+* 代理服务器访问DNS服务器以查询域名www.baidu.com对应的IP地址，包括数据包8、9。
+* 代理服务器查询路由器MAC地址的ARP请求和应答，包括数据包6、7。
+* wget客户端（192.168.1.109）和代理服务器（192.168.1.108）之间的HTTP通信，包括数据包1～5、23～25、32～40、42和43。
+* 代理服务器和Web服务器（119.75.218.77）之间的HTTP通信，包括数据包10～22、26～31和41。
+
+### 访问DNS服务器
+
+数据包8、9表示代理服务器ernest-laptop向DNS服务器（219.239.26.42，首选DNS服务器的IP地址）查询域名www.baidu.com对应的IP地址，并得到了回复。该回复包括一个主机别名（www.a.shifen.com）和两个IP地址（119.75.218.77和119.75.217.56）。
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902180624662.png" alt="image-20240902180624662" style="zoom:50%;" />
+
+squid程序通过读取/etc/resolv.conf文件获得DNS服务器的IP地址，然后将控制权传递给内核中的UDP模块。
+
+UDP模块将DNS查询报文封装成UDP数据报，同时把源端口号和目标端口号加入UDP数据报头部，然后UDP模块调用IP服务。
+
+IP模块则将UDP数据报封装成IP数据报，并把源端IP地址（192.168.1.108）和DNS服务器的IP地址加入IP数据报头部。接下来，IP模块查询路由表以决定如何发送该IP数据报。根据路由策略，目标IP地址（219.239.26.42）仅能匹配路由表中的默认路由项，因此该IP数据报先被发送至路由器（IP地址为192.168.1.1），然后通过路由器来转发。因为ernest-laptop的ARP缓存中没有与路由器对应的缓存项（我们手动将其删除了），所以ernest laptop需要发起一个ARP广播以查询路由器的IP地址，而这正是数据包6描述的内容。路由器则通过ARP应答告诉ernest-laptop自己的MAC地址是14:e6:e4:93:5b:78，如数据包7所示。最终，以太网驱动程序将IP数据报封装成以太网帧发送给路由器。此后，代理服务器再次发送数据到Internet时将不再需要ARP查询，因为ernest-laptop的ARP高速缓存中已经记录了路由器的IP地址和MAC地址的映射关系
+
+需要指出的是，虽然IP数据报是先发送到路由器，再由它转发给目标主机，但是其头部的目标IP地址却是最终的目标主机（DNS服务器）的IP地址，而不是中转路由器的IP地址（192.168.1.1）。这说明，IP头部的源端IP地址和目的端IP地址在转发过程中是始终不变的（一种例外是源路由选择）。但帧头部的源端物理地址和目的端物理地址在转发过程中则是一直在变化的。
+
+### 本地名称查询
+
+一般来说，通过域名来访问时，需要使用DNS服务来获取IP地址。但如果我们通过主机名来访问本地局域网上的机器，则可通过本地的静态文件来获得该机器的IP地址。Linux将目标主机名及其对应的IP地址存储在/etc/hosts配置文件中。当需要查询某个主机名对应的IP地址时，程序将首先检查这个文件。Kongming20上/etc/hosts文件的内容如下（笔者手动修改过）：
+
+~~~
+127.0.0.1 localhost
+192.168.1.109 Kongming20
+192.168.1.108 ernest-laptop
+~~~
+
+其中第一项指出本地回路地址127.0.0.1的名称是localhost，第二项和第三项则分别描述了Kongming20和ernest-laptop的IP地址及对应的主
+
+机名。代码清单4-1中，wget命令输出“Resolving ernest laptop...192.168.1.108”，即它成功地解析了主机名ernest-laptop对应的IP地址，原因如下：当wget访问某个Web服务器时，它先读取环境变量http_proxy。如果该环境变量被设置，并且我们没有阻止wget使用代理服务，则wget将通过http_proxy指定的代理服务器来访问Web服务。但http_proxy环境变量中包含主机名ernest-laptop，因此wget将首先读取/etc/hosts配置文件，试图通过它来解析主机名ernest-laptop对应的IP地址。其结果正如wget的输出所示，解析成功
+
+如果程序在/etc/hosts文件中未找到目标机器名对应的IP地址，它将求助于DNS服务。用户可以通过修改/etc/host.conf文件来自定义系统解析主机名的方法和顺序（一般是先访问本地文件/etc/hosts，再访问DNS服务），
+
+Kongming20上的该文件内容如下：
+
+order hosts,bind
+
+multi on
+
+其中第一行表示优先使用/etc/hosts文件来解析主机名（hosts），失败后再使用DNS服务（bind）。第二行表示如果/etc/hosts文件中一个主机名对应多个IP地址，那么解析的结果就包含多个IP地址。
+
+### HTTP通信
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902191037647.png" alt="image-20240902191037647" style="zoom:50%;" />
+
+TCP连接从建立到关闭的过程中，客户端仅给服务器发送了一个HTTP请求（即TCP报文段4）,代理服务器返回了六个tcp报文，总长8522字节，客户端用了七个tcp报文确定应答
+
+#### HTTP请求
+
+~~~
+GET http://www.baidu.com/index.html HTTP/1.0
+User-Agent:Wget/1.12(linux-gnu)
+Host:www.baidu.com
+Connection:close
+~~~
+
+GET请求方法，只读 的方式请求
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902191341514.png" alt="image-20240902191341514" style="zoom:50%;" />
+
+* HEAD、GET、OPTIONS和TRACE被视为安全的方法，因为它们只是从服务器获得资源或信息，而不对服务器进行任何修改。而POST、PUT、DELETE和PATCH则影响服务器上的资源
+
+* GET、HEAD、OPTIONS、TRACE、PUT和DELETE等请求方法被认为是等幂的（idempotent），即多次连续的、重复的请求和只发送一次该请求具有完全相同的效果。而POST方法则不同，连续多次发送同样一个请求可能进一步影响服务器上的资源
+
+Linux上提供了几个命令：HEAD、GET和POST。其含义基本与HTTP协议中的同名请求方法相同。它们适合用来快速测试Web服务器
+
+“http://www.baidu.com/index.html”是目标资源的URL。其中“http”是所谓的**scheme**，表示获取目标资源需要使用的应用层协议。其他常见的scheme还有ftp、rtsp和file等。“www.baidu.com”指定资源所在的目标主机。“index.html”指定资源文件的名称，这里指的是服务器根目录（站点的根目录，而不是服务器的文件系统根目录“/”）中的索引文件。“HTTP/1. 0”表示客户端（wget程序）使用的HTTP的版本号是1.0。目前的主流HTTP版本是1.1。
+
+* HTTP请求内容中的第2～4行都是HTTP请求的头部字段。一个HTTP请求可以包含多个头部字段。一个头部字段用一行表示，包含字段名称、冒号、空格和字段的值。HTTP请求中的头部字段可按任意顺序排列。
+
+“User-Agent:Wget/1. 12(linux-gnu)”表示客户端使用的程序是wget。
+
+“Host:www. baidu.com”表示目标主机名是www.baidu.com。HTTP协议规定HTTP请求中必须包含的头部字段就是目标主机名。
+
+* “Connection:close”是我们执行wget命令时传入的，告诉服务器处理完这个HTTP请求之后就关闭连接。在旧的HTTP协议中，Web客户端和Web服务器之间的一个TCP连接只能为一个HTTP请求服务。当处理完客户的一个HTTP请求之后，Web服务器就（主动）将TCP连接关闭了。此后，同一客户如果要再发送一个HTTP请求的话，必须与服务器建立一个新的TCP连接。也就是说，同一个客户的多个连续的HTTP请求不能共用同一个TCP连接，这称为**短连接**。
+
+* 长连接与之相反，是指多个请求可以使用同一个TCP连接。长连接在编程上稍微复杂一些，但性能上却有很大提高：它极大地减少了网络上为建立TCP连接导致的负荷，同时对每次请求而言缩减了处理时间。HTTP请求和应答中的“Connection”头部字段就是专门用于告诉对方一个请求完成之后该如何处理连接的，比如立即关闭连接（该头部字段的值为“close”）或者保持一段时间以等待后续请求（该头部字段的值为“keep-alive”）。当用浏览器访问一个网页时，读者不妨使用netstat命令来查看浏览器和Web服务器之间的连接是否是长连接，以及该连接维持了多长时间。
+
+* 在所有头部字段之后，HTTP请求必须包含一个空行，以标识头部字段的结束。请求行和每个头部字段都必须以＜CR＞＜LF＞结束（回车符和换行符）；而空行则必须只包含一个＜CR＞＜LF＞，不能有其他字符，甚至是空白字符。在空行之后，HTTP请求可以包含可选的消息体。如果消息体非空，则HTTP请求的头部字段中必须包含描述该消息体长度的字段“Content-Length”。我们的实例只是获取目标服务器上的资源，所以没有消息体
+
+#### HTTP应答
+
+~~~
+HTTP/1.0 200 OK
+Server:BWS/1.0
+Content-Length:8024
+Content-Type:text/html;charset=gbk
+SetCookie:BAIDUID=A5B6C72D68CF639CE8896FD79A03FBD8:FG=1;expires=Wed,04-
+Jul-42 00:10:47 GMT;path=/;domain=.baidu.com
+Via:1.0 localhost(squid/3.0 STABLE18)
+~~~
+
+* 第一行是状态行。“HTTP/1.0”是服务器使用的HTTP协议的版本号。通常，服务器需要使用和客户端相同的HTTP协议版本。“200 OK”是状态码和状态信息。
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902191955141.png" alt="image-20240902191955141" style="zoom:50%;" />
+
+* 第2～7行是HTTP应答的头部字段。其表示方法与HTTP请求中的头部字段相同。
+* “Server:BWS/1. 0”表示目标Web服务器程序的名字是BWS（Baidu Web Server）
+* “Content-Length:8024”表示目标文档的长度为8024字节。这个值和wget输出的文档长度一致
+* “Content-Type:text/html;charset=gbk”表示目标文档的MIME类型。其中“text”是主文档类型，“html”是子文档类型。“text/html”表示目标文档index.html是text类型中的html文档。“charset”是text文档类型的一个参数，用于指定文档的字符编码
+* “Set Cookie:BAIDUID=A5B6C72D68CF639CE8896FD79A03FBD8:FG=1;expires=Wed,04-Jul-42 00:10:47 GMT;path=/;domain=. baidu.com”表示服务器传送一个Cookie给客户端。其中，“BAIDUID”指定Cookie的名字，“expires”指定Cookie的生存时间，“domain”和“path”指定该Cookie生效的域名和路径。下面我们简单分析一下Cookie的作用。
+
+HTTP协议是一种无状态的协议，即每个HTTP请求之间没有任何上下文关系。如果服务器处理后续HTTP请求时需要用到前面的HTTP请求的相关信息，客户端必须重传这些信息。这样就导致HTTP请求必须传输更多的数据。在交互式Web应用程序兴起之后，HTTP协议的这种无状态特性就显得不适应了，因为交互程序通常要承上启下。因此，我们要使用额外的手段来保持HTTP连接状态，常见的解决方法就是Cookie。Cookie是服务器发送给客户端的特殊信息（通过HTTP应答的头部字段“Set Cookie”），客户端每次向服务器发送请求的时候都需要带上这些信息（通过HTTP请求的头部字段“Cookie”）。这样服务器就可以区分不同的客户了。基于浏览器的自动登录就是用Cookie实现的。
+
+* “Via:1. 0 localhost(squid/3.0 STABLE18)”表示HTTP应答在返回过程中经历过的所有代理服务器的地址和名称。这里的localhost实际上指的是“192.168.1.108”。这个头部字段的功能有点类似于IP协议的记录路由功能。
+
+在所有头部字段之后，HTTP应答必须包含一个空行，以标识头部字段的结束。状态行和每个头部字段都必须以＜CR＞＜LF＞结束；而空行则必须只包含一个＜CR＞＜LF＞，不能有其他字符，甚至是空白字符。
+
+* 空行之后是被请求文档index.html的内容，其长度是8024字节。
+
+# 深入解析高性能服务器编程
 
 ## Linux网络编程基础API
 
@@ -350,3 +1010,733 @@ IP协议是TCP/IP协议族的动力，它为上层协议提供无状态、无连
 * 网络信息API。Linux提供了一套网络信息API，以实现主机名和IP地址之间的转换，以及服务名称和端口号之间的转换。这些API都定义在netdb.h头文件中，我们将讨论其中几个主要的函数。
 
 ###socket地址API
+
+先要理解主机字节序和网络字节序
+
+#### 主机字节序和网络字节序
+
+现代CPU的累加器一次都能装载（至少）4字节（这里考虑32位机），即一个整数。那么这4字节在内存中排列的顺序将影响它被累加器装载成的整数的值。这就是字节序问题。字节序分为大端字节序（big endian）和小端字节序（little endian）。
+
+大端字节序是指一个整数的高位字节（23～31 bit）存储在内存的低地址处，低位字节（0～7 bit）存储在内存的高地址处。小端字节序则是指整数的高位字节存储在内存的高地址处，而低位字节则存储在内存的低地址处。
+
+判断机器字节序
+
+~~~c
+#include<stdio.h>
+void byteorder(){
+    union{
+		short value;  //short占两字节  
+		char union_bytes[sizeof(short)];
+	}test;
+	test.value=0x0102;  //01一个字节 02一个字节 
+    //union的成员共享一个内存，虽然是给short value赋值的，两个成员的内存都是一样的，只是用short类型解释是十六进制的0102，用char数组解释时，恰好是两个成员，每个1字节，都是十进制的第一个是01第二个是02
+	if((test.union_bytes[0]==1)&&(test.union_bytes[1]==2)){
+		printf("big endian\n");
+	}
+	else if((test.union_bytes[0]==2)&&(test.union_bytes[1]==1))
+	{
+	printf("little endian\n");
+	}
+	else{
+	printf("unknown...\n");
+	}
+}
+int main(){
+	byteorder();
+	return 0;
+}
+~~~
+
+我在linux上运行是little endian
+
+我们可以调试查看内存的表示，也是符合逻辑的
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902200404176.png" alt="image-20240902200404176" style="zoom:50%;" />
+
+* ==小端字节序又被称为主机字节序== 现代PC大多采用小端字节序
+* ==大端字节序也称为网络字节序== **发送端总是把要发送的数据转化成大端字节序数据后再发送**，而接收端知道对方传送过来的数据总是采用大端字节序，所以接收端可以根据自身采用的字节序决定是否对接收到的数据进行转换（小端机转换，大端机不转换）
+
+*即使是同一台机器上的两个进程（比如一个由C语言编写，另一个由JAVA编写）通信，也要考虑字节序的问题（JAVA虚拟机采用大端字节序）。*
+
+Linux提供了如下4个函数来完成主机字节序和网络字节序之间的转换
+
+~~~c
+#include＜netinet/in.h＞
+unsigned long int htonl(unsigned long int hostlong);  //无符号长整型 主机->网络
+unsigned short int htons(unsigned short int hostshort);//无符号短整型
+unsigned long int ntohl(unsigned long int netlong);  //网络->主机
+unsigned short int ntohs(unsigned short int netshort);
+~~~
+
+长整型（32 bit）常用来转换IP地址，短整型(16位)用来转换端口号
+
+这里的类型都是可以换的，比如我转换一个short类型为大端序
+
+~~~c++
+#include<netinet/in.h>
+#include <stdio.h> 
+#include <iostream>
+using namespace std;
+int main() {
+    unsigned short int host_short = 0x1234;
+    unsigned short int net_short = htons(host_short); 
+    printf("Network byte order short: 0x%X\n", net_short);  //3412
+    cout << net_short << endl; //13330的十六进制3421
+	return 0;
+}
+~~~
+
+#### 通用socket地址
+
+socket网络编程接口中表示socket地址的是结构体sockaddr，其定义如下
+
+~~~c
+#include＜bits/socket.h＞
+struct sockaddr{
+	sa_family_t sa_family; //地址族类型
+	char sa_data[14];
+}
+~~~
+
+* 地址族类型通常与协议族类型对应  常见的协议族（protocol family，也称domain)
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831112454497.png" alt="image-20240831112454497" style="zoom:50%;" />
+
+宏PF\_\*和AF\_\*都定义在bits/socket.h头文件中，且后者与前者有完全相同的值，所以二者通常混用。
+
+* sa_data成员用于存放socket地址值。但是，不同的协议族的地址值具有不同的含义和长度
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831112643843.png" alt="image-20240831112643843" style="zoom: 50%;" />
+
+可见14的大小完全不够，linux定义了新的结构
+
+~~~c
+#include＜bits/socket.h＞
+struct sockaddr_storage{
+	sa_family_t sa_family; 
+	unsigned long int__ss_align;
+	char__ss_padding[128-sizeof(__ss_align)];
+}
+~~~
+
+__ss_align成员使内存对齐
+
+#### 专用socket地址
+
+上面这两个通用socket地址结构体显然很不好用，比如设置与获取IP地址和端口号就需要执行烦琐的位操作。所以Linux为各个协议族提供了专门的socket地址结构体
+
+* UNIX本地域协议族
+
+~~~c
+#include＜sys/un.h＞
+struct sockaddr_un{
+	sa_family_t sin_family;/*地址族：AF_UNIX*/
+	char sun_path[108];/*文件路径名*/
+};
+~~~
+
+* TCP/IP协议族有sockaddr_in和sockaddr_in6两个专用socket地址结构体，它们分别用于IPv4和IPv6：
+
+~~~c
+struct sockaddr_in{
+	sa_family_t sin_family;/*地址族：AF_INET*/
+	u_int16_t sin_port;/*端口号，要用网络字节序表示*/
+	struct in_addr sin_addr;/*IPv4地址结构体，见下面*/
+};
+struct in_addr{
+	u_int32_t s_addr;/*IPv4地址，要用网络字节序表示*/
+};
+
+struct sockaddr_in6{
+	sa_family_t sin6_family;/*地址族：AF_INET6*/
+	u_int16_t sin6_port;/*端口号，要用网络字节序表示*/
+	u_int32_t sin6_flowinfo;/*流信息，应设置为0*/
+	struct in6_addr sin6_addr;/*IPv6地址结构体，见下面*/
+	u_int32_t sin6_scope_id;/*scope ID，尚处于实验阶段*/
+};
+struct in6_addr{
+	unsigned char sa_addr[16];/*IPv6地址，要用网络字节序表示*/
+};
+~~~
+
+所有专用socket地址（以及sockaddr_storage）类型的变量在实际使用时都需要转化为通用socket地址类型sockaddr（强制转换即可），因为所有socket编程接口使用的地址参数的类型都是sockaddr。
+
+#### IP地址转换函数
+
+通常，人们习惯用可读性好的字符串来表示IP地址，比如用点分十进制字符串表示IPv4地址，以及用十六进制字符串表示IPv6地址。
+
+* 编程中我们需要先把它们转化为整数（二进制数）方能使用。
+* 记录日志时，我们要把整数表示的IP地址转化为可读的字符串。
+
+下面3个函数可用于用*点分十进制字符串表示的IPv4地址*和用*网络字节序整数表示的IPv4地址*之间的转换：
+
+~~~c
+#include＜arpa/inet.h＞
+in_addr_t inet_addr(const char*strptr);
+int inet_aton(const char*cp,struct in_addr*inp);
+char*inet_ntoa(struct in_addr in);
+~~~
+
+* inet_addr IPv4地址转化为用网络字节序它  失败时返回INADDR_NONE。
+
+* inet_aton  IPv4地址转化为用网络字节序，但是将转化结果存储于参数inp指向的地址结构中。它成功时返回1，失败则返回0。
+
+* inet_ntoa  网络字节序转化为用点分十进制  但需要注意的是，该函数内部用一个静态变量存储转化结果，函数的返回值指向该静态内存，因此inet_ntoa是不可重入的。(意思是连续调用两个这个函数 后一个的结果会把前一个覆盖)
+
+~~~c
+#include＜arpa/inet.h＞
+int inet_pton(int af,const char*src,void*dst);
+const char*inet_ntop(int af,const void*src,char*dst,socklen_tcnt);
+~~~
+
+适用于ipv4和ipv6
+
+* inet_pton  IP地址src转换成用网络字节序  并把转换结果存储于dst指向的内存中。其中，af参数指定地址族，可以是AF_INET或者AF_INET6。inet_pton成功时返回1，失败则返回0并设置errno[1]。
+
+* inet_ntop函数进行相反的转换，前三个参数的含义与inet_pton的参数相同，最后一个参数cnt指定目标存储单元的大小。下面的两个宏能帮助我们指定这个大小（分别用于IPv4和IPv6）：    inet_ntop成功时返回目标存储单元的地址，失败则返回NULL并设置errno。
+
+* * \#include＜netinet/in.h＞
+
+    \#define INET_ADDRSTRLEN 16
+
+    \#define INET6_ADDRSTRLEN 46
+
+**使用示例**
+
+~~~c++
+#include <stdio.h> 
+#include <iostream>
+#include <arpa/inet.h>//ip地址转换
+using namespace std;
+int main() {
+    const char* ip="192.168.6.208";
+    in_addr_t ipAddr = inet_addr(ip); 
+    cout<<ipAddr<<endl;
+    cout<<inet_addr("192.168.6.208")<<endl; //3490097344 返回in_addr_t(unsigned long)
+
+    struct in_addr ip_addr;//专用socket结构体in_addr中成员s_addr
+    if(inet_aton(ip,&ip_addr)==1){
+        cout<<ip_addr.s_addr<<endl;
+    }
+
+    char* ip2=inet_ntoa(ip_addr);
+    cout<<ip2<<endl;
+}
+~~~
+
+### 创建socket
+
+UNIX/Linux的一个哲学是：所有东西都是文件。socket也不例外，它就是可读、可写、可控制、可关闭的文件描述符。下面的socket系统调用可创建一个socket：
+
+~~~c
+#include＜sys/types.h＞
+#include＜sys/socket.h＞
+int socket(int domain,int type,int protocol);
+~~~
+
+* domain参数告诉系统使用哪个底层协议族。PF_INET（Protocol Family of Internet，用于IPv4）或PF_INET6（用于IPv6）；对于UNIX本地域协议族而言，该参数应该设置为PF_UNIX。
+
+* type参数指定服务类型。服务类型主要有SOCK_STREAM服务（流服务）和SOCK_UGRAM（数据报）服务。对TCP/IP协议族而言，其值取SOCK_STREAM表示传输层使用TCP协议，取SOCK_DGRAM表示传输层使用UDP协议。
+
+* * 值得指出的是，自Linux内核版本2.6.17起，type参数可以接受上述服务类型与下面两个重要的标志相与的值：SOCK_NONBLOCK和SOCK_CLOEXEC。它们分别表示将新创建的socket设为非阻塞的，以及用fork调用创建子进程时在子进程中关闭该socket。在内核版本2.6.17之前的Linux中，文件描述符的这两个属性都需要使用额外的系统调用（比如fcntl）来设置。
+
+* protocol参数是在前两个参数构成的协议集合下，再选择一个具体的协议。不过这个值通常都是唯一的（前两个参数已经完全决定了它的值）。几乎在所有情况下，我们都应该把它设置为0，表示使用默认协议。
+
+socket系统调用成功时返回一个socket文件描述符，失败则返回-1并设置errno
+
+### 命名socket
+
+将一个socket与socket地址绑定称为给socket命名。在服务器程序中，我们通常要命名socket，因为只有命名后客户端才能知道该如何连接它。客户端则通常不需要命名socket，而是采用匿名方式，即使用操作系统自动分配的socket地址。命名socket的系统调用是bind，其定义如下：
+
+~~~c
+#include＜sys/types.h＞
+#include＜sys/socket.h＞
+int bind(int sockfd,const struct sockaddr*my_addr,socklen_t addrlen);
+~~~
+
+* bind将my_addr所指的socket地址分配给未命名的sockfd文件描述符，addrlen参数指出该socket地址的长度。bind成功时返回0，失败则返回-1并设置errno。其中两种常见的errno是EACCES和EADDRINUSE，它们的含义分别是：
+
+* * EACCES，被绑定的地址是受保护的地址，仅超级用户能够访问。比如普通用户将socket绑定到知名服务端口（端口号为0～1023）上时，bind将返回EACCES错误
+  * EADDRINUSE，被绑定的地址正在使用中。比如将socket绑定到一个处于TIME_WAIT状态的socket地址。
+
+### 监听socket
+
+socket被命名之后，还不能马上接受客户连接，我们需要使用如下系统调用来创建一个监听队列以存放待处理的客户连接：
+
+~~~c
+#include＜sys/socket.h＞
+int listen(int sockfd,int backlog);
+~~~
+
+* sockfd参数指定被监听的socket。
+* backlog参数提示内核监听队列的最大长度。监听队列的长度如果超过backlog，服务器将不受理新的客户连接，客户端也将收到ECONNREFUSED错误信息。在内核版本2.2之前的Linux中，backlog参数是指所有处于半连接状态（SYN_RCVD）和完全连接状态（ESTABLISHED）的socket的上限。但自内核版本2.2之后，它只表示处于完全连接状态的socket的上限，处于半连接状态的socket的上限则由/proc/sys/net/ipv4/tcp_max_syn_backlog内核参数定义。backlog参数的典型值是5。
+
+listen成功时返回0，失败则返回-1并设置errno
+
+**研究backlog参数对listen系统调用的实际影响**
+
+~~~c++
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <signal.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <stdio.h>
+#include <string.h>
+//#include <libgen.h>
+static bool stop = false;
+/*SIGTERM信号的处理函数，触发时结束主程序中的循环*/
+static void handle_term(int sig)
+{
+    stop = true;
+}
+int main(int argc, char *argv[])
+{
+    signal(SIGTERM, handle_term);
+    if (argc <= 3)
+    {
+        printf("usage:%s ip_address port_numberbacklog\n", basename(argv[0]));
+        return 1;
+    }
+    const char *ip = argv[1];
+    int port = atoi(argv[2]);
+    int backlog = atoi(argv[3]);
+    int sock = socket(PF_INET, SOCK_STREAM, 0);
+    assert(sock >= 0);
+    /*创建一个IPv4 socket地址*/
+    struct sockaddr_in address;
+    bzero(&address, sizeof(address));
+    address.sin_family = AF_INET;
+    inet_pton(AF_INET, ip, &address.sin_addr);
+    address.sin_port = htons(port);
+    int ret = bind(sock, (struct sockaddr *)&address, sizeof(address));
+    assert(ret != -1);
+    ret = listen(sock, backlog);
+    assert(ret != -1);
+    /*循环等待连接，直到有SIGTERM信号将它中断*/
+    while (!stop)
+    {
+        sleep(1);
+    }
+    /*关闭socket，见后文*/
+    close(sock);
+    return 0;
+}
+~~~
+
+~~~c++
+#include<netinet/in.h>//转换大端小端
+#include <stdio.h> 
+#include <iostream>
+#include <bits/socket.h>
+#include <arpa/inet.h>//ip地址转换
+#include <sys/types.h>
+#include <sys/socket.h>
+
+using namespace std;
+int main() {
+    //转换ip
+    const char* ip="192.168.6.208";
+    struct in_addr ip_addr;//专用socket结构体in_addr中成员s_addr
+    sockaddr_in addr;
+    addr.sin_family=AF_INET;
+    addr.sin_port = htons(567);
+    if(inet_aton(ip,&addr.sin_addr)==1){
+        cout<<addr.sin_addr.s_addr<<endl;
+    }
+    
+    //创建socket
+    int pre_name_socket;
+    pre_name_socket=socket(PF_INET,SOCK_STREAM,0);//ipv4 tcp SOCK_NONBLOCK  输出3 
+    //命名sockaddr_in
+    if(bind(pre_name_socket,(sockaddr*)&addr,sizeof(addr))==0){
+        cout<<"bind_success"<<endl;
+    }else{
+        
+    }
+    return 0;
+}
+~~~
+
+
+
+
+
+该服务器程序（名为testlisten）接收3个参数：IP地址、端口号和backlog值。我们在Kongming20上运行该服务器程序，并在ernestlaptop上多次执行telnet命令来连接该服务器程序。同时，每使用telnet命令建立一个连接，就执行一次netstat命令来查看服务器上连接的状态。具体操作过程如下：
+
+~~~
+$./testlisten 192.168.1.109 12345 5 #运行代码 监听12345端口，给backlog传递典型值5
+$telnet 192.168.1.109 12345#多次执行之
+$netstat-nt|grep 12345#多次执行之
+~~~
+
+是netstat命令某次输出的内容，它显示了这一时刻listen监听队列的内容。
+
+~~~
+Proto Recv-Q Send-Q Local Address Foreign Address Statetcp
+tcp 0 0 192.168.1.109:12345 192.168.1.108:2240 SYN_RECV
+tcp 0 0 192.168.1.109:12345 192.168.1.108:2228 SYN_RECV[1]
+tcp 0 0 192.168.1.109:12345 192.168.1.108:2230 SYN_RECV
+tcp 0 0 192.168.1.109:12345 192.168.1.108:2238 SYN_RECV
+tcp 0 0 192.168.1.109:12345 192.168.1.108:2236 SYN_RECV
+tcp 0 0 192.168.1.109:12345 192.168.1.108:2217 ESTABLISHED
+tcp 0 0 192.168.1.109:12345 192.168.1.108:2226 ESTABLISHED
+tcp 0 0 192.168.1.109:12345 192.168.1.108:2224 ESTABLISHED
+tcp 0 0 192.168.1.109:12345 192.168.1.108:2212 ESTABLISHED
+tcp 0 0 192.168.1.109:12345 192.168.1.108:2220 ESTABLISHED
+tcp 0 0 192.168.1.109:12345 192.168.1.108:2222 ESTABLISHED
+~~~
+
+可见，在监听队列中，处于ESTABLISHED状态的连接只有6个（backlog值加1），其他的连接都处于SYN_RCVD状态。我们改变服务器程序的第3个参数并重新运行之，能发现同样的规律，即完整连接最多有（backlog+1）个。在不同的系统上，运行结果会有些差别，不过监听队列中完整连接的上限通常比backlog值略大。
+
+### 接受连接
+
+~~~c
+#include＜sys/types.h＞
+#include＜sys/socket.h＞
+int accept(int sockfd,struct sockaddr*addr,socklen_t*addrlen);
+~~~
+
+* sockfd参数是执行过listen系统调用的监听socket。
+* addr参数用来获取被接受连接的远端socket地址，该socket地址的长度由addrlen参数指出。
+* accept成功时返回一个新的连接socket，该socket唯一地标识了被接受的这个连接，服务器可通过读写该socket来与被接受连接对应的客户端通信。
+* accept失败时返回-1并设置errno。
+
+现在考虑如下情况：如果监听队列中处于ESTABLISHED状态的连接对应的客户端出现网络异常（比如掉线），或者提前退出，那么服务器对这个连接执行的accept调用是否成功？我们编写一个简单的服务器程序来测试之
+
+~~~c++
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <assert.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+int main(int argc, char *argv[])
+{
+    if (argc <= 2)
+    {
+        printf("usage:%s ip_address port_number\n", basename(argv[0]));
+        return 1;
+    }
+    const char *ip = argv[1];
+    int port = atoi(argv[2]);
+    struct sockaddr_in address;
+    bzero(&address, sizeof(address));
+    address.sin_family = AF_INET;
+    inet_pton(AF_INET, ip, &address.sin_addr);
+    address.sin_port = htons(port);
+    int sock = socket(PF_INET, SOCK_STREAM, 0);
+    assert(sock >= 0);
+    int ret = bind(sock, (struct sockaddr *)&address, sizeof(address));
+    assert(ret != -1);
+    ret = listen(sock, 5);
+    assert(ret != -1);
+    /*暂停20秒以等待客户端连接和相关操作（掉线或者退出）完成*/
+    sleep(20);
+    struct sockaddr_in client;
+    socklen_t client_addrlength = sizeof(client);
+    int connfd = accept(sock, (struct sockaddr *)&client, &client_addrlength);
+    if (connfd < 0)
+    {
+        printf("errno is:%d\n", errno);
+    }
+    else
+    {
+        /*接受连接成功则打印出客户端的IP地址和端口号*/
+        char remote[INET_ADDRSTRLEN];
+        printf("connected with ip:%s and port:%d\n", inet_ntop(AF_INET, &client.sin_addr, remote, INET_ADDRSTRLEN), ntohs(client.sin_port));
+        close(connfd);
+    }
+    close(sock);
+    return 0;
+}
+~~~
+
+$./testaccept 192.168.1.109 54321#监听54321端口
+
+$telnet 192.168.1.109 54321 另一个机器上运行   启动telnet客户端程序后，立即断开该客户端的网络连接（建立和断开连接的过程要在服务器启动后20秒内完成）。结果发现accept调用能够正常返回，服务器输出如下：
+
+connected with ip:192.168.1.108 and port:38545
+
+在服务器上运行netstat命令以查看accept返回的连接socket的状态
+
+$netstat-nt|grep 54321
+
+tcp 0 0 192.168.1.109:54321 192.168.1.108:38545 ESTABLISHED
+
+netstat命令的输出说明，accept调用对于客户端网络断开毫不知情。
+
+下面我们重新执行上述过程，不过这次不断开客户端网络连接，而是在建立连接后立即退出客户端程序。这次accept调用同样正常返回，在服务器上运行netstat命令以查看accept返回的连接socket的状态也正常
+
+
+
+由此可见，accept只是从监听队列中取出连接，而不论连接处于何种状态（如上面的ESTABLISHED状态和CLOSE_WAIT状态），更不关心任何网络状况的变化
+
+我们把执行过listen调用、处于LISTEN状态的socket称为监听socket，而所有处于ESTABLISHED状态的socket则称为连接socket。
+
+### 发起连接
+
+如果说服务器通过listen调用来被动接受连接，那么客户端需要通过如下系统调用来主动与服务器建立连接
+
+~~~c
+#include＜sys/types.h＞
+#include＜sys/socket.h＞
+int connect(int sockfd,const struct sockaddr*serv_addr,socklen_t addrlen);
+~~~
+
+* sockfd参数由socket系统调用返回一个socket。serv_addr参数是服务器监听的socket地址，addrlen参数则指定这个地址的长度
+
+* connect成功时返回0。一旦成功建立连接，sockfd就唯一地标识了这个连接，客户端就可以通过读写sockfd来与服务器通信。connect失败则返回-1并设置errno。其中两种常见的errno是ECONNREFUSED和ETIMEDOUT，它们的含义如下：
+* * ECONNREFUSED，目标端口不存在，连接被拒绝
+  * ETIMEDOUT，连接超时
+
+### 关闭连接
+
+关闭一个连接实际上就是关闭该连接对应的socket，这可以通过如下关闭普通文件描述符的系统调用来完成
+
+~~~c
+#include＜unistd.h＞
+int close(int fd);
+~~~
+
+fd参数是待关闭的socket。不过，close系统调用并非总是立即关闭一个连接，而是将fd的引用计数减1。只有当fd的引用计数为0时，才真正关闭连接。多进程程序中，一次fork系统调用默认将使父进程中打开的socket的引用计数加1，因此我们必须在父进程和子进程中都对该socket执行close调用才能将连接关闭。
+
+如果无论如何都要立即终止连接（而不是将socket的引用计数减1），可以使用如下的shutdown系统调用（相对于close来说，它是专门为网络编程设计的）
+
+~~~c
+#include＜sys/socket.h＞
+int shutdown(int sockfd,int howto);
+~~~
+
+sockfd参数是待关闭的socket。howto参数决定了shutdown的行为，它可取表的某个值
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831124846783.png" alt="image-20240831124846783" style="zoom:50%;" />
+
+由此可见，shutdown能够分别关闭socket上的读或写，或者都关闭。而close在关闭连接时只能将socket上的读和写同时关闭。
+
+shutdown成功时返回0，失败则返回-1并设置errno。
+
+### 数据读写
+
+#### TCP数据读写
+
+对文件的读写操作read和write同样适用于socket。但是socket编程接口提供了几个专门用于socket数据读写的系统调用，它们增加了对数据读写的控制。其中用于TCP流数据读写的系统调用是：
+
+~~~c
+#include＜sys/types.h＞
+#include＜sys/socket.h＞
+ssize_t recv(int sockfd,void*buf,size_t len,int flags);
+ssize_t send(int sockfd,const void*buf,size_t len,int flags);
+~~~
+
+recv读取sockfd上的数据，buf和len参数分别指定读缓冲区的位置和大小，flags参数的含义见后文，通常设置为0即可。recv成功时返回实际读取到的数据的长度，它可能小于我们期望的长度len。因此我们可能要多次调用recv，才能读取到完整的数据。recv可能返回0，这意味着通信对方已经关闭连接了。recv出错时返回-1并设置errno。
+
+send往sockfd上写入数据，buf和len参数分别指定写缓冲区的位置和大小。send成功时返回实际写入的数据的长度，失败则返回-1并设置errno
+
+* flags参数为数据收发提供了额外的控制
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831142715399.png" alt="image-20240831142715399" style="zoom:50%;" />
+
+我们举例来说明如何使用这些选项。MSG_OOB选项给应用程序提供了发送和接收带外数据的方法
+
+* 接收带外数据
+
+~~~c++
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <assert.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
+int main(int argc, char *argv[])
+{
+    if (argc <= 2)
+    {
+        printf("usage:%s ip_address port_number\n", basename(argv[0]));
+        return 1;
+    }
+    const char *ip = argv[1];
+    int port = atoi(argv[2]);
+    struct sockaddr_in server_address;
+    bzero(&server_address, sizeof(server_address));
+    server_address.sin_family = AF_INET;
+    inet_pton(AF_INET, ip, &server_address.sin_addr);
+    server_address.sin_port = htons(port);
+    int sockfd = socket(PF_INET, SOCK_STREAM, 0);
+    assert(sockfd >= 0);
+    if (connect(sockfd, (struct sockaddr *)&server_address, sizeof(server_address)) < 0)
+    {
+        printf("connection failed\n");
+    }
+    else
+    {
+        const char *oob_data = "abc";
+        const char *normal_data = "123";
+        send(sockfd, normal_data, strlen(normal_data), 0);
+        send(sockfd, oob_data, strlen(oob_data), MSG_OOB);
+        send(sockfd, normal_data, strlen(normal_data), 0);
+    }
+    close(sockfd);
+    return 0;
+}
+~~~
+
+* 发送带外数据
+
+~~~c++
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <assert.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+#define BUF_SIZE 1024
+int main(int argc, char *argv[])
+{
+    if (argc <= 2)
+    {
+        printf("usage:%s ip_address port_number\n", basename(argv[0]));
+        return 1;
+    }
+    const char *ip = argv[1];
+    int port = atoi(argv[2]);
+    struct sockaddr_in address;
+    bzero(&address, sizeof(address));
+    address.sin_family = AF_INET;
+    inet_pton(AF_INET, ip, &address.sin_addr);
+    address.sin_port = htons(port);
+    int sock = socket(PF_INET, SOCK_STREAM, 0);
+    assert(sock >= 0);
+    int ret = bind(sock, (struct sockaddr *)&address, sizeof(address));
+    assert(ret != -1);
+    ret = listen(sock, 5);
+    assert(ret != -1);
+    struct sockaddr_in client;
+    socklen_t client_addrlength = sizeof(client);
+    int connfd = accept(sock, (struct sockaddr *)&client, &client_addrlength);
+    if (connfd < 0)
+    {
+        printf("errno is:%d\n", errno);
+    }
+    else
+    {
+        char buffer[BUF_SIZE];
+        memset(buffer, '\0', BUF_SIZE);
+        ret = recv(connfd, buffer, BUF_SIZE - 1, 0);
+        printf("got%d bytes of normal data'%s'\n", ret, buffer);
+        memset(buffer, '\0', BUF_SIZE);
+        ret = recv(connfd, buffer, BUF_SIZE - 1, MSG_OOB);
+        printf("got%d bytes of oob data'%s'\n", ret, buffer);
+        memset(buffer, '\0', BUF_SIZE);
+        ret = recv(connfd, buffer, BUF_SIZE - 1, 0);
+        printf("got%d bytes of normal data'%s'\n", ret, buffer);
+        close(connfd);
+    }
+    close(sock);
+    return 0;
+}
+~~~
+
+* 运行并tcpdump抓取这一过程中客户端和服务器交换的TCP报文段
+
+~~~
+$./testoobrecv 192.168.1.109 54321  #在Kongming20上执行服务器程序，监听54321端口
+$./testoobsend 192.168.1.109 54321  #在ernest-laptop上执行客户端程序
+$sudo tcpdump-ntx-i eth0 port 54321
+~~~
+
+* 服务器输出
+
+got 5 bytes of normal data'123ab'
+
+got 1 bytes of oob data'c'
+
+got 3 bytes of normal data'123'
+
+由此可见，客户端发送给服务器的3字节的带外数据“abc”中，仅有最后一个字符“c”被服务器当成真正的带外数据接收。并且，服务器对正常数据的接收将被带外数据截断，即前一部分正常数据“123ab”和后续的正常数据“123”是不能被一个recv调用全部读出的。
+
+* 含带外数据的TCP报文段
+
+~~~
+IP 192.168.1.108.60460＞192.168.1.109.54321:Flags[P.U],seq
+4:7,ack 1,win 92,urg 3,options[nop,nop,TS val 102794322 ecr
+154703423],length 3
+~~~
+
+这里我们第一次看到tcpdump输出标志U，这表示该TCP报文段的头部被设置了紧急标志。
+
+“urg 3”是紧急偏移值，它指出带外数据在字节流中的位置的下一字节位置是7（3+4，其中4是该TCP报文段的序号值相对初始序号值的偏移）。
+
+因此，带外数据是字节流中的第6字节，即字符“c”
+
+值得一提的是，flags参数只对send和recv的当前调用生效，而后面我们将看到如何通过setsockopt系统调用永久性地修改socket的某些属性。
+
+#### UDP数据读写
+
+~~~c++
+#include＜sys/types.h＞
+#include＜sys/socket.h＞
+ssize_t recvfrom(int sockfd,void*buf,size_t len,int flags,struct sockaddr*src_addr,socklen_t*addrlen);
+ssize_t sendto(int sockfd,const void*buf,size_t len,int flags,const struct sockaddr*dest_addr,socklen_t addrlen);
+~~~
+
+* recvfrom读取sockfd上的数据，buf和len参数分别指定读缓冲区的位置和大小。因为UDP通信没有连接的概念，所以我们每次读取数据都需要获取发送端的socket地址，即参数src_addr所指的内容，addrlen参数则指定该地址的长度
+
+* sendto往sockfd上写入数据，buf和len参数分别指定写缓冲区的位置和大小。dest_addr参数指定接收端的socket地址，addrlen参数则指定该地址的长度。
+
+值得一提的是，recvfrom/sendto系统调用也可以用于面向连接（STREAM）的socket的数据读写，只需要把最后两个参数都设置为NULL以忽略发送端/接收端的socket地址（因为我们已经和对方建立了连接，所以已经知道其socket地址了）。
+
+#### 通用数据读写函数
+
+适用tcp和udp
+
+~~~c
+#include＜sys/socket.h＞
+ssize_t recvmsg(int sockfd,struct msghdr*msg,int flags);
+ssize_t sendmsg(int sockfd,struct msghdr*msg,int flags);
+~~~
+
+* sockfd参数指定被操作的目标socket。msg参数是msghdr结构体类型的指针，msghdr结构体的定义如下：
+
+~~~c
+struct msghdr
+{
+    void*msg_name;/*socket地址*/
+    socklen_t msg_namelen;/*socket地址的长度*/
+    struct iovec*msg_iov;/*分散的内存块，见后文*/
+    int msg_iovlen;/*分散内存块的数量*/
+    void*msg_control;/*指向辅助数据的起始位置*/
+    socklen_t msg_controllen;/*辅助数据的大小*/
+    int msg_flags;/*复制函数中的flags参数，并在调用过程中更新*/
+};
+~~~
+
+msg_name成员指向一个socket地址结构变量。它指定通信对方的socket地址。对于面向连接的TCP协议，该成员没有意义，必须被设置为NULL。这是因为对数据流socket而言，对方的地址已经知道。msg_namelen成员则指定了msg_name所指socket地址的长度。msg_iov成员是iovec结构体类型的指针，iovec结构体的定义如下
+
+~~~c
+struct iovec
+{
+void*iov_base;/*内存起始地址*/
+size_t iov_len;/*这块内存的长度*/
+};
+~~~
+
+由上可见，iovec结构体封装了一块内存的起始位置和长度。msg_iovlen指定这样的iovec结构对象有多少个。对于recvmsg而言，数据将被读取并存放在msg_iovlen块分散的内存中，这些内存的位置和长度则由msg_iov指向的数组指定，这称为分散读（scatter read）；对于sendmsg而言，msg_iovlen块分散内存中的数据将被一并发送，这称为集中写（gather write）
+
+msg_control和msg_controllen成员用于辅助数据的传送。我们不详细讨论它们，仅在第13章介绍如何使用它们来实现在进程间传递文件描述符。
+
+msg_flags成员无须设定，它会复制recvmsg/sendmsg的flags参数的内容以影响数据读写过程。recvmsg还会在调用结束前，将某些更新后的标志设置到msg_flags中。
+
+recvmsg/sendmsg的flags参数以及返回值的含义均与send/recv的flags参数及返回值相同。
+
+由于socket连接是全双工的，这里的“读端”是针对通信对方而言的
