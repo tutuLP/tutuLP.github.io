@@ -154,7 +154,9 @@ g++ -C test.s -o test.o  -C 仅把源代码编译为机器语言（二进制）�
 
 4. 链接
 
-g++ test.o -o test   -o指定产生的文件名  生成bin文件  使用这一步会自动完成前面三步
+g++ test.o -o test   -o指定产生的文件名  生成bin文件  使用这一步会自动完成前面三步   
+
+链接是将编译后生成的目标文件以及程序中可能需要的库文件合并成一个可执行文件的过程。在链接阶段，链接器（Linker）会处理目标文件之间的依赖关系，并解决任何符号引用（比如函数或变量的调用）。
 
 ./test 运行当前路径下的可执行文件test
 
@@ -218,7 +220,7 @@ cd src
 
 g++ swap.cpp -c -I../include  生成swap.o
 
-ar rs libswap.a swap.o 把swap.o归档为libswap.a的静态库文件
+**ar rs libswap.a swap.o 把swap.o归档为libswap.a的静态库文件**
 
 cd ..
 
@@ -230,7 +232,7 @@ g++ main.cpp -lswap -Lsrc -Iinclude -o static_main
 
 cd src
 
-g++ swap.cpp -I../inlcude -fpic -shared -o libswap.so  -fpic于路径无关 -shared生成动态库 .so动态库后缀
+g++ swap.cpp -I../inlcude -fpic -shared -o libswap.so  -fpic于路径无关 **-shared生成动态库** .so动态库后缀
 
 cd ..
 
