@@ -815,19 +815,70 @@ ipv4转移到ipv6不便扩展，使用主机名访问机器，避免直接使用
 
 工欲善其事，必先利其器。
 
-服务器的调试和维护都需要一个专业的日志系统。Linux提供一个守护进程来处理系统日志——syslogd，不过现在的Linux系统上使用的都是它的升级版——rsyslogd。rsyslogd守护进程既能接收用户进程输出的日志，又能接收内核日志。用户进程是通过调用syslog函数生成系统日志的。该函数将日志输出到一个UNIX本地域socket类型（AF_UNIX）的文件/dev/log中，rsyslogd则监听该文件以获取用户进程的输出。内核日志在老的系统上是通过另外一个守护进程rklogd来管理的，rsyslogd利用额外的模块实现了相同的功能。内核日志由printk等函数打印至内核的环状缓存（ring buffer）中。环状缓存的内容直接映射到/proc/kmsg文件中。rsyslogd则通过读取该文件获得内核日志
+* 作用
 
-rsyslogd守护进程在接收到用户进程或内核输入的日志后，会把它们输出至某些特定的日志文件。默认情况下，调试信息会保存至/var/log/debug文件，普通信息保存至/var/log/messages文件，内核消息则保存至/var/log/kern.log文件。不过，日志信息具体如何分发，可以在rsyslogd的配置文件中设置。rsyslogd的主配置文件是/etc/rsyslog.conf，其中主要可以设置的项包括：内核日志输入路径，是否接收UDP日志及其监听端口（默认是514，见/etc/services文件），是否接收TCP日志及其监听端口，日志文件的权限，包含哪些子配置文件（比如/etc/rsyslog.d/*.conf）。rsyslogd的子配置文件则指定各类日志的目标存储文件
+服务器的调试和维护都需要一个专业的日志系统。
+
+* 原理
+
+Linux提供一个守护进程来处理系统日志——syslogd的升级版rsyslogd。**rsyslogd守护进程**既能接收用户进程输出的日志，又能接收内核日志。
+
+* * 接收用户进程输出的日志
+
+用户进程是通过调用syslog函数生成系统日志的。该函数将日志输出到一个UNIX本地域socket类型（AF_UNIX）的文件/dev/log中，rsyslogd则监听该文件以获取用户进程的输出。
+
+* * 接收内核日志
+
+内核日志在老的系统上是通过另外一个守护进程rklogd来管理的，rsyslogd利用额外的模块实现了相同的功能。内核日志由printk等函数打印至内核的环状缓存（ring buffer）中。环状缓存的内容直接映射到/proc/kmsg文件中。rsyslogd则通过读取该文件获得内核日志rsyslogd守护进程在接收到用户进程或内核输入的日志后，会把它们输出至某些特定的日志文件。默认情况下，调试信息会保存至/var/log/debug文件，普通信息保存至/var/log/messages文件，内核消息则保存至/var/log/kern.log文件。
+
+* 配置文件
+
+日志信息具体如何分发，可以在rsyslogd的配置文件中设置。rsyslogd的主配置文件是/etc/rsyslog.conf，其中主要可以设置的项包括：内核日志输入路径，是否接收UDP日志及其监听端口（默认是514，见/etc/services文件），是否接收TCP日志及其监听端口，日志文件的权限，包含哪些子配置文件（比如/etc/rsyslog.d/*.conf）。rsyslogd的子配置文件则指定各类日志的目标存储文件
 
 <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903102130167.png" alt="image-20240903102130167" style="zoom:50%;" />
 
-#### syslog函数
 
-与rsyslogd守护进程通信
+
+#### syslog函数
 
 \#include＜syslog.h＞   void syslog(int priority,const char*message,...)
 
+该函数采用可变参数（第二个参数message和第三个参数…）来结构化输出。priority参数是所谓的设施值与日志级别的按位或。设施值的默认值是LOG_USER，我们下面的讨论也只限于这一种设施值。日志级别有如下几个：
 
+~~~c
+#include＜syslog.h＞
+#define LOG_EMERG 0/*系统不可用*/
+#define LOG_ALERT 1/*报警，需要立即采取动作*/
+#define LOG_CRIT 2/*非常严重的情况*/
+#define LOG_ERR 3/*错误*/
+#define LOG_WARNING 4/*警告*/
+#define LOG_NOTICE 5/*通知*/
+#define LOG_INFO 6/*信息*/
+#define LOG_DEBUG 7/*调试*/
+~~~
+
+下面这个函数可以改变syslog的默认输出方式，进一步结构化日志内容：
+
+\#include＜syslog.h＞    void openlog(const char*ident,int logopt,int facility)
+
+ident参数指定的字符串将被添加到日志消息的日期和时间之后，它通常被设置为程序的名字。logopt参数对后续syslog调用的行为进行配置，它可取下列值的按位或：
+
+~~~c
+#define LOG_PID 0x01/*在日志消息中包含程序PID*/
+#define LOG_CONS 0x02/*如果消息不能记录到日志文件，则打印至终端*/
+#define LOG_ODELAY 0x04/*延迟打开日志功能直到第一次调用syslog*/
+#define LOG_NDELAY 0x08/*不延迟打开日志功能*/
+~~~
+
+facility参数可用来修改syslog函数中的默认设施值。
+
+此外，日志的过滤也很重要。程序在开发阶段可能需要输出很多调试信息，而发布之后我们又需要将这些调试信息关闭。解决这个问题的方法并不是在程序发布之后删除调试代码（因为日后可能还需要用到），而是简单地设置日志掩码，使日志级别大于日志掩码的日志信息被系统忽略。下面这个函数用于设置syslog的日志掩码：
+
+\#include＜syslog.h＞		int setlogmask(int maskpri);
+
+maskpri参数指定日志掩码值。该函数始终会成功，它返回调用进程先前的日志掩码值。最后，不要忘了使用如下函数关闭日志功能：
+
+\#include＜syslog.h＞		void closelog();
 
 ## 高性能服务器程序框架
 
@@ -2474,7 +2525,7 @@ int main(int argc, char *argv[])
 
 ## 信号
 
-信号是由用户、系统或者进程发送给目标进程的信息，以通知目标进程某个状态的改变或系统异常
+信号是由用户、系统或者进程   发送给  **目标进程**  的信息，以通知目标进程某个状态的改变或系统异常
 
 * 对于前台进程，比如输入Ctrl+C通常会给进程发送一个中断信号
 * 系统异常。比如浮点异常和非法内存段访问。
@@ -2488,6 +2539,127 @@ int main(int argc, char *argv[])
 #### 发送信号
 
 Linux下，一个进程给其他进程发送信号的API是kill函数。
+
+~~~c
+#include＜sys/types.h＞
+#include＜signal.h＞
+int kill(pid_t pid,int sig);
+~~~
+
+该函数把信号sig发送给目标进程；目标进程由pid参数指定，其可能的取值及含义如表所示。
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240910212907105.png" alt="image-20240910212907105" style="zoom:50%;" />
+
+>  Linux定义的信号值都大于0，如果sig取值为0，则kill函数不发送任何信号。但将sig设置为0可以用来检测目标进程或进程组是否存在，因为检查工作总是在信号发送之前就执行。不过这种检测方式是不可靠的。一方面由于进程PID的回绕，可能导致被检测的PID不是我们期望的进程的PID；另一方面，这种检测方法不是原子操作。
+
+该函数成功时返回0，失败则返回-1并设置errno。几种可能的errno
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240910213035989.png" alt="image-20240910213035989" style="zoom:50%;" />
+
+#### 信号处理方式
+
+目标进程在收到信号时，需要定义一个接收函数来处理之。信号处理函数的原型如下
+
+~~~c
+#include＜signal.h＞
+typedef void(*__sighandler_t)(int);
+~~~
+
+信号处理函数只带有一个整型参数，该参数用来指示信号类型。信号处理函数应该是可重入的，否则很容易引发一些竞态条件。所以在信号处理函数中严禁调用一些不安全的函数。除了用户自定义信号处理函数外，bits/signum.h头文件中还定义了信号的两种其他处理方式——SIG_IGN和SIG_DEL：
+
+~~~c
+#include＜bits/signum.h＞
+#define SIG_DFL((__sighandler_t)0)
+#define SIG_IGN((__sighandler_t)1)
+//SIG_IGN表示忽略目标信号，SIG_DFL表示使用信号的默认处理方式。信号的默认处理方式有如下几种：结束进程（Term）、忽略信号（Ign）、结束进程并生成核心转储文件（Core）、暂停进程（Stop），以及继续进程（Cont）。
+~~~
+
+#### 中断系统调用
+
+如果程序在执行处于阻塞状态的系统调用时接收到信号，并且我们为该信号设置了信号处理函数，则默认情况下系统调用将被中断，并且errno被设置为EINTR。我们可以使用sigaction函数（见后文）为信号设置SA_RESTART标志以自动重启被该信号中断的系统调用。
+
+对于默认行为是暂停进程的信号（比如SIGSTOP、SIGTTIN），如果我们没有为它们设置信号处理函数，则它们也可以中断某些系统调用（比如connect、epoll_wait）。POSIX没有规定这种行为，这是Linux独有的。
+
+### 信号函数
+
+#### signal系统调用
+
+为一个信号设置处理函数
+
+~~~c
+#include＜signal.h＞
+_sighandler_t signal(int sig,_sighandler_t_handler)
+~~~
+
+* sig参数指出要捕获的信号类型。\_handler参数是_sighandler_t类型的函数指针，用于指定信号sig的处理函数。
+* signal函数成功时返回一个函数指针，该函数指针的类型也是_sighandler_t。这个返回值是前一次调用signal函数时传入的函数指针，或者是信号sig对应的默认处理函数指针SIG_DEF（如果是第一次调用signal的话）。
+* signal系统调用出错时返回SIG_ERR，并设置errno。
+
+#### sigaction系统调用
+
+设置信号处理函数更好的版本
+
+~~~c
+#include＜signal.h＞
+int sigaction(int sig,const struct sigaction*act,struct sigaction*oact);
+~~~
+
+* sig参数指出要捕获的信号类型，act参数指定新的信号处理方式，oact参数则输出信号先前的处理方式（如果不为NULL的话）。act和oact都是sigaction结构体类型的指针，sigaction结构体描述了信号处理的细节，其定义如下：
+
+~~~c
+struct sigaction{
+	#ifdef__USE_POSIX199309
+	union{
+		_sighandler_t sa_handler;
+		void(*sa_sigaction)(int,siginfo_t*,void*);
+	}
+	_sigaction_handler;
+#define sa_handler__sigaction_handler.sa_handler
+#define sa_sigaction__sigaction_handler.sa_sigaction
+#else
+	_sighandler_t sa_handler;
+#endif
+	_sigset_t sa_mask;
+	int sa_flags;
+	void(*sa_restorer)(void);
+};
+~~~
+
+该结构体中的sa_hander成员指定信号处理函数。sa_mask成员设置进程的信号掩码（确切地说是在进程原有信号掩码的基础上增加信号掩码），以指定哪些信号不能发送给本进程。sa_mask是信号集sigset_t（_sigset_t的同义词）类型，该类型指定一组信号。关于信号集，我们将在后面介绍。sa_flags成员用于设置程序收到信号时的行为，其可选值如表10-4所示。
+
+<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240910215133724.png" alt="image-20240910215133724" style="zoom:50%;" />
+
+sa_restorer成员已经过时，最好不要使用。sigaction成功时返回0，失败则返回-1并设置errno。
+
+### 信号集
+
+Linux使用数据结构sigset_t来表示一组信号。其定义如下：
+
+~~~c
+#include＜bits/sigset.h＞
+#define_SIGSET_NWORDS(1024/(8*sizeof(unsigned long int)))
+typedef struct{
+	unsigned long int__val[_SIGSET_NWORDS];
+}__sigset_t;
+~~~
+
+由该定义可见，sigset_t实际上是一个长整型数组，数组的每个元素的每个位表示一个信号。这种定义方式和文件描述符集fd_set类似。Linux提供了如下一组函数来设置、修改、删除和查询信号集： 
+
+#### 进程信号掩码
+
+#### 被挂起的信号
+
+设置进程信号掩码后，被屏蔽的信号将不能被进程接收。
+
+### 统一事件源
+
+信号是一种异步事件：信号处理函数和程序的主循环是两条不同的执行路线。很显然，信号处理函数需要尽可能快地执行完毕，以确保该信号不被屏蔽（前面提到过，为了避免一些竞态条件，信号在处理期间，系统不会再次触发它）太久。一种典型的解决方案是：把信号的主要处理逻辑放到程序的主循环中，当信号处理函数被触发时，它只是简单地通知主循环程序接收到信号，并把信号值传递给主循环，主循环再根据接收到的信号值执行目标信号对应的逻辑代码。信号处理函数通常使用管道来将信号“传递”给主循环：信号处理函数往管道的写端写入信号值，主循环则从管道的读端读出该信号值。那么主循环怎么知道管道上何时有数据可读呢?这很简单，我们只需要使用I/O复用系统调用来监听管道的读端文件描述符上的可读事件。如此一来，信号事件就能和其他I/O事件一样被处理，即统一事件源。
+
+### 网络编程相关信号
+
+#### SIGHUP
+
+当挂起进程的控制终端时，SIGHUP信号将被触发。对于没有控制终端的网络后台程序而言，它们通常利用SIGHUP信号来强制服务器重读配置文件。一个典型的例子是xinetd超级服务程序。xinetd程序在接收到SIGHUP信号之后将调用hard_reconfig函数（见xinetd源码），它循环读取/etc/xinetd.d/目录下的每个子配置文件，并检测其变化。如果某个正在运行的子服务的配置文件被修改以停止服务，则xinetd主进程将给该子服务进程发送SIGTERM信号以结束它。如果某个子服务的配置文件被修改以开启服务，则xinetd将创建新的socket并将其绑定到该服务对应的端口上。下面我们简单地分析xinetd处理SIGHUP信号的流程。
 
 ##定时器
 
