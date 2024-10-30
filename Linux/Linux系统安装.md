@@ -10,14 +10,14 @@ root 123
 
 # 安装虚拟机
 
-安装虚拟机：virtual machine 15.5   我下载的是最新的17 for windows .exe [Download VMware Workstation Pro](https://www.vmware.com/content/vmware/vmware-published-sites/us/products/workstation-pro/workstation-pro-evaluation.html.html)网上找密钥 JU090-6039P-08409-8J0QH-2YR7F 或者 MC60H-DWHD5-H80U9-6V85M-8280D 
+vmware安装包
+
+激活码在网上找
 
 ##vm安装：
 
 1. bios里修改设置：开启虚拟化设备支持   上网搜索  我没有开（系统默认开启）
 2. 管理员运行安装包
-3. 安装选项：关闭更新，用户体验计划
-4. 许可证-激活码
 
 #安装Anolis OS
 
@@ -43,62 +43,6 @@ https://cnxiaobai.com/articles/2021/10/21/1634800698273.html
 软件选择：最小安装
 
 根密码：root用户   创建账户-一个权限较低的账户-可设为管理员
-
-# linux指令
-
-指令格式：命令+选项+操作对象  后面两个可以不要
-
-./  .当前目录  ..上一级  /根目录（绝对路径开头） 
-
-pwd 打印当前所在目录
-
-
-
-ls -l -a -h /home ../  等价于 ls -lah /home ./
-
-ls = ls ./    ls ../  上一级目录的文件  ls /home 绝对路径 /开头代表根目录  ls / 
-
--l 列表形式 -a 显示隐藏文件夹 -h 展示更多信息  显示的信息以d开头代表是一个文件夹 -开头表示是一个文件 .开头是隐藏文件
-
-
-
-cd 切换目录
-
-cd 进入家目录（初始？）= cd ~   ~是家目录的意思    cd -==？？？==
-
-cd ..上一级  cd ../local  上一级的local文件夹
-
-cd /home/tutu 绝对路径 
-
-
-
-mkdir 创建目录
-
-创建多级目录 mkdir -p ~/a/b/c
-
-tree a/ 查看目录结构  需要安装，百度 tree .
-
-mkdir a/ b/ c/  创建三个文件夹   rm -r *删除
-
-touch 建立文件
-
-touch ../test.txt 上级目录创建 
-
-使用绝对路径也可以   没有后缀名时==？？？==
-
-
-
-rm删除 -rf删除目录 rm *.out删除所有.out文件
-
-cp 被复制的文件路径 复制到的路径 -r复制文件夹
-
-mv 移动或者重命名 
-
-man 查看命令手册 man ls查看ls的用法 或 help cd
-
-reboot 重启
-
-shutdown -h 时间  关机  shutdown -h now 立即关机
 
 #开发环境搭建
 
@@ -1096,13 +1040,11 @@ ping www.baidu.com  ping不通代表有问题  ctrl+c结束ping
 
 #SSH
 
-###windows ssh连接
+###windows
 
-cmd命令提示符 ssh tutu@192.168.6.208
+ssh tutu@192.168.6.208
 
-输入密码链接成功
 
-exit退出ssh回到Windows命令行
 
 linux：
 
@@ -1110,7 +1052,7 @@ systemctl status sshd 查看是否启动ssh
 
 systemctl start sshd 启用
 
-###vscode ssh连接  
+###vscode
 
 配置config文件
 
@@ -1130,6 +1072,9 @@ cmd:ssh-keygen -t rsa -b 4096  四个回车生成密钥 ==？？？==
 
 ##免密登录
 
+* code /etc/ssh/sshd_config    日志：code /var/log/secure
+* sudo systemctl restart sshd
+
 * windows上运行ssh-keygen 
 
 三个回车看到生成的公钥和私钥的位置C:\Users\Tutu\.ssh\id_rsa
@@ -1147,7 +1092,13 @@ Host 192.168.6.208
 * 将id_rsa.pub复制到服务器的~/.ssh文件夹中
 * 修改文件/etc/ssh/ssh_config
 
-PasswordAuthentication yes
+PasswordAuthentication no
+
+PubkeyAuthentication yes
+
+
+
+systemctl restart sshd
 
 * 可能需要权限
 
@@ -1155,4 +1106,52 @@ chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys
 
 
+
+## ssh慢
+
+修改/etc/ssh/sshd_config文件
+
+UseDNS no
+
+GSSAPIAuthentication no
+
+
+
+
+
+创建实例并初始化  Open  StartAccept  创建TcpClientPtr   HandleAccept  StartRead
+
+407 行 pClient->GetBuffer(0); max,0   HandleRead RecvData  GetMessage
+
+~~~
+TcpClientPtr构造
+	m_maxBufSize = 8 * 1024 * 1024;
+	m_offset = 0;//总消息长度
+	m_parseOffset = 0;//上一条消息的末尾
+	m_pBuf = NULL;//堆上分配8MB内存，m_pBuf指向第一个字节
+	m_state = 1;
+    m_bReadClose = false;
+    m_nSendHeartBeatCount = 10;	
+    m_nRecvHeartBeatCount = 0;
+	Init(m_maxBufSize);
+	m_prp2dbspcPkt.pktLen = sizeof(PRP_DBSPC_RULE_PKT);
+	m_prp2dbspcPkt.flag = DBAGENT_FLAG;
+	m_prp2dbspcPkt.pktType = EU_AGENT_PKT_TYPE_RULE;
+	m_pBuf = new uint8_t[m_maxBufSize];//max
+GetBuffer(0)//获得缓冲区的第一个地址
+	uint8_t* pBuf = m_pBuf + m_offset;//+0
+	bufSize = m_maxBufSize - m_offset;//-0
+	if max<=0 return null
+	return pbuf 返回地址
+RecvData(readSize)
+	m_offset+=readSize
+HaveMessage
+	msgLen=*m_pBuf//
+	if(m_offset < msgLen) return fasle
+	m_parseOffset=0 
+GetMessage（0）
+	pBuf=
+	
+	msgSize 数据部分长度经过减去头部数据4
+~~~
 

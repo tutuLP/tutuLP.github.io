@@ -7,6 +7,17 @@ tags:
   - 代码托管  
 ---
 
+1. 集中版本控制 SVN   所有的版本数据都保存在服务器上，相当于在线修改
+2. 分布式版本控制 Git
+
+# 下载
+
+windows  https://git-scm.com/  无脑下一步
+
+centos  yum install git
+
+
+
 # 克隆项目
 
 在想要存放项目文件夹的地方git bash here

@@ -1,10 +1,5 @@
 # 命令
 
-* mkdir 创建目录
-* ls -a 查看包括隐藏文件
-* touch
-* rm -rf *删除
-
 * 防火墙
 
 查看防火墙状态 firewall-cmd --state
@@ -23,6 +18,15 @@ ss -tuln 查看所有端口
 * 查看具体某个端口状态
 
 ss -tuln | grep :80
+
+~~~pwd 显示当前目录
+ls -a 查看包括隐藏文件
+mkdir 新建文件夹		touch 新建文件
+rm 删除		rm -rf 删除文件夹 -r
+history 查看历史命令	
+mv a b a重命名为b或移动
+reboot 重启
+~~~
 
 # 系统编程
 
@@ -1139,3 +1143,10 @@ int main() {
 师弟https://blog.csdn.net/weixin_51322383/article/details/130464403 源码https://github.com/JehanRio/TinyWebServer?tab=readme-ov-file
 
 c++网络编程三大框架对比https://zhuanlan.zhihu.com/p/714229209
+
+
+
+
+
+
+
