@@ -1,3 +1,10 @@
+---
+title: "Log"
+date: 2025-03-02
+categories:
+  - Linux高性能服务器编程
+---
+
 # syslog系统日志
 
 mian.cpp
