@@ -1,0 +1,3620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/#5.8.0'>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="Volantis" content="5.8.0">
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+  <link rel="canonical" href="http://example.com/2025/03/02/source/基础四大件/操作系统/"/>
+  <!-- 渲染优化 -->
+    <meta http-equiv='x-dns-prefetch-control' content='on' />
+      <link rel='dns-prefetch' href='https://unpkg.com'>
+      <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' https:; block-all-mixed-content; base-uri 'self' https:; form-action 'self' https:; worker-src 'self' https:; connect-src 'self' https: *; img-src 'self' data: https: *; media-src 'self' https: *; font-src 'self' data: https: *; frame-src 'self' https: *; manifest-src 'self' https: *; child-src https:; script-src 'self' https: 'unsafe-inline' *; style-src 'self' https: 'unsafe-inline' *; ">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <!-- import head_begin begin -->
+  <!-- import head_begin end -->
+  <!-- Custom Files headBegin begin-->
+  
+  <!-- Custom Files headBegin end-->
+  <!-- front-matter head_begin begin -->
+  <!-- front-matter head_begin end -->
+  <link rel="preload" href="/css/style.css" as="style">
+  <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <!-- feed -->
+  <!-- 页面元数据 -->
+  <title>操作系统 - tutulp's blog</title>
+  <meta name="keywords" content="null">
+  <meta desc name="description" content="tutulp的博客网站 - tutulp - tutulp's blog">
+  
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统">
+<meta property="og:url" content="http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="tutulp&#39;s blog">
+<meta property="og:description" content="操作系统环境准备###安装编译工具 12345sudo yum groupinstall &quot;Development Tools&quot;   (GCC make Debug)yum install kernel-devel  (内核开发相关的头文件)yum install genisoimage  用于生成ISO光盘映像文件    123456789安装汇编语言编译器 nasmyum">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2025-03-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-03T12:45:53.375Z">
+<meta property="article:author" content="tutulp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+  <style>
+    /* 首屏样式 */
+    #safearea {
+  display: none;
+}
+:root {
+  --color-site-body: #f4f4f4;
+  --color-site-bg: #f4f4f4;
+  --color-site-inner: #fff;
+  --color-site-footer: #666;
+  --color-card: #fff;
+  --color-text: #444;
+  --color-block: #f6f6f6;
+  --color-inlinecode: #c74f00;
+  --color-codeblock: #fff7ea;
+  --color-h1: #3a3a3a;
+  --color-h2: #3a3a3a;
+  --color-h3: #333;
+  --color-h4: #444;
+  --color-h5: #555;
+  --color-h6: #666;
+  --color-p: #444;
+  --color-list: #666;
+  --color-list-hl: #30ad91;
+  --color-meta: #888;
+  --color-read-bkg: #e0d8c8;
+  --color-read-post: #f8f1e2;
+  --color-copyright-bkg: #f5f5f5;
+}
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+*::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+*::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: #3dd9b6;
+  cursor: pointer;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #ff5722;
+}
+html {
+  color: var(--color-text);
+  width: 100%;
+  height: 100%;
+  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-size: 16px;
+}
+html >::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+html >::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+html >::-webkit-scrollbar-thumb {
+  background: #54b5a0 linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+  cursor: pointer;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+html >::-webkit-scrollbar-thumb:hover {
+  background: #54b5a0 linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+}
+body {
+  background-color: var(--color-site-body);
+  text-rendering: optimizelegibility;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body.modal-active {
+  overflow: hidden;
+}
+@media screen and (max-width: 680px) {
+  body.modal-active {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+a {
+  color: #2092ec;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+a:hover {
+  color: #ff5722;
+}
+a:active,
+a:hover {
+  outline: 0;
+}
+ul,
+ol {
+  padding-left: 0;
+}
+ul li,
+ol li {
+  list-style: none;
+}
+header {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+img {
+  border: 0;
+  background: none;
+  max-width: 100%;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  height: 0;
+  border: 0;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  border-bottom: 1px solid rgba(68,68,68,0.1);
+}
+button,
+input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+button {
+  overflow: visible;
+  text-transform: none;
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+@supports (backdrop-filter: blur(20px)) {
+  .blur {
+    background: rgba(255,255,255,0.9) !important;
+    backdrop-filter: saturate(200%) blur(20px);
+  }
+}
+.shadow {
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+}
+.shadow.floatable {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.shadow.floatable:hover {
+  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.1), 0 4px 8px 0px rgba(0,0,0,0.1), 0 8px 16px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 2px 4px 0px rgba(0,0,0,0.1), 0 4px 8px 0px rgba(0,0,0,0.1), 0 8px 16px 0px rgba(0,0,0,0.1);
+}
+#l_cover {
+  min-height: 64px;
+}
+.cover-wrapper {
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  height: 100vh;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -khtml-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -o-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  color: var(--color-site-inner);
+  padding: 0 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: -100px;
+}
+.cover-wrapper .cover-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+}
+.cover-wrapper .cover-bg.lazyload:not(.loaded) {
+  opacity: 0;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+}
+.cover-wrapper .cover-bg.lazyload.loaded {
+  animation-delay: 0s;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+}
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.cover-wrapper .cover-body {
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.cover-wrapper#full {
+  height: calc(100vh + 100px);
+  padding-bottom: 100px;
+}
+.cover-wrapper#half {
+  max-height: 640px;
+  min-height: 400px;
+  height: calc(36vh - 64px + 200px);
+}
+.cover-wrapper #scroll-down {
+  width: 100%;
+  height: 64px;
+  position: absolute;
+  bottom: 100px;
+  text-align: center;
+  cursor: pointer;
+}
+.cover-wrapper #scroll-down .scroll-down-effects {
+  color: #fff;
+  font-size: 24px;
+  line-height: 64px;
+  position: absolute;
+  width: 24px;
+  left: calc(50% - 12px);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  animation: scroll-down-effect 1.5s infinite;
+  -webkit-animation: scroll-down-effect 1.5s infinite;
+  -khtml-animation: scroll-down-effect 1.5s infinite;
+  -moz-animation: scroll-down-effect 1.5s infinite;
+  -o-animation: scroll-down-effect 1.5s infinite;
+  -ms-animation: scroll-down-effect 1.5s infinite;
+}
+@-moz-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-webkit-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-o-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.cover-wrapper .cover-body {
+  margin-top: 64px;
+  margin-bottom: 100px;
+}
+.cover-wrapper .cover-body,
+.cover-wrapper .cover-body .top,
+.cover-wrapper .cover-body .bottom {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  max-width: 100%;
+}
+.cover-wrapper .cover-body .bottom {
+  margin-top: 32px;
+}
+.cover-wrapper .cover-body .title {
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+  font-size: 3.125rem;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.cover-wrapper .cover-body .subtitle {
+  font-size: 20px;
+}
+.cover-wrapper .cover-body .logo {
+  max-height: 120px;
+  max-width: calc(100% - 4 * 16px);
+}
+@media screen and (min-height: 1024px) {
+  .cover-wrapper .cover-body .title {
+    font-size: 3rem;
+  }
+  .cover-wrapper .cover-body .subtitle {
+    font-size: 1.05rem;
+  }
+  .cover-wrapper .cover-body .logo {
+    max-height: 150px;
+  }
+}
+.cover-wrapper .cover-body .m_search {
+  position: relative;
+  max-width: calc(100% - 16px);
+  width: 320px;
+  vertical-align: middle;
+}
+.cover-wrapper .cover-body .m_search .form {
+  position: relative;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  width: 100%;
+}
+.cover-wrapper .cover-body .m_search .icon,
+.cover-wrapper .cover-body .m_search .input {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.cover-wrapper .cover-body .m_search .icon {
+  position: absolute;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  line-height: 2.5rem;
+  width: 32px;
+  top: 0;
+  left: 5px;
+  color: rgba(68,68,68,0.75);
+}
+.cover-wrapper .cover-body .m_search .input {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  height: 2.5rem;
+  width: 100%;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-size: 0.875rem;
+  -webkit-appearance: none;
+  padding-left: 36px;
+  border-radius: 1.4rem;
+  -webkit-border-radius: 1.4rem;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  border: none;
+  color: var(--color-text);
+}
+@media screen and (max-width: 500px) {
+  .cover-wrapper .cover-body .m_search .input {
+    padding-left: 36px;
+  }
+}
+.cover-wrapper .cover-body .m_search .input:hover {
+  background: rgba(255,255,255,0.8);
+}
+.cover-wrapper .cover-body .m_search .input:focus {
+  background: #fff;
+}
+.cover-wrapper .list-h {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -khtml-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  align-items: stretch;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.cover-wrapper .list-h a {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1 0;
+  -ms-flex: 1 0;
+  flex: 1 0;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  font-weight: 600;
+}
+.cover-wrapper .list-h a img {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  margin: 4px;
+  min-width: 40px;
+  max-width: 44px;
+}
+@media screen and (max-width: 768px) {
+  .cover-wrapper .list-h a img {
+    min-width: 36px;
+    max-width: 40px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .cover-wrapper .list-h a img {
+    margin: 2px 4px;
+    min-width: 32px;
+    max-width: 36px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .cover-wrapper .list-h a img {
+    min-width: 28px;
+    max-width: 32px;
+  }
+}
+.cover-wrapper {
+  max-width: 100%;
+}
+.cover-wrapper.search .bottom .menu {
+  margin-top: 16px;
+}
+.cover-wrapper.search .bottom .menu .list-h a {
+  white-space: nowrap;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  align-items: baseline;
+  padding: 2px;
+  margin: 4px;
+  color: var(--color-site-inner);
+  opacity: 0.75;
+  -webkit-opacity: 0.75;
+  -moz-opacity: 0.75;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  border-bottom: 2px solid transparent;
+}
+.cover-wrapper.search .bottom .menu .list-h a i {
+  margin-right: 4px;
+}
+.cover-wrapper.search .bottom .menu .list-h a p {
+  font-size: 0.9375rem;
+}
+.cover-wrapper.search .bottom .menu .list-h a:hover,
+.cover-wrapper.search .bottom .menu .list-h a.active,
+.cover-wrapper.search .bottom .menu .list-h a:active {
+  opacity: 1;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  border-bottom: 2px solid var(--color-site-inner);
+}
+@font-face {
+  font-family: 'UbuntuMono';
+  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-weight: 'normal';
+  font-style: 'normal';
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Varela Round';
+  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf");
+  font-weight: 'normal';
+  font-style: 'normal';
+  font-display: swap;
+}
+.l_header {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  width: 100%;
+  height: 64px;
+  background: var(--color-card);
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+}
+.l_header.auto {
+  transition: opacity 0.4s ease;
+  -webkit-transition: opacity 0.4s ease;
+  -khtml-transition: opacity 0.4s ease;
+  -moz-transition: opacity 0.4s ease;
+  -o-transition: opacity 0.4s ease;
+  -ms-transition: opacity 0.4s ease;
+  visibility: hidden;
+}
+.l_header.auto.show {
+  opacity: 1 !important;
+  -webkit-opacity: 1 !important;
+  -moz-opacity: 1 !important;
+  visibility: visible;
+}
+.l_header .container {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+.l_header #wrapper {
+  height: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.l_header #wrapper .nav-main,
+.l_header #wrapper .nav-sub {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -khtml-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -o-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -khtml-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -o-justify-content: space-between;
+  -ms-justify-content: space-between;
+  align-items: center;
+}
+.l_header #wrapper .nav-main {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.l_header #wrapper.sub .nav-main {
+  transform: translateY(-64px);
+  -webkit-transform: translateY(-64px);
+  -khtml-transform: translateY(-64px);
+  -moz-transform: translateY(-64px);
+  -o-transform: translateY(-64px);
+  -ms-transform: translateY(-64px);
+}
+.l_header #wrapper .nav-sub {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  opacity: 0;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  height: 64px;
+  width: calc(100% - 2 * 16px);
+  position: absolute;
+}
+.l_header #wrapper .nav-sub ::-webkit-scrollbar {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+}
+@media screen and (min-width: 2048px) {
+  .l_header #wrapper .nav-sub {
+    max-width: 55vw;
+    margin: auto;
+  }
+}
+.l_header #wrapper.sub .nav-sub {
+  opacity: 1;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+}
+.l_header #wrapper .title {
+  position: relative;
+  color: var(--color-text);
+  padding-left: 24px;
+  max-height: 64px;
+}
+.l_header #wrapper .nav-main .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  line-height: 64px;
+  padding: 0 24px;
+  font-size: 1.25rem;
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+}
+.l_header #wrapper .nav-main .title img {
+  height: 64px;
+}
+.l_header .nav-sub {
+  max-width: 1080px;
+  margin: auto;
+}
+.l_header .nav-sub .title {
+  font-weight: bold;
+  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  line-height: 1.2;
+  max-height: 64px;
+  white-space: normal;
+  flex-shrink: 1;
+}
+.l_header .switcher {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  line-height: 64px;
+  align-items: center;
+}
+.l_header .switcher .s-toc {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .l_header .switcher .s-toc {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    display: flex;
+  }
+}
+.l_header .switcher >li {
+  height: 48px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  margin: 2px;
+}
+@media screen and (max-width: 500px) {
+  .l_header .switcher >li {
+    margin: 0 1px;
+    height: 48px;
+  }
+}
+.l_header .switcher >li >a {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0.85em 1.1em;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  border: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  color: #3dd9b6;
+}
+.l_header .switcher >li >a:hover {
+  border: none;
+}
+.l_header .switcher >li >a.active,
+.l_header .switcher >li >a:active {
+  border: none;
+  background: var(--color-site-bg);
+}
+@media screen and (max-width: 500px) {
+  .l_header .switcher >li >a {
+    width: 36px;
+    height: 48px;
+  }
+}
+.l_header .nav-sub .switcher {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+}
+.l_header .m_search {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  height: 64px;
+  width: 240px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+@media screen and (max-width: 1024px) {
+  .l_header .m_search {
+    width: 44px;
+    min-width: 44px;
+  }
+  .l_header .m_search input::placeholder {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+  }
+  .l_header .m_search:hover {
+    width: 240px;
+  }
+  .l_header .m_search:hover input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@media screen and (min-width: 500px) {
+  .l_header .m_search:hover .input {
+    width: 100%;
+  }
+  .l_header .m_search:hover .input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search {
+    min-width: 0;
+  }
+  .l_header .m_search input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.l_header .m_search .form {
+  position: relative;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.l_header .m_search .icon {
+  position: absolute;
+  width: 36px;
+  left: 5px;
+  color: var(--color-meta);
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search .icon {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: none;
+  }
+}
+.l_header .m_search .input {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: 1.3;
+  width: 100%;
+  color: var(--color-text);
+  background: #fafafa;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding-left: 40px;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+@media screen and (min-width: 500px) {
+  .l_header .m_search .input:focus {
+    box-shadow: 0 4px 8px 0px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 4px 8px 0px rgba(0,0,0,0.1);
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search .input {
+    background: var(--color-block);
+    padding-left: 8px;
+    border: none;
+  }
+  .l_header .m_search .input:hover,
+  .l_header .m_search .input:focus {
+    border: none;
+  }
+}
+@media (max-width: 500px) {
+  .l_header .m_search {
+    left: 0;
+    width: 0;
+    overflow: hidden;
+    position: absolute;
+    background: #fff;
+    transition: all 0.28s ease;
+    -webkit-transition: all 0.28s ease;
+    -khtml-transition: all 0.28s ease;
+    -moz-transition: all 0.28s ease;
+    -o-transition: all 0.28s ease;
+    -ms-transition: all 0.28s ease;
+  }
+  .l_header .m_search .input {
+    border-radius: 32px;
+    -webkit-border-radius: 32px;
+    margin-left: 16px;
+    padding-left: 16px;
+  }
+  .l_header.z_search-open .m_search {
+    width: 100%;
+  }
+  .l_header.z_search-open .m_search .input {
+    width: calc(100% - 120px);
+  }
+}
+ul.m-pc >li>a {
+  color: inherit;
+  border-bottom: 2px solid transparent;
+}
+ul.m-pc >li>a:active,
+ul.m-pc >li>a.active {
+  border-bottom: 2px solid #3dd9b6;
+}
+ul.m-pc li:hover >ul.list-v,
+ul.list-v li:hover >ul.list-v {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+ul.nav-list-h {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  align-items: stretch;
+}
+ul.nav-list-h>li {
+  position: relative;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  height: 100%;
+  line-height: 2.4;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+ul.nav-list-h>li >a {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 600;
+}
+ul.list-v {
+  z-index: 1;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  position: absolute;
+  background: var(--color-card);
+  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.08), 0 4px 8px 0px rgba(0,0,0,0.08), 0 8px 16px 0px rgba(0,0,0,0.08);
+  -webkit-box-shadow: 0 2px 4px 0px rgba(0,0,0,0.08), 0 4px 8px 0px rgba(0,0,0,0.08), 0 8px 16px 0px rgba(0,0,0,0.08);
+  margin-top: -6px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  padding: 8px 0;
+}
+ul.list-v.show {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+ul.list-v hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+ul.list-v >li {
+  white-space: nowrap;
+  word-break: keep-all;
+}
+ul.list-v >li.header {
+  font-size: 0.78125rem;
+  font-weight: bold;
+  line-height: 2em;
+  color: var(--color-meta);
+  margin: 8px 16px 4px;
+}
+ul.list-v >li.header i {
+  margin-right: 8px;
+}
+ul.list-v >li ul {
+  margin-left: 0;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  margin-top: -40px;
+}
+ul.list-v .aplayer-container {
+  min-height: 64px;
+  padding: 6px 16px;
+}
+ul.list-v >li>a {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  color: var(--color-list);
+  font-size: 0.875rem;
+  font-weight: bold;
+  line-height: 36px;
+  padding: 0 20px 0 16px;
+  text-overflow: ellipsis;
+  margin: 0 4px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+@media screen and (max-width: 1024px) {
+  ul.list-v >li>a {
+    line-height: 40px;
+  }
+}
+ul.list-v >li>a >i {
+  margin-right: 8px;
+}
+ul.list-v >li>a:active,
+ul.list-v >li>a.active {
+  color: var(--color-list-hl);
+}
+ul.list-v >li>a:hover {
+  color: var(--color-list-hl);
+  background: var(--color-site-bg);
+}
+.l_header .menu >ul>li>a {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  padding: 0 8px;
+}
+.l_header .menu >ul>li>a >i {
+  margin-right: 4px;
+}
+.l_header ul.nav-list-h>li {
+  color: var(--color-list);
+  line-height: 64px;
+}
+.l_header ul.nav-list-h>li >a {
+  max-height: 64px;
+  overflow: hidden;
+  color: inherit;
+}
+.l_header ul.nav-list-h>li >a:active,
+.l_header ul.nav-list-h>li >a.active {
+  color: #3dd9b6;
+}
+.l_header ul.nav-list-h>li:hover>a {
+  color: var(--color-list-hl);
+}
+.l_header ul.nav-list-h>li i.music {
+  animation: rotate-effect 1.5s linear infinite;
+  -webkit-animation: rotate-effect 1.5s linear infinite;
+  -khtml-animation: rotate-effect 1.5s linear infinite;
+  -moz-animation: rotate-effect 1.5s linear infinite;
+  -o-animation: rotate-effect 1.5s linear infinite;
+  -ms-animation: rotate-effect 1.5s linear infinite;
+}
+@-moz-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@-o-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+.menu-phone li ul.list-v {
+  right: calc(100% - 0.5 * 16px);
+}
+.menu-phone li ul.list-v ul {
+  right: calc(100% - 0.5 * 16px);
+}
+#wrapper {
+  max-width: 1080px;
+  margin: auto;
+}
+@media screen and (min-width: 2048px) {
+  #wrapper {
+    max-width: 55vw;
+  }
+}
+#wrapper .menu {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1 1;
+  -ms-flex: 1 1;
+  flex: 1 1;
+  margin: 0 16px 0 0;
+}
+#wrapper .menu .list-v ul {
+  left: calc(100% - 0.5 * 16px);
+}
+.menu-phone {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  margin-top: 16px;
+  right: 8px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.menu-phone ul {
+  right: calc(100% - 0.5 * 16px);
+}
+@media screen and (max-width: 500px) {
+  .menu-phone {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: block;
+  }
+}
+.l_header {
+  max-width: 65vw;
+  left: calc((100% - 65vw) * 0.5);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+@media screen and (max-width: 2048px) {
+  .l_header {
+    max-width: 1112px;
+    left: calc((100% - 1112px) * 0.5);
+  }
+}
+@media screen and (max-width: 1112px) {
+  .l_header {
+    left: 0;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .l_header #wrapper .nav-main .title {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .l_header #wrapper .nav-sub {
+    width: 100%;
+  }
+  .l_header #wrapper .nav-sub .title {
+    overflow-y: scroll;
+    margin-top: 2px;
+    padding: 8px 16px;
+  }
+  .l_header #wrapper .switcher {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    display: flex;
+    margin-right: 8px;
+  }
+  .l_header .menu {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: none;
+  }
+}
+@media screen and (max-width: 500px) {
+  .list-v li {
+    max-width: 270px;
+  }
+}
+#u-search {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 60px 20px;
+  z-index: 1001;
+}
+@media screen and (max-width: 680px) {
+  #u-search {
+    padding: 0px;
+  }
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  
+<script>
+if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
+    document.write(
+	'<style>'+
+		'html{'+
+			'overflow-x: hidden !important;'+
+			'overflow-y: hidden !important;'+
+		'}'+
+		'.kill-ie{'+
+			'text-align:center;'+
+			'height: 100%;'+
+			'margin-top: 15%;'+
+			'margin-bottom: 5500%;'+
+		'}'+
+    '.kill-t{'+
+      'font-size: 2rem;'+
+    '}'+
+    '.kill-c{'+
+      'font-size: 1.2rem;'+
+    '}'+
+		'#l_header,#l_body{'+
+			'display: none;'+
+		'}'+
+	'</style>'+
+    '<div class="kill-ie">'+
+        `<span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>`+
+        `<span class="kill-c">微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</span><br/>`+
+        `<a target="_blank" rel="noopener" href="https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/"><strong>了解详情 ></strong></a>`+
+    '</div>');
+</script>
+
+
+<noscript>
+	<style>
+		html{
+			overflow-x: hidden !important;
+			overflow-y: hidden !important;
+		}
+		.kill-noscript{
+			text-align:center;
+			height: 100%;
+			margin-top: 15%;
+			margin-bottom: 5500%;
+		}
+    .kill-t{
+      font-size: 2rem;
+    }
+    .kill-c{
+      font-size: 1.2rem;
+    }
+		#l_header,#l_body{
+			display: none;
+		}
+	</style>
+    <div class="kill-noscript">
+        <span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>
+        <span class="kill-c">本页面需要浏览器支持（启用）JavaScript</span><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+    </div>
+</noscript>
+
+
+  <script>
+  /************这个文件存放不需要重载的全局变量和全局函数*********/
+  window.volantis = {}; // volantis 全局变量
+  volantis.debug = "env"; // 调试模式
+  volantis.dom = {}; // 页面Dom see: /source/js/app.js etc.
+
+  volantis.GLOBAL_CONFIG ={
+    debug: "env",
+    cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
+    default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
+    lastupdate: new Date(1741012891758),
+    sidebar: {
+      for_page: ["blogger","category","tagcloud","donate"],
+      for_post: ["toc"],
+      webinfo: {
+        lastupd: {
+          enable: true,
+          friendlyShow: true
+        },
+        runtime: {
+          data: "2020/01/01",
+          unit: "天"
+        }
+      }
+    },
+    plugins: {
+      message: {"enable":true,"css":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/izitoast/dist/css/iziToast.min.css","js":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/izitoast/dist/js/iziToast.min.js","icon":{"default":"fa-solid fa-info-circle light-blue","quection":"fa-solid fa-question-circle light-blue"},"time":{"default":5000,"quection":20000},"position":"topRight","transitionIn":"bounceInLeft","transitionOut":"fadeOutRight","titleColor":"var(--color-text)","messageColor":"var(--color-text)","backgroundColor":"var(--color-card)","zindex":2147483647,"copyright":{"enable":true,"title":"知识共享许可协议","message":"请遵守 CC BY-NC-SA 4.0 协议。","icon":"far fa-copyright light-blue"},"aplayer":{"enable":true,"play":"fa-solid fa-play","pause":"fa-solid fa-pause"},"rightmenu":{"enable":true,"notice":true}},
+      fancybox: {"css":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fancyapps/ui/dist/fancybox.css","js":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fancyapps/ui/dist/fancybox.umd.js"},
+      
+      
+      
+    }
+  }
+
+  /******************** volantis.EventListener ********************************/
+  // 事件监听器 see: /source/js/app.js
+  volantis.EventListener = {}
+  // 这里存放pjax切换页面时将被移除的事件监听器
+  volantis.EventListener.list = []
+  //构造方法
+  function volantisEventListener(type, f, ele) {
+    this.type = type
+    this.f = f
+    this.ele = ele
+  }
+  // 移除事件监听器
+  volantis.EventListener.remove = () => {
+    volantis.EventListener.list.forEach(function (i) {
+      i.ele.removeEventListener(i.type, i.f, false)
+    })
+    volantis.EventListener.list = []
+  }
+  /******************** volantis.dom.$ ********************************/
+  // 注：这里没有选择器，也没有forEach一次只处理一个dom，这里重新封装主题常用的dom方法，返回的是dom对象，对象包含了以下方法，同时保留dom的原生API
+  function volantisDom(ele) {
+    if (!ele) ele = document.createElement("div")
+    this.ele = ele;
+    // ==============================================================
+    this.ele.find = (c) => {
+      let q = this.ele.querySelector(c)
+      if (q)
+        return new volantisDom(q)
+    }
+    // ==============================================================
+    this.ele.hasClass = (c) => {
+      return this.ele.className.match(new RegExp('(\\s|^)' + c + '(\\s|$)'));
+    }
+    this.ele.addClass = (c) => {
+      this.ele.classList.add(c);
+      return this.ele
+    }
+    this.ele.removeClass = (c) => {
+      this.ele.classList.remove(c);
+      return this.ele
+    }
+    this.ele.toggleClass = (c) => {
+      if (this.ele.hasClass(c)) {
+        this.ele.removeClass(c)
+      } else {
+        this.ele.addClass(c)
+      }
+      return this.ele
+    }
+    // ==============================================================
+    // 参数 r 为 true 表示pjax切换页面时事件监听器将被移除，false不移除
+    this.ele.on = (c, f, r = 1) => {
+      this.ele.addEventListener(c, f, false)
+      if (r) {
+        volantis.EventListener.list.push(new volantisEventListener(c, f, this.ele))
+      }
+      return this.ele
+    }
+    this.ele.click = (f, r) => {
+      this.ele.on("click", f, r)
+      return this.ele
+    }
+    this.ele.scroll = (f, r) => {
+      this.ele.on("scroll", f, r)
+      return this.ele
+    }
+    // ==============================================================
+    this.ele.html = (c) => {
+      // if(c=== undefined){
+      //   return this.ele.innerHTML
+      // }else{
+      this.ele.innerHTML = c
+      return this.ele
+      // }
+    }
+    // ==============================================================
+    this.ele.hide = (c) => {
+      this.ele.style.display = "none"
+      return this.ele
+    }
+    this.ele.show = (c) => {
+      this.ele.style.display = "block"
+      return this.ele
+    }
+    // ==============================================================
+    return this.ele
+  }
+  volantis.dom.$ = (ele) => {
+    return !!ele ? new volantisDom(ele) : null;
+  }
+  /******************** RunItem ********************************/
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = ()=>{
+          volantis.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) =>{
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index,1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+  /******************** Pjax ********************************/
+  // /layout/_plugins/pjax/index.ejs
+  // volantis.pjax.send(callBack[,"callBackName"]) 传入pjax:send回调函数
+  // volantis.pjax.push(callBack[,"callBackName"]) 传入pjax:complete回调函数
+  // volantis.pjax.error(callBack[,"callBackName"]) 传入pjax:error回调函数
+  volantis.pjax = {};
+  volantis.pjax.method = {
+    complete: new RunItem(),
+    error: new RunItem(),
+    send: new RunItem(),
+  };
+  volantis.pjax = Object.assign(volantis.pjax, {
+    push: volantis.pjax.method.complete.push,
+    error: volantis.pjax.method.error.push,
+    send: volantis.pjax.method.send.push,
+  });
+  /******************** RightMenu ********************************/
+  // volantis.rightmenu.handle(callBack[,"callBackName"]) 外部菜单项控制
+  // 可在 volantis.mouseEvent 处获取右键事件
+  volantis.rightmenu = {};
+  volantis.rightmenu.method = {
+    handle: new RunItem(),
+  }
+  volantis.rightmenu = Object.assign(volantis.rightmenu, {
+    handle: volantis.rightmenu.method.handle.push,
+  });
+  /********************  Dark Mode  ********************************/
+  // /layout/_partial/scripts/darkmode.ejs
+  // volantis.dark.mode 当前模式 dark or light
+  // volantis.dark.toggle() 暗黑模式触发器
+  // volantis.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  volantis.dark = {};
+  volantis.dark.method = {
+    toggle: new RunItem(),
+  };
+  volantis.dark = Object.assign(volantis.dark, {
+    push: volantis.dark.method.toggle.push,
+  });
+  /********************  Message  ********************************/
+  // VolantisApp.message
+  /********************  isMobile  ********************************/
+  // /source/js/app.js
+  // volantis.isMobile
+  // volantis.isMobileOld
+  /********************脚本动态加载函数********************************/
+  // volantis.js(src, cb)  cb 可以传入onload回调函数 或者 JSON对象 例如: volantis.js("src", ()=>{}) 或 volantis.js("src", {defer:true,onload:()=>{}})
+  // volantis.css(src)
+
+  // 返回Promise对象，如下方法同步加载资源，这利于处理文件资源之间的依赖关系，例如：APlayer 需要在 MetingJS 之前加载
+  // (async () => {
+  //     await volantis.js("...theme.plugins.aplayer.js.aplayer...")
+  //     await volantis.js("...theme.plugins.aplayer.js.meting...")
+  // })();
+
+  // 已经加入了setTimeout
+  volantis.js = (src, cb) => {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+  volantis.css = (src) => {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  }
+  /********************按需加载的插件********************************/
+  // volantis.import.jQuery().then(()=>{})
+  volantis.import = {
+    jQuery: () => {
+      if (typeof jQuery == "undefined") {
+        return volantis.js("https://unpkg.com/volantis-static@0.0.1654736714924/libs/jquery/dist/jquery.min.js")
+      } else {
+        return new Promise(resolve => {
+          resolve()
+        });
+      }
+    }
+  }
+  /********************** requestAnimationFrame ********************************/
+  // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+  // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+  volantis.requestAnimationFrame = (fn)=>{
+    if (!window.requestAnimationFrame) {
+      window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+    }
+    window.requestAnimationFrame(fn)
+  }
+  /************************ layoutHelper *****************************************/
+  volantis.layoutHelper = (helper, html, opt)=>{
+    opt = Object.assign({clean:false, pjax:true}, opt)
+    function myhelper(helper, html, clean) {
+      volantis.tempDiv = document.createElement("div");
+      volantis.tempDiv.innerHTML = html;
+      let layoutHelper = document.querySelector("#layoutHelper-"+helper)
+      if (layoutHelper) {
+        if (clean) {
+          layoutHelper.innerHTML = ""
+        }
+        layoutHelper.append(volantis.tempDiv);
+      }
+    }
+    myhelper(helper, html, opt.clean)
+    if (opt.pjax) {
+      volantis.pjax.push(()=>{
+        myhelper(helper, html, opt.clean)
+      },"layoutHelper-"+helper)
+    }
+  }
+  /****************************** 滚动事件处理 ****************************************/
+  volantis.scroll = {
+    engine: new RunItem(),
+    unengine: new RunItem(),
+  };
+  volantis.scroll = Object.assign(volantis.scroll, {
+    push: volantis.scroll.engine.push,
+  });
+  // 滚动条距离顶部的距离
+  volantis.scroll.getScrollTop = () =>{
+    let scrollPos;
+    if (window.pageYOffset) {
+      scrollPos = window.pageYOffset;
+    } else if (document.compatMode && document.compatMode != 'BackCompat') {
+      scrollPos = document.documentElement.scrollTop;
+    } else if (document.body) {
+      scrollPos = document.body.scrollTop;
+    }
+    return scrollPos;
+  }
+  // 使用 requestAnimationFrame 处理滚动事件
+  // `volantis.scroll.del` 中存储了一个数值, 该数值检测一定时间间隔内滚动条滚动的位移, 数值的检测频率是浏览器的刷新频率. 数值为正数时, 表示向下滚动. 数值为负数时, 表示向上滚动.
+  volantis.scroll.handleScrollEvents = () => {
+    volantis.scroll.lastScrollTop = volantis.scroll.getScrollTop()
+    function loop() {
+      const scrollTop = volantis.scroll.getScrollTop();
+      if (volantis.scroll.lastScrollTop !== scrollTop) {
+        volantis.scroll.del = scrollTop - volantis.scroll.lastScrollTop;
+        volantis.scroll.lastScrollTop = scrollTop;
+        // if (volantis.scroll.del > 0) {
+        //   console.log("向下滚动");
+        // } else {
+        //   console.log("向上滚动");
+        // }
+        // 注销过期的unengine未滚动事件
+        volantis.scroll.unengine.list=[]
+        volantis.scroll.engine.start();
+      }else{
+        volantis.scroll.unengine.start();
+      }
+      volantis.requestAnimationFrame(loop)
+    }
+    volantis.requestAnimationFrame(loop)
+  }
+  volantis.scroll.handleScrollEvents()
+  volantis.scroll.ele = null;
+  // 触发页面滚动至目标元素位置
+  volantis.scroll.to = (ele, option = {}) => {
+    if (!ele) return;
+    volantis.scroll.ele = ele;
+    // 默认配置
+    opt = {
+      top: ele.getBoundingClientRect().top + document.documentElement.scrollTop,
+      behavior: "smooth"
+    }
+    // 定义配置
+    if ("top" in option) {
+      opt.top = option.top
+    }
+    if ("behavior" in option) {
+      opt.behavior = option.behavior
+    }
+    if ("addTop" in option) {
+      opt.top += option.addTop
+    }
+    if (!("observerDic" in option)) {
+      option.observerDic = 100
+    }
+    // 滚动
+    window.scrollTo(opt);
+    // 监视器
+    // 监视并矫正元素滚动到指定位置
+    // 用于处理 lazyload 引起的 cls 导致的定位失败问题
+    // option.observer = false
+    if (option.observer) {
+      setTimeout(() => {
+        if (volantis.scroll.ele != ele) {
+          return
+        }
+        volantis.scroll.unengine.push(() => {
+          let me = ele.getBoundingClientRect().top
+          if(!(me >= -option.observerDic && me <= option.observerDic)){
+            volantis.scroll.to(ele, option)
+          }
+          volantis.scroll.unengine.remove("unengineObserver")
+        },"unengineObserver")
+      },1000)
+    }
+  }
+  /********************** Content Visibility ********************************/
+  // 见 source/css/first.styl 如果遇到任何问题 删除 .post-story 即可
+  // 一个元素被声明 content-visibility 属性后 如果元素不在 viewport 中 浏览器不会计算其后代元素样式和属性 从而节省 Style & Layout 耗时
+  // content-visibility 的副作用: 锚点失效 等等(实验初期 暂不明确), 使用此方法清除样式
+  volantis.cleanContentVisibility = ()=>{
+    if (document.querySelector(".post-story")) {
+      console.log("cleanContentVisibility");
+      document.querySelectorAll(".post-story").forEach(e=>{
+        e.classList.remove("post-story")
+      })
+    }
+  }
+  /******************************************************************************/
+  /******************************************************************************/
+  /******************************************************************************/
+  //图像加载出错时的处理
+  function errorImgAvatar(img) {
+    img.src = "https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg";
+    img.onerror = null;
+  }
+  function errorImgCover(img) {
+    img.src = "https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg";
+    img.onerror = null;
+  }
+  /******************************************************************************/
+</script>
+
+  <!-- import head_end begin -->
+  <!-- import head_end end -->
+  <!-- Custom Files headEnd begin-->
+  
+  <!-- Custom Files headEnd end-->
+  <!-- front-matter head_end begin -->
+  <!-- front-matter head_end end -->
+</head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <!-- import body_begin begin-->
+    <!-- import body_begin end-->
+    <!-- Custom Files bodyBegin begin-->
+    
+    <!-- Custom Files bodyBegin end-->
+    <!-- front-matter body_begin begin -->
+    <!-- front-matter body_begin end -->
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur " style='opacity: 0' >
+  <div class='container'>
+  <div id='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fa-solid fa-comments fa-fw" target="_self"  href="/" onclick="return false;" title="comment"></a></li>
+        
+          <li><a id="s-toc" class="s-toc fa-solid fa-list fa-fw" target="_self"  href="/" onclick="return false;" title="toc"></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/Logo-NavBar@3x.png'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/" title="博客"
+                  
+                  
+                  
+                    active-action="action-home"
+                  >
+                  <i class='fa-solid fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/categories/" title="分类"
+                  
+                  
+                  
+                    active-action="action-categories"
+                  >
+                  <i class='fa-solid fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/tags/" title="标签"
+                  
+                  
+                  
+                    active-action="action-tags"
+                  >
+                  <i class='fa-solid fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/archives/" title="归档"
+                  
+                  
+                  
+                    active-action="action-archives"
+                  >
+                  <i class='fa-solid fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="社区"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>社区
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="源码"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>源码
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/about/" title="作者"
+                  
+                  
+                  
+                    active-action="action-about"
+                  >
+                  <i class='fa-solid fa-info-circle fa-fw'></i>作者
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+      
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fa-solid fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+      
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fa-solid fa-search fa-fw" target="_self" href="/" onclick="return false;" title="search"></a></li>
+				
+				<li>
+          <a class="s-menu fa-solid fa-bars fa-fw" target="_self" href="/" onclick="return false;" title="menu"></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/" title="博客"
+                  
+                  
+                  
+                    active-action="action-home"
+                  >
+                  <i class='fa-solid fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/categories/" title="分类"
+                  
+                  
+                  
+                    active-action="action-categories"
+                  >
+                  <i class='fa-solid fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/tags/" title="标签"
+                  
+                  
+                  
+                    active-action="action-tags"
+                  >
+                  <i class='fa-solid fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/archives/" title="归档"
+                  
+                  
+                  
+                    active-action="action-archives"
+                  >
+                  <i class='fa-solid fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="社区"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>社区
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="源码"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>源码
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/about/" title="作者"
+                  
+                  
+                  
+                    active-action="action-about"
+                  >
+                  <i class='fa-solid fa-info-circle fa-fw'></i>作者
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+
+      <!-- Custom Files header begin -->
+      
+      <!-- Custom Files header end -->
+		</div>
+	</div>
+  </div>
+</header>
+
+    <div id="l_body">
+      <div id="l_cover">
+  
+    
+      <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
+      <div id="half" class='cover-wrapper post search' style="display: ;">
+        
+  <div class='cover-bg lazyload placeholder' data-bg="https://s3.bmp.ovh/imgs/2025/03/03/64c32e0ed0f747a9.jpg"></div>
+
+<div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">Leland Titus</p>
+    
+    
+      <p class="subtitle">风尘云万里</p>
+    
+  </div>
+  <div class='bottom'>
+    
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <input type="text" class="input u-search-input" placeholder="Recover lost knowledge" />
+          <i class="icon fa-solid fa-search fa-fw"></i>
+        </form>
+      </div>
+    
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+          
+            <a href="/"
+              
+              
+              active-action="action-home">
+              <p>博客</p>
+            </a>
+          
+            <a href="/categories/"
+              
+              
+              active-action="action-categories">
+              <p>分类</p>
+            </a>
+          
+            <a href="/tags/"
+              
+              
+              active-action="action-tags">
+              <p>标签</p>
+            </a>
+          
+            <a href="/contributors/"
+              
+              
+              active-action="action-contributors">
+              <p>社区</p>
+            </a>
+          
+            <a target="_blank" rel="noopener" href="https://github.com/volantis-x/hexo-theme-volantis/"
+              
+              
+              active-action="action-https:githubcomvolantis-xhexo-theme-volantis">
+              <p>源码</p>
+            </a>
+          
+            <a href="/author/"
+              
+              
+              active-action="action-author">
+              <p>作者</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+        <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+      </div>
+    
+  
+</div>
+
+      <div id="safearea">
+        <div class="body-wrapper">
+          
+<div id="l_main" class=''>
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/02/source/基础四大件/操作系统/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="tutulp's blog">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="tutulp's blog">
+    <meta itemprop="description" content="tutulp的博客网站">
+  </span>
+  
+
+
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title" itemprop="name headline">
+        操作系统
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/" rel="nofollow">
+    <img itemprop="image" src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">请设置文章作者</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>
+    <a class="category-link" href="/categories/%E5%9B%9B%E5%A4%A7%E4%BB%B6/">四大件</a>
+    
+      <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/%E5%9B%9B%E5%A4%A7%E4%BB%B6/" itemprop="url"><span itemprop="name">四大件</span></a>
+      </span>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2025-03-02T00:00:00+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2025年3月2日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
+      </div>
+    
+  </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>###安装编译工具</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo yum groupinstall &quot;Development Tools&quot;   (GCC make Debug)</span><br><span class="line"></span><br><span class="line">yum install kernel-devel  (内核开发相关的头文件)</span><br><span class="line"></span><br><span class="line">yum install genisoimage  用于生成ISO光盘映像文件</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">安装汇编语言编译器 nasm</span><br><span class="line">yum install wget</span><br><span class="line">wget https://www.nasm.us/pub/nasm/releasebuilds/2.15.05/nasm-2.15.05.tar.gz</span><br><span class="line">tar -xf nasm-2.15.05.tar.gz</span><br><span class="line">cd nasm-2.15.05</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br><span class="line">nasm -v</span><br></pre></td></tr></table></figure>
+
+<p>###安装虚拟机-Bochs</p>
+<blockquote>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/bochs/files/bochs/">https://sourceforge.net/projects/bochs/files/bochs/</a></p>
+<p>下载2.8 tar.gz  地址：<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/bochs/files/bochs/2.8/bochs-2.8.tar.gz/download">https://sourceforge.net/projects/bochs/files/bochs/2.8/bochs-2.8.tar.gz/download</a></p>
+</blockquote>
+<p>这里我选择直接使用curl下载</p>
+<p><code>curl -L -o bochs-2.8.tar.gz https://sourceforge.net/projects/bochs/files/bochs/2.8/bochs-2.8.tar.gz/download</code></p>
+<p><code>tar xvf bochs-2.8.tar.gz</code></p>
+<p><code>cd bochs-2.8</code></p>
+<p><code>./configure \ --prefix=/root/bochs \ --enable-debugger \ --enable-disasm \ --enable-iodebug \ --enable-x86-debugger \ --with-x \ --with-x11</code></p>
+<p>–prefix是安装的目录的位置，这里我是 &#x2F;root&#x2F;bochs&#x2F;</p>
+<p><code>make install</code></p>
+<p>我遇到了找不到X11的错误</p>
+<p><code>sudo yum install libX11-devel</code></p>
+<p><code>make</code></p>
+<p>###配置bochs</p>
+<p>类似于配置bios，知道有哪些硬件，启动顺序是什么，这里需要一个配置文件，参考文件在安装目录下的share&#x2F;doc&#x2F;bochs&#x2F;bochsrc-sample.txt，启动顺序大概在531-543行</p>
+<p>下方文件放到&#x2F;root&#x2F;bochs&#x2F;bochsrc.txt</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">megs : 512</span><br><span class="line">romimage: file=/root/bochs/share/bochs/BIOS-bochs-latest //注意路径</span><br><span class="line">vgaromimage: file=/root/bochs/share/bochs/VGABIOS-lgpl-latest //注意路径</span><br><span class="line">boot: disk</span><br><span class="line">log: bochs.out</span><br><span class="line">mouse:enabled=0</span><br><span class="line">keyboard:keymap=/root/bochs/share/bochs/keymaps/x11-pc-us.map //注意路径</span><br><span class="line">ata0:enabled=1,ioaddr1=0x1f0,ioaddr2=0x3f0,irq=14</span><br><span class="line">#gdbstub:enabled=1,port=1234,text_base=0,data_base=0,bss_base=0</span><br></pre></td></tr></table></figure>
+
+<p><code>cd /root/bochs</code></p>
+<p><code>sudo bin/bochs -f bochsrc.txt -q</code>  运行bochs -f 指定配置文件 -q 跳过界面指引</p>
+<blockquote>
+<p>报错：cannot connect to X server  </p>
+<p>原因：我使用的vscode远程连接没有访问Linux centos图形界面的权力,用MobaXterm是可以的有X server</p>
+</blockquote>
+<p>报错：No bootable device  没有启动盘</p>
+<img src="./images/操作系统.assets/image-20241212115256057.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20241212115256057.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241212115256057" style="zoom:33%;" />
+
+<h3 id="设置启动盘"><a href="#设置启动盘" class="headerlink" title="设置启动盘"></a>设置启动盘</h3><p>BIOS会将PC的控制权转移到引导加载程序，使用现有的引导加载程序GNU GRand(<strong>GRUB</strong>)，GRUB可以将操作系统构建为普通的ELF可执行文件，然后由GRUB将其加载到正确的内存位置。</p>
+<p>GRUB将寻找一个数(具体的)以确保它实际上是在跳转到操作系统。然后GRUB跳转到内存中的某个位置将控制权转移到OS。 </p>
+<p>操作系统的这一部分必须用汇编代码编写，因为C需要一个不可用的堆栈。将以下代码保存在一个名为loader.s的文件中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">global loader                   ; the entry symbol for ELF</span><br><span class="line"></span><br><span class="line">MAGIC_NUMBER equ 0x1BADB002     ; define the magic number constant</span><br><span class="line">FLAGS        equ 0x0            ; multiboot flags</span><br><span class="line">CHECKSUM     equ -MAGIC_NUMBER  ; calculate the checksum</span><br><span class="line">                                ; (magic number + checksum + flags should equal 0)</span><br><span class="line"></span><br><span class="line">section .text:                  ; start of the text (code) section</span><br><span class="line">align 4                         ; the code must be 4 byte aligned</span><br><span class="line">    dd MAGIC_NUMBER             ; write the magic number to the machine code,</span><br><span class="line">    dd FLAGS                    ; the flags,</span><br><span class="line">    dd CHECKSUM                 ; and the checksum</span><br><span class="line"></span><br><span class="line">loader:                         ; the loader label (defined as entry point in linker script)</span><br><span class="line">    mov eax, 0xCAFEBABE         ; place the number 0xCAFEBABE in the register eax</span><br><span class="line">.loop:</span><br><span class="line">    jmp .loop                   ; loop forever</span><br></pre></td></tr></table></figure>
+
+<p>功能：将0xCAFEBABE写入eax寄存器   后续开发中，.loop循环会被替换为真正的内核初始化代码</p>
+<p><code>mkdir /root/tutuio</code></p>
+<p><code>nasm -f elf32 loader.s </code> 将loader.s文件编译为32位ELF目标文件</p>
+<p>###链接内核</p>
+<p>现在必须链接代码以生成可执行文件。我们希望GRUB在大于或等于0x00100000（1兆字节（MB））的内存地址上加载内核，因为GRUB本身，BIOS和内存映射的I &#x2F; O使用小于1 MB的地址。因此，需要以下链接程序脚本（为GNU LD编写）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ENTRY</span>(loader)                <span class="comment">/* the name of the entry label */</span></span><br><span class="line"></span><br><span class="line">SECTIONS &#123;</span><br><span class="line">    . = <span class="number">0x00100000</span>;          <span class="comment">/* the code should be loaded at 1 MB */</span></span><br><span class="line"></span><br><span class="line">    .<span class="function">text <span class="title">ALIGN</span> <span class="params">(<span class="number">0x1000</span>)</span> :   /* align at <span class="number">4</span> KB */</span></span><br><span class="line"><span class="function">    &#123;</span></span><br><span class="line">        *(.text)             <span class="comment">/* all text sections from all files */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .<span class="function">rodata <span class="title">ALIGN</span> <span class="params">(<span class="number">0x1000</span>)</span> : /* align at <span class="number">4</span> KB */</span></span><br><span class="line"><span class="function">    &#123;</span></span><br><span class="line">        *(.rodata*)          <span class="comment">/* all read-only data sections from all files */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .<span class="function">data <span class="title">ALIGN</span> <span class="params">(<span class="number">0x1000</span>)</span> :   /* align at <span class="number">4</span> KB */</span></span><br><span class="line"><span class="function">    &#123;</span></span><br><span class="line">        *(.data)             <span class="comment">/* all data sections from all files */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .<span class="function">bss <span class="title">ALIGN</span> <span class="params">(<span class="number">0x1000</span>)</span> :    /* align at <span class="number">4</span> KB */</span></span><br><span class="line"><span class="function">    &#123;</span></span><br><span class="line">        *(COMMON)            <span class="comment">/* all COMMON sections from all files */</span></span><br><span class="line">        *(.bss)              <span class="comment">/* all bss sections from all files */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将链接程序脚本保存到名为link.ld的文件中</p>
+<p><code>ld -T link.ld -melf_i386 loader.o -o kernel.elf </code></p>
+<p>###创建可引导的so镜像</p>
+<p>我们将使用的GRUB版本是GRUB Legacy，因为可以在同时使用GRUB Legacy和GRUB 2的系统上生成OS ISO映像。将使用GRUB Legacy stage2_eltorito引导程序。</p>
+<blockquote>
+<p>教程中<code>wget ftp://alpha.gnu.org/gnu/grub/grub-0.97.tar.gz</code> 然后构建文件，我编译失败</p>
+<p>从<a target="_blank" rel="noopener" href="http://littleosbook.github.com/files/stage2_eltorito%E7%9B%B4%E6%8E%A5%E4%B8%8B%E8%BD%BDstage2_eltorito%E6%96%87%E4%BB%B6%EF%BC%8C%E8%BF%99%E4%B8%AA%E5%9C%B0%E5%9D%80%E4%B9%9F%E5%A4%B1%E6%95%88%E4%BA%86">http://littleosbook.github.com/files/stage2_eltorito直接下载stage2_eltorito文件，这个地址也失效了</a></p>
+</blockquote>
+<p>从syslinux构建isolinux.bin 即stage2_eltorito文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/syslinux-6.03.tar.gz</span><br><span class="line">tar xzf syslinux-6.03.tar.gz</span><br><span class="line">cd syslinux-6.03</span><br><span class="line">make bios</span><br><span class="line"></span><br><span class="line">mkdir -p /root/iso/boot/grub </span><br><span class="line">cp /root/syslinux-6.03/bios/core/isolinux.bin /root/iso/boot/grub/</span><br><span class="line">cp /root/tutuio/kernel.elf /root/iso/boot/</span><br></pre></td></tr></table></figure>
+
+<p>此时的目录结构：</p>
+<img src="./images/操作系统.assets/image-20241213155835165.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20241213155835165.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241213155835165" style="zoom: 50%;" />
+
+<p>menu.lst内容如下 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">default=0</span><br><span class="line">timeout=0</span><br><span class="line"></span><br><span class="line">title os</span><br><span class="line">kernel /boot/kernel.elf</span><br></pre></td></tr></table></figure>
+
+<p>在iso同级目录下运行下方指令， isolinux.bin本来是stage2_eltorito被我替换了</p>
+<p>可以使用<strong>man genisoimage</strong>查看参数含义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">genisoimage -R                              \</span><br><span class="line">            -b boot/grub/isolinux.bin    \</span><br><span class="line">            -no-emul-boot                   \</span><br><span class="line">            -boot-load-size 4               \</span><br><span class="line">            -A os                           \</span><br><span class="line">            -input-charset utf8             \</span><br><span class="line">            -quiet                          \</span><br><span class="line">            -boot-info-table                \</span><br><span class="line">            -o os.iso                       \</span><br><span class="line">            iso       </span><br></pre></td></tr></table></figure>
+
+<p>此时iso同级目录下会生成 os.iso文件</p>
+<p>以isolinux.bin构建的iso并不使用，会出现报错failed to load ldlinux.32c</p>
+<p>所以用GRUB 2构建iso</p>
+<p><code>sudo yum install grub2 grub2-tools grub2-tools-extra mtools xorriso</code></p>
+<p>新的目录结构</p>
+<img src="./images/操作系统.assets/image-20241213191936185.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20241213191936185.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241213191936185" style="zoom:50%;" />
+
+<p><code>grub2-mkrescue -o os.iso /root/iso</code></p>
+<h3 id="启动bochs"><a href="#启动bochs" class="headerlink" title="启动bochs"></a>启动bochs</h3><p><code>sudo bin/bochs -f bochsrc.txt -q</code></p>
+<p><code>c</code></p>
+<p>成功启动！</p>
+<p><code>cat bochslog.txt  | grep &#39;EAX=&#39;</code>查看日志并没有EAX &#x3D; CAFEBABE的字样？</p>
+<h2 id="过渡到c"><a href="#过渡到c" class="headerlink" title="过渡到c"></a>过渡到c</h2><h1 id="操作系统真相还原"><a href="#操作系统真相还原" class="headerlink" title="操作系统真相还原"></a>操作系统真相还原</h1><p>软件是如何访问硬件的？</p>
+<blockquote>
+<p>硬件发展迅速，操作系统不可能及时更新驱动，于是使用硬件适配器，也就是IO接口，生产出来的设备按照这个标准工作就实现了通用</p>
+<p>访问外部硬件有两个方式。</p>
+<p>（1）将某个外设的内存映射到一定范围的地址空间中，CPU 通过地址总线访问该内存区域时会落到外设的内存中</p>
+<p>比如显卡，显卡是显示器的适配器，CPU 不直接和显示器交互，它只和显卡通信。显卡上有片内存叫显存，它被映射到主机物理内存上的低端 1MB 的 0xB8000～0xBFFFF。CPU 访问这片内存就是访问显存，往这片内存上写字节便是往屏幕上打印内容。计算机中处处是分层，我们要充分相信上一层的工作。</p>
+<p>（2）外设是通过 IO 接口与 CPU 通信的，CPU 访问外设，就是访问 IO 接口，由 IO 接口将信息传递给另一端的外设，也就是说，CPU 从来不知道有这些设备的存在，它只知道自己操作的 IO 接口，你看，处处体现着分层。</p>
+<p>于是问题来了，如何访问到 IO 接口呢，答案就是 IO 接口上面有一些寄存器，访问 IO 接口本质上就是访问这些寄存器，这些寄存器就是人们常说的端口。这些端口是人家 IO 接口给咱们提供的接口。人家接口电路也有自己的思维（系统），看到寄存器中写了什么就做出相应的反应。</p>
+</blockquote>
+<h1 id="部署工作环境"><a href="#部署工作环境" class="headerlink" title="部署工作环境"></a>部署工作环境</h1><p>CentOS 9 (CentOS-Stream-9-latest-x86_64-dvd1.iso) </p>
+<blockquote>
+<p>我使用CentOS 7试过，无法连接到X server，需要安装图形界面，我就没有尝试了</p>
+</blockquote>
+<p>nasm 汇编语言编译器  (只能使用汇编语言修改寄存器)</p>
+<p>bochs 虚拟机</p>
+<p>virtualBox 虚拟机 我用的vmware</p>
+<blockquote>
+<p>只有从源码安装的版本才会在其配置和编译过程中根据所在的平台的特性去优化，这些是其他形式的软件包不可比拟的。</p>
+</blockquote>
+<p>##安装bochs</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="http://sourceforge.net/projects/bochs/files/bochs/">http://sourceforge.net/projects/bochs/files/bochs/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -L -o bochs-2.8.tar.gz https://sourceforge.net/projects/bochs/files/bochs/2.8/bochs-2.8.tar.gz/download</span><br><span class="line">tar xvf bochs-2.8.tar.gz</span><br><span class="line"></span><br><span class="line">书籍中使用的2.6.2 我使用的时候已经make编译不过了，需要&lt;gtk/gtk.h&gt;</span><br></pre></td></tr></table></figure>
+
+<p>编译 三部曲configure make make install</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">cd bochs-2.8</span><br><span class="line"></span><br><span class="line">./configure \ </span><br><span class="line">--prefix=/root/tutuos/bochs-2.8-installed \ </span><br><span class="line">--enable-debugger \ </span><br><span class="line">--enable-disasm \ </span><br><span class="line">--enable-iodebug \ </span><br><span class="line">--enable-x86-debugger \ </span><br><span class="line">--with-x \ </span><br><span class="line">--with-x11</span><br><span class="line"></span><br><span class="line">注意各行结尾的&#x27;\&#x27;字符前面有个空格</span><br><span class="line"></span><br><span class="line">//直接复制可使用版本：</span><br><span class="line">./configure --prefix=/root/tutuos/bochs-2.8-installed --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11</span><br><span class="line"></span><br><span class="line">我使用2.8出现报错：configure: WARNING: unrecognized options: --enable-disasm 我暂时没有理会，可以取消这个选项应该没有影响</span><br></pre></td></tr></table></figure>
+
+<img src="./images/操作系统.assets/image-20250116223727643.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250116223727643.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250116223727643" style="zoom:33%;" />
+
+<blockquote>
+<p>–enable-gdb-stub替换–enable-debugger来使用gdb调试，但是不建议</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置bochs"><a href="#配置bochs" class="headerlink" title="配置bochs"></a>配置bochs</h3><p>类似BIOS的作用</p>
+<p>安装目录下有配置文件的样本文件：share&#x2F;doc&#x2F;bochs&#x2F;bochsrc-sample.txt</p>
+<p>在安装目录下新建bochsrc.disk  文件名和位置都不固定，注意文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">############################################### </span><br><span class="line"># Configuration file for Bochs </span><br><span class="line">############################################### </span><br><span class="line"># 第一步，首先设置 Bochs 在运行过程中能够使用的内存，本例为 32MB。</span><br><span class="line"># 关键字为：megs </span><br><span class="line">megs: 32 </span><br><span class="line"># 第二步，设置对应真实机器的 BIOS 和 VGA BIOS。</span><br><span class="line"># 对应两个关键字为：romimage 和 vgaromimage </span><br><span class="line">romimage: file=/root/tutuos/bochs-2.8-installed/share/bochs/BIOS-bochs-latest </span><br><span class="line">vgaromimage: file=/root/tutuos/bochs-2.8-installed/share/bochs/VGABIOS-lgpl-latest </span><br><span class="line"># 第三步，设置 Bochs 所使用的磁盘，软盘的关键字为 floppy。</span><br><span class="line"># 若只有一个软盘，则使用 floppya 即可，若有多个，则为 floppya，floppyb…</span><br><span class="line">#floppya: 1_44=a.img, status=inserted </span><br><span class="line"># 第四步，选择启动盘符。</span><br><span class="line">#boot: floppy #默认从软盘启动，将其注释</span><br><span class="line">boot: disk #改为从硬盘启动。我们的任何代码都将直接写在硬盘上，所以不会再有读写软盘的操作。</span><br><span class="line"># 第五步，设置日志文件的输出。</span><br><span class="line">log: bochs.out </span><br><span class="line"># 第六步，开启或关闭某些功能。</span><br><span class="line"># 下面是关闭鼠标，并打开键盘。</span><br><span class="line">mouse: enabled=0 </span><br><span class="line">keyboard:keymap=/root/tutuos/bochs-2.8-installed/share/bochs/keymaps/x11-pc-us.map</span><br><span class="line"># 硬盘设置</span><br><span class="line">ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14 </span><br><span class="line">ata0-master: type=disk, path=&quot;hd60M.img&quot;, mode=flat, cylinders=121, heads=16, spt=63</span><br><span class="line"># 下面的是开放的 bochs 对 gdb 的支持，这样 gdb 便可以远程连接到此机器的 1234 端口调试了</span><br><span class="line">#gdbstub: enabled=1, port=4567, text_base=0, data_base=0, bss_base=0  注释掉，会出现段错误</span><br><span class="line">################### 配置文件结束 #####################</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行bochs"><a href="#运行bochs" class="headerlink" title="运行bochs"></a>运行bochs</h3><p>在 bochs 安装路径下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bin/bochs</span><br><span class="line">第一个默认选择是2，选择配置文件，这里2.8版本出现段错误，应该渲染选项界面出错，但是我也不知道如何解决</span><br><span class="line">sudo bin/bochs -f bochsrc.disk -q </span><br><span class="line">指定配置文件并跳过指引</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">创建启动硬盘</span><br><span class="line">bin/bximage -hd -mode=flat -size=60 -q hd60M.img</span><br><span class="line">bin/bximage -func=create -hd=60 -imgmode=flat -q hd60M.img</span><br><span class="line">bin/bochs –f bochsrc.disk</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="编写-MBR-主引导记录"><a href="#编写-MBR-主引导记录" class="headerlink" title="编写 MBR 主引导记录"></a>编写 MBR 主引导记录</h1><p>为什么程序要载入内存？</p>
+<blockquote>
+<p>内存快且容量大</p>
+<p>操作系统可以存储在多种存储介质中</p>
+</blockquote>
+<p>什么是载入内存？</p>
+<blockquote>
+<p>程序被加载器（软件或硬件）加载到内存某个区域</p>
+<p>CPU 的 cs：ip 寄存器被指向这个程序的起始地址</p>
+</blockquote>
+<p>##BIOS</p>
+<p>Base Input &amp; Output System，即基本输入输出系统</p>
+<h3 id="实模式下1mb内存布局"><a href="#实模式下1mb内存布局" class="headerlink" title="实模式下1mb内存布局"></a>实模式下1mb内存布局</h3><p>Intel 8086 有 20 条地址线，故其可以访问 1MB 的内存空间，即 2 的 20 次方&#x3D;1048576&#x3D;1MB，地址范围若按十六进制来表示，是 0x00000 到 0xFFFFF</p>
+<p><img src="/./images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20250119141515640.png" class="lazyload" data-srcset="/./images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20250119141515640.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250119141515640"></p>
+<ul>
+<li>地址 0～0x9FFFF 处是 DRAM(动态随机访问内存)，我们所装的物理内存就是 DRAM</li>
+</ul>
+<blockquote>
+<p>动态是什么意思？</p>
+<p>动态指此种存储介质由于本身电气元件的性质，需要定期地刷新(电容漏电，及时补点来保存数据，称为刷新)</p>
+</blockquote>
+<ul>
+<li>看顶部的 0xF0000～0xFFFFF，这 64KB 的内存是 ROM。这里面存的就是 BIOS 的代码</li>
+</ul>
+<p>BIOS的作用：</p>
+<blockquote>
+<p>过“int 中断号”来实现相关的硬件调用，即对硬件的输入输出，但由于就 64KB 大小的空间，挑一些重要的、保证计算机能运行的那些硬件的基本 IO 操作</p>
+</blockquote>
+<ul>
+<li>BIOS不用更该,被写进ROM，映射在低端1MB内存顶部，0xF0000入口地址</li>
+</ul>
+<p>开机指令执行顺序：</p>
+<ol>
+<li>开机的瞬间CPU 的 cs：ip 寄存器被强制初始化为 0xF000：0xFFF0 执行跳转指令</li>
+<li>jmp far f000：e05b 跳转到0xfe05b 处(段基址 0xf000 左移 4 位+0xe05b)，这是 BIOS 代码真正开始的地方</li>
+<li>cs：f000  加电，强制将 cs 置为 f000</li>
+<li>接下来 BIOS 便马不停蹄地检测内存、显卡等外设信息，当检测通过，并初始化好硬件后，开始在内存中 0x000～0x3FF 处建立数据结构，中断向量表 IVT 并填写中断例程。</li>
+<li>BIOS 最后一项工作校验启动盘中位于 0 盘 0 道 1 扇区的内容（最开始那个区域 CHS方法），也就是<strong>MBR</strong>所在位置</li>
+</ol>
+<h3 id="MBR"><a href="#MBR" class="headerlink" title="MBR"></a>MBR</h3><p>如果此扇区末尾的两个字节分别是魔数 0x55 和 0xaa，BIOS 便认为此扇区中确实存在可执行的程序，加载到物理地址 0x7c00</p>
+<p>MBR 的大小必须是 512 字节，这是为了保证 0x55 和 0xaa 这两个魔数恰好出现在该扇区的最后两个字节处，即第 510 字节处和第 511 字节处，由于我们的 bochs 模拟的是 x86 平台，所以是小端字节序，故其最后两个字节内容是 0xaa55</p>
+<h3 id="神奇好用的-和-，令人迷惑的-section"><a href="#神奇好用的-和-，令人迷惑的-section" class="headerlink" title="神奇好用的$和$$，令人迷惑的 section"></a>神奇好用的$和$$，令人迷惑的 section</h3><p>$和$$是编译器 NASM 预留的关键字，用来表示当前行和本 section 的地址，起到了标号的作用，它是 NASM 提供的，并不是 CPU 原生支持的，相当于伪指令一样，对 CPU 来说是假的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">code_start:</span><br><span class="line">	mov ax, 0</span><br><span class="line"></span><br><span class="line">code_start被nasm认为是一个地址，此地址是：mov ax, 0这条指令所在的地址</span><br></pre></td></tr></table></figure>
+
+<p>$属于“隐式地”藏在本行代码前的标号，也就是编译器给当前行安排的地址，看不到却又无处不在，$在每行都有。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">code_start:</span><br><span class="line"> 	jmp $</span><br><span class="line"> 等效于jmp code_start</span><br></pre></td></tr></table></figure>
+
+<p>$$指代本 section 的起始地址</p>
+<p>p70，暂且跳过</p>
+<h3 id="NASM简单用法"><a href="#NASM简单用法" class="headerlink" title="NASM简单用法"></a>NASM简单用法</h3><p><code>nasm -f &lt;format&gt;&lt;filename&gt; [-o &lt;output&gt;]</code></p>
+<p>-f指定输出格式，默认bin，需要用elf格式才使用-f，一共21中格式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">; 主引导程序</span><br><span class="line">SECTION MBR vstart=0x7c00 </span><br><span class="line">    mov ax, cs </span><br><span class="line">    mov ds, ax </span><br><span class="line">    mov es, ax </span><br><span class="line">    mov ss, ax </span><br><span class="line">    mov fs, ax </span><br><span class="line">    mov sp, 0x7c00 </span><br><span class="line"></span><br><span class="line">; 清屏利用 0x06 号功能,上卷全部行,则可清屏。</span><br><span class="line">; INT 0x10 功能号:0x06 功能描述:上卷窗口</span><br><span class="line">; 输入: </span><br><span class="line">; AH 功能号 = 0x06 </span><br><span class="line">; AL = 上卷的行数(如果为 0,表示全部) </span><br><span class="line">; BH = 上卷行属性</span><br><span class="line">; (CL,CH) = 窗口左上角的(X,Y)位置</span><br><span class="line">; (DL,DH) = 窗口右下角的(X,Y)位置</span><br><span class="line">; 无返回值: </span><br><span class="line">mov ax, 0x600 </span><br><span class="line">mov bx, 0x700 </span><br><span class="line">mov cx, 0 ; 左上角: (0, 0) </span><br><span class="line">mov dx, 0x184f ; 右下角: (80,25) </span><br><span class="line">; VGA 文本模式中,一行只能容纳 80 个字符,共 25 行。</span><br><span class="line">; 下标从 0 开始,所以 0x18=24,0x4f=79 </span><br><span class="line">int 0x10 ; int 0x10 </span><br><span class="line"></span><br><span class="line">;.get_cursor 获取当前光标位置,在光标位置处打印字符。</span><br><span class="line">mov ah, 3 ; 输入: 3 号子功能是获取光标位置,需要存入 ah 寄存器</span><br><span class="line">mov bh, 0 ; bh 寄存器存储的是待获取光标的页号</span><br><span class="line">int 0x10 ; 输出: ch=光标开始行,cl=光标结束行</span><br><span class="line">; dh=光标所在行号,dl=光标所在列号</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">; 打印字符串 </span><br><span class="line">; 还是用 10h 中断,不过这次调用 13 号子功能打印字符串</span><br><span class="line">mov ax, message </span><br><span class="line">mov bp, ax ; es:bp 为串首地址,es 此时同 cs 一致, </span><br><span class="line">; 开头时已经为 sreg 初始化</span><br><span class="line"></span><br><span class="line">; 光标位置要用到 dx 寄存器中内容,cx 中的光标位置可忽略</span><br><span class="line">mov cx, 5 ; cx 为串长度,不包括结束符 0 的字符个数</span><br><span class="line">mov ax, 0x1301 ; 子功能号 13 显示字符及属性,要存入 ah 寄存器, </span><br><span class="line">; al 设置写字符方式 ah=01: 显示字符串,光标跟随移动</span><br><span class="line">mov bx, 0x2 ; bh 存储要显示的页号,此处是第 0 页, </span><br><span class="line">; bl 中是字符属性,属性黑底绿字(bl = 02h) </span><br><span class="line">int 0x10 ; 执行 BIOS 0x10 号中断</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">jmp $ ; 使程序悬停在此</span><br><span class="line"></span><br><span class="line">message db &quot;1 MBR&quot; </span><br><span class="line">times 510-($-$$) db 0 </span><br><span class="line">db 0x55,0xaa </span><br></pre></td></tr></table></figure>
+
+<p>代码功能：在屏幕上打印字符串“1 MBR”，背景色为黑色，前景色为绿色</p>
+<blockquote>
+<p>没有使用显卡，本段代码中关于“打印显示”的操作都利用 BIOS 建立好的例程就好了，这里第 0x10 号中断便是负责有关打印的例程。</p>
+</blockquote>
+<ul>
+<li><p>第 3 行的“vstart&#x3D;0x7c00”表示本程序在编译时，告诉编译器，把我的起始地址编译为 0x7c00。</p>
+</li>
+<li><p>第 4～8 行是用 cs 寄存器的值去初始化其他寄存器。由于 BIOS 是通过 jmp 0：0x7c00 跳转到 MBR 的，故cs 此时为 0。对于 ds、es、fs、gs 这类 sreg，CPU 中不能直接给它们赋值，没有从立即数到段寄存器的电路实现，只有通过其他寄存器来中转，这里我们用的是通用寄存器 ax 来中转。例如 mov ds：0x7c00，这样就错了。</p>
+</li>
+<li><p>第 9 行是初始化栈指针，在 CPU 上运行的程序得遵从 CPU 的规则，mbr 也是程序，是程序就要用到栈。目前 0x7c00 以下暂时是安全的区域，就把它当作栈来用。</p>
+</li>
+<li><p>第 11～28 行是清屏。因为在 BIOS 工作中，会有一些输出，如检测硬件的结果信息。为了让大家看清楚我们在 MBR 中的输出字符串，故先把 BIOS 的输出清掉，这里演示的是 BIOS 中断 int 0x10 的用法。</p>
+</li>
+<li><p>第30～35 行是做打印前的工作，先获取光标位置，目的是避免打印字符混乱，覆盖别人的输出。字符打印的位置，不一定要在光标处，字</p>
+<p>符的位置只和显存中的地址有关，和光标是没关系的，这只是人为地加个约束，毕竟光标在视觉上告诉了我们当前字符写到哪里了，完全是为了好看，不要以为光标就是新打印字符的位置。更多细节，以后讲显卡时会提到。</p>
+</li>
+</ul>
+<p>&#x3D;&#x3D;页&#x3D;&#x3D;</p>
+<p>第 33 行，往 bh 寄存器中写入了 0，这是告诉 BIOS 例程，我要获取第0 页当前的光标</p>
+<p>显示器有很多种模式，如图形模式、文本模式等，在文本模式中，又可以工作于 80*25 和 40*25 等显示方式，默认情况下，所有个人计算机上的显卡在加电后都将自己置为 80*25 这种显示方式。80*25 是指一屏可以显示 25 行、每行 80 列的字符，也就是 2000 个字符。但由于一个字符要用两字节来表示，低字符是字符的 ASCII 编码，高字节是字符属性，故显示一屏字符需要用 4000 字节（实际上，分配给一屏的容量是 4KB），这一屏就称为一页，0 页是默认页。</p>
+<ul>
+<li>第 38～52 行是往光标处打印字符。说一下第 48 行的 mov ax，0x1301，13 对应的是 ah 寄存器，这是调用0x13 号子功能。01 对应的是 al 寄存器，表示的是写字符方式，其低 2 位才有意义，各位功能描述如下。</li>
+</ul>
+<p>（1）al&#x3D;0，显示字符串，并且光标返回起始位置。</p>
+<p>（2）al&#x3D;1，显示字符串，并且光标跟随到新位置。</p>
+<p>（3）al&#x3D;2，显示字符串及其属性，并且光标返回起始位置。</p>
+<p>（4）al&#x3D;3，显示字符串及其属性，光标跟随到新位置。</p>
+<ul>
+<li>第 55 行执行了个死循环，$是本行指令的地址，这属于伪指令，是汇编器在编译期间分配的地址。在最终编译出来的程序中，$会被替换为指令实际所在行的地址。jmp 是个近跳转，$是 jmp 自己的地址，于是跳到自己所在的地址再执行自己，又是跳到自己所在的地址再继续执行跳转，这样便实现了死循环。</li>
+<li>第 57 行是定义打印的字符串。</li>
+<li>第 58 行的$$是指本 section 的起始地址，上面说过了$是本行所在的地址，故$-$$是本行到本 section的偏移量。由于 MBR 的最后两个字节是固定的内容，分别是 0x55 和 0xaa，要预留出这 2 个字节，故本扇区内前 512-2&#x3D;510 字节要填满，那到底要用多少字节才能填满此扇区呢。用 510 字节减去上面通过$-$$得到的偏移量，其结果便是本扇区内的剩余量，也就是要填充的字节数。由此可见第 50 行的“times 510-（$-$$） db 0”是在用 0 将本扇区剩余空间填充。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">编译</span><br><span class="line">nasm -o mbr.bin mbr.S</span><br><span class="line">验证是否为512字节</span><br><span class="line">ls -lb mbr.bin</span><br><span class="line">磁盘操作，将文件写入 0 盘 0 道 1 扇区</span><br><span class="line">dd if=/root/tutuos/mbr.bin of=/root/tutuos/bochs-2.8-installed/hd60M.img bs=512 count=1 conv=notrunc</span><br><span class="line">运行</span><br><span class="line">bin/bochs -f bochsrc.disk -q</span><br><span class="line">输入c后回车</span><br></pre></td></tr></table></figure>
+
+<img src="./images/操作系统.assets/image-20250120155940621.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250120155940621.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250120155940621" style="zoom:33%;" />
+
+<p>第一个提示设置环境变量：export BXSHARE&#x3D;&#x2F;root&#x2F;tutuos&#x2F;bochs-2.8-installed&#x2F;share&#x2F;bochs</p>
+<h1 id="完善MBR"><a href="#完善MBR" class="headerlink" title="完善MBR"></a>完善MBR</h1><h2 id="地址-section-vstart浅尝"><a href="#地址-section-vstart浅尝" class="headerlink" title="地址 section vstart浅尝"></a>地址 section vstart浅尝</h2><h3 id="什么是地址"><a href="#什么是地址" class="headerlink" title="什么是地址"></a>什么是地址</h3><p>地址：描述各种符号在源文件中的位置，各符号偏移文件开头的距离</p>
+<p>编译器：给各符号编址，根据硬件平台特性，不考虑对齐则彼此相连</p>
+<img src="./images/操作系统.assets/image-20250120163158130.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250120163158130.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250120163158130" style="zoom:33%;" />
+
+<p>每个变量的地址是前一个变量的地址+前一个变量的内存空间大小。</p>
+<p>代码编译之后，源代码中的标号(比如$)会被替换为实际地址</p>
+<p>为了看程序编译后的各指令或标号的地址，可以用反汇编来查看，用 ndisasm 这个工具完成</p>
+<img src="./images/操作系统.assets/image-20250120222929605.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250120222929605.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250120222929605" style="zoom:33%;" />
+
+<blockquote>
+<p>指令 mov ds,ax，被编译器处理之后，其所在地址处的内容就是机器码 8ED8</p>
+<p>var dw 0x99 数据定义 定义一个双字节字，编译后为99 00 x86小端序，低地址在99</p>
+</blockquote>
+<ul>
+<li>看第 1 行的 mov 指令，$$表示的是所在的 section 的起始地址，由于这 6 行代码中没有定义 section，故 nasm 默认把全体文件当成一个大的 section，全体文件自然偏移地址为 0，所以在反汇编代码那列中，起始地址$$被置换为 0。</li>
+<li>第 2 行代码是真指令，不牵涉到符号转换，所以反汇编后的代码同源码一致。</li>
+<li>第 3 行引用了 var 变量的值，[]符号是取所在地址处的内容。在相应的反汇编代码中，相应的第三行中 var 这个符号地址被编译器替换为 0xd。结合地址列查看一下内容列，地址为 0xd 的内容为 99，这正是var 的值。</li>
+<li>第 4 行源码为“label: mov ax,$”,label 是个标号，代表指令“mov ax，$”所在地址。$是个隐式的标号，表示当前行地址。按理说这两个标号值应该是一致的，验证一下：查看下反汇编代码列的第 4 行，$被替换为0x8，即本行 mov 指令地址是 0x8，在地址列第 4 行查看，地址确实为 8，吻合。</li>
+<li>第 5 行的“jmp label”编译后被替换为 jmp short 0x8，这是短跳转指令，地址为 8 处的内容是第 4 行的“mov ax，$”，同样吻合。</li>
+</ul>
+<p>&#x3D;&#x3D;地址等于上一个地址+上一个地址处的内容的长度。例如地址列第二行的 3 等于“上一个地址 0”+“上一个地址0 处的内容：B80000 的长度 3(一个长度32位)”，以此类推。&#x3D;&#x3D;</p>
+<h3 id="节-section"><a href="#节-section" class="headerlink" title="节 section"></a>节 section</h3><p>编译器提供的伪指令，将程序逻辑上分为几个部分，比如将指令和数据分开便于维护等</p>
+<img src="./images/操作系统.assets/image-20250120230325398.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250120230325398.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250120230325398" style="zoom:33%;" />
+
+<h3 id="vstart"><a href="#vstart" class="headerlink" title="vstart"></a>vstart</h3><p>是 section 用 vstart&#x3D;来修饰后，可以被赋予一个虚拟起始地址，它被用来计算在该 section 内的所有内存引用地址。</p>
+<img src="./images/操作系统.assets/image-20250121173206298.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250121173206298.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250121173206298" style="zoom:33%;" />
+
+<p>在 section 中添加了 vstart，这个参数是让编译器将 section 中的数据的地址以 vstart 的值为起始，不再从整个程序开头算起。只有以程序开头 0 算起的地址才是真实存在的，在这个地址上能访问到相应的符号，所以不以程序开头算起的地址，必然在程序内部不存在，是虚拟的。</p>
+<ul>
+<li>源码第 1 行的 section 含有 vstart&#x3D;0x7c00，故该节中的数据地址以 0x7c00 为起始编址。此 0x7c00 便是虚拟的地址，在程序中没有偏移文件开头为 0x7c00 的地址，整个程序不到 100 字节。</li>
+<li>源码第 2 行的$$在编译后被替换为 vstart 的值 0x7c00</li>
+<li>第 5 行的$在文件中的地址是 0x9，经编译后变成了 0x7c09，以vstart为起始计算的</li>
+<li>第 6、7 行中引用的变量 var1 和 var2 属于 data 节，根据第二个vstart计算的</li>
+</ul>
+<h2 id="CPU的实模式-汇编讲解"><a href="#CPU的实模式-汇编讲解" class="headerlink" title="CPU的实模式(汇编讲解)"></a>CPU的实模式(汇编讲解)</h2><p>实模式其实就是 8086 CPU 的工作环境、工作方式、工作状态，这是一整套的内容，实模式是指 8086 CPU 的寻址方式、寄存器大小、指令用法等，是用来反应 CPU 在该环境下如何工作的概念</p>
+<p>实模式的“实”体现在：程序中用到的地址都是真实的物理地址，“段基址：段内偏移”产生的逻辑地址就是物理地址，也就是程序员看到的完全是真实的内存</p>
+<h2 id="直接对显示器说点什么"><a href="#直接对显示器说点什么" class="headerlink" title="直接对显示器说点什么"></a>直接对显示器说点什么</h2><h3 id="CPU如何与外设通信-IO接口"><a href="#CPU如何与外设通信-IO接口" class="headerlink" title="CPU如何与外设通信-IO接口"></a>CPU如何与外设通信-IO接口</h3><p>IO接口：CPU和外设之间的中间层，形式不限</p>
+<p>IO接口的多功能和多工作模式，甚至多设备，通过软件指令实，称为“IO接口控制编程”，通过端口读写指令in&#x2F;out实现</p>
+<p>IO接口的功能：</p>
+<ol>
+<li>设置数据缓冲，解决速度不匹配问题</li>
+<li>设置信号电平转换电路，CPU是TTL电平，外设大多机电设备无法被TTL驱动</li>
+<li>设置数据格式转换</li>
+<li>设置时序控制电路同步CPU和外设</li>
+<li>提供地址译码，多端口设备</li>
+</ol>
+<p>同一时刻CPU 只能和一个 IO 接口通信,CPU将选择这个工作交给输入输出控制中心（I&#x2F;O control hub，ICH），也就是<strong>南桥芯片</strong></p>
+<p>南桥用于连接 pci、pci-express、AGP 等低速设备，北桥用于连接高速设备，如内存</p>
+<blockquote>
+<p>IA32 体系系统中，因为用于存储端口号的寄存器是 16 位的，所以最大有 65536 个端口，即 0～65535。要是通过内存映射，端口就可以用 mov 指令来操作。但由于用的是独立编址，所以就不能把它当作</p>
+<p>内存来操作，因此 CPU 提供了专门的指令来干这事，in 和 out。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">in 指令用于从端口中读取数据，其一般形式是：</span><br><span class="line">（1）in al, dx；</span><br><span class="line">（2）in ax, dx; </span><br><span class="line">其中 al 和 ax 用来存储从端口获取的数据，dx 是指端口号</span><br><span class="line"></span><br><span class="line">目的操作数是用 al，还是 ax，取决于 dx 端口指代的寄存器是 8 位宽度，还是 16 位宽度</span><br><span class="line"></span><br><span class="line">（1）out dx, al；</span><br><span class="line">（2）out dx,ax；</span><br><span class="line">（3）out 立即数, al；</span><br><span class="line">（4）out 立即数, ax;</span><br></pre></td></tr></table></figure>
+
+<h3 id="显卡概述"><a href="#显卡概述" class="headerlink" title="显卡概述"></a>显卡概述</h3><p>mbr运行在实模式下，实模式下才有中断向量表，将来运行在保护模式下就不能调用BIOS中断0x10打印字符串</p>
+<h3 id="显存，显卡，显示器"><a href="#显存，显卡，显示器" class="headerlink" title="显存，显卡，显示器"></a>显存，显卡，显示器</h3><p>显卡的工作：不断读取显存中的内容，发送到屏幕上</p>
+<p>根据ASCLL编码往显示屏写入字符</p>
+<p><img src="/./images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20250204103652366.png" class="lazyload" data-srcset="/./images/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20250204103652366.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250204103652366"></p>
+<blockquote>
+<p>指令中的地址由地址总线寻址，指向某个介质，而不是都通过内存条</p>
+</blockquote>
+<p>显卡默认文本模式为80*25 一屏可以打印2000个字符，一行80个共25行</p>
+<p>打出彩色字符：ASCLL码一位，颜色一位，颜色RGB+I(1高亮)  </p>
+<img src="./images/操作系统.assets/image-20250204104421395.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250204104421395.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250204104421395" style="zoom:33%;" />
+
+<p>可用颜色：</p>
+<img src="./images/操作系统.assets/image-20250204104707501.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250204104707501.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250204104707501" style="zoom:33%;" />
+
+<h3 id="改进MBR，直接操作显卡"><a href="#改进MBR，直接操作显卡" class="headerlink" title="改进MBR，直接操作显卡"></a>改进MBR，直接操作显卡</h3><p>mbr.S</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">SECTION MBR vstart=0x7c00 ;标记一个MBR段 起始地址为0x7c00</span><br><span class="line">    mov ax, cs </span><br><span class="line">    mov ds, ax </span><br><span class="line">    mov es, ax </span><br><span class="line">    mov ss, ax </span><br><span class="line">    mov fs, ax </span><br><span class="line">    mov sp, 0x7c00 ;栈指针赋值，从7c00开始</span><br><span class="line">    mov ax, 0xb800 ;0xb800是文本模式下显存的段地址，后续通过gs访问显存</span><br><span class="line">    mov gs, ax</span><br><span class="line"></span><br><span class="line">mov ax, 0x600 ;滚动窗口</span><br><span class="line">mov bx, 0x700 ;黑底白字</span><br><span class="line">mov cx, 0 ;左上角行列坐标 (0,0)</span><br><span class="line">mov dx, 0x184f ;右下角行列坐标 (80,25)</span><br><span class="line">int 10h ;调用 BIOS 的 INT 10H 中断来清屏</span><br><span class="line"></span><br><span class="line">mov byte [gs:0x00],&#x27;1&#x27;   ;直接向显存写入数据，ASCLL码+属性</span><br><span class="line">mov byte [gs:0x01],0xA4</span><br><span class="line">mov byte [gs:0x02],&#x27; &#x27;</span><br><span class="line">mov byte [gs:0x03],0xA4</span><br><span class="line">mov byte [gs:0x04],&#x27;M&#x27;</span><br><span class="line">mov byte [gs:0x05],0xA4</span><br><span class="line">mov byte [gs:0x06],&#x27;B&#x27;</span><br><span class="line">mov byte [gs:0x07],0xA4</span><br><span class="line">mov byte [gs:0x08],&#x27;R&#x27;</span><br><span class="line">mov byte [gs:0x09],0xA4</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">jmp $ ;无限循环</span><br><span class="line"></span><br><span class="line">times 510-($-$$) db 0 ;填充剩余空间</span><br><span class="line">db 0x55,0xaa ;结束标志</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nasm -o mbr.bin mbr.S</span><br><span class="line">dd if=/root/tutuos/mbr.bin of=/root/tutuos/bochs-2.8-installed/hd60M.img bs=512 count=1 conv=notrunc</span><br><span class="line">bin/bochs -f bochsrc.disk -q</span><br></pre></td></tr></table></figure>
+
+<h2 id="bochs调试方法"><a href="#bochs调试方法" class="headerlink" title="bochs调试方法"></a>bochs调试方法</h2><h3 id="bochs一般用法"><a href="#bochs一般用法" class="headerlink" title="bochs一般用法"></a>bochs一般用法</h3>
+  </div>
+  
+  
+    
+    <div class='footer'>
+       <!-- 参考资料、相关资料等 -->
+      
+       <!-- 相关文章 -->
+      
+      <!-- 版权声明组件 -->
+      
+      <!-- 打赏组件 -->
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-03T20:45:53+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2025年3月3日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/&title=操作系统 - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qq.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/&title=操作系统 - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qzone.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/&title=操作系统 - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/weibo.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2025/03/02/source/Linux/Node.js/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>Node</p>
+          <p class='content'>#安装Nodejs
+使用nvm安装Node.jscurl -o- https://gitee.com/mirrors/nvm/raw/v0.39.3/install.sh | bash 使用镜像...</p>
+        </a>
+      
+      
+        <a class='next' href='/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/'>
+          <p class='title'>计算机组成原理<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>计算机系统概述##计算机发展历程
+什么是计算机系统？  硬件+软件(系统软件 应用软件)
+硬件的发展
+
+第一台计算机 ENIAC 1946 冯诺依曼顾问 逻辑元件 1.8w个电子管 机器语言编程...</p>
+        </a>
+      
+    </div>
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
+  
+
+
+  <article class="post white-box shadow floatable blur" id="comments">
+    <span hidden>
+      <meta itemprop="discussionUrl" content="/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html#comments">
+    </span>
+    <p ct><i class='fa-solid fa-comments'></i> 评论</p>
+    
+
+    <div id="layoutHelper-comments"></div>
+
+  </article>
+
+
+
+
+
+
+</div>
+<aside id='l_side' itemscope itemtype="http://schema.org/WPSideBar">
+  
+
+  
+    
+    
+      
+    
+  
+
+
+<div class="widget-sticky pjax">
+
+  
+  
+
+
+  <section class="widget toc-wrapper desktop mobile " id="toc-div" >
+    
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-text">环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%90%AF%E5%8A%A8%E7%9B%98"><span class="toc-text">设置启动盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8bochs"><span class="toc-text">启动bochs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%B8%A1%E5%88%B0c"><span class="toc-text">过渡到c</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEbochs"><span class="toc-text">配置bochs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8Cbochs"><span class="toc-text">运行bochs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%A8%A1%E5%BC%8F%E4%B8%8B1mb%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80"><span class="toc-text">实模式下1mb内存布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MBR"><span class="toc-text">MBR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A5%9E%E5%A5%87%E5%A5%BD%E7%94%A8%E7%9A%84-%E5%92%8C-%EF%BC%8C%E4%BB%A4%E4%BA%BA%E8%BF%B7%E6%83%91%E7%9A%84-section"><span class="toc-text">神奇好用的$和$$，令人迷惑的 section</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NASM%E7%AE%80%E5%8D%95%E7%94%A8%E6%B3%95"><span class="toc-text">NASM简单用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80-section-vstart%E6%B5%85%E5%B0%9D"><span class="toc-text">地址 section vstart浅尝</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%9C%B0%E5%9D%80"><span class="toc-text">什么是地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82-section"><span class="toc-text">节 section</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vstart"><span class="toc-text">vstart</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU%E7%9A%84%E5%AE%9E%E6%A8%A1%E5%BC%8F-%E6%B1%87%E7%BC%96%E8%AE%B2%E8%A7%A3"><span class="toc-text">CPU的实模式(汇编讲解)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E5%AF%B9%E6%98%BE%E7%A4%BA%E5%99%A8%E8%AF%B4%E7%82%B9%E4%BB%80%E4%B9%88"><span class="toc-text">直接对显示器说点什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU%E5%A6%82%E4%BD%95%E4%B8%8E%E5%A4%96%E8%AE%BE%E9%80%9A%E4%BF%A1-IO%E6%8E%A5%E5%8F%A3"><span class="toc-text">CPU如何与外设通信-IO接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%BE%E5%8D%A1%E6%A6%82%E8%BF%B0"><span class="toc-text">显卡概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%BE%E5%AD%98%EF%BC%8C%E6%98%BE%E5%8D%A1%EF%BC%8C%E6%98%BE%E7%A4%BA%E5%99%A8"><span class="toc-text">显存，显卡，显示器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9BMBR%EF%BC%8C%E7%9B%B4%E6%8E%A5%E6%93%8D%E4%BD%9C%E6%98%BE%E5%8D%A1"><span class="toc-text">改进MBR，直接操作显卡</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bochs%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95"><span class="toc-text">bochs调试方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#bochs%E4%B8%80%E8%88%AC%E7%94%A8%E6%B3%95"><span class="toc-text">bochs一般用法</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+  
+
+</div>
+
+
+<!-- 没有 pjax 占位会报错 万恶的 pjax -->
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <!-- Custom Files side begin -->
+  
+  <!-- Custom Files side end -->
+</aside>
+
+
+
+          <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+<pjax>
+<script>
+  window.pdata={}
+  pdata.ispage=true;
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+  pdata.commentConfig={};
+  //  see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs
+  
+    // header
+    var l_header=document.getElementById("l_header");
+    
+    l_header.classList.remove("show");
+    
+    
+      // cover
+      var cover_wrapper=document.querySelector('#l_cover .cover-wrapper');
+      var scroll_down=document.getElementById('scroll-down');
+      cover_wrapper.id="half";
+      cover_wrapper.style.display="";
+      scroll_down.style.display="none";
+    
+  
+</script>
+</pjax>
+        </div>
+        
+  
+  <footer class="footer clearfix"  itemscope itemtype="http://schema.org/WPFooter">
+    <br><br>
+    
+      
+        
+          <div><p><span id="lc-sv">博客内容遵循 tutulp-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</span></p>
+</div>
+        
+      
+    
+      
+        本站使用
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/#5.8.0" target="_blank" class="codename">Volantis</a>
+        作为主题
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © since 2025 tutulp</a></p>
+
+        </div>
+      
+    
+    <!-- Custom Files footer begin-->
+    
+    <!-- Custom Files footer end-->
+  </footer>
+
+
+        <a id="s-top" class="fa-solid fa-arrow-up fa-fw" href="/" onclick="return false;" title="top"></a>
+      </div>
+    </div>
+    <div>
+      <script>
+  /******************** volantis.dom ********************************/
+  // 页面选择器 将dom对象缓存起来 see: /source/js/app.js etc.
+  volantis.dom.bodyAnchor = volantis.dom.$(document.getElementById("safearea")); // 页面主体
+  volantis.dom.topBtn = volantis.dom.$(document.getElementById('s-top')); // 向上
+  volantis.dom.wrapper = volantis.dom.$(document.getElementById('wrapper')); // 整个导航栏
+  volantis.dom.coverAnchor = volantis.dom.$(document.querySelector('#l_cover .cover-wrapper')); // 1个
+  volantis.dom.switcher = volantis.dom.$(document.querySelector('#l_header .switcher .s-search')); // 搜索按钮   移动端 1个
+  volantis.dom.header = volantis.dom.$(document.getElementById('l_header')); // 移动端导航栏
+  volantis.dom.search = volantis.dom.$(document.querySelector('#l_header .m_search')); // 搜索框 桌面端 移动端 1个
+  volantis.dom.mPhoneList = volantis.dom.$(document.querySelectorAll('#l_header .m-phone .list-v')); //  手机端 子菜单 多个
+</script>
+
+<script>
+  
+  volantis.css("https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fortawesome/fontawesome-free/css/all.min.css");
+  
+  
+  
+</script>
+
+<!-- required -->
+
+
+<!-- internal -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+<!-- rightmenu要在darkmode之前（ToggleButton） darkmode要在comments之前（volantis.dark.push）-->
+
+
+
+<script>
+  function loadIssuesJS() {
+    
+      const sites_api = document.getElementById('sites-api');
+      if (sites_api != undefined && typeof SitesJS === 'undefined') {
+        volantis.js("/js/plugins/tags/sites.js")
+      }
+    
+    
+      const friends_api = document.getElementById('friends-api');
+      if (friends_api != undefined && typeof FriendsJS === 'undefined') {
+        volantis.js("/js/plugins/tags/friends.js")
+      }
+    
+    
+      const contributors_api = document.getElementById('contributors-api');
+      if (contributors_api != undefined && typeof ContributorsJS === 'undefined') {
+        volantis.js("/js/plugins/tags/contributors.js")
+      }
+    
+  };
+  loadIssuesJS()
+  volantis.pjax.push(()=>{
+    loadIssuesJS();
+  })
+
+</script>
+
+
+
+
+  <script defer src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/vanilla-lazyload/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
+  
+
+<script>
+  window.FPConfig = {
+	delay: 0,
+	ignoreKeywords: ["#"],
+	maxRPS: 6,
+	hoverDelay: 0
+  };
+</script>
+<script defer src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/flying-pages/flying-pages.min.js"></script>
+
+
+
+
+
+
+
+
+
+      <script>
+  volantis.layoutHelper("comments",`<div id="giscus_container"></div>`)
+
+  volantis.giscus = {};
+
+  function check_giscus() {
+    if (volantis.dark.mode === "dark") {
+      volantis.giscus.Theme = 'dark';
+    } else {
+      volantis.giscus.Theme = 'light';
+    }
+
+    return document.getElementById("giscus_container");
+  }
+
+  function pjax_giscus() {
+    const HEAD = check_giscus();
+    if (!HEAD) return;
+    let cfg = Object.assign({"theme":{"light":"light","dark":"dark"}},pdata.commentConfig)
+    const script = document.createElement('script');
+    script.setAttribute('src', 'https://giscus.app/client.js');
+    Object.keys(cfg).forEach(k=>{
+      if (k != "theme") {
+        script.setAttribute('data-'+k, cfg[k]);
+      }
+    })
+    script.setAttribute('data-theme', volantis.giscus.Theme);
+    script.setAttribute('crossorigin', "anonymous");
+    HEAD.appendChild(script);
+  }
+
+  function dark_giscus() {
+    const HEAD = check_giscus();
+    if (!HEAD) return;
+
+    const message = {
+      setConfig: {
+        theme: volantis.giscus.Theme
+      }
+    };
+    const giscusIframe = document.querySelector('iframe.giscus-frame');
+    giscusIframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+  }
+  pjax_giscus();
+  volantis.pjax.push(pjax_giscus);
+  volantis.dark.push(dark_giscus);
+</script>
+
+    
+
+
+
+
+
+<!-- optional -->
+
+  <script>
+  const SearchServiceDataPathRoot = ("/" || "/").endsWith("/") ?
+    "/" || "/" :
+    "//" || "/";
+  const SearchServiceDataPath = SearchServiceDataPathRoot + "content.json";
+
+  function loadSearchScript() {
+    // see: layout/_partial/scripts/_ctrl/cdnCtrl.ejs
+    return volantis.js("/js/search/hexo.js");
+  }
+
+  function loadSearchService() {
+    loadSearchScript();
+    document.querySelectorAll(".input.u-search-input").forEach((e) => {
+      e.removeEventListener("focus", loadSearchService, false);
+    });
+
+    document.querySelectorAll(".u-search-form").forEach((e) => {
+      e.addEventListener("submit", (event) => {
+        event.preventDefault();
+      }, false);
+    });
+  }
+
+  // 打开并搜索 字符串 s
+  function OpenSearch(s) {
+    if (typeof SearchService === 'undefined')
+      loadSearchScript().then(() => {
+        SearchService.setQueryText(s);
+        SearchService.search();
+      });
+    else {
+      SearchService.setQueryText(s);
+      SearchService.search();
+    }
+  }
+
+  // 访问含有 ?s=xxx  的链接时打开搜索 // 与搜索引擎 structured data 相关: /scripts/helpers/structured-data/lib/config.js
+  if (window.location.search && /^\?s=/g.test(window.location.search)) {
+    let queryText = decodeURI(window.location.search)
+      .replace(/\ /g, "-")
+      .replace(/^\?s=/g, "");
+    OpenSearch(queryText);
+  }
+
+  // 搜索输入框获取焦点时加载搜索
+  document.querySelectorAll(".input.u-search-input").forEach((e) => {
+    e.addEventListener("focus", loadSearchService, false);
+  });
+</script>
+
+
+
+
+
+
+
+  <script>
+
+
+
+  function pjax_highlightjs_copyCode(){
+    if (!(document.querySelector(".highlight .code pre") ||
+      document.querySelector(".article pre code"))) {
+      return;
+    }
+    VolantisApp.utilCopyCode(".highlight .code pre, .article pre code")
+  }
+  volantis.requestAnimationFrame(pjax_highlightjs_copyCode)
+  volantis.pjax.push(pjax_highlightjs_copyCode)
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+  function load_swiper() {
+    if (!document.querySelectorAll(".swiper-container")[0]) return;
+    volantis.css("https://unpkg.com/volantis-static@0.0.1654736714924/libs/swiper/swiper-bundle.min.css");
+    volantis.js("https://unpkg.com/volantis-static@0.0.1654736714924/libs/swiper/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    volantis.swiper = new Swiper('.swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  }
+
+  volantis.pjax.push(() => {
+    if (!document.querySelectorAll(".swiper-container")[0]) return;
+    if (typeof volantis.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+
+
+<!-- pjax 标签必须存在于所有页面 否则 pjax error -->
+<pjax>
+
+</pjax>
+
+<script>
+  function listennSidebarTOC() {
+    const navItems = document.querySelectorAll(".toc li");
+    if (!navItems.length) return;
+    let targets = []
+    const sections = [...navItems].map((element) => {
+      const link = element.querySelector(".toc-link");
+      const target = document.getElementById(
+        decodeURI(link.getAttribute("href")).replace("#", "")
+      );
+      targets.push(target)
+      // 解除 a 标签 href 的 锚点定位, a 标签 href 的 锚点定位 会随机启用?? 产生错位???
+      link.setAttribute("onclick","return false;")
+      link.setAttribute("toc-action","toc-"+decodeURI(link.getAttribute("href")).replace("#", ""))
+      link.setAttribute("href","/")
+      // 配置 点击 触发新的锚点定位
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        // 这里的 addTop 是通过错位使得 toc 自动展开.
+        volantis.scroll.to(target,{addTop: 5, observer:true})
+        // Anchor id
+        history.pushState(null, document.title, "#" + target.id);
+      });
+      return target;
+    });
+
+    function activateNavByIndex(target) {
+      if (target.classList.contains("active-current")) return;
+
+      document.querySelectorAll(".toc .active").forEach((element) => {
+        element.classList.remove("active", "active-current");
+      });
+      target.classList.add("active", "active-current");
+      let parent = target.parentNode;
+      while (!parent.matches(".toc")) {
+        if (parent.matches("li")) parent.classList.add("active");
+        parent = parent.parentNode;
+      }
+    }
+
+    // 方案一：
+    volantis.activateNavIndex=0
+    activateNavByIndex(navItems[volantis.activateNavIndex])
+    volantis.scroll.push(()=>{
+      if (targets[0].getBoundingClientRect().top >= 0) {
+        volantis.activateNavIndex = 0
+      }else if (targets[targets.length-1].getBoundingClientRect().top < 0) {
+        volantis.activateNavIndex = targets.length-1
+      } else {
+        for (let index = 0; index < targets.length; index++) {
+          const target0 = targets[index];
+          const target1 = targets[(index+1)%targets.length];
+          if (target0.getBoundingClientRect().top < 0&&target1.getBoundingClientRect().top >= 0) {
+            volantis.activateNavIndex=index
+            break;
+          }
+        }
+      }
+      activateNavByIndex(navItems[volantis.activateNavIndex])
+    })
+
+    // 方案二：
+    // IntersectionObserver 不是完美精确到像素级别 也不是低延时性的
+    // function findIndex(entries) {
+    //   let index = 0;
+    //   let entry = entries[index];
+    //   if (entry.boundingClientRect.top > 0) {
+    //     index = sections.indexOf(entry.target);
+    //     return index === 0 ? 0 : index - 1;
+    //   }
+    //   for (; index < entries.length; index++) {
+    //     if (entries[index].boundingClientRect.top <= 0) {
+    //       entry = entries[index];
+    //     } else {
+    //       return sections.indexOf(entry.target);
+    //     }
+    //   }
+    //   return sections.indexOf(entry.target);
+    // }
+    // function createIntersectionObserver(marginTop) {
+    //   marginTop = Math.floor(marginTop + 10000);
+    //   let intersectionObserver = new IntersectionObserver(
+    //     (entries, observe) => {
+    //       let scrollHeight = document.documentElement.scrollHeight;
+    //       if (scrollHeight > marginTop) {
+    //         observe.disconnect();
+    //         createIntersectionObserver(scrollHeight);
+    //         return;
+    //       }
+    //       let index = findIndex(entries);
+    //       activateNavByIndex(navItems[index]);
+    //     }, {
+    //       rootMargin: marginTop + "px 0px -100% 0px",
+    //       threshold: 0,
+    //     }
+    //   );
+    //   sections.forEach((element) => {
+    //     element && intersectionObserver.observe(element);
+    //   });
+    // }
+    // createIntersectionObserver(document.documentElement.scrollHeight);
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    volantis.requestAnimationFrame(listennSidebarTOC)
+  });
+  document.addEventListener("pjax:success", ()=>{
+    volantis.requestAnimationFrame(listennSidebarTOC)
+  });
+</script>
+
+
+
+<script>
+  document.onreadystatechange = function () {
+    if (document.readyState == 'complete') {
+      // 页面加载完毕 样式加载失败，或是当前网速慢，或是开启了省流模式
+      const { saveData, effectiveType } = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {}
+      if (getComputedStyle(document.querySelector("#safearea"), null)["display"] == "none" || saveData || /2g/.test(effectiveType)) {
+        document.querySelectorAll(".reveal").forEach(function (e) {
+          e.style["opacity"] = "1";
+        });
+        document.querySelector("#safearea").style["display"] = "block";
+      }
+    }
+  }
+</script>
+
+
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/四大件/","name":"四大件"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2025/03/02/source/基础四大件/操作系统/","name":"操作系统"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"操作系统","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/","wordCount":0,"datePublished":"2025-03-01T16:00:00.000Z","dateModified":"2025-03-03T12:45:53.375Z","articleSection":"四大件","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+
+
+
+      
+        <!--
+  pjax重载区域接口：
+  1.  <pjax></pjax> 标签 pjax 标签必须存在于所有页面 否则 pjax error
+  2.  script[data-pjax]
+  3.  .pjax-reload script
+  4.  .pjax
+-->
+
+
+
+<script src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/pjax/pjax.min.js"></script>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox]):not([onclick="return false;"]):not([onclick="return!1"]):not([target="_blank"]):not([target="view_window"]):not([href$=".xml"])',
+        selectors: [
+          "head title",
+          "head meta[name=keywords]",
+          "head meta[name=description]",
+          
+          "#l_main",
+          "#pjax-header-nav-list",
+          ".pjax",
+          "pjax", // <pjax></pjax> 标签
+          "script[data-pjax], .pjax-reload script" // script标签添加data-pjax 或 script标签外层添加.pjax-reload 的script代码段重载
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000,
+        
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
+      volantis.pjax.method.send.start();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
+      volantis.pjax.method.complete.start();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      if(volantis.debug) {
+        console.error(e);
+        console.log('pjax error: \n' + JSON.stringify(e));
+      }else{
+        // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+        volantis.pjax.method.error.start();
+        window.location.href = e.triggerElement.href;
+      }
+    });
+</script>
+
+      
+    </div>
+    <!-- import body_end begin-->
+    <!-- import body_end end-->
+    <!-- Custom Files bodyEnd begin-->
+    
+    <!-- Custom Files bodyEnd end-->
+    <!-- front-matter body_end begin -->
+    <!-- front-matter body_end end -->
+  </body>
+</html>

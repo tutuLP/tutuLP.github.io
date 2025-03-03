@@ -1,0 +1,3867 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/#5.8.0'>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="Volantis" content="5.8.0">
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+  <link rel="canonical" href="http://example.com/2025/03/02/source/linux/linix高性能服务器编程/tcpip协议详解/"/>
+  <!-- 渲染优化 -->
+    <meta http-equiv='x-dns-prefetch-control' content='on' />
+      <link rel='dns-prefetch' href='https://unpkg.com'>
+      <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' https:; block-all-mixed-content; base-uri 'self' https:; form-action 'self' https:; worker-src 'self' https:; connect-src 'self' https: *; img-src 'self' data: https: *; media-src 'self' https: *; font-src 'self' data: https: *; frame-src 'self' https: *; manifest-src 'self' https: *; child-src https:; script-src 'self' https: 'unsafe-inline' *; style-src 'self' https: 'unsafe-inline' *; ">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <!-- import head_begin begin -->
+  <!-- import head_begin end -->
+  <!-- Custom Files headBegin begin-->
+  
+  <!-- Custom Files headBegin end-->
+  <!-- front-matter head_begin begin -->
+  <!-- front-matter head_begin end -->
+  <link rel="preload" href="/css/style.css" as="style">
+  <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <!-- feed -->
+  <!-- 页面元数据 -->
+  <title>TCP/IP协议详解 - tutulp's blog</title>
+  <meta name="keywords" content="null">
+  <meta desc name="description" content="tutulp的博客网站 - tutulp - tutulp's blog">
+  
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP&#x2F;IP协议详解">
+<meta property="og:url" content="http://example.com/2025/03/02/source/Linux/Linix%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/TCPIP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="tutulp&#39;s blog">
+<meta property="og:description" content="Linux高性能服务器编程  -游双著 ​						作者充分理解巨作《TCP&#x2F;IP协议详解》（三卷本），以及《UNIX网络编程》（两卷本）后融入自己的理解编写 ​						主题：&#x3D;&#x3D;如何通过各种手段编写高性能的服务器程序&#x3D;&#x3D; 如何提高服务器程序性能？ 比如使用“池”以牺牲空间换取效率，使用零拷贝函数以避免内核和用户空间的切换等； 其次，介绍一些">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2025-03-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-03T12:45:53.382Z">
+<meta property="article:author" content="tutulp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+  <style>
+    /* 首屏样式 */
+    #safearea {
+  display: none;
+}
+:root {
+  --color-site-body: #f4f4f4;
+  --color-site-bg: #f4f4f4;
+  --color-site-inner: #fff;
+  --color-site-footer: #666;
+  --color-card: #fff;
+  --color-text: #444;
+  --color-block: #f6f6f6;
+  --color-inlinecode: #c74f00;
+  --color-codeblock: #fff7ea;
+  --color-h1: #3a3a3a;
+  --color-h2: #3a3a3a;
+  --color-h3: #333;
+  --color-h4: #444;
+  --color-h5: #555;
+  --color-h6: #666;
+  --color-p: #444;
+  --color-list: #666;
+  --color-list-hl: #30ad91;
+  --color-meta: #888;
+  --color-read-bkg: #e0d8c8;
+  --color-read-post: #f8f1e2;
+  --color-copyright-bkg: #f5f5f5;
+}
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+*::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+*::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: #3dd9b6;
+  cursor: pointer;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #ff5722;
+}
+html {
+  color: var(--color-text);
+  width: 100%;
+  height: 100%;
+  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-size: 16px;
+}
+html >::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+html >::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+html >::-webkit-scrollbar-thumb {
+  background: #54b5a0 linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+  cursor: pointer;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+html >::-webkit-scrollbar-thumb:hover {
+  background: #54b5a0 linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+}
+body {
+  background-color: var(--color-site-body);
+  text-rendering: optimizelegibility;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body.modal-active {
+  overflow: hidden;
+}
+@media screen and (max-width: 680px) {
+  body.modal-active {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+a {
+  color: #2092ec;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+a:hover {
+  color: #ff5722;
+}
+a:active,
+a:hover {
+  outline: 0;
+}
+ul,
+ol {
+  padding-left: 0;
+}
+ul li,
+ol li {
+  list-style: none;
+}
+header {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+img {
+  border: 0;
+  background: none;
+  max-width: 100%;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  height: 0;
+  border: 0;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  border-bottom: 1px solid rgba(68,68,68,0.1);
+}
+button,
+input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+button {
+  overflow: visible;
+  text-transform: none;
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+@supports (backdrop-filter: blur(20px)) {
+  .blur {
+    background: rgba(255,255,255,0.9) !important;
+    backdrop-filter: saturate(200%) blur(20px);
+  }
+}
+.shadow {
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+}
+.shadow.floatable {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.shadow.floatable:hover {
+  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.1), 0 4px 8px 0px rgba(0,0,0,0.1), 0 8px 16px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 2px 4px 0px rgba(0,0,0,0.1), 0 4px 8px 0px rgba(0,0,0,0.1), 0 8px 16px 0px rgba(0,0,0,0.1);
+}
+#l_cover {
+  min-height: 64px;
+}
+.cover-wrapper {
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  height: 100vh;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -khtml-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -o-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  color: var(--color-site-inner);
+  padding: 0 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: -100px;
+}
+.cover-wrapper .cover-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+}
+.cover-wrapper .cover-bg.lazyload:not(.loaded) {
+  opacity: 0;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+}
+.cover-wrapper .cover-bg.lazyload.loaded {
+  animation-delay: 0s;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+}
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.cover-wrapper .cover-body {
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.cover-wrapper#full {
+  height: calc(100vh + 100px);
+  padding-bottom: 100px;
+}
+.cover-wrapper#half {
+  max-height: 640px;
+  min-height: 400px;
+  height: calc(36vh - 64px + 200px);
+}
+.cover-wrapper #scroll-down {
+  width: 100%;
+  height: 64px;
+  position: absolute;
+  bottom: 100px;
+  text-align: center;
+  cursor: pointer;
+}
+.cover-wrapper #scroll-down .scroll-down-effects {
+  color: #fff;
+  font-size: 24px;
+  line-height: 64px;
+  position: absolute;
+  width: 24px;
+  left: calc(50% - 12px);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  animation: scroll-down-effect 1.5s infinite;
+  -webkit-animation: scroll-down-effect 1.5s infinite;
+  -khtml-animation: scroll-down-effect 1.5s infinite;
+  -moz-animation: scroll-down-effect 1.5s infinite;
+  -o-animation: scroll-down-effect 1.5s infinite;
+  -ms-animation: scroll-down-effect 1.5s infinite;
+}
+@-moz-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-webkit-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-o-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.cover-wrapper .cover-body {
+  margin-top: 64px;
+  margin-bottom: 100px;
+}
+.cover-wrapper .cover-body,
+.cover-wrapper .cover-body .top,
+.cover-wrapper .cover-body .bottom {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  max-width: 100%;
+}
+.cover-wrapper .cover-body .bottom {
+  margin-top: 32px;
+}
+.cover-wrapper .cover-body .title {
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+  font-size: 3.125rem;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.cover-wrapper .cover-body .subtitle {
+  font-size: 20px;
+}
+.cover-wrapper .cover-body .logo {
+  max-height: 120px;
+  max-width: calc(100% - 4 * 16px);
+}
+@media screen and (min-height: 1024px) {
+  .cover-wrapper .cover-body .title {
+    font-size: 3rem;
+  }
+  .cover-wrapper .cover-body .subtitle {
+    font-size: 1.05rem;
+  }
+  .cover-wrapper .cover-body .logo {
+    max-height: 150px;
+  }
+}
+.cover-wrapper .cover-body .m_search {
+  position: relative;
+  max-width: calc(100% - 16px);
+  width: 320px;
+  vertical-align: middle;
+}
+.cover-wrapper .cover-body .m_search .form {
+  position: relative;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  width: 100%;
+}
+.cover-wrapper .cover-body .m_search .icon,
+.cover-wrapper .cover-body .m_search .input {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.cover-wrapper .cover-body .m_search .icon {
+  position: absolute;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  line-height: 2.5rem;
+  width: 32px;
+  top: 0;
+  left: 5px;
+  color: rgba(68,68,68,0.75);
+}
+.cover-wrapper .cover-body .m_search .input {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  height: 2.5rem;
+  width: 100%;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-size: 0.875rem;
+  -webkit-appearance: none;
+  padding-left: 36px;
+  border-radius: 1.4rem;
+  -webkit-border-radius: 1.4rem;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  border: none;
+  color: var(--color-text);
+}
+@media screen and (max-width: 500px) {
+  .cover-wrapper .cover-body .m_search .input {
+    padding-left: 36px;
+  }
+}
+.cover-wrapper .cover-body .m_search .input:hover {
+  background: rgba(255,255,255,0.8);
+}
+.cover-wrapper .cover-body .m_search .input:focus {
+  background: #fff;
+}
+.cover-wrapper .list-h {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -khtml-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  align-items: stretch;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.cover-wrapper .list-h a {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1 0;
+  -ms-flex: 1 0;
+  flex: 1 0;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  font-weight: 600;
+}
+.cover-wrapper .list-h a img {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  margin: 4px;
+  min-width: 40px;
+  max-width: 44px;
+}
+@media screen and (max-width: 768px) {
+  .cover-wrapper .list-h a img {
+    min-width: 36px;
+    max-width: 40px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .cover-wrapper .list-h a img {
+    margin: 2px 4px;
+    min-width: 32px;
+    max-width: 36px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .cover-wrapper .list-h a img {
+    min-width: 28px;
+    max-width: 32px;
+  }
+}
+.cover-wrapper {
+  max-width: 100%;
+}
+.cover-wrapper.search .bottom .menu {
+  margin-top: 16px;
+}
+.cover-wrapper.search .bottom .menu .list-h a {
+  white-space: nowrap;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  align-items: baseline;
+  padding: 2px;
+  margin: 4px;
+  color: var(--color-site-inner);
+  opacity: 0.75;
+  -webkit-opacity: 0.75;
+  -moz-opacity: 0.75;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  border-bottom: 2px solid transparent;
+}
+.cover-wrapper.search .bottom .menu .list-h a i {
+  margin-right: 4px;
+}
+.cover-wrapper.search .bottom .menu .list-h a p {
+  font-size: 0.9375rem;
+}
+.cover-wrapper.search .bottom .menu .list-h a:hover,
+.cover-wrapper.search .bottom .menu .list-h a.active,
+.cover-wrapper.search .bottom .menu .list-h a:active {
+  opacity: 1;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  border-bottom: 2px solid var(--color-site-inner);
+}
+@font-face {
+  font-family: 'UbuntuMono';
+  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-weight: 'normal';
+  font-style: 'normal';
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Varela Round';
+  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf");
+  font-weight: 'normal';
+  font-style: 'normal';
+  font-display: swap;
+}
+.l_header {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  width: 100%;
+  height: 64px;
+  background: var(--color-card);
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+}
+.l_header.auto {
+  transition: opacity 0.4s ease;
+  -webkit-transition: opacity 0.4s ease;
+  -khtml-transition: opacity 0.4s ease;
+  -moz-transition: opacity 0.4s ease;
+  -o-transition: opacity 0.4s ease;
+  -ms-transition: opacity 0.4s ease;
+  visibility: hidden;
+}
+.l_header.auto.show {
+  opacity: 1 !important;
+  -webkit-opacity: 1 !important;
+  -moz-opacity: 1 !important;
+  visibility: visible;
+}
+.l_header .container {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+.l_header #wrapper {
+  height: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.l_header #wrapper .nav-main,
+.l_header #wrapper .nav-sub {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -khtml-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -o-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -khtml-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -o-justify-content: space-between;
+  -ms-justify-content: space-between;
+  align-items: center;
+}
+.l_header #wrapper .nav-main {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.l_header #wrapper.sub .nav-main {
+  transform: translateY(-64px);
+  -webkit-transform: translateY(-64px);
+  -khtml-transform: translateY(-64px);
+  -moz-transform: translateY(-64px);
+  -o-transform: translateY(-64px);
+  -ms-transform: translateY(-64px);
+}
+.l_header #wrapper .nav-sub {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  opacity: 0;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  height: 64px;
+  width: calc(100% - 2 * 16px);
+  position: absolute;
+}
+.l_header #wrapper .nav-sub ::-webkit-scrollbar {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+}
+@media screen and (min-width: 2048px) {
+  .l_header #wrapper .nav-sub {
+    max-width: 55vw;
+    margin: auto;
+  }
+}
+.l_header #wrapper.sub .nav-sub {
+  opacity: 1;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+}
+.l_header #wrapper .title {
+  position: relative;
+  color: var(--color-text);
+  padding-left: 24px;
+  max-height: 64px;
+}
+.l_header #wrapper .nav-main .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  line-height: 64px;
+  padding: 0 24px;
+  font-size: 1.25rem;
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+}
+.l_header #wrapper .nav-main .title img {
+  height: 64px;
+}
+.l_header .nav-sub {
+  max-width: 1080px;
+  margin: auto;
+}
+.l_header .nav-sub .title {
+  font-weight: bold;
+  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  line-height: 1.2;
+  max-height: 64px;
+  white-space: normal;
+  flex-shrink: 1;
+}
+.l_header .switcher {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  line-height: 64px;
+  align-items: center;
+}
+.l_header .switcher .s-toc {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .l_header .switcher .s-toc {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    display: flex;
+  }
+}
+.l_header .switcher >li {
+  height: 48px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  margin: 2px;
+}
+@media screen and (max-width: 500px) {
+  .l_header .switcher >li {
+    margin: 0 1px;
+    height: 48px;
+  }
+}
+.l_header .switcher >li >a {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0.85em 1.1em;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  border: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  color: #3dd9b6;
+}
+.l_header .switcher >li >a:hover {
+  border: none;
+}
+.l_header .switcher >li >a.active,
+.l_header .switcher >li >a:active {
+  border: none;
+  background: var(--color-site-bg);
+}
+@media screen and (max-width: 500px) {
+  .l_header .switcher >li >a {
+    width: 36px;
+    height: 48px;
+  }
+}
+.l_header .nav-sub .switcher {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+}
+.l_header .m_search {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  height: 64px;
+  width: 240px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+@media screen and (max-width: 1024px) {
+  .l_header .m_search {
+    width: 44px;
+    min-width: 44px;
+  }
+  .l_header .m_search input::placeholder {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+  }
+  .l_header .m_search:hover {
+    width: 240px;
+  }
+  .l_header .m_search:hover input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@media screen and (min-width: 500px) {
+  .l_header .m_search:hover .input {
+    width: 100%;
+  }
+  .l_header .m_search:hover .input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search {
+    min-width: 0;
+  }
+  .l_header .m_search input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.l_header .m_search .form {
+  position: relative;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.l_header .m_search .icon {
+  position: absolute;
+  width: 36px;
+  left: 5px;
+  color: var(--color-meta);
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search .icon {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: none;
+  }
+}
+.l_header .m_search .input {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: 1.3;
+  width: 100%;
+  color: var(--color-text);
+  background: #fafafa;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding-left: 40px;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+@media screen and (min-width: 500px) {
+  .l_header .m_search .input:focus {
+    box-shadow: 0 4px 8px 0px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 4px 8px 0px rgba(0,0,0,0.1);
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search .input {
+    background: var(--color-block);
+    padding-left: 8px;
+    border: none;
+  }
+  .l_header .m_search .input:hover,
+  .l_header .m_search .input:focus {
+    border: none;
+  }
+}
+@media (max-width: 500px) {
+  .l_header .m_search {
+    left: 0;
+    width: 0;
+    overflow: hidden;
+    position: absolute;
+    background: #fff;
+    transition: all 0.28s ease;
+    -webkit-transition: all 0.28s ease;
+    -khtml-transition: all 0.28s ease;
+    -moz-transition: all 0.28s ease;
+    -o-transition: all 0.28s ease;
+    -ms-transition: all 0.28s ease;
+  }
+  .l_header .m_search .input {
+    border-radius: 32px;
+    -webkit-border-radius: 32px;
+    margin-left: 16px;
+    padding-left: 16px;
+  }
+  .l_header.z_search-open .m_search {
+    width: 100%;
+  }
+  .l_header.z_search-open .m_search .input {
+    width: calc(100% - 120px);
+  }
+}
+ul.m-pc >li>a {
+  color: inherit;
+  border-bottom: 2px solid transparent;
+}
+ul.m-pc >li>a:active,
+ul.m-pc >li>a.active {
+  border-bottom: 2px solid #3dd9b6;
+}
+ul.m-pc li:hover >ul.list-v,
+ul.list-v li:hover >ul.list-v {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+ul.nav-list-h {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  align-items: stretch;
+}
+ul.nav-list-h>li {
+  position: relative;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  height: 100%;
+  line-height: 2.4;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+ul.nav-list-h>li >a {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 600;
+}
+ul.list-v {
+  z-index: 1;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  position: absolute;
+  background: var(--color-card);
+  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.08), 0 4px 8px 0px rgba(0,0,0,0.08), 0 8px 16px 0px rgba(0,0,0,0.08);
+  -webkit-box-shadow: 0 2px 4px 0px rgba(0,0,0,0.08), 0 4px 8px 0px rgba(0,0,0,0.08), 0 8px 16px 0px rgba(0,0,0,0.08);
+  margin-top: -6px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  padding: 8px 0;
+}
+ul.list-v.show {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+ul.list-v hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+ul.list-v >li {
+  white-space: nowrap;
+  word-break: keep-all;
+}
+ul.list-v >li.header {
+  font-size: 0.78125rem;
+  font-weight: bold;
+  line-height: 2em;
+  color: var(--color-meta);
+  margin: 8px 16px 4px;
+}
+ul.list-v >li.header i {
+  margin-right: 8px;
+}
+ul.list-v >li ul {
+  margin-left: 0;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  margin-top: -40px;
+}
+ul.list-v .aplayer-container {
+  min-height: 64px;
+  padding: 6px 16px;
+}
+ul.list-v >li>a {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  color: var(--color-list);
+  font-size: 0.875rem;
+  font-weight: bold;
+  line-height: 36px;
+  padding: 0 20px 0 16px;
+  text-overflow: ellipsis;
+  margin: 0 4px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+@media screen and (max-width: 1024px) {
+  ul.list-v >li>a {
+    line-height: 40px;
+  }
+}
+ul.list-v >li>a >i {
+  margin-right: 8px;
+}
+ul.list-v >li>a:active,
+ul.list-v >li>a.active {
+  color: var(--color-list-hl);
+}
+ul.list-v >li>a:hover {
+  color: var(--color-list-hl);
+  background: var(--color-site-bg);
+}
+.l_header .menu >ul>li>a {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  padding: 0 8px;
+}
+.l_header .menu >ul>li>a >i {
+  margin-right: 4px;
+}
+.l_header ul.nav-list-h>li {
+  color: var(--color-list);
+  line-height: 64px;
+}
+.l_header ul.nav-list-h>li >a {
+  max-height: 64px;
+  overflow: hidden;
+  color: inherit;
+}
+.l_header ul.nav-list-h>li >a:active,
+.l_header ul.nav-list-h>li >a.active {
+  color: #3dd9b6;
+}
+.l_header ul.nav-list-h>li:hover>a {
+  color: var(--color-list-hl);
+}
+.l_header ul.nav-list-h>li i.music {
+  animation: rotate-effect 1.5s linear infinite;
+  -webkit-animation: rotate-effect 1.5s linear infinite;
+  -khtml-animation: rotate-effect 1.5s linear infinite;
+  -moz-animation: rotate-effect 1.5s linear infinite;
+  -o-animation: rotate-effect 1.5s linear infinite;
+  -ms-animation: rotate-effect 1.5s linear infinite;
+}
+@-moz-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@-o-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+.menu-phone li ul.list-v {
+  right: calc(100% - 0.5 * 16px);
+}
+.menu-phone li ul.list-v ul {
+  right: calc(100% - 0.5 * 16px);
+}
+#wrapper {
+  max-width: 1080px;
+  margin: auto;
+}
+@media screen and (min-width: 2048px) {
+  #wrapper {
+    max-width: 55vw;
+  }
+}
+#wrapper .menu {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1 1;
+  -ms-flex: 1 1;
+  flex: 1 1;
+  margin: 0 16px 0 0;
+}
+#wrapper .menu .list-v ul {
+  left: calc(100% - 0.5 * 16px);
+}
+.menu-phone {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  margin-top: 16px;
+  right: 8px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.menu-phone ul {
+  right: calc(100% - 0.5 * 16px);
+}
+@media screen and (max-width: 500px) {
+  .menu-phone {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: block;
+  }
+}
+.l_header {
+  max-width: 65vw;
+  left: calc((100% - 65vw) * 0.5);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+@media screen and (max-width: 2048px) {
+  .l_header {
+    max-width: 1112px;
+    left: calc((100% - 1112px) * 0.5);
+  }
+}
+@media screen and (max-width: 1112px) {
+  .l_header {
+    left: 0;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .l_header #wrapper .nav-main .title {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .l_header #wrapper .nav-sub {
+    width: 100%;
+  }
+  .l_header #wrapper .nav-sub .title {
+    overflow-y: scroll;
+    margin-top: 2px;
+    padding: 8px 16px;
+  }
+  .l_header #wrapper .switcher {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    display: flex;
+    margin-right: 8px;
+  }
+  .l_header .menu {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: none;
+  }
+}
+@media screen and (max-width: 500px) {
+  .list-v li {
+    max-width: 270px;
+  }
+}
+#u-search {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 60px 20px;
+  z-index: 1001;
+}
+@media screen and (max-width: 680px) {
+  #u-search {
+    padding: 0px;
+  }
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  
+<script>
+if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
+    document.write(
+	'<style>'+
+		'html{'+
+			'overflow-x: hidden !important;'+
+			'overflow-y: hidden !important;'+
+		'}'+
+		'.kill-ie{'+
+			'text-align:center;'+
+			'height: 100%;'+
+			'margin-top: 15%;'+
+			'margin-bottom: 5500%;'+
+		'}'+
+    '.kill-t{'+
+      'font-size: 2rem;'+
+    '}'+
+    '.kill-c{'+
+      'font-size: 1.2rem;'+
+    '}'+
+		'#l_header,#l_body{'+
+			'display: none;'+
+		'}'+
+	'</style>'+
+    '<div class="kill-ie">'+
+        `<span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>`+
+        `<span class="kill-c">微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</span><br/>`+
+        `<a target="_blank" rel="noopener" href="https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/"><strong>了解详情 ></strong></a>`+
+    '</div>');
+</script>
+
+
+<noscript>
+	<style>
+		html{
+			overflow-x: hidden !important;
+			overflow-y: hidden !important;
+		}
+		.kill-noscript{
+			text-align:center;
+			height: 100%;
+			margin-top: 15%;
+			margin-bottom: 5500%;
+		}
+    .kill-t{
+      font-size: 2rem;
+    }
+    .kill-c{
+      font-size: 1.2rem;
+    }
+		#l_header,#l_body{
+			display: none;
+		}
+	</style>
+    <div class="kill-noscript">
+        <span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>
+        <span class="kill-c">本页面需要浏览器支持（启用）JavaScript</span><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+    </div>
+</noscript>
+
+
+  <script>
+  /************这个文件存放不需要重载的全局变量和全局函数*********/
+  window.volantis = {}; // volantis 全局变量
+  volantis.debug = "env"; // 调试模式
+  volantis.dom = {}; // 页面Dom see: /source/js/app.js etc.
+
+  volantis.GLOBAL_CONFIG ={
+    debug: "env",
+    cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
+    default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
+    lastupdate: new Date(1741012891758),
+    sidebar: {
+      for_page: ["blogger","category","tagcloud","donate"],
+      for_post: ["toc"],
+      webinfo: {
+        lastupd: {
+          enable: true,
+          friendlyShow: true
+        },
+        runtime: {
+          data: "2020/01/01",
+          unit: "天"
+        }
+      }
+    },
+    plugins: {
+      message: {"enable":true,"css":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/izitoast/dist/css/iziToast.min.css","js":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/izitoast/dist/js/iziToast.min.js","icon":{"default":"fa-solid fa-info-circle light-blue","quection":"fa-solid fa-question-circle light-blue"},"time":{"default":5000,"quection":20000},"position":"topRight","transitionIn":"bounceInLeft","transitionOut":"fadeOutRight","titleColor":"var(--color-text)","messageColor":"var(--color-text)","backgroundColor":"var(--color-card)","zindex":2147483647,"copyright":{"enable":true,"title":"知识共享许可协议","message":"请遵守 CC BY-NC-SA 4.0 协议。","icon":"far fa-copyright light-blue"},"aplayer":{"enable":true,"play":"fa-solid fa-play","pause":"fa-solid fa-pause"},"rightmenu":{"enable":true,"notice":true}},
+      fancybox: {"css":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fancyapps/ui/dist/fancybox.css","js":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fancyapps/ui/dist/fancybox.umd.js"},
+      
+      
+      
+    }
+  }
+
+  /******************** volantis.EventListener ********************************/
+  // 事件监听器 see: /source/js/app.js
+  volantis.EventListener = {}
+  // 这里存放pjax切换页面时将被移除的事件监听器
+  volantis.EventListener.list = []
+  //构造方法
+  function volantisEventListener(type, f, ele) {
+    this.type = type
+    this.f = f
+    this.ele = ele
+  }
+  // 移除事件监听器
+  volantis.EventListener.remove = () => {
+    volantis.EventListener.list.forEach(function (i) {
+      i.ele.removeEventListener(i.type, i.f, false)
+    })
+    volantis.EventListener.list = []
+  }
+  /******************** volantis.dom.$ ********************************/
+  // 注：这里没有选择器，也没有forEach一次只处理一个dom，这里重新封装主题常用的dom方法，返回的是dom对象，对象包含了以下方法，同时保留dom的原生API
+  function volantisDom(ele) {
+    if (!ele) ele = document.createElement("div")
+    this.ele = ele;
+    // ==============================================================
+    this.ele.find = (c) => {
+      let q = this.ele.querySelector(c)
+      if (q)
+        return new volantisDom(q)
+    }
+    // ==============================================================
+    this.ele.hasClass = (c) => {
+      return this.ele.className.match(new RegExp('(\\s|^)' + c + '(\\s|$)'));
+    }
+    this.ele.addClass = (c) => {
+      this.ele.classList.add(c);
+      return this.ele
+    }
+    this.ele.removeClass = (c) => {
+      this.ele.classList.remove(c);
+      return this.ele
+    }
+    this.ele.toggleClass = (c) => {
+      if (this.ele.hasClass(c)) {
+        this.ele.removeClass(c)
+      } else {
+        this.ele.addClass(c)
+      }
+      return this.ele
+    }
+    // ==============================================================
+    // 参数 r 为 true 表示pjax切换页面时事件监听器将被移除，false不移除
+    this.ele.on = (c, f, r = 1) => {
+      this.ele.addEventListener(c, f, false)
+      if (r) {
+        volantis.EventListener.list.push(new volantisEventListener(c, f, this.ele))
+      }
+      return this.ele
+    }
+    this.ele.click = (f, r) => {
+      this.ele.on("click", f, r)
+      return this.ele
+    }
+    this.ele.scroll = (f, r) => {
+      this.ele.on("scroll", f, r)
+      return this.ele
+    }
+    // ==============================================================
+    this.ele.html = (c) => {
+      // if(c=== undefined){
+      //   return this.ele.innerHTML
+      // }else{
+      this.ele.innerHTML = c
+      return this.ele
+      // }
+    }
+    // ==============================================================
+    this.ele.hide = (c) => {
+      this.ele.style.display = "none"
+      return this.ele
+    }
+    this.ele.show = (c) => {
+      this.ele.style.display = "block"
+      return this.ele
+    }
+    // ==============================================================
+    return this.ele
+  }
+  volantis.dom.$ = (ele) => {
+    return !!ele ? new volantisDom(ele) : null;
+  }
+  /******************** RunItem ********************************/
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = ()=>{
+          volantis.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) =>{
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index,1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+  /******************** Pjax ********************************/
+  // /layout/_plugins/pjax/index.ejs
+  // volantis.pjax.send(callBack[,"callBackName"]) 传入pjax:send回调函数
+  // volantis.pjax.push(callBack[,"callBackName"]) 传入pjax:complete回调函数
+  // volantis.pjax.error(callBack[,"callBackName"]) 传入pjax:error回调函数
+  volantis.pjax = {};
+  volantis.pjax.method = {
+    complete: new RunItem(),
+    error: new RunItem(),
+    send: new RunItem(),
+  };
+  volantis.pjax = Object.assign(volantis.pjax, {
+    push: volantis.pjax.method.complete.push,
+    error: volantis.pjax.method.error.push,
+    send: volantis.pjax.method.send.push,
+  });
+  /******************** RightMenu ********************************/
+  // volantis.rightmenu.handle(callBack[,"callBackName"]) 外部菜单项控制
+  // 可在 volantis.mouseEvent 处获取右键事件
+  volantis.rightmenu = {};
+  volantis.rightmenu.method = {
+    handle: new RunItem(),
+  }
+  volantis.rightmenu = Object.assign(volantis.rightmenu, {
+    handle: volantis.rightmenu.method.handle.push,
+  });
+  /********************  Dark Mode  ********************************/
+  // /layout/_partial/scripts/darkmode.ejs
+  // volantis.dark.mode 当前模式 dark or light
+  // volantis.dark.toggle() 暗黑模式触发器
+  // volantis.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  volantis.dark = {};
+  volantis.dark.method = {
+    toggle: new RunItem(),
+  };
+  volantis.dark = Object.assign(volantis.dark, {
+    push: volantis.dark.method.toggle.push,
+  });
+  /********************  Message  ********************************/
+  // VolantisApp.message
+  /********************  isMobile  ********************************/
+  // /source/js/app.js
+  // volantis.isMobile
+  // volantis.isMobileOld
+  /********************脚本动态加载函数********************************/
+  // volantis.js(src, cb)  cb 可以传入onload回调函数 或者 JSON对象 例如: volantis.js("src", ()=>{}) 或 volantis.js("src", {defer:true,onload:()=>{}})
+  // volantis.css(src)
+
+  // 返回Promise对象，如下方法同步加载资源，这利于处理文件资源之间的依赖关系，例如：APlayer 需要在 MetingJS 之前加载
+  // (async () => {
+  //     await volantis.js("...theme.plugins.aplayer.js.aplayer...")
+  //     await volantis.js("...theme.plugins.aplayer.js.meting...")
+  // })();
+
+  // 已经加入了setTimeout
+  volantis.js = (src, cb) => {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+  volantis.css = (src) => {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  }
+  /********************按需加载的插件********************************/
+  // volantis.import.jQuery().then(()=>{})
+  volantis.import = {
+    jQuery: () => {
+      if (typeof jQuery == "undefined") {
+        return volantis.js("https://unpkg.com/volantis-static@0.0.1654736714924/libs/jquery/dist/jquery.min.js")
+      } else {
+        return new Promise(resolve => {
+          resolve()
+        });
+      }
+    }
+  }
+  /********************** requestAnimationFrame ********************************/
+  // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+  // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+  volantis.requestAnimationFrame = (fn)=>{
+    if (!window.requestAnimationFrame) {
+      window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+    }
+    window.requestAnimationFrame(fn)
+  }
+  /************************ layoutHelper *****************************************/
+  volantis.layoutHelper = (helper, html, opt)=>{
+    opt = Object.assign({clean:false, pjax:true}, opt)
+    function myhelper(helper, html, clean) {
+      volantis.tempDiv = document.createElement("div");
+      volantis.tempDiv.innerHTML = html;
+      let layoutHelper = document.querySelector("#layoutHelper-"+helper)
+      if (layoutHelper) {
+        if (clean) {
+          layoutHelper.innerHTML = ""
+        }
+        layoutHelper.append(volantis.tempDiv);
+      }
+    }
+    myhelper(helper, html, opt.clean)
+    if (opt.pjax) {
+      volantis.pjax.push(()=>{
+        myhelper(helper, html, opt.clean)
+      },"layoutHelper-"+helper)
+    }
+  }
+  /****************************** 滚动事件处理 ****************************************/
+  volantis.scroll = {
+    engine: new RunItem(),
+    unengine: new RunItem(),
+  };
+  volantis.scroll = Object.assign(volantis.scroll, {
+    push: volantis.scroll.engine.push,
+  });
+  // 滚动条距离顶部的距离
+  volantis.scroll.getScrollTop = () =>{
+    let scrollPos;
+    if (window.pageYOffset) {
+      scrollPos = window.pageYOffset;
+    } else if (document.compatMode && document.compatMode != 'BackCompat') {
+      scrollPos = document.documentElement.scrollTop;
+    } else if (document.body) {
+      scrollPos = document.body.scrollTop;
+    }
+    return scrollPos;
+  }
+  // 使用 requestAnimationFrame 处理滚动事件
+  // `volantis.scroll.del` 中存储了一个数值, 该数值检测一定时间间隔内滚动条滚动的位移, 数值的检测频率是浏览器的刷新频率. 数值为正数时, 表示向下滚动. 数值为负数时, 表示向上滚动.
+  volantis.scroll.handleScrollEvents = () => {
+    volantis.scroll.lastScrollTop = volantis.scroll.getScrollTop()
+    function loop() {
+      const scrollTop = volantis.scroll.getScrollTop();
+      if (volantis.scroll.lastScrollTop !== scrollTop) {
+        volantis.scroll.del = scrollTop - volantis.scroll.lastScrollTop;
+        volantis.scroll.lastScrollTop = scrollTop;
+        // if (volantis.scroll.del > 0) {
+        //   console.log("向下滚动");
+        // } else {
+        //   console.log("向上滚动");
+        // }
+        // 注销过期的unengine未滚动事件
+        volantis.scroll.unengine.list=[]
+        volantis.scroll.engine.start();
+      }else{
+        volantis.scroll.unengine.start();
+      }
+      volantis.requestAnimationFrame(loop)
+    }
+    volantis.requestAnimationFrame(loop)
+  }
+  volantis.scroll.handleScrollEvents()
+  volantis.scroll.ele = null;
+  // 触发页面滚动至目标元素位置
+  volantis.scroll.to = (ele, option = {}) => {
+    if (!ele) return;
+    volantis.scroll.ele = ele;
+    // 默认配置
+    opt = {
+      top: ele.getBoundingClientRect().top + document.documentElement.scrollTop,
+      behavior: "smooth"
+    }
+    // 定义配置
+    if ("top" in option) {
+      opt.top = option.top
+    }
+    if ("behavior" in option) {
+      opt.behavior = option.behavior
+    }
+    if ("addTop" in option) {
+      opt.top += option.addTop
+    }
+    if (!("observerDic" in option)) {
+      option.observerDic = 100
+    }
+    // 滚动
+    window.scrollTo(opt);
+    // 监视器
+    // 监视并矫正元素滚动到指定位置
+    // 用于处理 lazyload 引起的 cls 导致的定位失败问题
+    // option.observer = false
+    if (option.observer) {
+      setTimeout(() => {
+        if (volantis.scroll.ele != ele) {
+          return
+        }
+        volantis.scroll.unengine.push(() => {
+          let me = ele.getBoundingClientRect().top
+          if(!(me >= -option.observerDic && me <= option.observerDic)){
+            volantis.scroll.to(ele, option)
+          }
+          volantis.scroll.unengine.remove("unengineObserver")
+        },"unengineObserver")
+      },1000)
+    }
+  }
+  /********************** Content Visibility ********************************/
+  // 见 source/css/first.styl 如果遇到任何问题 删除 .post-story 即可
+  // 一个元素被声明 content-visibility 属性后 如果元素不在 viewport 中 浏览器不会计算其后代元素样式和属性 从而节省 Style & Layout 耗时
+  // content-visibility 的副作用: 锚点失效 等等(实验初期 暂不明确), 使用此方法清除样式
+  volantis.cleanContentVisibility = ()=>{
+    if (document.querySelector(".post-story")) {
+      console.log("cleanContentVisibility");
+      document.querySelectorAll(".post-story").forEach(e=>{
+        e.classList.remove("post-story")
+      })
+    }
+  }
+  /******************************************************************************/
+  /******************************************************************************/
+  /******************************************************************************/
+  //图像加载出错时的处理
+  function errorImgAvatar(img) {
+    img.src = "https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg";
+    img.onerror = null;
+  }
+  function errorImgCover(img) {
+    img.src = "https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg";
+    img.onerror = null;
+  }
+  /******************************************************************************/
+</script>
+
+  <!-- import head_end begin -->
+  <!-- import head_end end -->
+  <!-- Custom Files headEnd begin-->
+  
+  <!-- Custom Files headEnd end-->
+  <!-- front-matter head_end begin -->
+  <!-- front-matter head_end end -->
+</head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <!-- import body_begin begin-->
+    <!-- import body_begin end-->
+    <!-- Custom Files bodyBegin begin-->
+    
+    <!-- Custom Files bodyBegin end-->
+    <!-- front-matter body_begin begin -->
+    <!-- front-matter body_begin end -->
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur " style='opacity: 0' >
+  <div class='container'>
+  <div id='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fa-solid fa-comments fa-fw" target="_self"  href="/" onclick="return false;" title="comment"></a></li>
+        
+          <li><a id="s-toc" class="s-toc fa-solid fa-list fa-fw" target="_self"  href="/" onclick="return false;" title="toc"></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/Logo-NavBar@3x.png'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/" title="博客"
+                  
+                  
+                  
+                    active-action="action-home"
+                  >
+                  <i class='fa-solid fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/categories/" title="分类"
+                  
+                  
+                  
+                    active-action="action-categories"
+                  >
+                  <i class='fa-solid fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/tags/" title="标签"
+                  
+                  
+                  
+                    active-action="action-tags"
+                  >
+                  <i class='fa-solid fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/archives/" title="归档"
+                  
+                  
+                  
+                    active-action="action-archives"
+                  >
+                  <i class='fa-solid fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="社区"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>社区
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="源码"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>源码
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/about/" title="作者"
+                  
+                  
+                  
+                    active-action="action-about"
+                  >
+                  <i class='fa-solid fa-info-circle fa-fw'></i>作者
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+      
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fa-solid fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+      
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fa-solid fa-search fa-fw" target="_self" href="/" onclick="return false;" title="search"></a></li>
+				
+				<li>
+          <a class="s-menu fa-solid fa-bars fa-fw" target="_self" href="/" onclick="return false;" title="menu"></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/" title="博客"
+                  
+                  
+                  
+                    active-action="action-home"
+                  >
+                  <i class='fa-solid fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/categories/" title="分类"
+                  
+                  
+                  
+                    active-action="action-categories"
+                  >
+                  <i class='fa-solid fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/tags/" title="标签"
+                  
+                  
+                  
+                    active-action="action-tags"
+                  >
+                  <i class='fa-solid fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/archives/" title="归档"
+                  
+                  
+                  
+                    active-action="action-archives"
+                  >
+                  <i class='fa-solid fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="社区"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>社区
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="源码"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>源码
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/about/" title="作者"
+                  
+                  
+                  
+                    active-action="action-about"
+                  >
+                  <i class='fa-solid fa-info-circle fa-fw'></i>作者
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+
+      <!-- Custom Files header begin -->
+      
+      <!-- Custom Files header end -->
+		</div>
+	</div>
+  </div>
+</header>
+
+    <div id="l_body">
+      <div id="l_cover">
+  
+    
+      <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
+      <div id="half" class='cover-wrapper post search' style="display: ;">
+        
+  <div class='cover-bg lazyload placeholder' data-bg="https://s3.bmp.ovh/imgs/2025/03/03/64c32e0ed0f747a9.jpg"></div>
+
+<div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">Leland Titus</p>
+    
+    
+      <p class="subtitle">风尘云万里</p>
+    
+  </div>
+  <div class='bottom'>
+    
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <input type="text" class="input u-search-input" placeholder="Recover lost knowledge" />
+          <i class="icon fa-solid fa-search fa-fw"></i>
+        </form>
+      </div>
+    
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+          
+            <a href="/"
+              
+              
+              active-action="action-home">
+              <p>博客</p>
+            </a>
+          
+            <a href="/categories/"
+              
+              
+              active-action="action-categories">
+              <p>分类</p>
+            </a>
+          
+            <a href="/tags/"
+              
+              
+              active-action="action-tags">
+              <p>标签</p>
+            </a>
+          
+            <a href="/contributors/"
+              
+              
+              active-action="action-contributors">
+              <p>社区</p>
+            </a>
+          
+            <a target="_blank" rel="noopener" href="https://github.com/volantis-x/hexo-theme-volantis/"
+              
+              
+              active-action="action-https:githubcomvolantis-xhexo-theme-volantis">
+              <p>源码</p>
+            </a>
+          
+            <a href="/author/"
+              
+              
+              active-action="action-author">
+              <p>作者</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+        <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+      </div>
+    
+  
+</div>
+
+      <div id="safearea">
+        <div class="body-wrapper">
+          
+<div id="l_main" class=''>
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/02/source/Linux/Linix高性能服务器编程/TCPIP协议详解/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="tutulp's blog">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="tutulp's blog">
+    <meta itemprop="description" content="tutulp的博客网站">
+  </span>
+  
+
+
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title" itemprop="name headline">
+        TCP/IP协议详解
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/" rel="nofollow">
+    <img itemprop="image" src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">请设置文章作者</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>
+    <a class="category-link" href="/categories/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">Linux高性能服务器编程</a>
+    
+      <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/" itemprop="url"><span itemprop="name">Linux高性能服务器编程</span></a>
+      </span>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2025-03-02T00:00:00+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2025年3月2日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
+      </div>
+    
+  </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <p>Linux高性能服务器编程  -游双著</p>
+<p>​						作者充分理解巨作《TCP&#x2F;IP协议详解》（三卷本），以及《UNIX网络编程》（两卷本）后融入自己的理解编写</p>
+<p>​						主题：&#x3D;&#x3D;如何通过各种手段编写高性能的服务器程序&#x3D;&#x3D;</p>
+<p><em>如何提高服务器程序性能？</em></p>
+<p>比如使用“池”以牺牲空间换取效率，使用零拷贝函数以避免内核和用户空间的切换等；</p>
+<p>其次，介绍一些高效的编程模式及其应用，比如使用<strong>有限状态机</strong>来分析用户数据，使用<strong>进程池</strong>或<strong>线程池</strong>来处理用户请求；最后，探讨如何通过<strong>调整系统参数</strong>来从服务器程序外部提高其整体性能。</p>
+<p>为了帮助读者进一步把书中的知识融汇到实际项目中，笔者还特意编写了一个较为完整的负载均衡服务器程序springsnail。该程序能从所有逻辑服务器中选取负荷最小的一台来处理新到的客户连接。在这个程序中，使用了进程池、有限状态机、高效数据结构来提高其性能；同时，细致地封装了每个函数和模块，使之更符合实际工程项目。由于篇幅的限制，笔者未将该程序的源代码列在书中，读者可从华章网站<a target="_blank" rel="noopener" href="http://www.hzbook.com./">www.hzbook.com。</a></p>
+<p>以上内容整本书阅读完之后再看吧</p>
+<p>最开始的目的是写一个起码是先看懂tinywebserver这个项目</p>
+<p>然后了解到要先看这本书，现在可谓是0基础开始</p>
+<p>先安装两台虚拟机用于测试，我打算一台Anolis OS一台Ubuntu Ubuntu正在安，出了点状况，安装界面会一直卡住</p>
+<p>TCP&#x2F;IP协议详解</p>
+<p>#TCP&#x2F;IP协议族</p>
+<h3 id="TCP-IP协议族体系结构以及主要协议"><a href="#TCP-IP协议族体系结构以及主要协议" class="headerlink" title="TCP&#x2F;IP协议族体系结构以及主要协议"></a>TCP&#x2F;IP协议族体系结构以及主要协议</h3><p>TCP&#x2F;IP协议族是一个四层协议系统，自底而上分别是数据链路层、网络层、传输层和应用层</p>
+<img src="./images/TCPIP协议详解.assets/image-20240830171024950-1740971872174-184.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240830171024950-1740971872174-184.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240830171024950" style="zoom: 50%;" />
+
+<p>####数据链路层</p>
+<p>实现了网卡接口的网络驱动程序 以处理数据在物理媒介（比如以太网、令牌环等）上的传输 网络驱动程序隐藏了这些细节为上层协议提供一个统一的接口</p>
+<ul>
+<li>协议</li>
+</ul>
+<p>数据链路层两个常用的协议是&#x3D;&#x3D;<strong>ARP</strong>&#x3D;&#x3D;协议（Address ResolveProtocol，地址解析协议）和&#x3D;&#x3D;<strong>RARP</strong>&#x3D;&#x3D;协议（Reverse Address ResolveProtocol，逆地址解析协议）。它们实现了<strong>IP地址和机器物理地址</strong>（通常是MAC地址，以太网、令牌环和802.11无线网络都使用MAC地址）之间的相互转换</p>
+<ul>
+<li><p>作用</p>
+</li>
+<li><p>网络层使用IP地址寻址一台机器，而数据链路层使用物理地址寻址一台机器，因此网络层必须先将目标机器的IP地址转化成其物理地址，才能使用数据链路层提供的服务，这就是ARP协议的用途。</p>
+</li>
+<li><p>RARP协议仅用于网络上的某些无盘工作站。因为缺乏存储设备，无盘工作站无法记住自己的IP地址，但它们可以利用网卡上的物理地址来向网络管理者（服务器或网络管理软件）查询自身的IP地址。运行RARP服务的网络管理者通常存有该网络上所有机器的物理地址到IP地址的映射。</p>
+</li>
+</ul>
+<h4 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h4><p>网络层实现数据包的选路和转发</p>
+<ul>
+<li>连接</li>
+</ul>
+<p><strong>WAN</strong>（Wide Area Network，广域网）通常使用众多分级的路由器来连接分散的主机或<strong>LAN</strong>（LocalArea Network，局域网），因此，通信的两台主机一般不是直接相连的，而是通过多个中间节点（路由器）连接的。网络层的任务就是选择这些中间节点，以确定两台主机之间的通信路径。同时，网络层对上层协议隐藏了网络拓扑连接的细节，使得在传输层和网络应用程序看来，通信的双方是直接相连的。</p>
+<ul>
+<li>协议</li>
+</ul>
+<p>网络层最核心的协议是&#x3D;&#x3D;<strong>IP协议</strong>&#x3D;&#x3D;（Internet Protocol，因特网协议）。IP协议根据数据包的目的IP地址来决定如何投递它。如果数据包不能直接发送给目标主机，那么IP协议就为它寻找一个合适的下一跳（nexthop）路由器，并将数据包交付给该路由器来转发。多次重复这一过程，数据包最终到达目标主机，或者由于发送失败而被丢弃。可见，IP协议使用逐跳（hop by hop）的方式确定通信路径。</p>
+<p>网络层另外一个重要的协议是&#x3D;&#x3D;<strong>ICMP协议</strong>&#x3D;&#x3D;（Internet Control MessageProtocol，因特网控制报文协议）。它是IP协议的重要补充，主要用于检测网络连接。</p>
+<img src="./images/TCPIP协议详解.assets/image-20240830171814478-1740971872174-188.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240830171814478-1740971872174-188.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240830171814478" style="zoom: 33%;" />
+
+<ul>
+<li>8位类型字段用于区分报文类型。它将ICMP报文分为两大类：一类是差错报文，这类报文主要用来回应网络错误，比如目标不可到达（类型值为3）和重定向（类型值为5）；另一类是查询报文，这类报文用来查询网络信息，比如ping程序就是使用ICMP报文查看目标是否可到达（类型值为8）的。</li>
+<li>有的ICMP报文还使用8位代码字段来进一步细分不同的条件。比如重定向报文使用代码值0表示对网络重定向，代码值1表示对主机重定向。</li>
+<li>ICMP报文使用16位校验和字段对整个报文（包括头部和内容部分）进行循环冗余校验（CyclicRedundancy Check，CRC），以检验报文在传输过程中是否损坏。</li>
+</ul>
+<p><strong>ICMP协议并非严格意义上的网络层协议，因为它使用处于同一层的IP协议提供的服务（一般来说，上层协议使用下层协议提供的服务）</strong></p>
+<h4 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h4><p>传输层为两台主机上的应用程序提供端到端（end to end）的通信。不在乎中转过程</p>
+<img src="./images/TCPIP协议详解.assets/image-20240830172329679-1740971872174-182.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240830172329679-1740971872174-182.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240830172329679" style="zoom:33%;" />
+
+<p>实线是实体通信，虚线是逻辑通信</p>
+<p>传输层则为应用程序封装了一条端到端的逻辑通信链路，它负责数据的收发、链路的超时重连等</p>
+<ul>
+<li>协议</li>
+<li>&#x3D;&#x3D;<strong>TCP协议</strong>&#x3D;&#x3D;（Transmission Control Protocol，传输控制协议）为应用层提供可靠的、面向连接的和基于流（stream）的服务。TCP协议使用超时重传、数据确认等方式来确保数据包被正确地发送至目的端，因此TCP服务是可靠的。使用TCP协议通信的双方必须先建立TCP连接，并在内核中为该连接维持一些必要的数据结构，比如连接的状态、读写缓冲区，以及诸多定时器等。当通信结束时，双方必须关闭连接以释放这些内核数据。TCP服务是基于流的。基于流的数据没有边界（长度）限制，它源源不断地从通信的一端流入另一端。发送端可以逐个字节地向数据流中写入数据，接收端也可以逐个字节地将它们读出。</li>
+<li>&#x3D;&#x3D;<strong>UDP协议</strong>&#x3D;&#x3D;（User Datagram Protocol，用户数据报协议）则与TCP协议完全相反，它为应用层提供不可靠、无连接和基于数据报的服务。“不可靠”意味着UDP协议无法保证数据从发送端正确地传送到目的端。如果数据在中途丢失，或者目的端通过数据校验发现数据错误而将其丢弃，则UDP协议只是简单地通知应用程序发送失败。因此，使用UDP协议的应用程序通常要自己处理数据确认、超时重传等逻辑。UDP协议是无连接的，即通信双方不保持一个长久的联系，因此应用程序每次发送数据都要明确指定接收端的地址（IP地址等信息）。基于数据报的服务，是相对基于流的服务而言的。每个UDP数据报都有一个长度，接收端必须以该长度为最小单位将其所有内容一次性读出，否则数据将被截断。</li>
+<li>&#x3D;&#x3D;<strong>SCTP协议</strong>&#x3D;&#x3D;（Stream Control Transmission Protocol，流控制传输协议）是一种相对较新的传输层协议，它是为了在因特网上传输电话信号而设计的。</li>
+</ul>
+<h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><p>应用层负责处理应用程序的逻辑。数据链路层、网络层和传输层负责处理网络通信细节</p>
+<ul>
+<li>协议</li>
+<li>&#x3D;&#x3D;<strong>ping</strong>&#x3D;&#x3D;是应用程序，而不是协议，前面说过它利用ICMP报文检测网络连接，是调试网络环境的必备工具。</li>
+<li>&#x3D;&#x3D;<strong>telnet</strong>&#x3D;&#x3D;协议是一种远程登录协议，它使我们能在本地完成远程任务，本书后续章节将会多次使用telnet客户端登录到其他服务上</li>
+<li>&#x3D;&#x3D;<strong>OSPF</strong>&#x3D;&#x3D;（Open Shortest Path First，开放最短路径优先）协议是一种动态路由更新协议，用于路由器之间的通信，以告知对方各自的路由信息</li>
+<li>&#x3D;&#x3D;<strong>DNS</strong>&#x3D;&#x3D;（Domain Name Service，域名服务）协议提供机器域名到IP地址的转换</li>
+</ul>
+<p>应用层协议（或程序）可能跳过传输层直接使用网络层提供的服务，比如ping程序和OSPF协议。应用层协议（或程序）通常既可以使用TCP服务，又可以使用UDP服务，比如DNS协议。我们可以通过&#x2F;etc&#x2F;services文件查看所有知名的应用层协议，以及它们都能使用哪些传输层服务。</p>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>应用程序数据在发送到物理网络上之前，将沿着协议栈从上往下依次传递。每层协议都将在上层数据的基础上加上自己的头部信息（有时还包括尾部信息），以实现该层的功能，这个过程就称为封装</p>
+<img src="./images/TCPIP协议详解.assets/image-20240830180219652-1740971872174-190.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240830180219652-1740971872174-190.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240830180219652" style="zoom:33%;" />
+
+<p>经过TCP封装后的数据称为TCP报文段，TCP协议为通信双方维持一个连接，并且在内核中存储相关数据。这部分数据中的TCP头部信息和TCP内核缓冲区（发送缓冲区或接收缓冲区）数据一起构成了<strong>TCP报文段</strong></p>
+<img src="./images/TCPIP协议详解.assets/image-20240830180552636-1740971872174-186.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240830180552636-1740971872174-186.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240830180552636" style="zoom:33%;" />
+
+<p>经过UDP封装后的数据称为<strong>UDP数据报</strong>（UDP datagram）。UDP对应用程序数据的封装与TCP类似。不同的是，UDP无须为应用层数据保存副本，因为它提供的服务是不可靠的。当一个UDP数据报被成功发送之后，UDP内核缓冲区中的该数据报就被丢弃了。如果应用程序检测到该数据报未能被接收端正确接收，并打算重发这个数据报，则应用程序需要重新从用户空间将该数据报拷贝到UDP内核发送缓冲区中。</p>
+<p>经过IP封装后的数据称为<strong>IP数据报</strong>（IP datagram）。IP数据报也包括头部信息和数据部分，其中数据部分就是一个TCP报文段、UDP数据报或者ICMP报文。</p>
+<p>经过数据链路层封装的数据称为<strong>帧</strong>（frame）。传输媒介不同，帧的类型也不同。比如，以太网上传输的是以太网帧（ethernet frame），而令牌环网络上传输的则是令牌环帧（token ring frame）</p>
+<img src="./images/TCPIP协议详解.assets/image-20240830180822945-1740971872174-192.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240830180822945-1740971872174-192.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240830180822945" style="zoom: 50%;" />
+
+<p>4字节CRC字段对帧的其他部分提供循环冗余校验</p>
+<p>帧的最大传输单元（Max Transmit Unit，<strong>MTU</strong>），即帧最多能携带多少上层协议数据（比如IP数据报），通常受到网络类型的限制。正因为如此，过长的IP数据报可能需要被分片（fragment）传输</p>
+<p>帧才是最终在物理网络上传送的字节序列</p>
+<h3 id="分用"><a href="#分用" class="headerlink" title="分用"></a>分用</h3><p>当帧到达目的主机时，将沿着协议栈自底向上依次传递。各层协议依次处理帧中本层负责的头部数据，以获取所需的信息，并最终将处理后的帧交给目标应用程序。这个过程称为分用</p>
+<p>分用是依靠头部信息中的类型字段实现的</p>
+<img src="./images/TCPIP协议详解.assets/image-20240830181045417-1740971872174-194.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240830181045417-1740971872174-194.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240830181045417" style="zoom:33%;" />
+
+<ul>
+<li><strong>分用帧</strong> 为IP协议、ARP协议和RARP协议都使用帧传输数据，所以帧的头部需要提供某个字段（具体情况取决于帧的类型）来区分它们</li>
+</ul>
+<p>以太网帧为例，它使用2字节的类型字段来标识上层协议。如果主机接收到的以太网帧类型字段的值为0x800，则帧的数据部分为IP数据报，以太网驱动程序就将帧交付给IP模块；若类型字段的值为0x806，则帧的数据部分为ARP请求或应答报文，以太网驱动程序就将帧交付给ARP模块；若类型字段的值为0x835，则帧的数据部分为RARP请求或应答报文，以太网驱动程序就将帧交付给RARP模块</p>
+<ul>
+<li><p><strong>分用IP数据报</strong> 因为ICMP协议、TCP协议和UDP协议都使用IP协议，所以IP数据报的头部采用16位的协议（protocol）字段来区分它们。</p>
+</li>
+<li><p>TCP报文段和UDP数据报则通过其头部中的16位的端口号（portnumber）字段来区分上层应用程序。比如DNS协议对应的端口号是53，HTTP协议（Hyper-Text Transfer Protocol，超文本传送协议）对应的端口号是80。所有知名应用层协议使用的端口号都可在&#x2F;etc&#x2F;services文件中找到。</p>
+</li>
+</ul>
+<h3 id="ARP协议工作原理"><a href="#ARP协议工作原理" class="headerlink" title="ARP协议工作原理"></a>ARP协议工作原理</h3><p>ARP协议能实现任意网络层地址到任意物理地址的转换，不过本书仅讨论从<strong>IP地址到以太网地址</strong>（MAC地址）的转换。其工作原理是：主机向自己所在的网络广播一个ARP请求，该请求包含目标机器的网络地址。此网络上的其他机器都将收到这个请求，但只有被请求的目标机器会回应一个ARP应答，其中包含自己的物理地址。</p>
+<h4 id="以太网ARP请求-应答报文详解"><a href="#以太网ARP请求-应答报文详解" class="headerlink" title="以太网ARP请求&#x2F;应答报文详解"></a>以太网ARP请求&#x2F;应答报文详解</h4><img src="./images/TCPIP协议详解.assets/image-20240830181627862-1740971872174-196.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240830181627862-1740971872174-196.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240830181627862" style="zoom: 50%;" />
+
+<ul>
+<li>硬件类型字段定义物理地址的类型，它的值为1表示MAC地址</li>
+<li>协议类型字段表示要映射的协议地址类型，它的值为0x800，表示IP地址</li>
+<li>硬件地址长度字段和协议地址长度字段，顾名思义，其单位是字节。对MAC地址来说，其长度为6；对IP（v4）地址来说，其长度为4。</li>
+<li>操作字段指出4种操作类型：ARP请求（值为1）、ARP应答（值为2）、RARP请求（值为3）和RARP应答（值为4）。</li>
+<li>最后4个字段指定通信双方的以太网地址和IP地址。发送端填充除目的端以太网地址外的其他3个字段，以构建ARP请求并发送之。接收端发现该请求的目的端IP地址是自己，就把自己的以太网地址填进去，然后交换两个目的端地址和两个发送端地址，以构建ARP应答并返回之（当然，如前所述，操作字段需要设置为2）。</li>
+</ul>
+<p>ARP请求&#x2F;应答报文的长度为28字节。如果再加上以太网帧头部和尾部的18字节(ARP为数据部分)，则一个携带ARP请求&#x2F;应答报文的以太网帧长度为46字节。不过有的实现要求以太网帧数据部分长度至少为46字节，此时ARP请求&#x2F;应答报文将增加一些填充字节，以满足这个要求。在这种情况下，一个携带ARP请求&#x2F;应答报文的以太网帧长度为64字节(512bit)。</p>
+<h4 id="ARP高速缓存的查看和修改"><a href="#ARP高速缓存的查看和修改" class="headerlink" title="ARP高速缓存的查看和修改"></a>ARP高速缓存的查看和修改</h4><p>通常，ARP维护一个高速缓存，其中包含经常访问（比如网关地址）或最近访问的机器的IP地址到物理地址的映射。这样就避免了重复的ARP请求，提高了发送数据包的速度</p>
+<p>Linux下可以使用arp命令来查看和修改ARP高速缓存。比如在某一时刻（注意，ARP高速缓存是动态变化的）的ARP缓存内容使用<strong>arp-a</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sudo</span> arp<span class="literal">-d</span> <span class="number">192.168</span>.<span class="number">1.109</span> <span class="comment">#删除对应的ARP缓存项</span></span><br><span class="line"><span class="variable">$sudo</span> arp<span class="literal">-s</span> <span class="number">192.168</span>.<span class="number">1.109</span> <span class="number">08</span>:<span class="number">00</span>:<span class="number">27</span>:<span class="number">53</span>:<span class="number">10</span>:<span class="number">67</span> <span class="comment">#添加对应的ARP缓存项</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="使用tcpdump观察ARP通信过程"><a href="#使用tcpdump观察ARP通信过程" class="headerlink" title="使用tcpdump观察ARP通信过程"></a>使用tcpdump观察ARP通信过程</h4><img src="./images/TCPIP协议详解.assets/image-20240830183143933-1740971872174-198.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240830183143933-1740971872174-198.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240830183143933" style="zoom: 50%;" />
+
+<p>为了清楚地了解ARP的运作过程，我们从ernest-laptop上执行telnet命令登录Kongming20的echo服务（已经开启），并用tcpdump抓取这个过程中两台测试机器之间交换的以太网帧。具体的操作过程如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$sudo arp-d 192.168.1.109#清除ARP缓存中Kongming20对应的项</span><br><span class="line">$sudo tcpdump-i eth0-ent&#x27;(dst 192.168.1.109 and src 192.168.1.108)or</span><br><span class="line">(dst 192.168.1.108 and src 192.168.1.109)&#x27;#如无特殊声明，抓包都在机器ernest-laptop上执行</span><br><span class="line">$telnet 192.168.1.109 echo#开启另一个终端执行telnet命令</span><br><span class="line">Trying 192.168.1.109...</span><br><span class="line">Connected to 192.168.1.109.</span><br><span class="line">Escape character is&#x27;^]&#x27;.</span><br><span class="line">^]（回车）#输入Ctrl+]并回车</span><br><span class="line">telnet＞quit（回车）</span><br><span class="line">Connection closed.</span><br></pre></td></tr></table></figure>
+
+<p>应先清除ARP缓存中与Kongming20对应的项，否则ARP通信不被执行</p>
+<p>当执行telnet命令并在两台通信主机之间建立TCP连接后（telnet输出“Connected to 192.168.1.109”），输入Ctrl+]以调出telnet程序的命令提示符，然后在telnet命令提示符后输入quit，退出telnet客户端程序（因为ARP通信在TCP连接建立之前就已经完成，故我们不关心后续内容）。tcpdump抓取到的众多数据包中，只有最靠前的两个和ARP通信有关系，现在将它们列出（数据包前面的编号是笔者加入的，后同）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 00:16:d3:5c:b9:e3＞ff:ff:ff:ff:ff:ff,ethertype</span><br><span class="line">ARP(0x0806),length 42:Request who-has 192.168.1.109 tell</span><br><span class="line">192.168.1.108,length 28</span><br><span class="line"></span><br><span class="line">2. 08:00:27:53:10:67＞00:16:d3:5c:b9:e3,ethertype</span><br><span class="line">ARP(0x0806),length 60:Reply 192.168.1.109 is-at</span><br><span class="line">08:00:27:53:10:67,length 46</span><br></pre></td></tr></table></figure>
+
+<p>由tcpdump抓取的数据包本质上是以太网帧，我们通过该命令的众多选项来控制帧的过滤（比如用dst和src指定通信的目的端IP地址和源端IP地址）和显示（比如用-e选项开启以太网帧头部信息的显示）。</p>
+<p>第一个数据包中，ARP通信的源端的物理地址是00:16:d3:5c:b9:e3（ernest-laptop），目的端的物理地址是ff:ff:ff:ff:ff:ff，这是以太网的广播地址，用以表示整个LAN。该LAN上的所有机器都会收到并处理这样的帧。数值0x806是以太网帧头部的类型字段的值，它表示分用的目标是ARP模块。该以太网帧的长度为42字节（实际上是46字节，tcpdump未统计以太网帧尾部4字节的CRC字段），其中数据部分长度为28字节。“Request”表示这是一个ARP请求，“who-has 192.168.1.109 tell 192.168.1.108”则表示是ernest-laptop要查询Kongming20的IP地址。</p>
+<p>第二个数据包中，ARP通信的源端的物理地址是08:00:27:53:10:67（Kongming20），目的端的物理地址是00:16:d3:5c:b9:e3（ernest-laptop）。“Reply”表示这是一个ARP应答，“192.168.1.109 is-at 08:00:27:53:10:67”则表示目标机器Kongming20报告其物理地址。该以太网帧的长度为60字节（实际上是64字节），可见它使用了填充字节来满足最小帧长度。</p>
+<img src="./images/TCPIP协议详解.assets/image-20240830184538728-1740971872174-200.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240830184538728-1740971872174-200.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240830184538728" style="zoom:50%;" />
+
+<p>ARP请求和应答是从以太网驱动程序发出的，而并非像图中描述的那样从ARP模块直接发送到以太网上，所以我们将它们用虚线表示</p>
+<p>路由器也将接收到以太网帧1，因为该帧是一个广播帧。不过很显然，路由器并没有回应其中的ARP请求</p>
+<h3 id="DNS工作原理"><a href="#DNS工作原理" class="headerlink" title="DNS工作原理"></a>DNS工作原理</h3><p>我们通常使用机器的域名来访问这台机器，而不直接使用其IP地址，比如访问因特网上的各种网站。那么如何将机器的域名转换成IP地址呢？这就需要使用域名查询服务。域名查询服务有很多种实现方式，比如NIS（Network Information Service，网络信息服务）、DNS和本地静态文件等。本节主要讨论DNS。</p>
+<h4 id="DNS查询和应答报文详解"><a href="#DNS查询和应答报文详解" class="headerlink" title="DNS查询和应答报文详解"></a>DNS查询和应答报文详解</h4><p>DNS是一套分布式的域名服务系统。每个DNS服务器上都存放着大量的机器名和IP地址的映射，并且是动态更新的。众多网络客户端程序都使用DNS协议来向DNS服务器查询目标主机的IP地址。</p>
+<img src="./images/TCPIP协议详解.assets/image-20240830184838542-1740971872174-202.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240830184838542-1740971872174-202.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240830184838542" style="zoom:50%;" />
+
+<ul>
+<li>16位标识字段用于标记一对DNS查询和应答，以此区分一个DNS应答是哪个DNS查询的回应。</li>
+<li>16位标志字段用于协商具体的通信方式和反馈通信状态。</li>
+</ul>
+<img src="./images/TCPIP协议详解.assets/image-20240830185013889-1740971872174-204.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240830185013889-1740971872174-204.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240830185013889" style="zoom: 50%;" />
+
+<ul>
+<li><ul>
+<li>QR，查询&#x2F;应答标志。0表示这是一个查询报文，1表示这是一个应答报文。</li>
+<li>opcode，定义查询和应答的类型。0表示标准查询，1表示反向查询（由IP地址获得主机域名），2表示请求服务器状态。</li>
+<li>AA，授权应答标志，仅由应答报文使用。1表示域名服务器是授权服务器</li>
+<li>TC，截断标志，仅当DNS报文使用UDP服务时使用。因为UDP数据报有长度限制，所以过长的DNS报文将被截断。1表示DNS报文超过512字节，并被截断</li>
+<li>RD，递归查询标志。1表示执行递归查询，即如果目标DNS服务器无法解析某个主机名，则它将向其他DNS服务器继续查询，如此递归，直到获得结果并把该结果返回给客户端。0表示执行迭代查询，即如果目标DNS服务器无法解析某个主机名，则它将自己知道的其他DNS服务器的IP地址返回给客户端，以供客户端参考。</li>
+<li>RA，允许递归标志。仅由应答报文使用，1表示DNS服务器支持递归查询</li>
+<li>zero，这3位未用，必须都设置为0。</li>
+<li>rcode，4位返回码，表示应答的状态。常用值有0（无错误）和3（域名不存在）。</li>
+</ul>
+</li>
+<li>接下来的4个字段则分别指出DNS报文的最后4个字段的资源记录数目。对查询报文而言，它一般包含1个查询问题，而应答资源记录数、授权资源记录数和额外资源记录数则为0。应答报文的应答资源记录数则至少为1，而授权资源记录数和额外资源记录数可为0或非0。</li>
+<li><img src="./images/TCPIP协议详解.assets/image-20240830190135772-1740971872174-206.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240830190135772-1740971872174-206.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240830190135772" style="zoom:50%;" /></li>
+<li>查询名以一定的格式封装了要查询的主机域名。16位查询类型表示如何执行查询操作，常见的类型有如下几种</li>
+<li><ul>
+<li>类型A，值是1，表示获取目标主机的IP地址。</li>
+<li>类型CNAME，值是5，表示获得目标主机的别名</li>
+<li>类型PTR，值是12，表示反向查询</li>
+</ul>
+</li>
+<li>16位查询类通常为1，表示获取因特网地址（IP地址）</li>
+<li>应答字段、授权字段和额外信息字段都使用资源记录（ResourceRecord，RR）格式</li>
+</ul>
+<img src="./images/TCPIP协议详解.assets/image-20240830190540948-1740971872174-208.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240830190540948-1740971872174-208.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240830190540948" style="zoom:50%;" />
+
+<ul>
+<li><ul>
+<li>32位域名是该记录中与资源对应的名字，其格式和查询问题中的查询名字段相同。</li>
+<li>16位类型和16位类字段的含义也与DNS查询问题的对应字段相同</li>
+<li>32位生存时间表示该查询记录结果可被本地客户端程序缓存多长时间，单位是秒</li>
+<li>16位资源数据长度字段和资源数据字段的内容取决于类型字段。对类型A而言，资源数据是32位的IPv4地址，而资源数据长度则为4（以字节为单位）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Linux下访问DNS服务"><a href="#Linux下访问DNS服务" class="headerlink" title="Linux下访问DNS服务"></a>Linux下访问DNS服务</h4><p>我们要访问DNS服务，就必须先知道DNS服务器的IP地址。Linux使用&#x2F;etc&#x2F;resolv.conf文件来存放DNS服务器的IP地址。机器ernest-laptop上，该文件的内容如下</p>
+<p>nameserver 219.239.26.42  nameserver 124.207.160.106</p>
+<p>我的机子上是nameserver 114.114.114.114  nameserver 8.8.8</p>
+<p>分别是首选和备选</p>
+<p>Linux下一个常用的访问DNS服务器的客户端程序是host ？？？，比如下面的命令是向首选DNS服务器219.239.26.42查询机器<a href="http://www.baidu.com的IP地址：">www.baidu.com的IP地址：</a></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$host</span> <span class="literal">-t</span> A www.baidu.com</span><br><span class="line">www.baidu.com is an alias <span class="keyword">for</span> www.a.shifen.com.</span><br><span class="line">www.a.shifen.com has address <span class="number">119.75</span>.<span class="number">217.56</span></span><br><span class="line">www.a.shifen.com has address <span class="number">119.75</span>.<span class="number">218.77</span></span><br></pre></td></tr></table></figure>
+
+<p>host命令的输出告诉我们，机器名<a target="_blank" rel="noopener" href="http://www.baidu.com是www.a.shifen.com.的别名,并且该机器名对应两个ip地址.host命令使用dns协议和dns服务器通信,其-t选项告诉dns协议使用哪种查询类型.我们这里使用的是a类型,即通过机器的域名获得其ip地址(但实际上返回的资源记录中还包含机器的别名)./">www.baidu.com是www.a.shifen.com.的别名，并且该机器名对应两个IP地址。host命令使用DNS协议和DNS服务器通信，其-t选项告诉DNS协议使用哪种查询类型。我们这里使用的是A类型，即通过机器的域名获得其IP地址（但实际上返回的资源记录中还包含机器的别名）。</a></p>
+<h4 id="使用tcpdump观察DNS通信过程"><a href="#使用tcpdump观察DNS通信过程" class="headerlink" title="使用tcpdump观察DNS通信过程"></a>使用tcpdump观察DNS通信过程</h4><p>为了看清楚DNS通信的过程，下面我们将从ernest-laptop上运行host命令以查询主机<a href="http://www.baidu.com对应的IP地址，并使用tcpdump抓取这一过程中LAN上传输的以太网帧。具体的操作过程如下：">www.baidu.com对应的IP地址，并使用tcpdump抓取这一过程中LAN上传输的以太网帧。具体的操作过程如下：</a></p>
+<p>$sudo tcpdump-i eth0-nt-s 500 port domain</p>
+<p>$host-t A <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+<p>这一次执行tcpdump抓包时，我们使用“port domain”来过滤数据包，表示只抓取使用domain（域名）服务的数据包，即DNS查询和应答报文。tcpdump的输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. IP 192.168.1.108.34319＞219.239.26.42.53 :57428+A?www.baidu.com.</span><br><span class="line">(31)</span><br><span class="line">2. IP 219.239.26.42.53＞192.168.1.108.34319 :57428 3/4/4 CNAME</span><br><span class="line">www.a.shifen.com.,A 119.75.218.77,A 119.75.217.56(226)</span><br></pre></td></tr></table></figure>
+
+<p>tcpdump以“IP地址.端口号”的形式来描述通信的某一端  第一个是DNS查询报文第二个是应答报文</p>
+<p>第一个数据包中，数值57428是DNS查询报文的标识值，因此该值也出现在DNS应答报文中。“+”表示启用递归查询标志。“A?”表示使用A类型的查询方式。“<a target="_blank" rel="noopener" href="http://www.baidu.com”则是dns查询问题中的查询名.括号中的数值31是dns查询报文的长度(以字节为单位)./">www.baidu.com”则是DNS查询问题中的查询名。括号中的数值31是DNS查询报文的长度（以字节为单位）。</a></p>
+<p>第二个数据包中，“3&#x2F;4&#x2F;4”表示该报文中包含3个应答资源记录、4个授权资源记录和4个额外信息记录。“CNAME <a target="_blank" rel="noopener" href="http://www.a.shifen.com.,a119.75.218.77,a/">www.a.shifen.com.，A119.75.218.77，A</a> 119.75.217.56”则表示3个应答资源记录的内容。其中CNAME表示紧随其后的记录是机器的别名，A表示紧随其后的记录是IP地址。该应答报文的长度为226字节。</p>
+<p>我们抓包的时候没有开启tcpdump的-X选项（或者-x选项）。如果使用-X选项，我们将能看到DNS报文的每一个字节，也就能明白上面31字节的查询报文和226字节的应答报文的具体含义</p>
+<h3 id="socket和TCP-IP协议族的关系"><a href="#socket和TCP-IP协议族的关系" class="headerlink" title="socket和TCP&#x2F;IP协议族的关系"></a>socket和TCP&#x2F;IP协议族的关系</h3><p>前文提到，数据链路层、网络层、传输层协议是在内核中实现的。因此操作系统需要实现一组系统调用，使得应用程序能够访问这些协议提供的服务。实现这组系统调用的API（Application Programming Interface，应用程序编程接口）主要有两套：socket和XTI。XTI现在基本不再使用，本书仅讨论socket。</p>
+<p>由socket定义的这一组API提供如下两点功能：一是将应用程序数据从用户缓冲区中复制到TCP&#x2F;UDP内核发送缓冲区，以交付内核来发送数据，或者是从内核TCP&#x2F;UDP接收缓冲区中复制数据到用户缓冲区，以读取数据；二是应用程序可以通过它们来修改内核中各层协议的某些头部信息或其他数据结构，从而精细地控制底层通信的行为。比如可以通过setsockopt函数来设置IP数据报在网络上的存活时间。</p>
+<p>值得一提的是，socket是一套通用网络编程接口，它不但可以访问内核中TCP&#x2F;IP协议栈，而且可以访问其他网络协议栈（比如X.25协议栈、UNIX本地域协议栈等）</p>
+<p>#IP协议详解</p>
+<p>IP协议是TCP&#x2F;IP协议族的核心协议，也是socket网络编程的基础之一</p>
+<ul>
+<li><p>IP头部信息。IP头部信息出现在每个IP数据报中，用于指定IP通信的源端IP地址、目的端IP地址，指导IP分片和重组，以及指定部分通信行为</p>
+</li>
+<li><p>IP数据报的路由和转发。IP数据报的路由和转发发生在除目标机器之外的所有主机和路由器上。它们决定数据报是否应该转发以及如何转发。</p>
+</li>
+</ul>
+<h3 id="IP服务的特点"><a href="#IP服务的特点" class="headerlink" title="IP服务的特点"></a>IP服务的特点</h3><p>IP协议是TCP&#x2F;IP协议族的动力，它为上层协议提供无状态、无连接、不可靠的服务。</p>
+<ul>
+<li><strong>无状态</strong>（stateless）是指IP通信双方不同步传输数据的状态信息，因此所有IP数据报的发送、传输和接收都是相互独立、没有上下文关系的。这种服务最大的缺点是无法处理乱序和重复的IP数据报。接收端的IP模块只要收到了完整的IP数据报（如果是IP分片的话，IP模块将先执行重组），就将其数据部分（TCP报文段、UDP数据报或者ICMP报文）上交给上层协议。那么从上层协议来看，这些数据就可能是乱序的、重复的。</li>
+</ul>
+<p>面向连接的协议，比如TCP协议，则能够自己处理乱序的、重复的报文段，它递交给上层协议的内容绝对是有序的、正确的。</p>
+<p>虽然IP数据报头部提供了一个标识字段（见后文）用以唯一标识一个IP数据报，但它是被用来处理IP分片和重组的，而不是用来指示接收顺序的。</p>
+<p>在网络协议中，无状态是很常见的，比如UDP协议和HTTP协议都是无状态协议。以HTTP协议为例，一个浏览器的连续两次网页请求之间没有任何关联，它们将被Web服务器独立地处理。</p>
+<ul>
+<li><strong>无连接</strong>（connectionless）是指IP通信双方都不长久地维持对方的任何信息。这样，上层协议每次发送数据的时候，都必须明确指定对方的IP地址。</li>
+<li><strong>不可靠</strong>是指IP协议不能保证IP数据报准确地到达接收端，它只是承诺尽最大努力（best effort）。很多种情况都能导致IP数据报发送失败。比如，某个中转路由器发现IP数据报在网络上存活的时间太长（根据IP数据报头部字段TTL判断，见后文），那么它将丢弃之，并返回一个ICMP错误消息（超时错误）给发送端。又比如，接收端发现收到的IP数据报不正确（通过校验机制），它也将丢弃之，并返回一个ICMP错误消息（IP头部参数错误）给发送端。无论哪种情况，发送端的IP模块一旦检测到IP数据报发送失败，就通知上层协议发送失败，而不会试图重传。因此，使用IP服务的上层协议（比如TCP协议）需要自己实现数据确认、超时重传等机制以达到可靠传输的目的</li>
+</ul>
+<h3 id="IPv4头部结构"><a href="#IPv4头部结构" class="headerlink" title="IPv4头部结构"></a>IPv4头部结构</h3><h3 id="IP分片"><a href="#IP分片" class="headerlink" title="IP分片"></a>IP分片</h3><h3 id="IP路由"><a href="#IP路由" class="headerlink" title="IP路由"></a>IP路由</h3><h3 id="IP转发"><a href="#IP转发" class="headerlink" title="IP转发"></a>IP转发</h3><h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><h3 id="IPv6头部结构"><a href="#IPv6头部结构" class="headerlink" title="IPv6头部结构"></a>IPv6头部结构</h3><p>#TCP协议详解</p>
+<ul>
+<li>TCP头部信息。源端端口号、目的端端口号，管理TCP连接，控制两个方向的数据流</li>
+<li>TCP状态转移过程。TCP连接的任意一端都是一个状态机。在TCP连接从建立到断开的整个过程中，连接两端的状态机将经历不同的状态变迁。</li>
+<li>TCP数据流。交互数据流和成块数据流。TCP数据流中有一种特殊的数据，称为紧急数据</li>
+<li>TCP数据流的控制。为了可靠和通信质量 超时重传和拥塞控制。</li>
+</ul>
+<h3 id="TCP服务的特点"><a href="#TCP服务的特点" class="headerlink" title="TCP服务的特点"></a>TCP服务的特点</h3><p>与UDP的区别：</p>
+<ul>
+<li><p>建立连接 全双工：双方数据读写通过一个连接进行     UDP适合多播和广播</p>
+</li>
+<li><p>字节流  数据报  编程中，体现为通信双方是否必须执行相同次数的读、写操作  </p>
+</li>
+<li><ul>
+<li>当发送端应用程序连续执行多次写操作时，TCP模块先将这些数据放入TCP发送缓冲区中。真正开始发送数据时，发送缓冲区中这些等待发送的数据可能被封装成一个或多个TCP报文段发出。因此，TCP模块发送出的TCP报文段的个数和应用程序执行的写操作次数之间没有固定的数量关系。</li>
+<li>当接收端收到一个或多个TCP报文段后，TCP模块将它们携带的应用程序数据按照TCP报文段的序号依次放入TCP接收缓冲区中，并通知应用程序读取数据。接收端应用程序可以一次性将TCP接收缓冲区中的数据全部读出，也可以分多次读取，这取决于用户指定的应用程序读缓冲区的大小。因此，应用程序执行的读操作次数和TCP模块接收到的TCP报文段个数之间也没有固定的数量关系。</li>
+<li>UDP则不然。每执行一次写操作，UDP模块就将其封装成一个UDP数据报并发送。接收端必须及时针对每一个UDP数据报执行读操作，否则就会丢包。并且，如果用户没有足够的应用程序缓冲区来读取UDP数据，则UDP数据将被截断</li>
+</ul>
+</li>
+<li><p>可靠  </p>
+</li>
+<li><ul>
+<li><p>TCP协议采用发送应答机制，即发送端发送的每个TCP报文段都必须得到接收方的应答，才认为这个TCP报文段传输成功</p>
+</li>
+<li><p>用超时重传机制 定时器时间内没有收到应答重发报文段</p>
+</li>
+<li><p>收到的IP数据报可能乱序，重复，tcp协议会整理之后再交付</p>
+</li>
+<li><p>UDP和IP都是不可靠的</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>###TCP头部</p>
+<h4 id="固定头部结构"><a href="#固定头部结构" class="headerlink" title="固定头部结构"></a>固定头部结构</h4><p>​			 <img src="./images/TCPIP协议详解.assets/image-20240831202716941-1740972540047-374.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240831202716941-1740972540047-374.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240831202716941" style="zoom:50%;" /></p>
+<ul>
+<li>16位端口号：报文的源端口和目的端口</li>
+</ul>
+<p>(客户端通常使用系统自动选择的临时端口号，而服务器则使用知名服务端口号。知名服务使用的端口号都定义在&#x2F;etc&#x2F;services文件中)</p>
+<ul>
+<li><p>32位序号（sequence number）：一次TCP通信过程中某一个传输方向上的字节流的每个字节的编号。A发送给B的第一个TCP报文段中，序号值被系统初始化为某个随机值ISN（Initial Sequence Number，初始序号值）。那么在该传输方向上（从A到B），后续的TCP报文段中序号值将被系统设置成ISN加上该报文段所携带数据的第一个字节在整个字节流中的偏移。例如，某个TCP报文段传送的数据是字节流中的第1025～2048字节，那么该报文段的序号值就是ISN+1025。</p>
+</li>
+<li><p>32位确认号（acknowledgement number）：用作对另一方发送来的TCP报文段的响应。其值是收到的TCP报文段的序号值加1。</p>
+</li>
+<li><p>4位头部长度（header length）：标识该TCP头部有多少个32bit字（4字节）。因为4位最大能表示15，所以TCP头部最长是60字节。？？？</p>
+</li>
+<li><ul>
+<li>URG标志，表示紧急指针（urgent pointer）是否有效。</li>
+<li>ACK标志，表示确认号是否有效。我们称携带ACK标志的TCP报文段为<strong>确认报文段</strong>。</li>
+<li>PSH标志，提示接收端应用程序应该立即从TCP接收缓冲区中读走数据，为接收后续数据腾出空间（如果应用程序不将接收到的数据读走，它们就会一直停留在TCP接收缓冲区中）。</li>
+<li>RST标志，表示要求对方重新建立连接。我们称携带RST标志的TCP报文段为<strong>复位报文段</strong>。</li>
+<li>SYN标志，表示请求建立一个连接。我们称携带SYN标志的TCP报文段为<strong>同步报文段</strong></li>
+<li>FIN标志，表示通知对方本端要关闭连接了。我们称携带FIN标志的TCP报文段为<strong>结束报文段</strong>。</li>
+</ul>
+</li>
+<li><p>16位窗口大小（window size）：是TCP流量控制的一个手段。这里说的窗口，指的是接收通告窗口（Receiver Window，RWND）。它告诉对方本端的TCP接收缓冲区还能容纳多少字节的数据，这样对方就可以控制发送数据的速度。</p>
+</li>
+<li><p>16位校验和（TCP checksum）：由发送端填充，接收端对TCP报文段执行CRC算法以检验TCP报文段在传输过程中是否损坏。注意，这个校验不仅包括TCP头部，也包括数据部分。这也是TCP可靠传输的一个重要保障。</p>
+</li>
+<li><p>16位紧急指针（urgent pointer）：是一个正的偏移量。它和序号字段的值相加表示最后一个紧急数据的下一字节的序号。因此，确切地说，这个字段是紧急指针相对当前序号的偏移，不妨称之为紧急偏移。TCP的紧急指针是发送端向接收端发送紧急数据的方法。</p>
+</li>
+<li><p>TCP头部的最后一个选项字段（options）是可变长的可选信息。这部分最多包含40字节，因为TCP头部最长是60字节（其中还包含20字节的固定部分）。</p>
+</li>
+</ul>
+<p>结构 kind(1字节)+length(1字节)+info(n字节)</p>
+<p>选项的第一个字段kind说明选项的类型。有的TCP选项没有后面两个字段，仅包含1字节的kind字段。第二个字段length指定该选项的总长度，该长度包括kind字段和length字段占据的2字节。第三个字段info是选项的具体信息。常见的TCP选项有7种</p>
+<img src="./images/TCPIP协议详解.assets/image-20240902113213630-1740971872174-212.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240902113213630-1740971872174-212.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240902113213630" style="zoom:50%;" />
+
+<p>没看完。。。</p>
+<h4 id="使用tcpdump观察TCP头部信息"><a href="#使用tcpdump观察TCP头部信息" class="headerlink" title="使用tcpdump观察TCP头部信息"></a>使用tcpdump观察TCP头部信息</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">IP 127.0.0.1.41621＞127.0.0.1.23 :Flags[S],seq 3499745539,win 32792,</span><br><span class="line">options[mss 16396,sackOK,TS val 40781017 ecr 0,nop,wscale 6],length 0</span><br><span class="line">0x0000:4510 003c a5da 4000 4006 96cf 7f00 0001</span><br><span class="line">0x0010:7f00 0001 a295 0017 d099 e103 0000 0000</span><br><span class="line">0x0020:a002 8018 fe30 0000 0204 400c 0402 080a</span><br><span class="line">0x0030:026e 44d9 0000 0000 0103 0306</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>tcpdump输出Flags[S]，表示该TCP报文段包含SYN标志，因此它是一个同步报文段。</li>
+<li>seq是序号值。第一个tcp报文是初始的ISN值，且没有确认号</li>
+<li>win是接收通告窗口的大小。因为这是一个同步报文段，所以win值反映的是总共的接收通告窗口大小</li>
+<li>options是TCP选项。mss是发送端通告的最大报文段长度。通过ifconfig命令查看回路接口的MTU为16436字节，因此可以预想到TCP报文段的MSS为16396（16436-40）字节。sackOK表示发送端支持并同意使用SACK选项。TS val是发送端的时间戳。ecr是时间戳回显应答。因为这是一次TCP通信的第一个TCP报文段，所以它针对对方的时间戳的应答为0（尚未收到对方的时间戳）。紧接着的nop是一个空操作选项。wscale指出发送端使用的窗口扩大因子为6。</li>
+<li>们分析tcpdump输出的字节码中TCP头部对应的信息，它从第21字节开始</li>
+</ul>
+<img src="./images/TCPIP协议详解.assets/image-20240902113917873-1740971872174-210.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240902113917873-1740971872174-210.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240902113917873" style="zoom:50%;" />
+
+
+
+<p>###TCP连接的建立和关闭</p>
+<h4 id="使用tcpdump观察TCP连接的建立和关闭"><a href="#使用tcpdump观察TCP连接的建立和关闭" class="headerlink" title="使用tcpdump观察TCP连接的建立和关闭"></a>使用tcpdump观察TCP连接的建立和关闭</h4><p>  从ernest-laptop上执行telnet命令登录Kongming20的80端口，然后抓取这一过程中客户端和服务器交换的TCP报文段。</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$sudo tcpdump-i eth0-nt &#x27;(src 192.168.1.109 and dst 192.168.1.108)or(src 192.168.1.108 and dst 192.168.1.109)&#x27;</span><br><span class="line">//新开一个终端</span><br><span class="line">$telnet 192.168.1.109 80</span><br><span class="line"></span><br><span class="line">Trying 192.168.1.109...</span><br><span class="line">Connected to 192.168.1.109.</span><br><span class="line">Escape character is&#x27;^]&#x27;.      #输入ctrl+]并回车</span><br><span class="line">telnet＞quit					#结束tcp连接</span><br><span class="line">Connection closed.</span><br></pre></td></tr></table></figure>
+
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.IP 192.168.1.108.60871＞192.168.1.109.80:Flags[S],seq 535734930,win 5840,length 0</span><br><span class="line">2.IP 192.168.1.109.80＞192.168.1.108.60871:Flags[S.],seq 2159701207,ack 535734931,win 5792,length 0</span><br><span class="line">3.IP 192.168.1.108.60871＞192.168.1.109.80:Flags[.],ack 1,win 92,length 0</span><br><span class="line"></span><br><span class="line">4.IP 192.168.1.108.60871＞192.168.1.109.80:Flags[F.],seq 1,ack 1,win 92,length 0</span><br><span class="line">5.IP 192.168.1.109.80＞192.168.1.108.60871:Flags[.],ack 2,win 91,length 0</span><br><span class="line">6.IP 192.168.1.109.80＞192.168.1.108.60871:Flags[F.],seq 1,ack 2,win 91,length 0</span><br><span class="line">7.IP 192.168.1.108.60871＞192.168.1.109.80:Flags[.],ack 2,win 92,length 0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>length 0 没有应用层数据</li>
+</ul>
+<p>​                   <img src="./images/TCPIP协议详解.assets/image-20240901223148455-1740971872174-214.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240901223148455-1740971872174-214.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240901223148455" style="zoom:50%;" /></p>
+<ul>
+<li>第1个TCP报文段包含SYN标志，因此它是一个同步报文段，即发起连接请求。同时，该同步报文段包含一个ISN值为535734930的序号。</li>
+<li>第2个TCP报文段也是同步报文段，表示同意建立连接。同时它发送自己的ISN值为2159701207的序号，并对第1个同步报文段进行确认。确认值是535734931，即第1个同步报文段的序号值加1。<strong>同步报文段比较特殊，即使它并没有携带任何应用程序数据，它也要占用一个序号值</strong>。</li>
+<li>第3个TCP报文段是对第2个同步报文段的确认。至此，TCP连接就建立起来了。</li>
+</ul>
+<p>建立TCP连接的这3个步骤被称为TCP三次握手</p>
+<p>从第3个TCP报文段开始，tcpdump输出的序号值和确认值都是相对初始ISN值的偏移。当然，我们可以开启tcpdump的-S选项来选择打印序号的绝对值。</p>
+<ul>
+<li>第4个TCP报文段包含FIN标志，因此它是一个结束报文段，即要求关闭连接。<strong>结束报文段和同步报文段一样，也要占用一个序号值</strong>。</li>
+<li>报文段5来确认该结束报文段。</li>
+<li>紧接着发送自己的结束报文段6</li>
+<li>TCP报文段7给予确认。</li>
+</ul>
+<p>实际上，仅用于确认目的的确认报文段5是可以省略的，因为结束报文段6也携带了该确认信息。确认报文段5是否出现在连接断开的过程中，取决于TCP的延迟确认特性。延迟确认将在后面讨论。</p>
+<p>  我自己尝试</p>
+<p>  先安装 tcpdump 和 telnet</p>
+<p>  tcpdump -i ens160 ‘(src 192.168.6.208 and dst 192.168.6.131)or(src 192.168.6.131 and dst 192.168.6.208)’</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# telnet 192.168.6.131 80</span><br><span class="line">Trying 192.168.6.131...</span><br><span class="line">telnet: connect to address 192.168.6.131: Connection refused</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# telnet 192.168.6.131 80</span><br><span class="line">Trying 192.168.6.131...</span><br><span class="line">telnet: connect to address 192.168.6.131: No route to host</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost .ssh]# tcpdump -i ens160 &#x27;(src 192.168.6.208 and dst 192.168.6.131)or(src 192.168.6.131 and dst 192.168.6.208)&#x27;</span><br><span class="line"></span><br><span class="line">22:27:14.825789 IP localhost.localdomain.58904 &gt; 192.168.6.131.http: Flags [S], seq 865449386, win 64240, options [mss 1460,sackOK,TS val 1199749114 ecr 0,nop,wscale 7], length 0</span><br><span class="line">22:27:14.826569 IP 192.168.6.131 &gt; localhost.localdomain: ICMP host 192.168.6.131 unreachable - admin prohibited filter, length 68</span><br><span class="line"></span><br><span class="line">22:27:20.093253 ARP, Request who-has localhost.localdomain tell 192.168.6.131, length 46</span><br><span class="line">22:27:20.093275 ARP, Reply localhost.localdomain is-at 00:0c:29:a0:76:f3 (oui Unknown), length 28</span><br><span class="line">22:27:20.196832 ARP, Request who-has 192.168.6.131 tell localhost.localdomain, length 28</span><br><span class="line">22:27:20.197899 ARP, Reply 192.168.6.131 is-at 00:0c:29:1f:61:5b (oui Unknown), length 46</span><br></pre></td></tr></table></figure>
+
+<h4 id="半关闭状态"><a href="#半关闭状态" class="headerlink" title="半关闭状态"></a>半关闭状态</h4><p>通信的一端可以发送结束报文段给对方，告诉它本端已经完成了数据的发送，但允许继续接收来自对方的数据，直到对方也发送结束报文段以关闭连接</p>
+<p>服务器和客户端应用程序判断对方是否已经关闭连接的方法是：read系统调用返回0（收到结束报文段）</p>
+<p>很少使用半关闭的程序</p>
+<h4 id="连接超时"><a href="#连接超时" class="headerlink" title="连接超时"></a>连接超时</h4><p>客户端发送出的同步报文段没有应答</p>
+<p>对于提供可靠服务的TCP来说，它必然是先进行重连（可能执行多次），如果重连仍然无效，则通知应用程序连接超时。</p>
+<p>$sudo iptables-F</p>
+<p>$sudo iptables-I INPUT-p tcp–syn-i eth0-j DROP</p>
+<p>iptable命令用于过滤数据包，这里我们利用它来丢弃所有接收到的连接请求（丢弃所有同步报文段，这样客户端就无法得到任何确认报文段）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$sudo tcpdump-n-i eth0 port 23		#仅抓取telnet客户端和服务器交换的数据包</span><br><span class="line">$date;telnet 192.168.1.108;date		#在telnet命令前后都执行date命令，以计算超时时间</span><br><span class="line">Mon Jun 11 21:23:35 CST 2012</span><br><span class="line">Trying 192.168.1.108...</span><br><span class="line">telnet:connect to address 192.168.1.108:Connection timed out</span><br><span class="line">Mon Jun 11 21:24:38 CST 2012</span><br></pre></td></tr></table></figure>
+
+<p>建立TCP连接的超时时间是63s</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1.21:23:35.612136 IP 192.168.1.109.39385＞</span><br><span class="line">192.168.1.108.telnet:Flags[S],seq 1355982096，length 0</span><br><span class="line">2.21:23:36.613146 IP 192.168.1.109.39385＞</span><br><span class="line">192.168.1.108.telnet:Flags[S],seq 1355982096,length 0</span><br><span class="line">3.21:23:38.617279 IP 192.168.1.109.39385＞</span><br><span class="line">192.168.1.108.telnet:Flags[S],seq 1355982096,length 0</span><br><span class="line">4.21:23:42.625140 IP 192.168.1.109.39385＞</span><br><span class="line">192.168.1.108.telnet:Flags[S],seq 1355982096,length 0</span><br><span class="line">5.21:23:50.641344 IP 192.168.1.109.39385＞</span><br><span class="line">192.168.1.108.telnet:Flags[S],seq 1355982096,length 0</span><br><span class="line">6.21:24:06.673331 IP 192.168.1.109.39385＞</span><br><span class="line">192.168.1.108.telnet:Flags[S],seq 1355982096,length 0</span><br></pre></td></tr></table></figure>
+
+<p>保留了tcpdump输出的时间戳 不使用-t</p>
+<p>后面五个都是超时重连报文 第一次2s 每次增倍时间</p>
+<h3 id="TCP状态转移"><a href="#TCP状态转移" class="headerlink" title="TCP状态转移"></a>TCP状态转移</h3><p>TCP连接的任意一端在任一时刻都处于某种状态，当前状态可以通过netstat命令查看</p>
+<img src="./images/TCPIP协议详解.assets/image-20240902115504980-1740971872174-216.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240902115504980-1740971872174-216.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240902115504980" style="zoom:50%;" />
+
+<p>粗虚线表示典型的服务器端连接的状态转移</p>
+<p>粗实线表示典型的客户端连接的状态转移。</p>
+<p>CLOSED是一个假想的起始点，并不是一个实际的状态。</p>
+<h4 id="TCP状态转移总图"><a href="#TCP状态转移总图" class="headerlink" title="TCP状态转移总图"></a>TCP状态转移总图</h4><p>先从CLOSED开始沿着虚线走一遍就是服务器的状态转移过程  先主动调用listen进入被动连接状态</p>
+<p>客户端通过connect系统调用主动与服务器建立连接。connect系统调用首先给服务器发送一个同步报文段，使连接转移到SYN_SENT状态。此后，connect系统调用可能因为如下两个原因失败</p>
+<ul>
+<li><p>如果connect连接的目标端口不存在（未被任何进程监听），或者该端口仍被处于TIME_WAIT状态的连接所占用，则服务器将给客户端发送一个复位报文段，connect调用失败。</p>
+</li>
+<li><p>如果目标端口存在，但connect在超时时间内未收到服务器的确认报文段，则connect调用失败。</p>
+</li>
+</ul>
+<p>connect调用失败将使连接立即返回到初始的CLOSED状态。如果客户端成功收到服务器的同步报文段和确认，则connect调用成功返回，连接转移至ESTABLISHED状态。</p>
+<p>当客户端执行主动关闭时，它将向服务器发送一个结束报文段，同时连接进入FIN_WAIT_1状态。若此时客户端收到服务器专门用于确认目的的确认报文段，则连接转移至FIN_WAIT_2状态。当客户端处于FIN_WAIT_2状态时，服务器处于CLOSE_WAIT状态，这一对状态是可能发生半关闭的状态。此时如果服务器也关闭连接（发送结束报文段），则客户端将给予确认并进入TIME_WAIT状态。</p>
+<p>客户端从FIN_WAIT_1状态直接进入TIME_WAIT状态，前提是处于FIN_WAIT_1状态的服务器直接收到带确认信息的结束报文段（而不是先收到确认报文段，再收到结束报文段）。</p>
+<p>前面说过，处于FIN_WAIT_2状态的客户端需要等待服务器发送结束报文段，才能转移至TIME_WAIT状态，否则它将一直停留在这个状态。如果不是为了在半关闭状态下继续接收数据，连接长时间地停留在FIN_WAIT_2状态并无益处。连接停留在FIN_WAIT_2状态的情况可能发生在：客户端执行半关闭后，未等服务器关闭连接就强行退出了。此时客户端连接由内核来接管，可称之为孤儿连接（和孤儿进程类似）。Linux为了防止孤儿连接长时间存留在内核中，定义了两个内核变量：&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;tcp_max_orphans和&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;tcp_fin_timeout。前者指定内核能接管的孤儿连接数目，后者指定孤儿连接在内核中生存的时间。</p>
+<img src="./images/TCPIP协议详解.assets/image-20240902121020622-1740971872174-218.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240902121020622-1740971872174-218.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240902121020622" style="zoom:50%;" />
+
+<h3 id="TIME-WAIT状态"><a href="#TIME-WAIT状态" class="headerlink" title="TIME_WAIT状态"></a>TIME_WAIT状态</h3><p>客户端连接在收到服务器的结束报文段（TCP报文段6）之后，并没有直接进入CLOSED状态，而是转移到TIME_WAIT状态。在这个状态，客户端连接要等待一段长为2MSL（Maximum Segment Life，报文段最大生存时间）的时间，才能完全关闭。MSL是TCP报文段在网络中的最大生存时间，标准文档RFC 1122的建议值是2min</p>
+<p>原因</p>
+<ul>
+<li>可靠地终止TCP连接。</li>
+</ul>
+<p>假设文段7丢失，那么服务器将重发结束报文段。因此客户端需要停留在某个状态以处理重复收到的结束报文段（即向服务器发送确认报文段）。否则，客户端将以复位报文段来回应服务器，服务器则认为这是一个错误，因为它期望的是一个像TCP报文段7那样的确认报文段。</p>
+<ul>
+<li>保证让迟来的TCP报文段有足够的时间被识别并丢弃</li>
+</ul>
+<p>在Linux系统上，一个TCP端口不能被同时打开多次（两次及以上）。当一个TCP连接处于TIME_WAIT状态时，我们将无法立即使用该连接占用着的端口来建立一个新连接。反过来思考，如果不存在TIME_WAIT状态，则应用程序能够立即建立一个和刚关闭的连接相似的连接（这里说的相似，是指它们具有相同的IP地址和端口号）。这个新的、和原来相似的连接被称为原来的连接的化身（incarnation）。新的化身可能接收到属于原来的连接的、携带应用程序数据的TCP报文段（迟到的报文段），这显然是不应该发生的。</p>
+<p>另外，因为TCP报文段的最大生存时间是MSL，所以坚持2MSL时间的TIME_WAIT状态能够确保网络上两个传输方向上尚未被接收到的、迟到的TCP报文段都已经消失（被中转路由器丢弃）。因此，一个连接的新的化身可以在2MSL时间之后安全地建立，而绝对不会接收到属于原来连接的应用程序数据，这就是TIME_WAIT状态要持续2MSL时间的原因。</p>
+<p>有时候我们希望<strong>避免TIME_WAIT状态</strong>，因为当程序退出后，我们希望能够立即重启它。但由于处在TIME_WAIT状态的连接还占用着端口，程序将无法启动（直到2MSL超时时间结束）。考虑一个例子：在测试机器ernest-laptop上以客户端方式运行nc（用于创建网络连接的工具，见第17章）命令，登录本机的Web服务，且明确指定客户端使用12345端口与服务器通信。然后从终端输入Ctrl+C终止客户端程序，接着又立即重启nc程序，以完全相同的方式再次连接本机的Web服务。具体操作如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$nc-p 12345 192.168.1.108 80</span><br><span class="line">ctrl+C#中断客户端程序</span><br><span class="line">$nc-p 12345 192.168.1.108 80#重启客户端程序，重新建立连接</span><br><span class="line">nc:bind failed:Address already in use#输出显示连接失败，因为12345端口</span><br><span class="line">仍被占用</span><br><span class="line">$netstat-nat#用netstat命令查看连接状态</span><br><span class="line">Proto Recv-Q Send-Q Local Address Foreign Address State</span><br><span class="line">tcp 0 0 192.168.1.108:12345 192.168.1.108:80 TIME_WAIT</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>一般客户端使用系统自动分配的随机端口，我们强制使用12345号端口才会有这样的问题</li>
+<li>但如果是服务器主动关闭连接后异常终止，则因为它总是使用同一个知名服务端口号，所以连接的TIME_WAIT状态将导致它不能立即重启。不过，我们可以通过socket选项SO_REUSEADDR来强制进程立即使用处于TIME_WAIT状态的连接占用的端口    一个服务器可以接收多少tcp连接？</li>
+</ul>
+<h3 id="复位报文段"><a href="#复位报文段" class="headerlink" title="复位报文段"></a>复位报文段</h3><p>TCP连接的一端会向另一端发送携带RST标志的报文段，即复位报文段，以通知对方关闭连接或重新建立连接</p>
+<h4 id="访问不存在的端口"><a href="#访问不存在的端口" class="headerlink" title="访问不存在的端口"></a>访问不存在的端口</h4><p>会发送复位报文段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$sudo tcpdump-nt-i eth0 port 54321#仅抓取发送至和来自54321端口的TCP</span><br><span class="line">报文段</span><br><span class="line">$telnet 192.168.1.108 54321</span><br><span class="line">Trying 192.168.1.108...</span><br><span class="line">telnet:connect to address 192.168.1.108:Connection refused</span><br><span class="line"></span><br><span class="line">1.IP 192.168.1.109.42001＞192.168.1.108.54321:Flags[S],seq 21621375,win 14600,length 0</span><br><span class="line">2.IP 192.168.1.108.54321＞192.168.1.109.42001:Flags[R.],seq 0,ack 21621376,win 0,length 0</span><br></pre></td></tr></table></figure>
+
+<p>回复一个复位报文段R 接收通告窗口为0，所以收到复位的一方不能回应并且应该关闭或重新连接</p>
+<p>当客户端程序向服务器的某个端口发起连接，而该端口仍被处于TIME_WAIT状态的连接所占用时，客户端程序也将收到复位报文段</p>
+<h4 id="异常终止连接"><a href="#异常终止连接" class="headerlink" title="异常终止连接"></a>异常终止连接</h4><p>TCP提供了异常终止一个连接的方法，即给对方发送一个复位报文段。一旦发送了复位报文段，发送端所有排队等待发送的数据都将被丢弃。</p>
+<p>应用程序可以使用socket选项SO_LINGER来发送复位报文段，以异常终止一个连接。</p>
+<h4 id="处理半打开连接"><a href="#处理半打开连接" class="headerlink" title="处理半打开连接"></a>处理半打开连接</h4><p>服务器（或客户端）关闭或者异常终止了连接，而对方没有接收到结束报文段（比如发生了网络故障），此时，客户端（或服务器）还维持着原来的连接，而服务器（或客户端）即使重启，也已经没有该连接的任何信息了。我们将这种状态称为半打开状态，处于这种状态的连接称为半打开连接。如果客户端（或服务器）往处于半打开状态的连接写入数据，则对方将回应一个复位报文段。</p>
+<p>举例来说，我们在Kongming20上使用nc命令模拟一个服务器程序，使之监听12345端口，然后从ernest-laptop运行telnet命令登录到该端口上，接着拔掉ernest-laptop的网线，并在Kongming20上中断服务器程序。显然，此时ernest-laptop上运行的telnet客户端程序维持着一个半打开连接。然后接上ernest-laptop的网线，并从客户端程序往半打开连接写入1字节的数据“a”。同时，运行tcpdump程序抓取整个过程中telnet客户端和nc服务器交换的TCP报文段。具体操作过程如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$nc-l 12345#在Kongming20上运行服务器程序</span><br><span class="line">$sudo tcpdump-nt-i eth0 port 12345</span><br><span class="line">$telnet 192.168.1.109 12345#在ernest-laptop上运行客户端程序</span><br><span class="line">Trying 192.168.1.109...</span><br><span class="line">Connected to 192.168.1.109.</span><br><span class="line">Escape character is&#x27;^]&#x27;.#此时断开ernest-laptop的网线，并重启服务器</span><br><span class="line">a（回车）#向半打开连接输入字符a</span><br><span class="line">Connection closed by foreign host.</span><br><span class="line"></span><br><span class="line">1.IP 192.168.1.108.55100＞192.168.1.109.12345:Flags[S],seq 3093809365,length 0</span><br><span class="line">2.IP 192.168.1.109.12345＞192.168.1.108.55100:Flags[S.],seq 1495337791,ack 3093809366,length 0</span><br><span class="line">3.IP 192.168.1.108.55100＞192.168.1.109.12345:Flags[.],ack 1,length 0</span><br><span class="line">4.IP 192.168.1.108.55100＞192.168.1.109.12345:Flags[P.],seq 1:4,ack 1,length 3</span><br><span class="line">5.IP 192.168.1.109.12345＞192.168.1.108.55100:Flags[R],seq 1495337792,length 0</span><br></pre></td></tr></table></figure>
+
+<p>该输出内容中，前3个TCP报文段是正常建立TCP连接的3次握手的过程。</p>
+<p>第4个TCP报文段由客户端发送给服务器，它携带了3字节的应用程序数据，这3字节依次是：字母“a”、回车符“\r”和换行符“\n”。不过因为服务器程序已经被中断，所以Kongming20对客户端发送的数据回应了一个复位报文段5。</p>
+<h3 id="TCP交互数据流"><a href="#TCP交互数据流" class="headerlink" title="TCP交互数据流"></a>TCP交互数据流</h3><p>TCP报文段所携带的应用程序数据按照长度分为两种：<strong>交互数据</strong>和<strong>成块数据</strong>。交互数据仅包含很少的字节。</p>
+<p>使用交互数据的应用程序（或协议）对实时性要求高，比如telnet、ssh等。成块数据的长度则通常为TCP报文段允许的最大数据长度。使用成块数据的应用程序（或协议）对传输效率要求高，比如ftp。</p>
+<p>考虑如下情况：在ernest-laptop上执行telnet命令登录到本机，然后在shell命令提示符后执行ls命令，同时用tcpdump抓取这一过程中telnet客户端和telnet服务器交换的TCP报文段。具体操作过程如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$tcpdump-nt-i lo port 23</span><br><span class="line">$telnet 127.0.0.1</span><br><span class="line">Trying 127.0.0.1...</span><br><span class="line">Connected to 127.0.0.1.</span><br><span class="line">Escape character is&#x27;^]&#x27;.</span><br><span class="line">Ubuntu 9.10</span><br><span class="line">ernest-laptop login:ernest（回车）  #输入用户名并回车</span><br><span class="line">Password:（回车）  #输入密码并回车</span><br><span class="line">ernest@ernest-laptop:～$ls（回车）</span><br><span class="line"></span><br><span class="line">1.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[P.],seq 1408334812:1408334813,ack 1415955507,win 613,length 1</span><br><span class="line">2.IP 127.0.0.1.23＞127.0.0.1.58130:Flags[P.],seq 1:2,ack 1,win 512,length 1</span><br><span class="line">3.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[.],ack 2,win 613,length 0</span><br><span class="line">4.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[P.],seq 1:2,ack 2,win 613,length 1</span><br><span class="line">5.IP 127.0.0.1.23＞127.0.0.1.58130:Flags[P.],seq 2:3,ack 2,win 512,length 1</span><br><span class="line">6.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[.],ack 3,win 613,length 0</span><br><span class="line">7.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[P.],seq 2:4,ack 3,win 613,length 2</span><br><span class="line">8.IP 127.0.0.1.23＞127.0.0.1.58130:Flags[P.],seq 3:176,ack 4,win 512,length 173</span><br><span class="line">9.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[.],ack 176,win 630,length 0</span><br><span class="line">10.IP 127.0.0.1.23＞127.0.0.1.58130:Flags[P.],seq 176:228,ack 4,win 512,length 52</span><br><span class="line">11.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[.],ack 228,win 630,length 0</span><br></pre></td></tr></table></figure>
+
+<p>TCP报文段1由客户端发送给服务器，它携带1个字节的应用程序数据，即字母“l”。TCP报文段2是服务器对TCP报文段1的确认，同时回显字母“l”。TCP报文段3是客户端对TCP报文段2的确认。第4～6个TCP报文段是针对字母“s”的上述过程。TCP报文段7传送的2字节数据分别是：客户端键入的回车符和流结束符（EOF，本例中是0x00）。TCP报文段8携带服务器返回的客户查询的目录的内容（ls命令的输出），包括该目录下文件的文件名及其显示控制参数。TCP报文段9是客户端对TCP报文段8的确认。TCP报文段10携带的也是服务器返回给客户端的数据，包括一个回车符、一个换行符、客户端登录用户的PS1环境变量（第一级命令提示符）。TCP报文段11是客户端对TCP报文段10的确认。</p>
+<p>在上述过程中，客户端针对服务器返回的数据所发送的确认报文段（TCP报文段6、9和11）都不携带任何应用程序数据（长度为0），而服务器每次发送的确认报文段（TCP报文段2、5、8和10）都包含它需要发送的应用程序数据。服务器的这种处理方式称为<strong>延迟确认</strong>，即它不马上确认上次收到的数据，而是在一段延迟时间后查看本端是否有数据需要发送，如果有，则和确认信息一起发出。因为服务器对客户请求处理得很快，所以它发送确认报文段的时候总是有数据一起发送。延迟确认可以减少发送TCP报文段的数量。而由于用户的输入速度明显慢于客户端程序的处理速度，所以客户端的确认报文段总是不携带任何应用程序数据。</p>
+<p>前文曾提到，在TCP连接的建立和断开过程中，也可能发生延迟确认。上例是在本地回路运行的结果，在局域网中也能得到基本相同的结果，但在广域网就未必如此了。广域网上的交互数据流可能经受很大的延迟，并且，携带交互数据的微小TCP报文段数量一般很多（一个按键输入就导致一个TCP报文段），这些因素都可能导致拥塞发生。解决该问题的一个简单有效的方法是使用<strong>Nagle算法</strong>。Nagle算法要求一个TCP连接的通信双方在任意时刻都最多只能发送一个未被确认的TCP报文段，在该TCP报文段的确认到达之前不能发送其他TCP报文段。另一方面，发送方在等待确认的同时收集本端需要发送的微量数据，并在确认到来时以一个TCP报文段将它们全部发出。这样就极大地减少了网络上的微小TCP报文段的数量。该算法的另一个优点在于其自适应性：确认到达得越快，数据也就发送得越快。</p>
+<h4 id="TCP成块数据流"><a href="#TCP成块数据流" class="headerlink" title="TCP成块数据流"></a>TCP成块数据流</h4><p>下面考虑用FTP协议传输一个大文件。在ernest-laptop上启动一个vsftpd服务器程序（升级的、安全版的ftp服务器程序），并执行ftp命令登录该服务器上，然后在ftp命令提示符后输入get命令，从服务器下载一个几百兆的大文件。同时用tcpdump抓取这一个过程中ftp客户端和vsftpd服务器交换的TCP报文段。具体操作过程如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">$sudo tcpdump-nt-i eth0 port 20#vsftpd服务器程序使用端口号20</span><br><span class="line">$ftp 127.0.0.1</span><br><span class="line">Connected to 127.0.0.1.</span><br><span class="line">220(vsFTPd 2.3.0)</span><br><span class="line">Name(127.0.0.1:ernest):ernest（回车）#输入用户名并回车</span><br><span class="line">331 Please specify the password.</span><br><span class="line">Password:（回车）		#输入密码并回车</span><br><span class="line">230 Login successful.</span><br><span class="line">Remote system type is UNIX.</span><br><span class="line">Using binary mode to transfer files.</span><br><span class="line">ftp＞get bigfile（回车）		#获取大文件bigfile</span><br><span class="line"></span><br><span class="line">1.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205783041:205799425,ack 1,win 513,length 16384</span><br><span class="line">2.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205799425:205815809,ack 1,win 513,length 16384</span><br><span class="line">3.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205815809:205832193,ack 1,win 513,length 16384</span><br><span class="line">4.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[P.],seq 205832193:205848577,ack 1,win 513,length 16384</span><br><span class="line">5.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205848577:205864961,ack 1,win 513,length 16384</span><br><span class="line">6.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205864961:205881345,ack 1,win 513,length 16384</span><br><span class="line">7.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205881345:205897729,ack 1,win 513,length 16384</span><br><span class="line">8.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[P.],seq 205897729:205914113,ack 1,win 513,length 16384</span><br><span class="line">9.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205914113:205930497,ack 1,win 513,length 16384</span><br><span class="line">10.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205930497:205946881,ack 1,win 513,length 16384</span><br><span class="line">11.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205946881:205963265,ack 1,win 513,length 16384</span><br><span class="line">12.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[P.],seq 205963265:205979649,ack 1,win 513,length 16384</span><br><span class="line">13.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205979649:205996033,ack 1,win 513,length 16384</span><br><span class="line">14.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 205996033:206012417,ack 1,win 513,length 16384</span><br><span class="line">15.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[.],seq 206012417:206028801,ack 1,win 513,length 16384</span><br><span class="line">16.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[P.],seq 206028801:206045185,ack 1,win 513,length 16384</span><br><span class="line">17.IP 127.0.0.1.39651＞127.0.0.1.20:Flags[.],ack 205815809,win 30084,length 0</span><br><span class="line">18.IP 127.0.0.1.39651＞127.0.0.1.20:Flags[.],ack 206045185,win 27317,length 0</span><br></pre></td></tr></table></figure>
+
+<p>注意，客户端发送的最后两个TCP报文段17和18，它们分别是对TCP报文段2和16的确认（从序号值和确认值来判断）。由此可见，当传输大量大块数据的时候，发送方会连续发送多个TCP报文段，接收方可以一次确认所有这些报文段。那么发送方在收到上一次确认后，能连续发送多少个TCP报文段呢？这是由接收通告窗口（还需要考虑拥塞窗口，见后文）的大小决定的。TCP报文段17说明客户端还能接收30 084×64字节（本例中窗口扩大因子为6），即1 925 376字节的数据。而在TCP报文段18中，接收通告窗口大小为1 748 288字节，即客户端能接收的数据量变小了。这表明客户端的TCP接收缓冲区有更多的数据未被应用程序读取而停留在其中，这些数据都来自TCP报文段3～16中的一部分。服务器收到TCP报文段18后，它至少（因为接收通告窗口可能扩大）还能连续发送的未被确认的报文段数量是1 748288&#x2F;16 384个，即106个（但一般不会连续发送这么多）。其中，16384是成块数据的长度（见TCP报文段1～16的length值），很显然它小于但接近MSS规定的16 396字节。</p>
+<p>另外一个值得注意的地方是，服务器每发送4个TCP报文段就传送一个PSH标志（tcpdump输出标志P）给客户端，以通知客户端的应用程序尽快读取数据。不过这对服务器来说显然不是必需的，因为它知道客户端的TCP接收缓冲区中还有空闲空间（接收通告窗口大小不为0）。</p>
+<p>下面我们修改系统的TCP接收缓冲区和TCP发送缓冲区的大小，使之都为4096字节，然后重启vsftpd服务器，并再次执行上述操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.IP 127.0.0.1.20＞127.0.0.1.45227:Flags[.],seq 5195777:5197313,ack 1,win 3072,length 1536</span><br><span class="line">2.IP 127.0.0.1.20＞127.0.0.1.45227:Flags[.],seq 5197313:5198849,ack 1,win 3072,length 1536</span><br><span class="line">3.IP 127.0.0.1.45227＞127.0.0.1.20:Flags[.],ack 5198849,win 3072,length 0</span><br><span class="line">4.IP 127.0.0.1.20＞127.0.0.1.45227:Flags[P.],seq 5198849:5200385,ack 1,win 3072,length 1536</span><br><span class="line">5.IP 127.0.0.1.45227＞127.0.0.1.20:Flags[.],ack 5200385,win 3072,length 0</span><br></pre></td></tr></table></figure>
+
+<p>从同步报文段（未在代码中列出）得知在这次通信过程中，客户端和服务器的窗口扩大因子都为0，因而客户端和服务器每次通告的窗口大小都是3072字节（没超过4096字节，预料之中）。因为每个成块数据的长度为1536字节，所以服务器在收到上一个TCP报文段的确认之前最多还能再发送1个TCP报文段，这正是TCP报文段1～3描述的情形。</p>
+<h3 id="带外数据"><a href="#带外数据" class="headerlink" title="带外数据"></a>带外数据</h3><p>实际应用中，带外数据的使用很少见，已知的仅有telnet、ftp等远程非活跃程序。</p>
+<h3 id="TCP超时重传"><a href="#TCP超时重传" class="headerlink" title="TCP超时重传"></a>TCP超时重传</h3><p>异常网络状况下（开始出现超时或丢包），TCP如何控制数据传输以保证其承诺的可靠服务。</p>
+<p>TCP服务必须能够重传超时时间内未收到确认的TCP报文段。为此，TCP模块为每个TCP报文段都维护一个重传定时器，该定时器在TCP报文段第一次被发送时启动。如果超时时间内未收到接收方的应答，TCP模块将重传TCP报文段并重置定时器。至于下次重传的超时时间如何选择，以及最多执行多少次重传，就是TCP的重传策略。</p>
+<p>我们通过实例来研究Linux下TCP的超时重传策略。在ernest-laptop上启动iperf服务器程序，然后从Kongming20上执行telnet命令登录该服务器程序。接下来，从telnet客户端发送一些数据（此处是“1234”）给服务器，然后断开服务器的网线并再次从客户端发送一些数据给服务器（此处是“12”）。同时，用tcpdump抓取这一过程中客户端和服务器交换的TCP报文段。具体操作过程如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$sudo tcpdump-n-i eth0 port 5001</span><br><span class="line">$iperf-s					  #在ernest-laptop上执行</span><br><span class="line">$telnet 192.168.1.108 5001		#在Kongming20上执行</span><br><span class="line">Trying 192.168.1.108...</span><br><span class="line">Connected to 192.168.1.108.</span><br><span class="line">Escape character is&#x27;^]&#x27;.</span><br><span class="line">1234#发送完之后断开服务器网线</span><br><span class="line">12</span><br><span class="line">Connection closed by foreign host</span><br></pre></td></tr></table></figure>
+
+<p>iperf是一个测量网络状况的工具，-s选项表示将其作为服务器运行。iperf默认监听5001端口，并丢弃该端口上接收到的所有数据，相当于一个discard服务器。</p>
+<p>代码就不展示了</p>
+<p>TCP报文段1～3是三次握手建立连接的过程，TCP报文段4～5是客户端发送数据“1234”（应用程序数据长度为6，包括回车、换行两个字符，后同）及服务器确认的过程。TCP报文段6是客户端第一次发送数据“12”的过程。因为服务器的网线被断开，所以客户端无法收到TCP报文段6的确认报文段。此后，<em>客户端对TCP报文段6执行了5次重传</em>，它们是TCP报文段7～11，这可以从每个TCP报文段的序号得知。此后，数据包12～23都是ARP模块的输出内容，即Kongming20查询ernest-laptop的MAC地址。</p>
+<p>我们保留了tcpdump输出的时间戳，以便推理TCP的超时重传策略。观察TCP报文段6～11被发送的时间间隔，它们分别为0.2 s、0.4s、0.8 s、1.6 s和3.2 s。由此可见，TCP一共执行5次重传，每次重传超时时间都增加一倍（因此，和TCP超时重连的策略相似）。在5次重传均失败的情况下，底层的IP和ARP开始接管，直到telnet客户端放弃连接为止。</p>
+<p>Linux有两个重要的内核参数与TCP超时重传相关：&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;tcp_retries1和&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;tcp_retries2。前者指定在底层IP接管之前TCP最少执行的重传次数，默认值是3。后者指定连接放弃前TCP最多可以执行的重传次数，默认值是15（一般对应13～30 min）。在我们的实例中，TCP超时重传发生了5次，连接坚持的时间是15 min（可以用date命令来测量）。虽然超时会导致TCP报文段重传，但TCP报文段的重传可以发生在超时之前，即快速重传</p>
+<h3 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h3><p>TCP模块还有一个重要的任务，就是提高网络利用率，降低丢包率，并保证网络资源对每条数据流的公平性。这就是所谓的拥塞控制。</p>
+<p>TCP拥塞控制的标准文档是RFC 5681，其中详细介绍了拥塞控制的四个部分：慢启动（slow start）、拥塞避免（congestion avoidance）、快速重传（fast retransmit）和快速恢复（fast recovery）。拥塞控制算法在Linux下有多种实现，比如reno算法、vegas算法和cubic算法等。它们或者部分或者全部实现了上述四个部分。&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;tcp_congestion_control文件指示机器当前所使用的拥塞控制算法。</p>
+<p>…</p>
+<p>#TCP&#x2F;IP通信案例：访问Internet上的Web服务器</p>
+<p>Web客户端和服务器之间使用HTTP协议通信</p>
+<h3 id="实例总图"><a href="#实例总图" class="headerlink" title="实例总图"></a>实例总图</h3><p>在Kongming20上运行wget客户端程序，在ernest-laptop上运行squid代理服务器程序。客户端通过代理服务器的中转，获取Internet上的主机<a target="_blank" rel="noopener" href="http://www.baidu.com的首页文档index.html/">www.baidu.com的首页文档index.html</a></p>
+<img src="./images/TCPIP协议详解.assets/image-20240902175244566-1740971872174-220.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240902175244566-1740971872174-220.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240902175244566" style="zoom:50%;" />
+
+<p>wget客户端程序和代理服务器之间，以及代理服务器与Web服务器之间都是使用HTTP协议通信的。HTTP协议是一种应用层协议，它默认使用的传输层协议是TCP协议。</p>
+<ul>
+<li>将ernest-laptop设置为Kongming20的HTTP代理服务器，在Kongming20上设置环境变量http_proxy：</li>
+</ul>
+<p>$export http_proxy&#x3D;”ernest-laptop:3128”</p>
+<p>3128是squid服务器默认使用的端口号（可以通过lsof命令查看服务器程序监听的端口号）。设置好环境变量之后，Kongming20访问任何Internet上的Web服务器时，其HTTP请求都将首先发送至ernest-laptop的3128端口。</p>
+<p>squid代理服务器接收到wget客户端的HTTP请求之后，将简单地修改这个请求，然后把它发送给最终的目标Web服务器。代理服务器访问的是Internet上的机器，可以预见它发送的IP数据报都将经过路由器的中转</p>
+<h3 id="部署代理服务器"><a href="#部署代理服务器" class="headerlink" title="部署代理服务器"></a>部署代理服务器</h3><p>由于通信实例中使用了HTTP代理服务器（squid程序），所以先简单介绍一下HTTP代理服务器的工作原理，以及如何部署squid代理服务器</p>
+<h4 id="HTTP代理服务器的工作原理"><a href="#HTTP代理服务器的工作原理" class="headerlink" title="HTTP代理服务器的工作原理"></a>HTTP代理服务器的工作原理</h4><p>在HTTP通信链上，一个HTTP请求可能被多个代理服务器转发，后面的服务器称为前面服务器的上游服务器。代理服务器按照其使用方式和作用，</p>
+<ul>
+<li><p><strong>正向代理</strong>要求客户端自己设置代理服务器的地址。客户的每次请求都将直接发送到该代理服务器，并由代理服务器来请求目标资源。比如处于防火墙内的局域网机器要访问Internet，或者要访问一些被屏蔽掉的国外网站，就需要使用正向代理服务器</p>
+</li>
+<li><p><strong>反向代理</strong>则被设置在服务器端，因而客户端无须进行任何设置。反向代理是指用代理服务器来接收Internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从内部服务器上得到的结果返回给客户端。这种情况下，代理服务器对外就表现为一个真实的服务器。各大网站通常分区域设置了多个代理服务器，所以在不同的地方ping同一个域名可能得到不同的IP地址，因为这些IP地址实际上是代理服务器的IP地址。</p>
+</li>
+<li><p><strong>透明代理</strong>只能设置在网关上。用户访问Internet的数据报必然都经过网关，如果在网关上设置代理，则该代理对用户来说显然是透明的。透明代理可以看作正向代理的一种特殊情况</p>
+</li>
+</ul>
+<p>代理服务器通常还提供缓存目标资源的功能（可选），这样用户下次访问同一资源时速度将很快。优秀的开源软件squid、varnish都是提供了缓存能力的代理服务器软件，其中squid支持所有代理方式，而varnish仅能用作反向代理</p>
+<h4 id="部署squid代理服务器"><a href="#部署squid代理服务器" class="headerlink" title="部署squid代理服务器"></a>部署squid代理服务器</h4><p>现在我们在ernest-laptop上部署squid代理服务器。</p>
+<ul>
+<li>修改squid服务器的配置文件&#x2F;etc&#x2F;squid3&#x2F;squid.conf</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">acl localnet src 192.168.1.0/24</span><br><span class="line">http_access allow localnet</span><br></pre></td></tr></table></figure>
+
+<p>这两行代码的含义是：允许网络192.168.1.0上的所有机器通过该代理服务器来访问Web服务器。</p>
+<p>我们通过上面的两行代码简单地配置了squid的访问控制。但实际应用中，squid提供更多、更安全的配置，比如用户验证等。</p>
+<ul>
+<li>重启squid服务器：</li>
+</ul>
+<p>$sudo service squid3 restart</p>
+<p>service是一个脚本程序（&#x2F;usr&#x2F;sbin&#x2F;service），它为&#x2F;etc&#x2F;init.d&#x2F;目录下的众多服务器程序（比如httpd、vsftpd、sshd和mysqld等）的启动（start）、停止（stop）和重启（restart）等动作提供了一个统一的管理。现在，Linux程序员已经越来越偏向于使用service脚本来管理服务器程序了</p>
+<h4 id="使用tcpdump抓取传输数据包"><a href="#使用tcpdump抓取传输数据包" class="headerlink" title="使用tcpdump抓取传输数据包"></a>使用tcpdump抓取传输数据包</h4><p>在执行wget命令前，我们首先应删除ernest-laptop的ARP高速缓存中路由器对应的项，以便观察TCP&#x2F;IP通信过程中ARP协议何时起作用。然后，使用tcpdump命令抓取整个通信过程中传输的数据包。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$sudo arp-d 192.168.1.1</span><br><span class="line">$sudo tcpdump-s 2000-i eth0-ntX&#x27;(src 192.168.1.108)or(dst 192.168.1.108)or(arp)&#x27;</span><br><span class="line">$wget--header=&quot;Connection:close&quot;http://www.baidu.com/index.html</span><br><span class="line">--2012-07-03 00:51:12--http://www.baidu.com/index.html</span><br><span class="line">Resolving ernest-laptop...192.168.1.108</span><br><span class="line">Connecting to ernest-laptop|192.168.1.108|:3128...connected.</span><br><span class="line">Proxy request sent,awaiting response...200 OK</span><br><span class="line">Length:8024(7.8K)[text/html]</span><br><span class="line">Saving to:“index.html”</span><br><span class="line">100%[=======================＞]8,024--.-K/s in 0.001s</span><br><span class="line">2012-07-03 00:51:12(8.76 MB/s)-“index.html”saved[8024/8024]</span><br></pre></td></tr></table></figure>
+
+<p>wget命令的输出显示，HTTP请求确实是先被送至代理服务器的3128端口，并且代理服务器正确地返回了文件index.html的内容。</p>
+<p>43个数据包这里没有显示</p>
+<ul>
+<li>代理服务器访问DNS服务器以查询域名<a target="_blank" rel="noopener" href="http://www.baidu.com对应的ip地址,包括数据包8、9./">www.baidu.com对应的IP地址，包括数据包8、9。</a></li>
+<li>代理服务器查询路由器MAC地址的ARP请求和应答，包括数据包6、7。</li>
+<li>wget客户端（192.168.1.109）和代理服务器（192.168.1.108）之间的HTTP通信，包括数据包1～5、23～25、32～40、42和43。</li>
+<li>代理服务器和Web服务器（119.75.218.77）之间的HTTP通信，包括数据包10～22、26～31和41。</li>
+</ul>
+<h3 id="访问DNS服务器"><a href="#访问DNS服务器" class="headerlink" title="访问DNS服务器"></a>访问DNS服务器</h3><p>数据包8、9表示代理服务器ernest-laptop向DNS服务器（219.239.26.42，首选DNS服务器的IP地址）查询域名<a target="_blank" rel="noopener" href="http://www.baidu.com对应的ip地址,并得到了回复.该回复包括一个主机别名(www.a.shifen.com)和两个ip地址(119.75.218.77和119.75.217.56)./">www.baidu.com对应的IP地址，并得到了回复。该回复包括一个主机别名（www.a.shifen.com）和两个IP地址（119.75.218.77和119.75.217.56）。</a></p>
+<img src="./images/TCPIP协议详解.assets/image-20240902180624662-1740971872174-222.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240902180624662-1740971872174-222.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240902180624662" style="zoom:50%;" />
+
+<p>squid程序通过读取&#x2F;etc&#x2F;resolv.conf文件获得DNS服务器的IP地址，然后将控制权传递给内核中的UDP模块。</p>
+<p>UDP模块将DNS查询报文封装成UDP数据报，同时把源端口号和目标端口号加入UDP数据报头部，然后UDP模块调用IP服务。</p>
+<p>IP模块则将UDP数据报封装成IP数据报，并把源端IP地址（192.168.1.108）和DNS服务器的IP地址加入IP数据报头部。接下来，IP模块查询路由表以决定如何发送该IP数据报。根据路由策略，目标IP地址（219.239.26.42）仅能匹配路由表中的默认路由项，因此该IP数据报先被发送至路由器（IP地址为192.168.1.1），然后通过路由器来转发。因为ernest-laptop的ARP缓存中没有与路由器对应的缓存项（我们手动将其删除了），所以ernest laptop需要发起一个ARP广播以查询路由器的IP地址，而这正是数据包6描述的内容。路由器则通过ARP应答告诉ernest-laptop自己的MAC地址是14:e6:e4:93:5b:78，如数据包7所示。最终，以太网驱动程序将IP数据报封装成以太网帧发送给路由器。此后，代理服务器再次发送数据到Internet时将不再需要ARP查询，因为ernest-laptop的ARP高速缓存中已经记录了路由器的IP地址和MAC地址的映射关系</p>
+<p>需要指出的是，虽然IP数据报是先发送到路由器，再由它转发给目标主机，但是其头部的目标IP地址却是最终的目标主机（DNS服务器）的IP地址，而不是中转路由器的IP地址（192.168.1.1）。这说明，IP头部的源端IP地址和目的端IP地址在转发过程中是始终不变的（一种例外是源路由选择）。但帧头部的源端物理地址和目的端物理地址在转发过程中则是一直在变化的。</p>
+<h3 id="本地名称查询"><a href="#本地名称查询" class="headerlink" title="本地名称查询"></a>本地名称查询</h3><p>一般来说，通过域名来访问时，需要使用DNS服务来获取IP地址。但如果我们通过主机名来访问本地局域网上的机器，则可通过本地的静态文件来获得该机器的IP地址。Linux将目标主机名及其对应的IP地址存储在&#x2F;etc&#x2F;hosts配置文件中。当需要查询某个主机名对应的IP地址时，程序将首先检查这个文件。Kongming20上&#x2F;etc&#x2F;hosts文件的内容如下（笔者手动修改过）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 localhost</span><br><span class="line">192.168.1.109 Kongming20</span><br><span class="line">192.168.1.108 ernest-laptop</span><br></pre></td></tr></table></figure>
+
+<p>其中第一项指出本地回路地址127.0.0.1的名称是localhost，第二项和第三项则分别描述了Kongming20和ernest-laptop的IP地址及对应的主</p>
+<p>机名。代码清单4-1中，wget命令输出“Resolving ernest laptop…192.168.1.108”，即它成功地解析了主机名ernest-laptop对应的IP地址，原因如下：当wget访问某个Web服务器时，它先读取环境变量http_proxy。如果该环境变量被设置，并且我们没有阻止wget使用代理服务，则wget将通过http_proxy指定的代理服务器来访问Web服务。但http_proxy环境变量中包含主机名ernest-laptop，因此wget将首先读取&#x2F;etc&#x2F;hosts配置文件，试图通过它来解析主机名ernest-laptop对应的IP地址。其结果正如wget的输出所示，解析成功</p>
+<p>如果程序在&#x2F;etc&#x2F;hosts文件中未找到目标机器名对应的IP地址，它将求助于DNS服务。用户可以通过修改&#x2F;etc&#x2F;host.conf文件来自定义系统解析主机名的方法和顺序（一般是先访问本地文件&#x2F;etc&#x2F;hosts，再访问DNS服务），</p>
+<p>Kongming20上的该文件内容如下：</p>
+<p>order hosts,bind</p>
+<p>multi on</p>
+<p>其中第一行表示优先使用&#x2F;etc&#x2F;hosts文件来解析主机名（hosts），失败后再使用DNS服务（bind）。第二行表示如果&#x2F;etc&#x2F;hosts文件中一个主机名对应多个IP地址，那么解析的结果就包含多个IP地址。</p>
+<h3 id="HTTP通信"><a href="#HTTP通信" class="headerlink" title="HTTP通信"></a>HTTP通信</h3><img src="./images/TCPIP协议详解.assets/image-20240902191037647-1740971872174-224.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240902191037647-1740971872174-224.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240902191037647" style="zoom:50%;" />
+
+<p>TCP连接从建立到关闭的过程中，客户端仅给服务器发送了一个HTTP请求（即TCP报文段4）,代理服务器返回了六个tcp报文，总长8522字节，客户端用了七个tcp报文确定应答</p>
+<h4 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET http://www.baidu.com/index.html HTTP/1.0</span><br><span class="line">User-Agent:Wget/1.12(linux-gnu)</span><br><span class="line">Host:www.baidu.com</span><br><span class="line">Connection:close</span><br></pre></td></tr></table></figure>
+
+<p>GET请求方法，只读 的方式请求</p>
+<img src="./images/TCPIP协议详解.assets/image-20240902191341514-1740971872174-226.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240902191341514-1740971872174-226.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240902191341514" style="zoom:50%;" />
+
+<ul>
+<li><p>HEAD、GET、OPTIONS和TRACE被视为安全的方法，因为它们只是从服务器获得资源或信息，而不对服务器进行任何修改。而POST、PUT、DELETE和PATCH则影响服务器上的资源</p>
+</li>
+<li><p>GET、HEAD、OPTIONS、TRACE、PUT和DELETE等请求方法被认为是等幂的（idempotent），即多次连续的、重复的请求和只发送一次该请求具有完全相同的效果。而POST方法则不同，连续多次发送同样一个请求可能进一步影响服务器上的资源</p>
+</li>
+</ul>
+<p>Linux上提供了几个命令：HEAD、GET和POST。其含义基本与HTTP协议中的同名请求方法相同。它们适合用来快速测试Web服务器</p>
+<p>“<a target="_blank" rel="noopener" href="http://www.baidu.com/index.html%E2%80%9D%E6%98%AF%E7%9B%AE%E6%A0%87%E8%B5%84%E6%BA%90%E7%9A%84URL%E3%80%82%E5%85%B6%E4%B8%AD%E2%80%9Chttp%E2%80%9D%E6%98%AF%E6%89%80%E8%B0%93%E7%9A%84**scheme**%EF%BC%8C%E8%A1%A8%E7%A4%BA%E8%8E%B7%E5%8F%96%E7%9B%AE%E6%A0%87%E8%B5%84%E6%BA%90%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8%E7%9A%84%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE%E3%80%82%E5%85%B6%E4%BB%96%E5%B8%B8%E8%A7%81%E7%9A%84scheme%E8%BF%98%E6%9C%89ftp%E3%80%81rtsp%E5%92%8Cfile%E7%AD%89%E3%80%82%E2%80%9Cwww.baidu.com%E2%80%9D%E6%8C%87%E5%AE%9A%E8%B5%84%E6%BA%90%E6%89%80%E5%9C%A8%E7%9A%84%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BA%E3%80%82%E2%80%9Cindex.html%E2%80%9D%E6%8C%87%E5%AE%9A%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8D%E7%A7%B0%EF%BC%8C%E8%BF%99%E9%87%8C%E6%8C%87%E7%9A%84%E6%98%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A0%B9%E7%9B%AE%E5%BD%95%EF%BC%88%E7%AB%99%E7%82%B9%E7%9A%84%E6%A0%B9%E7%9B%AE%E5%BD%95%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A0%B9%E7%9B%AE%E5%BD%95%E2%80%9C/%E2%80%9D%EF%BC%89%E4%B8%AD%E7%9A%84%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6%E3%80%82%E2%80%9CHTTP/1">http://www.baidu.com/index.html”是目标资源的URL。其中“http”是所谓的**scheme**，表示获取目标资源需要使用的应用层协议。其他常见的scheme还有ftp、rtsp和file等。“www.baidu.com”指定资源所在的目标主机。“index.html”指定资源文件的名称，这里指的是服务器根目录（站点的根目录，而不是服务器的文件系统根目录“/”）中的索引文件。“HTTP/1</a>. 0”表示客户端（wget程序）使用的HTTP的版本号是1.0。目前的主流HTTP版本是1.1。</p>
+<ul>
+<li>HTTP请求内容中的第2～4行都是HTTP请求的头部字段。一个HTTP请求可以包含多个头部字段。一个头部字段用一行表示，包含字段名称、冒号、空格和字段的值。HTTP请求中的头部字段可按任意顺序排列。</li>
+</ul>
+<p>“User-Agent:Wget&#x2F;1. 12(linux-gnu)”表示客户端使用的程序是wget。</p>
+<p>“Host:www. baidu.com”表示目标主机名是<a target="_blank" rel="noopener" href="http://www.baidu.com.http协议规定http请求中必须包含的头部字段就是目标主机名./">www.baidu.com。HTTP协议规定HTTP请求中必须包含的头部字段就是目标主机名。</a></p>
+<ul>
+<li><p>“Connection:close”是我们执行wget命令时传入的，告诉服务器处理完这个HTTP请求之后就关闭连接。在旧的HTTP协议中，Web客户端和Web服务器之间的一个TCP连接只能为一个HTTP请求服务。当处理完客户的一个HTTP请求之后，Web服务器就（主动）将TCP连接关闭了。此后，同一客户如果要再发送一个HTTP请求的话，必须与服务器建立一个新的TCP连接。也就是说，同一个客户的多个连续的HTTP请求不能共用同一个TCP连接，这称为<strong>短连接</strong>。</p>
+</li>
+<li><p>长连接与之相反，是指多个请求可以使用同一个TCP连接。长连接在编程上稍微复杂一些，但性能上却有很大提高：它极大地减少了网络上为建立TCP连接导致的负荷，同时对每次请求而言缩减了处理时间。HTTP请求和应答中的“Connection”头部字段就是专门用于告诉对方一个请求完成之后该如何处理连接的，比如立即关闭连接（该头部字段的值为“close”）或者保持一段时间以等待后续请求（该头部字段的值为“keep-alive”）。当用浏览器访问一个网页时，读者不妨使用netstat命令来查看浏览器和Web服务器之间的连接是否是长连接，以及该连接维持了多长时间。</p>
+</li>
+<li><p>在所有头部字段之后，HTTP请求必须包含一个空行，以标识头部字段的结束。请求行和每个头部字段都必须以＜CR＞＜LF＞结束（回车符和换行符）；而空行则必须只包含一个＜CR＞＜LF＞，不能有其他字符，甚至是空白字符。在空行之后，HTTP请求可以包含可选的消息体。如果消息体非空，则HTTP请求的头部字段中必须包含描述该消息体长度的字段“Content-Length”。我们的实例只是获取目标服务器上的资源，所以没有消息体</p>
+</li>
+</ul>
+<h4 id="HTTP应答"><a href="#HTTP应答" class="headerlink" title="HTTP应答"></a>HTTP应答</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.0 200 OK</span><br><span class="line">Server:BWS/1.0</span><br><span class="line">Content-Length:8024</span><br><span class="line">Content-Type:text/html;charset=gbk</span><br><span class="line">SetCookie:BAIDUID=A5B6C72D68CF639CE8896FD79A03FBD8:FG=1;expires=Wed,04-</span><br><span class="line">Jul-42 00:10:47 GMT;path=/;domain=.baidu.com</span><br><span class="line">Via:1.0 localhost(squid/3.0 STABLE18)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一行是状态行。“HTTP&#x2F;1.0”是服务器使用的HTTP协议的版本号。通常，服务器需要使用和客户端相同的HTTP协议版本。“200 OK”是状态码和状态信息。</li>
+</ul>
+<img src="./images/TCPIP协议详解.assets/image-20240902191955141-1740971872174-228.png" class="lazyload" data-srcset="./images/TCPIP协议详解.assets/image-20240902191955141-1740971872174-228.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240902191955141" style="zoom:50%;" />
+
+<ul>
+<li>第2～7行是HTTP应答的头部字段。其表示方法与HTTP请求中的头部字段相同。</li>
+<li>“Server:BWS&#x2F;1. 0”表示目标Web服务器程序的名字是BWS（Baidu Web Server）</li>
+<li>“Content-Length:8024”表示目标文档的长度为8024字节。这个值和wget输出的文档长度一致</li>
+<li>“Content-Type:text&#x2F;html;charset&#x3D;gbk”表示目标文档的MIME类型。其中“text”是主文档类型，“html”是子文档类型。“text&#x2F;html”表示目标文档index.html是text类型中的html文档。“charset”是text文档类型的一个参数，用于指定文档的字符编码</li>
+<li>“Set Cookie:BAIDUID&#x3D;A5B6C72D68CF639CE8896FD79A03FBD8:FG&#x3D;1;expires&#x3D;Wed,04-Jul-42 00:10:47 GMT;path&#x3D;&#x2F;;domain&#x3D;. baidu.com”表示服务器传送一个Cookie给客户端。其中，“BAIDUID”指定Cookie的名字，“expires”指定Cookie的生存时间，“domain”和“path”指定该Cookie生效的域名和路径。下面我们简单分析一下Cookie的作用。</li>
+</ul>
+<p>HTTP协议是一种无状态的协议，即每个HTTP请求之间没有任何上下文关系。如果服务器处理后续HTTP请求时需要用到前面的HTTP请求的相关信息，客户端必须重传这些信息。这样就导致HTTP请求必须传输更多的数据。在交互式Web应用程序兴起之后，HTTP协议的这种无状态特性就显得不适应了，因为交互程序通常要承上启下。因此，我们要使用额外的手段来保持HTTP连接状态，常见的解决方法就是Cookie。Cookie是服务器发送给客户端的特殊信息（通过HTTP应答的头部字段“Set Cookie”），客户端每次向服务器发送请求的时候都需要带上这些信息（通过HTTP请求的头部字段“Cookie”）。这样服务器就可以区分不同的客户了。基于浏览器的自动登录就是用Cookie实现的。</p>
+<ul>
+<li>“Via:1. 0 localhost(squid&#x2F;3.0 STABLE18)”表示HTTP应答在返回过程中经历过的所有代理服务器的地址和名称。这里的localhost实际上指的是“192.168.1.108”。这个头部字段的功能有点类似于IP协议的记录路由功能。</li>
+</ul>
+<p>在所有头部字段之后，HTTP应答必须包含一个空行，以标识头部字段的结束。状态行和每个头部字段都必须以＜CR＞＜LF＞结束；而空行则必须只包含一个＜CR＞＜LF＞，不能有其他字符，甚至是空白字符。</p>
+<ul>
+<li>空行之后是被请求文档index.html的内容，其长度是8024字节。</li>
+</ul>
+
+  </div>
+  
+  
+    
+    <div class='footer'>
+       <!-- 参考资料、相关资料等 -->
+      
+       <!-- 相关文章 -->
+      
+      <!-- 版权声明组件 -->
+      
+      <!-- 打赏组件 -->
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-03T20:45:53+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2025年3月3日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2025/03/02/source/Linux/Linix%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/TCPIP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/&title=TCP/IP协议详解 - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qq.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2025/03/02/source/Linux/Linix%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/TCPIP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/&title=TCP/IP协议详解 - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qzone.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2025/03/02/source/Linux/Linix%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/TCPIP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/&title=TCP/IP协议详解 - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/weibo.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2025/03/02/source/Linux/Linix%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/Log/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>Log</p>
+          <p class='content'>syslog系统日志mian.cpp
+123456789101112131415161718192021222324252627282930313233343536373839404142434...</p>
+        </a>
+      
+      
+        <a class='next' href='/2025/03/02/source/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/'>
+          <p class='title'>计算机网络<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>socket状态转变
+特殊情况：同时调用close，同时先收到FIN包的状态：FIN_WAIT_1 -&gt; ClOSE -&gt; TIME_WAIT（另一个走1 2），如果同时收到FIN则...</p>
+        </a>
+      
+    </div>
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
+  
+
+
+  <article class="post white-box shadow floatable blur" id="comments">
+    <span hidden>
+      <meta itemprop="discussionUrl" content="/2025/03/02/source/Linux/Linix%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/TCPIP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/index.html#comments">
+    </span>
+    <p ct><i class='fa-solid fa-comments'></i> 评论</p>
+    
+
+    <div id="layoutHelper-comments"></div>
+
+  </article>
+
+
+
+
+
+
+</div>
+<aside id='l_side' itemscope itemtype="http://schema.org/WPSideBar">
+  
+
+  
+    
+    
+      
+    
+  
+
+
+<div class="widget-sticky pjax">
+
+  
+  
+
+
+  <section class="widget toc-wrapper desktop mobile " id="toc-div" >
+    
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-IP%E5%8D%8F%E8%AE%AE%E6%97%8F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E4%BB%A5%E5%8F%8A%E4%B8%BB%E8%A6%81%E5%8D%8F%E8%AE%AE"><span class="toc-text">TCP&#x2F;IP协议族体系结构以及主要协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-text">应用层</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%81%E8%A3%85"><span class="toc-text">封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%94%A8"><span class="toc-text">分用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARP%E5%8D%8F%E8%AE%AE%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">ARP协议工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91ARP%E8%AF%B7%E6%B1%82-%E5%BA%94%E7%AD%94%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3"><span class="toc-text">以太网ARP请求&#x2F;应答报文详解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ARP%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98%E7%9A%84%E6%9F%A5%E7%9C%8B%E5%92%8C%E4%BF%AE%E6%94%B9"><span class="toc-text">ARP高速缓存的查看和修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8tcpdump%E8%A7%82%E5%AF%9FARP%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B"><span class="toc-text">使用tcpdump观察ARP通信过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">DNS工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%BA%94%E7%AD%94%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3"><span class="toc-text">DNS查询和应答报文详解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux%E4%B8%8B%E8%AE%BF%E9%97%AEDNS%E6%9C%8D%E5%8A%A1"><span class="toc-text">Linux下访问DNS服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8tcpdump%E8%A7%82%E5%AF%9FDNS%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B"><span class="toc-text">使用tcpdump观察DNS通信过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#socket%E5%92%8CTCP-IP%E5%8D%8F%E8%AE%AE%E6%97%8F%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">socket和TCP&#x2F;IP协议族的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-text">IP服务的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv4%E5%A4%B4%E9%83%A8%E7%BB%93%E6%9E%84"><span class="toc-text">IPv4头部结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E5%88%86%E7%89%87"><span class="toc-text">IP分片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E8%B7%AF%E7%94%B1"><span class="toc-text">IP路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E8%BD%AC%E5%8F%91"><span class="toc-text">IP转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-text">重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6%E5%A4%B4%E9%83%A8%E7%BB%93%E6%9E%84"><span class="toc-text">IPv6头部结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-text">TCP服务的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BA%E5%AE%9A%E5%A4%B4%E9%83%A8%E7%BB%93%E6%9E%84"><span class="toc-text">固定头部结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8tcpdump%E8%A7%82%E5%AF%9FTCP%E5%A4%B4%E9%83%A8%E4%BF%A1%E6%81%AF"><span class="toc-text">使用tcpdump观察TCP头部信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8tcpdump%E8%A7%82%E5%AF%9FTCP%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E5%85%B3%E9%97%AD"><span class="toc-text">使用tcpdump观察TCP连接的建立和关闭</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%8A%E5%85%B3%E9%97%AD%E7%8A%B6%E6%80%81"><span class="toc-text">半关闭状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6"><span class="toc-text">连接超时</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB"><span class="toc-text">TCP状态转移</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%80%BB%E5%9B%BE"><span class="toc-text">TCP状态转移总图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TIME-WAIT%E7%8A%B6%E6%80%81"><span class="toc-text">TIME_WAIT状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E4%BD%8D%E6%8A%A5%E6%96%87%E6%AE%B5"><span class="toc-text">复位报文段</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E7%AB%AF%E5%8F%A3"><span class="toc-text">访问不存在的端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E7%BB%88%E6%AD%A2%E8%BF%9E%E6%8E%A5"><span class="toc-text">异常终止连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%8D%8A%E6%89%93%E5%BC%80%E8%BF%9E%E6%8E%A5"><span class="toc-text">处理半打开连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E4%BA%A4%E4%BA%92%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-text">TCP交互数据流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E6%88%90%E5%9D%97%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-text">TCP成块数据流</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E5%A4%96%E6%95%B0%E6%8D%AE"><span class="toc-text">带外数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0"><span class="toc-text">TCP超时重传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-text">拥塞控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E6%80%BB%E5%9B%BE"><span class="toc-text">实例总图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">部署代理服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">HTTP代理服务器的工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2squid%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">部署squid代理服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8tcpdump%E6%8A%93%E5%8F%96%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="toc-text">使用tcpdump抓取传输数据包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AEDNS%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">访问DNS服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E5%90%8D%E7%A7%B0%E6%9F%A5%E8%AF%A2"><span class="toc-text">本地名称查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E9%80%9A%E4%BF%A1"><span class="toc-text">HTTP通信</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP%E8%AF%B7%E6%B1%82"><span class="toc-text">HTTP请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP%E5%BA%94%E7%AD%94"><span class="toc-text">HTTP应答</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+  
+
+</div>
+
+
+<!-- 没有 pjax 占位会报错 万恶的 pjax -->
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <!-- Custom Files side begin -->
+  
+  <!-- Custom Files side end -->
+</aside>
+
+
+
+          <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+<pjax>
+<script>
+  window.pdata={}
+  pdata.ispage=true;
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+  pdata.commentConfig={};
+  //  see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs
+  
+    // header
+    var l_header=document.getElementById("l_header");
+    
+    l_header.classList.remove("show");
+    
+    
+      // cover
+      var cover_wrapper=document.querySelector('#l_cover .cover-wrapper');
+      var scroll_down=document.getElementById('scroll-down');
+      cover_wrapper.id="half";
+      cover_wrapper.style.display="";
+      scroll_down.style.display="none";
+    
+  
+</script>
+</pjax>
+        </div>
+        
+  
+  <footer class="footer clearfix"  itemscope itemtype="http://schema.org/WPFooter">
+    <br><br>
+    
+      
+        
+          <div><p><span id="lc-sv">博客内容遵循 tutulp-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</span></p>
+</div>
+        
+      
+    
+      
+        本站使用
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/#5.8.0" target="_blank" class="codename">Volantis</a>
+        作为主题
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © since 2025 tutulp</a></p>
+
+        </div>
+      
+    
+    <!-- Custom Files footer begin-->
+    
+    <!-- Custom Files footer end-->
+  </footer>
+
+
+        <a id="s-top" class="fa-solid fa-arrow-up fa-fw" href="/" onclick="return false;" title="top"></a>
+      </div>
+    </div>
+    <div>
+      <script>
+  /******************** volantis.dom ********************************/
+  // 页面选择器 将dom对象缓存起来 see: /source/js/app.js etc.
+  volantis.dom.bodyAnchor = volantis.dom.$(document.getElementById("safearea")); // 页面主体
+  volantis.dom.topBtn = volantis.dom.$(document.getElementById('s-top')); // 向上
+  volantis.dom.wrapper = volantis.dom.$(document.getElementById('wrapper')); // 整个导航栏
+  volantis.dom.coverAnchor = volantis.dom.$(document.querySelector('#l_cover .cover-wrapper')); // 1个
+  volantis.dom.switcher = volantis.dom.$(document.querySelector('#l_header .switcher .s-search')); // 搜索按钮   移动端 1个
+  volantis.dom.header = volantis.dom.$(document.getElementById('l_header')); // 移动端导航栏
+  volantis.dom.search = volantis.dom.$(document.querySelector('#l_header .m_search')); // 搜索框 桌面端 移动端 1个
+  volantis.dom.mPhoneList = volantis.dom.$(document.querySelectorAll('#l_header .m-phone .list-v')); //  手机端 子菜单 多个
+</script>
+
+<script>
+  
+  volantis.css("https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fortawesome/fontawesome-free/css/all.min.css");
+  
+  
+  
+</script>
+
+<!-- required -->
+
+
+<!-- internal -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+<!-- rightmenu要在darkmode之前（ToggleButton） darkmode要在comments之前（volantis.dark.push）-->
+
+
+
+<script>
+  function loadIssuesJS() {
+    
+      const sites_api = document.getElementById('sites-api');
+      if (sites_api != undefined && typeof SitesJS === 'undefined') {
+        volantis.js("/js/plugins/tags/sites.js")
+      }
+    
+    
+      const friends_api = document.getElementById('friends-api');
+      if (friends_api != undefined && typeof FriendsJS === 'undefined') {
+        volantis.js("/js/plugins/tags/friends.js")
+      }
+    
+    
+      const contributors_api = document.getElementById('contributors-api');
+      if (contributors_api != undefined && typeof ContributorsJS === 'undefined') {
+        volantis.js("/js/plugins/tags/contributors.js")
+      }
+    
+  };
+  loadIssuesJS()
+  volantis.pjax.push(()=>{
+    loadIssuesJS();
+  })
+
+</script>
+
+
+
+
+  <script defer src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/vanilla-lazyload/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
+  
+
+<script>
+  window.FPConfig = {
+	delay: 0,
+	ignoreKeywords: ["#"],
+	maxRPS: 6,
+	hoverDelay: 0
+  };
+</script>
+<script defer src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/flying-pages/flying-pages.min.js"></script>
+
+
+
+
+
+
+
+
+
+      <script>
+  volantis.layoutHelper("comments",`<div id="giscus_container"></div>`)
+
+  volantis.giscus = {};
+
+  function check_giscus() {
+    if (volantis.dark.mode === "dark") {
+      volantis.giscus.Theme = 'dark';
+    } else {
+      volantis.giscus.Theme = 'light';
+    }
+
+    return document.getElementById("giscus_container");
+  }
+
+  function pjax_giscus() {
+    const HEAD = check_giscus();
+    if (!HEAD) return;
+    let cfg = Object.assign({"theme":{"light":"light","dark":"dark"}},pdata.commentConfig)
+    const script = document.createElement('script');
+    script.setAttribute('src', 'https://giscus.app/client.js');
+    Object.keys(cfg).forEach(k=>{
+      if (k != "theme") {
+        script.setAttribute('data-'+k, cfg[k]);
+      }
+    })
+    script.setAttribute('data-theme', volantis.giscus.Theme);
+    script.setAttribute('crossorigin', "anonymous");
+    HEAD.appendChild(script);
+  }
+
+  function dark_giscus() {
+    const HEAD = check_giscus();
+    if (!HEAD) return;
+
+    const message = {
+      setConfig: {
+        theme: volantis.giscus.Theme
+      }
+    };
+    const giscusIframe = document.querySelector('iframe.giscus-frame');
+    giscusIframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+  }
+  pjax_giscus();
+  volantis.pjax.push(pjax_giscus);
+  volantis.dark.push(dark_giscus);
+</script>
+
+    
+
+
+
+
+
+<!-- optional -->
+
+  <script>
+  const SearchServiceDataPathRoot = ("/" || "/").endsWith("/") ?
+    "/" || "/" :
+    "//" || "/";
+  const SearchServiceDataPath = SearchServiceDataPathRoot + "content.json";
+
+  function loadSearchScript() {
+    // see: layout/_partial/scripts/_ctrl/cdnCtrl.ejs
+    return volantis.js("/js/search/hexo.js");
+  }
+
+  function loadSearchService() {
+    loadSearchScript();
+    document.querySelectorAll(".input.u-search-input").forEach((e) => {
+      e.removeEventListener("focus", loadSearchService, false);
+    });
+
+    document.querySelectorAll(".u-search-form").forEach((e) => {
+      e.addEventListener("submit", (event) => {
+        event.preventDefault();
+      }, false);
+    });
+  }
+
+  // 打开并搜索 字符串 s
+  function OpenSearch(s) {
+    if (typeof SearchService === 'undefined')
+      loadSearchScript().then(() => {
+        SearchService.setQueryText(s);
+        SearchService.search();
+      });
+    else {
+      SearchService.setQueryText(s);
+      SearchService.search();
+    }
+  }
+
+  // 访问含有 ?s=xxx  的链接时打开搜索 // 与搜索引擎 structured data 相关: /scripts/helpers/structured-data/lib/config.js
+  if (window.location.search && /^\?s=/g.test(window.location.search)) {
+    let queryText = decodeURI(window.location.search)
+      .replace(/\ /g, "-")
+      .replace(/^\?s=/g, "");
+    OpenSearch(queryText);
+  }
+
+  // 搜索输入框获取焦点时加载搜索
+  document.querySelectorAll(".input.u-search-input").forEach((e) => {
+    e.addEventListener("focus", loadSearchService, false);
+  });
+</script>
+
+
+
+
+
+
+
+  <script>
+
+
+
+  function pjax_highlightjs_copyCode(){
+    if (!(document.querySelector(".highlight .code pre") ||
+      document.querySelector(".article pre code"))) {
+      return;
+    }
+    VolantisApp.utilCopyCode(".highlight .code pre, .article pre code")
+  }
+  volantis.requestAnimationFrame(pjax_highlightjs_copyCode)
+  volantis.pjax.push(pjax_highlightjs_copyCode)
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+  function load_swiper() {
+    if (!document.querySelectorAll(".swiper-container")[0]) return;
+    volantis.css("https://unpkg.com/volantis-static@0.0.1654736714924/libs/swiper/swiper-bundle.min.css");
+    volantis.js("https://unpkg.com/volantis-static@0.0.1654736714924/libs/swiper/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    volantis.swiper = new Swiper('.swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  }
+
+  volantis.pjax.push(() => {
+    if (!document.querySelectorAll(".swiper-container")[0]) return;
+    if (typeof volantis.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+
+
+<!-- pjax 标签必须存在于所有页面 否则 pjax error -->
+<pjax>
+
+</pjax>
+
+<script>
+  function listennSidebarTOC() {
+    const navItems = document.querySelectorAll(".toc li");
+    if (!navItems.length) return;
+    let targets = []
+    const sections = [...navItems].map((element) => {
+      const link = element.querySelector(".toc-link");
+      const target = document.getElementById(
+        decodeURI(link.getAttribute("href")).replace("#", "")
+      );
+      targets.push(target)
+      // 解除 a 标签 href 的 锚点定位, a 标签 href 的 锚点定位 会随机启用?? 产生错位???
+      link.setAttribute("onclick","return false;")
+      link.setAttribute("toc-action","toc-"+decodeURI(link.getAttribute("href")).replace("#", ""))
+      link.setAttribute("href","/")
+      // 配置 点击 触发新的锚点定位
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        // 这里的 addTop 是通过错位使得 toc 自动展开.
+        volantis.scroll.to(target,{addTop: 5, observer:true})
+        // Anchor id
+        history.pushState(null, document.title, "#" + target.id);
+      });
+      return target;
+    });
+
+    function activateNavByIndex(target) {
+      if (target.classList.contains("active-current")) return;
+
+      document.querySelectorAll(".toc .active").forEach((element) => {
+        element.classList.remove("active", "active-current");
+      });
+      target.classList.add("active", "active-current");
+      let parent = target.parentNode;
+      while (!parent.matches(".toc")) {
+        if (parent.matches("li")) parent.classList.add("active");
+        parent = parent.parentNode;
+      }
+    }
+
+    // 方案一：
+    volantis.activateNavIndex=0
+    activateNavByIndex(navItems[volantis.activateNavIndex])
+    volantis.scroll.push(()=>{
+      if (targets[0].getBoundingClientRect().top >= 0) {
+        volantis.activateNavIndex = 0
+      }else if (targets[targets.length-1].getBoundingClientRect().top < 0) {
+        volantis.activateNavIndex = targets.length-1
+      } else {
+        for (let index = 0; index < targets.length; index++) {
+          const target0 = targets[index];
+          const target1 = targets[(index+1)%targets.length];
+          if (target0.getBoundingClientRect().top < 0&&target1.getBoundingClientRect().top >= 0) {
+            volantis.activateNavIndex=index
+            break;
+          }
+        }
+      }
+      activateNavByIndex(navItems[volantis.activateNavIndex])
+    })
+
+    // 方案二：
+    // IntersectionObserver 不是完美精确到像素级别 也不是低延时性的
+    // function findIndex(entries) {
+    //   let index = 0;
+    //   let entry = entries[index];
+    //   if (entry.boundingClientRect.top > 0) {
+    //     index = sections.indexOf(entry.target);
+    //     return index === 0 ? 0 : index - 1;
+    //   }
+    //   for (; index < entries.length; index++) {
+    //     if (entries[index].boundingClientRect.top <= 0) {
+    //       entry = entries[index];
+    //     } else {
+    //       return sections.indexOf(entry.target);
+    //     }
+    //   }
+    //   return sections.indexOf(entry.target);
+    // }
+    // function createIntersectionObserver(marginTop) {
+    //   marginTop = Math.floor(marginTop + 10000);
+    //   let intersectionObserver = new IntersectionObserver(
+    //     (entries, observe) => {
+    //       let scrollHeight = document.documentElement.scrollHeight;
+    //       if (scrollHeight > marginTop) {
+    //         observe.disconnect();
+    //         createIntersectionObserver(scrollHeight);
+    //         return;
+    //       }
+    //       let index = findIndex(entries);
+    //       activateNavByIndex(navItems[index]);
+    //     }, {
+    //       rootMargin: marginTop + "px 0px -100% 0px",
+    //       threshold: 0,
+    //     }
+    //   );
+    //   sections.forEach((element) => {
+    //     element && intersectionObserver.observe(element);
+    //   });
+    // }
+    // createIntersectionObserver(document.documentElement.scrollHeight);
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    volantis.requestAnimationFrame(listennSidebarTOC)
+  });
+  document.addEventListener("pjax:success", ()=>{
+    volantis.requestAnimationFrame(listennSidebarTOC)
+  });
+</script>
+
+
+
+<script>
+  document.onreadystatechange = function () {
+    if (document.readyState == 'complete') {
+      // 页面加载完毕 样式加载失败，或是当前网速慢，或是开启了省流模式
+      const { saveData, effectiveType } = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {}
+      if (getComputedStyle(document.querySelector("#safearea"), null)["display"] == "none" || saveData || /2g/.test(effectiveType)) {
+        document.querySelectorAll(".reveal").forEach(function (e) {
+          e.style["opacity"] = "1";
+        });
+        document.querySelector("#safearea").style["display"] = "block";
+      }
+    }
+  }
+</script>
+
+
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/Linux高性能服务器编程/","name":"Linux高性能服务器编程"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2025/03/02/source/Linux/Linix高性能服务器编程/TCPIP协议详解/","name":"TCP/IP协议详解"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"TCP/IP协议详解","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2025/03/02/source/Linux/Linix%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/TCPIP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2025/03/02/source/Linux/Linix%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/TCPIP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/","wordCount":0,"datePublished":"2025-03-01T16:00:00.000Z","dateModified":"2025-03-03T12:45:53.382Z","articleSection":"Linux高性能服务器编程","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+
+
+
+      
+        <!--
+  pjax重载区域接口：
+  1.  <pjax></pjax> 标签 pjax 标签必须存在于所有页面 否则 pjax error
+  2.  script[data-pjax]
+  3.  .pjax-reload script
+  4.  .pjax
+-->
+
+
+
+<script src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/pjax/pjax.min.js"></script>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox]):not([onclick="return false;"]):not([onclick="return!1"]):not([target="_blank"]):not([target="view_window"]):not([href$=".xml"])',
+        selectors: [
+          "head title",
+          "head meta[name=keywords]",
+          "head meta[name=description]",
+          
+          "#l_main",
+          "#pjax-header-nav-list",
+          ".pjax",
+          "pjax", // <pjax></pjax> 标签
+          "script[data-pjax], .pjax-reload script" // script标签添加data-pjax 或 script标签外层添加.pjax-reload 的script代码段重载
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000,
+        
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
+      volantis.pjax.method.send.start();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
+      volantis.pjax.method.complete.start();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      if(volantis.debug) {
+        console.error(e);
+        console.log('pjax error: \n' + JSON.stringify(e));
+      }else{
+        // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+        volantis.pjax.method.error.start();
+        window.location.href = e.triggerElement.href;
+      }
+    });
+</script>
+
+      
+    </div>
+    <!-- import body_end begin-->
+    <!-- import body_end end-->
+    <!-- Custom Files bodyEnd begin-->
+    
+    <!-- Custom Files bodyEnd end-->
+    <!-- front-matter body_end begin -->
+    <!-- front-matter body_end end -->
+  </body>
+</html>

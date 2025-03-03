@@ -1,0 +1,3915 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/#5.8.0'>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="Volantis" content="5.8.0">
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+  <link rel="canonical" href="http://example.com/2025/03/02/source/linux/linux系统安装/"/>
+  <!-- 渲染优化 -->
+    <meta http-equiv='x-dns-prefetch-control' content='on' />
+      <link rel='dns-prefetch' href='https://unpkg.com'>
+      <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' https:; block-all-mixed-content; base-uri 'self' https:; form-action 'self' https:; worker-src 'self' https:; connect-src 'self' https: *; img-src 'self' data: https: *; media-src 'self' https: *; font-src 'self' data: https: *; frame-src 'self' https: *; manifest-src 'self' https: *; child-src https:; script-src 'self' https: 'unsafe-inline' *; style-src 'self' https: 'unsafe-inline' *; ">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <!-- import head_begin begin -->
+  <!-- import head_begin end -->
+  <!-- Custom Files headBegin begin-->
+  
+  <!-- Custom Files headBegin end-->
+  <!-- front-matter head_begin begin -->
+  <!-- front-matter head_begin end -->
+  <link rel="preload" href="/css/style.css" as="style">
+  <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <!-- feed -->
+  <!-- 页面元数据 -->
+  <title>Linux系统安装 - tutulp's blog</title>
+  <meta name="keywords" content="null">
+  <meta desc name="description" content="tutulp的博客网站 - tutulp - tutulp's blog">
+  
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统安装">
+<meta property="og:url" content="http://example.com/2025/03/02/source/Linux/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="tutulp&#39;s blog">
+<meta property="og:description" content="Ubuntu 192.168.6.131  tutu tutu root root Anois os 192.168.6.208 root 123 安装虚拟机vmware安装包 激活码在网上找 ##vm安装：  bios里修改设置：开启虚拟化设备支持   上网搜索  我没有开（系统默认开启） 管理员运行安装包  #安装Anolis OS 下载官网龙蜥8 关于龙蜥(Anolis) OS 8 (ope">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2025-03-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-03T12:45:53.386Z">
+<meta property="article:author" content="tutulp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+  <style>
+    /* 首屏样式 */
+    #safearea {
+  display: none;
+}
+:root {
+  --color-site-body: #f4f4f4;
+  --color-site-bg: #f4f4f4;
+  --color-site-inner: #fff;
+  --color-site-footer: #666;
+  --color-card: #fff;
+  --color-text: #444;
+  --color-block: #f6f6f6;
+  --color-inlinecode: #c74f00;
+  --color-codeblock: #fff7ea;
+  --color-h1: #3a3a3a;
+  --color-h2: #3a3a3a;
+  --color-h3: #333;
+  --color-h4: #444;
+  --color-h5: #555;
+  --color-h6: #666;
+  --color-p: #444;
+  --color-list: #666;
+  --color-list-hl: #30ad91;
+  --color-meta: #888;
+  --color-read-bkg: #e0d8c8;
+  --color-read-post: #f8f1e2;
+  --color-copyright-bkg: #f5f5f5;
+}
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+*::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+*::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: #3dd9b6;
+  cursor: pointer;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #ff5722;
+}
+html {
+  color: var(--color-text);
+  width: 100%;
+  height: 100%;
+  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-size: 16px;
+}
+html >::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+html >::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+html >::-webkit-scrollbar-thumb {
+  background: #54b5a0 linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+  cursor: pointer;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+html >::-webkit-scrollbar-thumb:hover {
+  background: #54b5a0 linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+}
+body {
+  background-color: var(--color-site-body);
+  text-rendering: optimizelegibility;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body.modal-active {
+  overflow: hidden;
+}
+@media screen and (max-width: 680px) {
+  body.modal-active {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+a {
+  color: #2092ec;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+a:hover {
+  color: #ff5722;
+}
+a:active,
+a:hover {
+  outline: 0;
+}
+ul,
+ol {
+  padding-left: 0;
+}
+ul li,
+ol li {
+  list-style: none;
+}
+header {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+img {
+  border: 0;
+  background: none;
+  max-width: 100%;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  height: 0;
+  border: 0;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  border-bottom: 1px solid rgba(68,68,68,0.1);
+}
+button,
+input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+button {
+  overflow: visible;
+  text-transform: none;
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+@supports (backdrop-filter: blur(20px)) {
+  .blur {
+    background: rgba(255,255,255,0.9) !important;
+    backdrop-filter: saturate(200%) blur(20px);
+  }
+}
+.shadow {
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+}
+.shadow.floatable {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.shadow.floatable:hover {
+  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.1), 0 4px 8px 0px rgba(0,0,0,0.1), 0 8px 16px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 2px 4px 0px rgba(0,0,0,0.1), 0 4px 8px 0px rgba(0,0,0,0.1), 0 8px 16px 0px rgba(0,0,0,0.1);
+}
+#l_cover {
+  min-height: 64px;
+}
+.cover-wrapper {
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  height: 100vh;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -khtml-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -o-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  color: var(--color-site-inner);
+  padding: 0 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: -100px;
+}
+.cover-wrapper .cover-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+}
+.cover-wrapper .cover-bg.lazyload:not(.loaded) {
+  opacity: 0;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+}
+.cover-wrapper .cover-bg.lazyload.loaded {
+  animation-delay: 0s;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+}
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.cover-wrapper .cover-body {
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.cover-wrapper#full {
+  height: calc(100vh + 100px);
+  padding-bottom: 100px;
+}
+.cover-wrapper#half {
+  max-height: 640px;
+  min-height: 400px;
+  height: calc(36vh - 64px + 200px);
+}
+.cover-wrapper #scroll-down {
+  width: 100%;
+  height: 64px;
+  position: absolute;
+  bottom: 100px;
+  text-align: center;
+  cursor: pointer;
+}
+.cover-wrapper #scroll-down .scroll-down-effects {
+  color: #fff;
+  font-size: 24px;
+  line-height: 64px;
+  position: absolute;
+  width: 24px;
+  left: calc(50% - 12px);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  animation: scroll-down-effect 1.5s infinite;
+  -webkit-animation: scroll-down-effect 1.5s infinite;
+  -khtml-animation: scroll-down-effect 1.5s infinite;
+  -moz-animation: scroll-down-effect 1.5s infinite;
+  -o-animation: scroll-down-effect 1.5s infinite;
+  -ms-animation: scroll-down-effect 1.5s infinite;
+}
+@-moz-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-webkit-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-o-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.cover-wrapper .cover-body {
+  margin-top: 64px;
+  margin-bottom: 100px;
+}
+.cover-wrapper .cover-body,
+.cover-wrapper .cover-body .top,
+.cover-wrapper .cover-body .bottom {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  max-width: 100%;
+}
+.cover-wrapper .cover-body .bottom {
+  margin-top: 32px;
+}
+.cover-wrapper .cover-body .title {
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+  font-size: 3.125rem;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.cover-wrapper .cover-body .subtitle {
+  font-size: 20px;
+}
+.cover-wrapper .cover-body .logo {
+  max-height: 120px;
+  max-width: calc(100% - 4 * 16px);
+}
+@media screen and (min-height: 1024px) {
+  .cover-wrapper .cover-body .title {
+    font-size: 3rem;
+  }
+  .cover-wrapper .cover-body .subtitle {
+    font-size: 1.05rem;
+  }
+  .cover-wrapper .cover-body .logo {
+    max-height: 150px;
+  }
+}
+.cover-wrapper .cover-body .m_search {
+  position: relative;
+  max-width: calc(100% - 16px);
+  width: 320px;
+  vertical-align: middle;
+}
+.cover-wrapper .cover-body .m_search .form {
+  position: relative;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  width: 100%;
+}
+.cover-wrapper .cover-body .m_search .icon,
+.cover-wrapper .cover-body .m_search .input {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.cover-wrapper .cover-body .m_search .icon {
+  position: absolute;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  line-height: 2.5rem;
+  width: 32px;
+  top: 0;
+  left: 5px;
+  color: rgba(68,68,68,0.75);
+}
+.cover-wrapper .cover-body .m_search .input {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  height: 2.5rem;
+  width: 100%;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-size: 0.875rem;
+  -webkit-appearance: none;
+  padding-left: 36px;
+  border-radius: 1.4rem;
+  -webkit-border-radius: 1.4rem;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  border: none;
+  color: var(--color-text);
+}
+@media screen and (max-width: 500px) {
+  .cover-wrapper .cover-body .m_search .input {
+    padding-left: 36px;
+  }
+}
+.cover-wrapper .cover-body .m_search .input:hover {
+  background: rgba(255,255,255,0.8);
+}
+.cover-wrapper .cover-body .m_search .input:focus {
+  background: #fff;
+}
+.cover-wrapper .list-h {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -khtml-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  align-items: stretch;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.cover-wrapper .list-h a {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1 0;
+  -ms-flex: 1 0;
+  flex: 1 0;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  font-weight: 600;
+}
+.cover-wrapper .list-h a img {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  margin: 4px;
+  min-width: 40px;
+  max-width: 44px;
+}
+@media screen and (max-width: 768px) {
+  .cover-wrapper .list-h a img {
+    min-width: 36px;
+    max-width: 40px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .cover-wrapper .list-h a img {
+    margin: 2px 4px;
+    min-width: 32px;
+    max-width: 36px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .cover-wrapper .list-h a img {
+    min-width: 28px;
+    max-width: 32px;
+  }
+}
+.cover-wrapper {
+  max-width: 100%;
+}
+.cover-wrapper.search .bottom .menu {
+  margin-top: 16px;
+}
+.cover-wrapper.search .bottom .menu .list-h a {
+  white-space: nowrap;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  align-items: baseline;
+  padding: 2px;
+  margin: 4px;
+  color: var(--color-site-inner);
+  opacity: 0.75;
+  -webkit-opacity: 0.75;
+  -moz-opacity: 0.75;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  border-bottom: 2px solid transparent;
+}
+.cover-wrapper.search .bottom .menu .list-h a i {
+  margin-right: 4px;
+}
+.cover-wrapper.search .bottom .menu .list-h a p {
+  font-size: 0.9375rem;
+}
+.cover-wrapper.search .bottom .menu .list-h a:hover,
+.cover-wrapper.search .bottom .menu .list-h a.active,
+.cover-wrapper.search .bottom .menu .list-h a:active {
+  opacity: 1;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  border-bottom: 2px solid var(--color-site-inner);
+}
+@font-face {
+  font-family: 'UbuntuMono';
+  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-weight: 'normal';
+  font-style: 'normal';
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Varela Round';
+  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf");
+  font-weight: 'normal';
+  font-style: 'normal';
+  font-display: swap;
+}
+.l_header {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  width: 100%;
+  height: 64px;
+  background: var(--color-card);
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+}
+.l_header.auto {
+  transition: opacity 0.4s ease;
+  -webkit-transition: opacity 0.4s ease;
+  -khtml-transition: opacity 0.4s ease;
+  -moz-transition: opacity 0.4s ease;
+  -o-transition: opacity 0.4s ease;
+  -ms-transition: opacity 0.4s ease;
+  visibility: hidden;
+}
+.l_header.auto.show {
+  opacity: 1 !important;
+  -webkit-opacity: 1 !important;
+  -moz-opacity: 1 !important;
+  visibility: visible;
+}
+.l_header .container {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+.l_header #wrapper {
+  height: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.l_header #wrapper .nav-main,
+.l_header #wrapper .nav-sub {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -khtml-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -o-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -khtml-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -o-justify-content: space-between;
+  -ms-justify-content: space-between;
+  align-items: center;
+}
+.l_header #wrapper .nav-main {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.l_header #wrapper.sub .nav-main {
+  transform: translateY(-64px);
+  -webkit-transform: translateY(-64px);
+  -khtml-transform: translateY(-64px);
+  -moz-transform: translateY(-64px);
+  -o-transform: translateY(-64px);
+  -ms-transform: translateY(-64px);
+}
+.l_header #wrapper .nav-sub {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  opacity: 0;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  height: 64px;
+  width: calc(100% - 2 * 16px);
+  position: absolute;
+}
+.l_header #wrapper .nav-sub ::-webkit-scrollbar {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+}
+@media screen and (min-width: 2048px) {
+  .l_header #wrapper .nav-sub {
+    max-width: 55vw;
+    margin: auto;
+  }
+}
+.l_header #wrapper.sub .nav-sub {
+  opacity: 1;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+}
+.l_header #wrapper .title {
+  position: relative;
+  color: var(--color-text);
+  padding-left: 24px;
+  max-height: 64px;
+}
+.l_header #wrapper .nav-main .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  line-height: 64px;
+  padding: 0 24px;
+  font-size: 1.25rem;
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+}
+.l_header #wrapper .nav-main .title img {
+  height: 64px;
+}
+.l_header .nav-sub {
+  max-width: 1080px;
+  margin: auto;
+}
+.l_header .nav-sub .title {
+  font-weight: bold;
+  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  line-height: 1.2;
+  max-height: 64px;
+  white-space: normal;
+  flex-shrink: 1;
+}
+.l_header .switcher {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  line-height: 64px;
+  align-items: center;
+}
+.l_header .switcher .s-toc {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .l_header .switcher .s-toc {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    display: flex;
+  }
+}
+.l_header .switcher >li {
+  height: 48px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  margin: 2px;
+}
+@media screen and (max-width: 500px) {
+  .l_header .switcher >li {
+    margin: 0 1px;
+    height: 48px;
+  }
+}
+.l_header .switcher >li >a {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0.85em 1.1em;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  border: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  color: #3dd9b6;
+}
+.l_header .switcher >li >a:hover {
+  border: none;
+}
+.l_header .switcher >li >a.active,
+.l_header .switcher >li >a:active {
+  border: none;
+  background: var(--color-site-bg);
+}
+@media screen and (max-width: 500px) {
+  .l_header .switcher >li >a {
+    width: 36px;
+    height: 48px;
+  }
+}
+.l_header .nav-sub .switcher {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+}
+.l_header .m_search {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  height: 64px;
+  width: 240px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+@media screen and (max-width: 1024px) {
+  .l_header .m_search {
+    width: 44px;
+    min-width: 44px;
+  }
+  .l_header .m_search input::placeholder {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+  }
+  .l_header .m_search:hover {
+    width: 240px;
+  }
+  .l_header .m_search:hover input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@media screen and (min-width: 500px) {
+  .l_header .m_search:hover .input {
+    width: 100%;
+  }
+  .l_header .m_search:hover .input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search {
+    min-width: 0;
+  }
+  .l_header .m_search input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.l_header .m_search .form {
+  position: relative;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.l_header .m_search .icon {
+  position: absolute;
+  width: 36px;
+  left: 5px;
+  color: var(--color-meta);
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search .icon {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: none;
+  }
+}
+.l_header .m_search .input {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: 1.3;
+  width: 100%;
+  color: var(--color-text);
+  background: #fafafa;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding-left: 40px;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+@media screen and (min-width: 500px) {
+  .l_header .m_search .input:focus {
+    box-shadow: 0 4px 8px 0px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 4px 8px 0px rgba(0,0,0,0.1);
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search .input {
+    background: var(--color-block);
+    padding-left: 8px;
+    border: none;
+  }
+  .l_header .m_search .input:hover,
+  .l_header .m_search .input:focus {
+    border: none;
+  }
+}
+@media (max-width: 500px) {
+  .l_header .m_search {
+    left: 0;
+    width: 0;
+    overflow: hidden;
+    position: absolute;
+    background: #fff;
+    transition: all 0.28s ease;
+    -webkit-transition: all 0.28s ease;
+    -khtml-transition: all 0.28s ease;
+    -moz-transition: all 0.28s ease;
+    -o-transition: all 0.28s ease;
+    -ms-transition: all 0.28s ease;
+  }
+  .l_header .m_search .input {
+    border-radius: 32px;
+    -webkit-border-radius: 32px;
+    margin-left: 16px;
+    padding-left: 16px;
+  }
+  .l_header.z_search-open .m_search {
+    width: 100%;
+  }
+  .l_header.z_search-open .m_search .input {
+    width: calc(100% - 120px);
+  }
+}
+ul.m-pc >li>a {
+  color: inherit;
+  border-bottom: 2px solid transparent;
+}
+ul.m-pc >li>a:active,
+ul.m-pc >li>a.active {
+  border-bottom: 2px solid #3dd9b6;
+}
+ul.m-pc li:hover >ul.list-v,
+ul.list-v li:hover >ul.list-v {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+ul.nav-list-h {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  align-items: stretch;
+}
+ul.nav-list-h>li {
+  position: relative;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  height: 100%;
+  line-height: 2.4;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+ul.nav-list-h>li >a {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 600;
+}
+ul.list-v {
+  z-index: 1;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  position: absolute;
+  background: var(--color-card);
+  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.08), 0 4px 8px 0px rgba(0,0,0,0.08), 0 8px 16px 0px rgba(0,0,0,0.08);
+  -webkit-box-shadow: 0 2px 4px 0px rgba(0,0,0,0.08), 0 4px 8px 0px rgba(0,0,0,0.08), 0 8px 16px 0px rgba(0,0,0,0.08);
+  margin-top: -6px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  padding: 8px 0;
+}
+ul.list-v.show {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+ul.list-v hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+ul.list-v >li {
+  white-space: nowrap;
+  word-break: keep-all;
+}
+ul.list-v >li.header {
+  font-size: 0.78125rem;
+  font-weight: bold;
+  line-height: 2em;
+  color: var(--color-meta);
+  margin: 8px 16px 4px;
+}
+ul.list-v >li.header i {
+  margin-right: 8px;
+}
+ul.list-v >li ul {
+  margin-left: 0;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  margin-top: -40px;
+}
+ul.list-v .aplayer-container {
+  min-height: 64px;
+  padding: 6px 16px;
+}
+ul.list-v >li>a {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  color: var(--color-list);
+  font-size: 0.875rem;
+  font-weight: bold;
+  line-height: 36px;
+  padding: 0 20px 0 16px;
+  text-overflow: ellipsis;
+  margin: 0 4px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+@media screen and (max-width: 1024px) {
+  ul.list-v >li>a {
+    line-height: 40px;
+  }
+}
+ul.list-v >li>a >i {
+  margin-right: 8px;
+}
+ul.list-v >li>a:active,
+ul.list-v >li>a.active {
+  color: var(--color-list-hl);
+}
+ul.list-v >li>a:hover {
+  color: var(--color-list-hl);
+  background: var(--color-site-bg);
+}
+.l_header .menu >ul>li>a {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  padding: 0 8px;
+}
+.l_header .menu >ul>li>a >i {
+  margin-right: 4px;
+}
+.l_header ul.nav-list-h>li {
+  color: var(--color-list);
+  line-height: 64px;
+}
+.l_header ul.nav-list-h>li >a {
+  max-height: 64px;
+  overflow: hidden;
+  color: inherit;
+}
+.l_header ul.nav-list-h>li >a:active,
+.l_header ul.nav-list-h>li >a.active {
+  color: #3dd9b6;
+}
+.l_header ul.nav-list-h>li:hover>a {
+  color: var(--color-list-hl);
+}
+.l_header ul.nav-list-h>li i.music {
+  animation: rotate-effect 1.5s linear infinite;
+  -webkit-animation: rotate-effect 1.5s linear infinite;
+  -khtml-animation: rotate-effect 1.5s linear infinite;
+  -moz-animation: rotate-effect 1.5s linear infinite;
+  -o-animation: rotate-effect 1.5s linear infinite;
+  -ms-animation: rotate-effect 1.5s linear infinite;
+}
+@-moz-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@-o-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+.menu-phone li ul.list-v {
+  right: calc(100% - 0.5 * 16px);
+}
+.menu-phone li ul.list-v ul {
+  right: calc(100% - 0.5 * 16px);
+}
+#wrapper {
+  max-width: 1080px;
+  margin: auto;
+}
+@media screen and (min-width: 2048px) {
+  #wrapper {
+    max-width: 55vw;
+  }
+}
+#wrapper .menu {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1 1;
+  -ms-flex: 1 1;
+  flex: 1 1;
+  margin: 0 16px 0 0;
+}
+#wrapper .menu .list-v ul {
+  left: calc(100% - 0.5 * 16px);
+}
+.menu-phone {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  margin-top: 16px;
+  right: 8px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.menu-phone ul {
+  right: calc(100% - 0.5 * 16px);
+}
+@media screen and (max-width: 500px) {
+  .menu-phone {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: block;
+  }
+}
+.l_header {
+  max-width: 65vw;
+  left: calc((100% - 65vw) * 0.5);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+@media screen and (max-width: 2048px) {
+  .l_header {
+    max-width: 1112px;
+    left: calc((100% - 1112px) * 0.5);
+  }
+}
+@media screen and (max-width: 1112px) {
+  .l_header {
+    left: 0;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .l_header #wrapper .nav-main .title {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .l_header #wrapper .nav-sub {
+    width: 100%;
+  }
+  .l_header #wrapper .nav-sub .title {
+    overflow-y: scroll;
+    margin-top: 2px;
+    padding: 8px 16px;
+  }
+  .l_header #wrapper .switcher {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    display: flex;
+    margin-right: 8px;
+  }
+  .l_header .menu {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: none;
+  }
+}
+@media screen and (max-width: 500px) {
+  .list-v li {
+    max-width: 270px;
+  }
+}
+#u-search {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 60px 20px;
+  z-index: 1001;
+}
+@media screen and (max-width: 680px) {
+  #u-search {
+    padding: 0px;
+  }
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  
+<script>
+if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
+    document.write(
+	'<style>'+
+		'html{'+
+			'overflow-x: hidden !important;'+
+			'overflow-y: hidden !important;'+
+		'}'+
+		'.kill-ie{'+
+			'text-align:center;'+
+			'height: 100%;'+
+			'margin-top: 15%;'+
+			'margin-bottom: 5500%;'+
+		'}'+
+    '.kill-t{'+
+      'font-size: 2rem;'+
+    '}'+
+    '.kill-c{'+
+      'font-size: 1.2rem;'+
+    '}'+
+		'#l_header,#l_body{'+
+			'display: none;'+
+		'}'+
+	'</style>'+
+    '<div class="kill-ie">'+
+        `<span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>`+
+        `<span class="kill-c">微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</span><br/>`+
+        `<a target="_blank" rel="noopener" href="https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/"><strong>了解详情 ></strong></a>`+
+    '</div>');
+</script>
+
+
+<noscript>
+	<style>
+		html{
+			overflow-x: hidden !important;
+			overflow-y: hidden !important;
+		}
+		.kill-noscript{
+			text-align:center;
+			height: 100%;
+			margin-top: 15%;
+			margin-bottom: 5500%;
+		}
+    .kill-t{
+      font-size: 2rem;
+    }
+    .kill-c{
+      font-size: 1.2rem;
+    }
+		#l_header,#l_body{
+			display: none;
+		}
+	</style>
+    <div class="kill-noscript">
+        <span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>
+        <span class="kill-c">本页面需要浏览器支持（启用）JavaScript</span><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+    </div>
+</noscript>
+
+
+  <script>
+  /************这个文件存放不需要重载的全局变量和全局函数*********/
+  window.volantis = {}; // volantis 全局变量
+  volantis.debug = "env"; // 调试模式
+  volantis.dom = {}; // 页面Dom see: /source/js/app.js etc.
+
+  volantis.GLOBAL_CONFIG ={
+    debug: "env",
+    cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
+    default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
+    lastupdate: new Date(1741012891758),
+    sidebar: {
+      for_page: ["blogger","category","tagcloud","donate"],
+      for_post: ["toc"],
+      webinfo: {
+        lastupd: {
+          enable: true,
+          friendlyShow: true
+        },
+        runtime: {
+          data: "2020/01/01",
+          unit: "天"
+        }
+      }
+    },
+    plugins: {
+      message: {"enable":true,"css":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/izitoast/dist/css/iziToast.min.css","js":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/izitoast/dist/js/iziToast.min.js","icon":{"default":"fa-solid fa-info-circle light-blue","quection":"fa-solid fa-question-circle light-blue"},"time":{"default":5000,"quection":20000},"position":"topRight","transitionIn":"bounceInLeft","transitionOut":"fadeOutRight","titleColor":"var(--color-text)","messageColor":"var(--color-text)","backgroundColor":"var(--color-card)","zindex":2147483647,"copyright":{"enable":true,"title":"知识共享许可协议","message":"请遵守 CC BY-NC-SA 4.0 协议。","icon":"far fa-copyright light-blue"},"aplayer":{"enable":true,"play":"fa-solid fa-play","pause":"fa-solid fa-pause"},"rightmenu":{"enable":true,"notice":true}},
+      fancybox: {"css":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fancyapps/ui/dist/fancybox.css","js":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fancyapps/ui/dist/fancybox.umd.js"},
+      
+      
+      
+    }
+  }
+
+  /******************** volantis.EventListener ********************************/
+  // 事件监听器 see: /source/js/app.js
+  volantis.EventListener = {}
+  // 这里存放pjax切换页面时将被移除的事件监听器
+  volantis.EventListener.list = []
+  //构造方法
+  function volantisEventListener(type, f, ele) {
+    this.type = type
+    this.f = f
+    this.ele = ele
+  }
+  // 移除事件监听器
+  volantis.EventListener.remove = () => {
+    volantis.EventListener.list.forEach(function (i) {
+      i.ele.removeEventListener(i.type, i.f, false)
+    })
+    volantis.EventListener.list = []
+  }
+  /******************** volantis.dom.$ ********************************/
+  // 注：这里没有选择器，也没有forEach一次只处理一个dom，这里重新封装主题常用的dom方法，返回的是dom对象，对象包含了以下方法，同时保留dom的原生API
+  function volantisDom(ele) {
+    if (!ele) ele = document.createElement("div")
+    this.ele = ele;
+    // ==============================================================
+    this.ele.find = (c) => {
+      let q = this.ele.querySelector(c)
+      if (q)
+        return new volantisDom(q)
+    }
+    // ==============================================================
+    this.ele.hasClass = (c) => {
+      return this.ele.className.match(new RegExp('(\\s|^)' + c + '(\\s|$)'));
+    }
+    this.ele.addClass = (c) => {
+      this.ele.classList.add(c);
+      return this.ele
+    }
+    this.ele.removeClass = (c) => {
+      this.ele.classList.remove(c);
+      return this.ele
+    }
+    this.ele.toggleClass = (c) => {
+      if (this.ele.hasClass(c)) {
+        this.ele.removeClass(c)
+      } else {
+        this.ele.addClass(c)
+      }
+      return this.ele
+    }
+    // ==============================================================
+    // 参数 r 为 true 表示pjax切换页面时事件监听器将被移除，false不移除
+    this.ele.on = (c, f, r = 1) => {
+      this.ele.addEventListener(c, f, false)
+      if (r) {
+        volantis.EventListener.list.push(new volantisEventListener(c, f, this.ele))
+      }
+      return this.ele
+    }
+    this.ele.click = (f, r) => {
+      this.ele.on("click", f, r)
+      return this.ele
+    }
+    this.ele.scroll = (f, r) => {
+      this.ele.on("scroll", f, r)
+      return this.ele
+    }
+    // ==============================================================
+    this.ele.html = (c) => {
+      // if(c=== undefined){
+      //   return this.ele.innerHTML
+      // }else{
+      this.ele.innerHTML = c
+      return this.ele
+      // }
+    }
+    // ==============================================================
+    this.ele.hide = (c) => {
+      this.ele.style.display = "none"
+      return this.ele
+    }
+    this.ele.show = (c) => {
+      this.ele.style.display = "block"
+      return this.ele
+    }
+    // ==============================================================
+    return this.ele
+  }
+  volantis.dom.$ = (ele) => {
+    return !!ele ? new volantisDom(ele) : null;
+  }
+  /******************** RunItem ********************************/
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = ()=>{
+          volantis.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) =>{
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index,1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+  /******************** Pjax ********************************/
+  // /layout/_plugins/pjax/index.ejs
+  // volantis.pjax.send(callBack[,"callBackName"]) 传入pjax:send回调函数
+  // volantis.pjax.push(callBack[,"callBackName"]) 传入pjax:complete回调函数
+  // volantis.pjax.error(callBack[,"callBackName"]) 传入pjax:error回调函数
+  volantis.pjax = {};
+  volantis.pjax.method = {
+    complete: new RunItem(),
+    error: new RunItem(),
+    send: new RunItem(),
+  };
+  volantis.pjax = Object.assign(volantis.pjax, {
+    push: volantis.pjax.method.complete.push,
+    error: volantis.pjax.method.error.push,
+    send: volantis.pjax.method.send.push,
+  });
+  /******************** RightMenu ********************************/
+  // volantis.rightmenu.handle(callBack[,"callBackName"]) 外部菜单项控制
+  // 可在 volantis.mouseEvent 处获取右键事件
+  volantis.rightmenu = {};
+  volantis.rightmenu.method = {
+    handle: new RunItem(),
+  }
+  volantis.rightmenu = Object.assign(volantis.rightmenu, {
+    handle: volantis.rightmenu.method.handle.push,
+  });
+  /********************  Dark Mode  ********************************/
+  // /layout/_partial/scripts/darkmode.ejs
+  // volantis.dark.mode 当前模式 dark or light
+  // volantis.dark.toggle() 暗黑模式触发器
+  // volantis.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  volantis.dark = {};
+  volantis.dark.method = {
+    toggle: new RunItem(),
+  };
+  volantis.dark = Object.assign(volantis.dark, {
+    push: volantis.dark.method.toggle.push,
+  });
+  /********************  Message  ********************************/
+  // VolantisApp.message
+  /********************  isMobile  ********************************/
+  // /source/js/app.js
+  // volantis.isMobile
+  // volantis.isMobileOld
+  /********************脚本动态加载函数********************************/
+  // volantis.js(src, cb)  cb 可以传入onload回调函数 或者 JSON对象 例如: volantis.js("src", ()=>{}) 或 volantis.js("src", {defer:true,onload:()=>{}})
+  // volantis.css(src)
+
+  // 返回Promise对象，如下方法同步加载资源，这利于处理文件资源之间的依赖关系，例如：APlayer 需要在 MetingJS 之前加载
+  // (async () => {
+  //     await volantis.js("...theme.plugins.aplayer.js.aplayer...")
+  //     await volantis.js("...theme.plugins.aplayer.js.meting...")
+  // })();
+
+  // 已经加入了setTimeout
+  volantis.js = (src, cb) => {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+  volantis.css = (src) => {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  }
+  /********************按需加载的插件********************************/
+  // volantis.import.jQuery().then(()=>{})
+  volantis.import = {
+    jQuery: () => {
+      if (typeof jQuery == "undefined") {
+        return volantis.js("https://unpkg.com/volantis-static@0.0.1654736714924/libs/jquery/dist/jquery.min.js")
+      } else {
+        return new Promise(resolve => {
+          resolve()
+        });
+      }
+    }
+  }
+  /********************** requestAnimationFrame ********************************/
+  // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+  // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+  volantis.requestAnimationFrame = (fn)=>{
+    if (!window.requestAnimationFrame) {
+      window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+    }
+    window.requestAnimationFrame(fn)
+  }
+  /************************ layoutHelper *****************************************/
+  volantis.layoutHelper = (helper, html, opt)=>{
+    opt = Object.assign({clean:false, pjax:true}, opt)
+    function myhelper(helper, html, clean) {
+      volantis.tempDiv = document.createElement("div");
+      volantis.tempDiv.innerHTML = html;
+      let layoutHelper = document.querySelector("#layoutHelper-"+helper)
+      if (layoutHelper) {
+        if (clean) {
+          layoutHelper.innerHTML = ""
+        }
+        layoutHelper.append(volantis.tempDiv);
+      }
+    }
+    myhelper(helper, html, opt.clean)
+    if (opt.pjax) {
+      volantis.pjax.push(()=>{
+        myhelper(helper, html, opt.clean)
+      },"layoutHelper-"+helper)
+    }
+  }
+  /****************************** 滚动事件处理 ****************************************/
+  volantis.scroll = {
+    engine: new RunItem(),
+    unengine: new RunItem(),
+  };
+  volantis.scroll = Object.assign(volantis.scroll, {
+    push: volantis.scroll.engine.push,
+  });
+  // 滚动条距离顶部的距离
+  volantis.scroll.getScrollTop = () =>{
+    let scrollPos;
+    if (window.pageYOffset) {
+      scrollPos = window.pageYOffset;
+    } else if (document.compatMode && document.compatMode != 'BackCompat') {
+      scrollPos = document.documentElement.scrollTop;
+    } else if (document.body) {
+      scrollPos = document.body.scrollTop;
+    }
+    return scrollPos;
+  }
+  // 使用 requestAnimationFrame 处理滚动事件
+  // `volantis.scroll.del` 中存储了一个数值, 该数值检测一定时间间隔内滚动条滚动的位移, 数值的检测频率是浏览器的刷新频率. 数值为正数时, 表示向下滚动. 数值为负数时, 表示向上滚动.
+  volantis.scroll.handleScrollEvents = () => {
+    volantis.scroll.lastScrollTop = volantis.scroll.getScrollTop()
+    function loop() {
+      const scrollTop = volantis.scroll.getScrollTop();
+      if (volantis.scroll.lastScrollTop !== scrollTop) {
+        volantis.scroll.del = scrollTop - volantis.scroll.lastScrollTop;
+        volantis.scroll.lastScrollTop = scrollTop;
+        // if (volantis.scroll.del > 0) {
+        //   console.log("向下滚动");
+        // } else {
+        //   console.log("向上滚动");
+        // }
+        // 注销过期的unengine未滚动事件
+        volantis.scroll.unengine.list=[]
+        volantis.scroll.engine.start();
+      }else{
+        volantis.scroll.unengine.start();
+      }
+      volantis.requestAnimationFrame(loop)
+    }
+    volantis.requestAnimationFrame(loop)
+  }
+  volantis.scroll.handleScrollEvents()
+  volantis.scroll.ele = null;
+  // 触发页面滚动至目标元素位置
+  volantis.scroll.to = (ele, option = {}) => {
+    if (!ele) return;
+    volantis.scroll.ele = ele;
+    // 默认配置
+    opt = {
+      top: ele.getBoundingClientRect().top + document.documentElement.scrollTop,
+      behavior: "smooth"
+    }
+    // 定义配置
+    if ("top" in option) {
+      opt.top = option.top
+    }
+    if ("behavior" in option) {
+      opt.behavior = option.behavior
+    }
+    if ("addTop" in option) {
+      opt.top += option.addTop
+    }
+    if (!("observerDic" in option)) {
+      option.observerDic = 100
+    }
+    // 滚动
+    window.scrollTo(opt);
+    // 监视器
+    // 监视并矫正元素滚动到指定位置
+    // 用于处理 lazyload 引起的 cls 导致的定位失败问题
+    // option.observer = false
+    if (option.observer) {
+      setTimeout(() => {
+        if (volantis.scroll.ele != ele) {
+          return
+        }
+        volantis.scroll.unengine.push(() => {
+          let me = ele.getBoundingClientRect().top
+          if(!(me >= -option.observerDic && me <= option.observerDic)){
+            volantis.scroll.to(ele, option)
+          }
+          volantis.scroll.unengine.remove("unengineObserver")
+        },"unengineObserver")
+      },1000)
+    }
+  }
+  /********************** Content Visibility ********************************/
+  // 见 source/css/first.styl 如果遇到任何问题 删除 .post-story 即可
+  // 一个元素被声明 content-visibility 属性后 如果元素不在 viewport 中 浏览器不会计算其后代元素样式和属性 从而节省 Style & Layout 耗时
+  // content-visibility 的副作用: 锚点失效 等等(实验初期 暂不明确), 使用此方法清除样式
+  volantis.cleanContentVisibility = ()=>{
+    if (document.querySelector(".post-story")) {
+      console.log("cleanContentVisibility");
+      document.querySelectorAll(".post-story").forEach(e=>{
+        e.classList.remove("post-story")
+      })
+    }
+  }
+  /******************************************************************************/
+  /******************************************************************************/
+  /******************************************************************************/
+  //图像加载出错时的处理
+  function errorImgAvatar(img) {
+    img.src = "https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg";
+    img.onerror = null;
+  }
+  function errorImgCover(img) {
+    img.src = "https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg";
+    img.onerror = null;
+  }
+  /******************************************************************************/
+</script>
+
+  <!-- import head_end begin -->
+  <!-- import head_end end -->
+  <!-- Custom Files headEnd begin-->
+  
+  <!-- Custom Files headEnd end-->
+  <!-- front-matter head_end begin -->
+  <!-- front-matter head_end end -->
+</head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <!-- import body_begin begin-->
+    <!-- import body_begin end-->
+    <!-- Custom Files bodyBegin begin-->
+    
+    <!-- Custom Files bodyBegin end-->
+    <!-- front-matter body_begin begin -->
+    <!-- front-matter body_begin end -->
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur " style='opacity: 0' >
+  <div class='container'>
+  <div id='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fa-solid fa-comments fa-fw" target="_self"  href="/" onclick="return false;" title="comment"></a></li>
+        
+          <li><a id="s-toc" class="s-toc fa-solid fa-list fa-fw" target="_self"  href="/" onclick="return false;" title="toc"></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/Logo-NavBar@3x.png'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/" title="博客"
+                  
+                  
+                  
+                    active-action="action-home"
+                  >
+                  <i class='fa-solid fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/categories/" title="分类"
+                  
+                  
+                  
+                    active-action="action-categories"
+                  >
+                  <i class='fa-solid fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/tags/" title="标签"
+                  
+                  
+                  
+                    active-action="action-tags"
+                  >
+                  <i class='fa-solid fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/archives/" title="归档"
+                  
+                  
+                  
+                    active-action="action-archives"
+                  >
+                  <i class='fa-solid fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="社区"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>社区
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="源码"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>源码
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/about/" title="作者"
+                  
+                  
+                  
+                    active-action="action-about"
+                  >
+                  <i class='fa-solid fa-info-circle fa-fw'></i>作者
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+      
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fa-solid fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+      
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fa-solid fa-search fa-fw" target="_self" href="/" onclick="return false;" title="search"></a></li>
+				
+				<li>
+          <a class="s-menu fa-solid fa-bars fa-fw" target="_self" href="/" onclick="return false;" title="menu"></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/" title="博客"
+                  
+                  
+                  
+                    active-action="action-home"
+                  >
+                  <i class='fa-solid fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/categories/" title="分类"
+                  
+                  
+                  
+                    active-action="action-categories"
+                  >
+                  <i class='fa-solid fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/tags/" title="标签"
+                  
+                  
+                  
+                    active-action="action-tags"
+                  >
+                  <i class='fa-solid fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/archives/" title="归档"
+                  
+                  
+                  
+                    active-action="action-archives"
+                  >
+                  <i class='fa-solid fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="社区"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>社区
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="源码"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>源码
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/about/" title="作者"
+                  
+                  
+                  
+                    active-action="action-about"
+                  >
+                  <i class='fa-solid fa-info-circle fa-fw'></i>作者
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+
+      <!-- Custom Files header begin -->
+      
+      <!-- Custom Files header end -->
+		</div>
+	</div>
+  </div>
+</header>
+
+    <div id="l_body">
+      <div id="l_cover">
+  
+    
+      <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
+      <div id="half" class='cover-wrapper post search' style="display: ;">
+        
+  <div class='cover-bg lazyload placeholder' data-bg="https://s3.bmp.ovh/imgs/2025/03/03/64c32e0ed0f747a9.jpg"></div>
+
+<div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">Leland Titus</p>
+    
+    
+      <p class="subtitle">风尘云万里</p>
+    
+  </div>
+  <div class='bottom'>
+    
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <input type="text" class="input u-search-input" placeholder="Recover lost knowledge" />
+          <i class="icon fa-solid fa-search fa-fw"></i>
+        </form>
+      </div>
+    
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+          
+            <a href="/"
+              
+              
+              active-action="action-home">
+              <p>博客</p>
+            </a>
+          
+            <a href="/categories/"
+              
+              
+              active-action="action-categories">
+              <p>分类</p>
+            </a>
+          
+            <a href="/tags/"
+              
+              
+              active-action="action-tags">
+              <p>标签</p>
+            </a>
+          
+            <a href="/contributors/"
+              
+              
+              active-action="action-contributors">
+              <p>社区</p>
+            </a>
+          
+            <a target="_blank" rel="noopener" href="https://github.com/volantis-x/hexo-theme-volantis/"
+              
+              
+              active-action="action-https:githubcomvolantis-xhexo-theme-volantis">
+              <p>源码</p>
+            </a>
+          
+            <a href="/author/"
+              
+              
+              active-action="action-author">
+              <p>作者</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+        <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+      </div>
+    
+  
+</div>
+
+      <div id="safearea">
+        <div class="body-wrapper">
+          
+<div id="l_main" class=''>
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/02/source/Linux/Linux系统安装/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="tutulp's blog">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="tutulp's blog">
+    <meta itemprop="description" content="tutulp的博客网站">
+  </span>
+  
+
+
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title" itemprop="name headline">
+        Linux系统安装
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/" rel="nofollow">
+    <img itemprop="image" src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">请设置文章作者</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>
+    <a class="category-link" href="/categories/Linux/">Linux</a>
+    
+      <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/Linux/" itemprop="url"><span itemprop="name">Linux</span></a>
+      </span>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2025-03-02T00:00:00+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2025年3月2日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
+      </div>
+    
+  </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <p>Ubuntu 192.168.6.131 </p>
+<p>tutu tutu</p>
+<p>root root</p>
+<p>Anois os 192.168.6.208</p>
+<p>root 123</p>
+<h1 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h1><p>vmware安装包</p>
+<p>激活码在网上找</p>
+<p>##vm安装：</p>
+<ol>
+<li>bios里修改设置：开启虚拟化设备支持   上网搜索  我没有开（系统默认开启）</li>
+<li>管理员运行安装包</li>
+</ol>
+<p>#安装Anolis OS</p>
+<p>下载官网龙蜥8 <a target="_blank" rel="noopener" href="https://openanolis.cn/anolisos">关于龙蜥(Anolis) OS 8 (openanolis.cn)</a></p>
+<p>下载Anolis OS8.6 QU1 -x86_64-dvd.ios  </p>
+<p>安装教程</p>
+<p><a target="_blank" rel="noopener" href="https://cnxiaobai.com/articles/2021/10/21/1634800698273.html">https://cnxiaobai.com/articles/2021/10/21/1634800698273.html</a></p>
+<ol>
+<li>创建虚拟机-典型-稍后安装操作系统-linux-centos 8 64位-虚拟机名称Anolis OS-自定义位置d:\APP\Vmware\Anolis OS-45G-将虚拟磁盘拆分为多个文件</li>
+<li>编辑虚拟机设置-CD&#x2F;DVD-使用ios镜像文件（龙蜥下载位置）-网络适配器-自定义-VMnet8（<strong>NAT模式</strong>）-内存-2GB</li>
+</ol>
+<img src="./images/Linux系统安装.assets/image-20230829094318453-1740971902830-254.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230829094318453-1740971902830-254.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230829094318453" style="zoom:33%;" />
+
+<p>可以看到两个cpu-16核 我们分配两个cpu-每个4核</p>
+<p>开启虚拟机器：ctrl+g  上下 回车 install（第一个）  返回ctrl+alt</p>
+<p>安装目的地：自动分区-可以选择手动分区</p>
+<p>软件选择：最小安装</p>
+<p>根密码：root用户   创建账户-一个权限较低的账户-可设为管理员</p>
+<p>#开发环境搭建</p>
+<h2 id="Ubuntu安装g"><a href="#Ubuntu安装g" class="headerlink" title="Ubuntu安装g++"></a>Ubuntu安装g++</h2><p>sudo apt update</p>
+<p>sudo apt install build-essential gdb  同时安装gcc g++ gdp</p>
+<p>检验安装是否成功 gcc –version g++ –version </p>
+<p>安装cmake</p>
+<p>sudo apt install cmake</p>
+<p>安装tree</p>
+<ul>
+<li>apt install net-tools 安装arp等网络工具</li>
+</ul>
+<p>##Anolis安装g++</p>
+<p>以上用anolis无法安装</p>
+<p>yum update</p>
+<p>yum install gcc </p>
+<p>yum install gcc-c++ libstdc++-devel</p>
+<p>yum install gdb 编译器</p>
+<p>yum install cmake</p>
+<p>yum install tree  一般跳转到要查看的目录下tree .</p>
+<p>手动如何安装？？?配置环境&#x3D;&#x3D;？？？&#x3D;&#x3D;</p>
+<p>使用gcc编译c语言文件 g++编译c++ vscode也是使用gcc</p>
+<p>##编译过程</p>
+<ol>
+<li>预处理</li>
+</ol>
+<p>g++ -E test.cpp -o test.i  -E 头文件，宏等处理</p>
+<ol start="2">
+<li>编译</li>
+</ol>
+<p>g++ -S test.i -o test.s  -S 生成汇编文件</p>
+<ol start="3">
+<li>汇编</li>
+</ol>
+<p>g++ -C test.s -o test.o  -C 仅把源代码编译为机器语言（二进制）的目标代码</p>
+<ol start="4">
+<li>链接</li>
+</ol>
+<p>g++ test.o -o test   -o指定产生的文件名  生成bin文件  使用这一步会自动完成前面三步   </p>
+<p>链接是将编译后生成的目标文件以及程序中可能需要的库文件合并成一个可执行文件的过程。在链接阶段，链接器（Linker）会处理目标文件之间的依赖关系，并解决任何符号引用（比如函数或变量的调用）。</p>
+<p>.&#x2F;test 运行当前路径下的可执行文件test</p>
+<p>###g++编译参数</p>
+<p>-g 产生带可调试信息的可执行文件</p>
+<p>-O[n] 优化代码 -O&#x3D;-O1  -O0不做优化 一般到-O2就可以了 最多-O3</p>
+<p>time .&#x2F; test 可以看到执行时间</p>
+<p>-l   usr&#x2F;local&#x2F;lib  usr&#x2F;lib  lib 这三个目录下的库这样使用</p>
+<p>g++ -lglog test.cpp  链接glog库  </p>
+<p>-L 其他目录</p>
+<p>g++ -L&#x2F;home&#x2F;tutu -lmytest test.cpp  链接mytest库</p>
+<p>-I 头文件不在&#x2F;usr&#x2F;include</p>
+<p>g++ -I&#x2F;myincldue test.cpp </p>
+<p>-Wall 打印警告信息 -w关闭警告信息</p>
+<p>-std&#x3D;c++11 使用c++11标准</p>
+<p>-o指定输出名字 没有会生成a.out</p>
+<p>-D使用宏<img src="./images/Linux系统安装.assets/image-20230912190036624-1740971902830-256.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230912190036624-1740971902830-256.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230912190036624" style="zoom:33%;" /></p>
+<h2 id="命令行编译"><a href="#命令行编译" class="headerlink" title="命令行编译"></a>命令行编译</h2><img src="./images/Linux系统安装.assets/image-20230912190542528-1740971902830-258.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230912190542528-1740971902830-258.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230912190542528" style="zoom: 50%;" />
+
+<p>如果有这样一个目录结构</p>
+<ol>
+<li>直接编译</li>
+</ol>
+<p>g++ main.cpp src&#x2F;swap.cpp -Iinclude  <strong>如果head.h和head.cpp在一个文件下则不需要-Iinclude</strong></p>
+<p>.&#x2F;a.out 执行</p>
+<p>增加编译参数</p>
+<p>g++ main.cpp src&#x2F;swap.cpp -Iinclude -Wall -std&#x3D;c++11 -o b.out</p>
+<ol start="2">
+<li>生成库文件并编译</li>
+</ol>
+<p><strong>链接静态库生成可执行文件</strong></p>
+<p>cd src</p>
+<p>g++ swap.cpp -c -I..&#x2F;include  生成swap.o</p>
+<p><strong>ar rs libswap.a swap.o 把swap.o归档为libswap.a的静态库文件</strong></p>
+<p>cd ..</p>
+<p>g++ main.cpp -lswap -Lsrc -Iinclude -o static_main</p>
+<p>.&#x2F;static_main</p>
+<p><strong>链接动态库生成可执行文件</strong></p>
+<p>cd src</p>
+<p>g++ swap.cpp -I..&#x2F;inlcude -fpic -shared -o libswap.so  -fpic于路径无关 <strong>-shared生成动态库</strong> .so动态库后缀</p>
+<p>cd ..</p>
+<p>g++ main.cpp -Iinclude -lswap -Lsrc -o dyna_main</p>
+<p>.&#x2F;dyna_main 运行不了</p>
+<p>动态生成的文件是在src里面 静态在外面（嵌到main.cpp中） 区别&#x3D;&#x3D;？？？&#x3D;&#x3D;</p>
+<p>LD_LIBRARY_PATH&#x3D;src .&#x2F;dyna_main 在指定文件中搜索</p>
+<p>###GDB调试器</p>
+<img src="./images/Linux系统安装.assets/image-20230912193610332-1740971902830-260.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230912193610332-1740971902830-260.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230912193610332" style="zoom:33%;" />
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">## 以下命令后括号内为命令的简化使用，比如run（r），直接输入命令 r 就代表命令run</span><br><span class="line">$(gdb)help(h)        # 查看命令帮助，具体命令查询在gdb中输入help + 命令 </span><br><span class="line">$(gdb)run(r)         # 重新开始运行文件（run-text：加载文本文件，run-bin：加载二进制文件）</span><br><span class="line">$(gdb)start          # 单步执行，运行程序，停在第一行执行语句</span><br><span class="line">$(gdb)list(l)        # 查看原代码（list-n,从第n行开始查看代码。list+ 函数名：查看具体函数）</span><br><span class="line">$(gdb)set            # 设置变量的值</span><br><span class="line">$(gdb)next(n)        # 单步调试（逐过程，函数直接执行）</span><br><span class="line">$(gdb)step(s)        # 单步调试（逐语句：跳入自定义函数内部执行）</span><br><span class="line">$(gdb)backtrace(bt)  # 查看函数的调用的栈帧和层级关系</span><br><span class="line">$(gdb)frame(f)       # 切换函数的栈帧</span><br><span class="line">$(gdb)info(i)        # 查看函数内部局部变量的数值</span><br><span class="line">$(gdb)finish         # 结束当前函数，返回到函数调用点</span><br><span class="line">$(gdb)continue(c)    # 继续运行</span><br><span class="line">$(gdb)print(p)       # 打印值及地址</span><br><span class="line">$(gdb)quit(q)        # 退出gdb</span><br><span class="line">$(gdb)break+num(b)                 # 在第num行设置断点</span><br><span class="line">$(gdb)info breakpoints             # 查看当前设置的所有断点</span><br><span class="line">$(gdb)delete breakpoints num(d)    # 删除第num个断点</span><br><span class="line">$(gdb)display                      # 追踪查看具体变量值</span><br><span class="line">$(gdb)undisplay                    # 取消追踪观察变量</span><br><span class="line">$(gdb)watch                        # 被设置观察点的变量发生修改时，打印显示</span><br><span class="line">$(gdb)i watch                      # 显示观察点</span><br><span class="line">$(gdb)enable breakpoints           # 启用断点</span><br><span class="line">$(gdb)disable breakpoints          # 禁用断点</span><br><span class="line">$(gdb)x                            # 查看内存x/20xw 显示20个单元，16进制，4字节每单元</span><br><span class="line">$(gdb)run argv[1] argv[2]          # 调试时命令行传参$(gdb)set follow-fork-mode child   # Makefile项目管理：选择跟踪父子进程（fork()）</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>编译程序时需要加上-g，之后才能用gdb进行调试：gcc -g main.c -o main</li>
+<li>回车键：重复上一命令</li>
+</ol>
+<p>gdb main</p>
+<h1 id="VScode"><a href="#VScode" class="headerlink" title="VScode"></a>VScode</h1><h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><p><strong>在 <code>Ctrl+P</code> 窗口下还可以:</strong></p>
+<ul>
+<li>直接输入文件名，跳转到文件</li>
+<li><code>?</code> 列出当前可执行的动作</li>
+<li><code>!</code> 显示 <code>Errors</code>或 <code>Warnings</code>，也可以 <code>Ctrl+Shift+M</code></li>
+<li><code>:</code> 跳转到行数，也可以 <code>Ctrl+G</code> 直接进入</li>
+<li><code>@</code> 跳转到 <code>symbol</code>（搜索变量或者函数），也可以 <code>Ctrl+Shift+O</code> 直接进入</li>
+<li><code>@</code> 根据分类跳转 <code>symbol</code>，查找属性或函数，也可以 <code>Ctrl+Shift+O</code> 后输入:进入</li>
+<li><code>#</code> 根据名字查找 <code>symbol</code>，也可以 <code>Ctrl+T</code></li>
+</ul>
+<p>编辑器与窗口管理</p>
+<ol>
+<li>打开一个新窗口：<code>Ctrl+Shift+N</code></li>
+<li>关闭窗口：<code>Ctrl+Shift+W</code></li>
+<li>同时打开多个编辑器（查看多个文件）</li>
+<li>新建文件 <code>Ctrl+N</code></li>
+<li>文件之间切换 <code>Ctrl+Tab</code></li>
+<li>切出一个新的编辑器（最多 <code>3</code> 个） <code>Ctrl+\</code>，也可以按住 <code>Ctrl</code> 鼠标点击 <code>Explorer</code> 里的文件名</li>
+<li>左中右 <code>3</code> 个编辑器的快捷键 <code>Ctrl+1</code> <code>Ctrl+2</code> <code>Ctrl+3</code></li>
+<li><code>3</code> 个编辑器之间循环切换 <code>Ctrl+</code></li>
+<li>编辑器换位置， <code>Ctrl+k</code>然后按 <code>Left</code>或 <code>Right</code></li>
+</ol>
+<p><strong>快捷键：格式调整</strong></p>
+<ol>
+<li>代码行缩进 <code>Ctrl+[</code> 、 <code>Ctrl+]</code></li>
+<li><code>Ctrl+C</code> 、 <code>Ctrl+V</code> 复制或剪切当前行&#x2F;当前选中内容</li>
+<li>代码格式化：<code>Shift+Alt+F</code>，或 <code>Ctrl+Shift+P</code> 后输入 <code>format code</code></li>
+<li>上下移动一行：<code>Alt+Up</code> 或 <code>Alt+Down</code></li>
+<li>向上向下复制一行：<code>Shift+Alt+Up</code> 或 <code>Shift+Alt+Down</code></li>
+<li>在当前行下边插入一行 <code>Ctrl+Enter</code></li>
+<li>在当前行上方插入一行 <code>Ctrl+Shift+Enter</code></li>
+</ol>
+<p><strong>快捷键：光标相关</strong></p>
+<ol>
+<li>移动到行首：<code>Home</code></li>
+<li>移动到行尾：<code>End</code></li>
+<li>移动到文件结尾：<code>Ctrl+End</code></li>
+<li>移动到文件开头：<code>Ctrl+Home</code></li>
+<li>移动到定义处：<code>F12</code></li>
+<li>定义处缩略图：只看一眼而不跳转过去 <code>Alt+F12</code></li>
+<li>移动到后半个括号：<code>Ctrl+Shift+]</code></li>
+<li>选择从光标到行尾：<code>Shift+End</code></li>
+<li>选择从行首到光标处：<code>Shift+Home</code></li>
+<li>删除光标右侧的所有字：<code>Ctrl+Delete</code></li>
+<li>扩展&#x2F;缩小选取范围：<code>Shift+Alt+Left</code> 和 <code>Shift+Alt+Right</code></li>
+<li>多行编辑(列编辑)：<code>Alt+Shift+鼠标左键</code>，<code>Ctrl+Alt+Down/Up</code></li>
+<li>同时选中所有匹配：<code>Ctrl+Shift+L</code></li>
+<li><code>Ctrl+D</code> 下一个匹配的也被选中 (在 sublime 中是删除当前行，后面自定义快键键中，设置与 <code>Ctrl+Shift+K</code> 互换了)</li>
+<li>回退上一个光标操作：<code>Ctrl+U</code></li>
+</ol>
+<p><strong>快捷键：重构代码</strong></p>
+<ol>
+<li>找到所有的引用：<code>Shift+F12</code></li>
+<li>同时修改本文件中所有匹配的：<code>Ctrl+F12</code></li>
+<li>重命名：比如要修改一个方法名，可以选中后按 <code>F2</code>，输入新的名字，回车，会发现所有的文件都修改了</li>
+<li>跳转到下一个 <code>Error</code> 或 <code>Warning</code>：当有多个错误时可以按 <code>F8</code> 逐个跳转</li>
+<li>查看 <code>diff</code>：在 <code>explorer</code> 里选择文件右键 <code>Set file to compare</code>，然后需要对比的文件上右键选择 <code>Compare with file_name_you_chose</code></li>
+</ol>
+<p><strong>快捷键：查找替换</strong></p>
+<ol>
+<li>查找 <code>Ctrl+F</code></li>
+<li>查找替换 <code>Ctrl+H</code></li>
+<li>整个文件夹中查找 <code>Ctrl+Shift+F</code></li>
+</ol>
+<p><strong>快捷键：显示相关</strong></p>
+<ol>
+<li>全屏：<code>F11</code></li>
+<li>zoomIn&#x2F;zoomOut：<code>Ctrl +/-</code></li>
+<li>侧边栏显&#x2F;隐：<code>Ctrl+B</code></li>
+<li>显示资源管理器 <code>Ctrl+Shift+E</code></li>
+<li>显示搜索 <code>Ctrl+Shift+F</code></li>
+<li>显示 Git <code>Ctrl+Shift+G</code></li>
+<li>显示 Debug <code>Ctrl+Shift+D</code></li>
+<li>显示 Output <code>Ctrl+Shift+U</code></li>
+</ol>
+<h4 id="高频使用技巧"><a href="#高频使用技巧" class="headerlink" title="高频使用技巧"></a>高频使用技巧</h4><ul>
+<li>左右分屏</li>
+<li>固定打开的文件  双击，不被覆盖</li>
+<li>格式化代码</li>
+<li>Rename Symbol</li>
+<li>显示minimap  右上角的小窗口</li>
+<li>侧边栏查看OUTLINE</li>
+<li>全屏</li>
+<li>关闭多个打开的文件</li>
+<li>选中整行 ctrl+l</li>
+</ul>
+<h1 id="cmake"><a href="#cmake" class="headerlink" title="cmake"></a>cmake</h1><h2 id="cmake-windows-不用看"><a href="#cmake-windows-不用看" class="headerlink" title="cmake windows(不用看)"></a>cmake windows(不用看)</h2><p>软件构建(build)：cmake   全自动完成代码编译，链接，打包 <strong>跨平台</strong></p>
+<p>vs:MSbuild 不同编译器使用的工具不同 cmake可以支配所有</p>
+<p>cmake：不用手动配置makefile</p>
+<p><strong>首先vscode安装插件cmake cmaketools</strong></p>
+<p>编译运行单个文件</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.10</span>)    //要求cmake的最低版本</span><br><span class="line"><span class="keyword">project</span>(Example)   //指定工程名字，也是生成的可执行文件的名字</span><br><span class="line"><span class="keyword">add_executable</span>(Example <span class="keyword">test</span>.cpp)  //表示我们需要构建一个可执行文件由<span class="keyword">test</span>.cpp编译而成</span><br></pre></td></tr></table></figure>
+
+<p>#####配置(configure) </p>
+<p>根据这个cmakelists文件生成目标平台的原生工程–配置(configure) </p>
+<p>命令面板ctrl+shift+p   输入&gt;cmake configure</p>
+<p>选择</p>
+<img src="./images/Linux系统安装.assets/image-20230830170656008-1740971902830-262.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230830170656008-1740971902830-262.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230830170656008" style="zoom: 50%;" />
+
+<p>命令行指令  cmake -S . -B build</p>
+<p>之后保存会自动配置</p>
+<p>#####构建(build)</p>
+<p>F7或者&gt;cmake build</p>
+<p>命令行指令 cmake –build build</p>
+<h5 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h5><p>复制粘贴构建后最后一行的路径</p>
+<p>C:\Users\Tutu\Desktop\cmake\build\Debug\Example.exe</p>
+<p>BV1rR4y1E7n9 入门-代码解释</p>
+<p><a target="_blank" rel="noopener" href="https://subingwen.cn/cmake/CMake-primer/">https://subingwen.cn/cmake/CMake-primer/</a> 详细文档  BV14s4y1g7Zj 视频解析</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.10</span>)  </span><br><span class="line"><span class="keyword">project</span>(Example)</span><br><span class="line"></span><br><span class="line"><span class="comment">#find_package(easyx REQUIRED) </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">file</span>(GLOB</span><br><span class="line">    <span class="string">&quot;$&#123;PROJECT_SOURCE_DIR&#125;/src/*.h&quot;</span></span><br><span class="line">    <span class="string">&quot;$&#123;PROJECT_SOURCE_DIR&#125;/src/*.cpp&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(<span class="variable">$&#123;CMAKE_PROJECT_NAME&#125;</span> <span class="variable">$&#123;SRC_FLIES&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#target_link_libraries($&#123;CMAKE_PROJECT_NAME&#125; PRIVATE easyx)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">target_compile_features</span>(<span class="variable">$&#123;CMAKE_PROJECT_NAME&#125;</span> PRIVATE cxx_std_17)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_custom_command</span>(</span><br><span class="line">    <span class="keyword">target</span> <span class="variable">$&#123;CMAKE_PROJECT_NAME&#125;</span></span><br><span class="line">    POST_BUILD</span><br><span class="line">    <span class="keyword">COMMAND</span> <span class="variable">$&#123;CMAKE_PROJECT_NAME&#125;</span> -E copy_directoy</span><br><span class="line">        <span class="string">&quot;$&#123;PROJECT_SOURCE_DIR&#125;/assets&quot;</span></span><br><span class="line">        <span class="string">&quot;$&lt;PROJECT_FILE_DIR:$&#123;CMAKE_PROJECT_NAME&#125;&gt;/assets&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>运行多文件</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.10</span>) </span><br><span class="line"><span class="keyword">project</span>(CALC)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">11</span>)  <span class="comment">#使用c++ 11</span></span><br><span class="line"><span class="keyword">set</span>(HOME /home/robin/Linux/calc)</span><br><span class="line"><span class="keyword">set</span>(EXECUTABLE_OUTPUT_PATH <span class="variable">$&#123;HOME&#125;</span>/bin/)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>)  <span class="comment">#包含头文件 不要也可以（有时出错？）</span></span><br><span class="line"><span class="keyword">file</span>(GLOB SRC_LIST <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/*.cpp)  <span class="comment">#文件下的源文件/str/*.cpp</span></span><br><span class="line"><span class="keyword">add_executable</span>(app  <span class="variable">$&#123;SRC_LIST&#125;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="cmake-linux"><a href="#cmake-linux" class="headerlink" title="cmake linux"></a>cmake linux</h2><p>crlf \r\n  lf \n &#x3D;&#x3D;???&#x3D;&#x3D;</p>
+<p>需要插件：c&#x2F;c++ cmake cmaketools</p>
+<p>在anolis中安装vscode 可以考虑，但是没必要</p>
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><img src="./images/Linux系统安装.assets/image-20230914084230917-1740971902830-264.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230914084230917-1740971902830-264.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230914084230917" style="zoom: 50%;" />
+
+<p>点这个没用</p>
+<p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/vscode%E4%B8%8B%E8%BD%BD%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84%E6%8F%92%E4%BB%B6-linux%E5%B9%B3%E5%8F%B0">https://marketplace.visualstudio.com/vscode下载对应版本的插件-linux平台</a></p>
+<img src="./images/Linux系统安装.assets/image-20230914084105440-1740971902830-268.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230914084105440-1740971902830-268.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230914084105440" style="zoom:50%;" />
+
+<img src="./images/Linux系统安装.assets/image-20230914084730133-1740971902830-266.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230914084730133-1740971902830-266.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230914084730133" style="zoom:50%;" />
+
+<p>跳转到对应目录，会提示安装成功重启vscode</p>
+<img src="./images/Linux系统安装.assets/image-20230914084909666-1740971902830-270.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230914084909666-1740971902830-270.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230914084909666" style="zoom:50%;" />
+
+<p>会提示已经安好的插件</p>
+<p>###cmake语法</p>
+<p>格式 指令(参数1 参数2) 参数间用分号或空格  指令和大小写无关 参数和变量有关</p>
+<p>变量使用${} IF控制语句中直接使用</p>
+<p>重要指令和常用变量</p>
+<p>中括号为可选项，可无</p>
+<ul>
+<li><p><strong>指定CMake的最小版本要求</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CMake最小版本要求为2.8.3</span><br><span class="line">cmake_minimum_required(VERSION 2.8.3)</span><br></pre></td></tr></table></figure>
+</li>
+<li><ul>
+<li>语法：<strong>cmake_minimum_required(VERSION versionNumber [FATAL_ERROR])</strong></li>
+</ul>
+</li>
+<li><p><strong>project</strong> <strong>- 定义工程名称，并可指定工程支持的语言</strong> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">指定工程名为HELLOWORLD</span><br><span class="line">project(HELLOWORLD)</span><br></pre></td></tr></table></figure>
+</li>
+<li><ul>
+<li>语法：<strong>project(projectname [CXX] [C] [Java])</strong></li>
+</ul>
+</li>
+<li><p><strong>set</strong> <strong>- 显式的定义变量</strong> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">定义SRC变量，其值为main.cpp hello.cpp</span><br><span class="line">set(SRC sayhello.cpp hello.cpp)</span><br></pre></td></tr></table></figure>
+</li>
+<li><ul>
+<li>语法：<strong>set(VAR [VALUE] [CACHE TYPE DOCSTRING [FORCE]])</strong></li>
+</ul>
+</li>
+<li><p><strong>include_directories - 向工程添加多个特定的头文件搜索路径</strong> —&gt;相当于指定g++编译器的-I参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将/usr/include/myincludefolder 和 ./include 添加到头文件搜索路径</span><br><span class="line">include_directories(/usr/include/myincludefolder ./include)</span><br></pre></td></tr></table></figure>
+</li>
+<li><ul>
+<li>语法：<strong>include_directories([AFTER|BEFORE] [SYSTEM] dir1 dir2 …)</strong></li>
+</ul>
+</li>
+<li><p><strong>link_directories</strong> <strong>- 向工程添加多个特定的库文件搜索路径</strong> —&gt;相当于指定g++编译器的-L参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将/usr/lib/mylibfolder 和 ./lib 添加到库文件搜索路径</span><br><span class="line">link_directories(/usr/lib/mylibfolder ./lib)</span><br></pre></td></tr></table></figure>
+</li>
+<li><ul>
+<li>语法：link_directories(dir1 dir2 …)</li>
+</ul>
+</li>
+<li><p><strong>add_library</strong> <strong>- 生成库文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">通过变量 SRC 生成 libhello.so 共享库</span><br><span class="line">add_library(hello SHARED $&#123;SRC&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><ul>
+<li>语法：<strong>add_library(libname [SHARED|STATIC|MODULE] [EXCLUDE_FROM_ALL] source1 source2 … sourceN)</strong></li>
+<li>SHARED动态库 STATIC静态库</li>
+</ul>
+</li>
+<li><p><strong>add_compile_options</strong> - 添加编译参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">添加编译参数 -Wall -std=c++11</span><br><span class="line">add_compile_options(-Wall -std=c++11 -O2)</span><br></pre></td></tr></table></figure>
+</li>
+<li><ul>
+<li>语法：<strong>add_compile_options(</strong></li>
+</ul>
+</li>
+<li><p><strong>add_executable</strong> <strong>- 生成可执行文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">编译main.cpp生成可执行文件main</span><br><span class="line">add_executable(main main.cpp)</span><br></pre></td></tr></table></figure>
+</li>
+<li><ul>
+<li>语法：<strong>add_executable(exename source1 source2 … sourceN)</strong></li>
+</ul>
+</li>
+<li><p><strong>target_link_libraries</strong> - 为 target 添加需要链接的共享库  —&gt;相同于指定g++编译器-l参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将hello动态库文件链接到可执行文件main</span><br><span class="line">target_link_libraries(main hello) </span><br></pre></td></tr></table></figure>
+</li>
+<li><ul>
+<li>语法：<strong>target_link_libraries(target library1library2…)</strong></li>
+</ul>
+</li>
+<li><p><strong>add_subdirectory - 向当前工程添加存放源文件的子目录，并可以指定中间二进制和目标二进制存放的位置</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">添加src子目录，src中需有一个CMakeLists.txt</span><br><span class="line">add_subdirectory(src) </span><br></pre></td></tr></table></figure>
+</li>
+<li><ul>
+<li>语法：<strong>add_subdirectory(source_dir [binary_dir] [EXCLUDE_FROM_ALL])</strong></li>
+</ul>
+</li>
+<li><p><strong>aux_source_directory - 发现一个目录下所有的源代码文件并将列表存储在一个变量中，这个指令临时被用来自动构建源文件列表</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">定义SRC变量，其值为当前目录下所有的源代码文件</span><br><span class="line">aux_source_directory(. SRC)</span><br><span class="line">编译SRC变量所代表的源代码文件，生成main可执行文件</span><br><span class="line">add_executable(main $&#123;SRC&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><ul>
+<li>语法：<strong>aux_source_directory(dir VARIABLE)</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="CMake常用变量"><a href="#CMake常用变量" class="headerlink" title="CMake常用变量"></a>CMake常用变量</h3><ul>
+<li><p><strong>CMAKE_C_FLAGS  gcc编译选项</strong></p>
+<p><strong>CMAKE_CXX_FLAGS  g++编译选项</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在CMAKE_CXX_FLAGS编译选项后追加-std=c++11</span><br><span class="line">set( CMAKE_CXX_FLAGS &quot;$&#123;CMAKE_CXX_FLAGS&#125; -std=c++11&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>CMAKE_BUILD_TYPE  编译类型(Debug, Release)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">设定编译类型为debug，调试时需要选择debug</span><br><span class="line">set(CMAKE_BUILD_TYPE Debug) </span><br><span class="line">设定编译类型为release，发布时需要选择release</span><br><span class="line">set(CMAKE_BUILD_TYPE Release) </span><br></pre></td></tr></table></figure>
+
+<p><strong>CMAKE_BINARY_DIR</strong></p>
+<p><strong>PROJECT_BINARY_DIR</strong></p>
+<p><strong><projectname>__BINARY_DIR</strong></p>
+</li>
+<li><ol>
+<li>这三个变量指代的内容是一致的。</li>
+<li>如果是 in source build，指的就是工程顶层目录。</li>
+<li>如果是 out-of-source 编译,指的是工程编译发生的目录。</li>
+<li>PROJECT_BINARY_DIR 跟其他指令稍有区别，不过现在，你可以理解为他们是一致的。</li>
+</ol>
+</li>
+<li><p><strong>CMAKE_SOURCE_DIR</strong></p>
+<p><strong>PROJECT_SOURCE_DIR</strong><br><strong><projectname>__SOURCE_DIR</strong></p>
+</li>
+<li><ol>
+<li>这三个变量指代的内容是一致的,不论采用何种编译方式,都是工程顶层目录。</li>
+<li>也就是在 in source build时,他跟 CMAKE_BINARY_DIR 等变量一致。</li>
+<li>PROJECT_SOURCE_DIR 跟其他指令稍有区别,现在,你可以理解为他们是一致的。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>CMAKE_C_COMPILER：指定C编译器</strong></li>
+<li><strong>CMAKE_CXX_COMPILER：指定C++编译器</strong></li>
+<li><strong>EXECUTABLE_OUTPUT_PATH：可执行文件输出的存放路径</strong></li>
+<li><strong>LIBRARY_OUTPUT_PATH：库文件输出的存放路径</strong></li>
+</ul>
+<h3 id="CMake编译工程"><a href="#CMake编译工程" class="headerlink" title="CMake编译工程"></a>CMake编译工程</h3><p>CMake目录结构：项目主目录存在一个CMakeLists.txt文件</p>
+<p>编译流程</p>
+<ul>
+<li><p>手动编写 CmakeLists.txt。</p>
+</li>
+<li><p>执行命令 <code>cmake PATH</code>生成 Makefile ( PATH 是顶层CMakeLists.txt 所在的路径 )。</p>
+</li>
+<li><p>执行命令<code>make</code> 进行编译。</p>
+</li>
+<li><pre><code>important tips
+.          # 表示当前目录
+./         # 表示当前目录
+
+..      # 表示上级目录
+../     # 表示上级目录
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 两种构建方式</span><br><span class="line"></span><br><span class="line">CMakeList在外面 外部构建只是进入build文件夹执行cmake使生成的文件放到build文件夹中</span><br><span class="line"></span><br><span class="line">- **内部构建(in-source build)**：不推荐使用</span><br><span class="line"></span><br><span class="line">  内部构建会在同级目录下产生一大堆中间文件，这些中间文件并不是我们最终所需要的，和工程源文件放在一起会显得杂乱无章。</span><br><span class="line"></span><br><span class="line">  ```</span><br><span class="line">  内部构建</span><br><span class="line">  在当前目录下，编译本目录的CMakeLists.txt，生成Makefile和其他文件</span><br><span class="line">  cmake .</span><br><span class="line">  执行make命令，生成target</span><br><span class="line">  make</span><br><span class="line">  ```</span><br><span class="line">  </span><br><span class="line">- **外部构建(out-of-source build)**：==推荐使用==</span><br><span class="line"></span><br><span class="line">  将编译输出文件存放到单独的build文件夹中</span><br><span class="line"></span><br><span class="line">  ```</span><br><span class="line">  # 外部构建</span><br><span class="line">  1. 在当前目录下，创建build文件夹</span><br><span class="line">  mkdir build </span><br><span class="line">  2. 进入到build文件夹</span><br><span class="line">  cd build</span><br><span class="line">  3. 编译上级目录的CMakeLists.txt，生成Makefile和其他文件</span><br><span class="line">  cmake ..</span><br><span class="line">  4. 执行make命令，生成target</span><br><span class="line">  make</span><br><span class="line">  ```</span><br><span class="line"></span><br><span class="line">####单文件直接使用g++指令更方便</span><br><span class="line"></span><br><span class="line">\#include&lt;include/head.h&gt; cmake可不加include</span><br><span class="line"></span><br><span class="line">实例</span><br><span class="line"></span><br><span class="line">&lt;img src=&quot;./images/Linux系统安装.assets/image-20230913214219685-1740971902830-272.png&quot; alt=&quot;image-20230913214219685&quot; style=&quot;zoom: 33%;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;img src=&quot;./images/Linux系统安装.assets/image-20230913214324629-1740971902830-274.png&quot; alt=&quot;image-20230913214324629&quot; style=&quot;zoom:33%;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">目录结构</span><br><span class="line"></span><br><span class="line">&lt;img src=&quot;./images/Linux系统安装.assets/image-20230914093743079-1740971902830-276.png&quot; alt=&quot;image-20230914093743079&quot; style=&quot;zoom:50%;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">g++ main.cpp scr/Gun.cpp scr/Solier.cpp -Iinclude [-o main] -wall -g -O2</span><br><span class="line"></span><br><span class="line">如果头文件和源文件放到同一个目录下则不需要-Iinclude</span><br><span class="line"></span><br><span class="line">~~~cmake</span><br><span class="line">cmake_minimum_required(VERSION 3.0)</span><br><span class="line">project(Solidefire)</span><br><span class="line">set(CMAKE_CXX_FLAGS &quot;$&#123;CMAKE_CXX_FLAGS&#125; -g -O2 -Wall&quot;)  //设置g++编译选项</span><br><span class="line">include_directories(include)</span><br><span class="line">add_executable(main_cmake main.cpp src/Gun.cpp src/Soldier.cpp)</span><br></pre></td></tr></table></figure>
+
+include_directories(include) 可以写成 include_directories($&#123;CMAKE_SOURCE_DIR&#125;/include) 变量CMAKE_SOURCE_DIR是cmakelists所在文件夹路径
+
+修改源代码之后只需要make不需要cmake .. cmake只针对cmakelists文件
+
+**所有文件放到一个目录里面**
+
+![image-20230914091740384](./images/Linux系统安装.assets/image-20230914091740384.png)
+
+aux_source_directory($&#123;PROJECT_SOURCE_DIR&#125; SRC) #PROJECT_SOURCE_DIR cmake .. 执行cmake后面跟随的路径
+
+或者file(GLOB SRC $&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/*.cpp) 
+
+再
+
+add_executable(main_cmake $&#123;SRC&#125;)
+
+**放到不同目录里面**
+
+目录结构
+
+&lt;img src=&quot;./images/Linux系统安装.assets/image-20230914093743079-1740971902830-276.png&quot; alt=&quot;image-20230914093743079&quot; style=&quot;zoom:50%;&quot; /&gt;
+
+一样是进入build文件夹 cmake .. make ./mian_cmake
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(Solidefire)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_FLAGS <span class="string">&quot;$&#123;CMAKE_CXX_FLAGS&#125; -g -O2 -Wall&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="keyword">include</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(SRC main_cmake main.cpp src/Gun.cpp src/Soldier.cpp)</span><br><span class="line"><span class="comment">#aux_source_directory($&#123;PROJECT_SOURCE_DIR&#125; SRC) #PROJECT_SOURCE_DIR cmake .. 执行cmake后面跟随的路径</span></span><br><span class="line"><span class="keyword">file</span>(GLOB SRC <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/src/*.cpp)    <span class="comment">#CMAKE_CURRENT_SOURCE_DIR对应makelists所在路径</span></span><br><span class="line"><span class="keyword">include_directories</span>(%&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/<span class="keyword">include</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#set(EXECUTABLE_OUTPUT_PATH /opt/demo/build) #指定输出路径</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">11</span>) <span class="comment">#使用c++11标准 或cmake .. -DCMAKE_CXX_STANDARD=11</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(main_cmake <span class="variable">$&#123;SRC&#125;</span>)</span><br></pre></td></tr></table></figure>
+
+后续链接库等看BV14s4y1g7Zj?p
+
+调试看BV1fy4y1b7TC?p 配置json等
+</code></pre>
+</li>
+</ul>
+<h1 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h1><img src="./images/Linux系统安装.assets/image-20230914134022495-1740971902830-279.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230914134022495-1740971902830-279.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230914134022495" style="zoom:33%;" />
+
+<p>选择creat a launch.json file再选择c++(GDB)</p>
+<p>如果没用在右下角选择第一个</p>
+<img src="./images/Linux系统安装.assets/image-20230914134118177-1740971902830-281.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230914134118177-1740971902830-281.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230914134118177" style="zoom:50%;" />
+
+<p>.json文件如下</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">// Use IntelliSense to learn about possible attributes.</span></span><br><span class="line">    <span class="comment">// Hover to view descriptions of existing attributes.</span></span><br><span class="line">    <span class="comment">// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0.2.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line"></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;(gdb) 启动&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cppdbg&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;request&quot;</span><span class="punctuation">:</span> <span class="string">&quot;launch&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;program&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;/demo/build/main_cmake&quot;</span><span class="punctuation">,</span> <span class="comment">//要调试的可执行文件的绝对路径</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;stopAtEntry&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span><span class="punctuation">,</span><span class="comment">//workspaceFolder顶层目录，json文件所在</span></span><br><span class="line">            <span class="attr">&quot;environment&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;externalConsole&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;MIMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gdb&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;setupCommands&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="punctuation">&#123;</span></span><br><span class="line">                    <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;为 gdb 启用整齐打印&quot;</span><span class="punctuation">,</span></span><br><span class="line">                    <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span> <span class="string">&quot;-enable-pretty-printing&quot;</span><span class="punctuation">,</span></span><br><span class="line">                    <span class="attr">&quot;ignoreFailures&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">                <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="comment">// &#123;</span></span><br><span class="line">                <span class="comment">//     &quot;description&quot;: &quot;将反汇编风格设置为 Intel&quot;,</span></span><br><span class="line">                <span class="comment">//     &quot;text&quot;: &quot;-gdb-set disassembly-flavor intel&quot;,</span></span><br><span class="line">                <span class="comment">//     &quot;ignoreFailures&quot;: true</span></span><br><span class="line">                <span class="comment">// &#125;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="comment">//&quot;preLaunchTask&quot;: &quot;build&quot;, //调试之前做一个task引号是名字</span></span><br><span class="line">            <span class="attr">&quot;miDebuggerPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/usr/bin/gdb&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>cmakelist中加set(CMAKE_BUILD_TYPE Debug) #生成可调试文件，避免冲突</p>
+<p>f5进入调试 f10单步 f11进入 f5结束</p>
+<p>打开</p>
+<p>&#x2F;&#x2F;“preLaunchTask”: “C&#x2F;C++:g++ build active file”, &#x2F;&#x2F;调试之前做一个task引号是名字</p>
+<p>配置tasks.json文件</p>
+<img src="./images/Linux系统安装.assets/image-20230914140159227-1740971902830-283.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230914140159227-1740971902830-283.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230914140159227" style="zoom: 33%;" />
+
+<p>随便点击一个</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;/build&quot;</span> <span class="comment">//进入build文件夹</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span>  <span class="comment">//包含了三个task</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;shell&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cmake&quot;</span><span class="punctuation">,</span>  <span class="comment">//task名字</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cmake&quot;</span><span class="punctuation">,</span> <span class="comment">//命令</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span>  <span class="comment">//参数</span></span><br><span class="line">                <span class="string">&quot;..&quot;</span></span><br><span class="line">            <span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;make&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;group&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;make&quot;</span><span class="punctuation">,</span>  <span class="comment">//执行make，没用参数</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;dependsOrder&quot;</span><span class="punctuation">:</span> <span class="string">&quot;sequence&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;dependsOn&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">//依赖于上面两个，做cmake .. make 两件事</span></span><br><span class="line">                <span class="string">&quot;cmake&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;make&quot;</span></span><br><span class="line">            <span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样直接f5就可以调试了运行了，不用再cmake和make了</p>
+<h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><p>yum install 时遇到问题</p>
+<p>###failed to set locale defaulting to C.UTF-8</p>
+<p><strong>我是网络问题，下面都没用的意思</strong></p>
+<p>先ping <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a> 看能不能通 不能一般是网络问题（我是没有设置dns）</p>
+<p>locale -a查看已经安装的语言包</p>
+<p>镜像网站下载rpm包</p>
+<p>指令安装</p>
+<p>sudo yum install epel-release</p>
+<p>sudo yum install langpacks-en</p>
+<p>无法使用指令镜像网站</p>
+<p>镜像网站：<a target="_blank" rel="noopener" href="http://rpmfind.net/linux/RPM/index.html">Welcome to the RPM repository on fr2.rpmfind.net</a></p>
+<p>搜索epel-release langpacks-en找对应版本进行安装rpm包</p>
+<p>rpm -i example.rpm  <code>-i</code>表示安装，<code>example.rpm</code>是要安装的RPM包的名称。</p>
+<p>可视化显示使用<code>-v</code>  使用<code>-h</code>选项来显示安装进度。</p>
+<p>rpm -ivh example.rpm</p>
+<p>镜像网站：<a target="_blank" rel="noopener" href="http://rpmfind.net/linux/RPM/index.html">Welcome to the RPM repository on fr2.rpmfind.net</a></p>
+<p>搜索名字安装rpm包</p>
+<img src="./images/Linux系统安装.assets/image-20230912124810367-1740971902830-285.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230912124810367-1740971902830-285.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230912124810367" style="zoom:33%;" />
+
+
+
+<p>重命名后使用xftp传输到&#x2F;home&#x2F;tutu </p>
+<p>进入目录 分别rpm -ivh epel-release.rpm</p>
+<p>然后</p>
+<p>生成语言环境</p>
+<p>先install再sudo localedef -v -c -i en_US -f UTF-8 en_US.UTF-8</p>
+<p>sudo nano &#x2F;etc&#x2F;default&#x2F;locale</p>
+<p>LANG&#x3D;en_US.UTF-8 LC_ALL&#x3D;en_US.UTF-8</p>
+<img src="./images/Linux系统安装.assets/image-20230912142455755-1740971902830-287.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230912142455755-1740971902830-287.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230912142455755" style="zoom:33%;" />
+
+<p>sudo yum install langpacks-en</p>
+<img src="./images/Linux系统安装.assets/image-20230912142521072-1740971902830-289.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230912142521072-1740971902830-289.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230912142521072" style="zoom:33%;" />
+
+<img src="./images/Linux系统安装.assets/image-20230912142609391-1740971902830-291.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230912142609391-1740971902830-291.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230912142609391" style="zoom:33%;" />
+
+<p>sudo localedef -v -c -i en_US -f UTF-8 en_US.UTF-8 生成语言环境</p>
+<h1 id="安装库文件"><a href="#安装库文件" class="headerlink" title="安装库文件"></a>安装库文件</h1><p>##安装pthread库 </p>
+<p>yum install -y glibc-devel</p>
+<p>rpm -q glibc-devel 检查</p>
+<p>编译 g++ communicationV2.0.cpp -lpthread</p>
+<h1 id="安装Ubuntu"><a href="#安装Ubuntu" class="headerlink" title="安装Ubuntu"></a>安装Ubuntu</h1><p>官网 <a target="_blank" rel="noopener" href="https://cn.ubuntu.com/desktop">https://cn.ubuntu.com/desktop</a></p>
+<p>我下载的是ubuntu-24.04-desktop-amd64.iso</p>
+<img src="./images/Linux系统安装.assets/image-20240831161004931-1740971902830-293.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20240831161004931-1740971902830-293.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240831161004931" style="zoom:50%;" />
+
+<img src="./images/Linux系统安装.assets/image-20240831161017835-1740971902830-295.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20240831161017835-1740971902830-295.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240831161017835" style="zoom:50%;" />
+
+<img src="./images/Linux系统安装.assets/image-20240831161030021-1740971902830-297.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20240831161030021-1740971902830-297.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240831161030021" style="zoom:50%;" />
+
+<img src="./images/Linux系统安装.assets/image-20240831165855765-1740971902830-299.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20240831165855765-1740971902830-299.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240831165855765" style="zoom:50%;" />
+
+<img src="./images/Linux系统安装.assets/image-20240831161121700-1740971902830-301.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20240831161121700-1740971902830-301.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240831161121700" style="zoom: 50%;" />
+
+<img src="./images/Linux系统安装.assets/image-20240831161216529-1740971902830-303.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20240831161216529-1740971902830-303.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240831161216529" style="zoom:50%;" />
+
+<p>完成</p>
+<p>编辑虚拟机设置</p>
+<img src="./images/Linux系统安装.assets/image-20240831161314609-1740971902830-305.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20240831161314609-1740971902830-305.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240831161314609" style="zoom:50%;" />
+
+<img src="./images/Linux系统安装.assets/image-20240831161418248-1740971902830-307.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20240831161418248-1740971902830-307.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240831161418248" style="zoom:50%;" />
+
+<p>这里选择这个会使用之前配置的网络自动分配一个ip，后面不用配置了</p>
+<img src="./images/Linux系统安装.assets/image-20240831170020170-1740971902830-309.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20240831170020170-1740971902830-309.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240831170020170" style="zoom:50%;" />
+
+<img src="./images/Linux系统安装.assets/image-20240831161447582-1740971902830-311.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20240831161447582-1740971902830-311.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240831161447582" style="zoom:50%;" />
+
+<p>确定-开启虚拟机</p>
+<p>不知道为什么我图形化界面进去在安装的位置一直卡住</p>
+<p>后面直接安装非图形化的 前面步骤一样，后面安好之后要重新启动一次，启动的时候把镜像文件改为自动检测，我改了以后不知道是我卡还是等的时间不够，后面我又把镜像安上之后或者取消重复开了好几次，去吃个饭回来就进入命名界面了，意外之喜</p>
+<p>镜像文件下载地址：<a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/ubuntu-releases/">https://mirrors.aliyun.com/ubuntu-releases/</a></p>
+<p>进入之后只有一个自己建的用户，没有root用户 导致输入命令很多都要 +sudo</p>
+<p>sudo passwd root 设置root密码</p>
+<p>su - root 切换到root</p>
+<p>#配置静态局域网</p>
+<p>虚拟机默认是NAT模式 每个虚拟机一个DHCP都是10.0.2.2  主机10.0.2.15 每个虚拟机都一样 所以虚拟机不能互通</p>
+<p>虚拟机可以ping主机NAT的私有地址，主机不能访问虚拟机 只出不进</p>
+<p>NAT网络</p>
+<p>教程：<a target="_blank" rel="noopener" href="https://cnxiaobai.com/articles/2021/04/21/1619011285612.html">https://cnxiaobai.com/articles/2021/04/21/1619011285612.html</a></p>
+<p>一开始ip a查看不到ip地址，需要编辑网卡信息</p>
+<p>首先进入root账户 普通账户尝试过不行</p>
+<ol>
+<li><p>cd &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;</p>
+</li>
+<li><p>ls  显示网卡名称 ifcfg-ens160</p>
+</li>
+<li><p>vi ifcfg-ens160 进入编辑模式&#x2F;vi</p>
+</li>
+<li><p>按 i 进入编辑</p>
+</li>
+<li><pre><code>TYPE=Ethernet        #网络类型:Ethernet以太网
+PROXY_METHOD=none    #代理方式：关闭状态
+BROWSER_ONLY=no         # 只是浏览器：否
+BOOTPROTO=static       #引导协议：static静态、dhcp动态获取、none不指定   改
+DEFROUTE=yes         #启动默认路由
+IPV4_FAILURE_FATAL=no  #不启用IPV4错误检测功能
+IPV6INIT=yes         #启用IPV6协议
+IPV6_AUTOCONF=yes    #自动配置IPV6地址
+IPV6_DEFROUTE=yes    #启用IPV6默认路由
+IPV6_FAILURE_FATAL=no #不启用IPV6错误检测功能
+NAME=ens160          # 网卡设备的别名
+UUID=985f89ca-ada3-4dfd-9dd2-c97f680a8ed1  #网卡设备的UUID,通用唯一识别码
+DEVICE=ens160        # 网卡的设备名称
+ONBOOT=yes           #开机自动启动网卡      改
+//加
+IPADDR=192.168.6.208    248.3
+NETMASK=255.255.255.0
+GATEWAY=192.168.6.2    248.2
+PREFIX=24
+DNS1=114.114.114.114
+DNS2=8.8.8.8
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">6. 编写完成后按esc进入选择模式</span><br><span class="line"></span><br><span class="line">7. : 进入底线模式 输入==w保存 q退出== 后加！强制执行</span><br><span class="line"></span><br><span class="line">8. nmcli c reload                         # 重新加载配置文件</span><br><span class="line">   nmcli c up ens160                      # 重启ens33网卡    service NetworkManager restart  重置网卡？？</span><br><span class="line"></span><br><span class="line">9. 重新启动客户机</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo nmtui 进入网络设置</span><br><span class="line"></span><br><span class="line">&lt;img src=&quot;./images/Linux系统安装.assets/image-20240831165217770-1740971902830-313.png&quot; alt=&quot;image-20240831165217770&quot; style=&quot;zoom:50%;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">为啥网关设置成.2呢</span><br><span class="line"></span><br><span class="line">### 虚拟机网络设置</span><br><span class="line"></span><br><span class="line">编辑-虚拟网络编辑器-更改设置-VMnet8</span><br><span class="line"></span><br><span class="line">&lt;img src=&quot;./images/Linux系统安装.assets/image-20230829172834973-1740971902830-315.png&quot; alt=&quot;image-20230829172834973&quot; style=&quot;zoom: 67%;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">NAT设置</span><br><span class="line"></span><br><span class="line">&lt;img src=&quot;./images/Linux系统安装.assets/image-20230829172924050-1740971902830-317.png&quot; alt=&quot;image-20230829172924050&quot; style=&quot;zoom:50%;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">规则192.168不变  6随便（224以下） </span><br><span class="line"></span><br><span class="line">DHCP设置</span><br><span class="line"></span><br><span class="line">&lt;img src=&quot;./images/Linux系统安装.assets/image-20230829173012318-1740971902830-319.png&quot; alt=&quot;image-20230829173012318&quot; style=&quot;zoom:50%;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">ip要在这个范围里面</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ping www.baidu.com  ping不通代表有问题  ctrl+c结束ping</span><br><span class="line"></span><br><span class="line">#SSH</span><br><span class="line"></span><br><span class="line">###windows</span><br><span class="line"></span><br><span class="line">ssh tutu@192.168.6.208</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">linux：</span><br><span class="line"></span><br><span class="line">systemctl status sshd 查看是否启动ssh</span><br><span class="line"></span><br><span class="line">systemctl start sshd 启用</span><br><span class="line"></span><br><span class="line">###vscode</span><br><span class="line"></span><br><span class="line">配置config文件</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+Host 192.168.6.208  //主机ip
+  HostName 192.168.6.208
+  User tutu
+</code></pre>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ssh tutu@192.168.6.208   tutu</span><br><span class="line"></span><br><span class="line">ssh root@192.168.6.208   123</span><br><span class="line"></span><br><span class="line">避免每次连接需要输入密码</span><br><span class="line"></span><br><span class="line">cmd:ssh-keygen -t rsa -b 4096  四个回车生成密钥 ==？？？==</span><br><span class="line"></span><br><span class="line">##免密登录</span><br><span class="line"></span><br><span class="line">* code /etc/ssh/sshd_config    日志：code /var/log/secure</span><br><span class="line">* sudo systemctl restart sshd</span><br><span class="line"></span><br><span class="line">* windows上运行ssh-keygen </span><br><span class="line"></span><br><span class="line">三个回车看到生成的公钥和私钥的位置C:\Users\Tutu\.ssh\id_rsa</span><br><span class="line"></span><br><span class="line">* 修改config配置文件</span><br><span class="line"></span><br><span class="line">Host 192.168.6.208</span><br><span class="line"></span><br><span class="line"> HostName 192.168.6.208</span><br><span class="line"></span><br><span class="line"> User root</span><br><span class="line"></span><br><span class="line"> IdentityFile C:\Users\Tutu\.ssh\id_rsa</span><br><span class="line"></span><br><span class="line">* 将id_rsa.pub复制到服务器的~/.ssh文件夹中</span><br><span class="line">* 修改文件/etc/ssh/ssh_config</span><br><span class="line"></span><br><span class="line">PasswordAuthentication no</span><br><span class="line"></span><br><span class="line">PubkeyAuthentication yes</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">systemctl restart sshd</span><br><span class="line"></span><br><span class="line">* 可能需要权限</span><br><span class="line"></span><br><span class="line">chmod 700 ~/.ssh</span><br><span class="line">chmod 600 ~/.ssh/authorized_keys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## ssh慢</span><br><span class="line"></span><br><span class="line">修改/etc/ssh/sshd_config文件</span><br><span class="line"></span><br><span class="line">UseDNS no</span><br><span class="line"></span><br><span class="line">GSSAPIAuthentication no</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">创建实例并初始化  Open  StartAccept  创建TcpClientPtr   HandleAccept  StartRead</span><br><span class="line"></span><br><span class="line">407 行 pClient-&gt;GetBuffer(0); max,0   HandleRead RecvData  GetMessage</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>TcpClientPtr构造<br>	m_maxBufSize &#x3D; 8 * 1024 * 1024;<br>	m_offset &#x3D; 0;&#x2F;&#x2F;总消息长度<br>	m_parseOffset &#x3D; 0;&#x2F;&#x2F;上一条消息的末尾<br>	m_pBuf &#x3D; NULL;&#x2F;&#x2F;堆上分配8MB内存，m_pBuf指向第一个字节<br>	m_state &#x3D; 1;<br>    m_bReadClose &#x3D; false;<br>    m_nSendHeartBeatCount &#x3D; 10;	<br>    m_nRecvHeartBeatCount &#x3D; 0;<br>	Init(m_maxBufSize);<br>	m_prp2dbspcPkt.pktLen &#x3D; sizeof(PRP_DBSPC_RULE_PKT);<br>	m_prp2dbspcPkt.flag &#x3D; DBAGENT_FLAG;<br>	m_prp2dbspcPkt.pktType &#x3D; EU_AGENT_PKT_TYPE_RULE;<br>	m_pBuf &#x3D; new uint8_t[m_maxBufSize];&#x2F;&#x2F;max<br>GetBuffer(0)&#x2F;&#x2F;获得缓冲区的第一个地址<br>	uint8_t* pBuf &#x3D; m_pBuf + m_offset;&#x2F;&#x2F;+0<br>	bufSize &#x3D; m_maxBufSize - m_offset;&#x2F;&#x2F;-0<br>	if max&lt;&#x3D;0 return null<br>	return pbuf 返回地址<br>RecvData(readSize)<br>	m_offset+&#x3D;readSize<br>HaveMessage<br>	msgLen&#x3D;*m_pBuf&#x2F;&#x2F;<br>	if(m_offset &lt; msgLen) return fasle<br>	m_parseOffset&#x3D;0<br>GetMessage（0）<br>	pBuf&#x3D;<br>	<br>	msgSize 数据部分长度经过减去头部数据4</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># CentOS7</span><br><span class="line"></span><br><span class="line">1. vmware安装centos7 </span><br><span class="line"></span><br><span class="line">![image-20250120103952216](./images/Linux系统安装.assets/image-20250120103952216-1740971902830-321.png)</span><br><span class="line"></span><br><span class="line">2. 配置静态网络</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>cd &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;<br>vi ifcfg-ens33 (替换成对呀网卡名称)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>TYPE&#x3D;Ethernet<br>PROXY_METHOD&#x3D;none<br>BROWSER_ONLY&#x3D;no<br>BOOTPROTO&#x3D;static   &#x2F;&#x2F;改<br>DEFROUTE&#x3D;yes<br>IPV4_FAILURE_FATAL&#x3D;no<br>IPV6INIT&#x3D;yes<br>IPV6_AUTOCONF&#x3D;yes<br>IPV6_DEFROUTE&#x3D;yes<br>IPV6_FAILURE_FATAL&#x3D;no<br>IPV6_ADDR_GEN_MODE&#x3D;stable-privacy<br>NAME&#x3D;ens33<br>UUID&#x3D;1647aabe-3d39-4811-b698-b958ac9169f4<br>DEVICE&#x3D;ens33<br>ONBOOT&#x3D;yes               &#x2F;&#x2F;从这往下，改，ip根据自己配置的VMnet8更改<br>IPADDR&#x3D;192.168.248.3<br>NETMASK&#x3D;255.255.255.0<br>GATEWAY&#x3D;192.168.248.2<br>PREFIX&#x3D;24<br>DNS1&#x3D;114.114.114.114<br>DNS2&#x3D;8.8.8.8</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>nmcli c reload<br>nmcli c up ens160                   </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3. 配置yum源</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>备份<br>cp &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo.backup<br>vi &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="CentOS-Base-repo"><a href="#CentOS-Base-repo" class="headerlink" title="CentOS-Base.repo"></a>CentOS-Base.repo</h1><h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="The-mirror-system-uses-the-connecting-IP-address-of-the-client-and-the"><a href="#The-mirror-system-uses-the-connecting-IP-address-of-the-client-and-the" class="headerlink" title="The mirror system uses the connecting IP address of the client and the"></a>The mirror system uses the connecting IP address of the client and the</h1><h1 id="update-status-of-each-mirror-to-pick-mirrors-that-are-updated-to-and"><a href="#update-status-of-each-mirror-to-pick-mirrors-that-are-updated-to-and" class="headerlink" title="update status of each mirror to pick mirrors that are updated to and"></a>update status of each mirror to pick mirrors that are updated to and</h1><h1 id="geographically-close-to-the-client-You-should-use-this-for-CentOS-updates"><a href="#geographically-close-to-the-client-You-should-use-this-for-CentOS-updates" class="headerlink" title="geographically close to the client.  You should use this for CentOS updates"></a>geographically close to the client.  You should use this for CentOS updates</h1><h1 id="unless-you-are-manually-picking-other-mirrors"><a href="#unless-you-are-manually-picking-other-mirrors" class="headerlink" title="unless you are manually picking other mirrors."></a>unless you are manually picking other mirrors.</h1><h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><h1 id="If-the-mirrorlist-does-not-work-for-you-as-a-fall-back-you-can-try-the"><a href="#If-the-mirrorlist-does-not-work-for-you-as-a-fall-back-you-can-try-the" class="headerlink" title="If the mirrorlist&#x3D; does not work for you, as a fall back you can try the"></a>If the mirrorlist&#x3D; does not work for you, as a fall back you can try the</h1><h1 id="remarked-out-baseurl-line-instead"><a href="#remarked-out-baseurl-line-instead" class="headerlink" title="remarked out baseurl&#x3D; line instead."></a>remarked out baseurl&#x3D; line instead.</h1><h1 id="-2"><a href="#-2" class="headerlink" title=""></a></h1><h1 id="-3"><a href="#-3" class="headerlink" title=""></a></h1><p>[os]<br>name&#x3D;Qcloud centos os - $basearch<br>baseurl&#x3D;<a target="_blank" rel="noopener" href="http://mirrors.cloud.tencent.com/centos/$releasever/os/$basearch/">http://mirrors.cloud.tencent.com/centos/$releasever/os/$basearch/</a><br>enabled&#x3D;1<br>gpgcheck&#x3D;1<br>gpgkey&#x3D;<a target="_blank" rel="noopener" href="http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7">http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7</a></p>
+<p>[updates]<br>name&#x3D;Qcloud centos updates - $basearch<br>baseurl&#x3D;<a target="_blank" rel="noopener" href="http://mirrors.cloud.tencent.com/centos/$releasever/updates/$basearch/">http://mirrors.cloud.tencent.com/centos/$releasever/updates/$basearch/</a><br>enabled&#x3D;1<br>gpgcheck&#x3D;1<br>gpgkey&#x3D;<a target="_blank" rel="noopener" href="http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7">http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7</a></p>
+<p>[centosplus]<br>name&#x3D;Qcloud centosplus - $basearch<br>baseurl&#x3D;<a target="_blank" rel="noopener" href="http://mirrors.cloud.tencent.com/centos/$releasever/centosplus/$basearch/">http://mirrors.cloud.tencent.com/centos/$releasever/centosplus/$basearch/</a><br>enabled&#x3D;0<br>gpgcheck&#x3D;1<br>gpgkey&#x3D;<a target="_blank" rel="noopener" href="http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7">http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7</a></p>
+<p>[cr]<br>name&#x3D;Qcloud centos cr - $basearch<br>baseurl&#x3D;<a target="_blank" rel="noopener" href="http://mirrors.cloud.tencent.com/centos/$releasever/cr/$basearch/">http://mirrors.cloud.tencent.com/centos/$releasever/cr/$basearch/</a><br>enabled&#x3D;0<br>gpgcheck&#x3D;1<br>gpgkey&#x3D;<a target="_blank" rel="noopener" href="http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7">http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7</a></p>
+<p>[extras]<br>name&#x3D;Qcloud centos extras - $basearch<br>baseurl&#x3D;<a target="_blank" rel="noopener" href="http://mirrors.cloud.tencent.com/centos/$releasever/extras/$basearch/">http://mirrors.cloud.tencent.com/centos/$releasever/extras/$basearch/</a><br>enabled&#x3D;1<br>gpgcheck&#x3D;1<br>gpgkey&#x3D;<a target="_blank" rel="noopener" href="http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7">http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7</a></p>
+<p>[fasttrack]<br>name&#x3D;Qcloud centos fasttrack - $basearch<br>baseurl&#x3D;<a target="_blank" rel="noopener" href="http://mirrors.cloud.tencent.com/centos/$releasever/fasttrack/$basearch/">http://mirrors.cloud.tencent.com/centos/$releasever/fasttrack/$basearch/</a><br>enabled&#x3D;0<br>gpgcheck&#x3D;1<br>gpgkey&#x3D;<a target="_blank" rel="noopener" href="http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7">http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>yum clean all<br>yum makecache    </p>
+<pre><code>
+</code></pre>
+
+  </div>
+  
+  
+    
+    <div class='footer'>
+       <!-- 参考资料、相关资料等 -->
+      
+       <!-- 相关文章 -->
+      
+      <!-- 版权声明组件 -->
+      
+      <!-- 打赏组件 -->
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-03T20:45:53+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2025年3月3日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2025/03/02/source/Linux/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/&title=Linux系统安装 - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qq.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2025/03/02/source/Linux/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/&title=Linux系统安装 - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qzone.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2025/03/02/source/Linux/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/&title=Linux系统安装 - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/weibo.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2025/03/02/source/%E5%88%B7%E9%A2%98/LeetCode%E4%B8%93%E9%A2%98/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>LeetCode算法总结</p>
+          <p class='content'>#链表
+总结递归
+链表方向转换+nullptr不断向前+尾节点成为头节点
+123456789101112class Solution &#123;    public:    ListNode*...</p>
+        </a>
+      
+      
+        <a class='next' href='/2025/03/02/source/Linux/Linux/'>
+          <p class='title'>Linux命令<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>命令
+防火墙
+
+查看防火墙状态 firewall-cmd –state
+关闭防火墙 systemctl stop firewalld
+
+查看端口信息
+
+ss -tuln 查看所有端口
+
+-t 表...</p>
+        </a>
+      
+    </div>
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
+  
+
+
+  <article class="post white-box shadow floatable blur" id="comments">
+    <span hidden>
+      <meta itemprop="discussionUrl" content="/2025/03/02/source/Linux/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/index.html#comments">
+    </span>
+    <p ct><i class='fa-solid fa-comments'></i> 评论</p>
+    
+
+    <div id="layoutHelper-comments"></div>
+
+  </article>
+
+
+
+
+
+
+</div>
+<aside id='l_side' itemscope itemtype="http://schema.org/WPSideBar">
+  
+
+  
+    
+    
+      
+    
+  
+
+
+<div class="widget-sticky pjax">
+
+  
+  
+
+
+  <section class="widget toc-wrapper desktop mobile " id="toc-div" >
+    
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu%E5%AE%89%E8%A3%85g"><span class="toc-text">Ubuntu安装g++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%BC%96%E8%AF%91"><span class="toc-text">命令行编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">快捷键</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E9%A2%91%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="toc-text">高频使用技巧</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cmake-windows-%E4%B8%8D%E7%94%A8%E7%9C%8B"><span class="toc-text">cmake windows(不用看)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C"><span class="toc-text">运行</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cmake-linux"><span class="toc-text">cmake linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-text">安装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMake%E5%B8%B8%E7%94%A8%E5%8F%98%E9%87%8F"><span class="toc-text">CMake常用变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMake%E7%BC%96%E8%AF%91%E5%B7%A5%E7%A8%8B"><span class="toc-text">CMake编译工程</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+  
+
+</div>
+
+
+<!-- 没有 pjax 占位会报错 万恶的 pjax -->
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <!-- Custom Files side begin -->
+  
+  <!-- Custom Files side end -->
+</aside>
+
+
+
+          <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+<pjax>
+<script>
+  window.pdata={}
+  pdata.ispage=true;
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+  pdata.commentConfig={};
+  //  see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs
+  
+    // header
+    var l_header=document.getElementById("l_header");
+    
+    l_header.classList.remove("show");
+    
+    
+      // cover
+      var cover_wrapper=document.querySelector('#l_cover .cover-wrapper');
+      var scroll_down=document.getElementById('scroll-down');
+      cover_wrapper.id="half";
+      cover_wrapper.style.display="";
+      scroll_down.style.display="none";
+    
+  
+</script>
+</pjax>
+        </div>
+        
+  
+  <footer class="footer clearfix"  itemscope itemtype="http://schema.org/WPFooter">
+    <br><br>
+    
+      
+        
+          <div><p><span id="lc-sv">博客内容遵循 tutulp-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</span></p>
+</div>
+        
+      
+    
+      
+        本站使用
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/#5.8.0" target="_blank" class="codename">Volantis</a>
+        作为主题
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © since 2025 tutulp</a></p>
+
+        </div>
+      
+    
+    <!-- Custom Files footer begin-->
+    
+    <!-- Custom Files footer end-->
+  </footer>
+
+
+        <a id="s-top" class="fa-solid fa-arrow-up fa-fw" href="/" onclick="return false;" title="top"></a>
+      </div>
+    </div>
+    <div>
+      <script>
+  /******************** volantis.dom ********************************/
+  // 页面选择器 将dom对象缓存起来 see: /source/js/app.js etc.
+  volantis.dom.bodyAnchor = volantis.dom.$(document.getElementById("safearea")); // 页面主体
+  volantis.dom.topBtn = volantis.dom.$(document.getElementById('s-top')); // 向上
+  volantis.dom.wrapper = volantis.dom.$(document.getElementById('wrapper')); // 整个导航栏
+  volantis.dom.coverAnchor = volantis.dom.$(document.querySelector('#l_cover .cover-wrapper')); // 1个
+  volantis.dom.switcher = volantis.dom.$(document.querySelector('#l_header .switcher .s-search')); // 搜索按钮   移动端 1个
+  volantis.dom.header = volantis.dom.$(document.getElementById('l_header')); // 移动端导航栏
+  volantis.dom.search = volantis.dom.$(document.querySelector('#l_header .m_search')); // 搜索框 桌面端 移动端 1个
+  volantis.dom.mPhoneList = volantis.dom.$(document.querySelectorAll('#l_header .m-phone .list-v')); //  手机端 子菜单 多个
+</script>
+
+<script>
+  
+  volantis.css("https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fortawesome/fontawesome-free/css/all.min.css");
+  
+  
+  
+</script>
+
+<!-- required -->
+
+
+<!-- internal -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+<!-- rightmenu要在darkmode之前（ToggleButton） darkmode要在comments之前（volantis.dark.push）-->
+
+
+
+<script>
+  function loadIssuesJS() {
+    
+      const sites_api = document.getElementById('sites-api');
+      if (sites_api != undefined && typeof SitesJS === 'undefined') {
+        volantis.js("/js/plugins/tags/sites.js")
+      }
+    
+    
+      const friends_api = document.getElementById('friends-api');
+      if (friends_api != undefined && typeof FriendsJS === 'undefined') {
+        volantis.js("/js/plugins/tags/friends.js")
+      }
+    
+    
+      const contributors_api = document.getElementById('contributors-api');
+      if (contributors_api != undefined && typeof ContributorsJS === 'undefined') {
+        volantis.js("/js/plugins/tags/contributors.js")
+      }
+    
+  };
+  loadIssuesJS()
+  volantis.pjax.push(()=>{
+    loadIssuesJS();
+  })
+
+</script>
+
+
+
+
+  <script defer src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/vanilla-lazyload/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
+  
+
+<script>
+  window.FPConfig = {
+	delay: 0,
+	ignoreKeywords: ["#"],
+	maxRPS: 6,
+	hoverDelay: 0
+  };
+</script>
+<script defer src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/flying-pages/flying-pages.min.js"></script>
+
+
+
+
+
+
+
+
+
+      <script>
+  volantis.layoutHelper("comments",`<div id="giscus_container"></div>`)
+
+  volantis.giscus = {};
+
+  function check_giscus() {
+    if (volantis.dark.mode === "dark") {
+      volantis.giscus.Theme = 'dark';
+    } else {
+      volantis.giscus.Theme = 'light';
+    }
+
+    return document.getElementById("giscus_container");
+  }
+
+  function pjax_giscus() {
+    const HEAD = check_giscus();
+    if (!HEAD) return;
+    let cfg = Object.assign({"theme":{"light":"light","dark":"dark"}},pdata.commentConfig)
+    const script = document.createElement('script');
+    script.setAttribute('src', 'https://giscus.app/client.js');
+    Object.keys(cfg).forEach(k=>{
+      if (k != "theme") {
+        script.setAttribute('data-'+k, cfg[k]);
+      }
+    })
+    script.setAttribute('data-theme', volantis.giscus.Theme);
+    script.setAttribute('crossorigin', "anonymous");
+    HEAD.appendChild(script);
+  }
+
+  function dark_giscus() {
+    const HEAD = check_giscus();
+    if (!HEAD) return;
+
+    const message = {
+      setConfig: {
+        theme: volantis.giscus.Theme
+      }
+    };
+    const giscusIframe = document.querySelector('iframe.giscus-frame');
+    giscusIframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+  }
+  pjax_giscus();
+  volantis.pjax.push(pjax_giscus);
+  volantis.dark.push(dark_giscus);
+</script>
+
+    
+
+
+
+
+
+<!-- optional -->
+
+  <script>
+  const SearchServiceDataPathRoot = ("/" || "/").endsWith("/") ?
+    "/" || "/" :
+    "//" || "/";
+  const SearchServiceDataPath = SearchServiceDataPathRoot + "content.json";
+
+  function loadSearchScript() {
+    // see: layout/_partial/scripts/_ctrl/cdnCtrl.ejs
+    return volantis.js("/js/search/hexo.js");
+  }
+
+  function loadSearchService() {
+    loadSearchScript();
+    document.querySelectorAll(".input.u-search-input").forEach((e) => {
+      e.removeEventListener("focus", loadSearchService, false);
+    });
+
+    document.querySelectorAll(".u-search-form").forEach((e) => {
+      e.addEventListener("submit", (event) => {
+        event.preventDefault();
+      }, false);
+    });
+  }
+
+  // 打开并搜索 字符串 s
+  function OpenSearch(s) {
+    if (typeof SearchService === 'undefined')
+      loadSearchScript().then(() => {
+        SearchService.setQueryText(s);
+        SearchService.search();
+      });
+    else {
+      SearchService.setQueryText(s);
+      SearchService.search();
+    }
+  }
+
+  // 访问含有 ?s=xxx  的链接时打开搜索 // 与搜索引擎 structured data 相关: /scripts/helpers/structured-data/lib/config.js
+  if (window.location.search && /^\?s=/g.test(window.location.search)) {
+    let queryText = decodeURI(window.location.search)
+      .replace(/\ /g, "-")
+      .replace(/^\?s=/g, "");
+    OpenSearch(queryText);
+  }
+
+  // 搜索输入框获取焦点时加载搜索
+  document.querySelectorAll(".input.u-search-input").forEach((e) => {
+    e.addEventListener("focus", loadSearchService, false);
+  });
+</script>
+
+
+
+
+
+
+
+  <script>
+
+
+
+  function pjax_highlightjs_copyCode(){
+    if (!(document.querySelector(".highlight .code pre") ||
+      document.querySelector(".article pre code"))) {
+      return;
+    }
+    VolantisApp.utilCopyCode(".highlight .code pre, .article pre code")
+  }
+  volantis.requestAnimationFrame(pjax_highlightjs_copyCode)
+  volantis.pjax.push(pjax_highlightjs_copyCode)
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+  function load_swiper() {
+    if (!document.querySelectorAll(".swiper-container")[0]) return;
+    volantis.css("https://unpkg.com/volantis-static@0.0.1654736714924/libs/swiper/swiper-bundle.min.css");
+    volantis.js("https://unpkg.com/volantis-static@0.0.1654736714924/libs/swiper/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    volantis.swiper = new Swiper('.swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  }
+
+  volantis.pjax.push(() => {
+    if (!document.querySelectorAll(".swiper-container")[0]) return;
+    if (typeof volantis.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+
+
+<!-- pjax 标签必须存在于所有页面 否则 pjax error -->
+<pjax>
+
+</pjax>
+
+<script>
+  function listennSidebarTOC() {
+    const navItems = document.querySelectorAll(".toc li");
+    if (!navItems.length) return;
+    let targets = []
+    const sections = [...navItems].map((element) => {
+      const link = element.querySelector(".toc-link");
+      const target = document.getElementById(
+        decodeURI(link.getAttribute("href")).replace("#", "")
+      );
+      targets.push(target)
+      // 解除 a 标签 href 的 锚点定位, a 标签 href 的 锚点定位 会随机启用?? 产生错位???
+      link.setAttribute("onclick","return false;")
+      link.setAttribute("toc-action","toc-"+decodeURI(link.getAttribute("href")).replace("#", ""))
+      link.setAttribute("href","/")
+      // 配置 点击 触发新的锚点定位
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        // 这里的 addTop 是通过错位使得 toc 自动展开.
+        volantis.scroll.to(target,{addTop: 5, observer:true})
+        // Anchor id
+        history.pushState(null, document.title, "#" + target.id);
+      });
+      return target;
+    });
+
+    function activateNavByIndex(target) {
+      if (target.classList.contains("active-current")) return;
+
+      document.querySelectorAll(".toc .active").forEach((element) => {
+        element.classList.remove("active", "active-current");
+      });
+      target.classList.add("active", "active-current");
+      let parent = target.parentNode;
+      while (!parent.matches(".toc")) {
+        if (parent.matches("li")) parent.classList.add("active");
+        parent = parent.parentNode;
+      }
+    }
+
+    // 方案一：
+    volantis.activateNavIndex=0
+    activateNavByIndex(navItems[volantis.activateNavIndex])
+    volantis.scroll.push(()=>{
+      if (targets[0].getBoundingClientRect().top >= 0) {
+        volantis.activateNavIndex = 0
+      }else if (targets[targets.length-1].getBoundingClientRect().top < 0) {
+        volantis.activateNavIndex = targets.length-1
+      } else {
+        for (let index = 0; index < targets.length; index++) {
+          const target0 = targets[index];
+          const target1 = targets[(index+1)%targets.length];
+          if (target0.getBoundingClientRect().top < 0&&target1.getBoundingClientRect().top >= 0) {
+            volantis.activateNavIndex=index
+            break;
+          }
+        }
+      }
+      activateNavByIndex(navItems[volantis.activateNavIndex])
+    })
+
+    // 方案二：
+    // IntersectionObserver 不是完美精确到像素级别 也不是低延时性的
+    // function findIndex(entries) {
+    //   let index = 0;
+    //   let entry = entries[index];
+    //   if (entry.boundingClientRect.top > 0) {
+    //     index = sections.indexOf(entry.target);
+    //     return index === 0 ? 0 : index - 1;
+    //   }
+    //   for (; index < entries.length; index++) {
+    //     if (entries[index].boundingClientRect.top <= 0) {
+    //       entry = entries[index];
+    //     } else {
+    //       return sections.indexOf(entry.target);
+    //     }
+    //   }
+    //   return sections.indexOf(entry.target);
+    // }
+    // function createIntersectionObserver(marginTop) {
+    //   marginTop = Math.floor(marginTop + 10000);
+    //   let intersectionObserver = new IntersectionObserver(
+    //     (entries, observe) => {
+    //       let scrollHeight = document.documentElement.scrollHeight;
+    //       if (scrollHeight > marginTop) {
+    //         observe.disconnect();
+    //         createIntersectionObserver(scrollHeight);
+    //         return;
+    //       }
+    //       let index = findIndex(entries);
+    //       activateNavByIndex(navItems[index]);
+    //     }, {
+    //       rootMargin: marginTop + "px 0px -100% 0px",
+    //       threshold: 0,
+    //     }
+    //   );
+    //   sections.forEach((element) => {
+    //     element && intersectionObserver.observe(element);
+    //   });
+    // }
+    // createIntersectionObserver(document.documentElement.scrollHeight);
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    volantis.requestAnimationFrame(listennSidebarTOC)
+  });
+  document.addEventListener("pjax:success", ()=>{
+    volantis.requestAnimationFrame(listennSidebarTOC)
+  });
+</script>
+
+
+
+<script>
+  document.onreadystatechange = function () {
+    if (document.readyState == 'complete') {
+      // 页面加载完毕 样式加载失败，或是当前网速慢，或是开启了省流模式
+      const { saveData, effectiveType } = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {}
+      if (getComputedStyle(document.querySelector("#safearea"), null)["display"] == "none" || saveData || /2g/.test(effectiveType)) {
+        document.querySelectorAll(".reveal").forEach(function (e) {
+          e.style["opacity"] = "1";
+        });
+        document.querySelector("#safearea").style["display"] = "block";
+      }
+    }
+  }
+</script>
+
+
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/Linux/","name":"Linux"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2025/03/02/source/Linux/Linux系统安装/","name":"Linux系统安装"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Linux系统安装","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2025/03/02/source/Linux/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2025/03/02/source/Linux/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/","wordCount":0,"datePublished":"2025-03-01T16:00:00.000Z","dateModified":"2025-03-03T12:45:53.386Z","articleSection":"Linux","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+
+
+
+      
+        <!--
+  pjax重载区域接口：
+  1.  <pjax></pjax> 标签 pjax 标签必须存在于所有页面 否则 pjax error
+  2.  script[data-pjax]
+  3.  .pjax-reload script
+  4.  .pjax
+-->
+
+
+
+<script src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/pjax/pjax.min.js"></script>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox]):not([onclick="return false;"]):not([onclick="return!1"]):not([target="_blank"]):not([target="view_window"]):not([href$=".xml"])',
+        selectors: [
+          "head title",
+          "head meta[name=keywords]",
+          "head meta[name=description]",
+          
+          "#l_main",
+          "#pjax-header-nav-list",
+          ".pjax",
+          "pjax", // <pjax></pjax> 标签
+          "script[data-pjax], .pjax-reload script" // script标签添加data-pjax 或 script标签外层添加.pjax-reload 的script代码段重载
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000,
+        
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
+      volantis.pjax.method.send.start();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
+      volantis.pjax.method.complete.start();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      if(volantis.debug) {
+        console.error(e);
+        console.log('pjax error: \n' + JSON.stringify(e));
+      }else{
+        // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+        volantis.pjax.method.error.start();
+        window.location.href = e.triggerElement.href;
+      }
+    });
+</script>
+
+      
+    </div>
+    <!-- import body_end begin-->
+    <!-- import body_end end-->
+    <!-- Custom Files bodyEnd begin-->
+    
+    <!-- Custom Files bodyEnd end-->
+    <!-- front-matter body_end begin -->
+    <!-- front-matter body_end end -->
+  </body>
+</html>

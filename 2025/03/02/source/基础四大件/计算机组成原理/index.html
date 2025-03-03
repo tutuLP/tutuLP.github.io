@@ -1,0 +1,4016 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/#5.8.0'>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="Volantis" content="5.8.0">
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+  <link rel="canonical" href="http://example.com/2025/03/02/source/基础四大件/计算机组成原理/"/>
+  <!-- 渲染优化 -->
+    <meta http-equiv='x-dns-prefetch-control' content='on' />
+      <link rel='dns-prefetch' href='https://unpkg.com'>
+      <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' https:; block-all-mixed-content; base-uri 'self' https:; form-action 'self' https:; worker-src 'self' https:; connect-src 'self' https: *; img-src 'self' data: https: *; media-src 'self' https: *; font-src 'self' data: https: *; frame-src 'self' https: *; manifest-src 'self' https: *; child-src https:; script-src 'self' https: 'unsafe-inline' *; style-src 'self' https: 'unsafe-inline' *; ">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <!-- import head_begin begin -->
+  <!-- import head_begin end -->
+  <!-- Custom Files headBegin begin-->
+  
+  <!-- Custom Files headBegin end-->
+  <!-- front-matter head_begin begin -->
+  <!-- front-matter head_begin end -->
+  <link rel="preload" href="/css/style.css" as="style">
+  <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <!-- feed -->
+  <!-- 页面元数据 -->
+  <title>计算机组成原理 - tutulp's blog</title>
+  <meta name="keywords" content="null">
+  <meta desc name="description" content="tutulp的博客网站 - tutulp - tutulp's blog">
+  
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机组成原理">
+<meta property="og:url" content="http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="tutulp&#39;s blog">
+<meta property="og:description" content="计算机系统概述##计算机发展历程 什么是计算机系统？  硬件+软件(系统软件 应用软件) 硬件的发展  第一台计算机 ENIAC 1946 冯诺依曼顾问 逻辑元件 1.8w个电子管 机器语言编程-纸带 有孔为0 bug：小虫子 第二代 贝尔实验室发明晶体管 面向过程语言：FORTRAN 操作系统 第三代 中小规模集成电路 高级语言 分时操作系统 第四代 大规模，超大规模集成电路  摩尔定律：集成电">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2025-03-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-03T12:45:53.375Z">
+<meta property="article:author" content="tutulp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+  <style>
+    /* 首屏样式 */
+    #safearea {
+  display: none;
+}
+:root {
+  --color-site-body: #f4f4f4;
+  --color-site-bg: #f4f4f4;
+  --color-site-inner: #fff;
+  --color-site-footer: #666;
+  --color-card: #fff;
+  --color-text: #444;
+  --color-block: #f6f6f6;
+  --color-inlinecode: #c74f00;
+  --color-codeblock: #fff7ea;
+  --color-h1: #3a3a3a;
+  --color-h2: #3a3a3a;
+  --color-h3: #333;
+  --color-h4: #444;
+  --color-h5: #555;
+  --color-h6: #666;
+  --color-p: #444;
+  --color-list: #666;
+  --color-list-hl: #30ad91;
+  --color-meta: #888;
+  --color-read-bkg: #e0d8c8;
+  --color-read-post: #f8f1e2;
+  --color-copyright-bkg: #f5f5f5;
+}
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+*::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+*::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: #3dd9b6;
+  cursor: pointer;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #ff5722;
+}
+html {
+  color: var(--color-text);
+  width: 100%;
+  height: 100%;
+  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-size: 16px;
+}
+html >::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+html >::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+html >::-webkit-scrollbar-thumb {
+  background: #54b5a0 linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+  cursor: pointer;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+html >::-webkit-scrollbar-thumb:hover {
+  background: #54b5a0 linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+}
+body {
+  background-color: var(--color-site-body);
+  text-rendering: optimizelegibility;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body.modal-active {
+  overflow: hidden;
+}
+@media screen and (max-width: 680px) {
+  body.modal-active {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+a {
+  color: #2092ec;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+a:hover {
+  color: #ff5722;
+}
+a:active,
+a:hover {
+  outline: 0;
+}
+ul,
+ol {
+  padding-left: 0;
+}
+ul li,
+ol li {
+  list-style: none;
+}
+header {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+img {
+  border: 0;
+  background: none;
+  max-width: 100%;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  height: 0;
+  border: 0;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  border-bottom: 1px solid rgba(68,68,68,0.1);
+}
+button,
+input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+button {
+  overflow: visible;
+  text-transform: none;
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+@supports (backdrop-filter: blur(20px)) {
+  .blur {
+    background: rgba(255,255,255,0.9) !important;
+    backdrop-filter: saturate(200%) blur(20px);
+  }
+}
+.shadow {
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+}
+.shadow.floatable {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.shadow.floatable:hover {
+  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.1), 0 4px 8px 0px rgba(0,0,0,0.1), 0 8px 16px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 2px 4px 0px rgba(0,0,0,0.1), 0 4px 8px 0px rgba(0,0,0,0.1), 0 8px 16px 0px rgba(0,0,0,0.1);
+}
+#l_cover {
+  min-height: 64px;
+}
+.cover-wrapper {
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  height: 100vh;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -khtml-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -o-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  color: var(--color-site-inner);
+  padding: 0 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: -100px;
+}
+.cover-wrapper .cover-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+}
+.cover-wrapper .cover-bg.lazyload:not(.loaded) {
+  opacity: 0;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+}
+.cover-wrapper .cover-bg.lazyload.loaded {
+  animation-delay: 0s;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+}
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.cover-wrapper .cover-body {
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.cover-wrapper#full {
+  height: calc(100vh + 100px);
+  padding-bottom: 100px;
+}
+.cover-wrapper#half {
+  max-height: 640px;
+  min-height: 400px;
+  height: calc(36vh - 64px + 200px);
+}
+.cover-wrapper #scroll-down {
+  width: 100%;
+  height: 64px;
+  position: absolute;
+  bottom: 100px;
+  text-align: center;
+  cursor: pointer;
+}
+.cover-wrapper #scroll-down .scroll-down-effects {
+  color: #fff;
+  font-size: 24px;
+  line-height: 64px;
+  position: absolute;
+  width: 24px;
+  left: calc(50% - 12px);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  animation: scroll-down-effect 1.5s infinite;
+  -webkit-animation: scroll-down-effect 1.5s infinite;
+  -khtml-animation: scroll-down-effect 1.5s infinite;
+  -moz-animation: scroll-down-effect 1.5s infinite;
+  -o-animation: scroll-down-effect 1.5s infinite;
+  -ms-animation: scroll-down-effect 1.5s infinite;
+}
+@-moz-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-webkit-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-o-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.cover-wrapper .cover-body {
+  margin-top: 64px;
+  margin-bottom: 100px;
+}
+.cover-wrapper .cover-body,
+.cover-wrapper .cover-body .top,
+.cover-wrapper .cover-body .bottom {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  max-width: 100%;
+}
+.cover-wrapper .cover-body .bottom {
+  margin-top: 32px;
+}
+.cover-wrapper .cover-body .title {
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+  font-size: 3.125rem;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.cover-wrapper .cover-body .subtitle {
+  font-size: 20px;
+}
+.cover-wrapper .cover-body .logo {
+  max-height: 120px;
+  max-width: calc(100% - 4 * 16px);
+}
+@media screen and (min-height: 1024px) {
+  .cover-wrapper .cover-body .title {
+    font-size: 3rem;
+  }
+  .cover-wrapper .cover-body .subtitle {
+    font-size: 1.05rem;
+  }
+  .cover-wrapper .cover-body .logo {
+    max-height: 150px;
+  }
+}
+.cover-wrapper .cover-body .m_search {
+  position: relative;
+  max-width: calc(100% - 16px);
+  width: 320px;
+  vertical-align: middle;
+}
+.cover-wrapper .cover-body .m_search .form {
+  position: relative;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  width: 100%;
+}
+.cover-wrapper .cover-body .m_search .icon,
+.cover-wrapper .cover-body .m_search .input {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.cover-wrapper .cover-body .m_search .icon {
+  position: absolute;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  line-height: 2.5rem;
+  width: 32px;
+  top: 0;
+  left: 5px;
+  color: rgba(68,68,68,0.75);
+}
+.cover-wrapper .cover-body .m_search .input {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  height: 2.5rem;
+  width: 100%;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-size: 0.875rem;
+  -webkit-appearance: none;
+  padding-left: 36px;
+  border-radius: 1.4rem;
+  -webkit-border-radius: 1.4rem;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  border: none;
+  color: var(--color-text);
+}
+@media screen and (max-width: 500px) {
+  .cover-wrapper .cover-body .m_search .input {
+    padding-left: 36px;
+  }
+}
+.cover-wrapper .cover-body .m_search .input:hover {
+  background: rgba(255,255,255,0.8);
+}
+.cover-wrapper .cover-body .m_search .input:focus {
+  background: #fff;
+}
+.cover-wrapper .list-h {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -khtml-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  align-items: stretch;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.cover-wrapper .list-h a {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1 0;
+  -ms-flex: 1 0;
+  flex: 1 0;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  font-weight: 600;
+}
+.cover-wrapper .list-h a img {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  margin: 4px;
+  min-width: 40px;
+  max-width: 44px;
+}
+@media screen and (max-width: 768px) {
+  .cover-wrapper .list-h a img {
+    min-width: 36px;
+    max-width: 40px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .cover-wrapper .list-h a img {
+    margin: 2px 4px;
+    min-width: 32px;
+    max-width: 36px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .cover-wrapper .list-h a img {
+    min-width: 28px;
+    max-width: 32px;
+  }
+}
+.cover-wrapper {
+  max-width: 100%;
+}
+.cover-wrapper.search .bottom .menu {
+  margin-top: 16px;
+}
+.cover-wrapper.search .bottom .menu .list-h a {
+  white-space: nowrap;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  align-items: baseline;
+  padding: 2px;
+  margin: 4px;
+  color: var(--color-site-inner);
+  opacity: 0.75;
+  -webkit-opacity: 0.75;
+  -moz-opacity: 0.75;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  border-bottom: 2px solid transparent;
+}
+.cover-wrapper.search .bottom .menu .list-h a i {
+  margin-right: 4px;
+}
+.cover-wrapper.search .bottom .menu .list-h a p {
+  font-size: 0.9375rem;
+}
+.cover-wrapper.search .bottom .menu .list-h a:hover,
+.cover-wrapper.search .bottom .menu .list-h a.active,
+.cover-wrapper.search .bottom .menu .list-h a:active {
+  opacity: 1;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  border-bottom: 2px solid var(--color-site-inner);
+}
+@font-face {
+  font-family: 'UbuntuMono';
+  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-weight: 'normal';
+  font-style: 'normal';
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Varela Round';
+  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf");
+  font-weight: 'normal';
+  font-style: 'normal';
+  font-display: swap;
+}
+.l_header {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  width: 100%;
+  height: 64px;
+  background: var(--color-card);
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+}
+.l_header.auto {
+  transition: opacity 0.4s ease;
+  -webkit-transition: opacity 0.4s ease;
+  -khtml-transition: opacity 0.4s ease;
+  -moz-transition: opacity 0.4s ease;
+  -o-transition: opacity 0.4s ease;
+  -ms-transition: opacity 0.4s ease;
+  visibility: hidden;
+}
+.l_header.auto.show {
+  opacity: 1 !important;
+  -webkit-opacity: 1 !important;
+  -moz-opacity: 1 !important;
+  visibility: visible;
+}
+.l_header .container {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+.l_header #wrapper {
+  height: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.l_header #wrapper .nav-main,
+.l_header #wrapper .nav-sub {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -khtml-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -o-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -khtml-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -o-justify-content: space-between;
+  -ms-justify-content: space-between;
+  align-items: center;
+}
+.l_header #wrapper .nav-main {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.l_header #wrapper.sub .nav-main {
+  transform: translateY(-64px);
+  -webkit-transform: translateY(-64px);
+  -khtml-transform: translateY(-64px);
+  -moz-transform: translateY(-64px);
+  -o-transform: translateY(-64px);
+  -ms-transform: translateY(-64px);
+}
+.l_header #wrapper .nav-sub {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  opacity: 0;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  height: 64px;
+  width: calc(100% - 2 * 16px);
+  position: absolute;
+}
+.l_header #wrapper .nav-sub ::-webkit-scrollbar {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+}
+@media screen and (min-width: 2048px) {
+  .l_header #wrapper .nav-sub {
+    max-width: 55vw;
+    margin: auto;
+  }
+}
+.l_header #wrapper.sub .nav-sub {
+  opacity: 1;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+}
+.l_header #wrapper .title {
+  position: relative;
+  color: var(--color-text);
+  padding-left: 24px;
+  max-height: 64px;
+}
+.l_header #wrapper .nav-main .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  line-height: 64px;
+  padding: 0 24px;
+  font-size: 1.25rem;
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+}
+.l_header #wrapper .nav-main .title img {
+  height: 64px;
+}
+.l_header .nav-sub {
+  max-width: 1080px;
+  margin: auto;
+}
+.l_header .nav-sub .title {
+  font-weight: bold;
+  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  line-height: 1.2;
+  max-height: 64px;
+  white-space: normal;
+  flex-shrink: 1;
+}
+.l_header .switcher {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  line-height: 64px;
+  align-items: center;
+}
+.l_header .switcher .s-toc {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .l_header .switcher .s-toc {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    display: flex;
+  }
+}
+.l_header .switcher >li {
+  height: 48px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  margin: 2px;
+}
+@media screen and (max-width: 500px) {
+  .l_header .switcher >li {
+    margin: 0 1px;
+    height: 48px;
+  }
+}
+.l_header .switcher >li >a {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0.85em 1.1em;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  border: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  color: #3dd9b6;
+}
+.l_header .switcher >li >a:hover {
+  border: none;
+}
+.l_header .switcher >li >a.active,
+.l_header .switcher >li >a:active {
+  border: none;
+  background: var(--color-site-bg);
+}
+@media screen and (max-width: 500px) {
+  .l_header .switcher >li >a {
+    width: 36px;
+    height: 48px;
+  }
+}
+.l_header .nav-sub .switcher {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+}
+.l_header .m_search {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  height: 64px;
+  width: 240px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+@media screen and (max-width: 1024px) {
+  .l_header .m_search {
+    width: 44px;
+    min-width: 44px;
+  }
+  .l_header .m_search input::placeholder {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+  }
+  .l_header .m_search:hover {
+    width: 240px;
+  }
+  .l_header .m_search:hover input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@media screen and (min-width: 500px) {
+  .l_header .m_search:hover .input {
+    width: 100%;
+  }
+  .l_header .m_search:hover .input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search {
+    min-width: 0;
+  }
+  .l_header .m_search input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.l_header .m_search .form {
+  position: relative;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.l_header .m_search .icon {
+  position: absolute;
+  width: 36px;
+  left: 5px;
+  color: var(--color-meta);
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search .icon {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: none;
+  }
+}
+.l_header .m_search .input {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: 1.3;
+  width: 100%;
+  color: var(--color-text);
+  background: #fafafa;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding-left: 40px;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+@media screen and (min-width: 500px) {
+  .l_header .m_search .input:focus {
+    box-shadow: 0 4px 8px 0px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 4px 8px 0px rgba(0,0,0,0.1);
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search .input {
+    background: var(--color-block);
+    padding-left: 8px;
+    border: none;
+  }
+  .l_header .m_search .input:hover,
+  .l_header .m_search .input:focus {
+    border: none;
+  }
+}
+@media (max-width: 500px) {
+  .l_header .m_search {
+    left: 0;
+    width: 0;
+    overflow: hidden;
+    position: absolute;
+    background: #fff;
+    transition: all 0.28s ease;
+    -webkit-transition: all 0.28s ease;
+    -khtml-transition: all 0.28s ease;
+    -moz-transition: all 0.28s ease;
+    -o-transition: all 0.28s ease;
+    -ms-transition: all 0.28s ease;
+  }
+  .l_header .m_search .input {
+    border-radius: 32px;
+    -webkit-border-radius: 32px;
+    margin-left: 16px;
+    padding-left: 16px;
+  }
+  .l_header.z_search-open .m_search {
+    width: 100%;
+  }
+  .l_header.z_search-open .m_search .input {
+    width: calc(100% - 120px);
+  }
+}
+ul.m-pc >li>a {
+  color: inherit;
+  border-bottom: 2px solid transparent;
+}
+ul.m-pc >li>a:active,
+ul.m-pc >li>a.active {
+  border-bottom: 2px solid #3dd9b6;
+}
+ul.m-pc li:hover >ul.list-v,
+ul.list-v li:hover >ul.list-v {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+ul.nav-list-h {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  align-items: stretch;
+}
+ul.nav-list-h>li {
+  position: relative;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  height: 100%;
+  line-height: 2.4;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+ul.nav-list-h>li >a {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 600;
+}
+ul.list-v {
+  z-index: 1;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  position: absolute;
+  background: var(--color-card);
+  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.08), 0 4px 8px 0px rgba(0,0,0,0.08), 0 8px 16px 0px rgba(0,0,0,0.08);
+  -webkit-box-shadow: 0 2px 4px 0px rgba(0,0,0,0.08), 0 4px 8px 0px rgba(0,0,0,0.08), 0 8px 16px 0px rgba(0,0,0,0.08);
+  margin-top: -6px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  padding: 8px 0;
+}
+ul.list-v.show {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+ul.list-v hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+ul.list-v >li {
+  white-space: nowrap;
+  word-break: keep-all;
+}
+ul.list-v >li.header {
+  font-size: 0.78125rem;
+  font-weight: bold;
+  line-height: 2em;
+  color: var(--color-meta);
+  margin: 8px 16px 4px;
+}
+ul.list-v >li.header i {
+  margin-right: 8px;
+}
+ul.list-v >li ul {
+  margin-left: 0;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  margin-top: -40px;
+}
+ul.list-v .aplayer-container {
+  min-height: 64px;
+  padding: 6px 16px;
+}
+ul.list-v >li>a {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  color: var(--color-list);
+  font-size: 0.875rem;
+  font-weight: bold;
+  line-height: 36px;
+  padding: 0 20px 0 16px;
+  text-overflow: ellipsis;
+  margin: 0 4px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+@media screen and (max-width: 1024px) {
+  ul.list-v >li>a {
+    line-height: 40px;
+  }
+}
+ul.list-v >li>a >i {
+  margin-right: 8px;
+}
+ul.list-v >li>a:active,
+ul.list-v >li>a.active {
+  color: var(--color-list-hl);
+}
+ul.list-v >li>a:hover {
+  color: var(--color-list-hl);
+  background: var(--color-site-bg);
+}
+.l_header .menu >ul>li>a {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  padding: 0 8px;
+}
+.l_header .menu >ul>li>a >i {
+  margin-right: 4px;
+}
+.l_header ul.nav-list-h>li {
+  color: var(--color-list);
+  line-height: 64px;
+}
+.l_header ul.nav-list-h>li >a {
+  max-height: 64px;
+  overflow: hidden;
+  color: inherit;
+}
+.l_header ul.nav-list-h>li >a:active,
+.l_header ul.nav-list-h>li >a.active {
+  color: #3dd9b6;
+}
+.l_header ul.nav-list-h>li:hover>a {
+  color: var(--color-list-hl);
+}
+.l_header ul.nav-list-h>li i.music {
+  animation: rotate-effect 1.5s linear infinite;
+  -webkit-animation: rotate-effect 1.5s linear infinite;
+  -khtml-animation: rotate-effect 1.5s linear infinite;
+  -moz-animation: rotate-effect 1.5s linear infinite;
+  -o-animation: rotate-effect 1.5s linear infinite;
+  -ms-animation: rotate-effect 1.5s linear infinite;
+}
+@-moz-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@-o-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+.menu-phone li ul.list-v {
+  right: calc(100% - 0.5 * 16px);
+}
+.menu-phone li ul.list-v ul {
+  right: calc(100% - 0.5 * 16px);
+}
+#wrapper {
+  max-width: 1080px;
+  margin: auto;
+}
+@media screen and (min-width: 2048px) {
+  #wrapper {
+    max-width: 55vw;
+  }
+}
+#wrapper .menu {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1 1;
+  -ms-flex: 1 1;
+  flex: 1 1;
+  margin: 0 16px 0 0;
+}
+#wrapper .menu .list-v ul {
+  left: calc(100% - 0.5 * 16px);
+}
+.menu-phone {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  margin-top: 16px;
+  right: 8px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.menu-phone ul {
+  right: calc(100% - 0.5 * 16px);
+}
+@media screen and (max-width: 500px) {
+  .menu-phone {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: block;
+  }
+}
+.l_header {
+  max-width: 65vw;
+  left: calc((100% - 65vw) * 0.5);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+@media screen and (max-width: 2048px) {
+  .l_header {
+    max-width: 1112px;
+    left: calc((100% - 1112px) * 0.5);
+  }
+}
+@media screen and (max-width: 1112px) {
+  .l_header {
+    left: 0;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .l_header #wrapper .nav-main .title {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .l_header #wrapper .nav-sub {
+    width: 100%;
+  }
+  .l_header #wrapper .nav-sub .title {
+    overflow-y: scroll;
+    margin-top: 2px;
+    padding: 8px 16px;
+  }
+  .l_header #wrapper .switcher {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    display: flex;
+    margin-right: 8px;
+  }
+  .l_header .menu {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: none;
+  }
+}
+@media screen and (max-width: 500px) {
+  .list-v li {
+    max-width: 270px;
+  }
+}
+#u-search {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 60px 20px;
+  z-index: 1001;
+}
+@media screen and (max-width: 680px) {
+  #u-search {
+    padding: 0px;
+  }
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  
+<script>
+if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
+    document.write(
+	'<style>'+
+		'html{'+
+			'overflow-x: hidden !important;'+
+			'overflow-y: hidden !important;'+
+		'}'+
+		'.kill-ie{'+
+			'text-align:center;'+
+			'height: 100%;'+
+			'margin-top: 15%;'+
+			'margin-bottom: 5500%;'+
+		'}'+
+    '.kill-t{'+
+      'font-size: 2rem;'+
+    '}'+
+    '.kill-c{'+
+      'font-size: 1.2rem;'+
+    '}'+
+		'#l_header,#l_body{'+
+			'display: none;'+
+		'}'+
+	'</style>'+
+    '<div class="kill-ie">'+
+        `<span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>`+
+        `<span class="kill-c">微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</span><br/>`+
+        `<a target="_blank" rel="noopener" href="https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/"><strong>了解详情 ></strong></a>`+
+    '</div>');
+</script>
+
+
+<noscript>
+	<style>
+		html{
+			overflow-x: hidden !important;
+			overflow-y: hidden !important;
+		}
+		.kill-noscript{
+			text-align:center;
+			height: 100%;
+			margin-top: 15%;
+			margin-bottom: 5500%;
+		}
+    .kill-t{
+      font-size: 2rem;
+    }
+    .kill-c{
+      font-size: 1.2rem;
+    }
+		#l_header,#l_body{
+			display: none;
+		}
+	</style>
+    <div class="kill-noscript">
+        <span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>
+        <span class="kill-c">本页面需要浏览器支持（启用）JavaScript</span><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+    </div>
+</noscript>
+
+
+  <script>
+  /************这个文件存放不需要重载的全局变量和全局函数*********/
+  window.volantis = {}; // volantis 全局变量
+  volantis.debug = "env"; // 调试模式
+  volantis.dom = {}; // 页面Dom see: /source/js/app.js etc.
+
+  volantis.GLOBAL_CONFIG ={
+    debug: "env",
+    cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
+    default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
+    lastupdate: new Date(1741012891758),
+    sidebar: {
+      for_page: ["blogger","category","tagcloud","donate"],
+      for_post: ["toc"],
+      webinfo: {
+        lastupd: {
+          enable: true,
+          friendlyShow: true
+        },
+        runtime: {
+          data: "2020/01/01",
+          unit: "天"
+        }
+      }
+    },
+    plugins: {
+      message: {"enable":true,"css":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/izitoast/dist/css/iziToast.min.css","js":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/izitoast/dist/js/iziToast.min.js","icon":{"default":"fa-solid fa-info-circle light-blue","quection":"fa-solid fa-question-circle light-blue"},"time":{"default":5000,"quection":20000},"position":"topRight","transitionIn":"bounceInLeft","transitionOut":"fadeOutRight","titleColor":"var(--color-text)","messageColor":"var(--color-text)","backgroundColor":"var(--color-card)","zindex":2147483647,"copyright":{"enable":true,"title":"知识共享许可协议","message":"请遵守 CC BY-NC-SA 4.0 协议。","icon":"far fa-copyright light-blue"},"aplayer":{"enable":true,"play":"fa-solid fa-play","pause":"fa-solid fa-pause"},"rightmenu":{"enable":true,"notice":true}},
+      fancybox: {"css":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fancyapps/ui/dist/fancybox.css","js":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fancyapps/ui/dist/fancybox.umd.js"},
+      
+      
+      
+    }
+  }
+
+  /******************** volantis.EventListener ********************************/
+  // 事件监听器 see: /source/js/app.js
+  volantis.EventListener = {}
+  // 这里存放pjax切换页面时将被移除的事件监听器
+  volantis.EventListener.list = []
+  //构造方法
+  function volantisEventListener(type, f, ele) {
+    this.type = type
+    this.f = f
+    this.ele = ele
+  }
+  // 移除事件监听器
+  volantis.EventListener.remove = () => {
+    volantis.EventListener.list.forEach(function (i) {
+      i.ele.removeEventListener(i.type, i.f, false)
+    })
+    volantis.EventListener.list = []
+  }
+  /******************** volantis.dom.$ ********************************/
+  // 注：这里没有选择器，也没有forEach一次只处理一个dom，这里重新封装主题常用的dom方法，返回的是dom对象，对象包含了以下方法，同时保留dom的原生API
+  function volantisDom(ele) {
+    if (!ele) ele = document.createElement("div")
+    this.ele = ele;
+    // ==============================================================
+    this.ele.find = (c) => {
+      let q = this.ele.querySelector(c)
+      if (q)
+        return new volantisDom(q)
+    }
+    // ==============================================================
+    this.ele.hasClass = (c) => {
+      return this.ele.className.match(new RegExp('(\\s|^)' + c + '(\\s|$)'));
+    }
+    this.ele.addClass = (c) => {
+      this.ele.classList.add(c);
+      return this.ele
+    }
+    this.ele.removeClass = (c) => {
+      this.ele.classList.remove(c);
+      return this.ele
+    }
+    this.ele.toggleClass = (c) => {
+      if (this.ele.hasClass(c)) {
+        this.ele.removeClass(c)
+      } else {
+        this.ele.addClass(c)
+      }
+      return this.ele
+    }
+    // ==============================================================
+    // 参数 r 为 true 表示pjax切换页面时事件监听器将被移除，false不移除
+    this.ele.on = (c, f, r = 1) => {
+      this.ele.addEventListener(c, f, false)
+      if (r) {
+        volantis.EventListener.list.push(new volantisEventListener(c, f, this.ele))
+      }
+      return this.ele
+    }
+    this.ele.click = (f, r) => {
+      this.ele.on("click", f, r)
+      return this.ele
+    }
+    this.ele.scroll = (f, r) => {
+      this.ele.on("scroll", f, r)
+      return this.ele
+    }
+    // ==============================================================
+    this.ele.html = (c) => {
+      // if(c=== undefined){
+      //   return this.ele.innerHTML
+      // }else{
+      this.ele.innerHTML = c
+      return this.ele
+      // }
+    }
+    // ==============================================================
+    this.ele.hide = (c) => {
+      this.ele.style.display = "none"
+      return this.ele
+    }
+    this.ele.show = (c) => {
+      this.ele.style.display = "block"
+      return this.ele
+    }
+    // ==============================================================
+    return this.ele
+  }
+  volantis.dom.$ = (ele) => {
+    return !!ele ? new volantisDom(ele) : null;
+  }
+  /******************** RunItem ********************************/
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = ()=>{
+          volantis.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) =>{
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index,1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+  /******************** Pjax ********************************/
+  // /layout/_plugins/pjax/index.ejs
+  // volantis.pjax.send(callBack[,"callBackName"]) 传入pjax:send回调函数
+  // volantis.pjax.push(callBack[,"callBackName"]) 传入pjax:complete回调函数
+  // volantis.pjax.error(callBack[,"callBackName"]) 传入pjax:error回调函数
+  volantis.pjax = {};
+  volantis.pjax.method = {
+    complete: new RunItem(),
+    error: new RunItem(),
+    send: new RunItem(),
+  };
+  volantis.pjax = Object.assign(volantis.pjax, {
+    push: volantis.pjax.method.complete.push,
+    error: volantis.pjax.method.error.push,
+    send: volantis.pjax.method.send.push,
+  });
+  /******************** RightMenu ********************************/
+  // volantis.rightmenu.handle(callBack[,"callBackName"]) 外部菜单项控制
+  // 可在 volantis.mouseEvent 处获取右键事件
+  volantis.rightmenu = {};
+  volantis.rightmenu.method = {
+    handle: new RunItem(),
+  }
+  volantis.rightmenu = Object.assign(volantis.rightmenu, {
+    handle: volantis.rightmenu.method.handle.push,
+  });
+  /********************  Dark Mode  ********************************/
+  // /layout/_partial/scripts/darkmode.ejs
+  // volantis.dark.mode 当前模式 dark or light
+  // volantis.dark.toggle() 暗黑模式触发器
+  // volantis.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  volantis.dark = {};
+  volantis.dark.method = {
+    toggle: new RunItem(),
+  };
+  volantis.dark = Object.assign(volantis.dark, {
+    push: volantis.dark.method.toggle.push,
+  });
+  /********************  Message  ********************************/
+  // VolantisApp.message
+  /********************  isMobile  ********************************/
+  // /source/js/app.js
+  // volantis.isMobile
+  // volantis.isMobileOld
+  /********************脚本动态加载函数********************************/
+  // volantis.js(src, cb)  cb 可以传入onload回调函数 或者 JSON对象 例如: volantis.js("src", ()=>{}) 或 volantis.js("src", {defer:true,onload:()=>{}})
+  // volantis.css(src)
+
+  // 返回Promise对象，如下方法同步加载资源，这利于处理文件资源之间的依赖关系，例如：APlayer 需要在 MetingJS 之前加载
+  // (async () => {
+  //     await volantis.js("...theme.plugins.aplayer.js.aplayer...")
+  //     await volantis.js("...theme.plugins.aplayer.js.meting...")
+  // })();
+
+  // 已经加入了setTimeout
+  volantis.js = (src, cb) => {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+  volantis.css = (src) => {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  }
+  /********************按需加载的插件********************************/
+  // volantis.import.jQuery().then(()=>{})
+  volantis.import = {
+    jQuery: () => {
+      if (typeof jQuery == "undefined") {
+        return volantis.js("https://unpkg.com/volantis-static@0.0.1654736714924/libs/jquery/dist/jquery.min.js")
+      } else {
+        return new Promise(resolve => {
+          resolve()
+        });
+      }
+    }
+  }
+  /********************** requestAnimationFrame ********************************/
+  // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+  // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+  volantis.requestAnimationFrame = (fn)=>{
+    if (!window.requestAnimationFrame) {
+      window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+    }
+    window.requestAnimationFrame(fn)
+  }
+  /************************ layoutHelper *****************************************/
+  volantis.layoutHelper = (helper, html, opt)=>{
+    opt = Object.assign({clean:false, pjax:true}, opt)
+    function myhelper(helper, html, clean) {
+      volantis.tempDiv = document.createElement("div");
+      volantis.tempDiv.innerHTML = html;
+      let layoutHelper = document.querySelector("#layoutHelper-"+helper)
+      if (layoutHelper) {
+        if (clean) {
+          layoutHelper.innerHTML = ""
+        }
+        layoutHelper.append(volantis.tempDiv);
+      }
+    }
+    myhelper(helper, html, opt.clean)
+    if (opt.pjax) {
+      volantis.pjax.push(()=>{
+        myhelper(helper, html, opt.clean)
+      },"layoutHelper-"+helper)
+    }
+  }
+  /****************************** 滚动事件处理 ****************************************/
+  volantis.scroll = {
+    engine: new RunItem(),
+    unengine: new RunItem(),
+  };
+  volantis.scroll = Object.assign(volantis.scroll, {
+    push: volantis.scroll.engine.push,
+  });
+  // 滚动条距离顶部的距离
+  volantis.scroll.getScrollTop = () =>{
+    let scrollPos;
+    if (window.pageYOffset) {
+      scrollPos = window.pageYOffset;
+    } else if (document.compatMode && document.compatMode != 'BackCompat') {
+      scrollPos = document.documentElement.scrollTop;
+    } else if (document.body) {
+      scrollPos = document.body.scrollTop;
+    }
+    return scrollPos;
+  }
+  // 使用 requestAnimationFrame 处理滚动事件
+  // `volantis.scroll.del` 中存储了一个数值, 该数值检测一定时间间隔内滚动条滚动的位移, 数值的检测频率是浏览器的刷新频率. 数值为正数时, 表示向下滚动. 数值为负数时, 表示向上滚动.
+  volantis.scroll.handleScrollEvents = () => {
+    volantis.scroll.lastScrollTop = volantis.scroll.getScrollTop()
+    function loop() {
+      const scrollTop = volantis.scroll.getScrollTop();
+      if (volantis.scroll.lastScrollTop !== scrollTop) {
+        volantis.scroll.del = scrollTop - volantis.scroll.lastScrollTop;
+        volantis.scroll.lastScrollTop = scrollTop;
+        // if (volantis.scroll.del > 0) {
+        //   console.log("向下滚动");
+        // } else {
+        //   console.log("向上滚动");
+        // }
+        // 注销过期的unengine未滚动事件
+        volantis.scroll.unengine.list=[]
+        volantis.scroll.engine.start();
+      }else{
+        volantis.scroll.unengine.start();
+      }
+      volantis.requestAnimationFrame(loop)
+    }
+    volantis.requestAnimationFrame(loop)
+  }
+  volantis.scroll.handleScrollEvents()
+  volantis.scroll.ele = null;
+  // 触发页面滚动至目标元素位置
+  volantis.scroll.to = (ele, option = {}) => {
+    if (!ele) return;
+    volantis.scroll.ele = ele;
+    // 默认配置
+    opt = {
+      top: ele.getBoundingClientRect().top + document.documentElement.scrollTop,
+      behavior: "smooth"
+    }
+    // 定义配置
+    if ("top" in option) {
+      opt.top = option.top
+    }
+    if ("behavior" in option) {
+      opt.behavior = option.behavior
+    }
+    if ("addTop" in option) {
+      opt.top += option.addTop
+    }
+    if (!("observerDic" in option)) {
+      option.observerDic = 100
+    }
+    // 滚动
+    window.scrollTo(opt);
+    // 监视器
+    // 监视并矫正元素滚动到指定位置
+    // 用于处理 lazyload 引起的 cls 导致的定位失败问题
+    // option.observer = false
+    if (option.observer) {
+      setTimeout(() => {
+        if (volantis.scroll.ele != ele) {
+          return
+        }
+        volantis.scroll.unengine.push(() => {
+          let me = ele.getBoundingClientRect().top
+          if(!(me >= -option.observerDic && me <= option.observerDic)){
+            volantis.scroll.to(ele, option)
+          }
+          volantis.scroll.unengine.remove("unengineObserver")
+        },"unengineObserver")
+      },1000)
+    }
+  }
+  /********************** Content Visibility ********************************/
+  // 见 source/css/first.styl 如果遇到任何问题 删除 .post-story 即可
+  // 一个元素被声明 content-visibility 属性后 如果元素不在 viewport 中 浏览器不会计算其后代元素样式和属性 从而节省 Style & Layout 耗时
+  // content-visibility 的副作用: 锚点失效 等等(实验初期 暂不明确), 使用此方法清除样式
+  volantis.cleanContentVisibility = ()=>{
+    if (document.querySelector(".post-story")) {
+      console.log("cleanContentVisibility");
+      document.querySelectorAll(".post-story").forEach(e=>{
+        e.classList.remove("post-story")
+      })
+    }
+  }
+  /******************************************************************************/
+  /******************************************************************************/
+  /******************************************************************************/
+  //图像加载出错时的处理
+  function errorImgAvatar(img) {
+    img.src = "https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg";
+    img.onerror = null;
+  }
+  function errorImgCover(img) {
+    img.src = "https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg";
+    img.onerror = null;
+  }
+  /******************************************************************************/
+</script>
+
+  <!-- import head_end begin -->
+  <!-- import head_end end -->
+  <!-- Custom Files headEnd begin-->
+  
+  <!-- Custom Files headEnd end-->
+  <!-- front-matter head_end begin -->
+  <!-- front-matter head_end end -->
+</head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <!-- import body_begin begin-->
+    <!-- import body_begin end-->
+    <!-- Custom Files bodyBegin begin-->
+    
+    <!-- Custom Files bodyBegin end-->
+    <!-- front-matter body_begin begin -->
+    <!-- front-matter body_begin end -->
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur " style='opacity: 0' >
+  <div class='container'>
+  <div id='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fa-solid fa-comments fa-fw" target="_self"  href="/" onclick="return false;" title="comment"></a></li>
+        
+          <li><a id="s-toc" class="s-toc fa-solid fa-list fa-fw" target="_self"  href="/" onclick="return false;" title="toc"></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/Logo-NavBar@3x.png'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/" title="博客"
+                  
+                  
+                  
+                    active-action="action-home"
+                  >
+                  <i class='fa-solid fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/categories/" title="分类"
+                  
+                  
+                  
+                    active-action="action-categories"
+                  >
+                  <i class='fa-solid fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/tags/" title="标签"
+                  
+                  
+                  
+                    active-action="action-tags"
+                  >
+                  <i class='fa-solid fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/archives/" title="归档"
+                  
+                  
+                  
+                    active-action="action-archives"
+                  >
+                  <i class='fa-solid fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="社区"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>社区
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="源码"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>源码
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/about/" title="作者"
+                  
+                  
+                  
+                    active-action="action-about"
+                  >
+                  <i class='fa-solid fa-info-circle fa-fw'></i>作者
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+      
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fa-solid fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+      
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fa-solid fa-search fa-fw" target="_self" href="/" onclick="return false;" title="search"></a></li>
+				
+				<li>
+          <a class="s-menu fa-solid fa-bars fa-fw" target="_self" href="/" onclick="return false;" title="menu"></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/" title="博客"
+                  
+                  
+                  
+                    active-action="action-home"
+                  >
+                  <i class='fa-solid fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/categories/" title="分类"
+                  
+                  
+                  
+                    active-action="action-categories"
+                  >
+                  <i class='fa-solid fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/tags/" title="标签"
+                  
+                  
+                  
+                    active-action="action-tags"
+                  >
+                  <i class='fa-solid fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/archives/" title="归档"
+                  
+                  
+                  
+                    active-action="action-archives"
+                  >
+                  <i class='fa-solid fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="社区"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>社区
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/friends/" title="源码"
+                  
+                  
+                  
+                    active-action="action-friends"
+                  >
+                  <i class='fa-solid fa-link fa-fw'></i>源码
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/about/" title="作者"
+                  
+                  
+                  
+                    active-action="action-about"
+                  >
+                  <i class='fa-solid fa-info-circle fa-fw'></i>作者
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+
+      <!-- Custom Files header begin -->
+      
+      <!-- Custom Files header end -->
+		</div>
+	</div>
+  </div>
+</header>
+
+    <div id="l_body">
+      <div id="l_cover">
+  
+    
+      <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
+      <div id="half" class='cover-wrapper post search' style="display: ;">
+        
+  <div class='cover-bg lazyload placeholder' data-bg="https://s3.bmp.ovh/imgs/2025/03/03/64c32e0ed0f747a9.jpg"></div>
+
+<div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">Leland Titus</p>
+    
+    
+      <p class="subtitle">风尘云万里</p>
+    
+  </div>
+  <div class='bottom'>
+    
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <input type="text" class="input u-search-input" placeholder="Recover lost knowledge" />
+          <i class="icon fa-solid fa-search fa-fw"></i>
+        </form>
+      </div>
+    
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+          
+            <a href="/"
+              
+              
+              active-action="action-home">
+              <p>博客</p>
+            </a>
+          
+            <a href="/categories/"
+              
+              
+              active-action="action-categories">
+              <p>分类</p>
+            </a>
+          
+            <a href="/tags/"
+              
+              
+              active-action="action-tags">
+              <p>标签</p>
+            </a>
+          
+            <a href="/contributors/"
+              
+              
+              active-action="action-contributors">
+              <p>社区</p>
+            </a>
+          
+            <a target="_blank" rel="noopener" href="https://github.com/volantis-x/hexo-theme-volantis/"
+              
+              
+              active-action="action-https:githubcomvolantis-xhexo-theme-volantis">
+              <p>源码</p>
+            </a>
+          
+            <a href="/author/"
+              
+              
+              active-action="action-author">
+              <p>作者</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+        <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+      </div>
+    
+  
+</div>
+
+      <div id="safearea">
+        <div class="body-wrapper">
+          
+<div id="l_main" class=''>
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/02/source/基础四大件/计算机组成原理/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="tutulp's blog">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="tutulp's blog">
+    <meta itemprop="description" content="tutulp的博客网站">
+  </span>
+  
+
+
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title" itemprop="name headline">
+        计算机组成原理
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/" rel="nofollow">
+    <img itemprop="image" src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">请设置文章作者</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>
+    <a class="category-link" href="/categories/%E5%9B%9B%E5%A4%A7%E4%BB%B6/">四大件</a>
+    
+      <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/%E5%9B%9B%E5%A4%A7%E4%BB%B6/" itemprop="url"><span itemprop="name">四大件</span></a>
+      </span>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2025-03-02T00:00:00+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2025年3月2日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
+      </div>
+    
+  </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <h1 id="计算机系统概述"><a href="#计算机系统概述" class="headerlink" title="计算机系统概述"></a>计算机系统概述</h1><p>##计算机发展历程</p>
+<p>什么是计算机系统？  <strong>硬件+软件</strong>(系统软件 应用软件)</p>
+<p>硬件的发展</p>
+<ul>
+<li>第一台计算机 ENIAC 1946 冯诺依曼顾问 逻辑元件 1.8w个<strong>电子管</strong> 机器语言编程-纸带 有孔为0 bug：小虫子</li>
+<li>第二代 贝尔实验室发明<strong>晶体管</strong> 面向过程语言：FORTRAN 操作系统</li>
+<li>第三代 <strong>中小规模集成电路</strong> 高级语言 分时操作系统</li>
+<li>第四代 <strong>大规模，超大规模集成电路</strong></li>
+</ul>
+<p>摩尔定律：集成电路的晶体管隔18个月能增强一倍，性能增强一倍</p>
+<p>###计算机硬件的基本组成</p>
+<p>早期冯诺依曼结构</p>
+<p>第一代ENIAC需要手动接线输入指令，他提出<strong>存储程序</strong>：将指令以二进制代码的形式事先输入到计算机的主存储器</p>
+<img src="./images/计算机组成原理.assets/image-20240826214553477-1737030934290-148-1737030940035-290.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20240826214553477-1737030934290-148-1737030940035-290.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240826214553477" style="zoom: 25%;" />
+
+<img src="./images/计算机组成原理.assets/image-20240826214729711-1737030940033-151.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20240826214729711-1737030940033-151.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240826214729711" style="zoom:25%;" />
+
+<p>以运算器为中心导致效率降低</p>
+<img src="./images/计算机组成原理.assets/image-20240826214903324-1737030940033-155.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20240826214903324-1737030940033-155.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240826214903324" style="zoom:25%;" />
+
+<img src="./images/计算机组成原理.assets/image-20240826215033513-1737030940033-153.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20240826215033513-1737030940033-153.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240826215033513" style="zoom:25%;" />
+
+<p>主存是内存 辅存是硬盘</p>
+<h3 id="各个硬件的工作原理"><a href="#各个硬件的工作原理" class="headerlink" title="各个硬件的工作原理"></a>各个硬件的工作原理</h3><ul>
+<li>&#x3D;&#x3D;主存储器&#x3D;&#x3D;的基本组成：存储体 <strong>+</strong> MAR(存储地址寄存器) <strong>+</strong> MDR(存储数据寄存器)</li>
+</ul>
+<p>MAR给出所需数据的地址，拿到数据后放到MDR</p>
+<img src="./images/计算机组成原理.assets/image-20240827082233562-1737030940033-157.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20240827082233562-1737030940033-157.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240827082233562" style="zoom:33%;" />
+
+<p>存储字长是8的整数倍 电子元件是电容</p>
+<p>MAR的位数反应存储单元的个数  MAR 4位表示一共2^4个存储单元</p>
+<p>MDR位数&#x3D;存储字长  16位MDR 每个单元可放16bit 1个字&#x3D;16bit  (这里的字不是字节(B)8bit)</p>
+<p>100Mbps指的是下载速度100M bit&#x2F;s 下载器100&#x2F;8M B&#x2F;s</p>
+<ul>
+<li>&#x3D;&#x3D;运算器&#x3D;&#x3D; ACC <strong>+</strong> MQ <strong>+</strong> X <strong>+</strong> ALU</li>
+</ul>
+<p>作用：算术，逻辑运算</p>
+<ul>
+<li><ul>
+<li>ACC 寄存器&#x2F;累加器  存操作数或运算结果</li>
+<li>MQ 乘除时存操作数或运算结果</li>
+<li>X 通用寄存器   存操作数</li>
+<li>ALU （核心）算术逻辑单元 实现算术和逻辑运算</li>
+</ul>
+</li>
+</ul>
+<p>了解一下</p>
+<img src="./images/计算机组成原理.assets/image-20240919185636923-1737030940033-159.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20240919185636923-1737030940033-159.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240919185636923" style="zoom:50%;" />
+
+<ul>
+<li>&#x3D;&#x3D;控制器&#x3D;&#x3D;</li>
+<li><ul>
+<li>CU 控制单元 分析指令，给出控制信号</li>
+<li>IR 指令寄存器 存当前执行的指定</li>
+<li>PC 程序计数器 存下一条指令的地址 自+1</li>
+</ul>
+</li>
+</ul>
+<p>顺序 PC-&gt;IR-&gt;CU</p>
+<img src="./images/计算机组成原理.assets/image-20240919190027508-1737030940033-161.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20240919190027508-1737030940033-161.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240919190027508" style="zoom:50%;" />
+
+<p><img src="/./images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20240919190208752.png" class="lazyload" data-srcset="/./images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20240919190208752.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240919190208752"></p>
+<p>PC取完指令后，指向下一条指令的地址2</p>
+<p><img src="/./images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20240919190355665.png" class="lazyload" data-srcset="/./images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20240919190355665.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240919190355665"></p>
+<h3 id="多级层次结构"><a href="#多级层次结构" class="headerlink" title="多级层次结构"></a>多级层次结构</h3><img src="./images/计算机组成原理.assets/image-20240919190651059-1737030940033-165.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20240919190651059-1737030940033-165.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240919190651059" style="zoom:50%;" />
+
+<p>高级语言    汇编语言    机器语言</p>
+<ul>
+<li>编译程序：高级语言全部译为汇编语言或机器语言</li>
+<li>汇编程序：汇编到机器</li>
+<li>解释程序：高级到机器 翻译一句执行一句</li>
+</ul>
+<h2 id="计算机的性能指标"><a href="#计算机的性能指标" class="headerlink" title="计算机的性能指标"></a>计算机的性能指标</h2><p>###存储器性能指标</p>
+<ul>
+<li>主存储器总容量：MAR32位 MDR8位 2^32*8bit&#x3D;4GB</li>
+</ul>
+<p>MAR位数反应存储单元的个数</p>
+<p>MDR位数反应每个存储单元的大小</p>
+<ul>
+<li>CPU主频 CPU数字脉冲信号震荡的频率 xGHz 越高cpu处理越快</li>
+<li>CPI 每条指令的执行需要多少个时钟周期</li>
+</ul>
+<p>1000Hz 100条指令 平均CPI&#x3D;3 需要执行多久？</p>
+<p>100*3*1&#x2F;1000&#x3D;0.3s</p>
+<ul>
+<li>IPS 每秒多少条指令 主频&#x2F;CPI</li>
+<li>FLOPS 每秒多少次浮点运算</li>
+</ul>
+<p>前面可以加K M G T 分别是10的 3 6 9 12次方</p>
+<ul>
+<li>文件大小</li>
+</ul>
+<p>2^10 K</p>
+<p>2^20 M</p>
+<p>2^30 G</p>
+<p>2^40 T</p>
+<h3 id="系统整体性能指标"><a href="#系统整体性能指标" class="headerlink" title="系统整体性能指标"></a>系统整体性能指标</h3><p>数据通路带宽：数据总线一次能并行传递信息的位数</p>
+<p>吞吐量：系统单位时间内处理请求的数量</p>
+<p>响应时间：向计算机发送请求到获得响应需要等待的时间</p>
+<p>基准程序：跑分软件</p>
+<h1 id="数据的表示和运算"><a href="#数据的表示和运算" class="headerlink" title="数据的表示和运算"></a>数据的表示和运算</h1><h2 id="进位转换"><a href="#进位转换" class="headerlink" title="进位转换"></a>进位转换</h2><p>&#x3D;&#x3D;二进制转化为8进制&#x3D;&#x3D;：三位一组，（分别是4 2 1*对应位值）每组表示0-7 ， 前面不足的补0，小数点后的最后不足的补0  </p>
+<p>&#x3D;&#x3D;二进制转化为16进制&#x3D;&#x3D;：四位一组</p>
+<img src="./images/计算机组成原理.assets/image-20240922112019739-1737030940034-167.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20240922112019739-1737030940034-167.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240922112019739" style="zoom:50%;" />
+
+<p>&#x3D;&#x3D;十六进制，八进制转化为二进制&#x3D;&#x3D;：每个数字或字母转化为四位或三位二进制，去掉头尾的0</p>
+<p>&#x3D;&#x3D;符号表示&#x3D;&#x3D;</p>
+<p>十六进制：(1652)16 1652<strong>H</strong> <strong>0x</strong>1652</p>
+<p>二进制 B</p>
+<p>十进制 D</p>
+<p>&#x3D;&#x3D;十进制转为其他进制&#x3D;&#x3D;</p>
+<p>整数部分</p>
+<img src="./images/计算机组成原理.assets/image-20240922112447363-1737030940034-169.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20240922112447363-1737030940034-169.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240922112447363" style="zoom:50%;" />
+
+<p>小数部分</p>
+<img src="./images/计算机组成原理.assets/image-20240922112637455-1737030940034-171.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20240922112637455-1737030940034-171.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240922112637455" style="zoom:50%;" />
+
+<p>无限循环</p>
+<h2 id="BCD码"><a href="#BCD码" class="headerlink" title="BCD码"></a>BCD码</h2><p>&#x3D;&#x3D;8421码&#x3D;&#x3D;：每位十进制数用四位二进制表示 权重分别为8 4 2 1</p>
+<p>加法：(手算)：5+8&#x3D;13 用8421表示13 0001 0011</p>
+<p>​	 （电脑）：0101+1000&#x3D;1101不在映射表里面 则再加上数字六的BCD码0110  1101+0110&#x3D;1 0011</p>
+<p>&#x3D;&#x3D;余3码&#x3D;&#x3D;：8421对应规则+3(0011)</p>
+<p>&#x3D;&#x3D;2421码&#x3D;&#x3D;：5-9首位是1</p>
+<p>##unsigned</p>
+<blockquote>
+<p>unsigned char 1B	ASCLL是0-127</p>
+<p>unsigned short  2B </p>
+<p>unsigned int   4B</p>
+</blockquote>
+<p>&#x3D;&#x3D;减法&#x3D;&#x3D;：减数全部取反，末位+1，减法变加法</p>
+<p>&#x3D;&#x3D;位运算&#x3D;&#x3D;:适合对无符号类型快速计算 无符号-原码表示 内存中都是二进制但是解释的时候会根据定义的类型</p>
+<p>&lt;&lt; 向左移动低位补0 左移一次*2</p>
+<p>&gt;&gt; 右移,高位补0&#x2F;1 除2</p>
+<p>&gt;&gt;&gt; 无符号右移,高位补1</p>
+<p>##带符号整数</p>
+<blockquote>
+<p>short 2B</p>
+<p>int 4B</p>
+<p>原码，补码，反码 同一个数的不同表现形式，含义相同</p>
+<p>机器字长 64位或者32位 表示通用寄存器能存多少位 能进行多少位的带符号整数的运算</p>
+<p>以8位通用寄存器为例子 8位是最小存储单元</p>
+</blockquote>
+<p>&#x3D;&#x3D;原码&#x3D;&#x3D;：1位符号位 7位数值位</p>
+<ul>
+<li><p>机器字长n+1位 带符号整数表示 -(2^n-1) &lt;&#x3D; x &lt;&#x3D; 2^n-1</p>
+</li>
+<li><p>+0 与 -0 含义相同</p>
+</li>
+<li><p>原码运算：符号位不能参与运算，需要设计复杂的电路才能处理</p>
+</li>
+</ul>
+<p>&#x3D;&#x3D;补码&#x3D;&#x3D;:正数的补码是本身,负数是其二进制取反+1</p>
+<ul>
+<li>原码 -&gt; 反码 -&gt; 补码</li>
+<li>正数 三种状态一样</li>
+<li>负数 -符号位不变 数值位取反&gt; 反码 -末位+1&gt; 补码</li>
+<li>快速转换：负数原码 -&gt; 补码 从右往左找到第一个1，左边所有的数值位取反</li>
+<li>加法：全部按位相加</li>
+<li>减法：减法看作加法，A-B&#x3D;A+(-B) </li>
+<li>求-B的补码：全部位取反，末尾+1   快速：从右往左找到第一个1，左边所有位取反</li>
+<li>因此同一套电路可以实现无符号和有符号的运算</li>
+</ul>
+<blockquote>
+<p>最终一个字节范围[-128,127) </p>
+<p><strong>11111111 -1</strong>        (规定)</p>
+<p>11111110 表示-2     -1 + -2  11111101 &#x3D; -3</p>
+<p>10000001 表示-127 </p>
+<p>10000000 -128</p>
+<p>00000000 0</p>
+<p>00000001 1 </p>
+<p>01111111 127</p>
+</blockquote>
+<p>&#x3D;&#x3D;特性比较&#x3D;&#x3D;：n位能表示的最大值为2^n - 1</p>
+<ul>
+<li>n+1位</li>
+<li>原码 [-(2^n - 1) , 2^n - 1]</li>
+<li>反码 [-(2^n - 1) , 2^n - 1]</li>
+<li>补码 [-2^n , 2^n - 1]</li>
+<li>无符号整数 [0 , 2^n+1 - 1]</li>
+<li>是否发生溢出：-64+(-64) 用原码则溢出，补码则没有溢出</li>
+</ul>
+<blockquote>
+<p>所以隐式转化就是非负数前面+0，负数前面+1,强制转换就是把前面多余的字节直接切掉,极大可能导致数据改变</p>
+<img src="./images/计算机组成原理.assets/image-20241017231702621-1737030940034-173.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241017231702621-1737030940034-173.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241017231702621" style="zoom:33%;" /></blockquote>
+<p>&#x3D;&#x3D;移码&#x3D;&#x3D;：补码基础上，符号位取反</p>
+<ul>
+<li><p>只能表示整数</p>
+</li>
+<li><p>以8位为例，从-128到127 从00000000到11111111</p>
+</li>
+<li><p>通常用于浮点数的阶码当中</p>
+</li>
+</ul>
+<h2 id="定点小数"><a href="#定点小数" class="headerlink" title="定点小数"></a>定点小数</h2><blockquote>
+<p>定点：小数点位置固定</p>
+<p>定点整数：有符号整数  原码，反码，补码，移码</p>
+<p>定点小数： 		  原码，反码，补码</p>
+</blockquote>
+<p>整数.小数 小数点默认在整数的最后，在小数的符号位后面</p>
+<p>符号位.位权 0&#x2F;1.2^-1 2^-2 … 2^-7   -0.5 0.25 0.125</p>
+<p>转换规则与整数一摸一样</p>
+<p>加法减法，与整数的规则也一样</p>
+<ul>
+<li>原码 [-(1 - 2^n) , 1 - 2^n]</li>
+<li>反码 [-(1 - 2^n) , 1 - 2^n]</li>
+<li>补码 [-1 , 1- 2^n]</li>
+</ul>
+<p>##电路</p>
+<blockquote>
+<p>ALU 算术逻辑单元  输入信号 输出信号 控制信号(cu) -&gt; 算术&#x2F;逻辑运算 </p>
+<p>ALU多少位 寄存器就多少位 也就是机器字长</p>
+</blockquote>
+<ul>
+<li>基本逻辑运算：与 &amp;&amp; 或 || 非 !  对应三个门电路 * +</li>
+</ul>
+<blockquote>
+<p>优先级:与 &gt; 或</p>
+<p>分配律 结合律 实现电路简化</p>
+<p>异或 :相同为0</p>
+</blockquote>
+<p>&#x3D;&#x3D;1位全加器 FA&#x3D;&#x3D;:<img src="./images/计算机组成原理.assets/image-20241017202812019-1737030940034-175.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241017202812019-1737030940034-175.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241017202812019" style="zoom:33%;" /></p>
+<p>串行加法器:进位信息保存起来,计算两个n位相加,串行执行n次,每次输出一个结果</p>
+<p>并行加法器:<img src="./images/计算机组成原理.assets/image-20241017203020308-1737030940034-177.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241017203020308-1737030940034-177.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241017203020308" style="zoom:33%;" /></p>
+<p>&#x3D;&#x3D;并行进位加法器 CLA&#x3D;&#x3D;:每个进位并行同时产生</p>
+<p>&#x3D;&#x3D;补码加减运算器&#x3D;&#x3D;:减数全部按位取反+1 变加法 </p>
+<blockquote>
+<p>用Sub控制加法或者减法,加法为0,不做任何处理,进位为0   减法则进位为0 减数取反,进位为1</p>
+<p>无符号也可以使用</p>
+</blockquote>
+<img src="./images/计算机组成原理.assets/image-20241017214454361-1737030940034-179.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241017214454361-1737030940034-179.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241017214454361" style="zoom:33%;" />
+
+<p>&#x3D;&#x3D;原码的加减&#x3D;&#x3D;:<img src="./images/计算机组成原理.assets/image-20241017220129021-1737030940034-181.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241017220129021-1737030940034-181.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241017220129021" style="zoom:33%;" /></p>
+<p>&#x3D;&#x3D;补码的加减运算&#x3D;&#x3D;:不用考虑符号位,直接参与运算</p>
+<blockquote>
+<p>只有正数+正数 负数+负数 才会溢出</p>
+<p>正数+正数  得到的结果看起来是负数 </p>
+<p>负数+负数  得到的结果看起来是正数</p>
+</blockquote>
+<p>&#x3D;&#x3D;溢出判断&#x3D;&#x3D;:</p>
+<p>方法一:<img src="./images/计算机组成原理.assets/image-20241017230651828-1737030940034-183.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241017230651828-1737030940034-183.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241017230651828" style="zoom: 33%;" />v的值为1 则有溢出 ABS分别表示AB的符号和结果的符号位</p>
+<p>方法二:符号位往更高位进位为Cs 符号位C1 他们异或为1 则溢出</p>
+<p>方法三:双符号位:00 11 都参与运算 与法二一样</p>
+<blockquote>
+<p>双符号位 :模4补码 实际也是存一个符号位,另一个是运算时复制的</p>
+<p>单符号位:模2补码</p>
+</blockquote>
+<p>###标志位</p>
+<ul>
+<li>OF <code>有符号</code>运算的加减运算是否溢出 1表示溢出</li>
+</ul>
+<p>最高位产生的进位与次高位产生的进位异或</p>
+<ul>
+<li>SF <code>有符号</code>加减运算结果的正负性 0表示正数</li>
+</ul>
+<p>最高位的输出</p>
+<ul>
+<li>ZF 表示运算结果是否为0 ZF1为表示结果为0</li>
+</ul>
+<p>全0</p>
+<ul>
+<li>CF 表示<code>无符号数</code>的加减法是否产生了进位或者借位 1发生</li>
+</ul>
+<p>最高位的进位异或sub(sub&#x3D;0表示加法)</p>
+<h2 id="移位运算"><a href="#移位运算" class="headerlink" title="移位运算"></a>移位运算</h2><p>移位：改变数码位和小数点的相对位置，从而改变数码位的位权。</p>
+<p>可以用算术移位来实现乘法和除法</p>
+<h3 id="算术移位"><a href="#算术移位" class="headerlink" title="算术移位"></a>算术移位</h3><p>小数点前后移动，数*10^n</p>
+<p>&#x3D;&#x3D;原码&#x3D;&#x3D;：符号位不变。数值位移位</p>
+<p>右移：高位补0，低位舍弃，舍弃位为0，相当于÷2，舍弃为1，丢失精度</p>
+<p>左移：低位补0，高位丢弃，舍弃位为0 *2 为1 严重误差</p>
+<p>定点小数的原码同样</p>
+<p>&#x3D;&#x3D;反码&#x3D;&#x3D;：</p>
+<p>正数与原码一样</p>
+<p>负数：补位补1</p>
+<p>&#x3D;&#x3D;补码&#x3D;&#x3D;：</p>
+<p>正数：与原码一致</p>
+<p>负数：补位规则，最右边的1及其右侧同原码(右移 高位补1)，左边的同补码(左移 低位补0)</p>
+<h3 id="逻辑移位"><a href="#逻辑移位" class="headerlink" title="逻辑移位"></a>逻辑移位</h3><p>逻辑右移：高位补0，低位舍弃</p>
+<p>逻辑左移：低位补0，高位舍弃</p>
+<blockquote>
+<p>看作无符号数的移位</p>
+<p>应用例子：RGB，用24位来存储，先用24位大小的数组填充R，然后左移16位，然后依次得到三个数组，相加得到最后的表示</p>
+</blockquote>
+<p>###循环移位</p>
+<p>左移的时候移除的高位放到最低位</p>
+<p>带进位的循环左移：进位信息CF也参与循环</p>
+<blockquote>
+<p>应用：适合高字节与低字节的调换 如大端和小端的调换</p>
+</blockquote>
+<h2 id="乘除"><a href="#乘除" class="headerlink" title="乘除"></a>乘除</h2><h3 id="原码的乘法"><a href="#原码的乘法" class="headerlink" title="原码的乘法"></a>原码的乘法</h3><p>计算X*Y</p>
+<blockquote>
+<p>运算器中ACC MQ X ALU</p>
+<p>X存 |x|的原码，也就是符号位为0其余不变</p>
+<p>MQ 存放|Y|的原码和乘积低位</p>
+<p>ACC 存乘积高位</p>
+</blockquote>
+<p>机器字长位n+1</p>
+<p><strong>原码的一位乘法</strong></p>
+<p>符号位单独处理：异或</p>
+<p>数值位绝对值相乘</p>
+<p>乘法之前，ACC清0，第一次计算：MQ的最低位如果为1 ACC加上X，为0则加0(由ALU完成)，进行第二次的时候，ACC和MQ并起来逻辑右移，同样是MQ的最低位，一共进行n次，最后修改符号位</p>
+<h3 id="补码的乘法运算"><a href="#补码的乘法运算" class="headerlink" title="补码的乘法运算"></a>补码的乘法运算</h3><img src="./images/计算机组成原理.assets/image-20241022224731616-1737030940034-185.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241022224731616-1737030940034-185.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241022224731616" style="zoom:33%;" />
+
+<p>MQ中扩展一位，称为辅助位，初始化为0，参与右移，MQ增加一位，ACC，X都会增加一位，可以采用双符号位补码运算</p>
+<p>会有一个辅助电路处理|-x|补码，再交给ALU</p>
+<h3 id="原码的除法"><a href="#原码的除法" class="headerlink" title="原码的除法"></a>原码的除法</h3><p>规律：忽略小数点，每确定一个商进行一次减法，得到四位余数，余数末尾补0，再确定下一位商，直到5位商(机器字长5)</p>
+<p>&#x3D;&#x3D;恢复余数法&#x3D;&#x3D;：</p>
+<img src="./images/计算机组成原理.assets/image-20241023000001553-1737030940034-187.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241023000001553-1737030940034-187.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241023000001553" style="zoom:33%;" />
+
+<ol>
+<li>符号位单独处理，异或</li>
+<li>数值位取绝对值进行除法运算 分别写出 |X|原 |-X|原 |Y|补 |-Y|补</li>
+<li>商MQ初始化为0 ACC存|X| X存|Y|</li>
+<li>从MQ低位开始确定一位商，默认为1，错了再改为0</li>
+<li>ACC+|-Y|补 -&gt; ACC 最高位为1，则为负数，所以商改为0，然后ACC+|Y|补 -&gt; ACC</li>
+<li>ACC和MQ逻辑左移</li>
+<li>循环n次</li>
+<li>修改符号位</li>
+<li>余数&#x3D;得到的商MQ*2^-n</li>
+</ol>
+<p>&#x3D;&#x3D;加减交替法&#x3D;&#x3D;：先不确定商位，ACC+|-Y|补 -&gt; ACC再给出商的 然后ACC左移加上|Y|补为下一个ACC，再确定一个商</p>
+<h3 id="补码的除法"><a href="#补码的除法" class="headerlink" title="补码的除法"></a>补码的除法</h3><p>符号位参与运算，采用双符号位，被除数与除数异号则+|Y|补，同号则+|-Y|补，根据余数和除数同号则商1，左移，循环，末位商横置为1，*2^-n</p>
+<h2 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h2><blockquote>
+<p>c语言中的定点整数 short int lang 都是补码的形式存储</p>
+<p>unsigned 无符号</p>
+<p>short x&#x3D;-4321 2字节 16bit <strong>1</strong>110 1111 0001 1111</p>
+</blockquote>
+<p>强制转换： unsigned short y &#x3D; (unsigned short)x    y &#x3D; 61215  都是2字节则bit位原封不同</p>
+<p>int 强制转化为 short 时，截断高字节</p>
+<p>小字节转化为大字节-符号扩展 真值不变 负数在符号位和数值位间添1，正数在符号位和数值位之间添0</p>
+<h2 id="数据的存储和排列"><a href="#数据的存储和排列" class="headerlink" title="数据的存储和排列"></a>数据的存储和排列</h2><h3 id="大小端模式"><a href="#大小端模式" class="headerlink" title="大小端模式"></a>大小端模式</h3><p>4字节int <strong>01</strong> 23 45 <strong>67</strong> H (16进制)		1908878743 D (10进制)</p>
+<p>01 MSB 最高有效字节</p>
+<p>67 LSB 最低有效字节</p>
+<p>大端:内存低地址-&gt;高地址 MSB-&gt;LSB 符合阅读习惯</p>
+<p>小端:便于机器处理</p>
+<h3 id="边界对齐"><a href="#边界对齐" class="headerlink" title="边界对齐"></a>边界对齐</h3><p><strong>按字节编址</strong>:每个字节对应一个地址 </p>
+<p>假设一个字32位,则半字16位,一个字节8bit</p>
+<p><strong>寻址方式</strong>:可以按照字,半字,字节寻址,但是都要需要转化为字节地址 </p>
+<p>字和半字寻址需要逻辑左移转化为字节地址</p>
+<p>字地址-&gt;字节地址 逻辑左移2位 *4 比如2号字,也就是第3行,10,左移2位,1000,8,8号字节,2号字则是从8号字节开始连续读4字节内容</p>
+<p>半字-&gt;字节地址,逻辑左移1位</p>
+<p><strong>边界对齐</strong>:比如一个结构体,存储3个char,3个short,1个int,发现有两个需要填充的空白</p>
+<p>边界对齐访问更快</p>
+<img src="./images/计算机组成原理.assets/image-20241023220437207-1737030940034-189.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241023220437207-1737030940034-189.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241023220437207" style="zoom: 25%;" />
+
+<p>##浮点数</p>
+<blockquote>
+<p>定点数表示的数据范围有限</p>
+<p>浮点数:位数不变的情况下增加范围</p>
+<p>用科学计数法表示  +3.026*10^11  &#x3D;  +11 +3.062</p>
+</blockquote>
+<img src="./images/计算机组成原理.assets/image-20241024215357212-1737030940034-191.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241024215357212-1737030940034-191.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241024215357212" style="zoom:33%;" />
+
+<p>N&#x3D;r^E×M E是阶码,M是尾数</p>
+<blockquote>
+<p>底r通常为2.方便左移右移得到真值</p>
+<p>E表示范围,M表示精度</p>
+</blockquote>
+<p>浮点数尾数字的规格化,尾数的最高位必须是有效值,尽可能保留精度</p>
+<blockquote>
+<p>左规:规格化,尾数左移,阶码-1</p>
+<p>右规:尾数溢出(双符号位为01或10),尾数右移,阶码+1</p>
+</blockquote>
+<img src="./images/计算机组成原理.assets/image-20241024220649494-1737030940034-193.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241024220649494-1737030940034-193.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241024220649494" style="zoom:33%;" />
+
+<h3 id="IEEE-754"><a href="#IEEE-754" class="headerlink" title="IEEE 754"></a>IEEE 754</h3><p>阶码用移码的方式表示	移码:补码的基础上符号位取反,只能表示整数</p>
+<p>移码&#x3D;真值+偏置值</p>
+<p>当n&#x3D;8,偏置值&#x3D;128D&#x3D;1000 0000 即 2^n-1</p>
+<p>eg:真值-127&#x3D;-111 1111B   移码&#x3D;-111 1111+1000 0000 &#x3D; 0000 0001</p>
+<p>IEEE 754 中偏置置是127D &#x3D; 2^n-1 - 1</p>
+<img src="./images/计算机组成原理.assets/image-20241024221748453-1737030940034-195.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241024221748453-1737030940034-195.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241024221748453" style="zoom:33%;" />
+
+<p>M23位是因为默认尾数为1.xxx</p>
+<p>float 4字节 1+8+23 真值:(-1)^s × 1.M × 2^(E-127)  </p>
+<p>double 8字节 1+11+52</p>
+<img src="./images/计算机组成原理.assets/image-20241024222421297-1737030940034-197.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241024222421297-1737030940034-197.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241024222421297" style="zoom:33%;" />
+
+<img src="./images/计算机组成原理.assets/image-20241024222724406-1737030940034-199.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241024222724406-1737030940034-199.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241024222724406" style="zoom:33%;" />
+
+<h3 id="浮点数的运算"><a href="#浮点数的运算" class="headerlink" title="浮点数的运算"></a>浮点数的运算</h3><img src="./images/计算机组成原理.assets/image-20241024223351366-1737030940034-201.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241024223351366-1737030940034-201.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241024223351366" style="zoom:33%;" />
+
+<img src="./images/计算机组成原理.assets/image-20241024223749995-1737030940034-203.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241024223749995-1737030940034-203.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241024223749995" style="zoom:33%;" />
+
+<p>舍入:规格化尾数右移时如果舍弃了右侧的1要+1,如果+1后又溢出,又需要右规  或   如果舍弃了1需要把最后一位改为1</p>
+<p>判溢出:阶码+1看符号位是否改变</p>
+<blockquote>
+<p>32位机器long占32位,64位机器long占64位</p>
+<p>64位机器,lang向double转化会有精度损失</p>
+<p>int -&gt; float 会损失精度,但是范围不损失</p>
+<p>float -&gt; int 可能损失精度,可能溢出</p>
+</blockquote>
+<h1 id="存储系统"><a href="#存储系统" class="headerlink" title="存储系统"></a>存储系统</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="层次结构"><a href="#层次结构" class="headerlink" title="层次结构"></a>层次结构</h3><img src="./images/计算机组成原理.assets/image-20241026110400727-1737030940034-205.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241026110400727-1737030940034-205.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241026110400727" style="zoom:33%;" />
+
+<blockquote>
+<p>16+512 16是主存，512是辅存，使用辅存数据要先掉入主存，CPU能直接访问的是内存和Cache</p>
+</blockquote>
+<img src="./images/计算机组成原理.assets/image-20241026110929964-1737030940034-207.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241026110929964-1737030940034-207.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241026110929964" style="zoom:33%;" />
+
+<img src="./images/计算机组成原理.assets/image-20241026110951010-1737030940034-209.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241026110951010-1737030940034-209.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241026110951010" style="zoom:33%;" />
+
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>按存储介质分类</p>
+<ul>
+<li><p>半导体器件，主存 Cache</p>
+</li>
+<li><p>磁表面存储器，磁盘，磁带</p>
+</li>
+<li><p>光存储器，光盘，DVD</p>
+</li>
+</ul>
+<p>存取方式</p>
+<ul>
+<li><p>随机存取存储器 RAM，读写任何一个存储单元需要的时间都相同 内存条</p>
+</li>
+<li><p>顺序存取存储器 SAM 取决于存储单元所在维持 磁带</p>
+</li>
+<li><p>直接存取存储器 DAM 磁盘 兼具特性</p>
+</li>
+<li><p>相联存储器 CAM 按照内容检索到存储位置进行读写 “快表”</p>
+</li>
+</ul>
+<p>信息可更改性</p>
+<ul>
+<li><p>读写存储器，磁盘，内存，Cache</p>
+</li>
+<li><p>只读存储器，ROM 实体专辑，BIOS</p>
+</li>
+</ul>
+<p>信息可保存性</p>
+<ul>
+<li><p>易失性存储器：断电后存储信息消失，主存，Cache</p>
+</li>
+<li><p>非易失性：磁盘，光盘</p>
+</li>
+<li><p>破坏性读出：信息读出后原信息被破坏，DRAM芯片，读出后需要重写</p>
+</li>
+<li><p>非破坏性：SRAM芯片，磁盘，光盘</p>
+</li>
+</ul>
+<p>###性能指标</p>
+<p>存储容量：存储字长 × 字长 (1M × 8位)</p>
+<p>单位成本：每位价格&#x3D;总成本&#x2F;总容量</p>
+<p>存储速度：数据传输速率&#x3D;数据的宽度&#x2F;存储周期  存储周期&#x3D;存取时间+恢复时间</p>
+<h2 id="主存储器的基本组成"><a href="#主存储器的基本组成" class="headerlink" title="主存储器的基本组成"></a>主存储器的基本组成</h2><p>###半导体元件的原理</p>
+<img src="./images/计算机组成原理.assets/image-20241026115637393-1737030940034-211.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241026115637393-1737030940034-211.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241026115637393" style="zoom:25%;" />
+
+<p>###存储芯片的原理</p>
+<p>存储体由很多存储单元组成，存储单元由存储原组成，一个存储字是一条线连接的MOS管的字节数</p>
+<p>MAR 译码器：n位的地址 -&gt; 2^n个存储单元,给出哪个地址就转化对应的存储单元为高电频信号</p>
+<img src="./images/计算机组成原理.assets/image-20241026121805130-1737030940034-213.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241026121805130-1737030940034-213.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241026121805130" style="zoom: 25%;" />
+
+<p>判断存储单元的金属引脚的数目</p>
+<img src="./images/计算机组成原理.assets/image-20241026122139759-1737030940034-215.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241026122139759-1737030940034-215.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241026122139759" style="zoom:25%;" />
+
+<img src="./images/计算机组成原理.assets/image-20241026122155986-1737030940034-217.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241026122155986-1737030940034-217.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241026122155986" style="zoom:25%;" />
+
+<p>偏选线是选择对哪一块存储单元运算,一个内存条上多个存储单元</p>
+<p>###如何实现不同的寻址方式</p>
+<p>一个小格是一个字节8bit，一整行是一个存储字，一行四字节，也就是字长为4B，</p>
+<p>如果总容量为1KB，也就是256个字，也就是256行</p>
+<p>现代计算机按字节编址，一个字节就是一个地址，1KB，也就是有1K个地址</p>
+<p>按字节编址，但是也可按字节寻址，按字寻址，按半字寻址，按双字寻址</p>
+<p>1KB 地址线10根，2^10&#x3D;1 K 所以10根地址线才能表示1K的地址</p>
+<p>按字寻址：以行为单位，一共256个单位(行)，转化为字节地址，需要算术左移两位，末尾+2个0，因为一行四个字节，2^2 &#x3D; 4, </p>
+<h2 id="SRAM和DRAM"><a href="#SRAM和DRAM" class="headerlink" title="SRAM和DRAM"></a>SRAM和DRAM</h2><h3 id="存储元件不同导致的特性差异"><a href="#存储元件不同导致的特性差异" class="headerlink" title="存储元件不同导致的特性差异"></a>存储元件不同导致的特性差异</h3><p>DRAM用的栅极电容，如上，读取的时候是破坏性读出，读出后应该有重写操作。速度更慢，常做主存，集成度高。发热相对要小</p>
+<p>SRAM用的双稳态触发器，非破坏性读出，不需要重写，运行速度快，用于Cache，集成度低，发热大</p>
+<h3 id="DRAM的刷新"><a href="#DRAM的刷新" class="headerlink" title="DRAM的刷新"></a>DRAM的刷新</h3><img src="./images/计算机组成原理.assets/image-20241026153237705-1737030940034-219.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241026153237705-1737030940034-219.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241026153237705" style="zoom:25%;" />
+
+<img src="./images/计算机组成原理.assets/image-20241026181527765-1737030940034-221.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241026181527765-1737030940034-221.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241026181527765" style="zoom:25%;" />
+
+<p>###DRAM的地址线复用技术</p>
+<p>n位的地址用n&#x2F;2条地址线代替n条，分两次传行地址和列地址，地址线减半，芯片引脚减少</p>
+<p>SRAM同时送行列地址，不用地址复用技术，因为集成度低点</p>
+<p>DRAM采用地址线复用技术</p>
+<p>刷新由存储器控制不由CPU控制</p>
+<h2 id="只读存储器ROM"><a href="#只读存储器ROM" class="headerlink" title="只读存储器ROM"></a>只读存储器ROM</h2><p>RAM-易失性，断电后数据消失</p>
+<p>ROM-非易失</p>
+<img src="./images/计算机组成原理.assets/image-20241026182455768-1737030940034-223.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241026182455768-1737030940034-223.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241026182455768" style="zoom: 25%;" />
+
+<p>BIOS芯片ROM用于引导开机，将辅存ROM中的指令调入主存RAM，然后CPU就可以执行指令了</p>
+<h2 id="内存优化技术"><a href="#内存优化技术" class="headerlink" title="内存优化技术"></a>内存优化技术</h2><p>存取周期：可连续读写的最短时间&#x3D;存取时间+恢复时间</p>
+<p>DRAM芯片的恢复时间比较长，有可能是存取时间的好几倍</p>
+<h3 id="双端口RAM"><a href="#双端口RAM" class="headerlink" title="双端口RAM"></a>双端口RAM</h3><p>忽略，不考</p>
+<img src="./images/计算机组成原理.assets/image-20241026184825768-1737030940034-225.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241026184825768-1737030940034-225.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241026184825768" style="zoom:25%;" />
+
+<h3 id="多模块存储器"><a href="#多模块存储器" class="headerlink" title="多模块存储器"></a>多模块存储器</h3><p>####多体并行存储器</p>
+<p>高位交叉编址的多体存储器 体号+体内地址</p>
+<p>低位交叉编址的多体存储器 体内地址+体号</p>
+<p>先根据体号选择不同的存储体，然后根据体内地址再在存储体内寻址，低位效率高于高位</p>
+<img src="./images/计算机组成原理.assets/image-20241026185415268-1737030940034-227.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241026185415268-1737030940034-227.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241026185415268" style="zoom:25%;" />
+
+<p>所以连续访问更快！存取周期T，存取时间r，为了使流水线不间断，应保证模块数m&gt;&#x3D;T&#x2F;r ,最好&#x3D;，小于会更待，大于会过剩空闲时间</p>
+<p>####单体多字存储器</p>
+<h3 id="主存储器和cpu的连接"><a href="#主存储器和cpu的连接" class="headerlink" title="主存储器和cpu的连接"></a>主存储器和cpu的连接</h3><p>字扩展：扩展主存字数</p>
+<p>位扩展：当数据总线(比如64位计算机)&gt;存储芯片字长(一个芯片只有8*8位)</p>
+<img src="./images/计算机组成原理.assets/image-20241027174939168-1737030940034-229.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241027174939168-1737030940034-229.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241027174939168" style="zoom:25%;" />
+
+<p>&#x3D;&#x3D;位扩展&#x3D;&#x3D;</p>
+<img src="./images/计算机组成原理.assets/image-20241027175132613-1737030940034-231.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241027175132613-1737030940034-231.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241027175132613" style="zoom:25%;" />
+
+<p>这里的8K × 1位 表示8k个地址 即2^13次方，所以需要13根地址线，然后每个地址只有1位，数据线一根，这里连了两个芯片</p>
+<p>当连续接了8个芯片之后，即8片8k*1位的存储芯片，得到一个8K*8位的存储器，容量8KB</p>
+<p>线选法：根据不同的数据线，n条数据线连n个芯片</p>
+<p>&#x3D;&#x3D;字扩展&#x3D;&#x3D;</p>
+<p>连接多个8K*8位的存储芯片，然后然后根据A13-A15来控制选择不同的芯片</p>
+<p>译码器片选法：n条线，2^n个片选信号，n&#x3D;3时，可以连8个存储芯片(38译码器)，这样就得到了8K*64位的存储器</p>
+<img src="./images/计算机组成原理.assets/image-20241027180549552-1737030940034-233.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241027180549552-1737030940034-233.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241027180549552" style="zoom:25%;" />
+
+
+
+<p>下面右上方是74LS138译码器，三个使能端，三个输入端，8个初始端，头上带横线是低电平有效</p>
+<img src="./images/计算机组成原理.assets/image-20241027180849150-1737030940034-235.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241027180849150-1737030940034-235.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241027180849150" style="zoom:25%;" />
+
+<h2 id="外部存储器"><a href="#外部存储器" class="headerlink" title="外部存储器"></a>外部存储器</h2><p>###磁盘存储器</p>
+<img src="./images/计算机组成原理.assets/image-20241027181508321-1737030940034-237.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241027181508321-1737030940034-237.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241027181508321" style="zoom:25%;" />
+
+<img src="./images/计算机组成原理.assets/image-20241027183650702-1737030940034-239.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241027183650702-1737030940034-239.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241027183650702" style="zoom:25%;" />
+
+<img src="./images/计算机组成原理.assets/image-20241028215254594-1737030940034-241.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241028215254594-1737030940034-241.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241028215254594" style="zoom:25%;" />
+
+<p>RAID 多个独立的物理磁盘组成一个独立的逻辑盘</p>
+<h3 id="固态硬盘SSD"><a href="#固态硬盘SSD" class="headerlink" title="固态硬盘SSD"></a>固态硬盘SSD</h3><img src="./images/计算机组成原理.assets/image-20241028215551601-1737030940034-243.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241028215551601-1737030940034-243.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241028215551601" style="zoom:33%;" />
+
+<h2 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h2><p>Cache被集成到CPU内部，用SRAM实现</p>
+<blockquote>
+<p>设tc为访问一次Cache需要的时间，tm为访问一次主存需要的时间</p>
+<p>命中率H：CPU欲访问的信息已经在cache中的比率</p>
+<p>缺失率：M&#x3D;1-H</p>
+<p>系统的平均访问时间t&#x3D;Htc+(1-H)(tc+tm)</p>
+<p>或t&#x3D;Htc+(1-H)tm 同时访问cache和内存，若cache命中则停止访问主存</p>
+</blockquote>
+<img src="./images/计算机组成原理.assets/image-20241028220545280-1737030940034-245.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241028220545280-1737030940034-245.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241028220545280" style="zoom:25%;" />
+
+<p>将cpu目前访问地址的周围的数据放到cache中，如何定义周围？</p>
+<p>将主存的存储空间分块&#x2F;页，主存与Cache之间以块为单位进行数据交换，比如1kb一块，主存4M，分为4096块，每一块进行编号</p>
+<p>Cache中的块也称为行</p>
+<h3 id="Cache与主存的映射"><a href="#Cache与主存的映射" class="headerlink" title="Cache与主存的映射"></a>Cache与主存的映射</h3><img src="./images/计算机组成原理.assets/image-20241028221018419-1737030940034-247.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241028221018419-1737030940034-247.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241028221018419" style="zoom:25%;" />
+
+<p>a：最慢，命中率高，空间利用充分</p>
+<p>b：最快，命中率低，空间利用不充分</p>
+<p>c：折中</p>
+<img src="./images/计算机组成原理.assets/image-20241028225625187-1737030940034-249.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241028225625187-1737030940034-249.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241028225625187" style="zoom:25%;" />
+
+<img src="./images/计算机组成原理.assets/image-20241028225749634-1737030940034-251.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241028225749634-1737030940034-251.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241028225749634" style="zoom:25%;" />
+
+<img src="./images/计算机组成原理.assets/image-20241028225912939-1737030940034-253.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241028225912939-1737030940034-253.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241028225912939" style="zoom:25%;" />
+
+<h3 id="替换算法"><a href="#替换算法" class="headerlink" title="替换算法"></a>替换算法</h3><p>Cache满了之后怎么办</p>
+<p>a：满了才需要换 b：直接替换 c：分组满了才替换</p>
+<h4 id="RAND随机算法"><a href="#RAND随机算法" class="headerlink" title="RAND随机算法"></a>RAND随机算法</h4><img src="./images/计算机组成原理.assets/image-20241028235814120-1737030940034-255.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241028235814120-1737030940034-255.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241028235814120" style="zoom:25%;" />
+
+<h4 id="FIFO先进先出算法"><a href="#FIFO先进先出算法" class="headerlink" title="FIFO先进先出算法"></a>FIFO先进先出算法</h4><img src="./images/计算机组成原理.assets/image-20241028235916893-1737030940034-257.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241028235916893-1737030940034-257.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241028235916893" style="zoom:25%;" />
+
+<p>抖动现象：频繁替换，刚被替换的块很快又被调入</p>
+<h4 id="LRU近期最少使用"><a href="#LRU近期最少使用" class="headerlink" title="LRU近期最少使用"></a>LRU近期最少使用</h4><img src="./images/计算机组成原理.assets/image-20241029000334058-1737030940034-259.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241029000334058-1737030940034-259.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241029000334058" style="zoom:25%;" />
+
+<h4 id="LFU最不经常使用算法"><a href="#LFU最不经常使用算法" class="headerlink" title="LFU最不经常使用算法"></a>LFU最不经常使用算法</h4><img src="./images/计算机组成原理.assets/image-20241029000520815-1737030940034-261.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241029000520815-1737030940034-261.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241029000520815" style="zoom:25%;" />
+
+<h3 id="Cache写策略"><a href="#Cache写策略" class="headerlink" title="Cache写策略"></a>Cache写策略</h3><p>写命中</p>
+<p>写回法：只修改Cache中的内容，当块被换出时才写回主存</p>
+<p>全写法：同时写入Cache和主存，一般使用写缓冲(SRAM实现的FIFO队列)，可能写缓冲饱和发生阻塞</p>
+<p>写不命中</p>
+<p>写分配法：把主存中的块掉入Cache，再写，通常搭配写回法使用</p>
+<p>非写分配法：只写入主存，不掉入Cache，搭配全写法</p>
+<h3 id="页式存储器"><a href="#页式存储器" class="headerlink" title="页式存储器"></a>页式存储器</h3><p>进程分为页，页大小与主存物理块大小相同，每个页面离散的放入不同的主存块</p>
+<p>逻辑地址：虚地址 程序员看到的地址</p>
+<p>物理地址：实地址 主存中看到的地址</p>
+<p>逻辑地址：逻辑页号+页内地址 -&gt; 物理地址：主存块号+块内地址</p>
+<p>页表：逻辑页号 -&gt; 主存块号</p>
+<img src="./images/计算机组成原理.assets/image-20241029010036915-1737030940034-263.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241029010036915-1737030940034-263.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241029010036915" style="zoom:25%;" />
+
+<p>快表：SRAM  慢表：DRAM</p>
+<img src="./images/计算机组成原理.assets/image-20241029010228650-1737030940034-265.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241029010228650-1737030940034-265.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241029010228650" style="zoom:25%;" />
+
+<h3 id="虚拟存储器"><a href="#虚拟存储器" class="headerlink" title="虚拟存储器"></a>虚拟存储器</h3><p>虚拟存储系统，每次使用一个程序不会调入全部的数据而是调入部分</p>
+<p>页式虚拟存储系统：</p>
+<img src="./images/计算机组成原理.assets/image-20241029012646272-1737030940034-267.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241029012646272-1737030940034-267.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241029012646272" style="zoom:25%;" />
+
+<p>了解：</p>
+<img src="./images/计算机组成原理.assets/image-20241029012722279-1737030940034-269.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241029012722279-1737030940034-269.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241029012722279" style="zoom:25%;" />
+
+<h1 id="指令系统"><a href="#指令系统" class="headerlink" title="指令系统"></a>指令系统</h1><p>##指令格式</p>
+<p>指令：操作码OP+地址码A (做什么+对谁做)</p>
+<p>根据指令的地址码数量分</p>
+<ul>
+<li>零地址指令  不需要操作数或者堆栈计算机(操作数隐含在栈顶和次栈顶-后缀表达式)</li>
+<li>一地址指令  只需要单操作数 +1 -1 取反 取补 等 或 其中一个操作数被隐含在寄存器中</li>
+<li>二地址指令  a+b</li>
+<li>三地址指令 结果存到第三个地址</li>
+<li>四地址指令 将下一个指令的地址指向第四个地址</li>
+</ul>
+<p>指令字长：可能会变</p>
+<p>机器字长：不变，和cpu有关，一次整数运算能处理的二进制位数</p>
+<p>存储字长：一个存储单元中二进制代码的位数 和主存有关</p>
+<img src="./images/计算机组成原理.assets/image-20241120202530858-1737030940034-271.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241120202530858-1737030940034-271.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241120202530858" style="zoom: 25%;" />
+
+<p><strong>扩展操作码指令格式</strong></p>
+<p>定长指令字结构+可变操作码</p>
+<img src="./images/计算机组成原理.assets/image-20241120202911048-1737030940034-273.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241120202911048-1737030940034-273.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241120202911048" style="zoom: 25%;" />
+
+<p><img src="/./images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20241120203357948.png" class="lazyload" data-srcset="/./images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20241120203357948.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241120203357948"></p>
+<h2 id="指令寻址"><a href="#指令寻址" class="headerlink" title="指令寻址"></a>指令寻址</h2><p>指令寻址：如何确定下一条指令的存放地址</p>
+<p>程序计数器PC指令下一条指令的存放地址</p>
+<ul>
+<li><strong>顺序寻址</strong></li>
+</ul>
+<ol>
+<li>定长指令字结构+指令字长&#x3D;存储字长&#x3D;2B+主存按字编制</li>
+</ol>
+<p>每次PC+1</p>
+<ol start="2">
+<li>定长指令字结构+指令字长&#x3D;存储字长&#x3D;2B+主存按字节编制  （每个指令占两个字节）</li>
+</ol>
+<p>每次PC+2</p>
+<ol start="3">
+<li>变长指令字结构 + 主存字节编址</li>
+</ol>
+<p>读入第一个字，根据操作码确定该指令占n字节，然后PC+n</p>
+<ul>
+<li><strong>跳跃寻址</strong></li>
+</ul>
+<p>由转移指令指出</p>
+<ol>
+<li>定长指令字结构+指令字长&#x3D;存储字长&#x3D;2B+主存按字编制</li>
+</ol>
+<p>每次执行指令PC+1，如果指令是转移指令JMP，PC跳到转移指令指定的位置</p>
+<h2 id="数据寻址"><a href="#数据寻址" class="headerlink" title="数据寻址"></a>数据寻址</h2><p>确定本条指令的地址码指明的真实地址</p>
+<p><img src="/./images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20241120204802820.png" class="lazyload" data-srcset="/./images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20241120204802820.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241120204802820"></p>
+<p><img src="/./images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20241120204823772.png" class="lazyload" data-srcset="/./images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20241120204823772.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241120204823772"></p>
+<p>基于指令字长&#x3D;机器字长&#x3D;存储字长 的 一地址指令</p>
+<ul>
+<li>直接寻址 EA&#x3D;A 访存两次 取指令+执行指令</li>
+<li>间接寻址 EA&#x3D;(A) A是有效地址所在存储单元的地址，要在主存中寻找   访存三次取指令+执行指令2</li>
+<li>寄存器寻址 EA&#x3D;Ri 操作数在Ri所指的寄存器内 访存一次：取地址      速度快</li>
+<li>寄存器间接寻址 EA&#x3D;(Ri)   2</li>
+<li>隐含寻址 另一个操作数在ACC中</li>
+<li>立即寻址 A就是操作数本身 #+立即数   1</li>
+</ul>
+<img src="./images/计算机组成原理.assets/image-20241120210348147-1737030940034-278.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241120210348147-1737030940034-278.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241120210348147" style="zoom:33%;" />
+
+<ul>
+<li>偏移寻址</li>
+<li><ul>
+<li><img src="./images/计算机组成原理.assets/image-20241120210448919-1737030940034-280.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241120210448919-1737030940034-280.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241120210448919" style="zoom:33%;" /></li>
+</ul>
+</li>
+<li>堆栈寻址</li>
+</ul>
+<h1 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h1><h2 id="功能和结构"><a href="#功能和结构" class="headerlink" title="功能和结构"></a>功能和结构</h2><p>cpu的功能：</p>
+<ul>
+<li>指令控制</li>
+<li>操作控制</li>
+<li>时间控制</li>
+<li>数据加工</li>
+<li>中断处理</li>
+</ul>
+<p>&#x3D;&#x3D;CPU&#x3D;&#x3D;：</p>
+<p>运算器  对数据加工</p>
+<p>控制器  协调并控制计算机各部件执行程序的指令序列，包括：取指令，分析指令，执行指令</p>
+<p>&#x3D;&#x3D;运算器的结构&#x3D;&#x3D;</p>
+<p>运算器的核心：<strong>ALU 算术逻辑单元</strong></p>
+<p>通用寄存器R0 R1 R2 SP(堆栈寄存器) 其中保存的数据可能作为ALU的输入A或B，用MUX多路选择器与ALU的输入端连接，或者使用内部单总线的方式，所有寄存器的输入输出都连到一条公共的通路上</p>
+<p>暂存寄存器：暂存从主存读过来的数据</p>
+<p>程序状态字寄存器</p>
+<p>移位器</p>
+<p>计数器</p>
+<p>&#x3D;&#x3D;控制器的结构&#x3D;&#x3D;</p>
+<ul>
+<li>程序计数器PC 指出下一个指令的地址</li>
+<li>指令寄存器 保存正在执行的那条指令</li>
+<li>指令译码器 仅对操作码进行译码，向控制器提供特定信号</li>
+<li>微操作信号发生器</li>
+<li>时序系统</li>
+<li>存储器地址寄存器MAR  存放要访问的主存单元的地址</li>
+<li>存储器数据寄存器MDR  存放从主存读入的信息</li>
+</ul>
+<img src="./images/计算机组成原理.assets/image-20241121221412904-1737030940034-282.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241121221412904-1737030940034-282.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241121221412904" style="zoom:67%;" />
+
+<h2 id="指令执行过程"><a href="#指令执行过程" class="headerlink" title="指令执行过程"></a>指令执行过程</h2><img src="./images/计算机组成原理.assets/image-20241121222334954-1737030940034-284.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241121222334954-1737030940034-284.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241121222334954" style="zoom:33%;" />
+
+<ul>
+<li>取址周期</li>
+</ul>
+<img src="./images/计算机组成原理.assets/image-20241123150816737-1737030940034-286.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241123150816737-1737030940034-286.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241123150816737" style="zoom:33%;" />
+
+<img src="./images/计算机组成原理.assets/image-20241123151013947-1737030940034-288.png" class="lazyload" data-srcset="./images/计算机组成原理.assets/image-20241123151013947-1737030940034-288.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241123151013947" style="zoom:33%;" />
+
+<img src="C:\Users\Tutu\AppData\Roaming\Typora\typora-user-images\image-20241123151110723.png" class="lazyload" data-srcset="C:\Users\Tutu\AppData\Roaming\Typora\typora-user-images\image-20241123151110723.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241123151110723" style="zoom:33%;" />
+
+
+
+
+  </div>
+  
+  
+    
+    <div class='footer'>
+       <!-- 参考资料、相关资料等 -->
+      
+       <!-- 相关文章 -->
+      
+      <!-- 版权声明组件 -->
+      
+      <!-- 打赏组件 -->
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-03T20:45:53+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2025年3月3日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/&title=计算机组成原理 - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qq.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/&title=计算机组成原理 - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qzone.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/&title=计算机组成原理 - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/weibo.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>操作系统</p>
+          <p class='content'>操作系统环境准备###安装编译工具
+12345sudo yum groupinstall &quot;Development Tools&quot;   (GCC make Debug)yum ...</p>
+        </a>
+      
+      
+        <a class='next' href='/2025/03/02/source/%E5%90%8E%E7%AB%AF/TinyWebServer/'>
+          <p class='title'>TinyWebServer<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>git clone https://github.com/qinguoyi/TinyWebServer.git
+准备mysql数据库 目前是在docker 容器mysql8 root 12345...</p>
+        </a>
+      
+    </div>
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
+  
+
+
+  <article class="post white-box shadow floatable blur" id="comments">
+    <span hidden>
+      <meta itemprop="discussionUrl" content="/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/index.html#comments">
+    </span>
+    <p ct><i class='fa-solid fa-comments'></i> 评论</p>
+    
+
+    <div id="layoutHelper-comments"></div>
+
+  </article>
+
+
+
+
+
+
+</div>
+<aside id='l_side' itemscope itemtype="http://schema.org/WPSideBar">
+  
+
+  
+    
+    
+      
+    
+  
+
+
+<div class="widget-sticky pjax">
+
+  
+  
+
+
+  <section class="widget toc-wrapper desktop mobile " id="toc-div" >
+    
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%84%E4%B8%AA%E7%A1%AC%E4%BB%B6%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">各个硬件的工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%A7%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="toc-text">多级层次结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="toc-text">计算机的性能指标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%95%B4%E4%BD%93%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="toc-text">系统整体性能指标</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E4%BD%8D%E8%BD%AC%E6%8D%A2"><span class="toc-text">进位转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BCD%E7%A0%81"><span class="toc-text">BCD码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E7%82%B9%E5%B0%8F%E6%95%B0"><span class="toc-text">定点小数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="toc-text">移位运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E7%A7%BB%E4%BD%8D"><span class="toc-text">算术移位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E7%A7%BB%E4%BD%8D"><span class="toc-text">逻辑移位</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%98%E9%99%A4"><span class="toc-text">乘除</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%A0%81%E7%9A%84%E4%B9%98%E6%B3%95"><span class="toc-text">原码的乘法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E7%A0%81%E7%9A%84%E4%B9%98%E6%B3%95%E8%BF%90%E7%AE%97"><span class="toc-text">补码的乘法运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%A0%81%E7%9A%84%E9%99%A4%E6%B3%95"><span class="toc-text">原码的除法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E7%A0%81%E7%9A%84%E9%99%A4%E6%B3%95"><span class="toc-text">补码的除法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">强制类型转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8%E5%92%8C%E6%8E%92%E5%88%97"><span class="toc-text">数据的存储和排列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E5%B0%8F%E7%AB%AF%E6%A8%A1%E5%BC%8F"><span class="toc-text">大小端模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9%E7%95%8C%E5%AF%B9%E9%BD%90"><span class="toc-text">边界对齐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IEEE-754"><span class="toc-text">IEEE 754</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-text">浮点数的运算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="toc-text">层次结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E5%AD%98%E5%82%A8%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90"><span class="toc-text">主存储器的基本组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SRAM%E5%92%8CDRAM"><span class="toc-text">SRAM和DRAM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%85%83%E4%BB%B6%E4%B8%8D%E5%90%8C%E5%AF%BC%E8%87%B4%E7%9A%84%E7%89%B9%E6%80%A7%E5%B7%AE%E5%BC%82"><span class="toc-text">存储元件不同导致的特性差异</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DRAM%E7%9A%84%E5%88%B7%E6%96%B0"><span class="toc-text">DRAM的刷新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AA%E8%AF%BB%E5%AD%98%E5%82%A8%E5%99%A8ROM"><span class="toc-text">只读存储器ROM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="toc-text">内存优化技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E7%AB%AF%E5%8F%A3RAM"><span class="toc-text">双端口RAM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%A8%A1%E5%9D%97%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-text">多模块存储器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E5%AD%98%E5%82%A8%E5%99%A8%E5%92%8Ccpu%E7%9A%84%E8%BF%9E%E6%8E%A5"><span class="toc-text">主存储器和cpu的连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-text">外部存储器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BA%E6%80%81%E7%A1%AC%E7%9B%98SSD"><span class="toc-text">固态硬盘SSD</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cache"><span class="toc-text">Cache</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cache%E4%B8%8E%E4%B8%BB%E5%AD%98%E7%9A%84%E6%98%A0%E5%B0%84"><span class="toc-text">Cache与主存的映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="toc-text">替换算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RAND%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95"><span class="toc-text">RAND随机算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FIFO%E5%85%88%E8%BF%9B%E5%85%88%E5%87%BA%E7%AE%97%E6%B3%95"><span class="toc-text">FIFO先进先出算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LRU%E8%BF%91%E6%9C%9F%E6%9C%80%E5%B0%91%E4%BD%BF%E7%94%A8"><span class="toc-text">LRU近期最少使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LFU%E6%9C%80%E4%B8%8D%E7%BB%8F%E5%B8%B8%E4%BD%BF%E7%94%A8%E7%AE%97%E6%B3%95"><span class="toc-text">LFU最不经常使用算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cache%E5%86%99%E7%AD%96%E7%95%A5"><span class="toc-text">Cache写策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E5%BC%8F%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-text">页式存储器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-text">虚拟存储器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E5%AF%BB%E5%9D%80"><span class="toc-text">指令寻址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AF%BB%E5%9D%80"><span class="toc-text">数据寻址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E5%92%8C%E7%BB%93%E6%9E%84"><span class="toc-text">功能和结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-text">指令执行过程</span></a>
+    </div>
+  </section>
+
+  
+
+</div>
+
+
+<!-- 没有 pjax 占位会报错 万恶的 pjax -->
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <!-- Custom Files side begin -->
+  
+  <!-- Custom Files side end -->
+</aside>
+
+
+
+          <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+<pjax>
+<script>
+  window.pdata={}
+  pdata.ispage=true;
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+  pdata.commentConfig={};
+  //  see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs
+  
+    // header
+    var l_header=document.getElementById("l_header");
+    
+    l_header.classList.remove("show");
+    
+    
+      // cover
+      var cover_wrapper=document.querySelector('#l_cover .cover-wrapper');
+      var scroll_down=document.getElementById('scroll-down');
+      cover_wrapper.id="half";
+      cover_wrapper.style.display="";
+      scroll_down.style.display="none";
+    
+  
+</script>
+</pjax>
+        </div>
+        
+  
+  <footer class="footer clearfix"  itemscope itemtype="http://schema.org/WPFooter">
+    <br><br>
+    
+      
+        
+          <div><p><span id="lc-sv">博客内容遵循 tutulp-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</span></p>
+</div>
+        
+      
+    
+      
+        本站使用
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/#5.8.0" target="_blank" class="codename">Volantis</a>
+        作为主题
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © since 2025 tutulp</a></p>
+
+        </div>
+      
+    
+    <!-- Custom Files footer begin-->
+    
+    <!-- Custom Files footer end-->
+  </footer>
+
+
+        <a id="s-top" class="fa-solid fa-arrow-up fa-fw" href="/" onclick="return false;" title="top"></a>
+      </div>
+    </div>
+    <div>
+      <script>
+  /******************** volantis.dom ********************************/
+  // 页面选择器 将dom对象缓存起来 see: /source/js/app.js etc.
+  volantis.dom.bodyAnchor = volantis.dom.$(document.getElementById("safearea")); // 页面主体
+  volantis.dom.topBtn = volantis.dom.$(document.getElementById('s-top')); // 向上
+  volantis.dom.wrapper = volantis.dom.$(document.getElementById('wrapper')); // 整个导航栏
+  volantis.dom.coverAnchor = volantis.dom.$(document.querySelector('#l_cover .cover-wrapper')); // 1个
+  volantis.dom.switcher = volantis.dom.$(document.querySelector('#l_header .switcher .s-search')); // 搜索按钮   移动端 1个
+  volantis.dom.header = volantis.dom.$(document.getElementById('l_header')); // 移动端导航栏
+  volantis.dom.search = volantis.dom.$(document.querySelector('#l_header .m_search')); // 搜索框 桌面端 移动端 1个
+  volantis.dom.mPhoneList = volantis.dom.$(document.querySelectorAll('#l_header .m-phone .list-v')); //  手机端 子菜单 多个
+</script>
+
+<script>
+  
+  volantis.css("https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fortawesome/fontawesome-free/css/all.min.css");
+  
+  
+  
+</script>
+
+<!-- required -->
+
+
+<!-- internal -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+<!-- rightmenu要在darkmode之前（ToggleButton） darkmode要在comments之前（volantis.dark.push）-->
+
+
+
+<script>
+  function loadIssuesJS() {
+    
+      const sites_api = document.getElementById('sites-api');
+      if (sites_api != undefined && typeof SitesJS === 'undefined') {
+        volantis.js("/js/plugins/tags/sites.js")
+      }
+    
+    
+      const friends_api = document.getElementById('friends-api');
+      if (friends_api != undefined && typeof FriendsJS === 'undefined') {
+        volantis.js("/js/plugins/tags/friends.js")
+      }
+    
+    
+      const contributors_api = document.getElementById('contributors-api');
+      if (contributors_api != undefined && typeof ContributorsJS === 'undefined') {
+        volantis.js("/js/plugins/tags/contributors.js")
+      }
+    
+  };
+  loadIssuesJS()
+  volantis.pjax.push(()=>{
+    loadIssuesJS();
+  })
+
+</script>
+
+
+
+
+  <script defer src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/vanilla-lazyload/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
+  
+
+<script>
+  window.FPConfig = {
+	delay: 0,
+	ignoreKeywords: ["#"],
+	maxRPS: 6,
+	hoverDelay: 0
+  };
+</script>
+<script defer src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/flying-pages/flying-pages.min.js"></script>
+
+
+
+
+
+
+
+
+
+      <script>
+  volantis.layoutHelper("comments",`<div id="giscus_container"></div>`)
+
+  volantis.giscus = {};
+
+  function check_giscus() {
+    if (volantis.dark.mode === "dark") {
+      volantis.giscus.Theme = 'dark';
+    } else {
+      volantis.giscus.Theme = 'light';
+    }
+
+    return document.getElementById("giscus_container");
+  }
+
+  function pjax_giscus() {
+    const HEAD = check_giscus();
+    if (!HEAD) return;
+    let cfg = Object.assign({"theme":{"light":"light","dark":"dark"}},pdata.commentConfig)
+    const script = document.createElement('script');
+    script.setAttribute('src', 'https://giscus.app/client.js');
+    Object.keys(cfg).forEach(k=>{
+      if (k != "theme") {
+        script.setAttribute('data-'+k, cfg[k]);
+      }
+    })
+    script.setAttribute('data-theme', volantis.giscus.Theme);
+    script.setAttribute('crossorigin', "anonymous");
+    HEAD.appendChild(script);
+  }
+
+  function dark_giscus() {
+    const HEAD = check_giscus();
+    if (!HEAD) return;
+
+    const message = {
+      setConfig: {
+        theme: volantis.giscus.Theme
+      }
+    };
+    const giscusIframe = document.querySelector('iframe.giscus-frame');
+    giscusIframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+  }
+  pjax_giscus();
+  volantis.pjax.push(pjax_giscus);
+  volantis.dark.push(dark_giscus);
+</script>
+
+    
+
+
+
+
+
+<!-- optional -->
+
+  <script>
+  const SearchServiceDataPathRoot = ("/" || "/").endsWith("/") ?
+    "/" || "/" :
+    "//" || "/";
+  const SearchServiceDataPath = SearchServiceDataPathRoot + "content.json";
+
+  function loadSearchScript() {
+    // see: layout/_partial/scripts/_ctrl/cdnCtrl.ejs
+    return volantis.js("/js/search/hexo.js");
+  }
+
+  function loadSearchService() {
+    loadSearchScript();
+    document.querySelectorAll(".input.u-search-input").forEach((e) => {
+      e.removeEventListener("focus", loadSearchService, false);
+    });
+
+    document.querySelectorAll(".u-search-form").forEach((e) => {
+      e.addEventListener("submit", (event) => {
+        event.preventDefault();
+      }, false);
+    });
+  }
+
+  // 打开并搜索 字符串 s
+  function OpenSearch(s) {
+    if (typeof SearchService === 'undefined')
+      loadSearchScript().then(() => {
+        SearchService.setQueryText(s);
+        SearchService.search();
+      });
+    else {
+      SearchService.setQueryText(s);
+      SearchService.search();
+    }
+  }
+
+  // 访问含有 ?s=xxx  的链接时打开搜索 // 与搜索引擎 structured data 相关: /scripts/helpers/structured-data/lib/config.js
+  if (window.location.search && /^\?s=/g.test(window.location.search)) {
+    let queryText = decodeURI(window.location.search)
+      .replace(/\ /g, "-")
+      .replace(/^\?s=/g, "");
+    OpenSearch(queryText);
+  }
+
+  // 搜索输入框获取焦点时加载搜索
+  document.querySelectorAll(".input.u-search-input").forEach((e) => {
+    e.addEventListener("focus", loadSearchService, false);
+  });
+</script>
+
+
+
+
+
+
+
+  <script>
+
+
+
+  function pjax_highlightjs_copyCode(){
+    if (!(document.querySelector(".highlight .code pre") ||
+      document.querySelector(".article pre code"))) {
+      return;
+    }
+    VolantisApp.utilCopyCode(".highlight .code pre, .article pre code")
+  }
+  volantis.requestAnimationFrame(pjax_highlightjs_copyCode)
+  volantis.pjax.push(pjax_highlightjs_copyCode)
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+  function load_swiper() {
+    if (!document.querySelectorAll(".swiper-container")[0]) return;
+    volantis.css("https://unpkg.com/volantis-static@0.0.1654736714924/libs/swiper/swiper-bundle.min.css");
+    volantis.js("https://unpkg.com/volantis-static@0.0.1654736714924/libs/swiper/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    volantis.swiper = new Swiper('.swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  }
+
+  volantis.pjax.push(() => {
+    if (!document.querySelectorAll(".swiper-container")[0]) return;
+    if (typeof volantis.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+
+
+<!-- pjax 标签必须存在于所有页面 否则 pjax error -->
+<pjax>
+
+</pjax>
+
+<script>
+  function listennSidebarTOC() {
+    const navItems = document.querySelectorAll(".toc li");
+    if (!navItems.length) return;
+    let targets = []
+    const sections = [...navItems].map((element) => {
+      const link = element.querySelector(".toc-link");
+      const target = document.getElementById(
+        decodeURI(link.getAttribute("href")).replace("#", "")
+      );
+      targets.push(target)
+      // 解除 a 标签 href 的 锚点定位, a 标签 href 的 锚点定位 会随机启用?? 产生错位???
+      link.setAttribute("onclick","return false;")
+      link.setAttribute("toc-action","toc-"+decodeURI(link.getAttribute("href")).replace("#", ""))
+      link.setAttribute("href","/")
+      // 配置 点击 触发新的锚点定位
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        // 这里的 addTop 是通过错位使得 toc 自动展开.
+        volantis.scroll.to(target,{addTop: 5, observer:true})
+        // Anchor id
+        history.pushState(null, document.title, "#" + target.id);
+      });
+      return target;
+    });
+
+    function activateNavByIndex(target) {
+      if (target.classList.contains("active-current")) return;
+
+      document.querySelectorAll(".toc .active").forEach((element) => {
+        element.classList.remove("active", "active-current");
+      });
+      target.classList.add("active", "active-current");
+      let parent = target.parentNode;
+      while (!parent.matches(".toc")) {
+        if (parent.matches("li")) parent.classList.add("active");
+        parent = parent.parentNode;
+      }
+    }
+
+    // 方案一：
+    volantis.activateNavIndex=0
+    activateNavByIndex(navItems[volantis.activateNavIndex])
+    volantis.scroll.push(()=>{
+      if (targets[0].getBoundingClientRect().top >= 0) {
+        volantis.activateNavIndex = 0
+      }else if (targets[targets.length-1].getBoundingClientRect().top < 0) {
+        volantis.activateNavIndex = targets.length-1
+      } else {
+        for (let index = 0; index < targets.length; index++) {
+          const target0 = targets[index];
+          const target1 = targets[(index+1)%targets.length];
+          if (target0.getBoundingClientRect().top < 0&&target1.getBoundingClientRect().top >= 0) {
+            volantis.activateNavIndex=index
+            break;
+          }
+        }
+      }
+      activateNavByIndex(navItems[volantis.activateNavIndex])
+    })
+
+    // 方案二：
+    // IntersectionObserver 不是完美精确到像素级别 也不是低延时性的
+    // function findIndex(entries) {
+    //   let index = 0;
+    //   let entry = entries[index];
+    //   if (entry.boundingClientRect.top > 0) {
+    //     index = sections.indexOf(entry.target);
+    //     return index === 0 ? 0 : index - 1;
+    //   }
+    //   for (; index < entries.length; index++) {
+    //     if (entries[index].boundingClientRect.top <= 0) {
+    //       entry = entries[index];
+    //     } else {
+    //       return sections.indexOf(entry.target);
+    //     }
+    //   }
+    //   return sections.indexOf(entry.target);
+    // }
+    // function createIntersectionObserver(marginTop) {
+    //   marginTop = Math.floor(marginTop + 10000);
+    //   let intersectionObserver = new IntersectionObserver(
+    //     (entries, observe) => {
+    //       let scrollHeight = document.documentElement.scrollHeight;
+    //       if (scrollHeight > marginTop) {
+    //         observe.disconnect();
+    //         createIntersectionObserver(scrollHeight);
+    //         return;
+    //       }
+    //       let index = findIndex(entries);
+    //       activateNavByIndex(navItems[index]);
+    //     }, {
+    //       rootMargin: marginTop + "px 0px -100% 0px",
+    //       threshold: 0,
+    //     }
+    //   );
+    //   sections.forEach((element) => {
+    //     element && intersectionObserver.observe(element);
+    //   });
+    // }
+    // createIntersectionObserver(document.documentElement.scrollHeight);
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    volantis.requestAnimationFrame(listennSidebarTOC)
+  });
+  document.addEventListener("pjax:success", ()=>{
+    volantis.requestAnimationFrame(listennSidebarTOC)
+  });
+</script>
+
+
+
+<script>
+  document.onreadystatechange = function () {
+    if (document.readyState == 'complete') {
+      // 页面加载完毕 样式加载失败，或是当前网速慢，或是开启了省流模式
+      const { saveData, effectiveType } = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {}
+      if (getComputedStyle(document.querySelector("#safearea"), null)["display"] == "none" || saveData || /2g/.test(effectiveType)) {
+        document.querySelectorAll(".reveal").forEach(function (e) {
+          e.style["opacity"] = "1";
+        });
+        document.querySelector("#safearea").style["display"] = "block";
+      }
+    }
+  }
+</script>
+
+
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/四大件/","name":"四大件"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2025/03/02/source/基础四大件/计算机组成原理/","name":"计算机组成原理"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"计算机组成原理","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/","wordCount":0,"datePublished":"2025-03-01T16:00:00.000Z","dateModified":"2025-03-03T12:45:53.375Z","articleSection":"四大件","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+
+
+
+      
+        <!--
+  pjax重载区域接口：
+  1.  <pjax></pjax> 标签 pjax 标签必须存在于所有页面 否则 pjax error
+  2.  script[data-pjax]
+  3.  .pjax-reload script
+  4.  .pjax
+-->
+
+
+
+<script src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/pjax/pjax.min.js"></script>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox]):not([onclick="return false;"]):not([onclick="return!1"]):not([target="_blank"]):not([target="view_window"]):not([href$=".xml"])',
+        selectors: [
+          "head title",
+          "head meta[name=keywords]",
+          "head meta[name=description]",
+          
+          "#l_main",
+          "#pjax-header-nav-list",
+          ".pjax",
+          "pjax", // <pjax></pjax> 标签
+          "script[data-pjax], .pjax-reload script" // script标签添加data-pjax 或 script标签外层添加.pjax-reload 的script代码段重载
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000,
+        
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
+      volantis.pjax.method.send.start();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
+      volantis.pjax.method.complete.start();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      if(volantis.debug) {
+        console.error(e);
+        console.log('pjax error: \n' + JSON.stringify(e));
+      }else{
+        // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+        volantis.pjax.method.error.start();
+        window.location.href = e.triggerElement.href;
+      }
+    });
+</script>
+
+      
+    </div>
+    <!-- import body_end begin-->
+    <!-- import body_end end-->
+    <!-- Custom Files bodyEnd begin-->
+    
+    <!-- Custom Files bodyEnd end-->
+    <!-- front-matter body_end begin -->
+    <!-- front-matter body_end end -->
+  </body>
+</html>
