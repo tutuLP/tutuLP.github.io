@@ -65,7 +65,7 @@ p 双 段落之间有空隙
 
 ###文本格式化
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530112228863.png" alt="image-20240530112228863" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530112228863-1737030799559-50-1737030806990-83.png" alt="image-20240530112228863" style="zoom:33%;" />
 
 
 
@@ -73,7 +73,7 @@ p 双 段落之间有空隙
 
 <img src="URL">
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530112532059.png" alt="image-20240530112532059" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530112532059-1737030806990-53.png" alt="image-20240530112532059" style="zoom:33%;" />
 
 <img src="URL" alt="图片加载出错"> 图片的大小一般用css控制
 
@@ -94,13 +94,13 @@ p 双 段落之间有空隙
 
 ###音频标签
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530113650694.png" alt="image-20240530113650694" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530113650694-1737030806990-63.png" alt="image-20240530113650694" style="zoom:33%;" />
 
 后三个属性都可以简写 引号里面的内容和名字一样
 
 ###视频标签
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530113948869.png" alt="image-20240530113948869" style="zoom: 33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530113948869-1737030806990-55.png" alt="image-20240530113948869" style="zoom: 33%;" />
 
 
 
@@ -108,29 +108,29 @@ p 双 段落之间有空隙
 
 无序ul嵌套li   有序ol嵌套li   定义列表dl嵌套dt标题 dd
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530114747460.png" alt="image-20240530114747460" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530114747460-1737030806990-57.png" alt="image-20240530114747460" style="zoom:33%;" />
 
 ###表格
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530115244523.png" alt="image-20240530115244523" style="zoom: 33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530115244523-1737030806990-61.png" alt="image-20240530115244523" style="zoom: 33%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530115345382.png" alt="image-20240530115345382" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530115345382-1737030806990-59.png" alt="image-20240530115345382" style="zoom:33%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530115528423.png" alt="image-20240530115528423" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530115528423-1737030806990-67.png" alt="image-20240530115528423" style="zoom:33%;" />
 
 包裹住tr即可，但是视觉上没变化
 
 合并单元格
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530115811123.png" alt="image-20240530115811123" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530115811123-1737030806990-65.png" alt="image-20240530115811123" style="zoom:33%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530115908567.png" alt="image-20240530115908567" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530115908567-1737030806990-75.png" alt="image-20240530115908567" style="zoom:33%;" />
 
 ###表单-收集用户信息
 
 **input**
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530124822126.png" alt="image-20240530124822126" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530124822126-1737030806990-69.png" alt="image-20240530124822126" style="zoom:33%;" />
 
 **占位文本-提示**
 
@@ -138,7 +138,7 @@ placeholder=""
 
 
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530161038632.png" alt="image-20240530161038632" style="zoom: 33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530161038632-1737030806990-71.png" alt="image-20240530161038632" style="zoom: 33%;" />
 
 **其他属性**
 
@@ -148,7 +148,7 @@ checkbox checked
 
 **下拉菜单**
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530172520032.png" alt="image-20240530172520032" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530172520032-1737030806990-73.png" alt="image-20240530172520032" style="zoom:33%;" />
 
 ###文本域
 
@@ -162,11 +162,11 @@ textarea 双
 
 绑定文字和表单控件的关系，增大表单控件的点击范围
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530173446948.png" alt="image-20240530173446948" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530173446948-1737030806990-77.png" alt="image-20240530173446948" style="zoom:33%;" />
 
 ### 按钮button
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530213231208.png" alt="image-20240530213231208" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530213231208-1737030806990-79.png" alt="image-20240530213231208" style="zoom:33%;" />
 
 ###无语义布局标签 
 
@@ -176,7 +176,7 @@ span 不换行 小盒子(不换行展示)
 
 ### 字符实体
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530213620093.png" alt="image-20240530213620093" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530213620093-1737030806990-88.png" alt="image-20240530213620093" style="zoom:33%;" />
 
 多个键盘空格网页上只有一个
 
@@ -184,7 +184,7 @@ span 不换行 小盒子(不换行展示)
 
 层叠样式表
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530213949450.png" alt="image-20240530213949450" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530213949450-1737030806990-81.png" alt="image-20240530213949450" style="zoom:33%;" />
 
 ## 引入方式
 
@@ -196,9 +196,9 @@ css写在style标签里面
 
 单独放 .css html使用link标签引入
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530214301555.png" alt="image-20240530214301555" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530214301555-1737030806990-84.png" alt="image-20240530214301555" style="zoom:33%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240530215044614.png" alt="image-20240530215044614" style="zoom:33%;" />
+<img src="./images/Web HTML5 CSS3.assets/image-20240530215044614-1737030806990-86.png" alt="image-20240530215044614" style="zoom:33%;" />
 
 **行内**
 

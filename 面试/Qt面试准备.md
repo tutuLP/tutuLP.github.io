@@ -2,9 +2,9 @@
 title: "Qt面试"
 date: 2024-06-09
 categories:
-  - 就业
+  - 面试
 tags:
-  - qt
+  - 面试
 ---
 
 ## 核心机制
@@ -118,7 +118,7 @@ QSignalMapper 绑定对象数据一并传递
 
 第五个参数：
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240609150150846.png" alt="image-20240609150150846" style="zoom:33%;" />
+<img src="./images/Qt面试准备.assets/image-20240609150150846-1737030987688-364-1737030998783-367.png" alt="image-20240609150150846" style="zoom:33%;" />
 
 ## 事件过滤器
 

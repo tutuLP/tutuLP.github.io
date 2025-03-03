@@ -20,7 +20,7 @@ tags:
 
 ctrl+shift+p 输入kill
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240325221202501.png" alt="image-20240325221202501" style="zoom:33%;" />
+<img src="./images/vscode.assets/image-20240325221202501-1737030837680-109-1737030861345-124.png" alt="image-20240325221202501" style="zoom:33%;" />
 
 输入密码后删除服务器中的服务文件
 
@@ -36,7 +36,7 @@ ctrl+shift+p 输入kill
 
 **配置环境变量** 右键此电脑-属性-高级系统设置-环境变量-上方Path-编辑-新建-放入地址(不要"")
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327165119465.png" alt="image-20240327165119465" style="zoom:33%;" />
+<img src="./images/vscode.assets/image-20240327165119465-1737030861345-112.png" alt="image-20240327165119465" style="zoom:33%;" />
 
 下载vscode
 
@@ -54,7 +54,7 @@ C/C++ Chinese(可选)两个插件
 
 文件-将工作区另存为-选择这个文件夹
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327165740892.png" alt="image-20240327165740892" style="zoom:33%;" />
+<img src="./images/vscode.assets/image-20240327165740892-1737030861345-114.png" alt="image-20240327165740892" style="zoom:33%;" />
 
 #### 配置.vscode文件
 
@@ -62,7 +62,7 @@ C/C++ Chinese(可选)两个插件
 
 手动输入文件名和后缀
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327165856725.png" alt="image-20240327165856725" style="zoom: 50%;" />
+<img src="./images/vscode.assets/image-20240327165856725-1737030861345-120.png" alt="image-20240327165856725" style="zoom: 50%;" />
 
 下面我附上配置内容
 
@@ -143,9 +143,9 @@ C/C++ Chinese(可选)两个插件
 
 在每一个有代码的同级目录下都要新建一个a.exe 每次运行代码都会覆盖写入可执行文件，避免出现一堆exe文件，我已经在上方两个文件中改动优化了
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327170643483.png" alt="image-20240327170643483" style="zoom:33%;" />
+<img src="./images/vscode.assets/image-20240327170643483-1737030861345-116.png" alt="image-20240327170643483" style="zoom:33%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327170703359.png" alt="image-20240327170703359" style="zoom:33%;" />
+<img src="./images/vscode.assets/image-20240327170703359-1737030861345-118.png" alt="image-20240327170703359" style="zoom:33%;" />
 
 例如上方的目录结构，其中可以内涵很多文件夹，只需要每个文件夹都有一个a.exe
 
@@ -171,4 +171,4 @@ system("pause");
 
 或者直接双击我们之前保存的工作区也同样的效果
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327171229497.png" alt="image-20240327171229497" style="zoom:33%;" />
+<img src="./images/vscode.assets/image-20240327171229497-1737030861345-122.png" alt="image-20240327171229497" style="zoom:33%;" />

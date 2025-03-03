@@ -19,7 +19,7 @@ tags:
 
 我设置的密码：！niubiplus007
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240527095329828.png" alt="image-20240527095329828" style="zoom:33%;" />
+<img src="./images/VMware win11.assets/image-20240527095329828-1737030898720-143-1737030907387-146.png" alt="image-20240527095329828" style="zoom:33%;" />
 
 设置-选项-访问控制-加密
 

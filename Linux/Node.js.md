@@ -1,16 +1,19 @@
+---
+title: "Node"
+date: 2025-03-02
+categories:
+  - Linux
+---
+
 #安装Nodejs
 
 ### 使用nvm安装Node.js
 
-* curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+`curl -o- https://gitee.com/mirrors/nvm/raw/v0.39.3/install.sh | bash` 使用镜像源安装nvm
 
-或wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+`source ~/.bashrc`
 
-* 重新启动终端或者执行命令使nvm生效
+`nvm --version`
 
-source ~/.bashrc 或 source ~/.bash_profile 
+`nvm install --lts`  安装Node
 
-* nvm install node
-* nvm alias default node
-
-* node --version

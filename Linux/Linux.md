@@ -1,3 +1,10 @@
+---
+title: "Linux命令"
+date: 2025-03-02
+categories:
+  - Linux
+---
+
 # 命令
 
 * 防火墙
@@ -73,7 +80,7 @@ int main() {
 
 文件模式
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240828202342232.png" alt="image-20240828202342232" style="zoom:25%;" />
+<img src="./images/Linux.assets/image-20240828202342232-1740972521218-369.png" alt="image-20240828202342232" style="zoom:25%;" />
 
 同时读写模式时  先读后写，写会失败 不知道原因？？？
 
@@ -1082,7 +1089,7 @@ int main() {
 
 而 IO 操作、网络请求加载到内存的数据一开始是放在内核缓冲区的
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240829161908376.png" alt="image-20240829161908376" style="zoom: 80%;" />
+<img src="./images/Linux.assets/image-20240829161908376-1740972517970-366.png" alt="image-20240829161908376" style="zoom: 80%;" />
 
 五种网络IO模型
 

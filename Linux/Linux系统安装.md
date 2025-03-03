@@ -1,3 +1,10 @@
+---
+title: "Linux系统安装"
+date: 2025-03-02
+categories:
+  - Linux
+---
+
 Ubuntu 192.168.6.131 
 
 tutu tutu
@@ -32,7 +39,7 @@ https://cnxiaobai.com/articles/2021/10/21/1634800698273.html
 1. 创建虚拟机-典型-稍后安装操作系统-linux-centos 8 64位-虚拟机名称Anolis OS-自定义位置d:\APP\Vmware\Anolis OS-45G-将虚拟磁盘拆分为多个文件
 2. 编辑虚拟机设置-CD/DVD-使用ios镜像文件（龙蜥下载位置）-网络适配器-自定义-VMnet8（**NAT模式**）-内存-2GB
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230829094318453.png" alt="image-20230829094318453" style="zoom:33%;" />
+<img src="./images/Linux系统安装.assets/image-20230829094318453-1740971902830-254.png" alt="image-20230829094318453" style="zoom:33%;" />
 
 可以看到两个cpu-16核 我们分配两个cpu-每个4核
 
@@ -138,11 +145,11 @@ g++ -I/myincldue test.cpp
 
 -o指定输出名字 没有会生成a.out
 
--D使用宏<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230912190036624.png" alt="image-20230912190036624" style="zoom:33%;" />
+-D使用宏<img src="./images/Linux系统安装.assets/image-20230912190036624-1740971902830-256.png" alt="image-20230912190036624" style="zoom:33%;" />
 
 ## 命令行编译
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230912190542528.png" alt="image-20230912190542528" style="zoom: 50%;" />
+<img src="./images/Linux系统安装.assets/image-20230912190542528-1740971902830-258.png" alt="image-20230912190542528" style="zoom: 50%;" />
 
 如果有这样一个目录结构
 
@@ -190,7 +197,7 @@ LD_LIBRARY_PATH=src ./dyna_main 在指定文件中搜索
 
 ###GDB调试器
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230912193610332.png" alt="image-20230912193610332" style="zoom:33%;" />
+<img src="./images/Linux系统安装.assets/image-20230912193610332-1740971902830-260.png" alt="image-20230912193610332" style="zoom:33%;" />
 
 ~~~
 ## 以下命令后括号内为命令的简化使用，比如run（r），直接输入命令 r 就代表命令run
@@ -345,7 +352,7 @@ add_executable(Example test.cpp)  //表示我们需要构建一个可执行文�
 
 选择
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230830170656008.png" alt="image-20230830170656008" style="zoom: 50%;" />
+<img src="./images/Linux系统安装.assets/image-20230830170656008-1740971902830-262.png" alt="image-20230830170656008" style="zoom: 50%;" />
 
 命令行指令  cmake -S . -B build
 
@@ -420,19 +427,19 @@ crlf \r\n  lf \n ==???==
 
 ### 安装插件
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230914084230917.png" alt="image-20230914084230917" style="zoom: 50%;" />
+<img src="./images/Linux系统安装.assets/image-20230914084230917-1740971902830-264.png" alt="image-20230914084230917" style="zoom: 50%;" />
 
 点这个没用
 
 https://marketplace.visualstudio.com/vscode下载对应版本的插件-linux平台
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230914084105440.png" alt="image-20230914084105440" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20230914084105440-1740971902830-268.png" alt="image-20230914084105440" style="zoom:50%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230914084730133.png" alt="image-20230914084730133" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20230914084730133-1740971902830-266.png" alt="image-20230914084730133" style="zoom:50%;" />
 
 跳转到对应目录，会提示安装成功重启vscode
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230914084909666.png" alt="image-20230914084909666" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20230914084909666-1740971902830-270.png" alt="image-20230914084909666" style="zoom:50%;" />
 
 会提示已经安好的插件
 
@@ -654,13 +661,13 @@ CMake目录结构：项目主目录存在一个CMakeLists.txt文件
 
   实例
 
-  <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230913214219685.png" alt="image-20230913214219685" style="zoom: 33%;" />
+  <img src="./images/Linux系统安装.assets/image-20230913214219685-1740971902830-272.png" alt="image-20230913214219685" style="zoom: 33%;" />
 
-  <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230913214324629.png" alt="image-20230913214324629" style="zoom:33%;" />
+  <img src="./images/Linux系统安装.assets/image-20230913214324629-1740971902830-274.png" alt="image-20230913214324629" style="zoom:33%;" />
 
   目录结构
 
-  <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230914093743079.png" alt="image-20230914093743079" style="zoom:50%;" />
+  <img src="./images/Linux系统安装.assets/image-20230914093743079-1740971902830-276.png" alt="image-20230914093743079" style="zoom:50%;" />
 
   g++ main.cpp scr/Gun.cpp scr/Solier.cpp -Iinclude [-o main] -wall -g -O2
 
@@ -680,7 +687,7 @@ CMake目录结构：项目主目录存在一个CMakeLists.txt文件
   
   **所有文件放到一个目录里面**
   
-  ![image-20230914091740384](http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230914091740384.png)
+  ![image-20230914091740384](./images/Linux系统安装.assets/image-20230914091740384.png)
   
   aux_source_directory(${PROJECT_SOURCE_DIR} SRC) #PROJECT_SOURCE_DIR cmake .. 执行cmake后面跟随的路径
   
@@ -694,7 +701,7 @@ CMake目录结构：项目主目录存在一个CMakeLists.txt文件
   
   目录结构
   
-  <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230914093743079.png" alt="image-20230914093743079" style="zoom:50%;" />
+  <img src="./images/Linux系统安装.assets/image-20230914093743079-1740971902830-276.png" alt="image-20230914093743079" style="zoom:50%;" />
   
   一样是进入build文件夹 cmake .. make ./mian_cmake
   
@@ -724,13 +731,13 @@ CMake目录结构：项目主目录存在一个CMakeLists.txt文件
 
 # 调试
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230914134022495.png" alt="image-20230914134022495" style="zoom:33%;" />
+<img src="./images/Linux系统安装.assets/image-20230914134022495-1740971902830-279.png" alt="image-20230914134022495" style="zoom:33%;" />
 
 选择creat a launch.json file再选择c++(GDB)
 
 如果没用在右下角选择第一个
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230914134118177.png" alt="image-20230914134118177" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20230914134118177-1740971902830-281.png" alt="image-20230914134118177" style="zoom:50%;" />
 
 .json文件如下
 
@@ -785,7 +792,7 @@ f5进入调试 f10单步 f11进入 f5结束
 
 配置tasks.json文件
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230914140159227.png" alt="image-20230914140159227" style="zoom: 33%;" />
+<img src="./images/Linux系统安装.assets/image-20230914140159227-1740971902830-283.png" alt="image-20230914140159227" style="zoom: 33%;" />
 
 随便点击一个
 
@@ -865,7 +872,7 @@ rpm -ivh example.rpm
 
 搜索名字安装rpm包
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230912124810367.png" alt="image-20230912124810367" style="zoom:33%;" />
+<img src="./images/Linux系统安装.assets/image-20230912124810367-1740971902830-285.png" alt="image-20230912124810367" style="zoom:33%;" />
 
 
 
@@ -883,13 +890,13 @@ sudo nano /etc/default/locale
 
 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230912142455755.png" alt="image-20230912142455755" style="zoom:33%;" />
+<img src="./images/Linux系统安装.assets/image-20230912142455755-1740971902830-287.png" alt="image-20230912142455755" style="zoom:33%;" />
 
 sudo yum install langpacks-en
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230912142521072.png" alt="image-20230912142521072" style="zoom:33%;" />
+<img src="./images/Linux系统安装.assets/image-20230912142521072-1740971902830-289.png" alt="image-20230912142521072" style="zoom:33%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230912142609391.png" alt="image-20230912142609391" style="zoom:33%;" />
+<img src="./images/Linux系统安装.assets/image-20230912142609391-1740971902830-291.png" alt="image-20230912142609391" style="zoom:33%;" />
 
 sudo localedef -v -c -i en_US -f UTF-8 en_US.UTF-8 生成语言环境
 
@@ -909,31 +916,31 @@ rpm -q glibc-devel 检查
 
 我下载的是ubuntu-24.04-desktop-amd64.iso
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831161004931.png" alt="image-20240831161004931" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20240831161004931-1740971902830-293.png" alt="image-20240831161004931" style="zoom:50%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831161017835.png" alt="image-20240831161017835" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20240831161017835-1740971902830-295.png" alt="image-20240831161017835" style="zoom:50%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831161030021.png" alt="image-20240831161030021" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20240831161030021-1740971902830-297.png" alt="image-20240831161030021" style="zoom:50%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831165855765.png" alt="image-20240831165855765" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20240831165855765-1740971902830-299.png" alt="image-20240831165855765" style="zoom:50%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831161121700.png" alt="image-20240831161121700" style="zoom: 50%;" />
+<img src="./images/Linux系统安装.assets/image-20240831161121700-1740971902830-301.png" alt="image-20240831161121700" style="zoom: 50%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831161216529.png" alt="image-20240831161216529" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20240831161216529-1740971902830-303.png" alt="image-20240831161216529" style="zoom:50%;" />
 
 完成
 
 编辑虚拟机设置
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831161314609.png" alt="image-20240831161314609" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20240831161314609-1740971902830-305.png" alt="image-20240831161314609" style="zoom:50%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831161418248.png" alt="image-20240831161418248" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20240831161418248-1740971902830-307.png" alt="image-20240831161418248" style="zoom:50%;" />
 
 这里选择这个会使用之前配置的网络自动分配一个ip，后面不用配置了
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831170020170.png" alt="image-20240831170020170" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20240831170020170-1740971902830-309.png" alt="image-20240831170020170" style="zoom:50%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831161447582.png" alt="image-20240831161447582" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20240831161447582-1740971902830-311.png" alt="image-20240831161447582" style="zoom:50%;" />
 
 确定-开启虚拟机
 
@@ -991,9 +998,9 @@ NAT网络
    DEVICE=ens160        # 网卡的设备名称
    ONBOOT=yes           #开机自动启动网卡      改
    //加
-   IPADDR=192.168.6.208
+   IPADDR=192.168.6.208    248.3
    NETMASK=255.255.255.0
-   GATEWAY=192.168.6.2
+   GATEWAY=192.168.6.2    248.2
    PREFIX=24
    DNS1=114.114.114.114
    DNS2=8.8.8.8
@@ -1012,7 +1019,7 @@ NAT网络
 
 sudo nmtui 进入网络设置
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831165217770.png" alt="image-20240831165217770" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20240831165217770-1740971902830-313.png" alt="image-20240831165217770" style="zoom:50%;" />
 
 为啥网关设置成.2呢
 
@@ -1020,17 +1027,17 @@ sudo nmtui 进入网络设置
 
 编辑-虚拟网络编辑器-更改设置-VMnet8
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230829172834973.png" alt="image-20230829172834973" style="zoom: 67%;" />
+<img src="./images/Linux系统安装.assets/image-20230829172834973-1740971902830-315.png" alt="image-20230829172834973" style="zoom: 67%;" />
 
 NAT设置
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230829172924050.png" alt="image-20230829172924050" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20230829172924050-1740971902830-317.png" alt="image-20230829172924050" style="zoom:50%;" />
 
 规则192.168不变  6随便（224以下） 
 
 DHCP设置
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230829173012318.png" alt="image-20230829173012318" style="zoom:50%;" />
+<img src="./images/Linux系统安装.assets/image-20230829173012318-1740971902830-319.png" alt="image-20230829173012318" style="zoom:50%;" />
 
 ip要在这个范围里面
 
@@ -1153,5 +1160,116 @@ GetMessage（0）
 	pBuf=
 	
 	msgSize 数据部分长度经过减去头部数据4
+~~~
+
+# CentOS7
+
+1. vmware安装centos7 
+
+![image-20250120103952216](./images/Linux系统安装.assets/image-20250120103952216-1740971902830-321.png)
+
+2. 配置静态网络
+
+~~~
+cd /etc/sysconfig/network-scripts/
+vi ifcfg-ens33 (替换成对呀网卡名称)
+~~~
+
+~~~
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=static   //改
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=ens33
+UUID=1647aabe-3d39-4811-b698-b958ac9169f4
+DEVICE=ens33
+ONBOOT=yes               //从这往下，改，ip根据自己配置的VMnet8更改
+IPADDR=192.168.248.3
+NETMASK=255.255.255.0
+GATEWAY=192.168.248.2
+PREFIX=24
+DNS1=114.114.114.114
+DNS2=8.8.8.8
+~~~
+
+~~~
+nmcli c reload                   
+nmcli c up ens160                   
+~~~
+
+3. 配置yum源
+
+~~~
+备份
+cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+vi /etc/yum.repos.d/CentOS-Base.repo
+~~~
+
+~~~
+# CentOS-Base.repo
+#
+# The mirror system uses the connecting IP address of the client and the
+# update status of each mirror to pick mirrors that are updated to and
+# geographically close to the client.  You should use this for CentOS updates
+# unless you are manually picking other mirrors.
+#
+# If the mirrorlist= does not work for you, as a fall back you can try the
+# remarked out baseurl= line instead.
+#
+#
+ 
+[os]
+name=Qcloud centos os - $basearch
+baseurl=http://mirrors.cloud.tencent.com/centos/$releasever/os/$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7
+ 
+[updates]
+name=Qcloud centos updates - $basearch
+baseurl=http://mirrors.cloud.tencent.com/centos/$releasever/updates/$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7
+ 
+[centosplus]
+name=Qcloud centosplus - $basearch
+baseurl=http://mirrors.cloud.tencent.com/centos/$releasever/centosplus/$basearch/
+enabled=0
+gpgcheck=1
+gpgkey=http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7
+ 
+[cr]
+name=Qcloud centos cr - $basearch
+baseurl=http://mirrors.cloud.tencent.com/centos/$releasever/cr/$basearch/
+enabled=0
+gpgcheck=1
+gpgkey=http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7
+ 
+[extras]
+name=Qcloud centos extras - $basearch
+baseurl=http://mirrors.cloud.tencent.com/centos/$releasever/extras/$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7
+ 
+[fasttrack]
+name=Qcloud centos fasttrack - $basearch
+baseurl=http://mirrors.cloud.tencent.com/centos/$releasever/fasttrack/$basearch/
+enabled=0
+gpgcheck=1
+gpgkey=http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7
+~~~
+
+~~~
+yum clean all   
+yum makecache    
 ~~~
 

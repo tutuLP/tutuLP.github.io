@@ -28,9 +28,9 @@ centos  yum install git
 
 在本地修改完文件后从vscode或其他工具上传 输入信息并提交-同步更改
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240325222050209.png" alt="image-20240325222050209" style="zoom:33%;" />
+<img src="./images/git.assets/image-20240325222050209-1740971590160-42.png" alt="image-20240325222050209" style="zoom:33%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240325222102057.png" alt="image-20240325222102057" style="zoom:33%;" />
+<img src="./images/git.assets/image-20240325222102057-1740971590160-48.png" alt="image-20240325222102057" style="zoom:33%;" />
 
 从远程拉取并且删除本地多余的文件 `git pull --prune`
 
@@ -71,9 +71,9 @@ git status 其中可以随时查看状态
 * 添加电脑与账号的ssh公钥
 * 新建一个空白仓库(只填名称)并上传项目
 * 选择ssh
-* <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240801120057128.png" alt="image-20240801120057128" style="zoom:33%;" />
+* <img src="./images/git.assets/image-20240801120057128-1740971590160-44.png" alt="image-20240801120057128" style="zoom:33%;" />
 * 输入最后两条
-* <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240801120153099.png" alt="image-20240801120153099" style="zoom:33%;" />
+* <img src="./images/git.assets/image-20240801120153099-1740971590160-46.png" alt="image-20240801120153099" style="zoom:33%;" />
 
 # SSH密钥
 
@@ -84,9 +84,27 @@ ssh-keygen -t rsa -b 2048 -C 'github注册邮箱'
 2. ssh-keygen -t rsa -b 2048 -C 'tutu2061867903@gmail.com' 一路回车即可
 3. 粘贴.pub文件的内容到SSH keys
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240609211058663.png" alt="image-20240609211058663" style="zoom:33%;" />
+<img src="./images/git.assets/image-20240609211058663-1740971590160-50.png" alt="image-20240609211058663" style="zoom:33%;" />
 
 4. 进入hexo项目根目录 cd blog
 5. 删除文件 .deploy_git
 6. 修改_config.yml
 7. repo:项目的SSH地址
+
+
+
+git fetch origin c8
+git merge origin/c8
+如果有冲突解决冲突之后：
+git add .
+git commit
+
+
+
+git init
+
+git add.   git commit 
+
+git remote add origin https://github.com/username/repository.git
+
+git push -f origin master

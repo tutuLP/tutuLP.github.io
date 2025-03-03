@@ -19,7 +19,7 @@ tags:
 
 * 关闭防火墙后访问ip，会使用linux的80号端口，云服务器记得在规则中打开80 出现如下代表服务启动成功
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240319160124855.png" alt="image-20240319160124855" style="zoom: 25%;" />
+<img src="./images/Nginx.assets/image-20240319160124855-1740971541980-27.png" alt="image-20240319160124855" style="zoom: 25%;" />
 
 # 常用指令
 
@@ -125,13 +125,13 @@ http 80 https 443 需要使用ssl证书(免费申请)-得到密钥文件+证书�
 
 也可以申请自签
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240320192929544.png" alt="image-20240320192929544" style="zoom: 33%;" />
+<img src="./images/Nginx.assets/image-20240320192929544-1740971541980-29.png" alt="image-20240320192929544" style="zoom: 33%;" />
 
 生成两个文件.key .pem
 
 server中添加以下内容
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240320193101594.png" alt="image-20240320193101594" style="zoom:33%;" />
+<img src="./images/Nginx.assets/image-20240320193101594-1740971541980-31.png" alt="image-20240320193101594" style="zoom:33%;" />
 
 nginx -s reload
 
@@ -139,7 +139,7 @@ https://47.115.215.143
 
 这种没有ca机构验证会有安全提示
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240320193308883.png" alt="image-20240320193308883" style="zoom:33%;" />
+<img src="./images/Nginx.assets/image-20240320193308883-1740971541980-33.png" alt="image-20240320193308883" style="zoom:33%;" />
 
 自动跳到https
 
@@ -155,6 +155,6 @@ https://47.115.215.143
 
 在servers目录下新建vue.conf
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240320193831477.png" alt="image-20240320193831477" style="zoom:33%;" />
+<img src="./images/Nginx.assets/image-20240320193831477-1740971541980-35.png" alt="image-20240320193831477" style="zoom:33%;" />
 
 root跟打包好的vue目录

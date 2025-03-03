@@ -827,7 +827,7 @@ public:
 
 上三角下三角法
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20230924170228489.png" alt="image-20230924170228489" style="zoom:50%;" />
+<img src="./images/leetcode.assets/image-20230924170228489.png" alt="image-20230924170228489" style="zoom:50%;" />
 
 B[i]=对应行乘积  返回B数组
 

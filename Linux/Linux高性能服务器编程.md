@@ -1,3 +1,10 @@
+---
+title: "Linux高性能服务器编程"
+date: 2025-03-02
+categories:
+  - Linux
+---
+
 # 深入解析高性能服务器编程
 
 ## Linux网络编程基础API
@@ -50,7 +57,7 @@ int main(){
 
 我们可以调试查看内存的表示，也是符合逻辑的
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902200404176.png" alt="image-20240902200404176" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240902200404176-1740971827554-57.png" alt="image-20240902200404176" style="zoom:50%;" />
 
 * ==小端字节序又被称为主机字节序== 现代PC大多采用小端字节序
 * ==大端字节序也称为网络字节序== **发送端总是把要发送的数据转化成大端字节序数据后再发送**，而接收端知道对方传送过来的数据总是采用大端字节序，所以接收端可以根据自身采用的字节序决定是否对接收到的数据进行转换（小端机转换，大端机不转换）
@@ -99,13 +106,13 @@ struct sockaddr{
 
 * 地址族类型通常与协议族类型对应  常见的协议族（protocol family，也称domain)
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831112454497.png" alt="image-20240831112454497" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240831112454497-1740971827554-61.png" alt="image-20240831112454497" style="zoom:50%;" />
 
 宏PF\_\*和AF\_\*都定义在bits/socket.h头文件中，且后者与前者有完全相同的值，所以二者通常混用。
 
 * sa_data成员用于存放socket地址值。但是，不同的协议族的地址值具有不同的含义和长度
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831112643843.png" alt="image-20240831112643843" style="zoom: 50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240831112643843-1740971827554-59.png" alt="image-20240831112643843" style="zoom: 50%;" />
 
 可见14的大小完全不够，linux定义了新的结构
 
@@ -533,7 +540,7 @@ int shutdown(int sockfd,int howto);
 
 sockfd参数是待关闭的socket。howto参数决定了shutdown的行为，它可取表的某个值
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831124846783.png" alt="image-20240831124846783" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240831124846783-1740971827554-65.png" alt="image-20240831124846783" style="zoom:50%;" />
 
 由此可见，shutdown能够分别关闭socket上的读或写，或者都关闭。而close在关闭连接时只能将socket上的读和写同时关闭。
 
@@ -558,7 +565,7 @@ send往sockfd上写入数据，buf和len参数分别指定写缓冲区的位置�
 
 * flags参数为数据收发提供了额外的控制
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831142715399.png" alt="image-20240831142715399" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240831142715399-1740971827554-63.png" alt="image-20240831142715399" style="zoom:50%;" />
 
 我们举例来说明如何使用这些选项。MSG_OOB选项给应用程序提供了发送和接收带外数据的方法
 
@@ -845,7 +852,7 @@ Linux提供一个守护进程来处理系统日志——syslogd的升级版rsysl
 
 日志信息具体如何分发，可以在rsyslogd的配置文件中设置。rsyslogd的主配置文件是/etc/rsyslog.conf，其中主要可以设置的项包括：内核日志输入路径，是否接收UDP日志及其监听端口（默认是514，见/etc/services文件），是否接收TCP日志及其监听端口，日志文件的权限，包含哪些子配置文件（比如/etc/rsyslog.d/*.conf）。rsyslogd的子配置文件则指定各类日志的目标存储文件
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903102130167.png" alt="image-20240903102130167" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903102130167-1740971827554-67.png" alt="image-20240903102130167" style="zoom:50%;" />
 
 
 
@@ -910,7 +917,7 @@ maskpri参数指定日志掩码值。该函数始终会成功，它返回调用�
 
 * 服务器在处理一个客户请求的同时还会继续监听其他客户请求，否则就变成了效率低下的串行服务器了图8-2中，服务器同时监听多个客户请求是通过select系统调用实现的。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903102816273.png" alt="image-20240903102816273" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903102816273-1740971827554-69.png" alt="image-20240903102816273" style="zoom:50%;" />
 
 C/S模型非常适合资源相对集中的场合，并且它的实现也很简单，但其缺点也很明显：服务器是通信的中心，当访问量过大时，可能所有客户都将得到很慢的响应。下面讨论的P2P模型解决了这个问题
 
@@ -922,13 +929,13 @@ P2P模型如图8-3a所示。P2P模型使得每台机器在消耗服务的同时�
 
 图8-3a所示的P2P模型存在一个显著的问题，即主机之间很难互相发现。所以实际使用的P2P模型通常带有一个专门的发现服务器，如图8-3b所示。这个发现服务器通常还提供查找服务（甚至还可以提供内容服务），使每个客户都能尽快地找到自己需要的资源。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903103826023.png" alt="image-20240903103826023" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903103826023-1740971827554-71.png" alt="image-20240903103826023" style="zoom:50%;" />
 
 从编程角度来讲，P2P模型可以看作C/S模型的扩展：每台主机既是客户端，又是服务器。因此，我们仍然采用C/S模型来讨论网络编程
 
 ### 服务器编程框架
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903103947062.png" alt="image-20240903103947062" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903103947062-1740971827554-73.png" alt="image-20240903103947062" style="zoom:50%;" />
 
 该图既能用来描述一台服务器，也能用来描述一个服务器机群
 
@@ -958,7 +965,7 @@ socket在创建的时候默认是阻塞的。我们可以给socket系统调用�
 
 从理论上说，阻塞I/O、I/O复用和信号驱动I/O都是同步I/O模型。因为在这三种I/O模型中，I/O的读写操作，都是在I/O事件发生之后，由应用程序来完成的。而POSIX规范所定义的异步I/O模型则不同。对异步I/O而言，用户可以直接对I/O执行读写操作，这些操作告诉内核用户读写缓冲区的位置，以及I/O操作完成之后内核通知应用程序的方式。异步I/O的读写操作总是立即返回，而不论I/O是否是阻塞的，因为真正的读写操作已经由内核接管。也就是说，同步I/O模型要求用户代码自行执行I/O操作（将数据从内核缓冲区读入用户缓冲区，或将数据从用户缓冲区写入内核缓冲区），而异步I/O机制则由内核来执行I/O操作（数据在内核缓冲区和用户缓冲区之间的移动是由内核在“后台”完成的）。你可以这样认为，同步I/O向应用程序通知的是I/O就绪事件，而异步I/O向应用程序通知的是I/O完成事件。Linux环境下，aio.h头文件中定义的函数提供了对异步I/O的支持。不过这部分内容不是本书的重点，所以只做简单的讨论
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903105336713.png" alt="image-20240903105336713" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903105336713-1740971827554-75.png" alt="image-20240903105336713" style="zoom:50%;" />
 
 ### 两种高效的事件处理模式
 
@@ -988,7 +995,7 @@ socket在创建的时候默认是阻塞的。我们可以给socket系统调用�
 
 7）睡眠在请求队列上的某个工作线程被唤醒，它往socket上写入服务器处理客户请求的结果
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903105623824.png" alt="image-20240903105623824" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903105623824-1740971827554-77.png" alt="image-20240903105623824" style="zoom:50%;" />
 
 工作线程从请求队列中取出事件后，将根据事件的类型来决定如何处理它：对于可读事件，执行读数据和处理请求的操作；对于可写事件，执行写数据的操作。因此，所示的Reactor模式中，没必要区分所谓的“读工作线程”和“写工作线程”。
 
@@ -1012,7 +1019,7 @@ socket在创建的时候默认是阻塞的。我们可以给socket系统调用�
 
 7）应用程序预先定义好的信号处理函数选择一个工作线程来做善后处理，比如决定是否关闭socket。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903110142310.png" alt="image-20240903110142310" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903110142310-1740971827554-79.png" alt="image-20240903110142310" style="zoom:50%;" />
 
 连接socket上的读写事件是通过aio_read/aio_write向内核注册的，因此内核将通过信号来向应用程序报告连接socket上的读写事件。所以，主线程中的epoll_wait调用仅能用来检测监听socket上的连接请求事件，而不能用来检测连接socket上的读写事件。
 
@@ -1034,7 +1041,7 @@ socket在创建的时候默认是阻塞的。我们可以给socket系统调用�
 
 6）当socket可写时，epoll_wait通知主线程。主线程往socket上写入服务器处理客户请求的结果。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903110744520.png" alt="image-20240903110744520" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903110744520-1740971827554-81.png" alt="image-20240903110744520" style="zoom:50%;" />
 
 ### 两种高效的并发模式
 
@@ -1052,17 +1059,17 @@ socket在创建的时候默认是阻塞的。我们可以给socket系统调用�
 
 在并发模式中，“同步”指的是程序完全按照代码序列的顺序执行；“异步”指的是程序的执行需要由系统事件来驱动。常见的系统事件包括中断、信号等。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903111202443.png" alt="image-20240903111202443" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903111202443-1740971827554-83.png" alt="image-20240903111202443" style="zoom:50%;" />
 
 按照同步方式运行的线程称为同步线程，按照异步方式运行的线程称为异步线程。显然，异步线程的执行效率高，实时性强，这是很多嵌入式程序采用的模型。但编写以异步方式执行的程序相对复杂，难于调试和扩展，而且不适合于大量的并发。而同步线程则相反，它虽然效率相对较低，实时性较差，但逻辑简单。因此，对于像服务器这种既要求较好的实时性，又要求能同时处理多个客户请求的应用程序，我们就应该同时使用同步线程和异步线程来实现，即采用半同步/半异步模式来实现。
 
 半同步/半异步模式中，同步线程用于处理客户逻辑；异步线程用于处理I/O事件。异步线程监听到客户请求后，就将其封装成请求对象并插入请求队列中。请求队列将通知某个工作在同步模式的工作线程来读取并处理该请求对象。具体选择哪个工作线程来为新的客户请求服务，则取决于请求队列的设计。比如最简单的轮流选取工作线程的Round Robin算法，也可以通过条件变量或信号量来随机地选择一个工作线程。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903111908331.png" alt="image-20240903111908331" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903111908331-1740971827554-85.png" alt="image-20240903111908331" style="zoom:50%;" />
 
 在服务器程序中，如果结合考虑两种事件处理模式和几种I/O模型，则半同步/半异步模式就存在多种变体。其中有一种变体称为半同步/半反应堆（half-sync/half-reactive）模式
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903111921950.png" alt="image-20240903111921950" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903111921950-1740971827554-87.png" alt="image-20240903111921950" style="zoom:50%;" />
 
 异步线程只有一个，由主线程来充当。它负责监听所有socket上的事件。如果监听socket上有可读事件发生，即有新的连接请求到来，主线程就接受之以得到新的连接socket，然后往epoll内核事件表中注册该socket上的读写事件。如果连接socket上有读写事件发生，即有新的客户请求到来或有数据要发送至客户端，主线程就将该连接socket插入请求队列中。所有工作线程都睡眠在请求队列上，当有任务到来时，它们将通过竞争（比如申请互斥锁）获得任务的接管权。这种竞争机制使得只有空闲的工作线程才有机会来处理新任务，这是很合理的。
 
@@ -1076,7 +1083,7 @@ socket在创建的时候默认是阻塞的。我们可以给socket系统调用�
 
 一种高效的半同步/半异步模式 每个工作线程都能同时处理多个客户连接。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903112357921.png" alt="image-20240903112357921" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903112357921-1740971827554-89.png" alt="image-20240903112357921" style="zoom:50%;" />
 
 主线程只管理监听socket，连接socket由工作线程来管理。当有新的连接到来时，主线程就接受之并将新返回的连接socket派发给某个工作线程，此后该新socket上的任何I/O操作都由被选中的工作线程来处理，直到客户关闭连接。主线程向工作线程派发socket的最简单的方式，是往它和工作线程之间的管道里写数据。工作线程检测到管道上有数据可读时，就分析是否是一个新的客户连接请求到来。如果是，则把该新socket上的读写事件注册到自己的epoll内核事件表中。
 
@@ -1088,7 +1095,7 @@ socket在创建的时候默认是阻塞的。我们可以给socket系统调用�
 
 领导者/追随者模式包含如下几个组件：句柄集（HandleSet）、线程集（ThreadSet）、事件处理器（EventHandler）和具体的事件处理器（ConcreteEventHandler）。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903112552656.png" alt="image-20240903112552400" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903112552656-1740971827555-91.png" alt="image-20240903112552400" style="zoom:50%;" />
 
 
 
@@ -1421,7 +1428,7 @@ int main(int argc, char *argv[])
 
 我们将代码清单中的两个有限状态机分别称为主状态机和从状态机，这体现了它们之间的关系：主状态机在内部调用从状态机。下面先分析从状态机，即parse_line函数，它从buffer中解析出一个行。图8-15描述了其可能的状态及状态转移过程
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903113737658.png" alt="image-20240903113737658" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903113737658-1740971827555-93.png" alt="image-20240903113737658" style="zoom:50%;" />
 
 
 
@@ -1661,7 +1668,7 @@ struct pollfd{
 };
 ~~~
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903181311707.png" alt="image-20240903181311707" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903181311707-1740971827555-95.png" alt="image-20240903181311707" style="zoom:50%;" />
 
 使用POLLRDHUP事件时，我们需要在代码最开始处定义_GNU_SOURCE
 
@@ -2124,7 +2131,7 @@ select和poll都只能工作在相对低效的LT模式，而epoll则可以工作
 
 select和poll采用的都是轮询的方式，即每次调用都要扫描整个注册文件描述符集合，并将其中就绪的文件描述符返回给用户程序，因此它们检测就绪事件的算法的时间复杂度是O（n）。epoll_wait则不同，它采用的是回调的方式。内核检测到就绪的文件描述符时，将触发回调函数，回调函数就将该文件描述符上对应的事件插入内核就绪事件队列。内核最后在适当的时机将该就绪事件队列中的内容拷贝到用户空间。因此epoll_wait无须轮询整个文件描述符集合来检测哪些事件已经就绪，其算法时间复杂度是O（1）。但是，当活动连接比较多的时候，epoll_wait的效率未必比select和poll高，因为此时回调函数被触发得过于频繁。所以**epoll_wait适用于连接数量多，但活动连接较少的情况。** **其他情况用poll**，select没啥好处
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903184558006.png" alt="image-20240903184558006" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903184558006-1740971827555-97.png" alt="image-20240903184558006" style="zoom:50%;" />
 
 ### I/O复用的高级应用一：非阻塞connect
 
@@ -2559,13 +2566,13 @@ int kill(pid_t pid,int sig);
 
 该函数把信号sig发送给目标进程；目标进程由pid参数指定，其可能的取值及含义如表所示。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240910212907105.png" alt="image-20240910212907105" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240910212907105-1740971827555-99.png" alt="image-20240910212907105" style="zoom:50%;" />
 
 >  Linux定义的信号值都大于0，如果sig取值为0，则kill函数不发送任何信号。但将sig设置为0可以用来检测目标进程或进程组是否存在，因为检查工作总是在信号发送之前就执行。不过这种检测方式是不可靠的。一方面由于进程PID的回绕，可能导致被检测的PID不是我们期望的进程的PID；另一方面，这种检测方法不是原子操作。
 
 该函数成功时返回0，失败则返回-1并设置errno。几种可能的errno
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240910213035989.png" alt="image-20240910213035989" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240910213035989-1740971827555-101.png" alt="image-20240910213035989" style="zoom:50%;" />
 
 #### 信号处理方式
 
@@ -2638,7 +2645,7 @@ struct sigaction{
 
 该结构体中的sa_hander成员指定信号处理函数。sa_mask成员设置进程的信号掩码（确切地说是在进程原有信号掩码的基础上增加信号掩码），以指定哪些信号不能发送给本进程。sa_mask是信号集sigset_t（_sigset_t的同义词）类型，该类型指定一组信号。关于信号集，我们将在后面介绍。sa_flags成员用于设置程序收到信号时的行为，其可选值如表10-4所示。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240910215133724.png" alt="image-20240910215133724" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240910215133724-1740971827555-103.png" alt="image-20240910215133724" style="zoom:50%;" />
 
 sa_restorer成员已经过时，最好不要使用。sigaction成功时返回0，失败则返回-1并设置errno。
 
@@ -2688,7 +2695,7 @@ linux三种定时方法
 
 分别设置socket接收数据超时时间和发送数据超时时间
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903200850739.png" alt="image-20240903200850739" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903200850739-1740971827555-105.png" alt="image-20240903200850739" style="zoom:50%;" />
 
 我们可以根据系统调用（send、sendmsg、recv、recvmsg、accept和connect）的返回值以及errno来判断超时时间是否已到，进而决定是否开始处理定时任务。
 
@@ -2892,7 +2899,7 @@ int pthread_join(pthread_t thread,void**retval);
 
 thread参数是目标线程的标识符，retval参数则是目标线程返回的退出信息。该函数会一直阻塞，直到被回收的线程结束为止。该函数成功时返回0，失败则返回错误码。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903205058260.png" alt="image-20240903205058260" style="zoom:50%;" />
+<img src="./images/Linux高性能服务器编程.assets/image-20240903205058260-1740971827555-107.png" alt="image-20240903205058260" style="zoom:50%;" />
 
 **pthread_cancel**
 

@@ -503,3 +503,8 @@ footer:
     <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 ~~~
 
+~~~
+npm i hexo-theme-volantis
+icon
+~~~
+

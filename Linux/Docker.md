@@ -1,3 +1,12 @@
+---
+title: "docker"
+date: 2025-03-02
+categories:
+  - Linux
+tags:
+  - Linux
+---
+
 docker为每一个应用提供完全隔离的环境-配置的环境也叫做container/容器
 
 image/镜像：包含部署的程序以及关联的所有库
@@ -102,8 +111,6 @@ docker ps查看运行的镜像
 
 镜像仓库:全球Docker Hub 华为 腾讯 ali 公司私服
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240106142338178.png" alt="image-20240106142338178" style="zoom:33%;" />
-
 ## 命令解读
 
 - docker run -d ：创建并运行一个容器，-d 容器后台运行
@@ -152,9 +159,9 @@ https://docs.docker.com/engine/reference/commandline/cli/
 | docker load    | 加载本地压缩文件到镜像         | [docker load](https://docs.docker.com/engine/reference/commandline/load/) |
 | docker inspect | 查看容器详细信息               | [docker inspect](https://docs.docker.com/engine/reference/commandline/inspect/) |
 
-用一副图来表示这些命令的关系：
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240106145239873.png" alt="image-20240106145239873" style="zoom:33%;" />
+
+
 
 补充：
 
@@ -262,7 +269,7 @@ source /root/.bashrc
 * 找到index.html文件在哪里
 
 * * 看官网
-  * <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240107101415047.png" alt="image-20240107101415047" style="zoom:33%;" />
+  * <img src="./images/Docker.assets/image-20240107101415047-1740972279877-357.png" alt="image-20240107101415047" style="zoom:33%;" />
 
 * ~~~powershell
   docker exec -it nginx bash
@@ -272,7 +279,7 @@ source /root/.bashrc
 
 **数据卷（volume）**是一个虚拟目录，是容器内目录与宿主机目录之间映射的桥梁。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240107101910600.png" alt="image-20240107101910600" style="zoom: 33%;" />
+<img src="./images/Docker.assets/image-20240107101910600-1740972330679-360.png" alt="image-20240107101910600" style="zoom: 33%;" />
 
 一旦绑定,一着变则全变
 

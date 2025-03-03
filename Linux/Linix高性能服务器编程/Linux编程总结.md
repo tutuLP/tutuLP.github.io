@@ -8,19 +8,19 @@ C/S模型
 
 > B/S模型 浏览器服务器模型
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20241201133052276.png" alt="image-20241201133052276" style="zoom:33%;" />
+<img src="./images/Linux编程总结.assets/image-20241201133052276-1740971847233-135.png" alt="image-20241201133052276" style="zoom:33%;" />
 
 P2P模型
 
 每个节点都既是服务器又是客户端，可以直接与其他节点通信。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20241201131859404.png" alt="image-20241201131859404" style="zoom:33%;" />
+<img src="./images/Linux编程总结.assets/image-20241201131859404-1740971847234-139.png" alt="image-20241201131859404" style="zoom:33%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20241201132901998.png" alt="image-20241201132901998" style="zoom:33%;" />
+<img src="./images/Linux编程总结.assets/image-20241201132901998-1740971847234-143.png" alt="image-20241201132901998" style="zoom:33%;" />
 
 ### 服务器编程框架
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903103947062.png" alt="image-20240903103947062" style="zoom: 33%;" />
+<img src="./images/Linux编程总结.assets/image-20240903103947062-1740971847234-137.png" alt="image-20240903103947062" style="zoom: 33%;" />
 
 | 模块         | 单个服务器                   | 服务器集群                   |
 | ------------ | ---------------------------- | ---------------------------- |
@@ -35,15 +35,32 @@ P2P模型
 
 在I/O模型中，“同步”和“异步”区分的是内核向应用程序通知的是何种I/O事件（是就绪事件还是完成事件），以及该由谁来完成I/O读写（是应用程序还是内核）。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903105336713.png" alt="image-20240903105336713" style="zoom:50%;" />
+<img src="./images/Linux编程总结.assets/image-20240903105336713-1740971847234-141.png" alt="image-20240903105336713" style="zoom:50%;" />
 
-##### 事件处理模式
+I/O复用技术,来实现对监听socket（`listenfd`）和连接socket（客户请求）的同时监听。注意I/O复用虽然可以同时监听多个文件描述符，但是它本身是阻塞的，并且当有多个文件描述符同时就绪的时候，如果不采取额外措施，程序则只能按顺序处理其中就绪的每一个文件描述符，所以为提高效率，我们将在这部分通过线程池来实现并发（多线程并发），为每个就绪的文件描述符分配一个逻辑单元（线程）来处理。
 
-###### Reactor模式
+==同步IO和异步IO的区别==：
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20241201134224699.png" alt="image-20241201134224699" style="zoom: 50%;" />
+* 同步IO：CPU一旦遇到IO操作，如读写文件、发送网络数据时，就需要等待IO操作完成，才能继续进行下一步操作。这种情况称为同步IO。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20241201134305203.png" alt="image-20241201134305203" style="zoom:33%;" />
+* 异步IO：只发出IO指令，并不等待IO结果，然后就去执行其他代码了。一段时间后，当IO返回结果时，再通知CPU进行处理。异步IO模型下，一个线程就可以同时处理多个IO请求，并且没有切换线程的操作异步IO模型需要一个消息循环，在消息循环中，主线程不断地重复“读取消息-处理消息”这一过程：
+
+~~~
+loop = get_event_loop()
+while True:
+    event = loop.get_event()
+    process_event(event)
+~~~
+
+#####事件处理模式
+
+######Reactor模式
+
+要求主线程（I/O处理单元）只负责监听文件描述符上是否有事件发生（可读、可写），若有，则立即通知工作线程（逻辑单元），将socket可读可写事件放入请求队列，交给工作线程处理。
+
+<img src="./images/Linux编程总结.assets/image-20241201134224699-1740971847234-145.png" alt="image-20241201134224699" style="zoom: 50%;" />
+
+<img src="./images/Linux编程总结.assets/image-20241201134305203-1740971847234-147.png" alt="image-20241201134305203" style="zoom:33%;" />
 
 Reactor（事件分发器）：1. 管理EventHandler的注册与销毁 2. 分发事件 (根据Demultiplexer返回的注册的事件分发) 
 
@@ -55,7 +72,9 @@ EventHandler（事件处理器）：1. 实际处理各类事件的组件
 
 ###### Proactor模式
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20241201135651226.png" alt="image-20241201135651226" style="zoom:33%;" />
+将所有的I/O操作都交给主线程和内核来处理（进行读、写），工作线程仅负责处理逻辑，如主线程读完成后`users[sockfd].read()`，选择一个工作线程来处理客户请求`pool->append(users + sockfd)`。
+
+<img src="./images/Linux编程总结.assets/image-20241201135651226-1740971847234-149.png" alt="image-20241201135651226" style="zoom:33%;" />
 
 Proactor Initiator: 发起异步操作的初始化器
 
@@ -77,7 +96,7 @@ Handler处理完成事件并返回结果给应用程序
 
 使用同步I/O方式模拟出Proactor模式的一种方法：主线程执行数据读写操作，读写完成之后，主线程向工作线程通知这一“完成事件”。那么从工作线程的角度来看，它们就直接获得了数据读写的结果，接下来要做的只是对读写的结果进行逻辑处理。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20241201181852869.png" alt="image-20241201181852869" style="zoom:33%;" />
+<img src="./images/Linux编程总结.assets/image-20241201181852869-1740971847234-151.png" alt="image-20241201181852869" style="zoom:33%;" />
 
 CompletionHandler: 完成事件处理接口
 
@@ -87,9 +106,9 @@ ProactorInitiator: 发起异步操作的接口
 
 ###### Reactor和Proactor的区别
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20241201140053653.png" alt="image-20241201140053653" style="zoom: 50%;" />
+<img src="./images/Linux编程总结.assets/image-20241201140053653-1740971847234-153.png" alt="image-20241201140053653" style="zoom: 50%;" />
 
-![image-20241201140104227](http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20241201140104227.png)
+![image-20241201140104227](./images/Linux编程总结.assets/image-20241201140104227.png)
 
 I/O操作处理方式
 
@@ -149,7 +168,7 @@ Proactor: 需要更多的系统资源来支持异步操作
 
 
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20241201184705755.png" alt="image-20241201184705755" style="zoom:33%;" />
+<img src="./images/Linux编程总结.assets/image-20241201184705755-1740971847234-156.png" alt="image-20241201184705755" style="zoom:33%;" />
 
 * 同步服务层
 
@@ -171,9 +190,9 @@ Proactor: 需要更多的系统资源来支持异步操作
 
 在服务器程序中，如果结合考虑两种事件处理模式和几种I/O模型，则半同步/半异步模式就存在多种变体。其中有一种变体称为半同步/半反应堆
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903111921950.png" alt="image-20240903111921950" style="zoom:50%;" />
+<img src="./images/Linux编程总结.assets/image-20240903111921950-1740971847234-158.png" alt="image-20240903111921950" style="zoom:50%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20241201194214080.png" alt="image-20241201194214080" style="zoom: 50%;" />
+<img src="./images/Linux编程总结.assets/image-20241201194214080-1740971847234-160.png" alt="image-20241201194214080" style="zoom: 50%;" />
 
 异步线程只有一个，由主线程来充当。它负责监听所有socket上的事件。如果监听socket上有可读事件发生，即有新的连接请求到来，主线程就接受之以得到新的连接socket，然后往epoll内核事件表中注册该socket上的读写事件。如果连接socket上有读写事件发生，即有新的客户请求到来或有数据要发送至客户端，主线程就将该连接socket插入请求队列中。所有工作线程都睡眠在请求队列上，当有任务到来时，它们将通过竞争（比如申请互斥锁）获得任务的接管权
 
@@ -187,13 +206,13 @@ Proactor: 需要更多的系统资源来支持异步操作
 
 一种高效的半同步/半异步模式 每个工作线程都能同时处理多个客户连接
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240903112357921.png" alt="image-20240903112357921" style="zoom:50%;" />
+<img src="./images/Linux编程总结.assets/image-20240903112357921-1740971847234-162.png" alt="image-20240903112357921" style="zoom:50%;" />
 
 主线程只管理监听socket，连接socket由工作线程来管理。当有新的连接到来时，主线程就接受之并将新返回的连接socket派发给某个工作线程，此后该新socket上的任何I/O操作都由被选中的工作线程来处理，直到客户关闭连接。主线程向工作线程派发socket的最简单的方式，是**往它和工作线程之间的管道里写数据**。工作线程检测到管道上有数据可读时，就分析是否是一个新的客户连接请求到来。如果是，则把该新socket上的读写事件注册到自己的epoll内核事件表中。
 
 ###### 领导者/追随者模式
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20241201215046863.png" alt="image-20241201215046863" style="zoom:50%;" />
+<img src="./images/Linux编程总结.assets/image-20241201215046863-1740971847234-164.png" alt="image-20241201215046863" style="zoom:50%;" />
 
 Leader线程 负责等待和接收新的事件，当事件到达时开始处理，在处理之前提升一个新的Leader，处理完成后重新加入线程池
 
@@ -242,3 +261,70 @@ int main() {
 ET 边缘触发 状态改变才会 epoll会通知一次
 
 LT 水平触发 符合状态就会(持续)通知
+
+
+
+# 项目演示
+
+项目地址：https://github.com/qinguoyi/TinyWebServer
+
+机器：centos 9
+
+~~~
+yum install docker
+docker pull dockerpull.org/mysql:latest
+docker tag dockerpull.org/mysql:latest mysql:latest
+
+docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=yourpassword -p 3306:3306 mysql:latest
+
+docker start mysql
+
+docker exec -it mysql bash
+
+mysql -h localhost -u root -p         yourpassword
+
+
+// 建立yourdb库
+create database yourdb;
+
+// 创建user表
+USE yourdb;
+CREATE TABLE user(
+    username char(50) NULL,
+    passwd char(50) NULL
+)ENGINE=InnoDB;
+
+// 添加数据
+INSERT INTO user(username, passwd) VALUES('name', 'passwd');
+~~~
+
+* 修改main.cpp , 如果实在docker中运行的mysql webserver.cpp 文件中 "localhost" 修改为 "127.0.0.1"
+
+* 安装mysql编译包
+
+~~~
+sudo dnf install https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
+
+sudo dnf install mysql-devel --nogpgcheck
+
+rpm -qi mysql-devel //验证显示没有安装mysql-devel
+echo "/usr/lib64/mysql" | sudo tee /etc/ld.so.conf.d/mysql.conf  //添加路径
+sudo ldconfig 
+还是找不到-Lmysqlclient
+//修改makefile  手动添加路径
+MYSQL_LIBS = -L/usr/lib64/mysql -lmysqlclient
+server:$(MYSQL_LIBS)
+//难道是没有安装mysql的原因？因为我是在docker中运行的mysql
+~~~
+
+* 关闭centos防火墙
+
+systemctl stop firewalld
+
+systemctl disable firewalld
+
+systemctl status firewalld
+
+* 运行
+
+sh ./build.sh

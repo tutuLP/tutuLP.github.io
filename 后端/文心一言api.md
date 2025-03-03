@@ -1,4 +1,11 @@
-
+---
+title: "文心一言"
+date: 2025-03-02
+categories:
+  - 后端
+tags:
+  - 文心一言
+---
 
 1. 登录百度智能云账号并实名 [百度智能云-云智一体深入产业 (baidu.com)](https://cloud.baidu.com/)
 2. 访问千帆平台-立即使用[百度智能云千帆大模型平台ModelBuilder (baidu.com)](https://qianfan.cloud.baidu.com/) 或者[百度智能云控制台 (baidu.com)](https://console.bce.baidu.com/qianfan/overview)

@@ -16,7 +16,7 @@ tags:
 
 下载方式：https://oatpp.io/docs/installation/windows/
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327161303655.png" alt="image-20240327161303655" style="zoom:33%;" />
+<img src="./images/oatpp+nginx.assets/image-20240327161303655-1740971521688-1.png" alt="image-20240327161303655" style="zoom:33%;" />
 
 而后我尝试进行下载，第一次我忽略了下方的cmake参数，下面我整理了完整指令，在想要安装oatpp的地方cmd输入指令
 
@@ -39,11 +39,11 @@ cmake --build . --target INSTALL
 
 而后我又想直接把oatpp的源码放进项目中但是一直提示无法打开文件/或找不到文件
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240326205418158.png" alt="image-20240326205418158" style="zoom:33%;" />
+<img src="./images/oatpp+nginx.assets/image-20240326205418158-1740971521688-3.png" alt="image-20240326205418158" style="zoom:33%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240326205448363.png" alt="image-20240326205448363" style="zoom:33%;" />
+<img src="./images/oatpp+nginx.assets/image-20240326205448363-1740971521688-5.png" alt="image-20240326205448363" style="zoom:33%;" />
 
-![image-20240326221209405](http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240326221209405.png)
+![image-20240326221209405](./images/oatpp+nginx.assets/image-20240326221209405.png)
 
 历尽千辛万苦我终于知道如何链接了
 
@@ -51,13 +51,13 @@ cmake --build . --target INSTALL
 
 找到之前下载的oatpp/src的位置"D:\oatpp\src"填入 右键项目-属性-c/c++-附加包含目录
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327163552082.png" alt="image-20240327163552082" style="zoom:33%;" />
+<img src="./images/oatpp+nginx.assets/image-20240327163552082-1740971521688-10.png" alt="image-20240327163552082" style="zoom:33%;" />
 
 找到D:\oatpp\build\src\Debug 填入下图，里面有四个库文件
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327163852259.png" alt="image-20240327163852259" style="zoom:33%;" />
+<img src="./images/oatpp+nginx.assets/image-20240327163852259-1740971521688-8.png" alt="image-20240327163852259" style="zoom:33%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327163753697.png" alt="image-20240327163753697" style="zoom:33%;" />
+<img src="./images/oatpp+nginx.assets/image-20240327163753697-1740971521688-12.png" alt="image-20240327163753697" style="zoom:33%;" />
 
 填入四个库
 
@@ -66,7 +66,7 @@ oatpp.lib
 wsock32.lib
 ws2_32.lib`
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240327163935539.png" alt="image-20240327163935539" style="zoom:33%;" />
+<img src="./images/oatpp+nginx.assets/image-20240327163935539-1740971521688-16.png" alt="image-20240327163935539" style="zoom:33%;" />
 
 然后完事
 
@@ -438,7 +438,7 @@ App.cpp main 路由器(请求) 获取上述组件中的路由-获取controller�
 
 ​						  获取HTTP连接-获取TCP连接-建立服务-从TCP连接提供者发送消息到http连接处理
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240328095617737.png" alt="image-20240328095617737" style="zoom:33%;" />
+<img src="./images/oatpp+nginx.assets/image-20240328095617737-1740971521688-14.png" alt="image-20240328095617737" style="zoom:33%;" />
 
 ### 代码
 

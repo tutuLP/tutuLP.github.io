@@ -1,26 +1,47 @@
+---
+title: "QT"
+date: 2025-03-02
+categories:
+  - 前端
+tags:
+  - QT
+---
+
 # 软件安装
 
 1. 下载安装包 https://download.qt.io/official_releases/online_installers/ windows版
 
 2. 换源安装 安装包拖进去-后面加https://mirrors.tuna.tsinghua.edu.cn/qt/
 
-D:\下载\qt-unified-windows-x64-4.6.1-online.exe --mirror https://mirrors.tuna.tsinghua.edu.cn/qt/
+D:\下载\qt-unified-windows-x64-4.8.1-online.exe --mirror https://mirrors.tuna.tsinghua.edu.cn/qt/
+
+>  --mirror https://mirror.nju.edu.cn/qt 上面那个源用不了了，我换了一个
 
 3. 安装指引
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20231011184425061.png" alt="image-20231011184425061" style="zoom: 25%;" />
+账号注册需要在邮箱中点击链接填写信息进行验证
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20231011184557519.png" alt="image-20231011184557519" style="zoom: 25%;" />
+* 不发送使用信息
 
-按需选择插件
+<img src="./images/Qt.assets/image-20231011184425061-1737030763839-1.png" alt="image-20231011184425061" style="zoom: 25%;" />
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20231020164946892.png" alt="image-20231020164946892" style="zoom:50%;" />
+<img src="./images/Qt.assets/image-20231011184557519-1737030763840-3.png" alt="image-20231011184557519" style="zoom: 25%;" />
 
-最后的<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20231020165004372.png" alt="image-20231020165004372" style="zoom: 50%;" />
+* 按需选择插件
+
+<img src="./images/Qt.assets/image-20250116202948108-1737030763840-21.png" alt="image-20250116202948108" style="zoom:33%;" />
+
+<img src="./images/Qt.assets/image-20250116203018849-1737030763840-22.png" alt="image-20250116203018849" style="zoom:33%;" />
+
+<img src="./images/Qt.assets/image-20250116203032131-1737030763840-26.png" alt="image-20250116203032131" style="zoom:33%;" />
+
+* 选择最后一个协议
+
+<img src="./images/Qt.assets/image-20250116203109022-1737030763840-25.png" alt="image-20250116203109022" style="zoom:33%;" />
 
 4. 后面需要安装插件时：根目录下会有一个维护程序，打开进行安装-同样需要换源
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20231011185215532.png" alt="image-20231011185215532" style="zoom:50%;" />
+<img src="./images/Qt.assets/image-20231011185215532-1737030763840-7.png" alt="image-20231011185215532" style="zoom:50%;" />
 
 # 新建项目
 
@@ -28,7 +49,7 @@ D:\下载\qt-unified-windows-x64-4.6.1-online.exe --mirror https://mirrors.tuna.
 
 2. * 项目名词 位置
    * 构建系统-qmake
-   * Base class-QWidget
+   * Base class: QWidget
    * 语言-无
 3. 减少警告
 
@@ -443,7 +464,7 @@ QMessageBox 模态对话框，用于显示信息，询问问题等
 
 按钮pushbutton
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20231118161423666.png" alt="image-20231118161423666" style="zoom:33%;" />
+<img src="./images/Qt.assets/image-20231118161423666-1737030763840-5.png" alt="image-20231118161423666" style="zoom:33%;" />
 
 plain text edit 文本编辑器
 
@@ -495,7 +516,7 @@ Line Edit
 
 增加弹簧，并且水平布局
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20231118165552193.png" alt="image-20231118165552193" style="zoom: 33%;" />
+<img src="./images/Qt.assets/image-20231118165552193-1737030763840-13.png" alt="image-20231118165552193" style="zoom: 33%;" />
 
 解除布局后可以进行调整
 
@@ -582,15 +603,15 @@ connect(this->new_window,&LogIn::back,this,[=](){
 
 1. 编译release版本，生成包-后缀为Release
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20231201141318808.png" alt="image-20231201141318808" style="zoom:50%;" />
+<img src="./images/Qt.assets/image-20231201141318808-1737030763840-11.png" alt="image-20231201141318808" style="zoom:50%;" />
 
 2. 打开Release文件-release-复制.exe文件到桌面一个新的文件夹里面
 3. 利用qt bin文件夹下的工具"D:\App\Qt\6.2.4\mingw_64\bin\windeployqt.exe"来找出程序需要的所有动态库
 4. 在新文件夹里面打开终端  D:\App\Qt\6.2.4\mingw_64\bin\windeployqt.exe .\OpenChatRoom.exe 得到绿色版
 5. 下载打包工具Inno Setuphttp://www.jrsoftware.org/isdl.php#stable
-6. <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20231201145718723.png" alt="image-20231201145718723" style="zoom:50%;" />ok
-7. next-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20231201150207554.png" alt="image-20231201150207554" style="zoom: 33%;" />安装目录
-8. 打包程序的文件<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20231201150359527.png" alt="image-20231201150359527" style="zoom:33%;" /><img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20231201150452190.png" alt="image-20231201150452190" style="zoom:33%;" />-next-next-next-next
-9. <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20231201151307189.png" alt="image-20231201151307189" style="zoom:50%;" />安装包所在目录 安装包名称 图标位置(安装包的图标)
+6. <img src="./images/Qt.assets/image-20231201145718723-1737030763840-9.png" alt="image-20231201145718723" style="zoom:50%;" />ok
+7. next-<img src="./images/Qt.assets/image-20231201150207554-1737030763840-15.png" alt="image-20231201150207554" style="zoom: 33%;" />安装目录
+8. 打包程序的文件<img src="./images/Qt.assets/image-20231201150359527-1740972357197-363.png" alt="image-20231201150359527" style="zoom:33%;" /><img src="./images/Qt.assets/image-20231201150452190-1737030763840-19.png" alt="image-20231201150452190" style="zoom:33%;" />-next-next-next-next
+9. <img src="./images/Qt.assets/image-20231201151307189-1737030763840-23.png" alt="image-20231201151307189" style="zoom:50%;" />安装包所在目录 安装包名称 图标位置(安装包的图标)
 10. 不要配置qt的环境变量,配置了在自己机器上面可运行,别的机器不能运行,找不到动态库：看缺哪些,去qt文件夹里面去搜索,把缺少的手动复制到需要打包的文件夹里面
 11. 不配置环境->桌面文件夹找全动态库->再打包安装包  如果没有找全就打包,可找全后直接打开保留的.iss文件运行一遍即可

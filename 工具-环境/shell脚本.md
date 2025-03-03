@@ -1,3 +1,12 @@
+---
+title: "shell脚本"
+date: 2025-03-02
+categories:
+  - 工具
+tags:
+  - shell
+---
+
 shell：命令行解释器-接收用户输入的命令-调用操作系统内核去执行-返回结果
 
 运行环境：linux-bash windows-powershell
@@ -14,7 +23,7 @@ date
 whoami
 ~~~
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240721171550006.png" alt="image-20240721171550006" style="zoom:33%;" />
+<img src="./images/shell脚本.assets/image-20240721171550006-1737030888275-132-1737030895078-139.png" alt="image-20240721171550006" style="zoom:33%;" />
 
 运行脚本
 
@@ -34,7 +43,7 @@ echo"$name"
 
 
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240721170619389.png" alt="image-20240721170619389" style="zoom:25%;" />
+<img src="./images/shell脚本.assets/image-20240721170619389-1737030895078-135.png" alt="image-20240721170619389" style="zoom:25%;" />
 
 ~~~sh
 name=jokeer#会话变量
@@ -72,7 +81,7 @@ do
 done
 ~~~
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240721171826377.png" alt="image-20240721171826377" style="zoom:25%;" />
+<img src="./images/shell脚本.assets/image-20240721171826377-1737030895078-137.png" alt="image-20240721171826377" style="zoom:25%;" />
 
 $RANDOM生成0-32767的随机数
 

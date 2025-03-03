@@ -1,4 +1,4 @@
-​       				Linux高性能服务器编程  -游双著
+       				Linux高性能服务器编程  -游双著
 
 ​						作者充分理解巨作《TCP/IP协议详解》（三卷本），以及《UNIX网络编程》（两卷本）后融入自己的理解编写
 
@@ -34,7 +34,7 @@ TCP/IP协议详解
 
 TCP/IP协议族是一个四层协议系统，自底而上分别是数据链路层、网络层、传输层和应用层
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830171024950.png" alt="image-20240830171024950" style="zoom: 50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240830171024950-1740971872174-184.png" alt="image-20240830171024950" style="zoom: 50%;" />
 
 ####数据链路层
 
@@ -64,7 +64,7 @@ TCP/IP协议族是一个四层协议系统，自底而上分别是数据链路�
 
 网络层另外一个重要的协议是==**ICMP协议**==（Internet Control MessageProtocol，因特网控制报文协议）。它是IP协议的重要补充，主要用于检测网络连接。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830171814478.png" alt="image-20240830171814478" style="zoom: 33%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240830171814478-1740971872174-188.png" alt="image-20240830171814478" style="zoom: 33%;" />
 
 * 8位类型字段用于区分报文类型。它将ICMP报文分为两大类：一类是差错报文，这类报文主要用来回应网络错误，比如目标不可到达（类型值为3）和重定向（类型值为5）；另一类是查询报文，这类报文用来查询网络信息，比如ping程序就是使用ICMP报文查看目标是否可到达（类型值为8）的。
 * 有的ICMP报文还使用8位代码字段来进一步细分不同的条件。比如重定向报文使用代码值0表示对网络重定向，代码值1表示对主机重定向。
@@ -76,7 +76,7 @@ TCP/IP协议族是一个四层协议系统，自底而上分别是数据链路�
 
 传输层为两台主机上的应用程序提供端到端（end to end）的通信。不在乎中转过程
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830172329679.png" alt="image-20240830172329679" style="zoom:33%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240830172329679-1740971872174-182.png" alt="image-20240830172329679" style="zoom:33%;" />
 
 实线是实体通信，虚线是逻辑通信
 
@@ -103,11 +103,11 @@ TCP/IP协议族是一个四层协议系统，自底而上分别是数据链路�
 
 应用程序数据在发送到物理网络上之前，将沿着协议栈从上往下依次传递。每层协议都将在上层数据的基础上加上自己的头部信息（有时还包括尾部信息），以实现该层的功能，这个过程就称为封装
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830180219652.png" alt="image-20240830180219652" style="zoom:33%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240830180219652-1740971872174-190.png" alt="image-20240830180219652" style="zoom:33%;" />
 
 经过TCP封装后的数据称为TCP报文段，TCP协议为通信双方维持一个连接，并且在内核中存储相关数据。这部分数据中的TCP头部信息和TCP内核缓冲区（发送缓冲区或接收缓冲区）数据一起构成了**TCP报文段**
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830180552636.png" alt="image-20240830180552636" style="zoom:33%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240830180552636-1740971872174-186.png" alt="image-20240830180552636" style="zoom:33%;" />
 
 经过UDP封装后的数据称为**UDP数据报**（UDP datagram）。UDP对应用程序数据的封装与TCP类似。不同的是，UDP无须为应用层数据保存副本，因为它提供的服务是不可靠的。当一个UDP数据报被成功发送之后，UDP内核缓冲区中的该数据报就被丢弃了。如果应用程序检测到该数据报未能被接收端正确接收，并打算重发这个数据报，则应用程序需要重新从用户空间将该数据报拷贝到UDP内核发送缓冲区中。
 
@@ -115,7 +115,7 @@ TCP/IP协议族是一个四层协议系统，自底而上分别是数据链路�
 
 经过数据链路层封装的数据称为**帧**（frame）。传输媒介不同，帧的类型也不同。比如，以太网上传输的是以太网帧（ethernet frame），而令牌环网络上传输的则是令牌环帧（token ring frame）
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830180822945.png" alt="image-20240830180822945" style="zoom: 50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240830180822945-1740971872174-192.png" alt="image-20240830180822945" style="zoom: 50%;" />
 
 4字节CRC字段对帧的其他部分提供循环冗余校验
 
@@ -129,7 +129,7 @@ TCP/IP协议族是一个四层协议系统，自底而上分别是数据链路�
 
 分用是依靠头部信息中的类型字段实现的
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830181045417.png" alt="image-20240830181045417" style="zoom:33%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240830181045417-1740971872174-194.png" alt="image-20240830181045417" style="zoom:33%;" />
 
 * **分用帧** 为IP协议、ARP协议和RARP协议都使用帧传输数据，所以帧的头部需要提供某个字段（具体情况取决于帧的类型）来区分它们
 
@@ -145,7 +145,7 @@ ARP协议能实现任意网络层地址到任意物理地址的转换，不过�
 
 #### 以太网ARP请求/应答报文详解
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830181627862.png" alt="image-20240830181627862" style="zoom: 50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240830181627862-1740971872174-196.png" alt="image-20240830181627862" style="zoom: 50%;" />
 
 * 硬件类型字段定义物理地址的类型，它的值为1表示MAC地址
 * 协议类型字段表示要映射的协议地址类型，它的值为0x800，表示IP地址
@@ -168,7 +168,7 @@ $sudo arp-s 192.168.1.109 08:00:27:53:10:67 #添加对应的ARP缓存项
 
 #### 使用tcpdump观察ARP通信过程
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830183143933.png" alt="image-20240830183143933" style="zoom: 50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240830183143933-1740971872174-198.png" alt="image-20240830183143933" style="zoom: 50%;" />
 
 为了清楚地了解ARP的运作过程，我们从ernest-laptop上执行telnet命令登录Kongming20的echo服务（已经开启），并用tcpdump抓取这个过程中两台测试机器之间交换的以太网帧。具体的操作过程如下：
 
@@ -205,7 +205,7 @@ ARP(0x0806),length 60:Reply 192.168.1.109 is-at
 
 第二个数据包中，ARP通信的源端的物理地址是08:00:27:53:10:67（Kongming20），目的端的物理地址是00:16:d3:5c:b9:e3（ernest-laptop）。“Reply”表示这是一个ARP应答，“192.168.1.109 is-at 08:00:27:53:10:67”则表示目标机器Kongming20报告其物理地址。该以太网帧的长度为60字节（实际上是64字节），可见它使用了填充字节来满足最小帧长度。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830184538728.png" alt="image-20240830184538728" style="zoom:50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240830184538728-1740971872174-200.png" alt="image-20240830184538728" style="zoom:50%;" />
 
 ARP请求和应答是从以太网驱动程序发出的，而并非像图中描述的那样从ARP模块直接发送到以太网上，所以我们将它们用虚线表示
 
@@ -219,12 +219,12 @@ ARP请求和应答是从以太网驱动程序发出的，而并非像图中描�
 
 DNS是一套分布式的域名服务系统。每个DNS服务器上都存放着大量的机器名和IP地址的映射，并且是动态更新的。众多网络客户端程序都使用DNS协议来向DNS服务器查询目标主机的IP地址。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830184838542.png" alt="image-20240830184838542" style="zoom:50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240830184838542-1740971872174-202.png" alt="image-20240830184838542" style="zoom:50%;" />
 
 * 16位标识字段用于标记一对DNS查询和应答，以此区分一个DNS应答是哪个DNS查询的回应。
 * 16位标志字段用于协商具体的通信方式和反馈通信状态。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830185013889.png" alt="image-20240830185013889" style="zoom: 50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240830185013889-1740971872174-204.png" alt="image-20240830185013889" style="zoom: 50%;" />
 
 * * QR，查询/应答标志。0表示这是一个查询报文，1表示这是一个应答报文。
   * opcode，定义查询和应答的类型。0表示标准查询，1表示反向查询（由IP地址获得主机域名），2表示请求服务器状态。
@@ -235,7 +235,7 @@ DNS是一套分布式的域名服务系统。每个DNS服务器上都存放着�
   * zero，这3位未用，必须都设置为0。
   * rcode，4位返回码，表示应答的状态。常用值有0（无错误）和3（域名不存在）。
 * 接下来的4个字段则分别指出DNS报文的最后4个字段的资源记录数目。对查询报文而言，它一般包含1个查询问题，而应答资源记录数、授权资源记录数和额外资源记录数则为0。应答报文的应答资源记录数则至少为1，而授权资源记录数和额外资源记录数可为0或非0。
-* <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830190135772.png" alt="image-20240830190135772" style="zoom:50%;" />
+* <img src="./images/TCPIP协议详解.assets/image-20240830190135772-1740971872174-206.png" alt="image-20240830190135772" style="zoom:50%;" />
 * 查询名以一定的格式封装了要查询的主机域名。16位查询类型表示如何执行查询操作，常见的类型有如下几种
 * * 类型A，值是1，表示获取目标主机的IP地址。
   * 类型CNAME，值是5，表示获得目标主机的别名
@@ -243,7 +243,7 @@ DNS是一套分布式的域名服务系统。每个DNS服务器上都存放着�
 * 16位查询类通常为1，表示获取因特网地址（IP地址）
 * 应答字段、授权字段和额外信息字段都使用资源记录（ResourceRecord，RR）格式
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240830190540948.png" alt="image-20240830190540948" style="zoom:50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240830190540948-1740971872174-208.png" alt="image-20240830190540948" style="zoom:50%;" />
 
 * * 32位域名是该记录中与资源对应的名字，其格式和查询问题中的查询名字段相同。
   * 16位类型和16位类字段的含义也与DNS查询问题的对应字段相同
@@ -370,7 +370,7 @@ IP协议是TCP/IP协议族的动力，它为上层协议提供无状态、无连
 
   #### 固定头部结构
 
- 				 <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240831202716941.png" alt="image-20240831202716941" style="zoom:50%;" />
+​			 <img src="./images/TCPIP协议详解.assets/image-20240831202716941-1740972540047-374.png" alt="image-20240831202716941" style="zoom:50%;" />
 
 * 16位端口号：报文的源端口和目的端口 
 
@@ -395,7 +395,7 @@ IP协议是TCP/IP协议族的动力，它为上层协议提供无状态、无连
 
 选项的第一个字段kind说明选项的类型。有的TCP选项没有后面两个字段，仅包含1字节的kind字段。第二个字段length指定该选项的总长度，该长度包括kind字段和length字段占据的2字节。第三个字段info是选项的具体信息。常见的TCP选项有7种
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902113213630.png" alt="image-20240902113213630" style="zoom:50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240902113213630-1740971872174-212.png" alt="image-20240902113213630" style="zoom:50%;" />
 
 没看完。。。
 
@@ -416,7 +416,7 @@ options[mss 16396,sackOK,TS val 40781017 ecr 0,nop,wscale 6],length 0
 * options是TCP选项。mss是发送端通告的最大报文段长度。通过ifconfig命令查看回路接口的MTU为16436字节，因此可以预想到TCP报文段的MSS为16396（16436-40）字节。sackOK表示发送端支持并同意使用SACK选项。TS val是发送端的时间戳。ecr是时间戳回显应答。因为这是一次TCP通信的第一个TCP报文段，所以它针对对方的时间戳的应答为0（尚未收到对方的时间戳）。紧接着的nop是一个空操作选项。wscale指出发送端使用的窗口扩大因子为6。
 * 们分析tcpdump输出的字节码中TCP头部对应的信息，它从第21字节开始
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902113917873.png" alt="image-20240902113917873" style="zoom:50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240902113917873-1740971872174-210.png" alt="image-20240902113917873" style="zoom:50%;" />
 
 
 
@@ -451,7 +451,7 @@ Connection closed.
 
 * length 0 没有应用层数据
 
-​                   <img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240901223148455.png" alt="image-20240901223148455" style="zoom:50%;" />
+​                   <img src="./images/TCPIP协议详解.assets/image-20240901223148455-1740971872174-214.png" alt="image-20240901223148455" style="zoom:50%;" />
 
 * 第1个TCP报文段包含SYN标志，因此它是一个同步报文段，即发起连接请求。同时，该同步报文段包含一个ISN值为535734930的序号。
 * 第2个TCP报文段也是同步报文段，表示同意建立连接。同时它发送自己的ISN值为2159701207的序号，并对第1个同步报文段进行确认。确认值是535734931，即第1个同步报文段的序号值加1。**同步报文段比较特殊，即使它并没有携带任何应用程序数据，它也要占用一个序号值**。
@@ -553,7 +553,7 @@ Mon Jun 11 21:24:38 CST 2012
 
 TCP连接的任意一端在任一时刻都处于某种状态，当前状态可以通过netstat命令查看
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902115504980.png" alt="image-20240902115504980" style="zoom:50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240902115504980-1740971872174-216.png" alt="image-20240902115504980" style="zoom:50%;" />
 
 粗虚线表示典型的服务器端连接的状态转移
 
@@ -583,7 +583,7 @@ connect调用失败将使连接立即返回到初始的CLOSED状态。如果客�
 
 前面说过，处于FIN_WAIT_2状态的客户端需要等待服务器发送结束报文段，才能转移至TIME_WAIT状态，否则它将一直停留在这个状态。如果不是为了在半关闭状态下继续接收数据，连接长时间地停留在FIN_WAIT_2状态并无益处。连接停留在FIN_WAIT_2状态的情况可能发生在：客户端执行半关闭后，未等服务器关闭连接就强行退出了。此时客户端连接由内核来接管，可称之为孤儿连接（和孤儿进程类似）。Linux为了防止孤儿连接长时间存留在内核中，定义了两个内核变量：/proc/sys/net/ipv4/tcp_max_orphans和/proc/sys/net/ipv4/tcp_fin_timeout。前者指定内核能接管的孤儿连接数目，后者指定孤儿连接在内核中生存的时间。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902121020622.png" alt="image-20240902121020622" style="zoom:50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240902121020622-1740971872174-218.png" alt="image-20240902121020622" style="zoom:50%;" />
 
 ### TIME_WAIT状态
 
@@ -816,7 +816,7 @@ Web客户端和服务器之间使用HTTP协议通信
 
 在Kongming20上运行wget客户端程序，在ernest-laptop上运行squid代理服务器程序。客户端通过代理服务器的中转，获取Internet上的主机www.baidu.com的首页文档index.html
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902175244566.png" alt="image-20240902175244566" style="zoom:50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240902175244566-1740971872174-220.png" alt="image-20240902175244566" style="zoom:50%;" />
 
 wget客户端程序和代理服务器之间，以及代理服务器与Web服务器之间都是使用HTTP协议通信的。HTTP协议是一种应用层协议，它默认使用的传输层协议是TCP协议。
 
@@ -896,7 +896,7 @@ wget命令的输出显示，HTTP请求确实是先被送至代理服务器的312
 
 数据包8、9表示代理服务器ernest-laptop向DNS服务器（219.239.26.42，首选DNS服务器的IP地址）查询域名www.baidu.com对应的IP地址，并得到了回复。该回复包括一个主机别名（www.a.shifen.com）和两个IP地址（119.75.218.77和119.75.217.56）。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902180624662.png" alt="image-20240902180624662" style="zoom:50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240902180624662-1740971872174-222.png" alt="image-20240902180624662" style="zoom:50%;" />
 
 squid程序通过读取/etc/resolv.conf文件获得DNS服务器的IP地址，然后将控制权传递给内核中的UDP模块。
 
@@ -932,7 +932,7 @@ multi on
 
 ### HTTP通信
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902191037647.png" alt="image-20240902191037647" style="zoom:50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240902191037647-1740971872174-224.png" alt="image-20240902191037647" style="zoom:50%;" />
 
 TCP连接从建立到关闭的过程中，客户端仅给服务器发送了一个HTTP请求（即TCP报文段4）,代理服务器返回了六个tcp报文，总长8522字节，客户端用了七个tcp报文确定应答
 
@@ -947,7 +947,7 @@ Connection:close
 
 GET请求方法，只读 的方式请求
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902191341514.png" alt="image-20240902191341514" style="zoom:50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240902191341514-1740971872174-226.png" alt="image-20240902191341514" style="zoom:50%;" />
 
 * HEAD、GET、OPTIONS和TRACE被视为安全的方法，因为它们只是从服务器获得资源或信息，而不对服务器进行任何修改。而POST、PUT、DELETE和PATCH则影响服务器上的资源
 
@@ -983,7 +983,7 @@ Via:1.0 localhost(squid/3.0 STABLE18)
 
 * 第一行是状态行。“HTTP/1.0”是服务器使用的HTTP协议的版本号。通常，服务器需要使用和客户端相同的HTTP协议版本。“200 OK”是状态码和状态信息。
 
-<img src="http://typora-tutu.oss-cn-chengdu.aliyuncs.com/img/image-20240902191955141.png" alt="image-20240902191955141" style="zoom:50%;" />
+<img src="./images/TCPIP协议详解.assets/image-20240902191955141-1740971872174-228.png" alt="image-20240902191955141" style="zoom:50%;" />
 
 * 第2～7行是HTTP应答的头部字段。其表示方法与HTTP请求中的头部字段相同。
 * “Server:BWS/1. 0”表示目标Web服务器程序的名字是BWS（Baidu Web Server）

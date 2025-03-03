@@ -1,3 +1,10 @@
+---
+title: "TinyWebServer"
+date: 2025-03-02
+categories:
+  - 后端
+---
+
 git clone https://github.com/qinguoyi/TinyWebServer.git
 
 准备mysql数据库 目前是在docker 容器mysql8 root 123456
