@@ -29,7 +29,7 @@
   <!-- front-matter head_begin end -->
   <link rel="preload" href="/css/style.css" as="style">
   <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-<link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="/fonts/OPPO-Sans.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
   <!-- feed -->
   <!-- 页面元数据 -->
@@ -104,7 +104,7 @@ html {
   color: var(--color-text);
   width: 100%;
   height: 100%;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: OPPO-Sans, Menlo, Monaco, monospace, sans-serif;
   font-size: 16px;
 }
 html >::-webkit-scrollbar {
@@ -866,8 +866,8 @@ button {
   }
 }
 @font-face {
-  font-family: 'UbuntuMono';
-  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-family: 'OPPO-Sans';
+  src: url("/fonts/OPPO-Sans.ttf");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
@@ -1008,7 +1008,7 @@ button {
 }
 .l_header .nav-sub .title {
   font-weight: bold;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: OPPO-Sans, Menlo, Monaco, monospace, sans-serif;
   line-height: 1.2;
   max-height: 64px;
   white-space: normal;
@@ -1789,7 +1789,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1741058732582),
+    lastupdate: new Date(1741704802062),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2483,7 +2483,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <p class="title">Leland Titus</p>
     
     
-      <p class="subtitle">风尘云万里</p>
+      <p class="subtitle">风沉云万里</p>
     
   </div>
   <div class='bottom'>
@@ -2555,6 +2555,309 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <section class="post-list">
     
     
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/02/source/面试/数据库/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="tutulp's blog">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="tutulp's blog">
+    <meta itemprop="description" content="tutulp的博客网站">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2025/03/02/source/%E9%9D%A2%E8%AF%95/%E6%95%B0%E6%8D%AE%E5%BA%93/"  itemprop="url">
+        数据库
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      
+        B+树和B树的区别
+B树：数据可以在内部节点，插入删除可能破坏结构造成更多操作，适合随机访问要求高，如操作系统的文件系统索引
+B+树：数据只在叶子节点，插入删除更简单，适合范围查询和顺序查询，如数据库索引，叶子节点形成双向链表方便查找
+mysql隔离级别
+T1事务可能读取到T2事务未提交的数据，但是最后T2回滚了，导致T1读取到了一个未存在的数据，从而导致脏读现象
+T1在读取同一行数据的两次...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2025-03-02T00:00:00+08:00">2025-03-02</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url"><span itemprop="name">面试</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2025/03/02/source/%E9%9D%A2%E8%AF%95/%E6%95%B0%E6%8D%AE%E5%BA%93/' itemprop="url">
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/02/source/面试/计算机网络/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="tutulp's blog">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="tutulp's blog">
+    <meta itemprop="description" content="tutulp的博客网站">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2025/03/02/source/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"  itemprop="url">
+        计算机网络
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      
+        socket状态转变
+特殊情况：同时调用close，同时先收到FIN包的状态：FIN_WAIT_1 -&gt; ClOSE -&gt; TIME_WAIT（另一个走1 2），如果同时收到FIN则都走这种状态
+超时时间：2MSL
+三次握手
+
+你能听到吗？我携带了序列号(SYN),我的序列号(seq&#x3D;x)是x
+你能听到吗？我确认能听到(ACK&#x3D;1),我携带了序列号(SYN)，...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2025-03-02T00:00:00+08:00">2025-03-02</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url"><span itemprop="name">面试</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2025/03/02/source/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/' itemprop="url">
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/02/source/Linux/Linix高性能服务器编程/IO复用/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="tutulp's blog">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="tutulp's blog">
+    <meta itemprop="description" content="tutulp的博客网站">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2025/03/02/source/Linux/Linix%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/IO%E5%A4%8D%E7%94%A8/"  itemprop="url">
+        IO复用
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      
+        IO复用为什么要封装？
+封装各个接口简化调用，并且方便使用wait然后循环遍历各个事件，根据不同的事件处理不同的逻辑
+epoll存储形式
+int epollFd_;   构造的时候epoll_create(512) 返回fd并指定最大可监听512个，较新的linux内核用epoll_create1
+std::vector events_;  wait的时候存储监听到的事件
+监听事件：
+123...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2025-03-02T00:00:00+08:00">2025-03-02</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">Linux高性能服务器编程</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/" itemprop="url"><span itemprop="name">Linux高性能服务器编程</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2025/03/02/source/Linux/Linix%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/IO%E5%A4%8D%E7%94%A8/' itemprop="url">
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/02/source/Linux/Linix高性能服务器编程/Linux编程总结/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="tutulp's blog">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="tutulp's blog">
+    <meta itemprop="description" content="tutulp的博客网站">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2025/03/02/source/Linux/Linix%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/Linux%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/"  itemprop="url">
+        Linux编程总结
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      
+        服务器框架服务器模型C&#x2F;S模型 
+
+B&#x2F;S模型 浏览器服务器模型
+
+
+
+P2P模型
+每个节点都既是服务器又是客户端，可以直接与其他节点通信。
+
+
+
+
+服务器编程框架
+
+
+
+
+模块
+单个服务器
+服务器集群
+
+
+
+I&#x2F;O处理单元
+处理客户端连接，读写网络数据
+作为接入服务器，实现负载均衡
+
+
+逻辑单元
+业务进程，线程
+逻辑服务器
+
+
+网络存储单元
+本地数据库，文件，...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2025-03-02T00:00:00+08:00">2025-03-02</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">Linux高性能服务器编程</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/" itemprop="url"><span itemprop="name">Linux高性能服务器编程</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2025/03/02/source/Linux/Linix%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/Linux%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/' itemprop="url">
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -2886,6 +3189,75 @@ g++ -o my_program my_program.cpp -lmysqlclient
           </div>
         
       
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/02/source/工具-环境/Docker/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="tutulp's blog">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="tutulp's blog">
+    <meta itemprop="description" content="tutulp的博客网站">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2025/03/02/source/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/Docker/"  itemprop="url">
+        docker
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      
+        docker为每一个应用提供完全隔离的环境-配置的环境也叫做container&#x2F;容器
+image&#x2F;镜像：包含部署的程序以及关联的所有库
+容器：通过镜像创建，就像一台台运行起来的虚拟机
+安装Docker
+卸载旧版
+
+12345678yum remove docker \    docker-client \    docker-client-latest \    dock...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2025-03-02T00:00:00+08:00">2025-03-02</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/Linux/">Linux</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/Linux/" itemprop="url"><span itemprop="name">Linux</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2025/03/02/source/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/Docker/' itemprop="url">
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
     
   </section>
   
@@ -3003,7 +3375,7 @@ g++ -o my_program my_program.cpp -lmysqlclient
           <li><a class="flat-box"
             title="/categories/Linux/" href="/categories/Linux/"
             active-action="action-categoriesLinux"
-            ><div class='name'>Linux</div><div class='badge'>(5)</div></a></li>
+            ><div class='name'>Linux</div><div class='badge'>(4)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/" href="/categories/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/"
@@ -3013,7 +3385,12 @@ g++ -o my_program my_program.cpp -lmysqlclient
           <li><a class="flat-box"
             title="/categories/Web/" href="/categories/Web/"
             active-action="action-categoriesWeb"
-            ><div class='name'>Web</div><div class='badge'>(3)</div></a></li>
+            ><div class='name'>Web</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/c/" href="/categories/c/"
+            active-action="action-categoriesc"
+            ><div class='name'>c++</div><div class='badge'>(6)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%88%B7%E9%A2%98/" href="/categories/%E5%88%B7%E9%A2%98/"
@@ -3036,9 +3413,14 @@ g++ -o my_program my_program.cpp -lmysqlclient
             ><div class='name'>四大件</div><div class='badge'>(2)</div></a></li>
         
           <li><a class="flat-box"
+            title="/categories/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/" href="/categories/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/"
+            active-action="action-categoriesE5B7A5E585B7-E78EAFE5A283"
+            ><div class='name'>工具-环境</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box"
             title="/categories/%E5%B7%A5%E5%85%B7/" href="/categories/%E5%B7%A5%E5%85%B7/"
             active-action="action-categoriesE5B7A5E585B7"
-            ><div class='name'>工具</div><div class='badge'>(3)</div></a></li>
+            ><div class='name'>工具</div><div class='badge'>(2)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%BA%93/" href="/categories/%E5%BA%93/"
@@ -3093,7 +3475,7 @@ g++ -o my_program my_program.cpp -lmysqlclient
 
 
     <div class='content'>
-      <a href="/tags/CSS/" style="font-size: 14px; color: #999">CSS</a> <a href="/tags/HTML/" style="font-size: 14px; color: #999">HTML</a> <a href="/tags/HTTP-%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E3%80%81%E8%B7%AF%E7%94%B1%E3%80%81JSON-%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 14px; color: #999">HTTP 请求处理、路由、JSON 序列化</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #999">Node.js</a> <a href="/tags/QT/" style="font-size: 14px; color: #999">QT</a> <a href="/tags/Web%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 14px; color: #999">Web开发框架</a> <a href="/tags/c/" style="font-size: 14px; color: #999">c</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/win-vmware/" style="font-size: 14px; color: #999">win+vmware</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1/" style="font-size: 14px; color: #999">代码托管</a> <a href="/tags/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91/" style="font-size: 14px; color: #999">公众号开发</a> <a href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" style="font-size: 14px; color: #999">反向代理</a> <a href="/tags/%E6%96%87%E5%BF%83%E4%B8%80%E8%A8%80/" style="font-size: 14px; color: #999">文心一言</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="font-size: 14px; color: #999">蓝桥杯</a> <a href="/tags/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%99%A8/" style="font-size: 14px; color: #999">静态网站生成器</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 24px; color: #555">面试</a>
+      <a href="/tags/CSS/" style="font-size: 14px; color: #999">CSS</a> <a href="/tags/HTML/" style="font-size: 14px; color: #999">HTML</a> <a href="/tags/HTTP-%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E3%80%81%E8%B7%AF%E7%94%B1%E3%80%81JSON-%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 14px; color: #999">HTTP 请求处理、路由、JSON 序列化</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Nginx/" style="font-size: 14px; color: #999">Nginx</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #999">Node.js</a> <a href="/tags/QT/" style="font-size: 14px; color: #999">QT</a> <a href="/tags/Web%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 14px; color: #999">Web开发框架</a> <a href="/tags/c/" style="font-size: 14px; color: #999">c</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/win-vmware/" style="font-size: 14px; color: #999">win+vmware</a> <a href="/tags/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91/" style="font-size: 14px; color: #999">公众号开发</a> <a href="/tags/%E6%96%87%E5%BF%83%E4%B8%80%E8%A8%80/" style="font-size: 14px; color: #999">文心一言</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="font-size: 14px; color: #999">蓝桥杯</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 24px; color: #555">面试</a>
     </div>
   </section>
 

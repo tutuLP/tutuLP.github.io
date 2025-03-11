@@ -29,7 +29,7 @@
   <!-- front-matter head_begin end -->
   <link rel="preload" href="/css/style.css" as="style">
   <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-<link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="/fonts/OPPO-Sans.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
   <!-- feed -->
   <!-- 页面元数据 -->
@@ -104,7 +104,7 @@ html {
   color: var(--color-text);
   width: 100%;
   height: 100%;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: OPPO-Sans, Menlo, Monaco, monospace, sans-serif;
   font-size: 16px;
 }
 html >::-webkit-scrollbar {
@@ -866,8 +866,8 @@ button {
   }
 }
 @font-face {
-  font-family: 'UbuntuMono';
-  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-family: 'OPPO-Sans';
+  src: url("/fonts/OPPO-Sans.ttf");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
@@ -1008,7 +1008,7 @@ button {
 }
 .l_header .nav-sub .title {
   font-weight: bold;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: OPPO-Sans, Menlo, Monaco, monospace, sans-serif;
   line-height: 1.2;
   max-height: 64px;
   white-space: normal;
@@ -1789,7 +1789,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1741058732582),
+    lastupdate: new Date(1741704802062),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2483,7 +2483,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <p class="title">Leland Titus</p>
     
     
-      <p class="subtitle">风尘云万里</p>
+      <p class="subtitle">风沉云万里</p>
     
   </div>
   <div class='bottom'>
@@ -2809,7 +2809,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           <li><a class="flat-box"
             title="/categories/Linux/" href="/categories/Linux/"
             active-action="action-categoriesLinux"
-            ><div class='name'>Linux</div><div class='badge'>(5)</div></a></li>
+            ><div class='name'>Linux</div><div class='badge'>(4)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/" href="/categories/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/"
@@ -2819,7 +2819,12 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           <li><a class="flat-box"
             title="/categories/Web/" href="/categories/Web/"
             active-action="action-categoriesWeb"
-            ><div class='name'>Web</div><div class='badge'>(3)</div></a></li>
+            ><div class='name'>Web</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/c/" href="/categories/c/"
+            active-action="action-categoriesc"
+            ><div class='name'>c++</div><div class='badge'>(6)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%88%B7%E9%A2%98/" href="/categories/%E5%88%B7%E9%A2%98/"
@@ -2842,9 +2847,14 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             ><div class='name'>四大件</div><div class='badge'>(2)</div></a></li>
         
           <li><a class="flat-box"
+            title="/categories/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/" href="/categories/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/"
+            active-action="action-categoriesE5B7A5E585B7-E78EAFE5A283"
+            ><div class='name'>工具-环境</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box"
             title="/categories/%E5%B7%A5%E5%85%B7/" href="/categories/%E5%B7%A5%E5%85%B7/"
             active-action="action-categoriesE5B7A5E585B7"
-            ><div class='name'>工具</div><div class='badge'>(3)</div></a></li>
+            ><div class='name'>工具</div><div class='badge'>(2)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%BA%93/" href="/categories/%E5%BA%93/"
@@ -2899,7 +2909,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-      <a href="/tags/CSS/" style="font-size: 14px; color: #999">CSS</a> <a href="/tags/HTML/" style="font-size: 14px; color: #999">HTML</a> <a href="/tags/HTTP-%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E3%80%81%E8%B7%AF%E7%94%B1%E3%80%81JSON-%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 14px; color: #999">HTTP 请求处理、路由、JSON 序列化</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #999">Node.js</a> <a href="/tags/QT/" style="font-size: 14px; color: #999">QT</a> <a href="/tags/Web%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 14px; color: #999">Web开发框架</a> <a href="/tags/c/" style="font-size: 14px; color: #999">c</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/win-vmware/" style="font-size: 14px; color: #999">win+vmware</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1/" style="font-size: 14px; color: #999">代码托管</a> <a href="/tags/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91/" style="font-size: 14px; color: #999">公众号开发</a> <a href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" style="font-size: 14px; color: #999">反向代理</a> <a href="/tags/%E6%96%87%E5%BF%83%E4%B8%80%E8%A8%80/" style="font-size: 14px; color: #999">文心一言</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="font-size: 14px; color: #999">蓝桥杯</a> <a href="/tags/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%99%A8/" style="font-size: 14px; color: #999">静态网站生成器</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 24px; color: #555">面试</a>
+      <a href="/tags/CSS/" style="font-size: 14px; color: #999">CSS</a> <a href="/tags/HTML/" style="font-size: 14px; color: #999">HTML</a> <a href="/tags/HTTP-%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E3%80%81%E8%B7%AF%E7%94%B1%E3%80%81JSON-%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 14px; color: #999">HTTP 请求处理、路由、JSON 序列化</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Nginx/" style="font-size: 14px; color: #999">Nginx</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #999">Node.js</a> <a href="/tags/QT/" style="font-size: 14px; color: #999">QT</a> <a href="/tags/Web%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 14px; color: #999">Web开发框架</a> <a href="/tags/c/" style="font-size: 14px; color: #999">c</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/win-vmware/" style="font-size: 14px; color: #999">win+vmware</a> <a href="/tags/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91/" style="font-size: 14px; color: #999">公众号开发</a> <a href="/tags/%E6%96%87%E5%BF%83%E4%B8%80%E8%A8%80/" style="font-size: 14px; color: #999">文心一言</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="font-size: 14px; color: #999">蓝桥杯</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 24px; color: #555">面试</a>
     </div>
   </section>
 

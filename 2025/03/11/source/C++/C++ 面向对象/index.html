@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <!-- SEO相关 -->
   
-  <link rel="canonical" href="http://example.com/2024/03/25/source/linux/hexo/"/>
+  <link rel="canonical" href="http://example.com/2025/03/11/source/c++/c++ 面向对象/"/>
   <!-- 渲染优化 -->
     <meta http-equiv='x-dns-prefetch-control' content='on' />
       <link rel='dns-prefetch' href='https://unpkg.com'>
@@ -29,26 +29,24 @@
   <!-- front-matter head_begin end -->
   <link rel="preload" href="/css/style.css" as="style">
   <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-<link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="/fonts/OPPO-Sans.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>hexo - tutulp's blog</title>
-  <meta name="keywords" content="Node.js,静态网站生成器,null">
+  <title>面向对象 - tutulp's blog</title>
+  <meta name="keywords" content="null">
   <meta desc name="description" content="tutulp的博客网站 - tutulp - tutulp's blog">
   
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo">
-<meta property="og:url" content="http://example.com/2024/03/25/source/Linux/hexo/index.html">
+<meta property="og:title" content="面向对象">
+<meta property="og:url" content="http://example.com/2025/03/11/source/C++/C++%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/index.html">
 <meta property="og:site_name" content="tutulp&#39;s blog">
-<meta property="og:description" content="下载 npm install hexo-cli -g  cd   (当前用户的目录)  hexo init blog  用hexo搭建一个文件夹  cd blog     hexo g 生成一个静态站点，把markdown文件转化为静态页面放到public文件夹下   hexo s 启动本地服务器 访问4000号端口就可以看到构建的网页   使用nginx代理网页把public目录下的所有内容复制">
+<meta property="og:description" content="类局部类：函数内部定义类 访问控制public 任意都可访问  private 被类的成员函数访问 （只能自己） protected 当前类或者子类  (血脉连接，自己和子孙) 友元&#x3D;&#x3D;friend&#x3D;&#x3D; 可以访问类的所有成员 friend void getName(A&amp; a); 友元类friend void B::getName(A&amp; a);">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-<meta property="article:published_time" content="2024-03-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-03T12:45:53.386Z">
+<meta property="article:published_time" content="2025-03-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-11T14:51:50.472Z">
 <meta property="article:author" content="tutulp">
-<meta property="article:tag" content="Node.js">
-<meta property="article:tag" content="静态网站生成器">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
   <style>
@@ -108,7 +106,7 @@ html {
   color: var(--color-text);
   width: 100%;
   height: 100%;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: OPPO-Sans, Menlo, Monaco, monospace, sans-serif;
   font-size: 16px;
 }
 html >::-webkit-scrollbar {
@@ -870,8 +868,8 @@ button {
   }
 }
 @font-face {
-  font-family: 'UbuntuMono';
-  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-family: 'OPPO-Sans';
+  src: url("/fonts/OPPO-Sans.ttf");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
@@ -1012,7 +1010,7 @@ button {
 }
 .l_header .nav-sub .title {
   font-weight: bold;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: OPPO-Sans, Menlo, Monaco, monospace, sans-serif;
   line-height: 1.2;
   max-height: 64px;
   white-space: normal;
@@ -1793,7 +1791,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1741058732582),
+    lastupdate: new Date(1741704802062),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2487,7 +2485,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <p class="title">Leland Titus</p>
     
     
-      <p class="subtitle">风尘云万里</p>
+      <p class="subtitle">风沉云万里</p>
     
   </div>
   <div class='bottom'>
@@ -2555,7 +2553,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
 <div id="l_main" class=''>
   <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
-  <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/25/source/Linux/hexo/">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/11/source/C++/C++ 面向对象/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="tutulp's blog">
   </span>
@@ -2576,7 +2574,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title" itemprop="name headline">
-        hexo
+        面向对象
       </h1>
       <div class='new-meta-box'>
         
@@ -2584,8 +2582,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
 <div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
   <a itemprop="url" class='author' href="/" rel="nofollow">
-    <img itemprop="image" src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-    <p itemprop="name">请设置文章作者</p>
+    " class="lazyload" data-srcset="" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==<img itemprop="image" src="">
+    <p itemprop="name">tutulp</p>
   </a>
 </div>
 
@@ -2595,10 +2593,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
   <div class='new-meta-item category'>
     <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>
-    <a class="category-link" href="/categories/Web/">Web</a>
+    <a class="category-link" href="/categories/c/">c++</a>
     
       <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-        <a href="/categories/Web/" itemprop="url"><span itemprop="name">Web</span></a>
+        <a href="/categories/c/" itemprop="url"><span itemprop="name">c++</span></a>
       </span>
     
   </div>
@@ -2607,10 +2605,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
         
           
-            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2024-03-25T00:00:00+08:00">
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2025-03-11T00:00:00+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2024年3月25日</p>
+    <p>发布于：2025年3月11日</p>
   </a>
 </div>
 
@@ -2633,202 +2631,314 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    <h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><ul>
-<li><p>npm install hexo-cli -g</p>
-</li>
-<li><p>cd   (当前用户的目录)</p>
-</li>
-<li><p>hexo init blog  用hexo搭建一个文件夹</p>
-</li>
-<li><p>cd blog   </p>
-</li>
-<li><p>hexo g 生成一个静态站点，把markdown文件转化为静态页面放到public文件夹下 </p>
-</li>
-<li><p>hexo s 启动本地服务器 访问4000号端口就可以看到构建的网页</p>
-</li>
-</ul>
-<h1 id="使用nginx代理网页"><a href="#使用nginx代理网页" class="headerlink" title="使用nginx代理网页"></a>使用nginx代理网页</h1><p>把public目录下的所有内容复制到nginx的html目录下</p>
-<ul>
-<li><p>cd public </p>
-</li>
-<li><p>cp -rf * &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html</p>
-</li>
-</ul>
-<h1 id="使用github云代理网页"><a href="#使用github云代理网页" class="headerlink" title="使用github云代理网页"></a>使用github云代理网页</h1><ul>
-<li>新建仓库</li>
-</ul>
-<p>新建仓库-仓库名字：用户名.github.io,勾选readme</p>
-<p>仓库的main分支用来存源笔记文件 master分支用来存前端文件</p>
-<ul>
-<li>编辑_config.yml</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:你的用户名/你的用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p>这里可以使用ssh也可以使用http 使用ssh要先配置密钥</p>
-<p><a href="mailto:&#103;&#x69;&#x74;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#109;">git@github.com</a>:tutuLP&#x2F;tutuLP.github.io.git  </p>
-<p><a target="_blank" rel="noopener" href="https://github.com/tutuLP/tutuLP.github.io.git">https://github.com/tutuLP/tutuLP.github.io.git</a></p>
-<ul>
-<li>下载插件</li>
-</ul>
-<p>npm install hexo-deployer-git –save</p>
-<ul>
-<li>配置</li>
-</ul>
-<p>git config –global user.email <a href="mailto:&#x74;&#x75;&#116;&#117;&#x32;&#x30;&#54;&#49;&#x38;&#x36;&#55;&#x39;&#x30;&#51;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#46;&#99;&#111;&#109;">tutu2061867903@gmail.com</a></p>
-<p>git config –global user.name tutuLP</p>
-<p>可能需要打开端口22 9418</p>
-<ul>
-<li>修改仓库配置</li>
-</ul>
-<p>进入GitHub仓库的设置页面-Pages-GitHub Pages选项 将源设置为master分支</p>
-<p>这时得到网址 <a target="_blank" rel="noopener" href="https://tutulp.github.io/">https://tutulp.github.io/</a></p>
-<ul>
-<li>hexo deploy 部署到github服务器平台</li>
-</ul>
-<h2 id="拉取云端文件构建并部署"><a href="#拉取云端文件构建并部署" class="headerlink" title="拉取云端文件构建并部署"></a>拉取云端文件构建并部署</h2><p>以上只是构建本地的文件生成静态网站上传到github服务器</p>
-<ul>
-<li><p>cd source&#x2F;_posts</p>
-</li>
-<li><p>git clone (地址)</p>
-</li>
-<li><p>然后回到blog hexo generate     hexo deploy</p>
-</li>
-</ul>
-<p>pull进来的文件不会自动拿文件名作为标题，我们需要在文档前面加上一段Front Matter，用于指定文章元数据的YAML格式的内容</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">&quot;文章标题&quot;</span></span><br><span class="line"><span class="attr">date:</span> <span class="string">YYYY-MM-DD</span> <span class="string">HH:MM:SS</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">分类1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">分类2</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">标签1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">标签2</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
-
-<p>#主题stellar</p>
-<p>来源：<a target="_blank" rel="noopener" href="https://xaoxuu.com/wiki/stellar/#start">Stellar：开始您全新的博客之旅 - XAOXUU</a></p>
-<p>还可在上方网页上搜索Volantis另一个主题</p>
-<ul>
-<li><p>进入blog  npm i hexo-theme-stellar</p>
-</li>
-<li><p>在 _config.yml 文件中找到并修改： theme: stellar</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">title: 您的网站名称</span><br><span class="line">avatar: 您的头像链接</span><br><span class="line">favicon: 您的网站icon</span><br><span class="line"># subtitle: # subtitle 已移至主题配置中</span><br><span class="line"># 多语言</span><br><span class="line">language:</span><br><span class="line">  - zh-CN</span><br><span class="line">  - en</span><br></pre></td></tr></table></figure>
-
-<p><code>_config.yml</code> 文件旁边新建一个文件： <code>_config.stellar.yml</code> ，在这个文件中的配置信息优先级高于主题文件夹中的配置文件。</p>
-<p>默认生成 Open Graph 标签，如果您不希望生成它，可以在主题配置文件中关闭：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">blog/_config.stellar.ymlopen_graph:</span><br><span class="line">  enable: true</span><br><span class="line">  twitter_id: # for open_graph meta</span><br></pre></td></tr></table></figure>
-
-<h2 id="自定义主题样式"><a href="#自定义主题样式" class="headerlink" title="自定义主题样式"></a>自定义主题样式</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">您的网站名称</span></span><br><span class="line"><span class="attr">avatar:</span> <span class="string">您的头像链接</span> <span class="comment"># 这个我用的png 512x512</span></span><br><span class="line"><span class="attr">favicon:</span> <span class="string">您的网站icon</span> <span class="comment"># 32x32 png</span></span><br><span class="line"><span class="comment"># subtitle: # subtitle 已移至主题配置中</span></span><br><span class="line"><span class="comment"># 多语言</span></span><br><span class="line"><span class="attr">language:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">zh-CN</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">en</span></span><br></pre></td></tr></table></figure>
-
-<p>icon生成网址：<a target="_blank" rel="noopener" href="https://www.logosc.cn/favicon-generator">https://www.logosc.cn/favicon-generator</a></p>
-<p>网站图标的在线链接一直显示不了，在blog&#x2F;public文件下创建image文件夹，里面放入图片，然后配置文件中 favicon: ‘&#x2F;image&#x2F;32x32.png’ 即可</p>
-<p>在博客根目录的 <code>_config.yml</code> 文件旁边新建一个文件： <code>_config.stellar.yml</code> 这个文件配置优先级高</p>
-<h3 id="文章封面"><a href="#文章封面" class="headerlink" title="文章封面"></a>文章封面</h3><p>根据 tags 作为关键词为每一篇文章在线搜索封面</p>
-<p>或者在文章开头给关键词</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">blog/_config.stellar.yml</span></span><br><span class="line"><span class="attr">article:</span></span><br><span class="line">  <span class="attr">auto_cover:</span> <span class="literal">true</span></span><br><span class="line">  </span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">cover:</span> <span class="string">workout,strava</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="设置摘要"><a href="#设置摘要" class="headerlink" title="设置摘要"></a>设置摘要</h3><p>自动</p>
-<p>手动</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">article:</span></span><br><span class="line">  <span class="attr">auto_excerpt:</span> <span class="number">200</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">cover:</span> <span class="string">/assets/xaoxuu/blog/2020-0927a@1x.svg</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="string">在心率管家默默无闻地上线了一年多之后，现在终于打算来好好聊聊关于手机摄像头测量心率的那些事。本文参考了很多前辈的文章，将在文末列出。</span></span><br><span class="line"></span><br><span class="line"><span class="string">&lt;!--</span> <span class="string">more</span> <span class="string">--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="string">后面是正文部分，在主页看不到。</span></span><br></pre></td></tr></table></figure>
-
-<p>AI摘要 基于 tianli_gpt 前端项目 <a target="_blank" rel="noopener" href="https://github.com/qxchuckle/Post-Summary-AI">Post-Summary-AI</a></p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">_config.stellar.yml</span></span><br><span class="line"><span class="comment"># AI 摘要</span></span><br><span class="line"><span class="comment"># https://github.com/qxchuckle/Post-Summary-AI</span></span><br><span class="line"><span class="attr">tianli_gpt:</span> </span><br><span class="line">  <span class="attr">enable:</span> <span class="comment">#true</span></span><br><span class="line">  <span class="attr">js:</span> <span class="string">https://jsd.onmicrosoft.cn/gh/qxchuckle/Post-Summary-AI@6.0/chuckle-post-ai.min.js</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span> <span class="comment"># all, post, wiki</span></span><br><span class="line">  <span class="attr">key:</span> <span class="string">5Q5mpqRK5DkwT1X9Gi5e</span> <span class="comment"># tianli_gpt key</span></span><br><span class="line">  <span class="attr">total_length:</span> <span class="number">1000</span> <span class="comment"># 设置提交的字数限制，默认为1000字，上限为5000，超过5000字符将被截断</span></span><br><span class="line">  <span class="attr">typewriter:</span> <span class="literal">true</span> <span class="comment"># 打字机动画 </span></span><br><span class="line">  <span class="attr">summary_directly:</span> <span class="literal">true</span> <span class="comment"># 是否直接显示摘要，否则显示 AI 简介</span></span><br><span class="line">  <span class="attr">rec_method:</span> <span class="string">all</span> <span class="comment"># all, web # 文章推荐方式，all：匹配数据库内所有文章进行推荐，web：仅当前站内的文章，默认all</span></span><br><span class="line">  <span class="attr">hide_shuttle:</span> <span class="literal">true</span> <span class="comment"># 是否隐藏矩阵穿梭</span></span><br><span class="line">  <span class="attr">summary_toggle:</span> <span class="literal">false</span> <span class="comment"># 是否开启切换简介功能，经过一些处理后，重新生成一份简介，这将消耗key字数</span></span><br><span class="line">  <span class="attr">interface:</span> <span class="comment"># AI 信息展示</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">AI摘要</span></span><br><span class="line">    <span class="attr">introduce:</span> <span class="string">&#x27;我是文章辅助AI: QX-AI，点击下方的按钮，让我生成本文简介、推荐相关文章等。&#x27;</span></span><br><span class="line">    <span class="attr">version:</span> <span class="string">TianliGPT</span></span><br><span class="line">    <span class="attr">button:</span> [<span class="string">&quot;介绍自己&quot;</span>, <span class="string">&quot;推荐文章&quot;</span>, <span class="string">&quot;生成摘要&quot;</span>, <span class="string">&quot;矩阵穿梭&quot;</span>] <span class="comment"># 底部按钮文字</span></span><br></pre></td></tr></table></figure>
-
-<p>如何获取 <code>tianliGPT_key</code>：到 <a target="_blank" rel="noopener" href="https://afdian.net/item/f18c2e08db4411eda2f25254001e7c00">爱发电</a> 中购买，购买完成后，进入 <a target="_blank" rel="noopener" href="https://summary.zhheo.com/">网页后台管理</a> 绑定key并添加自己的站点</p>
-<p>key与博客地址为绑定状态，所以本地调试时是无法接收到数据的。</p>
-<h3 id="获取文章开头内容"><a href="#获取文章开头内容" class="headerlink" title="获取文章开头内容"></a>获取文章开头内容</h3><p>根目录下 scaffolds 文件夹中编辑 post.md 的 font-matter，根据自己的需要增加你想要配置的内容</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="comment"># 基本信息</span></span><br><span class="line"><span class="attr">title:</span> &#123;&#123; <span class="string">title</span> &#125;&#125;</span><br><span class="line"><span class="attr">date:</span> &#123;&#123; <span class="string">date</span> &#125;&#125;</span><br><span class="line"><span class="attr">tags:</span> []</span><br><span class="line"><span class="attr">categories:</span> []   <span class="comment">#categories: [设计开发, iOS开发] 两级分类</span></span><br><span class="line"><span class="attr">description:</span> <span class="comment"># excerpt 也可 </span></span><br><span class="line"><span class="comment"># 封面</span></span><br><span class="line"><span class="attr">cover:</span> </span><br><span class="line"><span class="attr">banner:</span> </span><br><span class="line"><span class="attr">poster:</span> <span class="comment"># 海报（可选，全图封面卡片）</span></span><br><span class="line">  <span class="attr">topic:</span> <span class="string">标题上方的小字</span> <span class="comment"># 可选</span></span><br><span class="line">  <span class="attr">headline:</span> <span class="string">大标题</span> <span class="comment"># 必选</span></span><br><span class="line">  <span class="attr">caption:</span> <span class="string">标题下方的小字</span> <span class="comment"># 可选</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">标题颜色</span> <span class="comment"># 可选</span></span><br><span class="line"><span class="comment"># 插件</span></span><br><span class="line"><span class="attr">sticky:</span> <span class="comment"># 数字越大越靠前</span></span><br><span class="line"><span class="attr">mermaid:</span></span><br><span class="line"><span class="attr">katex:</span> </span><br><span class="line"><span class="attr">mathjax:</span> </span><br><span class="line"><span class="comment"># 可选</span></span><br><span class="line"><span class="attr">topic:</span> <span class="comment"># 专栏 id</span></span><br><span class="line"><span class="attr">author:</span> </span><br><span class="line"><span class="attr">references:</span></span><br><span class="line"><span class="attr">comments:</span> <span class="comment"># 设置 false 禁止评论</span></span><br><span class="line"><span class="attr">indexing:</span> <span class="comment"># 设置 false 避免被搜索</span></span><br><span class="line"><span class="attr">breadcrumb:</span> <span class="comment"># 设置 false 隐藏面包屑导航</span></span><br><span class="line"><span class="attr">leftbar:</span> </span><br><span class="line"><span class="attr">rightbar:</span></span><br><span class="line"><span class="attr">h1:</span> <span class="comment"># 设置为 &#x27;&#x27; 隐藏标题</span></span><br><span class="line"><span class="attr">type:</span> <span class="comment"># tech/story</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="相关文章推荐"><a href="#相关文章推荐" class="headerlink" title="相关文章推荐"></a>相关文章推荐</h3><p>安装插件 <code>npm i hexo-related-popular-posts</code></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">article:</span></span><br><span class="line">  <span class="comment"># npm i hexo-related-popular-posts</span></span><br><span class="line">  <span class="attr">related_posts:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">title:</span> <span class="string">您可能感兴趣的文章</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">references:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">&#x27;[心跳之旅—💗—iOS用手机摄像头检测心率(PPG)](https://punmy.cn/2016/07/28/15231176397746.html)&#x27;</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">&#x27;[PPG光电容积脉搏波描记法技术概况](https://www.jianshu.com/p/695c131abfa5)&#x27;</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="许可协议"><a href="#许可协议" class="headerlink" title="许可协议"></a>许可协议</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">article:</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">&#x27;本文采用 [署名-非商业性使用-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议，转载请注明出处。&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>若你配置了作者数据 _data&#x2F;authors.yml 和文章作者，可以在 license 中使用 {author.name} 来自动替换为当前文章作者名字。</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">article:</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">&#x27;本文由&#123;author.name&#125;编写，采用...&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="分享链接"><a href="#分享链接" class="headerlink" title="分享链接"></a>分享链接</h3><p>分享至微信会生成对应的页面二维码，weibo 和 email 会自动跳转到对应软件或网页，link 会拷贝当前页面链接至剪切板。</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">article:</span></span><br><span class="line">  <span class="attr">share:</span> <span class="comment"># [wechat, weibo, email, link]</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="覆盖-OpenGraph"><a href="#覆盖-OpenGraph" class="headerlink" title="覆盖 OpenGraph"></a>覆盖 OpenGraph</h3><p>如果分享到社交平台的缩略图不理想，可以通过这个特性覆盖为自己想要的：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">open_graph:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">/assets/xaoxuu/blog/2022-1029a@2x.webp</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="设置导航栏"><a href="#设置导航栏" class="headerlink" title="设置导航栏"></a>设置导航栏</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menubar:</span></span><br><span class="line">  <span class="attr">columns:</span> <span class="number">4</span> <span class="comment"># 一行多少个</span></span><br><span class="line">  <span class="attr">items:</span> <span class="comment"># 可按照自己需求增加，符合以下格式即可</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">more</span></span><br><span class="line">      <span class="attr">theme:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">      <span class="attr">title:</span> <span class="string">更多</span></span><br><span class="line">      <span class="attr">icon:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">/more/</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logo:</span></span><br><span class="line">  <span class="attr">subtitle:</span> <span class="string">&#x27;&#x27;</span> <span class="comment"># &#x27;文字1 | 文字2&#x27; (鼠标放上去会切换到文字2)         设置鼠标指上 subtitle 后翻转另一行字  记得使用utf-8编码</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">#背景</span></span><br><span class="line"><span class="attr">style:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">  <span class="attr">leftbar:</span></span><br><span class="line">    <span class="attr">background-image:</span> <span class="string">url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.13/image/sidebar-bg1@small.jpg)</span></span><br><span class="line">    <span class="attr">blur-px:</span> <span class="string">100px</span> <span class="comment"># 模糊半径</span></span><br><span class="line">    <span class="attr">blur-bg:</span> <span class="string">var(--alpha60)</span> <span class="comment"># 模糊颜色</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="字体设置"><a href="#字体设置" class="headerlink" title="字体设置"></a>字体设置</h3><ul>
-<li>第一步：_config.yml 文件中，最后一行加入以下指令</li>
-</ul>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">inject: head:</span> <span class="string">-(</span></span><br><span class="line">  <span class="string">&lt;link</span></span><br><span class="line">    <span class="string">rel=&quot;stylesheet&quot;</span></span><br><span class="line">    <span class="string">href=&quot;https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css&quot;</span></span><br><span class="line">    <span class="string">media=&quot;all&quot;</span></span><br><span class="line">  <span class="string">/&gt;</span></span><br><span class="line"><span class="string">);</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>第二步：在_config.stellar.yml 中找到 style.font-family，修改以下内容：</li>
-</ul>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">style:</span></span><br><span class="line">    <span class="attr">font-family:</span></span><br><span class="line">        <span class="attr">logo:</span> <span class="string">&#x27;&quot;LXGW WenKai Screen&quot;, ...</span></span><br><span class="line"><span class="string">        body: &#x27;</span><span class="string">&quot;LXGW WenKai Screen&quot;</span><span class="string">,</span> <span class="string">...</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">inject: </span><br><span class="line">  head: </span><br><span class="line">    - |</span><br><span class="line">      &lt;link</span><br><span class="line">        rel=&quot;stylesheet&quot;</span><br><span class="line">        href=&quot;https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css&quot;</span><br><span class="line">        media=&quot;all&quot;</span><br><span class="line">      /&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">font-family:</span><br><span class="line">    # logo: &#x27;system-ui, &quot;LXGW WenKai Screen&quot;, &quot;Microsoft Yahei&quot;, &quot;Segoe UI&quot;, -apple-system, Roboto, Ubuntu, &quot;Helvetica Neue&quot;, Arial, &quot;WenQuanYi Micro Hei&quot;, sans-serif&#x27;</span><br><span class="line">  # body: &#x27;system-ui, &quot;LXGW WenKai Screen&quot;, &quot;Microsoft Yahei&quot;, &quot;Segoe UI&quot;, -apple-system, Roboto, Ubuntu, &quot;Helvetica Neue&quot;, Arial, &quot;WenQuanYi Micro Hei&quot;, sans-serif&#x27;</span><br><span class="line">  # logo: &quot;LXGW WenKai Screen&quot;</span><br><span class="line">  # body: &quot;LXGW WenKai Screen&quot;</span><br></pre></td></tr></table></figure>
-
+    <h1 id="类"><a href="#类" class="headerlink" title="类"></a>类</h1><p>局部类：函数内部定义类</p>
+<h3 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h3><p>public 任意都可访问 </p>
+<p>private 被类的成员函数访问 （只能自己）</p>
+<p>protected 当前类或者子类  (血脉连接，自己和子孙)</p>
+<h3 id="友元"><a href="#友元" class="headerlink" title="友元"></a>友元</h3><p>&#x3D;&#x3D;friend&#x3D;&#x3D; 可以访问类的所有成员</p>
+<p>friend void getName(A&amp; a); 友元类<br>friend void B::getName(A&amp; a); 友元类函数<br>friend class B; 友元类   &#x2F;&#x2F;<strong>必须在此之前声明class B;</strong></p>
+<p>###struct与class的区别</p>
 <ol>
-<li><p><code>source</code>目录下新建文件夹<code>css</code>，在 CSS 目录下新建我们自定义文件 <code>my.css</code></p>
+<li><p>默认的访问权限<br>struct的成员默认为public，class的成员默认为private</p>
 </li>
-<li><p>博客配置文件<code>_config.yml</code>中引入 CSS 文件，CSS 文件一般在<code>head</code>引入，JS 文件一般在<code>script</code>里引入</p>
+<li><p>继承时的默认访问权限</p>
 </li>
 </ol>
-<p>打开控制面板 —  程序和功能  —  打开或关闭Windows功能  —-  勾选上Internet Informent Services</p>
-<h1 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h1><p>hexo generate后生成的资源存放在public文件夹中</p>
-<p>当我测试时创建的分类和标签会永远存在，即使我删除.md文档重新构建也依旧存在</p>
-<p>cd &#x2F;public&#x2F;categories  tags</p>
-<p>rm -rf *</p>
-<p>然后清除临时文件 生成 推送</p>
-<p>hexo clean</p>
-<p>hexo generate</p>
-<p>hexo deploy</p>
-<p>##测试</p>
-<p>hexo generate后</p>
-<p>hexo server</p>
-<p><a target="_blank" rel="noopener" href="http://localhost:4000/%E6%9F%A5%E7%9C%8B%E7%BB%93%E6%9E%9C">http://localhost:4000/查看结果</a></p>
-<p>达到效果后再deploy</p>
-<h2 id="后续更新博客"><a href="#后续更新博客" class="headerlink" title="后续更新博客"></a>后续更新博客</h2><ol>
-<li>提交并push到github</li>
-<li>cd &#x2F;root&#x2F;nginx&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;</li>
-<li>git pull</li>
-<li>hexo generate</li>
-<li>hexo deploy</li>
-</ol>
-<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><p><a target="_blank" rel="noopener" href="https://tutulp.github.io/">https://tutulp.github.io/</a></p>
-<p>是的，你可以通过将自定义域名（例如你拥有的域名）映射到你的GitHub Pages网站来实现这一目标。以下是一些步骤：</p>
-<ol>
-<li><strong>购买域名</strong>：首先，你需要购买一个域名，例如<code>yourdomain.com</code>。你可以通过注册商（例如GoDaddy、Namecheap等）购买域名。</li>
-<li><strong>配置DNS记录</strong>：登录到你的域名注册商的控制面板，并配置DNS记录，将你的域名指向GitHub Pages。通常，你需要添加一个CNAME记录，将域名指向你的GitHub Pages用户名，例如<code>yourusername.github.io</code>。具体的步骤可能会因注册商而异，你可以参考GitHub Pages提供的文档或向注册商寻求帮助。</li>
-<li><strong>在GitHub设置中配置自定义域名</strong>：登录到GitHub，进入你的仓库设置页面，将你的自定义域名添加到”Custom domain”字段中。</li>
-<li><strong>等待DNS生效</strong>：一旦你配置了DNS记录并保存了更改，你需要等待一段时间（通常几小时至48小时），直到DNS记录生效。一旦生效，你的域名就会指向你的GitHub Pages网站。</li>
-<li><strong>HTTPS支持</strong>：GitHub Pages支持HTTPS，但你需要确保你的域名有有效的SSL证书。你可以使用GitHub提供的自动生成的SSL证书，或者使用其他证书颁发机构提供的证书。</li>
-</ol>
-<p>##shell脚本自动化</p>
-<p>&#x2F;root下新建blog.sh</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash  </span><br><span class="line">cd /root/hexo/blog_new/source/_posts/tutuLP.github.io || exit  </span><br><span class="line">git pull  </span><br><span class="line">cd .. </span><br><span class="line">cd ..  </span><br><span class="line">hexo generate  </span><br><span class="line">hexo deploy  </span><br><span class="line">echo &quot;博客部署完成！&quot;</span><br></pre></td></tr></table></figure>
-
-<p>bash blog.sh</p>
-<h1 id="Linux系统更换后移植"><a href="#Linux系统更换后移植" class="headerlink" title="Linux系统更换后移植"></a>Linux系统更换后移植</h1><ul>
-<li>保存配置文件</li>
+<ul>
+<li>struct的继承默认是public继承，而class的继承默认是private继承。</li>
 </ul>
-<p>_config.yml</p>
-<p>_config.stellar.yml</p>
-<p>scaffolds</p>
-<p>public文件下image</p>
-<p>npm需要的插件</p>
-<p>&#x2F;&#x2F;删除原来的仓库新建仓库重新配置一遍  可能不需要</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">theme: stellar</span><br><span class="line"></span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:tutuLP/tutuLP.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>语义上的区别<br>struct：关注数据集合而不是行为。class：OOP</li>
+</ol>
+<h3 id="静态成员static"><a href="#静态成员static" class="headerlink" title="静态成员static"></a>静态成员static</h3><p>静态函数谁都可以调用，静态成员变量谁都可以修改</p>
+<p>静态成员变量</p>
+<ul>
+<li>类里声明，类外初始化  static int count;  int A::count&#x3D; 0;</li>
+<li>类内初始化 static constexpr或const int constVar &#x3D; 42; </li>
+<li>生命周期全局</li>
+<li>类的静态成员的类型可以是这个类，而非静态成员只能是该类的指针或引用，因为分配内存的时候会导致无限嵌套</li>
+</ul>
+<p>静态成员函数</p>
+<ul>
+<li>只能访问静态数据成员和其他静态成员函数</li>
+<li>没有this指针，只能显式传入对象的指针或引用才能访问成员变量。</li>
+<li>类内声明和定义 或者类外不加static定义</li>
+</ul>
+<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><ol>
+<li>struct和class前+const 不会报错，但是没有意义</li>
+<li>常量对象</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">base</span>&#123;&#125;</span><br><span class="line"><span class="type">const</span> base a;</span><br><span class="line">base <span class="type">const</span> a;</span><br><span class="line"><span class="comment">//常量类对象，只能调用const函数，只能修改mutable声明的变量</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> b;</span><br><span class="line"><span class="type">int</span> <span class="type">const</span> b;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">article:</span><br><span class="line">  share: # [wechat, weibo, email, link]</span><br><span class="line"></span><br><span class="line">logo:</span><br><span class="line">  subtitle: &#x27;从此天边尽沉云 | Designed by tutulp&#x27;</span><br><span class="line">  </span><br><span class="line">style:</span><br><span class="line">  site:</span><br><span class="line">    blur-px: 100px # 模糊半径</span><br><span class="line">    blur-bg: var(--alpha75) # 模糊颜色</span><br><span class="line">  leftbar:</span><br><span class="line">    blur-px: 100px # 模糊半径</span><br><span class="line">    blur-bg: var(--alpha60) # 模糊颜色</span><br><span class="line">footer:</span><br><span class="line">  content: | # 支持 Markdown 格式</span><br><span class="line">    本博客所有文章除特别声明外，均采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议，转载请注明出处。</span><br><span class="line">    &lt;span class=&quot;jinrishici-sentence&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &lt;script src=&quot;https://sdk.jinrishici.com/v2/browser/jinrishici.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>mutable</strong>声明的变量，表示可以被const成员对象或函数修改。</p>
+</blockquote>
+<ol start="3">
+<li><p>const类成员函数<br>void getname() const {}<br>只能调用const函数，只能修改mutable成员变量<br>可以const重载，给不同的对象调用<br>this指针默认为(const Base*)this，所以如果返回值为this，返回类型必须是const Base*，如果返回值为*this，返回值类型可以为Base，因为返回的是副本不影响。</p>
+<blockquote>
+<p>有一种情况可以通过const函数修改成员变量的值：那就是const函数内部调用静态成员函数，然后静态成员函数的参数是非指向const成员的指针或者非const对象的引用，这时可以通过这个参数修改。参数是类对象不能修改，因为修改的是副本。</p>
+</blockquote>
+</li>
+<li><p>const成员变量，<strong>必须提供构造函数的初始化列表</strong></p>
+</li>
+<li><p>const指针<br>指向cosnt对象的指针：const Base* ptr &#x3D; &obj1;  不能通过该指针修改对象的值，指针可以指向其他对象。<br>const指针：Base* const ptr &#x3D; &obj;  指针不能指向其他对象。<br>指向const对象的const指针：const Base* const ptr &#x3D; &obj;既不能通过该指针修改对象的值，指针也不能再指向其他对象。</p>
+</li>
+<li><p>const引用<br>const Base&amp; y&#x3D;a; 不能修改a的内容。<br>Base&amp; const y&#x3D;a; ❌没有这种表达</p>
+</li>
+</ol>
+<h3 id="this指针"><a href="#this指针" class="headerlink" title="this指针"></a>this指针</h3><p>this指针指向调用该函数的对象<br>a.com(b); a隐式绑定到this上<br>*this，相当于this指针的解引用代表这个对象</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MyClass&amp; <span class="keyword">operator</span>=(<span class="type">const</span> MyClass&amp; other) &#123;  </span><br><span class="line">    <span class="comment">// 赋值操作...  </span></span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">// 返回当前对象的引用  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-theme-volantis</span><br><span class="line">icon</span><br></pre></td></tr></table></figure>
+<h3 id="类的作用域"><a href="#类的作用域" class="headerlink" title="类的作用域"></a>类的作用域</h3><p>类允许包含指向自身的引用和指针</p>
+<ul>
+<li><p>声明中的名字，参数名字，返回类型都必须在使用前声明</p>
+</li>
+<li><p>函数体会在整个类全部可见后再处理，所以会看到后续public中的成员变量，可以做函数体的返回值。</p>
+</li>
+<li><p>类外已经定义了一个全局变量名为name，则类里不能再定义一个同名的成员name</p>
+</li>
+</ul>
+<p>###聚合类</p>
+<ul>
+<li><p>所有成员都是public 没有private，protected</p>
+</li>
+<li><p>没有定义构造函数</p>
+</li>
+<li><p>没有基类 不从其他地方继承而来</p>
+</li>
+<li><p>没有虚函数 不支持多态</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Point</span> &#123;  </span><br><span class="line">    <span class="type">int</span> x;  </span><br><span class="line">    <span class="type">int</span> y;  </span><br><span class="line">&#125;;  </span><br><span class="line"><span class="comment">// 聚合类初始化 ，使用花括号初始化列表</span></span><br><span class="line">Point p = &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br></pre></td></tr></table></figure>
 
+<h3 id="字面值常量类"><a href="#字面值常量类" class="headerlink" title="字面值常量类"></a>字面值常量类</h3><p>在编译时创建对象，并且其对象能用于常量表达式的类</p>
+<ul>
+<li>数据成员都是<strong>字面值类型</strong></li>
+</ul>
+<blockquote>
+<p>字面值类型：整形，浮点型，枚举类型，指针(指向字面值类型或空指针)，引用类型，字面值常量类</p>
+</blockquote>
+<ul>
+<li>有一个<strong>constexpr构造函数</strong> constexpr函数的参数值和返回值必须是字面值类型，且不能抛出异常，用noexcept</li>
+<li>如果定义了析构函数，必须是<strong>constexpr</strong>的</li>
+</ul>
+<p>constexpr构造函数可以声明成&#x3D;default的形式、或者删除函数的形式。否则，constexpr构造函数必须符合构造函数的要求又符合constexpr函数的要求（拥有的唯一可执行语句就是返回语句）<br>constexpr构造函数必须初始化所有的数据成员</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Debug</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">bool</span> hw;</span><br><span class="line">    <span class="type">bool</span> io;</span><br><span class="line">    <span class="type">bool</span> other;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">constexpr</span> <span class="title">Debug</span><span class="params">(<span class="type">bool</span> b = <span class="literal">true</span>)</span> :hw(b), io(b), other(b) &#123;</span>&#125;</span><br><span class="line">    <span class="function"><span class="keyword">constexpr</span> <span class="title">Debug</span><span class="params">(<span class="type">bool</span> h, <span class="type">bool</span> i, <span class="type">bool</span> o)</span> : hw(h), io(i), other(o) &#123;</span>&#125;</span><br><span class="line">    <span class="function"><span class="keyword">constexpr</span> <span class="type">bool</span> <span class="title">any</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> hw || io || other; &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">set_io</span><span class="params">(<span class="type">bool</span> b)</span> </span>&#123; io = b; &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">set_hw</span><span class="params">(<span class="type">bool</span> b)</span> </span>&#123; hw = b; &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">set_other</span><span class="params">(<span class="type">bool</span> b)</span> </span>&#123; other = b; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">constexpr</span> Debug <span class="title">io_sub</span><span class="params">(<span class="literal">false</span>, <span class="literal">true</span>, <span class="literal">false</span>)</span></span>;  <span class="comment">//调试IO</span></span><br><span class="line">    <span class="function"><span class="keyword">constexpr</span> Debug <span class="title">prod</span><span class="params">(<span class="literal">false</span>)</span></span>;  <span class="comment">//无调试</span></span><br><span class="line">    <span class="keyword">if</span> (io_sub.<span class="built_in">any</span>())  <span class="comment">//等价于if(true)</span></span><br><span class="line">        cerr &lt;&lt; <span class="string">&quot;print appropriate error messages;&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">if</span>(prod.<span class="built_in">any</span>()) <span class="comment">//等价于if(false)</span></span><br><span class="line">        cerr &lt;&lt; <span class="string">&quot;print an error message;&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="类函数"><a href="#类函数" class="headerlink" title="类函数"></a>类函数</h1><h2 id="自由函数"><a href="#自由函数" class="headerlink" title="自由函数"></a>自由函数</h2><p>不属于任何结构体和类，在全局任何地方都可以调用 不接受this指针<br>std::ostream&amp; print(std::ostream&amp; os, const sals&amp; item)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="comment">// 定义 sals 类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">sals</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::string bookNumber;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 构造函数</span></span><br><span class="line">    <span class="built_in">sals</span>(<span class="type">const</span> std::string&amp; number) : <span class="built_in">bookNumber</span>(number) &#123;&#125;</span><br><span class="line">    <span class="comment">// 返回书籍编号</span></span><br><span class="line">    <span class="function">std::string <span class="title">isbn</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> bookNumber;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 输出 sals 对象的内容到任何输出流</span></span><br><span class="line"><span class="function">std::ostream&amp; <span class="title">print</span><span class="params">(std::ostream&amp; os, <span class="type">const</span> sals&amp; item)</span> </span>&#123;</span><br><span class="line">    os &lt;&lt; <span class="string">&quot;Book Number: &quot;</span> &lt;&lt; item.<span class="built_in">isbn</span>();</span><br><span class="line">    <span class="keyword">return</span> os;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个 sals 对象</span></span><br><span class="line">    <span class="function">sals <span class="title">myBook</span><span class="params">(<span class="string">&quot;1234567890&quot;</span>)</span></span>;</span><br><span class="line">    <span class="comment">// 输出到标准输出流</span></span><br><span class="line">    <span class="built_in">print</span>(std::cout, myBook) &lt;&lt; std::endl;</span><br><span class="line">    <span class="comment">// 输出到文件流</span></span><br><span class="line">    <span class="function">std::ofstream <span class="title">outFile</span><span class="params">(<span class="string">&quot;book_info.txt&quot;</span>)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (outFile.<span class="built_in">is_open</span>()) &#123;</span><br><span class="line">        <span class="built_in">print</span>(outFile, myBook) &lt;&lt; std::endl;</span><br><span class="line">        outFile.<span class="built_in">close</span>();</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Data written to file successfully.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Unable to open file.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>只要定义了构造函数就不会自动生成默认构造函数，如果需要应该显示定义<br>成员是<strong>const</strong>或者<strong>引用</strong>，某种<strong>未提供默认构造函数的类类型</strong>，必须通过构造函数初始值列表提供初始值，而不是在函数体内赋值</p>
+<h3 id="默认构造函数"><a href="#默认构造函数" class="headerlink" title="默认构造函数"></a>默认构造函数</h3><ul>
+<li>没有参数</li>
+<li>如果类中没有显式定义任何构造函数，编译器会自动生成一个默认构造函数（仅当类中有需要初始化的成员时）。</li>
+<li>显示定义构造函数</li>
+</ul>
+<ol>
+<li>MyClass() &#x3D; <strong>default</strong>;</li>
+<li>MyClass(){}; 使用这种方式，编译器就不会再生成其他隐式的特殊成员函数（如拷贝构造函数、拷贝赋值运算符等），除非你显式地定义它们。</li>
+</ol>
+<blockquote>
+<p>有一个成员变量int c;无论如何不会自动初始化为0(内置参数类型),使用默认构造函数则c会初始化为一个类似32691的值</p>
+</blockquote>
+<h3 id="拷贝构造函数"><a href="#拷贝构造函数" class="headerlink" title="拷贝构造函数"></a>拷贝构造函数</h3><p>使用原有对象的值初始化一个新的对象。</p>
+<ul>
+<li>第一个参数是自身引用类型(推荐为const const MyClass&amp; other)，任何额外参数都有默认值<br>如果不为const自身引用类型：<ol>
+<li>不能接受const和volatile</li>
+<li>不能使用 MyClass obj2 &#x3D; MyClass (obj1);因为obj1是一个临时变量，<strong>临时变量是一个右值，不能被修改</strong></li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>可以存在多个拷贝构造函数</li>
+<li>一般隐式使用 MyClass B&#x3D;A;     显式使用：MyClass B &#x3D; MyClass(A);</li>
+</ul>
+<p>什么时候会使用拷贝构造函数？</p>
+<p>对象作为函数参数，以值传递的方式传入函数体，会使用拷贝构造函数生成副本。(建议传指针或者引用)<br>对象作为函数返回值，以值传递的方式从函数返回<br>使用原有对象的值初始化一个新的对象。</p>
+<p>&#x3D;&#x3D;浅拷贝&#x3D;&#x3D;<br>默认拷贝构造函数 ClassName(const ClassName&amp; other);<br>定义了拷贝构造函数就不会自动生成默认的<br>不能处理需要动态分配内存的的情况(含指针等)，使多个对象指向同一个内存<br>静态成员变量count用于计数，计数在构造函数中实现，调用默认拷贝不会实现计数</p>
+<p>&#x3D;&#x3D;深拷贝&#x3D;&#x3D;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">MyClass</span>(<span class="type">const</span> MyClass&amp; other) &#123;</span><br><span class="line">    data = <span class="keyword">new</span> <span class="built_in">int</span>(*(other.data));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自定义实现，解决动态分配问题。</p>
+<h3 id="移动构造函数"><a href="#移动构造函数" class="headerlink" title="移动构造函数"></a>移动构造函数</h3><p>高效转移资源，避免不必要的深拷贝</p>
+<p>什么时候使用？</p>
+<p>函数返回临时对象：将临时对象的资源转移到接收返回值的对象中。<br>容器插入临时对象：在向容器（如 std::vector）中插入临时对象时，会调用移动构造函数来避免不必要的拷贝。<br>MyClass obj2(std::move(obj1));<br>MyClass obj &#x3D; MyClass(5);  &#x2F;&#x2F;区别MyClass obj &#x3D; MyClass(obj1);  <strong>MyClass(5)是一个右值</strong></p>
+<ul>
+<li>参数是该类对象的一个右值引用（T&amp;&amp;），用于通过移动一个已存在的对象（通常是临时对象）来初始化新创建的对象。</li>
+<li>定义ClassName(ClassName&amp;&amp; other); </li>
+<li>转移之后需要置空原资源，防止原对象被析构时释放了转移的资源</li>
+<li>MyClass(MyClass&amp;&amp;) &#x3D; delete;</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">MyClass</span>(MyClass&amp;&amp; other) <span class="keyword">noexcept</span> : <span class="built_in">data</span>(other.data), <span class="built_in">size</span>(other.size) &#123;</span><br><span class="line">    other.data = <span class="literal">nullptr</span>;   <span class="comment">//原对象资源置空</span></span><br><span class="line">    other.size = <span class="number">0</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Move constructor called&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//noexcept 不会抛出异常</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="转换构造函数"><a href="#转换构造函数" class="headerlink" title="转换构造函数"></a>转换构造函数</h3><ul>
+<li><p>转换构造函数允许将一个其他类型的数据转换成一个<strong>临时类对象</strong>。</p>
+</li>
+<li><p>只有一个参数，并且该参数不是本类的const引用时，该构造函数被视为转换构造函数。</p>
+</li>
+<li><p>转换构造函数可以隐式地转换其他类型的对象到本类的对象，使用<code>explicit</code>关键字可以禁用这种隐式转换。</p>
+</li>
+<li><p>可以用类对象直接与int相加</p>
+</li>
+</ul>
+<p>使用：<br>Complex c2 &#x3D; 12；隐式，非explict<br>Complex c2 &#x3D; Complex(12);  显式<br>c1 &#x3D; Complex(9);  转换构造函数返回的是一个临时类对象<br>c1 + 1; 隐式，非explict配合+运算符重载</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Complex</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">double</span> real , imag;</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Complex</span><span class="params">(<span class="type">int</span> i)</span></span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;IntConstructor called&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        real = i;</span><br><span class="line">        imag = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">void</span> <span class="keyword">operator</span>+(<span class="type">const</span> Complex&amp; a) &#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;real += a.real;</span><br><span class="line">    <span class="keyword">this</span>-&gt;imag += a.imag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="explicit"><a href="#explicit" class="headerlink" title="explicit"></a>explicit</h4><p>使用explicit关键字可以防止构造函数进行隐式类型转换。<br>一个类的对象与另一个类型的值进行赋值或比较时，如果类的构造函数可以接受该类型的参数，编译器可能会尝试使用构造函数来隐式地将一个类型的值转换为类的对象。</p>
+<p>用于转换构造函数或者单参数模板构造函数 ，explicit TemplateClass(T value) : data(value)</p>
+<h3 id="委托构造函数"><a href="#委托构造函数" class="headerlink" title="委托构造函数"></a>委托构造函数</h3><ul>
+<li>委托构造函数允许一个构造函数调用同一个类中的另一个构造函数来执行初始化工作。</li>
+<li>委托构造函数通过初始化列表中的’类名后跟参数列表’来调用另一个构造函数。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="built_in">Person</span>(<span class="type">const</span> std::string&amp; name, <span class="type">int</span> age) : <span class="built_in">name</span>(name), <span class="built_in">age</span>(age) &#123;&#125;</span><br><span class="line"><span class="comment">//委托构造函数</span></span><br><span class="line"> <span class="built_in">Person</span>(<span class="type">const</span> std::string&amp; name) : <span class="built_in">Person</span>(name, <span class="number">0</span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> value;</span><br><span class="line">    std::string name;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 默认构造函数</span></span><br><span class="line">    <span class="built_in">MyClass</span>() : <span class="built_in">value</span>(<span class="number">0</span>), <span class="built_in">name</span>(<span class="string">&quot;default&quot;</span>) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Default constructor called&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 拷贝构造函数</span></span><br><span class="line">    <span class="built_in">MyClass</span>(<span class="type">const</span> MyClass&amp; other) : <span class="built_in">value</span>(other.value), <span class="built_in">name</span>(other.name) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Copy constructor called&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 移动构造函数</span></span><br><span class="line">    <span class="built_in">MyClass</span>(MyClass&amp;&amp; other) <span class="keyword">noexcept</span> : <span class="built_in">value</span>(other.value), <span class="built_in">name</span>(std::<span class="built_in">move</span>(other.name)) &#123;<span class="comment">//更高效</span></span><br><span class="line">        other.value = <span class="number">0</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Move constructor called&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 转换构造函数</span></span><br><span class="line">    <span class="built_in">MyClass</span>(<span class="type">int</span> val) : <span class="built_in">value</span>(val), <span class="built_in">name</span>(<span class="string">&quot;converted&quot;</span>) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Conversion constructor called&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 委托构造函数</span></span><br><span class="line">    <span class="built_in">MyClass</span>(<span class="type">int</span> val, <span class="type">const</span> std::string&amp; str) : <span class="built_in">MyClass</span>(val) &#123;<span class="comment">//委托转换构造函数</span></span><br><span class="line">        name = str;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Delegating constructor called&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 打印对象信息的成员函数</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">printInfo</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Value: &quot;</span> &lt;&lt; value &lt;&lt; <span class="string">&quot;, Name: &quot;</span> &lt;&lt; name &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用默认构造函数</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Using default constructor:&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    MyClass obj1;</span><br><span class="line">    obj<span class="number">1.</span><span class="built_in">printInfo</span>();</span><br><span class="line">    <span class="comment">// 使用转换构造函数</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;\nUsing conversion constructor:&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="function">MyClass <span class="title">obj2</span><span class="params">(<span class="number">42</span>)</span></span>;</span><br><span class="line">    obj<span class="number">2.</span><span class="built_in">printInfo</span>();</span><br><span class="line">    <span class="comment">// 使用委托构造函数</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;\nUsing delegating constructor:&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="function">MyClass <span class="title">obj3</span><span class="params">(<span class="number">100</span>, <span class="string">&quot;custom&quot;</span>)</span></span>;</span><br><span class="line">    obj<span class="number">3.</span><span class="built_in">printInfo</span>();</span><br><span class="line">    <span class="comment">// 使用拷贝构造函数</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;\nUsing copy constructor:&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="function">MyClass <span class="title">obj4</span><span class="params">(obj3)</span></span>;</span><br><span class="line">    obj<span class="number">4.</span><span class="built_in">printInfo</span>();</span><br><span class="line">    <span class="comment">// 使用移动构造函数</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;\nUsing move constructor:&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="function">MyClass <span class="title">obj5</span><span class="params">(std::move(obj2))</span></span>;</span><br><span class="line">    obj<span class="number">5.</span><span class="built_in">printInfo</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>##内联函数</p>
+<p>是在编译的时候将函数嵌到调用了它的地方<br>隐式内联：类声明和定义放在一起，只是建议编译器内联<br>显示内联：使用inline</p>
+<h2 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h2><p>~MyClass() {}</p>
+<p>隐式调用：当离开当前作用域会自动调用析构函数，如果有动态内存分配的成员在函数实现中添加释放<br>显示调用：当用new管理对象时</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span>* buffer = <span class="keyword">new</span> <span class="type">char</span>[<span class="built_in">sizeof</span>(MyClass)];</span><br><span class="line">MyClass* obj = <span class="built_in">new</span> (buffer) <span class="built_in">MyClass</span>();</span><br><span class="line">obj-&gt;~<span class="built_in">MyClass</span>();</span><br><span class="line"><span class="keyword">delete</span>[] buffer;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不可重载</li>
+<li>没有参数和返回值</li>
+<li>private多用于设计模式中，单例等</li>
+<li>一个类有虚函数或作为基类，析构函数应该声明为虚函数 <strong>virtual</strong> ~Base() {…}</li>
+<li><ul>
+<li>首先调用该类的析构函数，然后按继承层次依次向上调用基类的析构函数。</li>
+</ul>
+</li>
+<li>纯虚析构函数<br>**抽象类：**如果一个类的析构函数被声明为纯虚函数，该类是抽象类，不能实例化。<br>纯虚析构函数仍然需要定义，因为对象销毁时必须调用析构函数。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AbstractBase</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">AbstractBase</span>() = <span class="number">0</span>;  <span class="comment">// 纯虚析构函数</span></span><br><span class="line">&#125;;</span><br><span class="line">AbstractBase::~<span class="built_in">AbstractBase</span>() &#123;</span><br><span class="line">    <span class="comment">// 纯虚析构函数的定义</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>禁止析构 以禁止对象被销毁。这在某些设计模式中可能会用到。~NonDestructible() &#x3D; <strong>delete</strong>;</li>
+</ul>
+<h2 id="拷贝赋值运算符"><a href="#拷贝赋值运算符" class="headerlink" title="拷贝赋值运算符"></a>拷贝赋值运算符</h2><p>已存在的对象给一已存在的对象赋值<br>ClassName&amp; operator&#x3D;(const ClassName&amp; other);<br>ClassName a;ClassName b; b&#x3D;a;</p>
+<ul>
+<li>默认拷贝赋值运算符-参考浅拷贝</li>
+<li>深拷贝需要自己定义</li>
+<li>禁止对象被拷贝 删除拷贝赋值运算符 MyClass&amp; operator&#x3D;(const MyClass&amp;) &#x3D; delete;</li>
+<li><ul>
+<li>检查自赋值-避免资源意外释放</li>
+<li>释放已有资源 释放当前对象已经持有的资源（例如内存）</li>
+<li>深拷贝新资源</li>
+<li>返回当前对象的引用</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MyClass&amp; <span class="keyword">operator</span>=(<span class="type">const</span> MyClass&amp; other) &#123;</span><br><span class="line">     <span class="keyword">if</span> (<span class="keyword">this</span> == &amp;other) <span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">// 防止自我赋值</span></span><br><span class="line">     <span class="keyword">delete</span> data; <span class="comment">// 释放原来的内存</span></span><br><span class="line">     data = <span class="keyword">new</span> <span class="built_in">int</span>(*(other.data)); <span class="comment">// 深拷贝</span></span><br><span class="line">     <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="移动赋值运算符"><a href="#移动赋值运算符" class="headerlink" title="移动赋值运算符"></a>移动赋值运算符</h2><p>实现步骤</p>
+<ul>
+<li>检查自赋值</li>
+<li>释放当前资源</li>
+<li>转移资源</li>
+<li>返回 *this</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MyClass&amp; <span class="keyword">operator</span>=(MyClass&amp;&amp; other) <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> != &amp;other) &#123; <span class="comment">// 检查自赋值</span></span><br><span class="line">            <span class="keyword">delete</span>[] data; <span class="comment">// 释放当前资源</span></span><br><span class="line">            data = other.data; <span class="comment">// 转移资源</span></span><br><span class="line">            other.data = <span class="literal">nullptr</span>; <span class="comment">// 防止资源释放</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">obj5 = std::<span class="built_in">move</span>(obj2);</span><br></pre></td></tr></table></figure>
+
+<h2 id="三五法则"><a href="#三五法则" class="headerlink" title="三五法则"></a>三五法则</h2><p>定义其中一个需要定义其他的</p>
+<ul>
+<li><strong>三法则</strong></li>
+</ul>
+<p>析构函数 拷贝构造函数 拷贝赋值运算符<br>比如：当成员中有动态分配的数组时，需要显示定义析构函数来释放内存。同时避免浅拷贝的问题(多个对象共享一块内存，导致多次释放)，所以需要实现深拷贝。</p>
+<ul>
+<li><strong>五法则</strong></li>
+</ul>
+<p>移动构造函数  移动赋值运算符<br>移动构造函数和移动赋值运算符通过将临时对象的资源所有权转移到新对象，避免了不必要的深拷贝，提高了性能</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span>* data;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 默认构造函数</span></span><br><span class="line">    <span class="built_in">MyClass</span>(<span class="type">int</span> value) : <span class="built_in">data</span>(<span class="keyword">new</span> <span class="built_in">int</span>(value)) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;默认构造函数被调用&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 拷贝构造函数</span></span><br><span class="line">    <span class="built_in">MyClass</span>(<span class="type">const</span> MyClass&amp; other) : <span class="built_in">data</span>(<span class="keyword">new</span> <span class="built_in">int</span>(*(other.data))) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;拷贝构造函数被调用&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 拷贝赋值运算符</span></span><br><span class="line">    MyClass&amp; <span class="keyword">operator</span>=(<span class="type">const</span> MyClass&amp; other) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == &amp;other) <span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">// 防止自我赋值</span></span><br><span class="line">        *data = *(other.data); <span class="comment">// 拷贝数据</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;拷贝赋值运算符被调用&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 移动构造函数</span></span><br><span class="line">    <span class="built_in">MyClass</span>(MyClass&amp;&amp; other) <span class="keyword">noexcept</span> : <span class="built_in">data</span>(other.data) &#123;</span><br><span class="line">        other.data = <span class="literal">nullptr</span>; <span class="comment">// 将源对象的数据指针设为nullptr</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;移动构造函数被调用&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 移动赋值运算符</span></span><br><span class="line">    MyClass&amp; <span class="keyword">operator</span>=(MyClass&amp;&amp; other) <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == &amp;other) <span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">// 防止自我赋值</span></span><br><span class="line">        <span class="keyword">delete</span> data; <span class="comment">// 释放当前对象的资源</span></span><br><span class="line">        data = other.data; <span class="comment">// 接管源对象的数据指针</span></span><br><span class="line">        other.data = <span class="literal">nullptr</span>; <span class="comment">// 将源对象的数据指针设为nullptr</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;移动赋值运算符被调用&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 析构函数</span></span><br><span class="line">    ~<span class="built_in">MyClass</span>() &#123;</span><br><span class="line">        <span class="keyword">delete</span> data; <span class="comment">// 释放资源</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;析构函数被调用&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取值</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getValue</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> *data; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">MyClass <span class="title">obj1</span><span class="params">(<span class="number">42</span>)</span></span>;           <span class="comment">// 默认构造函数</span></span><br><span class="line">    MyClass obj2 = obj1;        <span class="comment">// 拷贝构造函数</span></span><br><span class="line">    <span class="function">MyClass <span class="title">obj3</span><span class="params">(<span class="number">0</span>)</span></span>;            <span class="comment">// 默认构造函数</span></span><br><span class="line">    obj3 = obj1;                <span class="comment">// 拷贝赋值运算符</span></span><br><span class="line"></span><br><span class="line">    MyClass obj4 = std::<span class="built_in">move</span>(obj1);  <span class="comment">// 移动构造函数</span></span><br><span class="line">    <span class="function">MyClass <span class="title">obj5</span><span class="params">(<span class="number">0</span>)</span></span>;                 <span class="comment">// 默认构造函数</span></span><br><span class="line">    obj5 = std::<span class="built_in">move</span>(obj2);          <span class="comment">// 移动赋值运算符</span></span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;obj1的值: &quot;</span> &lt;&lt; (obj<span class="number">1.</span><span class="built_in">getValue</span>() ? std::<span class="built_in">to_string</span>(obj<span class="number">1.</span><span class="built_in">getValue</span>()) : <span class="string">&quot;nullptr&quot;</span>) &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;obj2的值: &quot;</span> &lt;&lt; (obj<span class="number">2.</span><span class="built_in">getValue</span>() ? std::<span class="built_in">to_string</span>(obj<span class="number">2.</span><span class="built_in">getValue</span>()) : <span class="string">&quot;nullptr&quot;</span>) &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;obj3的值: &quot;</span> &lt;&lt; obj<span class="number">3.</span><span class="built_in">getValue</span>() &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;obj4的值: &quot;</span> &lt;&lt; obj<span class="number">4.</span><span class="built_in">getValue</span>() &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;obj5的值: &quot;</span> &lt;&lt; obj<span class="number">5.</span><span class="built_in">getValue</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="操作重载"><a href="#操作重载" class="headerlink" title="操作重载"></a>操作重载</h2><img src="./images/C++ 面向对象.assets/image-20240608132237830.png" class="lazyload" data-srcset="./images/C++ 面向对象.assets/image-20240608132237830.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240608132237830" style="zoom:33%;" />
+
+<p>de1+de2 或 operator+(de1+de2)</p>
+<p>de1+&#x3D;de2 或 de1.operator+&#x3D;(de2) this绑定到de1 de2作为实参</p>
+<p>#面向对象程序设计</p>
+<p>OOP： 封装 继承 多态</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>class Dog : public Animal<br>继承会继承私有成员，占用内存，但是不能访问</p>
+<p>&#x3D;&#x3D;继承类型&#x3D;&#x3D; 默认为private</p>
+<ul>
+<li>公有继承（public）：不能访问基类的private，其他类型不变</li>
+<li>保护继承（protected）：public，protected -&gt; protected</li>
+<li>私有继承（private）：public，protected -&gt; private</li>
+<li>继承来的成员变量 可以使用using改变可访问性 public: using A::num;</li>
+</ul>
+<p>一个派生类<strong>继承</strong>了所有的基类方法，但下列情况除外：</p>
+<ul>
+<li>基类的构造函数。c++ 11中使用using Base::Base;可以继承构造函数</li>
+<li>析构函数。 </li>
+<li>赋值运算符重载函数</li>
+<li>友元关系。</li>
+</ul>
+<h3 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h3><p>一个子类有多个父类</p>
+<p>class C: public A, public B</p>
+<p>&#x3D;&#x3D;<strong>菱形继承</strong>&#x3D;&#x3D;<br>A B有一个共同的祖宗O，这时A B都有O的元素，C不知道继承A和B哪一个的元素</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;<span class="keyword">public</span>:<span class="type">int</span> data;&#125;;</span><br><span class="line"><span class="comment">// 中间基类 A</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DerivedA</span> : <span class="keyword">public</span> Base &#123;&#125;;</span><br><span class="line"><span class="comment">// 中间基类 B</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DerivedB</span> : <span class="keyword">public</span> Base &#123;&#125;;</span><br><span class="line"><span class="comment">// 最终派生类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FinalDerived</span> : <span class="keyword">public</span> DerivedA, <span class="keyword">public</span> DerivedB &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// obj.data = 10; 二义性报错</span></span><br><span class="line">obj.DerivedA::data = <span class="number">10</span>; <span class="comment">//需要指定路径</span></span><br><span class="line"><span class="comment">//虚继承解决</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> Base &#123;&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> Base &#123;&#125;;</span><br><span class="line">obj.data = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p>子类的构造函数用<strong>初始化列表</strong>的方式时不能直接给继承来的变量赋值，必须要在列表中调用父类的构造函数，否则就在函数体内赋值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Fu</span>(<span class="type">int</span> value) : <span class="built_in">baseValue</span>(value) &#123;&#125;</span><br><span class="line"><span class="built_in">Zi</span>() : <span class="built_in">Fu</span>(<span class="number">2</span>), <span class="built_in">derivedValue</span>(<span class="number">2</span>) &#123;&#125;</span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line"><span class="built_in">Zi</span>() : <span class="built_in">derivedValue</span>(<span class="number">2</span>) &#123;baseValue=<span class="number">2</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>子类对象给父类对象赋值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Zi a;</span><br><span class="line">Fu b;</span><br><span class="line">b=a; <span class="comment">//会将继承来的变量的值赋值给父类对象</span></span><br><span class="line"><span class="comment">//a=b;不可以</span></span><br></pre></td></tr></table></figure>
+
+<p>父类引用子类对象或者父类指针指向子类对象，只能访问子类能访问的父类对象</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Zi a;</span><br><span class="line">Fu&amp; b = a;</span><br><span class="line">Fu* p = &amp;a;</span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;<strong>同名</strong>&#x3D;&#x3D;</p>
+<p>如果子类有一个和父类同名的成员，子类对象默认访问子类成员，访问父类成员要加fu::</p>
+<p>如果子类有一个和父类同名的函数，访问也是先访问子类的函数，如果子类的函数参数与父类不一样，调用函数也不会自动去匹配参数</p>
+<p>&#x3D;&#x3D;<strong>构造函数</strong>&#x3D;&#x3D;</p>
+<p>会先调用父类的构造函数，然后调用子类的构造函数<br>子类隐式调用父类的默认构造函数，或显示调用构造函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">human</span> &#123;</span><br><span class="line"><span class="keyword">protected</span>: std::string _name;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">human</span>(std::string name = <span class="string">&quot;小明&quot;</span>) : _name(name) &#123;std::cout &lt;&lt; <span class="string">&quot;调用 human 构造函数，姓名: &quot;</span> &lt;&lt; _name &lt;&lt; std::endl;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">student</span> : <span class="keyword">public</span> human &#123;</span><br><span class="line"><span class="keyword">private</span>: <span class="type">int</span> _age;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">student</span>(std::string name, <span class="type">int</span> age) : _age(age)&#123;std::cout &lt;&lt; <span class="string">&quot;调用 student 构造函数，姓名: &quot;</span> &lt;&lt; _name &lt;&lt; <span class="string">&quot;, 年龄: &quot;</span> &lt;&lt; _age &lt;&lt; std::endl;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">student <span class="title">st</span><span class="params">(<span class="string">&quot;小红&quot;</span>, <span class="number">18</span>)</span></span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//human的构造函数带有默认参数，它可以当作默认构造函数来使用，隐式调用 小明 18  这时如果还有一个默认构造函数human()&#123;_name=&quot;小黄&quot;;&#125;，那么编译会有歧义，因为不知道隐式调用哪一个函数</span></span><br><span class="line"><span class="built_in">student</span>(std::string name, <span class="type">int</span> age) : _age(age),<span class="built_in">human</span>(name)</span><br><span class="line"><span class="comment">//显示调用父类构造函数 小红 18</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;<strong>析构函数</strong>&#x3D;&#x3D;</p>
+<p>先调用子类的析构再父类的析构，禁止子类中调用父类的析构-造成空间释放两次。</p>
+<p>子类拷贝构造函数调用父类的拷贝构造函数时，直接传入子类的对象，父对象会拿到他有的哪部分，剩下的在子类拷贝构造函数中完成</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">student</span>(student&amp; s)</span><br><span class="line">		:<span class="built_in">human</span>(s)<span class="comment">//直接将子类传过来通过切片拿到父类中的值</span></span><br><span class="line">		,_age(s._age)<span class="comment">//拿除了父类之外的值</span></span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; s._age &lt;&lt; endl&lt;&lt;s._name&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示调用父类的拷贝赋值运算符</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">student&amp; <span class="keyword">operator</span>=(<span class="type">const</span> student&amp; s)&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span> != &amp;s)&#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;调用了子类&quot;</span> &lt;&lt; endl;</span><br><span class="line">			human::<span class="keyword">operator</span>=(s);<span class="comment">//必须调用父类运算符</span></span><br><span class="line">			_age = s._age;</span><br><span class="line">			_name = s._name;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>编译时多态：静态绑定，编译时就确定了要调用的函数或方法，比如重载(函数重载，运算符重载)，模板。<br>运行时多态：动态绑定，在运行时确定调用哪个函数 ，实现：通过对象的虚函数表指针找到并调用正确的函数</p>
+<p>虚函数：在基类中使用关键字virtual声明的函数。<br>虚函数表：每个有虚函数的类都有一个虚函数表。虚函数表是一个指针数组，其中每个指针指向类的虚函数。存放在全局数据空间。就算是继承父类的虚函数也有自己的虚函数表，如果没有重写，那么虚函数表中的指针还是指向父类的虚函数。<br>虚函数表指针：指向虚函数表(开头位置)。大小：32位系统(4字节)，64位系统(8字节)<br>调用顺序：判断函数是否为虚函数，如果是则通过虚函数表指针找到虚函数表，再在虚函数表中找到该虚函数调用。</p>
+<blockquote>
+<p>如果派生类还有一个int类型的变量，64位系统中，虚函数表指针为8 节，int为4字节，考虑内存对齐后，对象大小通常为16字节（按8字节对齐），32位系统中为8字节(四字节对齐)。</p>
+<p>多继承：如果一个派生类继承了两个类，两个类都有虚函数，这个派生类就有两个虚函数表指针，如果这个派生类再次声明自己新的虚函数，那么会放到第一个虚函数表的末尾。</p>
+</blockquote>
+<h3 id="vitual-override"><a href="#vitual-override" class="headerlink" title="vitual override"></a>vitual override</h3><p>vitual 声明虚函数，当基类的指针或者引用指向派生类，调用虚函数时，子类如果对虚函数重写，调用的是子类重写的虚函数，没有重写调用的就是父类的虚函数，如果没有声明为虚函数，则调用的都是父类的函数。<br>override 显示声明重写了虚函数，void reload() override{}; 有override的函数编译时会检查重写是否正确。</p>
+<p>重写虚函数传入参数和返回类型不能改变-如果类型不同会造成重定义<br>例外：</p>
+<ol>
+<li>协变 ，父类的虚函数返回类型是自身的指针或引用，子类的虚函数返回类型可以改为子类的指针或引用</li>
+<li>重写析构函数</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Base* ptr = <span class="keyword">new</span> <span class="built_in">Derived</span>();</span><br><span class="line"><span class="keyword">delete</span> ptr;</span><br><span class="line"><span class="comment">//如果Base的析构函数没有声明为虚函数将不会调用Derived的析构函数，造成无法释放的内存泄露。如果声明为虚函数，则先调用子类的析构函数，再调用基类的虚构函数。</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意区别重载，重载是同一个作用域内函数名相同，所以子类中可以有与继承的虚函数相同函数名的函数，但是一个是重写，一个重载，当没有重写虚函数时，子类对象调用该函数名函数不会做动态匹配，如果要使用父类的同名函数需要加作用域::</p>
+</blockquote>
+<p><strong>建议析构函数都声明为虚函数，避免内存泄漏</strong><br>构造函数不能声明为虚函数</p>
+<h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><p>c++11，用于类名后或者虚函数后防止被继承。<br>class student final{};<br>virtual void abc() override final{}; 一般是某个子类对继承的虚函数进行重写之后，它的子类不会用到这个虚函数了就,子类也不能出现和这个虚函数相同名字，参数，返回值的函数。</p>
+<h3 id="抽象基类"><a href="#抽象基类" class="headerlink" title="抽象基类"></a>抽象基类</h3><p>含纯虚函数 virtual void draw()&#x3D; 0;  子类必须提供实现<br><strong>不能创建抽象基类对象</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里常考一道笔试题：sizeof(Base)是多少？</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Func1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Func1()&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> _b = <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//虚函数表指针(32位系统4字节，64位系统8字节)+int成员4字节,考虑内存对齐，8/32</span></span><br><span class="line"><span class="comment">//类的成员函数不占空间，存放在程序的代码段</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="union联合"><a href="#union联合" class="headerlink" title="union联合"></a>union联合</h1><p>union成员共享一个内存空间，给其中一个成员赋值，另一个已经赋值的成员就没有值了。<br>只给unino分配最大的成员所需的空间</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="title class_">MyUnion</span> &#123;  </span><br><span class="line">    <span class="type">int</span> i;  </span><br><span class="line">    <span class="type">float</span> f;  </span><br><span class="line">    <span class="type">char</span> str[<span class="number">20</span>];  </span><br><span class="line">&#125;;</span><br><span class="line">MyUnion u;</span><br><span class="line">u.i=<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//匿名联合</span></span><br><span class="line"><span class="keyword">union</span> &#123;</span><br><span class="line">    <span class="type">int</span> intValue;</span><br><span class="line">    <span class="type">char</span> charValue;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 直接访问成员</span></span><br><span class="line">intValue = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//构造与析构</span></span><br><span class="line"><span class="keyword">union</span> <span class="title class_">MyUnion</span> &#123;</span><br><span class="line">    <span class="type">int</span> intValue;</span><br><span class="line">    std::string stringValue;</span><br><span class="line">    <span class="comment">// 手动定义构造函数</span></span><br><span class="line">    <span class="built_in">MyUnion</span>() &#123;</span><br><span class="line">        <span class="keyword">new</span> (&amp;intValue) <span class="built_in">int</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 手动定义析构函数</span></span><br><span class="line">    ~<span class="built_in">MyUnion</span>() &#123;</span><br><span class="line">        <span class="comment">// 由于 string 有非平凡析构函数，需要手动调用</span></span><br><span class="line">        stringValue.~<span class="built_in">basic_string</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>标准库中的 std::variant：C++17 引入了 std::variant，它提供了一种类型安全的方式来存储一个值，这个值可以是几种类型中的任何一种。std::variant 是 union 的一个更现代、更安全的替代品。</li>
+</ul>
+<h1 id="variant"><a href="#variant" class="headerlink" title="variant"></a>variant</h1><p>c++ 17中对union更现代，安全的替代品</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;variant&gt;</span></span></span><br><span class="line"><span class="comment">// 定义一个 variant 类型，它可以存储 int、double 或 std::string 类型的值</span></span><br><span class="line">std::variant&lt;<span class="type">int</span>, <span class="type">double</span>, std::string&gt; myVariant;</span><br><span class="line"><span class="comment">// 存储一个 int 值</span></span><br><span class="line">myVariant = <span class="number">42</span>;</span><br><span class="line"><span class="comment">// 使用 std::get_if 检查当前存储的是否为 int 类型, 是则返回其值的指针</span></span><br><span class="line"><span class="keyword">if</span> (<span class="type">const</span> <span class="type">int</span>* intPtr = std::<span class="built_in">get_if</span>&lt;<span class="type">int</span>&gt;(&amp;myVariant)) &#123;</span><br><span class="line">     td::cout &lt;&lt; <span class="string">&quot;The stored value is an int: &quot;</span> &lt;&lt; *intPtr &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>类型匹配</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;variant&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="comment">// 定义一个访问器结构体，使用重载的 () 运算符处理不同类型</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">VariantVisitor</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">int</span> value)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Received an int: &quot;</span> &lt;&lt; value &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">double</span> value)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Received a double: &quot;</span> &lt;&lt; value &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> std::string&amp; value)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Received a string: &quot;</span> &lt;&lt; value &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::vector&lt;std::variant&lt;<span class="type">int</span>, <span class="type">double</span>, std::string&gt;&gt; variants = &#123;<span class="number">42</span>, <span class="number">3.14</span>, <span class="string">&quot;Hello&quot;</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; var : variants) &#123;</span><br><span class="line">        <span class="comment">// 使用 std::visit 调用访问器来处理 variant 中的值</span></span><br><span class="line">        std::<span class="built_in">visit</span>(VariantVisitor&#123;&#125;, var);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>异常处理</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">std::variant&lt;<span class="type">int</span>, std::string&gt; myVariant = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 尝试获取一个 std::string 类型的值，由于当前存储的是 int，会抛出异常</span></span><br><span class="line">    std::string str = std::<span class="built_in">get</span>&lt;std::string&gt;(myVariant);</span><br><span class="line">&#125; <span class="built_in">catch</span> (<span class="type">const</span> std::bad_variant_access&amp; e) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Exception caught: &quot;</span> &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
   </div>
   
@@ -2853,10 +2963,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-03T20:45:53+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-11T22:51:50+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2025年3月3日</p>
+    <p>更新于：2025年3月11日</p>
   </a>
 </div>
 
@@ -2864,10 +2974,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         
           
-  
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Node-js/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>Node.js</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%99%A8/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>静态网站生成器</p></a></div>
-  <span hidden itemprop="keywords">Node.js 静态网站生成器</span>
-
 
         
       
@@ -2879,7 +2985,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2024/03/25/source/Linux/hexo/&title=hexo - tutulp's blog&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2025/03/11/source/C++/C++%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/&title=面向对象 - tutulp's blog&summary="
           
           >
           
@@ -2891,7 +2997,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2024/03/25/source/Linux/hexo/&title=hexo - tutulp's blog&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2025/03/11/source/C++/C++%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/&title=面向对象 - tutulp's blog&summary="
           
           >
           
@@ -2903,7 +3009,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2024/03/25/source/Linux/hexo/&title=hexo - tutulp's blog&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2025/03/11/source/C++/C++%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/&title=面向对象 - tutulp's blog&summary="
           
           >
           
@@ -2936,28 +3042,29 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2024/03/25/source/Linux/Nginx/'>
-          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>Nginx</p>
-          <p class='content'>安装Nginx(最流行的web服务器软件)
-
-安装 yum install nginx
-
-启动 nginx
-
-关闭 nginx -s stop
-
-关闭防火墙后访问ip，会使用linux的80号端...</p>
-        </a>
       
-      
-        <a class='next' href='/2024/03/25/source/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/git/'>
-          <p class='title'>git<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>
-集中版本控制 SVN   所有的版本数据都保存在服务器上，相当于在线修改
-分布式版本控制 Git
+        <a class='next' href='/2025/03/11/source/C++/STL/'>
+          <p class='title'>c++ STL<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>C++标准库 &#x2F; STL 标准模板库
+容器#include
+##顺序容器
 
-下载windows  https://git-scm.com/  无脑下一步
-centos ...</p>
+
+
+容器类型
+描述
+访问支持
+增删
+
+
+
+vector向量
+动态扩容的数组
+连续存储-随机访问
+尾部快
+
+
+...</p>
         </a>
       
     </div>
@@ -2973,7 +3080,7 @@ centos ...</p>
 
   <article class="post white-box shadow floatable blur" id="comments">
     <span hidden>
-      <meta itemprop="discussionUrl" content="/2024/03/25/source/Linux/hexo/index.html#comments">
+      <meta itemprop="discussionUrl" content="/2025/03/11/source/C++/C++%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/index.html#comments">
     </span>
     <p ct><i class='fas fa-comments'></i> 评论</p>
     
@@ -3015,7 +3122,7 @@ centos ...</p>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E4%BA%91%E7%AB%AF%E6%96%87%E4%BB%B6%E6%9E%84%E5%BB%BA%E5%B9%B6%E9%83%A8%E7%BD%B2"><span class="toc-text">拉取云端文件构建并部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F"><span class="toc-text">自定义主题样式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2"><span class="toc-text">文章封面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%91%98%E8%A6%81"><span class="toc-text">设置摘要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E7%AB%A0%E5%BC%80%E5%A4%B4%E5%86%85%E5%AE%B9"><span class="toc-text">获取文章开头内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%96%87%E7%AB%A0%E6%8E%A8%E8%8D%90"><span class="toc-text">相关文章推荐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE"><span class="toc-text">许可协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E4%BA%AB%E9%93%BE%E6%8E%A5"><span class="toc-text">分享链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%86%E7%9B%96-OpenGraph"><span class="toc-text">覆盖 OpenGraph</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%AF%BC%E8%88%AA%E6%A0%8F"><span class="toc-text">设置导航栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE"><span class="toc-text">字体设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD%E6%9B%B4%E6%96%B0%E5%8D%9A%E5%AE%A2"><span class="toc-text">后续更新博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">自定义域名</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="toc-text">访问控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8B%E5%85%83"><span class="toc-text">友元</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98static"><span class="toc-text">静态成员static</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#const"><span class="toc-text">const</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this%E6%8C%87%E9%92%88"><span class="toc-text">this指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">类的作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E9%9D%A2%E5%80%BC%E5%B8%B8%E9%87%8F%E7%B1%BB"><span class="toc-text">字面值常量类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E7%94%B1%E5%87%BD%E6%95%B0"><span class="toc-text">自由函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">默认构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">拷贝构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">移动构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">转换构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#explicit"><span class="toc-text">explicit</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">委托构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="toc-text">析构函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%B7%E8%B4%9D%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">拷贝赋值运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">移动赋值运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E4%BA%94%E6%B3%95%E5%88%99"><span class="toc-text">三五法则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E9%87%8D%E8%BD%BD"><span class="toc-text">操作重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-text">继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BB%A7%E6%89%BF"><span class="toc-text">多继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC"><span class="toc-text">赋值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%80%81"><span class="toc-text">多态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vitual-override"><span class="toc-text">vitual override</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#final"><span class="toc-text">final</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%9F%BA%E7%B1%BB"><span class="toc-text">抽象基类</span></a></li></ol>
     </div>
   </section>
 
@@ -3675,7 +3782,7 @@ window.matchMedia('(prefers-color-scheme: light)').addListener(darkModelListener
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/Web/","name":"Web"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2024/03/25/source/Linux/hexo/","name":"hexo"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"hexo","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/03/25/source/Linux/hexo/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2024/03/25/source/Linux/hexo/","wordCount":0,"datePublished":"2024-03-24T16:00:00.000Z","dateModified":"2025-03-03T12:45:53.386Z","articleSection":"Web","keywords":"Node.js,静态网站生成器","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/c/","name":"c++"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2025/03/11/source/C++/C++ 面向对象/","name":"面向对象"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"面向对象","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2025/03/11/source/C++/C++%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2025/03/11/source/C++/C++%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/","wordCount":0,"datePublished":"2025-03-10T16:00:00.000Z","dateModified":"2025-03-11T14:51:50.472Z","articleSection":"c++","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 

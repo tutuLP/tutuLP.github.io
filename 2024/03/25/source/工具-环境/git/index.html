@@ -29,25 +29,25 @@
   <!-- front-matter head_begin end -->
   <link rel="preload" href="/css/style.css" as="style">
   <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-<link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="/fonts/OPPO-Sans.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
   <!-- feed -->
   <!-- 页面元数据 -->
   <title>git - tutulp's blog</title>
-  <meta name="keywords" content="代码托管,null">
+  <meta name="keywords" content="git,null">
   <meta desc name="description" content="tutulp的博客网站 - tutulp - tutulp's blog">
   
 <meta property="og:type" content="article">
 <meta property="og:title" content="git">
 <meta property="og:url" content="http://example.com/2024/03/25/source/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/git/index.html">
 <meta property="og:site_name" content="tutulp&#39;s blog">
-<meta property="og:description" content="集中版本控制 SVN   所有的版本数据都保存在服务器上，相当于在线修改 分布式版本控制 Git  下载windows  https:&#x2F;&#x2F;git-scm.com&#x2F;  无脑下一步 centos  yum install git 克隆项目在想要存放项目文件夹的地方git bash here 克隆远程仓库 git clone https...... 右键-在vscode中打开 在本地修改完文件后从vs">
+<meta property="og:description" content="集中版本控制 SVN   所有的版本数据都保存在服务器上，相当于在线修改 分布式版本控制 Git  下载windows  https:&#x2F;&#x2F;git-scm.com&#x2F;  无脑下一步yum install git SSH生成SSH keyssh-keygen -t ed25519 -C “Gitee SSH Key”   #三次回车，注释可改或者不要注释查看生成的公钥和私钥ls ~&#x2F;.ssh">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2024-03-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-03T12:45:53.375Z">
+<meta property="article:modified_time" content="2025-03-11T14:51:50.712Z">
 <meta property="article:author" content="tutulp">
-<meta property="article:tag" content="代码托管">
+<meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
   <style>
@@ -107,7 +107,7 @@ html {
   color: var(--color-text);
   width: 100%;
   height: 100%;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: OPPO-Sans, Menlo, Monaco, monospace, sans-serif;
   font-size: 16px;
 }
 html >::-webkit-scrollbar {
@@ -869,8 +869,8 @@ button {
   }
 }
 @font-face {
-  font-family: 'UbuntuMono';
-  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-family: 'OPPO-Sans';
+  src: url("/fonts/OPPO-Sans.ttf");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
@@ -1011,7 +1011,7 @@ button {
 }
 .l_header .nav-sub .title {
   font-weight: bold;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: OPPO-Sans, Menlo, Monaco, monospace, sans-serif;
   line-height: 1.2;
   max-height: 64px;
   white-space: normal;
@@ -1792,7 +1792,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1741058732582),
+    lastupdate: new Date(1741704802062),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2486,7 +2486,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <p class="title">Leland Titus</p>
     
     
-      <p class="subtitle">风尘云万里</p>
+      <p class="subtitle">风沉云万里</p>
     
   </div>
   <div class='bottom'>
@@ -2583,8 +2583,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
 <div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
   <a itemprop="url" class='author' href="/" rel="nofollow">
-    <img itemprop="image" src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-    <p itemprop="name">请设置文章作者</p>
+    " class="lazyload" data-srcset="" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==<img itemprop="image" src="">
+    <p itemprop="name">tutulp</p>
   </a>
 </div>
 
@@ -2594,10 +2594,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
   <div class='new-meta-item category'>
     <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>
-    <a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+    <a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/">工具-环境</a>
     
       <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-        <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url"><span itemprop="name">工具</span></a>
+        <a href="/categories/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/" itemprop="url"><span itemprop="name">工具-环境</span></a>
       </span>
     
   </div>
@@ -2636,68 +2636,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>集中版本控制 SVN   所有的版本数据都保存在服务器上，相当于在线修改</li>
 <li>分布式版本控制 Git</li>
 </ol>
-<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>windows  <a target="_blank" rel="noopener" href="https://git-scm.com/">https://git-scm.com/</a>  无脑下一步</p>
-<p>centos  yum install git</p>
-<h1 id="克隆项目"><a href="#克隆项目" class="headerlink" title="克隆项目"></a>克隆项目</h1><p>在想要存放项目文件夹的地方git bash here</p>
-<p>克隆远程仓库 <code>git clone https......</code></p>
-<p>右键-在vscode中打开</p>
-<p>在本地修改完文件后从vscode或其他工具上传 输入信息并提交-同步更改</p>
-<img src="./images/git.assets/image-20240325222050209-1740971590160-42.png" class="lazyload" data-srcset="./images/git.assets/image-20240325222050209-1740971590160-42.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240325222050209" style="zoom:33%;" />
-
-<img src="./images/git.assets/image-20240325222102057-1740971590160-48.png" class="lazyload" data-srcset="./images/git.assets/image-20240325222102057-1740971590160-48.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240325222102057" style="zoom:33%;" />
-
-<p>从远程拉取并且删除本地多余的文件 <code>git pull --prune</code></p>
-<h1 id="本地项目上传"><a href="#本地项目上传" class="headerlink" title="本地项目上传"></a>本地项目上传</h1><p>##控制文件</p>
-<ol>
-<li>忽略文件</li>
-</ol>
-<ul>
-<li>根目录新建自定义文件 .gitignore</li>
-</ul>
-<p>以uni-app项目为例</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/node_modules   </span><br><span class="line">/unpackage/dist   一个是插件包 一个是运行到微信开发者工具自动生成的文件</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>忽略例外</li>
-</ol>
-<ul>
-<li>unpackage文件夹下新建一个空文件 .gitkeep</li>
-</ul>
-<p>为了追踪到这个文件夹而不是随dist一起被忽略</p>
-<h2 id="初始化项目并上传到仓库"><a href="#初始化项目并上传到仓库" class="headerlink" title="初始化项目并上传到仓库"></a>初始化项目并上传到仓库</h2><ul>
-<li>根目录下输入命令</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git init </span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;init project&quot;</span><br><span class="line">git status 其中可以随时查看状态</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>添加电脑与账号的ssh公钥</li>
-<li>新建一个空白仓库(只填名称)并上传项目</li>
-<li>选择ssh</li>
-<li><img src="./images/git.assets/image-20240801120057128-1740971590160-44.png" class="lazyload" data-srcset="./images/git.assets/image-20240801120057128-1740971590160-44.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240801120057128" style="zoom:33%;" /></li>
-<li>输入最后两条</li>
-<li><img src="./images/git.assets/image-20240801120153099-1740971590160-46.png" class="lazyload" data-srcset="./images/git.assets/image-20240801120153099-1740971590160-46.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240801120153099" style="zoom:33%;" /></li>
-</ul>
-<h1 id="SSH密钥"><a href="#SSH密钥" class="headerlink" title="SSH密钥"></a>SSH密钥</h1><ol>
-<li>cd ~&#x2F;.ssh</li>
-</ol>
-<p>ssh-keygen -t rsa -b 2048 -C ‘github注册邮箱’</p>
-<ol start="2">
-<li>ssh-keygen -t rsa -b 2048 -C ‘<a href="mailto:&#116;&#117;&#116;&#117;&#50;&#x30;&#x36;&#x31;&#56;&#x36;&#x37;&#x39;&#x30;&#x33;&#x40;&#103;&#x6d;&#97;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;">tutu2061867903@gmail.com</a>‘ 一路回车即可</li>
-<li>粘贴.pub文件的内容到SSH keys</li>
-</ol>
-<img src="./images/git.assets/image-20240609211058663-1740971590160-50.png" class="lazyload" data-srcset="./images/git.assets/image-20240609211058663-1740971590160-50.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240609211058663" style="zoom:33%;" />
-
-<ol start="4">
-<li>进入hexo项目根目录 cd blog</li>
-<li>删除文件 .deploy_git</li>
-<li>修改_config.yml</li>
-<li>repo:项目的SSH地址</li>
-</ol>
-<p>git fetch origin c8<br>git merge origin&#x2F;c8<br>如果有冲突解决冲突之后：<br>git add .<br>git commit</p>
-<p>git init</p>
-<p>git add.   git commit </p>
-<p>git remote add origin <a target="_blank" rel="noopener" href="https://github.com/username/repository.git">https://github.com/username/repository.git</a></p>
-<p>git push -f origin master</p>
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>windows  <a target="_blank" rel="noopener" href="https://git-scm.com/">https://git-scm.com/</a>  无脑下一步<br>yum install git</p>
+<h1 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h1><p>生成SSH key<br>ssh-keygen -t ed25519 -C “Gitee SSH Key”   #三次回车，注释可改或者不要注释<br>查看生成的公钥和私钥<br>ls ~&#x2F;.ssh&#x2F; # id_ed25519  id_ed25519.pub<br>读取公钥文件<br>cat ~&#x2F;.ssh&#x2F;id_ed25519.pub<br>复制公钥到所需账户中</p>
+<h1 id="Git使用"><a href="#Git使用" class="headerlink" title="Git使用"></a>Git使用</h1><h2 id="新建仓库并关联远程仓库"><a href="#新建仓库并关联远程仓库" class="headerlink" title="新建仓库并关联远程仓库"></a>新建仓库并关联远程仓库</h2><p>git init #在需要管理的项目的根目录<br>git add .<br>git commit -m ‘xxxx’<br>git remote add origin xxx(仓库网址)  # 关联远端仓库<br>git push -u origin main   # 第一次推送关联分支</p>
+<p>或者<br>git push -f origin master  # 强制覆盖远端参股</p>
+<h2 id="父仓库版本更高"><a href="#父仓库版本更高" class="headerlink" title="父仓库版本更高"></a>父仓库版本更高</h2><p>切换到子仓库<br>git fetch origin xxx # 拉取最新的父仓库<br>git merge origin&#x2F;xxxx # 父仓库向子仓库合并<br>git status # 查看是否有冲突，有冲突在项目中解决(带有&gt;&gt;&gt;)<br>git add .<br>git commit</p>
+<h2 id="其他指令"><a href="#其他指令" class="headerlink" title="其他指令"></a>其他指令</h2><p>git pull –prune # 从远程拉取并且删除本地多余的文件 git pull –prune</p>
+<p>git status</p>
+<p>git branch</p>
+<p>git checkout xxxx #切换分支</p>
+<p>git commit -F …&#x2F;log.txt</p>
+<p>git config –global http.sslVerify false # 当拉取仓库遇到ssl问题</p>
 
   </div>
   
@@ -2722,10 +2671,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-03T20:45:53+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-11T22:51:50+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2025年3月3日</p>
+    <p>更新于：2025年3月11日</p>
   </a>
 </div>
 
@@ -2734,8 +2683,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>代码托管</p></a></div>
-  <span hidden itemprop="keywords">代码托管</span>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/git/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>git</p></a></div>
+  <span hidden itemprop="keywords">git</span>
 
 
         
@@ -2805,18 +2754,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2024/03/25/source/Linux/hexo/'>
-          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>hexo</p>
-          <p class='content'>下载
-npm install hexo-cli -g
-
-cd   (当前用户的目录)
-
-hexo init blog  用hexo搭建一个文件夹
-
-cd blog   
-
-hexo g 生成一个...</p>
+        <a class='prev' href='/2024/03/27/source/Linux/oatpp+nginx/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>oatpp-nginx</p>
+          <p class='content'>安装oatpp我先在oatpp的github的官方网站上找到windows的下载方式
+官方网站：https://github.com/oatpp/oatpp
+下载方式：https://oatpp...</p>
         </a>
       
       
@@ -2886,7 +2828,7 @@ hexo g 生成一个...</p>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE%E5%B9%B6%E4%B8%8A%E4%BC%A0%E5%88%B0%E4%BB%93%E5%BA%93"><span class="toc-text">初始化项目并上传到仓库</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E4%BB%93%E5%BA%93%E5%B9%B6%E5%85%B3%E8%81%94%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">新建仓库并关联远程仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%88%B6%E4%BB%93%E5%BA%93%E7%89%88%E6%9C%AC%E6%9B%B4%E9%AB%98"><span class="toc-text">父仓库版本更高</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%8C%87%E4%BB%A4"><span class="toc-text">其他指令</span></a></li></ol>
     </div>
   </section>
 
@@ -3546,7 +3488,7 @@ window.matchMedia('(prefers-color-scheme: light)').addListener(darkModelListener
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/工具/","name":"工具"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2024/03/25/source/工具-环境/git/","name":"git"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"git","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/03/25/source/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/git/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2024/03/25/source/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/git/","wordCount":0,"datePublished":"2024-03-24T16:00:00.000Z","dateModified":"2025-03-03T12:45:53.375Z","articleSection":"工具","keywords":"代码托管","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/工具-环境/","name":"工具-环境"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2024/03/25/source/工具-环境/git/","name":"git"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"git","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/03/25/source/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/git/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2024/03/25/source/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/git/","wordCount":0,"datePublished":"2024-03-24T16:00:00.000Z","dateModified":"2025-03-11T14:51:50.712Z","articleSection":"工具-环境","keywords":"git","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 

@@ -5,8 +5,8 @@
   <meta name="Volantis" content="5.8.0">
   <meta charset="utf-8">
   <!-- SEO相关 -->
-  <meta name="robots" content="noindex,follow">
-  <link rel="canonical" href="http://example.com/tags/代码托管/"/>
+  
+  <link rel="canonical" href="http://example.com/2025/03/11/source/c++/stl/"/>
   <!-- 渲染优化 -->
     <meta http-equiv='x-dns-prefetch-control' content='on' />
       <link rel='dns-prefetch' href='https://unpkg.com'>
@@ -29,21 +29,23 @@
   <!-- front-matter head_begin end -->
   <link rel="preload" href="/css/style.css" as="style">
   <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-<link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="/fonts/OPPO-Sans.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>标签：代码托管 - tutulp's blog</title>
+  <title>c++ STL - tutulp's blog</title>
   <meta name="keywords" content="null">
   <meta desc name="description" content="tutulp的博客网站 - tutulp - tutulp's blog">
   
-<meta property="og:type" content="website">
-<meta property="og:title" content="tutulp&#39;s blog">
-<meta property="og:url" content="http://example.com/tags/%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++ STL">
+<meta property="og:url" content="http://example.com/2025/03/11/source/C++/STL/index.html">
 <meta property="og:site_name" content="tutulp&#39;s blog">
-<meta property="og:description" content="tutulp的博客网站">
+<meta property="og:description" content="C++标准库 &#x2F; STL 标准模板库 容器#include ##顺序容器    容器类型 描述 访问支持 增删    vector向量 动态扩容的数组 连续存储-随机访问 尾部快   deque双端队列 指针数组-每个元素指向一块连续数组 随机 两端快   list双向链表  双向顺序 any   不常用：  forward_list 单向链表 array就是普通数组  string 与">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2025-03-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-11T14:51:50.472Z">
 <meta property="article:author" content="tutulp">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -104,7 +106,7 @@ html {
   color: var(--color-text);
   width: 100%;
   height: 100%;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: OPPO-Sans, Menlo, Monaco, monospace, sans-serif;
   font-size: 16px;
 }
 html >::-webkit-scrollbar {
@@ -866,8 +868,8 @@ button {
   }
 }
 @font-face {
-  font-family: 'UbuntuMono';
-  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-family: 'OPPO-Sans';
+  src: url("/fonts/OPPO-Sans.ttf");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
@@ -1008,7 +1010,7 @@ button {
 }
 .l_header .nav-sub .title {
   font-weight: bold;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: OPPO-Sans, Menlo, Monaco, monospace, sans-serif;
   line-height: 1.2;
   max-height: 64px;
   white-space: normal;
@@ -1789,7 +1791,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1741058732582),
+    lastupdate: new Date(1741704802062),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2472,7 +2474,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
       <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
-      <div id="half" class='cover-wrapper  search' style="display: ;">
+      <div id="half" class='cover-wrapper post search' style="display: ;">
         
   <div class='cover-bg lazyload placeholder' data-bg="https://s3.bmp.ovh/imgs/2025/03/03/64c32e0ed0f747a9.jpg"></div>
 
@@ -2483,7 +2485,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <p class="title">Leland Titus</p>
     
     
-      <p class="subtitle">风尘云万里</p>
+      <p class="subtitle">风沉云万里</p>
     
   </div>
   <div class='bottom'>
@@ -2549,25 +2551,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="safearea">
         <div class="body-wrapper">
           
-
 <div id="l_main" class=''>
-  
-    
-      
-  <section class="post-list">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/25/source/工具-环境/git/">
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/11/source/C++/STL/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="tutulp's blog">
   </span>
@@ -2576,75 +2562,476 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <meta itemprop="description" content="tutulp的博客网站">
   </span>
   
-  
+
+
   
     <span hidden>
       <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
     </span>
   
-  
+  <div class="article-meta" id="top">
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/25/source/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/git/"  itemprop="url">
-        git
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
     
-      
+    
+      <h1 class="title" itemprop="name headline">
+        c++ STL
+      </h1>
+      <div class='new-meta-box'>
         
-集中版本控制 SVN   所有的版本数据都保存在服务器上，相当于在线修改
-分布式版本控制 Git
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/" rel="nofollow">
+    " class="lazyload" data-srcset="" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==<img itemprop="image" src="">
+    <p itemprop="name">tutulp</p>
+  </a>
+</div>
 
-下载windows  https://git-scm.com/  无脑下一步
-centos  yum install git
-克隆项目在想要存放项目文件夹的地方git bash here
-克隆远程仓库 git clone https......
-右键-在vscode中打开
-在本地修改完文件后...
-      
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>
+    <a class="category-link" href="/categories/c/">c++</a>
+    
+      <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/c/" itemprop="url"><span itemprop="name">c++</span></a>
+      </span>
     
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-25T00:00:00+08:00">2024-03-25</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url"><span itemprop="name">工具</span></a>
-            </span>
+
+
           
         
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2025-03-11T00:00:00+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2025年3月11日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
       </div>
+    
+  </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <p>C++标准库 &#x2F; STL 标准模板库</p>
+<h1 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h1><p>#include<vector></p>
+<p>##顺序容器</p>
+<table>
+<thead>
+<tr>
+<th align="center">容器类型</th>
+<th align="center">描述</th>
+<th align="center">访问支持</th>
+<th align="center">增删</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">vector向量</td>
+<td align="center">动态扩容的数组</td>
+<td align="center">连续存储-随机访问</td>
+<td align="center">尾部快</td>
+</tr>
+<tr>
+<td align="center">deque双端队列</td>
+<td align="center">指针数组-每个元素指向一块连续数组</td>
+<td align="center">随机</td>
+<td align="center">两端快</td>
+</tr>
+<tr>
+<td align="center">list双向链表</td>
+<td align="center"></td>
+<td align="center">双向顺序</td>
+<td align="center">any</td>
+</tr>
+</tbody></table>
+<p>不常用：</p>
+<ul>
+<li><strong>forward_list</strong> 单向链表</li>
+<li><strong>array</strong>就是普通数组 </li>
+<li><strong>string</strong> 与vector相似 存字符串</li>
+</ul>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<li>初始化</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//默认构造</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vec; <span class="comment">//空</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">vec</span><span class="params">(<span class="number">10</span>)</span></span>; <span class="comment">//10个值为0的int           默认构造</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">vec</span><span class="params">(<span class="number">10</span>, <span class="number">42</span>)</span></span>; <span class="comment">//10个值为42的int      42作为参数的构造函数</span></span><br><span class="line"><span class="comment">//范围初始化</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">vec</span><span class="params">(arr.begin(), arr.end())</span></span>; <span class="comment">// 使用arr的范围初始化vec  </span></span><br><span class="line"><span class="comment">//拷贝初始化-容器类型和元素类型一致</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">copy</span><span class="params">(original)</span></span>;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; copy2 = original;</span><br><span class="line"><span class="comment">//移动构造</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">moved</span><span class="params">(move(original))</span></span>; <span class="comment">//original的资源交给moved  c++11 original为空且未定义状态</span></span><br><span class="line"><span class="comment">//列表初始化 c++11</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vec = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">array&lt;<span class="type">int</span>,5&gt; ia;  赋随机数?</span><br><span class="line">array&lt;<span class="type">int</span>,5&gt; ia&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">41</span>,<span class="number">1</span>&#125;;  &#123;<span class="number">0</span>&#125; 全为<span class="number">0</span> &#123;<span class="number">2</span>&#125;第一个是<span class="number">2</span>其余为<span class="number">0</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">ia</span><span class="params">(<span class="number">5</span>)</span></span>; 不能拷贝或赋值</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>容器操作</li>
+<li><ul>
+<li>size</li>
+<li>empty</li>
+<li>max_size 可包含的最大大小</li>
+<li>reserve  vector和string 请求容器保留足够的空间来存储指定数量的元素，但不改变容器的大小</li>
+<li>shrink_to_fit c++11  vector和string 尝试减少容器的容量以匹配其大小</li>
+</ul>
+</li>
+<li>元素访问</li>
+<li><ul>
+<li>[] 下标 除了list</li>
+<li>at() 返回<strong>指定位置</strong>的元素引用</li>
+<li>front 第一个元素</li>
+<li>back 最后一个</li>
+<li>data 第一个元素的指针 除了list</li>
+</ul>
+</li>
+<li>修改器</li>
+<li><ul>
+<li>push_back() &#x2F; emplace_back()：在容器末尾添加一个元素&#x2F;构造一个元素。</li>
+<li>pop_back()：移除容器末尾的元素。</li>
+<li>insert(itrator,value) &#x2F; emplace()：在<strong>指定位置</strong>插入一个元素&#x2F;构造一个元素。  指定位置用迭代器实现</li>
+<li>erase()：移除指定位置的元素或元素范围。</li>
+<li>clear</li>
+<li>resize()：改变容器的大小，如果新大小大于当前大小，则添加默认构造的元素；如果小于当前大小，则删除多余的元素。</li>
+</ul>
+</li>
+</ul>
+<h3 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入元素到 vector</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insertElements</span><span class="params">(std::vector&lt;<span class="type">int</span>&gt;&amp; vec, <span class="type">const</span> std::initializer_list&lt;<span class="type">int</span>&gt;&amp; elements)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> element : elements) &#123;</span><br><span class="line">        vec.<span class="built_in">push_back</span>(element);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历 vector</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">traverseVector</span><span class="params">(<span class="type">const</span> std::vector&lt;<span class="type">int</span>&gt;&amp; vec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> element : vec) &#123;</span><br><span class="line">        std::cout &lt;&lt; element &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; myVector;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入元素</span></span><br><span class="line">    <span class="built_in">insertElements</span>(myVector, &#123;<span class="number">5</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">9</span>&#125;);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;插入元素后的 vector: &quot;</span>;</span><br><span class="line">    <span class="built_in">traverseVector</span>(myVector);</span><br><span class="line">    <span class="comment">// 排序</span></span><br><span class="line">    std::<span class="built_in">sort</span>(myVector.<span class="built_in">begin</span>(), myVector.<span class="built_in">end</span>());</span><br><span class="line">    <span class="comment">//反向排序</span></span><br><span class="line">    std::<span class="built_in">sort</span>(myVector.<span class="built_in">begin</span>(), myVector.<span class="built_in">end</span>(), std::<span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;排序后的 vector: &quot;</span>;</span><br><span class="line">    <span class="built_in">traverseVector</span>(myVector);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找元素</span></span><br><span class="line">    <span class="type">int</span> target = <span class="number">8</span>;</span><br><span class="line">    <span class="keyword">if</span> (std::<span class="built_in">find</span>(myVector.<span class="built_in">begin</span>(), myVector.<span class="built_in">end</span>(), target) != myVector.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        std::cout &lt;&lt; target &lt;&lt; <span class="string">&quot; 存在于 vector 中。&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::cout &lt;&lt; target &lt;&lt; <span class="string">&quot; 不存在于 vector 中。&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除元素</span></span><br><span class="line">    <span class="keyword">auto</span> newEnd = std::<span class="built_in">remove</span>(myVector.<span class="built_in">begin</span>(), myVector.<span class="built_in">end</span>(), target);</span><br><span class="line">    myVector.<span class="built_in">erase</span>(newEnd, myVector.<span class="built_in">end</span>());</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;删除 &quot;</span> &lt;&lt; target &lt;&lt; <span class="string">&quot; 后的 vector: &quot;</span>;</span><br><span class="line">    <span class="built_in">traverseVector</span>(myVector);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>###string</p>
+<p>string::size_type类型 size函数的返回类型，能存任何string的大小，无符号</p>
+<p>比较：</p>
+<ul>
+<li>“hello”&lt;”hello world”</li>
+<li>“hi”&gt;”he” i的ascll码在后面</li>
+</ul>
+<p>string+字符字面值+字符串字面值(不是string) 必须保证+两侧的对象至少一个是string</p>
+<p>string s2&#x3D;s1+”,”+”world”; 正确 s1放最后不对</p>
+<p>##关联容器</p>
+<p>按关键字有序 <strong>map</strong>(键值对) <strong>set</strong> multimap multiset     multi-可重复出现键             红黑树，元素按键自动排序</p>
+<p>无序 unordered_map unordered_set unordered_multimap  unordered_multiset          哈希表</p>
+<p>都是双向迭代器(可以向前或向后遍历) 不支持随机访问(不能使用下标)除了map</p>
+<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//默认初始化</span></span><br><span class="line">map&lt;<span class="type">int</span>, string&gt; myMap;</span><br><span class="line">set&lt;<span class="type">int</span>&gt; mySet;</span><br><span class="line"><span class="comment">//拷贝初始化</span></span><br><span class="line"><span class="function">map&lt;<span class="type">int</span>, string&gt; <span class="title">myMap2</span><span class="params">(myMap1)</span></span>; </span><br><span class="line"><span class="function">set&lt;<span class="type">int</span>&gt; <span class="title">mySet2</span><span class="params">(mySet1)</span></span>;</span><br><span class="line"><span class="comment">//迭代器范围初始化</span></span><br><span class="line"><span class="function">set&lt;<span class="type">int</span>&gt; <span class="title">mySet</span><span class="params">(myVector.begin(), myVector.end())</span></span>;</span><br><span class="line">	<span class="comment">// 对于map，需要确保范围中的元素是pair或可以隐式转换为pair的类型  </span></span><br><span class="line">vector&lt;pair&lt;<span class="type">int</span>, string&gt;&gt; myVectorPairs = &#123; &#123;<span class="number">1</span>, <span class="string">&quot;One&quot;</span>&#125;, &#123;<span class="number">2</span>, <span class="string">&quot;Two&quot;</span>&#125; &#125;;  </span><br><span class="line"><span class="function">map&lt;<span class="type">int</span>, string&gt; <span class="title">myMap</span><span class="params">(myVectorPairs.begin(), myVectorPairs.end())</span></span>;</span><br><span class="line"><span class="comment">//列表初始化 c++11</span></span><br><span class="line">map&lt;<span class="type">int</span>, string&gt; myMap = &#123; &#123;<span class="number">1</span>, <span class="string">&quot;One&quot;</span>&#125;, &#123;<span class="number">2</span>, <span class="string">&quot;Two&quot;</span>&#125; &#125;;</span><br><span class="line">set&lt;<span class="type">int</span>&gt; mySet = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>插入</li>
+<li><ul>
+<li>insert</li>
+<li>emplace 底层插入</li>
+<li>map可以用下标 map[“123”]  没有”123”会自动创建一个</li>
+<li>map插入时 .int( make_pair(“123”, 1) ) 或pair</li>
+</ul>
+</li>
+<li>删除</li>
+<li><ul>
+<li>erase 根据迭代器(单个或范围)或者关键字</li>
+<li>clear 删除所有</li>
+</ul>
+</li>
+<li>查找</li>
+<li><ul>
+<li>find 返回迭代器指向第一个关键字匹配 否则返回尾后迭代器</li>
+<li>count 返回与关键字匹配的个数</li>
+<li>lower_bound和upper_bound （仅适用于有序关联容器） 返回指向第一个关键字不小于和大于给定关键字的元素的迭代器</li>
+<li>equal_range  （仅适用于有序关联容器） 返回一个pair，包含两个迭代器，分别表示关键字等于给定关键字的元素范围的开始和结束。</li>
+</ul>
+</li>
+<li>大小</li>
+<li><ul>
+<li>size</li>
+<li>empty</li>
+</ul>
+</li>
+<li>有序关联容器（如set和map）允许通过传递自定义的比较函数或函数对象来定义元素之间的比较方式。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span>   </span></span><br><span class="line"><span class="comment">// 自定义比较器类  </span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CompareLength</span> &#123;  </span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> std::string&amp; a, <span class="type">const</span> std::string&amp; b)</span> <span class="type">const</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> a.<span class="built_in">length</span>() &lt; b.<span class="built_in">length</span>(); <span class="comment">// 根据字符串长度进行比较  </span></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;;  </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="comment">// 使用自定义比较器类  </span></span><br><span class="line">    std::map&lt;std::string, <span class="type">int</span>, CompareLength&gt; myMap;  </span><br><span class="line">    myMap[<span class="string">&quot;apple&quot;</span>] = <span class="number">1</span>;  </span><br><span class="line">    myMap[<span class="string">&quot;banana&quot;</span>] = <span class="number">2</span>;  </span><br><span class="line">    myMap[<span class="string">&quot;cherry&quot;</span>] = <span class="number">3</span>;  </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; pair : myMap) &#123;  </span><br><span class="line">        std::cout &lt;&lt; pair.first &lt;&lt; <span class="string">&quot;: &quot;</span> &lt;&lt; pair.second &lt;&lt; std::endl;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>无序关联容器（如unordered_set和unordered_map）允许通过传递自定义的哈希函数和比较函数来定义元素的存储和比较方式。</li>
+</ul>
+<h3 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个无序映射，键是字符串，值是整数</span></span><br><span class="line">    std::unordered_map&lt;std::string, <span class="type">int</span>&gt; myMap;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入元素</span></span><br><span class="line">    myMap[<span class="string">&quot;apple&quot;</span>] = <span class="number">5</span>;</span><br><span class="line">    myMap[<span class="string">&quot;banana&quot;</span>] = <span class="number">2</span>;</span><br><span class="line">    myMap[<span class="string">&quot;orange&quot;</span>] = <span class="number">8</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 访问元素</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;apple: &quot;</span> &lt;&lt; myMap[<span class="string">&quot;apple&quot;</span>] &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 修改元素</span></span><br><span class="line">    myMap[<span class="string">&quot;apple&quot;</span>] = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历元素</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; pair : myMap) &#123;</span><br><span class="line">        std::cout &lt;&lt; pair.first &lt;&lt; <span class="string">&quot;: &quot;</span> &lt;&lt; pair.second &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找元素</span></span><br><span class="line">    <span class="keyword">if</span> (myMap.<span class="built_in">find</span>(<span class="string">&quot;banana&quot;</span>) != myMap.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Found banana&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除元素</span></span><br><span class="line">    myMap.<span class="built_in">erase</span>(<span class="string">&quot;orange&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取元素数量</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Size: &quot;</span> &lt;&lt; myMap.<span class="built_in">size</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="容器适配器"><a href="#容器适配器" class="headerlink" title="容器适配器"></a>容器适配器</h2><p>stack 后进先出</p>
+<p>queue 先进先出</p>
+<p>priority_queue 优先队列</p>
+<p>###stack</p>
+<ul>
+<li><p>stack<int> a 初始化</p>
+</li>
+<li><p>push() 添加元素</p>
+</li>
+<li><p>pop() 移除元素，不返回值</p>
+</li>
+<li><p>top() 返回顶部元素引用，不移除</p>
+</li>
+<li><p>empty() 是否为空</p>
+</li>
+<li><p>size() 元素个数-性能较低</p>
+</li>
+<li><p>swap(<strong>stack&amp; other</strong>) 交换两个stack的元素</p>
+</li>
+</ul>
+<h3 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h3><ul>
+<li>没有top</li>
+<li><strong>front()</strong> 返回最先进入的元素引用</li>
+<li><strong>back()</strong> 最后进入的</li>
+</ul>
+<h3 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h3><ul>
+<li>构造 带比较函数   默认为less<T> 创建一个最大堆-元素大的优先级高       :greater<int>&gt;最小堆</li>
+<li>最小堆 必须显示指出底层类型为vector priority_queue&lt;int, vector<int>,greater<int>&gt; ll;</li>
+<li><strong>emplace</strong>() 底层容器上创建新元素，避免额外复制和移动</li>
+<li>自定义比较函数</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;functional&gt;</span> <span class="comment">// 对于 std::less 和 std::greater，虽然在这个例子中我们将自定义比较  </span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;  </span><br><span class="line"><span class="keyword">public</span>:  </span><br><span class="line">    <span class="type">int</span> a;  </span><br><span class="line">    <span class="built_in">MyClass</span>(<span class="type">int</span> val) : <span class="built_in">a</span>(val) &#123;&#125;  </span><br><span class="line">&#125;;   </span><br><span class="line"><span class="comment">// 自定义比较函数对象，用于比较 MyClass 对象的 a 成员  </span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CompareMyClass</span> &#123;  </span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> MyClass&amp; lhs, <span class="type">const</span> MyClass&amp; rhs)</span> <span class="type">const</span> </span>&#123;  </span><br><span class="line">        <span class="comment">// 如果你想要最小堆，就返回 lhs.a &gt; rhs.a  </span></span><br><span class="line">        <span class="keyword">return</span> lhs.a &gt; rhs.a;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;;  </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    std::priority_queue&lt;MyClass, std::vector&lt;MyClass&gt;, CompareMyClass&gt; minHeap;  </span><br><span class="line">    <span class="comment">// 添加元素  </span></span><br><span class="line">    minHeap.<span class="built_in">push</span>(<span class="built_in">MyClass</span>(<span class="number">3</span>));  </span><br><span class="line">    minHeap.<span class="built_in">push</span>(<span class="built_in">MyClass</span>(<span class="number">1</span>));  </span><br><span class="line">    minHeap.<span class="built_in">push</span>(<span class="built_in">MyClass</span>(<span class="number">4</span>));  </span><br><span class="line">    minHeap.<span class="built_in">push</span>(<span class="built_in">MyClass</span>(<span class="number">1</span>));  </span><br><span class="line">    minHeap.<span class="built_in">push</span>(<span class="built_in">MyClass</span>(<span class="number">5</span>));  </span><br><span class="line">    <span class="comment">// 访问并移除优先级最高的元素（在最小堆中是基于 a 成员的最小值）  </span></span><br><span class="line">    <span class="keyword">while</span> (!minHeap.<span class="built_in">empty</span>()) &#123;  </span><br><span class="line">        MyClass topElement = minHeap.<span class="built_in">top</span>();  </span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Top element (min a): &quot;</span> &lt;&lt; topElement.a &lt;&lt; std::endl;  </span><br><span class="line">        minHeap.<span class="built_in">pop</span>();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//比较字符串</span></span><br><span class="line">priority_queue&lt;string, vector&lt;string&gt;, CompareStr&gt; pq;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CompareStr</span> &#123;  </span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> string&amp; lhs, <span class="type">const</span> string&amp; rhs)</span> <span class="type">const</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> lhs &gt; rhs;   <span class="comment">//小的优先</span></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;; </span><br></pre></td></tr></table></figure>
+
+<p>#迭代器</p>
+<p>类型：<br>::const_iterator   &#x2F;&#x2F;仅需要读<br>::iterator        &#x2F;&#x2F;修改存储在容器中的值使用<br>容器类型为const则返回::const_iterator，const vecotr<int> </p>
+<p>使用：</p>
+<p>(*iter).name。   .优先级比*高<br>iter-&gt;name<br>auto b&#x3D;v.begin(),e&#x3D;v.end(); &#x2F;&#x2F;如果容器为空，b，e返回同一个迭代器-尾后迭代器”尾元素的下一位”</p>
+<ul>
+<li><p>基本操作</p>
+</li>
+<li><ul>
+<li>*iter 解引用 访问当前指向的值</li>
+<li>++ –移动   双向和随机可以使用–</li>
+<li>&#x3D;&#x3D; !&#x3D; &gt;&#x3D; &lt;&#x3D; &lt; &gt; 比较迭代器的位置</li>
+</ul>
+</li>
+<li><p>注意</p>
+</li>
+<li><ul>
+<li>避免迭代器失效  在对容器进行修改操作(删除元素之后的，插入扩容等)，导致元素位置改变的，指向这些元素的迭代器会失效，需要重新获取迭代器</li>
+<li>解引用之前确保不是空迭代器</li>
+<li>不同的容器类型有不同的迭代器类型</li>
+</ul>
+</li>
+<li><p>类型</p>
+</li>
+<li><ul>
+<li>vector deque string 随机访问迭代器</li>
+<li>list 双向</li>
+<li>foward_list双向</li>
+<li>输入&#x2F;输出迭代器通常与特定的算法或适配器一起使用</li>
+</ul>
+</li>
+</ul>
+<p>cbegin cend          方便不是常量的容器也能返回const迭代器<br>c.rbegin() c.rend()   反向迭代器，rbegin是最后一个元素的迭代器，rend是第一个元素之前的迭代器<br>c.crbegin() c.crend() const反向迭代器</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it=v.<span class="built_in">cbegin</span>();it!=v.<span class="built_in">cend</span>() &amp;&amp; !it-&gt;<span class="built_in">empty</span>();++it)</span><br><span class="line">	cout&lt;&lt;*it&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><p>算法 遍历 最值 排序 查找 反转  （没有：稳定婚姻 树链部分 后缀自动机 跳舞链 模拟退火 随机算法）</p>
+<p>排序 sort</p>
+<p>查找 find</p>
+<p>遍历 traversal</p>
+<p>#仿函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span> <span class="comment">// std::sort  </span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span>  </span></span><br><span class="line">  </span><br><span class="line"><span class="comment">// 定义仿函数  </span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CompareInt</span> &#123;  </span><br><span class="line"><span class="keyword">public</span>:  </span><br><span class="line">    <span class="comment">// 重载operator()，用于比较两个整数  </span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> <span class="type">const</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> a &lt; b;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; vec = &#123;<span class="number">5</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">2</span>&#125;;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 使用仿函数作为std::sort的第三个参数  </span></span><br><span class="line">    std::<span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>(), <span class="built_in">CompareInt</span>());  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 输出排序后的结果  </span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> num : vec) &#123;  </span><br><span class="line">        std::cout &lt;&lt; num &lt;&lt; <span class="string">&quot; &quot;</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    std::cout &lt;&lt; std::endl;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>#动态内存 分配器</p>
+<p>内存泄漏：忘记释放</p>
+<p>引用非法指针：指针正在引用内存的时候被释放</p>
+<h2 id="new-delete"><a href="#new-delete" class="headerlink" title="new delete"></a>new delete</h2><p>new 分配内存并返回指针</p>
+<p>int *pi&#x3D;new int; 未定义值<br>int *pi&#x3D;new int(24); 初始化为24<br>string *pi&#x3D;new string(10,’9’);<br>int* arrPtr &#x3D; new int[5];<br>int *p&#x3D;new int[5]{0,1,2,3,4};<br><strong>const</strong> int *p&#x3D;new <strong>const</strong> int;</p>
+<p>delete p;<br>p&#x3D;nullptr; 防止释放之后依然指向无效地址<br>delete []arrPtr</p>
+<h2 id="allocator"><a href="#allocator" class="headerlink" title="allocator"></a>allocator</h2><p>#include <memory></p>
+<p>STL容器默认使用的内存分配器</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 1. 创建分配器对象，指定分配的对象类型为 int</span></span><br><span class="line">    std::allocator&lt;<span class="type">int</span>&gt; alloc;</span><br><span class="line">    <span class="comment">// 2. 分配内存，这里分配 5 个 int 类型的内存空间</span></span><br><span class="line">    <span class="type">int</span>* ptr = alloc.<span class="built_in">allocate</span>(<span class="number">5</span>);</span><br><span class="line">    <span class="comment">// 3. 构造对象，使用 std::construct 在分配的内存上构造对象</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">        std::<span class="built_in">construct_at</span>(ptr + i, i * <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 输出分配内存上构造的对象的值</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">        std::cout &lt;&lt; ptr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line">    <span class="comment">// 4. 析构对象，使用 std::destroy 析构对象</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">        std::<span class="built_in">destroy_at</span>(ptr + i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 5. 释放内存</span></span><br><span class="line">    alloc.<span class="built_in">deallocate</span>(ptr, <span class="number">5</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<p>嵌入式web后端-基于linux系统的非客户端的各种应用 如自动驾驶后端</p>
+<p>手写常用设计模式</p>
+<p>linux系统编程</p>
+<img src="./images/STL.assets/image-20240825194457430.png" class="lazyload" data-srcset="./images/STL.assets/image-20240825194457430.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240825194457430" style="zoom:33%;" />
+
+<p>进阶</p>
+<img src="./images/STL.assets/image-20240825194527299.png" class="lazyload" data-srcset="./images/STL.assets/image-20240825194527299.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240825194527299" style="zoom:33%;" />
+
+<img src="./images/STL.assets/image-20240825194618667.png" class="lazyload" data-srcset="./images/STL.assets/image-20240825194618667.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240825194618667" style="zoom:33%;" />
+
+<p>压力测试10万+</p>
+<img src="./images/STL.assets/image-20240825194653583.png" class="lazyload" data-srcset="./images/STL.assets/image-20240825194653583.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240825194653583" style="zoom:33%;" />
+
+<p>高性能数据处理</p>
+<p>金融量化</p>
+<p>游戏服务器</p>
+<p>自动驾驶</p>
+<p>高性能中间件开发-网路模块</p>
+<p>linux后端-银行业务</p>
+<p>搜索 * c++</p>
+<ul>
+<li>c++ 后端</li>
+<li>c++ linux</li>
+</ul>
+
+  </div>
+  
+  
+    
+    <div class='footer'>
+       <!-- 参考资料、相关资料等 -->
       
-        <div>
-          <a class='readmore' href='/2024/03/25/source/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/git/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
+       <!-- 相关文章 -->
+      
+      <!-- 版权声明组件 -->
+      
+      <!-- 打赏组件 -->
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-11T22:51:50+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2025年3月11日</p>
+  </a>
 </div>
 
-          </div>
         
       
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
-  </section>
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2025/03/11/source/C++/STL/&title=c++ STL - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qq.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2025/03/11/source/C++/STL/&title=c++ STL - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qzone.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2025/03/11/source/C++/STL/&title=c++ STL - tutulp's blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/weibo.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
   
-    
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2025/03/11/source/C++/C++%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>面向对象</p>
+          <p class='content'>类局部类：函数内部定义类
+访问控制public 任意都可访问 
+private 被类的成员函数访问 （只能自己）
+protected 当前类或者子类  (血脉连接，自己和子孙)
+友元&#x3D;...</p>
+        </a>
+      
+      
+        <a class='next' href='/2025/03/11/source/C++/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/'>
+          <p class='title'>c++知识点<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>建议看一下源码：前缀效率更高 –i,后缀先复制一个副本尽量以const enum inline替换#define尽可能使用const
+手册：比如找get函数在线手册网址https://zh.cp...</p>
+        </a>
+      
+    </div>
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
   
 
 
+  <article class="post white-box shadow floatable blur" id="comments">
+    <span hidden>
+      <meta itemprop="discussionUrl" content="/2025/03/11/source/C++/STL/index.html#comments">
+    </span>
+    <p ct><i class='fas fa-comments'></i> 评论</p>
     
-  
+
+    <div id="layoutHelper-comments"></div>
+
+  </article>
+
+
+
+
+
+
 </div>
 <aside id='l_side' itemscope itemtype="http://schema.org/WPSideBar">
   
@@ -2653,199 +3040,48 @@ centos  yum install git
     
     
       
-<section class="widget blogger desktop mobile pjax">
-  <div class='content'>
     
-      
-        <a class='avatar flat-box circle' href='/about/'>
-          <img no-lazy src='https://s3.bmp.ovh/imgs/2025/03/03/30639e1f0584064f.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">tutulp's blog</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fa-solid fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:me@xxx.com"
-              class="social fa-solid fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/volantis-x/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fa-solid fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-    
-  
-
-  
-    
-    
-      
-  
-  <section class="widget category desktop pjax">
-    
-  <header>
-    
-      <a href='/blog/categories/'><i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Linux/" href="/categories/Linux/"
-            active-action="action-categoriesLinux"
-            ><div class='name'>Linux</div><div class='badge'>(5)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/" href="/categories/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/"
-            active-action="action-categoriesLinuxE9AB98E680A7E883BDE69C8DE58AA1E599A8E7BC96E7A88B"
-            ><div class='name'>Linux高性能服务器编程</div><div class='badge'>(7)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Web/" href="/categories/Web/"
-            active-action="action-categoriesWeb"
-            ><div class='name'>Web</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%88%B7%E9%A2%98/" href="/categories/%E5%88%B7%E9%A2%98/"
-            active-action="action-categoriesE588B7E9A298"
-            ><div class='name'>刷题</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%89%8D%E7%AB%AF/" href="/categories/%E5%89%8D%E7%AB%AF/"
-            active-action="action-categoriesE5898DE7ABAF"
-            ><div class='name'>前端</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%90%8E%E7%AB%AF/" href="/categories/%E5%90%8E%E7%AB%AF/"
-            active-action="action-categoriesE5908EE7ABAF"
-            ><div class='name'>后端</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%9B%9B%E5%A4%A7%E4%BB%B6/" href="/categories/%E5%9B%9B%E5%A4%A7%E4%BB%B6/"
-            active-action="action-categoriesE59B9BE5A4A7E4BBB6"
-            ><div class='name'>四大件</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%B7%A5%E5%85%B7/" href="/categories/%E5%B7%A5%E5%85%B7/"
-            active-action="action-categoriesE5B7A5E585B7"
-            ><div class='name'>工具</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%BA%93/" href="/categories/%E5%BA%93/"
-            active-action="action-categoriesE5BA93"
-            ><div class='name'>库</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%BC%80%E5%8F%91/" href="/categories/%E5%BC%80%E5%8F%91/"
-            active-action="action-categoriesE5BC80E58F91"
-            ><div class='name'>开发</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%9D%82%E8%AF%B4/" href="/categories/%E6%9D%82%E8%AF%B4/"
-            active-action="action-categoriesE69D82E8AFB4"
-            ><div class='name'>杂说</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%AE%97%E6%B3%95/" href="/categories/%E7%AE%97%E6%B3%95/"
-            active-action="action-categoriesE7AE97E6B395"
-            ><div class='name'>算法</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E8%99%9A%E6%8B%9F%E6%9C%BA/" href="/categories/%E8%99%9A%E6%8B%9F%E6%9C%BA/"
-            active-action="action-categoriesE8999AE68B9FE69CBA"
-            ><div class='name'>虚拟机</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E9%9D%A2%E8%AF%95/" href="/categories/%E9%9D%A2%E8%AF%95/"
-            active-action="action-categoriesE99DA2E8AF95"
-            ><div class='name'>面试</div><div class='badge'>(7)</div></a></li>
-        
-      </ul>
-    </div>
-  </section>
-
-
-    
-  
-
-  
-    
-    
-      
-  
-  <section class="widget tagcloud desktop mobile pjax">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fa-solid fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/CSS/" style="font-size: 14px; color: #999">CSS</a> <a href="/tags/HTML/" style="font-size: 14px; color: #999">HTML</a> <a href="/tags/HTTP-%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E3%80%81%E8%B7%AF%E7%94%B1%E3%80%81JSON-%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 14px; color: #999">HTTP 请求处理、路由、JSON 序列化</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #999">Node.js</a> <a href="/tags/QT/" style="font-size: 14px; color: #999">QT</a> <a href="/tags/Web%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 14px; color: #999">Web开发框架</a> <a href="/tags/c/" style="font-size: 14px; color: #999">c</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/win-vmware/" style="font-size: 14px; color: #999">win+vmware</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1/" style="font-size: 14px; color: #999">代码托管</a> <a href="/tags/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91/" style="font-size: 14px; color: #999">公众号开发</a> <a href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" style="font-size: 14px; color: #999">反向代理</a> <a href="/tags/%E6%96%87%E5%BF%83%E4%B8%80%E8%A8%80/" style="font-size: 14px; color: #999">文心一言</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="font-size: 14px; color: #999">蓝桥杯</a> <a href="/tags/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%99%A8/" style="font-size: 14px; color: #999">静态网站生成器</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 24px; color: #555">面试</a>
-    </div>
-  </section>
-
-
-    
-  
-
   
 
 
 <div class="widget-sticky pjax">
 
+  
+  
+
+
+  <section class="widget toc-wrapper desktop mobile " id="toc-div" >
+    
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vector"><span class="toc-text">vector</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-1"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#unordered-map"><span class="toc-text">unordered_map</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8"><span class="toc-text">容器适配器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#queue"><span class="toc-text">queue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#priority-queue"><span class="toc-text">priority_queue</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new-delete"><span class="toc-text">new delete</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#allocator"><span class="toc-text">allocator</span></a>
+    </div>
+  </section>
+
+  
+
 </div>
 
 
 <!-- 没有 pjax 占位会报错 万恶的 pjax -->
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
 
   <div class="pjax">
     <!-- pjax占位 -->
@@ -2873,13 +3109,14 @@ centos  yum install git
 </aside>
 
 
+
           <!--此文件用来存放一些不方便取值的变量-->
 <!--思路大概是将值藏到重加载的区域内-->
 
 <pjax>
 <script>
   window.pdata={}
-  pdata.ispage=false;
+  pdata.ispage=true;
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   pdata.commentConfig={};
@@ -3483,7 +3720,7 @@ window.matchMedia('(prefers-color-scheme: light)').addListener(darkModelListener
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/tags/代码托管/","name":"代码托管"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"wordCount":0,"image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/c/","name":"c++"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2025/03/11/source/C++/STL/","name":"c++ STL"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"c++ STL","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2025/03/11/source/C++/STL/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2025/03/11/source/C++/STL/","wordCount":0,"datePublished":"2025-03-10T16:00:00.000Z","dateModified":"2025-03-11T14:51:50.472Z","articleSection":"c++","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 

@@ -29,7 +29,7 @@
   <!-- front-matter head_begin end -->
   <link rel="preload" href="/css/style.css" as="style">
   <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-<link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="/fonts/OPPO-Sans.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
   <!-- feed -->
   <!-- 页面元数据 -->
@@ -41,11 +41,11 @@
 <meta property="og:title" content="Linux系统安装">
 <meta property="og:url" content="http://example.com/2025/03/02/source/Linux/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="tutulp&#39;s blog">
-<meta property="og:description" content="Ubuntu 192.168.6.131  tutu tutu root root Anois os 192.168.6.208 root 123 安装虚拟机vmware安装包 激活码在网上找 ##vm安装：  bios里修改设置：开启虚拟化设备支持   上网搜索  我没有开（系统默认开启） 管理员运行安装包  #安装Anolis OS 下载官网龙蜥8 关于龙蜥(Anolis) OS 8 (ope">
+<meta property="og:description" content="安装虚拟机前置准备 bios里修改设置：开启虚拟化设备支持   【上网搜索（系统默认开启）】 管理员运行VMware安装包    可以看到两个cpu-16核，我们分配两个cpu-每个4核 AnolisAnolis8.6 GA 下载地址：https:&#x2F;&#x2F;mirrors.openanolis.cn&#x2F;anolis&#x2F;8.6&#x2F;isos&#x2F;GA&#x2F;x86_64&#x2F; 下载minimal.iso 虚拟机选择centos">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2025-03-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-03T12:45:53.386Z">
+<meta property="article:modified_time" content="2025-03-11T14:51:50.711Z">
 <meta property="article:author" content="tutulp">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -106,7 +106,7 @@ html {
   color: var(--color-text);
   width: 100%;
   height: 100%;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: OPPO-Sans, Menlo, Monaco, monospace, sans-serif;
   font-size: 16px;
 }
 html >::-webkit-scrollbar {
@@ -868,8 +868,8 @@ button {
   }
 }
 @font-face {
-  font-family: 'UbuntuMono';
-  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-family: 'OPPO-Sans';
+  src: url("/fonts/OPPO-Sans.ttf");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
@@ -1010,7 +1010,7 @@ button {
 }
 .l_header .nav-sub .title {
   font-weight: bold;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: OPPO-Sans, Menlo, Monaco, monospace, sans-serif;
   line-height: 1.2;
   max-height: 64px;
   white-space: normal;
@@ -1791,7 +1791,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1741058732582),
+    lastupdate: new Date(1741704802062),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2485,7 +2485,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <p class="title">Leland Titus</p>
     
     
-      <p class="subtitle">风尘云万里</p>
+      <p class="subtitle">风沉云万里</p>
     
   </div>
   <div class='bottom'>
@@ -2582,8 +2582,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
 <div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
   <a itemprop="url" class='author' href="/" rel="nofollow">
-    <img itemprop="image" src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-    <p itemprop="name">请设置文章作者</p>
+    " class="lazyload" data-srcset="" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==<img itemprop="image" src="">
+    <p itemprop="name">tutulp</p>
   </a>
 </div>
 
@@ -2631,46 +2631,20 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    <p>Ubuntu 192.168.6.131 </p>
-<p>tutu tutu</p>
-<p>root root</p>
-<p>Anois os 192.168.6.208</p>
-<p>root 123</p>
-<h1 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h1><p>vmware安装包</p>
-<p>激活码在网上找</p>
-<p>##vm安装：</p>
-<ol>
-<li>bios里修改设置：开启虚拟化设备支持   上网搜索  我没有开（系统默认开启）</li>
-<li>管理员运行安装包</li>
-</ol>
-<p>#安装Anolis OS</p>
-<p>下载官网龙蜥8 <a target="_blank" rel="noopener" href="https://openanolis.cn/anolisos">关于龙蜥(Anolis) OS 8 (openanolis.cn)</a></p>
-<p>下载Anolis OS8.6 QU1 -x86_64-dvd.ios  </p>
-<p>安装教程</p>
-<p><a target="_blank" rel="noopener" href="https://cnxiaobai.com/articles/2021/10/21/1634800698273.html">https://cnxiaobai.com/articles/2021/10/21/1634800698273.html</a></p>
-<ol>
-<li>创建虚拟机-典型-稍后安装操作系统-linux-centos 8 64位-虚拟机名称Anolis OS-自定义位置d:\APP\Vmware\Anolis OS-45G-将虚拟磁盘拆分为多个文件</li>
-<li>编辑虚拟机设置-CD&#x2F;DVD-使用ios镜像文件（龙蜥下载位置）-网络适配器-自定义-VMnet8（<strong>NAT模式</strong>）-内存-2GB</li>
+    <h1 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h1><h2 id="前置准备"><a href="#前置准备" class="headerlink" title="前置准备"></a>前置准备</h2><ol>
+<li>bios里修改设置：开启虚拟化设备支持   【上网搜索（系统默认开启）】</li>
+<li>管理员运行VMware安装包</li>
 </ol>
 <img src="./images/Linux系统安装.assets/image-20230829094318453-1740971902830-254.png" class="lazyload" data-srcset="./images/Linux系统安装.assets/image-20230829094318453-1740971902830-254.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20230829094318453" style="zoom:33%;" />
 
-<p>可以看到两个cpu-16核 我们分配两个cpu-每个4核</p>
-<p>开启虚拟机器：ctrl+g  上下 回车 install（第一个）  返回ctrl+alt</p>
-<p>安装目的地：自动分区-可以选择手动分区</p>
-<p>软件选择：最小安装</p>
-<p>根密码：root用户   创建账户-一个权限较低的账户-可设为管理员</p>
-<p>#开发环境搭建</p>
+<p>可以看到两个cpu-16核，我们分配两个cpu-每个4核</p>
+<h2 id="Anolis"><a href="#Anolis" class="headerlink" title="Anolis"></a>Anolis</h2><p>Anolis8.6 GA 下载地址：<a target="_blank" rel="noopener" href="https://mirrors.openanolis.cn/anolis/8.6/isos/GA/x86_64/">https://mirrors.openanolis.cn/anolis/8.6/isos/GA/x86_64/</a> 下载minimal.iso</p>
+<p>虚拟机选择centos 8 64位</p>
+<h2 id="CentOS7"><a href="#CentOS7" class="headerlink" title="CentOS7"></a>CentOS7</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/centos/7/isos/x86_64/">https://mirrors.aliyun.com/centos/7/isos/x86_64/</a>  CentOS-7-x86_64-Minimal-2009.iso</p>
 <h2 id="Ubuntu安装g"><a href="#Ubuntu安装g" class="headerlink" title="Ubuntu安装g++"></a>Ubuntu安装g++</h2><p>sudo apt update</p>
 <p>sudo apt install build-essential gdb  同时安装gcc g++ gdp</p>
-<p>检验安装是否成功 gcc –version g++ –version </p>
-<p>安装cmake</p>
-<p>sudo apt install cmake</p>
-<p>安装tree</p>
-<ul>
-<li>apt install net-tools 安装arp等网络工具</li>
-</ul>
+<p>apt install net-tools 安装arp等网络工具</p>
 <p>##Anolis安装g++</p>
-<p>以上用anolis无法安装</p>
 <p>yum update</p>
 <p>yum install gcc </p>
 <p>yum install gcc-c++ libstdc++-devel</p>
@@ -2750,92 +2724,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>回车键：重复上一命令</li>
 </ol>
 <p>gdb main</p>
-<h1 id="VScode"><a href="#VScode" class="headerlink" title="VScode"></a>VScode</h1><h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><p><strong>在 <code>Ctrl+P</code> 窗口下还可以:</strong></p>
-<ul>
-<li>直接输入文件名，跳转到文件</li>
-<li><code>?</code> 列出当前可执行的动作</li>
-<li><code>!</code> 显示 <code>Errors</code>或 <code>Warnings</code>，也可以 <code>Ctrl+Shift+M</code></li>
-<li><code>:</code> 跳转到行数，也可以 <code>Ctrl+G</code> 直接进入</li>
-<li><code>@</code> 跳转到 <code>symbol</code>（搜索变量或者函数），也可以 <code>Ctrl+Shift+O</code> 直接进入</li>
-<li><code>@</code> 根据分类跳转 <code>symbol</code>，查找属性或函数，也可以 <code>Ctrl+Shift+O</code> 后输入:进入</li>
-<li><code>#</code> 根据名字查找 <code>symbol</code>，也可以 <code>Ctrl+T</code></li>
-</ul>
-<p>编辑器与窗口管理</p>
-<ol>
-<li>打开一个新窗口：<code>Ctrl+Shift+N</code></li>
-<li>关闭窗口：<code>Ctrl+Shift+W</code></li>
-<li>同时打开多个编辑器（查看多个文件）</li>
-<li>新建文件 <code>Ctrl+N</code></li>
-<li>文件之间切换 <code>Ctrl+Tab</code></li>
-<li>切出一个新的编辑器（最多 <code>3</code> 个） <code>Ctrl+\</code>，也可以按住 <code>Ctrl</code> 鼠标点击 <code>Explorer</code> 里的文件名</li>
-<li>左中右 <code>3</code> 个编辑器的快捷键 <code>Ctrl+1</code> <code>Ctrl+2</code> <code>Ctrl+3</code></li>
-<li><code>3</code> 个编辑器之间循环切换 <code>Ctrl+</code></li>
-<li>编辑器换位置， <code>Ctrl+k</code>然后按 <code>Left</code>或 <code>Right</code></li>
-</ol>
-<p><strong>快捷键：格式调整</strong></p>
-<ol>
-<li>代码行缩进 <code>Ctrl+[</code> 、 <code>Ctrl+]</code></li>
-<li><code>Ctrl+C</code> 、 <code>Ctrl+V</code> 复制或剪切当前行&#x2F;当前选中内容</li>
-<li>代码格式化：<code>Shift+Alt+F</code>，或 <code>Ctrl+Shift+P</code> 后输入 <code>format code</code></li>
-<li>上下移动一行：<code>Alt+Up</code> 或 <code>Alt+Down</code></li>
-<li>向上向下复制一行：<code>Shift+Alt+Up</code> 或 <code>Shift+Alt+Down</code></li>
-<li>在当前行下边插入一行 <code>Ctrl+Enter</code></li>
-<li>在当前行上方插入一行 <code>Ctrl+Shift+Enter</code></li>
-</ol>
-<p><strong>快捷键：光标相关</strong></p>
-<ol>
-<li>移动到行首：<code>Home</code></li>
-<li>移动到行尾：<code>End</code></li>
-<li>移动到文件结尾：<code>Ctrl+End</code></li>
-<li>移动到文件开头：<code>Ctrl+Home</code></li>
-<li>移动到定义处：<code>F12</code></li>
-<li>定义处缩略图：只看一眼而不跳转过去 <code>Alt+F12</code></li>
-<li>移动到后半个括号：<code>Ctrl+Shift+]</code></li>
-<li>选择从光标到行尾：<code>Shift+End</code></li>
-<li>选择从行首到光标处：<code>Shift+Home</code></li>
-<li>删除光标右侧的所有字：<code>Ctrl+Delete</code></li>
-<li>扩展&#x2F;缩小选取范围：<code>Shift+Alt+Left</code> 和 <code>Shift+Alt+Right</code></li>
-<li>多行编辑(列编辑)：<code>Alt+Shift+鼠标左键</code>，<code>Ctrl+Alt+Down/Up</code></li>
-<li>同时选中所有匹配：<code>Ctrl+Shift+L</code></li>
-<li><code>Ctrl+D</code> 下一个匹配的也被选中 (在 sublime 中是删除当前行，后面自定义快键键中，设置与 <code>Ctrl+Shift+K</code> 互换了)</li>
-<li>回退上一个光标操作：<code>Ctrl+U</code></li>
-</ol>
-<p><strong>快捷键：重构代码</strong></p>
-<ol>
-<li>找到所有的引用：<code>Shift+F12</code></li>
-<li>同时修改本文件中所有匹配的：<code>Ctrl+F12</code></li>
-<li>重命名：比如要修改一个方法名，可以选中后按 <code>F2</code>，输入新的名字，回车，会发现所有的文件都修改了</li>
-<li>跳转到下一个 <code>Error</code> 或 <code>Warning</code>：当有多个错误时可以按 <code>F8</code> 逐个跳转</li>
-<li>查看 <code>diff</code>：在 <code>explorer</code> 里选择文件右键 <code>Set file to compare</code>，然后需要对比的文件上右键选择 <code>Compare with file_name_you_chose</code></li>
-</ol>
-<p><strong>快捷键：查找替换</strong></p>
-<ol>
-<li>查找 <code>Ctrl+F</code></li>
-<li>查找替换 <code>Ctrl+H</code></li>
-<li>整个文件夹中查找 <code>Ctrl+Shift+F</code></li>
-</ol>
-<p><strong>快捷键：显示相关</strong></p>
-<ol>
-<li>全屏：<code>F11</code></li>
-<li>zoomIn&#x2F;zoomOut：<code>Ctrl +/-</code></li>
-<li>侧边栏显&#x2F;隐：<code>Ctrl+B</code></li>
-<li>显示资源管理器 <code>Ctrl+Shift+E</code></li>
-<li>显示搜索 <code>Ctrl+Shift+F</code></li>
-<li>显示 Git <code>Ctrl+Shift+G</code></li>
-<li>显示 Debug <code>Ctrl+Shift+D</code></li>
-<li>显示 Output <code>Ctrl+Shift+U</code></li>
-</ol>
-<h4 id="高频使用技巧"><a href="#高频使用技巧" class="headerlink" title="高频使用技巧"></a>高频使用技巧</h4><ul>
-<li>左右分屏</li>
-<li>固定打开的文件  双击，不被覆盖</li>
-<li>格式化代码</li>
-<li>Rename Symbol</li>
-<li>显示minimap  右上角的小窗口</li>
-<li>侧边栏查看OUTLINE</li>
-<li>全屏</li>
-<li>关闭多个打开的文件</li>
-<li>选中整行 ctrl+l</li>
-</ul>
 <h1 id="cmake"><a href="#cmake" class="headerlink" title="cmake"></a>cmake</h1><h2 id="cmake-windows-不用看"><a href="#cmake-windows-不用看" class="headerlink" title="cmake windows(不用看)"></a>cmake windows(不用看)</h2><p>软件构建(build)：cmake   全自动完成代码编译，链接，打包 <strong>跨平台</strong></p>
 <p>vs:MSbuild 不同编译器使用的工具不同 cmake可以支配所有</p>
 <p>cmake：不用手动配置makefile</p>
@@ -3188,8 +3076,8 @@ Host 192.168.6.208  //主机ip
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ssh tutu@192.168.6.208   tutu</span><br><span class="line"></span><br><span class="line">ssh root@192.168.6.208   123</span><br><span class="line"></span><br><span class="line">避免每次连接需要输入密码</span><br><span class="line"></span><br><span class="line">cmd:ssh-keygen -t rsa -b 4096  四个回车生成密钥 ==？？？==</span><br><span class="line"></span><br><span class="line">##免密登录</span><br><span class="line"></span><br><span class="line">* code /etc/ssh/sshd_config    日志：code /var/log/secure</span><br><span class="line">* sudo systemctl restart sshd</span><br><span class="line"></span><br><span class="line">* windows上运行ssh-keygen </span><br><span class="line"></span><br><span class="line">三个回车看到生成的公钥和私钥的位置C:\Users\Tutu\.ssh\id_rsa</span><br><span class="line"></span><br><span class="line">* 修改config配置文件</span><br><span class="line"></span><br><span class="line">Host 192.168.6.208</span><br><span class="line"></span><br><span class="line"> HostName 192.168.6.208</span><br><span class="line"></span><br><span class="line"> User root</span><br><span class="line"></span><br><span class="line"> IdentityFile C:\Users\Tutu\.ssh\id_rsa</span><br><span class="line"></span><br><span class="line">* 将id_rsa.pub复制到服务器的~/.ssh文件夹中</span><br><span class="line">* 修改文件/etc/ssh/ssh_config</span><br><span class="line"></span><br><span class="line">PasswordAuthentication no</span><br><span class="line"></span><br><span class="line">PubkeyAuthentication yes</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">systemctl restart sshd</span><br><span class="line"></span><br><span class="line">* 可能需要权限</span><br><span class="line"></span><br><span class="line">chmod 700 ~/.ssh</span><br><span class="line">chmod 600 ~/.ssh/authorized_keys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## ssh慢</span><br><span class="line"></span><br><span class="line">修改/etc/ssh/sshd_config文件</span><br><span class="line"></span><br><span class="line">UseDNS no</span><br><span class="line"></span><br><span class="line">GSSAPIAuthentication no</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">创建实例并初始化  Open  StartAccept  创建TcpClientPtr   HandleAccept  StartRead</span><br><span class="line"></span><br><span class="line">407 行 pClient-&gt;GetBuffer(0); max,0   HandleRead RecvData  GetMessage</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>TcpClientPtr构造<br>	m_maxBufSize &#x3D; 8 * 1024 * 1024;<br>	m_offset &#x3D; 0;&#x2F;&#x2F;总消息长度<br>	m_parseOffset &#x3D; 0;&#x2F;&#x2F;上一条消息的末尾<br>	m_pBuf &#x3D; NULL;&#x2F;&#x2F;堆上分配8MB内存，m_pBuf指向第一个字节<br>	m_state &#x3D; 1;<br>    m_bReadClose &#x3D; false;<br>    m_nSendHeartBeatCount &#x3D; 10;	<br>    m_nRecvHeartBeatCount &#x3D; 0;<br>	Init(m_maxBufSize);<br>	m_prp2dbspcPkt.pktLen &#x3D; sizeof(PRP_DBSPC_RULE_PKT);<br>	m_prp2dbspcPkt.flag &#x3D; DBAGENT_FLAG;<br>	m_prp2dbspcPkt.pktType &#x3D; EU_AGENT_PKT_TYPE_RULE;<br>	m_pBuf &#x3D; new uint8_t[m_maxBufSize];&#x2F;&#x2F;max<br>GetBuffer(0)&#x2F;&#x2F;获得缓冲区的第一个地址<br>	uint8_t* pBuf &#x3D; m_pBuf + m_offset;&#x2F;&#x2F;+0<br>	bufSize &#x3D; m_maxBufSize - m_offset;&#x2F;&#x2F;-0<br>	if max&lt;&#x3D;0 return null<br>	return pbuf 返回地址<br>RecvData(readSize)<br>	m_offset+&#x3D;readSize<br>HaveMessage<br>	msgLen&#x3D;*m_pBuf&#x2F;&#x2F;<br>	if(m_offset &lt; msgLen) return fasle<br>	m_parseOffset&#x3D;0<br>GetMessage（0）<br>	pBuf&#x3D;<br>	<br>	msgSize 数据部分长度经过减去头部数据4</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># CentOS7</span><br><span class="line"></span><br><span class="line">1. vmware安装centos7 </span><br><span class="line"></span><br><span class="line">![image-20250120103952216](./images/Linux系统安装.assets/image-20250120103952216-1740971902830-321.png)</span><br><span class="line"></span><br><span class="line">2. 配置静态网络</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>cd &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;<br>vi ifcfg-ens33 (替换成对呀网卡名称)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 配置静态网络</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>cd &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;<br>vi ifcfg-ens33 (替换成对应网卡名称)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 <p>TYPE&#x3D;Ethernet<br>PROXY_METHOD&#x3D;none<br>BROWSER_ONLY&#x3D;no<br>BOOTPROTO&#x3D;static   &#x2F;&#x2F;改<br>DEFROUTE&#x3D;yes<br>IPV4_FAILURE_FATAL&#x3D;no<br>IPV6INIT&#x3D;yes<br>IPV6_AUTOCONF&#x3D;yes<br>IPV6_DEFROUTE&#x3D;yes<br>IPV6_FAILURE_FATAL&#x3D;no<br>IPV6_ADDR_GEN_MODE&#x3D;stable-privacy<br>NAME&#x3D;ens33<br>UUID&#x3D;1647aabe-3d39-4811-b698-b958ac9169f4<br>DEVICE&#x3D;ens33<br>ONBOOT&#x3D;yes               &#x2F;&#x2F;从这往下，改，ip根据自己配置的VMnet8更改<br>IPADDR&#x3D;192.168.248.3<br>NETMASK&#x3D;255.255.255.0<br>GATEWAY&#x3D;192.168.248.2<br>PREFIX&#x3D;24<br>DNS1&#x3D;114.114.114.114<br>DNS2&#x3D;8.8.8.8</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
@@ -3231,10 +3119,10 @@ Host 192.168.6.208  //主机ip
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-03T20:45:53+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-11T22:51:50+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2025年3月3日</p>
+    <p>更新于：2025年3月11日</p>
   </a>
 </div>
 
@@ -3387,7 +3275,7 @@ socket地址API。socket最开始的含义是一个IP地址和端口对（ip，p
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu%E5%AE%89%E8%A3%85g"><span class="toc-text">Ubuntu安装g++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%BC%96%E8%AF%91"><span class="toc-text">命令行编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">快捷键</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E9%A2%91%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="toc-text">高频使用技巧</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cmake-windows-%E4%B8%8D%E7%94%A8%E7%9C%8B"><span class="toc-text">cmake windows(不用看)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C"><span class="toc-text">运行</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cmake-linux"><span class="toc-text">cmake linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-text">安装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMake%E5%B8%B8%E7%94%A8%E5%8F%98%E9%87%8F"><span class="toc-text">CMake常用变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMake%E7%BC%96%E8%AF%91%E5%B7%A5%E7%A8%8B"><span class="toc-text">CMake编译工程</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87"><span class="toc-text">前置准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Anolis"><span class="toc-text">Anolis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS7"><span class="toc-text">CentOS7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu%E5%AE%89%E8%A3%85g"><span class="toc-text">Ubuntu安装g++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%BC%96%E8%AF%91"><span class="toc-text">命令行编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cmake-windows-%E4%B8%8D%E7%94%A8%E7%9C%8B"><span class="toc-text">cmake windows(不用看)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C"><span class="toc-text">运行</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cmake-linux"><span class="toc-text">cmake linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-text">安装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMake%E5%B8%B8%E7%94%A8%E5%8F%98%E9%87%8F"><span class="toc-text">CMake常用变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMake%E7%BC%96%E8%AF%91%E5%B7%A5%E7%A8%8B"><span class="toc-text">CMake编译工程</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -4047,7 +3935,7 @@ window.matchMedia('(prefers-color-scheme: light)').addListener(darkModelListener
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/Linux/","name":"Linux"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2025/03/02/source/Linux/Linux系统安装/","name":"Linux系统安装"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Linux系统安装","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2025/03/02/source/Linux/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2025/03/02/source/Linux/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/","wordCount":0,"datePublished":"2025-03-01T16:00:00.000Z","dateModified":"2025-03-03T12:45:53.386Z","articleSection":"Linux","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/Linux/","name":"Linux"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2025/03/02/source/Linux/Linux系统安装/","name":"Linux系统安装"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Linux系统安装","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2025/03/02/source/Linux/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2025/03/02/source/Linux/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/","wordCount":0,"datePublished":"2025-03-01T16:00:00.000Z","dateModified":"2025-03-11T14:51:50.711Z","articleSection":"Linux","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
