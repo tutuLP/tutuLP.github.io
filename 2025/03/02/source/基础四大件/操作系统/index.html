@@ -45,7 +45,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2025-03-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-03T12:45:53.375Z">
+<meta property="article:modified_time" content="2025-03-12T03:07:30.034Z">
 <meta property="article:author" content="tutulp">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -1791,7 +1791,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1741704802062),
+    lastupdate: new Date(1741749556008),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2219,7 +2219,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <!-- Custom Files bodyBegin end-->
     <!-- front-matter body_begin begin -->
     <!-- front-matter body_begin end -->
-    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur " style='opacity: 0' >
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur show" style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -2474,7 +2474,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
       <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
-      <div id="half" class='cover-wrapper post search' style="display: ;">
+      <div id="none" class='cover-wrapper post search' style="display: none;">
         
   <div class='cover-bg lazyload placeholder' data-bg="https://s3.bmp.ovh/imgs/2025/03/03/64c32e0ed0f747a9.jpg"></div>
 
@@ -2582,7 +2582,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
 <div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
   <a itemprop="url" class='author' href="/" rel="nofollow">
-    " class="lazyload" data-srcset="" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==<img itemprop="image" src="">
+    <img itemprop="image" src="https://s3.bmp.ovh/imgs/2025/03/03/30639e1f0584064f.jpg" class="lazyload" data-srcset="https://s3.bmp.ovh/imgs/2025/03/03/30639e1f0584064f.jpg" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
     <p itemprop="name">tutulp</p>
   </a>
 </div>
@@ -2665,7 +2665,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>原因：我使用的vscode远程连接没有访问Linux centos图形界面的权力,用MobaXterm是可以的有X server</p>
 </blockquote>
 <p>报错：No bootable device  没有启动盘</p>
-<img src="./images/操作系统.assets/image-20241212115256057.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20241212115256057.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241212115256057" style="zoom:33%;" />
+<!-- <img src="../../../images/操作系统.assets/image-20241212115256057.png" class="lazyload" data-srcset="../../../images/操作系统.assets/image-20241212115256057.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241212115256057" style="zoom:33%;" /> -->
+
+<img src="/images/操作系统.assets/image-20241212115256057.png" class="lazyload" data-srcset="/images/操作系统.assets/image-20241212115256057.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241212115256057" style="zoom:33%;">
 
 <h3 id="设置启动盘"><a href="#设置启动盘" class="headerlink" title="设置启动盘"></a>设置启动盘</h3><p>BIOS会将PC的控制权转移到引导加载程序，使用现有的引导加载程序GNU GRand(<strong>GRUB</strong>)，GRUB可以将操作系统构建为普通的ELF可执行文件，然后由GRUB将其加载到正确的内存位置。</p>
 <p>GRUB将寻找一个数(具体的)以确保它实际上是在跳转到操作系统。然后GRUB跳转到内存中的某个位置将控制权转移到OS。 </p>
@@ -2691,7 +2693,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/syslinux-6.03.tar.gz</span><br><span class="line">tar xzf syslinux-6.03.tar.gz</span><br><span class="line">cd syslinux-6.03</span><br><span class="line">make bios</span><br><span class="line"></span><br><span class="line">mkdir -p /root/iso/boot/grub </span><br><span class="line">cp /root/syslinux-6.03/bios/core/isolinux.bin /root/iso/boot/grub/</span><br><span class="line">cp /root/tutuio/kernel.elf /root/iso/boot/</span><br></pre></td></tr></table></figure>
 
 <p>此时的目录结构：</p>
-<img src="./images/操作系统.assets/image-20241213155835165.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20241213155835165.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241213155835165" style="zoom: 50%;" />
+<img src="./images/操作系统.assets/image-20241213155835165.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20241213155835165.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241213155835165" style="zoom: 50%;">
 
 <p>menu.lst内容如下 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">default=0</span><br><span class="line">timeout=0</span><br><span class="line"></span><br><span class="line">title os</span><br><span class="line">kernel /boot/kernel.elf</span><br></pre></td></tr></table></figure>
@@ -2705,7 +2707,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>所以用GRUB 2构建iso</p>
 <p><code>sudo yum install grub2 grub2-tools grub2-tools-extra mtools xorriso</code></p>
 <p>新的目录结构</p>
-<img src="./images/操作系统.assets/image-20241213191936185.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20241213191936185.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241213191936185" style="zoom:50%;" />
+<img src="./images/操作系统.assets/image-20241213191936185.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20241213191936185.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241213191936185" style="zoom:50%;">
 
 <p><code>grub2-mkrescue -o os.iso /root/iso</code></p>
 <h3 id="启动bochs"><a href="#启动bochs" class="headerlink" title="启动bochs"></a>启动bochs</h3><p><code>sudo bin/bochs -f bochsrc.txt -q</code></p>
@@ -2738,7 +2740,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>编译 三部曲configure make make install</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">cd bochs-2.8</span><br><span class="line"></span><br><span class="line">./configure \ </span><br><span class="line">--prefix=/root/tutuos/bochs-2.8-installed \ </span><br><span class="line">--enable-debugger \ </span><br><span class="line">--enable-disasm \ </span><br><span class="line">--enable-iodebug \ </span><br><span class="line">--enable-x86-debugger \ </span><br><span class="line">--with-x \ </span><br><span class="line">--with-x11</span><br><span class="line"></span><br><span class="line">注意各行结尾的&#x27;\&#x27;字符前面有个空格</span><br><span class="line"></span><br><span class="line">//直接复制可使用版本：</span><br><span class="line">./configure --prefix=/root/tutuos/bochs-2.8-installed --enable-debugger --enable-disasm --enable-iodebug --enable-x86-debugger --with-x --with-x11</span><br><span class="line"></span><br><span class="line">我使用2.8出现报错：configure: WARNING: unrecognized options: --enable-disasm 我暂时没有理会，可以取消这个选项应该没有影响</span><br></pre></td></tr></table></figure>
 
-<img src="./images/操作系统.assets/image-20250116223727643.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250116223727643.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250116223727643" style="zoom:33%;" />
+<img src="./images/操作系统.assets/image-20250116223727643.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250116223727643.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250116223727643" style="zoom:33%;">
 
 <blockquote>
 <p>–enable-gdb-stub替换–enable-debugger来使用gdb调试，但是不建议</p>
@@ -2844,17 +2846,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">编译</span><br><span class="line">nasm -o mbr.bin mbr.S</span><br><span class="line">验证是否为512字节</span><br><span class="line">ls -lb mbr.bin</span><br><span class="line">磁盘操作，将文件写入 0 盘 0 道 1 扇区</span><br><span class="line">dd if=/root/tutuos/mbr.bin of=/root/tutuos/bochs-2.8-installed/hd60M.img bs=512 count=1 conv=notrunc</span><br><span class="line">运行</span><br><span class="line">bin/bochs -f bochsrc.disk -q</span><br><span class="line">输入c后回车</span><br></pre></td></tr></table></figure>
 
-<img src="./images/操作系统.assets/image-20250120155940621.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250120155940621.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250120155940621" style="zoom:33%;" />
+<img src="./images/操作系统.assets/image-20250120155940621.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250120155940621.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250120155940621" style="zoom:33%;">
 
 <p>第一个提示设置环境变量：export BXSHARE&#x3D;&#x2F;root&#x2F;tutuos&#x2F;bochs-2.8-installed&#x2F;share&#x2F;bochs</p>
 <h1 id="完善MBR"><a href="#完善MBR" class="headerlink" title="完善MBR"></a>完善MBR</h1><h2 id="地址-section-vstart浅尝"><a href="#地址-section-vstart浅尝" class="headerlink" title="地址 section vstart浅尝"></a>地址 section vstart浅尝</h2><h3 id="什么是地址"><a href="#什么是地址" class="headerlink" title="什么是地址"></a>什么是地址</h3><p>地址：描述各种符号在源文件中的位置，各符号偏移文件开头的距离</p>
 <p>编译器：给各符号编址，根据硬件平台特性，不考虑对齐则彼此相连</p>
-<img src="./images/操作系统.assets/image-20250120163158130.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250120163158130.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250120163158130" style="zoom:33%;" />
+<img src="./images/操作系统.assets/image-20250120163158130.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250120163158130.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250120163158130" style="zoom:33%;">
 
 <p>每个变量的地址是前一个变量的地址+前一个变量的内存空间大小。</p>
 <p>代码编译之后，源代码中的标号(比如$)会被替换为实际地址</p>
 <p>为了看程序编译后的各指令或标号的地址，可以用反汇编来查看，用 ndisasm 这个工具完成</p>
-<img src="./images/操作系统.assets/image-20250120222929605.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250120222929605.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250120222929605" style="zoom:33%;" />
+<img src="./images/操作系统.assets/image-20250120222929605.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250120222929605.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250120222929605" style="zoom:33%;">
 
 <blockquote>
 <p>指令 mov ds,ax，被编译器处理之后，其所在地址处的内容就是机器码 8ED8</p>
@@ -2869,10 +2871,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </ul>
 <p>&#x3D;&#x3D;地址等于上一个地址+上一个地址处的内容的长度。例如地址列第二行的 3 等于“上一个地址 0”+“上一个地址0 处的内容：B80000 的长度 3(一个长度32位)”，以此类推。&#x3D;&#x3D;</p>
 <h3 id="节-section"><a href="#节-section" class="headerlink" title="节 section"></a>节 section</h3><p>编译器提供的伪指令，将程序逻辑上分为几个部分，比如将指令和数据分开便于维护等</p>
-<img src="./images/操作系统.assets/image-20250120230325398.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250120230325398.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250120230325398" style="zoom:33%;" />
+<img src="./images/操作系统.assets/image-20250120230325398.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250120230325398.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250120230325398" style="zoom:33%;">
 
 <h3 id="vstart"><a href="#vstart" class="headerlink" title="vstart"></a>vstart</h3><p>是 section 用 vstart&#x3D;来修饰后，可以被赋予一个虚拟起始地址，它被用来计算在该 section 内的所有内存引用地址。</p>
-<img src="./images/操作系统.assets/image-20250121173206298.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250121173206298.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250121173206298" style="zoom:33%;" />
+<img src="./images/操作系统.assets/image-20250121173206298.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250121173206298.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250121173206298" style="zoom:33%;">
 
 <p>在 section 中添加了 vstart，这个参数是让编译器将 section 中的数据的地址以 vstart 的值为起始，不再从整个程序开头算起。只有以程序开头 0 算起的地址才是真实存在的，在这个地址上能访问到相应的符号，所以不以程序开头算起的地址，必然在程序内部不存在，是虚拟的。</p>
 <ul>
@@ -2910,10 +2912,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </blockquote>
 <p>显卡默认文本模式为80*25 一屏可以打印2000个字符，一行80个共25行</p>
 <p>打出彩色字符：ASCLL码一位，颜色一位，颜色RGB+I(1高亮)  </p>
-<img src="./images/操作系统.assets/image-20250204104421395.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250204104421395.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250204104421395" style="zoom:33%;" />
+<img src="./images/操作系统.assets/image-20250204104421395.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250204104421395.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250204104421395" style="zoom:33%;">
 
 <p>可用颜色：</p>
-<img src="./images/操作系统.assets/image-20250204104707501.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250204104707501.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250204104707501" style="zoom:33%;" />
+<img src="./images/操作系统.assets/image-20250204104707501.png" class="lazyload" data-srcset="./images/操作系统.assets/image-20250204104707501.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250204104707501" style="zoom:33%;">
 
 <h3 id="改进MBR，直接操作显卡"><a href="#改进MBR，直接操作显卡" class="headerlink" title="改进MBR，直接操作显卡"></a>改进MBR，直接操作显卡</h3><p>mbr.S</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">SECTION MBR vstart=0x7c00 ;标记一个MBR段 起始地址为0x7c00</span><br><span class="line">    mov ax, cs </span><br><span class="line">    mov ds, ax </span><br><span class="line">    mov es, ax </span><br><span class="line">    mov ss, ax </span><br><span class="line">    mov fs, ax </span><br><span class="line">    mov sp, 0x7c00 ;栈指针赋值，从7c00开始</span><br><span class="line">    mov ax, 0xb800 ;0xb800是文本模式下显存的段地址，后续通过gs访问显存</span><br><span class="line">    mov gs, ax</span><br><span class="line"></span><br><span class="line">mov ax, 0x600 ;滚动窗口</span><br><span class="line">mov bx, 0x700 ;黑底白字</span><br><span class="line">mov cx, 0 ;左上角行列坐标 (0,0)</span><br><span class="line">mov dx, 0x184f ;右下角行列坐标 (80,25)</span><br><span class="line">int 10h ;调用 BIOS 的 INT 10H 中断来清屏</span><br><span class="line"></span><br><span class="line">mov byte [gs:0x00],&#x27;1&#x27;   ;直接向显存写入数据，ASCLL码+属性</span><br><span class="line">mov byte [gs:0x01],0xA4</span><br><span class="line">mov byte [gs:0x02],&#x27; &#x27;</span><br><span class="line">mov byte [gs:0x03],0xA4</span><br><span class="line">mov byte [gs:0x04],&#x27;M&#x27;</span><br><span class="line">mov byte [gs:0x05],0xA4</span><br><span class="line">mov byte [gs:0x06],&#x27;B&#x27;</span><br><span class="line">mov byte [gs:0x07],0xA4</span><br><span class="line">mov byte [gs:0x08],&#x27;R&#x27;</span><br><span class="line">mov byte [gs:0x09],0xA4</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">jmp $ ;无限循环</span><br><span class="line"></span><br><span class="line">times 510-($-$$) db 0 ;填充剩余空间</span><br><span class="line">db 0x55,0xaa ;结束标志</span><br></pre></td></tr></table></figure>
@@ -2944,10 +2946,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-03T20:45:53+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-12T11:07:30+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2025年3月3日</p>
+    <p>更新于：2025年3月12日</p>
   </a>
 </div>
 
@@ -3163,14 +3165,14 @@ vi hello.s...</p>
     // header
     var l_header=document.getElementById("l_header");
     
-    l_header.classList.remove("show");
+    l_header.classList.add("show");
     
     
       // cover
       var cover_wrapper=document.querySelector('#l_cover .cover-wrapper');
       var scroll_down=document.getElementById('scroll-down');
-      cover_wrapper.id="half";
-      cover_wrapper.style.display="";
+      cover_wrapper.id="none";
+      cover_wrapper.style.display="none";
       scroll_down.style.display="none";
     
   
@@ -3758,7 +3760,7 @@ window.matchMedia('(prefers-color-scheme: light)').addListener(darkModelListener
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/四大件/","name":"四大件"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2025/03/02/source/基础四大件/操作系统/","name":"操作系统"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"操作系统","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/","wordCount":0,"datePublished":"2025-03-01T16:00:00.000Z","dateModified":"2025-03-03T12:45:53.375Z","articleSection":"四大件","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/四大件/","name":"四大件"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2025/03/02/source/基础四大件/操作系统/","name":"操作系统"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"操作系统","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2025/03/02/source/%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%A4%A7%E4%BB%B6/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/","wordCount":0,"datePublished":"2025-03-01T16:00:00.000Z","dateModified":"2025-03-12T03:07:30.034Z","articleSection":"四大件","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
