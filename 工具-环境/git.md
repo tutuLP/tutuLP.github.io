@@ -47,6 +47,20 @@ git status # 查看是否有冲突，有冲突在项目中解决(带有>>>)
 git add .
 git commit
 
+## 新建标签
+
+```bash
+git tag -a v1.0 -m "Release version 1.1"
+
+# 查看所有标签
+git tag
+
+# 删除标签
+git tag -d v1.0
+
+git push origin v1.0
+```
+
 ## 其他指令
 
 git pull --prune # 从远程拉取并且删除本地多余的文件 git pull --prune

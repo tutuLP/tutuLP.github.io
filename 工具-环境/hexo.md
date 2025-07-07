@@ -349,6 +349,38 @@ title: 所有标签
 fonts存放字体文件，在yml配置文件中使用eg：/fonts/JetBrainsMono-Bold.ttf
 需要使用图片的时候也可以这样放和引用
 
+## 正确显示md中的图片
+
+typora中采取图片复制规则为：./images/${filename}.assets
+_config.yml中设值post_asset_folder: true
+source文件夹新建images文件夹，然后将所有资源目录下的.assets文件夹都复制到其中，这里采用脚本复制
+
+~~~sh
+#!/bin/bash
+
+# 定义源目录，这里假设当前目录为搜索起始点
+source_dir="."
+# 定义目标目录
+target_dir="/root/blog/blog/source/images/"
+
+# 检查目标目录是否存在，如果不存在则创建
+if [ ! -d "$target_dir" ]; then
+    mkdir -p "$target_dir"
+fi
+
+# 使用 find 命令查找所有 .assets 后缀的文件夹
+find "$source_dir" -type d -name "*.assets" | while read -r asset_folder; do
+    # 获取 .assets 文件夹的名称
+    folder_name=$(basename "$asset_folder")
+    # 复制 .assets 文件夹到目标目录
+    cp -r "$asset_folder" "$target_dir/$folder_name"
+    # 输出复制信息
+    echo "Copied $asset_folder to $target_dir/$folder_name"
+done
+~~~
+
+
+
 ## 参考链接
 
 主题volantis：https://volantis.js.org/v6/getting-started/
