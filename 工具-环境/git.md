@@ -74,3 +74,11 @@ git checkout xxxx #切换分支
 git commit -F .../log.txt
 
 git config --global http.sslVerify false # 当拉取仓库遇到ssl问题
+
+## 放弃更改
+
+```sh
+git reset --hard <id>
+git checkout -- .
+```
+
