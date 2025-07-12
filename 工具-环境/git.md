@@ -47,6 +47,8 @@ git status # 查看是否有冲突，有冲突在项目中解决(带有>>>)
 git add .
 git commit
 
+或者 git config pull.rebase false 直接永久设置合并策略
+
 ## 新建标签
 
 ```bash
@@ -94,7 +96,13 @@ git checkout xxxx #切换分支
 git commit -F .../log.txt
 
 git config --global http.sslVerify false # 当拉取仓库遇到ssl问题
-
 git branch -r 查看远程分支
 
 git branch -a 查看所有分支
+
+## 放弃更改
+
+```sh
+git reset --hard <id>
+git checkout -- .
+```
