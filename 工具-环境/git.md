@@ -61,6 +61,26 @@ git tag -d v1.0
 git push origin v1.0
 ```
 
+## 新建分支
+
+~~~sh
+git checkout -b 新分支名 或  git switch -c  新分支名
+git push -u origin 新分支名
+git branch -a
+~~~
+
+## 合并分支
+
+```sh
+git branch -vv  # 查看所有分支及最新提交信息
+git checkout qs  # 切换到qs分支
+git pull origin qs  # 拉取远程最新代码
+git merge main  # 将main分支合并到当前分支(qs)。
+# 处理冲突
+```
+
+
+
 ## 其他指令
 
 git pull --prune # 从远程拉取并且删除本地多余的文件 git pull --prune
@@ -74,3 +94,7 @@ git checkout xxxx #切换分支
 git commit -F .../log.txt
 
 git config --global http.sslVerify false # 当拉取仓库遇到ssl问题
+
+git branch -r 查看远程分支
+
+git branch -a 查看所有分支
