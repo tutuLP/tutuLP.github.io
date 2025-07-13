@@ -105,7 +105,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -out app.test.crt \
   -subj "/C=CN/ST=Shanghai/L=Shanghai/O=Test/OU=Dev/CN=app.test"
   
-# git bash shou'dng
+# git bash 手动输入
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -keyout app.test.key \
   -out app.test.crt
