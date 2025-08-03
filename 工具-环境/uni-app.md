@@ -102,6 +102,44 @@ wx.getUserProfile({
 
 ### 点击获取用户头像，点击获取用户名
 
+```
+<!-- 头像选择按钮 -->
+<button class="avatar-wrapper" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
+    <image class="avatar" :src="avatarUrl"></image>
+</button>
+
+<!-- 头像处理方法 -->
+onChooseAvatar(e) {
+    console.log("选择头像:", e.detail.avatarUrl)
+    this.avatarUrl = e.detail.avatarUrl
+}
+
+<!-- 昵称输入框 -->
+<view class="row">
+    <view class="text1">昵称：</view>
+    <input type="nickname" class="weui-input" name="nickname" placeholder="请输入昵称"/>
+</view>
+
+<!-- 昵称处理方法 -->
+async formSubmit(e){
+    console.log("nickname: " + e.detail.value.nickname)
+
+    // 获取昵称
+    const nickname = e.detail.value.nickname
+    if (!nickname) {
+        uni.showToast({
+            title: '请输入昵称',
+            icon: 'none'
+        })
+        return
+    }
+    
+    // 后续登录逻辑...
+}
+```
+
+
+
 ### 获取手机号
 
 收费功能，暂不考虑
