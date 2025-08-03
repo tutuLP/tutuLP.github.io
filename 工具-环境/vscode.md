@@ -172,3 +172,9 @@ system("pause");
 或者直接双击我们之前保存的工作区也同样的效果
 
 <img src="./images/vscode.assets/image-20240327171229497-1737030861345-122.png" alt="image-20240327171229497" style="zoom:33%;" />
+
+
+
+# vscode占用过大
+
+pkill -f vscode rm -rf ~/.vscode-server

@@ -106,3 +106,32 @@ git branch -a 查看所有分支
 git reset --hard <id>
 git checkout -- .
 ```
+
+## 删除历史-压缩体积
+
+```sh
+# 1. 查看远程地址  git@gitee.com:tutuLP/titus_utils.git
+git remote -v
+
+# 2. 复制 remote URL，例如：
+
+# 3. 删除旧的 .git 仓库
+rm -rf .git
+
+# 4. 初始化新的 Git 仓库
+git init
+
+# 5. 添加所有当前文件
+git add .
+
+# 6. 创建一次干净的提交
+git commit -m "Cleaned history, keep current state"
+
+# 7. 重新添加远程 origin
+git remote add origin git@gitee.com:tutuLP/titus_utils.git
+
+# 8. 强制推送到远程（覆盖原仓库历史）
+git push -f origin master  # 或 main，看你原来是哪个分支
+
+```
+
