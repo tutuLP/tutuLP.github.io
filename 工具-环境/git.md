@@ -134,6 +134,7 @@ git remote add origin git@gitee.com:tutuLP/titus_utils.git
 
 # 8. 强制推送到远程（覆盖原仓库历史）
 git push -f origin master  # 或 main，看你原来是哪个分支
+git push --set-upstream origin master
 
 ```
 

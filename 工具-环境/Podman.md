@@ -14,6 +14,32 @@ sudo dnf -y update
 sudo dnf -y install podman
 ```
 
+## win
+
+https://blog.csdn.net/qq_43072399/article/details/134076856
+
+* 启用wsl
+
+```
+ctrl+r control
+# 控制面板\程序\程序和功能 - 启用或关闭windwos功能
+# 开启
+适用于Linux的Windows子系统
+虚拟机平台
+# 重启
+# 管理员模式启用powershell
+wsl --set-default-version 2
+wsl --update
+wsl --install
+# https://github.com/containers/podman/tree/main
+# 我下载的是podman-installer-windows-amd64.exe  双击安装
+podman --version   # podman version 5.5.2
+podman machine init
+podman machine start
+```
+
+
+
 # 镜像-暂时无用
 
 ## Linux
@@ -115,5 +141,14 @@ podman exec -i postgresvec psql -U postgres < ~/all_databases.sql
  
 psql -h localhost -p 5432 -U postgres -d spark # mysecretpassword  -d指定启用扩展的数据库
 CREATE EXTENSION IF NOT EXISTS vector;
+```
+
+## Redis
+
+```
+podman pull redis
+podman run -d --name redis -p 6379:6379  redis
+# windows 安装 Redis CLI
+podman exec -it redis redis-cli
 ```
 
