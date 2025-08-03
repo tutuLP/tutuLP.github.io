@@ -100,6 +100,8 @@ git branch -r 查看远程分支
 
 git branch -a 查看所有分支
 
+git branch -d xjz 删除分支xjz
+
 ## 放弃更改
 
 ```sh

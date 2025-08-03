@@ -567,3 +567,19 @@ xxx   规格：x单位 y单位   价格  x单位
 
 2. yy  单价：10 元/个  用量： y个
 
+
+
+
+
+# 其他markdown组件
+
+静态站点生成：https://vuepress.vuejs.org/zh/guide/introduction.html
+
+编辑器：https://tiptap.dev/
+
+编辑器：(左右分屏显示)http://editor.md.ipandao.com/
+
+编辑器：(左右分屏)https://imzbf.github.io/md-editor-v3/zh-CN
+
+富文本编辑器：https://www.wangeditor.com/
+
