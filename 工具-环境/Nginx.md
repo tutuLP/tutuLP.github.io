@@ -140,7 +140,7 @@ http {
     upstream pub {
         server localhost:3001;
     }
-
+sdsdsddwdwdsdsd
     # 支持 WebSocket 升级
     map $http_upgrade $connection_upgrade {
         default upgrade;

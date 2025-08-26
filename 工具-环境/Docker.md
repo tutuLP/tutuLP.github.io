@@ -1,19 +1,15 @@
 ---
 title: "docker"
-date: 2025-03-02
+date: 2025-08-04
 categories:
-  - Linux
+  - utils
 tags:
-  - Linux
+  - container
 ---
 
-docker为每一个应用提供完全隔离的环境-配置的环境也叫做container/容器
+# Install
 
-image/镜像：包含部署的程序以及关联的所有库
-
-容器：通过镜像创建，就像一台台运行起来的虚拟机
-
-# 安装Docker
+## centos
 
 * 卸载旧版
 
@@ -30,15 +26,9 @@ yum remove docker \
 
 * 配置Docker的yum库
 
-首先要安装一个yum工具
-
 ```Bash
 yum install -y yum-utils
-```
-
-安装成功后，执行命令，配置Docker的yum源：
-
-```Bash
+# 配置Docker的yum源
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 ```
 
@@ -46,32 +36,26 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 
 ```Bash
 yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-```
 
-docker -v 查看版本
+docker -v 
 
-docker images显示没有连接，docker也是一个服务进程(如mysql)需要启动
-
-## 启动和校验
-
-```Bash
-# 启动Docker
 systemctl start docker
-# 停止Docker
-systemctl stop docker
-# 重启
-systemctl restart docker
+
 # 设置开机自启
 systemctl enable docker
-# 执行docker ps命令，如果不报错，说明安装启动成功
-docker ps
 ```
 
-##配置镜像加速
+## MacOS
 
-镜像加速在24年中旬g了
+macos：https://juejin.cn/post/7530868895767920675
 
-以前的阿里镜像
+# 镜像加速
+
+* 镜像地址：https://www.wxy97.com/archives/b5b225b6-7741-4560-be2f-2e6a4f671d9b
+* 镜像地址 2：https://1ms.run
+* 阿里镜像(没用过，估计不行)：https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
+
+## centos
 
 ```Bash
 # 创建目录
@@ -85,7 +69,6 @@ EOF
 
 # 重新加载配置
 systemctl daemon-reload
-
 # 重启Docker
 systemctl restart docker
 ```
@@ -133,8 +116,6 @@ https://docs.docker.com/
 
 ## 常见命令
 
-首先我们来学习Docker中的常见命令，可以参考官方文档：
-
 https://docs.docker.com/engine/reference/commandline/cli/
 
 ### 命令介绍
@@ -159,14 +140,6 @@ https://docs.docker.com/engine/reference/commandline/cli/
 | docker load    | 加载本地压缩文件到镜像         | [docker load](https://docs.docker.com/engine/reference/commandline/load/) |
 | docker inspect | 查看容器详细信息               | [docker inspect](https://docs.docker.com/engine/reference/commandline/inspect/) |
 
-
-
-
-
-补充：
-
-默认情况下，每次重启虚拟机我们都需要手动启动Docker和Docker中的容器。通过命令可以实现开机自启：
-
 ```PowerShell
 # Docker开机自启
 systemctl enable docker
@@ -176,376 +149,21 @@ docker update --restart=always [容器名/容器id]
 
 ### 演示Nginx
 
-```PowerShell
-# 第1步，去DockerHub查看nginx镜像仓库及相关信息
-# 第2步，拉取Nginx镜像
-docker pull nginx
-# 第3步，查看镜像
-docker images
-# 结果如下：
-REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
-nginx        latest    605c77e624dd   16 months ago   141MB
-mysql        latest    3218b38490ce   17 months ago   516MB
-# 第4步，创建并允许Nginx容器
-docker run -d --name nginx -p 80:80 nginx
-# 第5步，查看运行中容器
-docker ps
-# 也可以加格式化方式访问，格式会更加清爽
-docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}\t{{.Names}}"
-# 第6步，访问网页，地址：http://虚拟机地址
-# 第7步，停止容器
-docker stop nginx
-# 第8步，查看所有容器(包括停掉的)
-docker ps -a --format "table {{.ID}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}\t{{.Names}}"
-# 第9步，再次启动nginx容器
-docker start nginx
-# 第10步，再次查看容器
-docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}\t{{.Names}}"
-# 第11步，查看容器详细信息
-docker inspect nginx
-# 第12步，进入容器,查看容器内目录
-docker exec -it nginx bash
-# 或者，可以进入MySQL
-docker exec -it mysql mysql -uroot -p
-# 第13步，删除容器
-docker rm nginx
-# 发现无法删除，因为容器运行中，强制删除容器
-docker rm -f nginx
-```
+`docker save -o nginx.tar nginx:lastest`就会在目录下生存一个nginx.tar的文件，可以拷贝到别的机器上使用 
 
-当想使用docker save不知道后面怎么写了,`docker save --help`查看帮助
+`docker rmi nginx:lastest` 删除镜像
 
-`docker save -o nginx.tar nginx:lastest`就会在目录下生存一个nginx.tar的文件
-
-可以拷贝到别的机器上使用 
-
-`docker rmi nginx:lastest`删除镜像
-
-`docker load -i naginx.tar`使用刚才打包的文件
-
-
+`docker load -i naginx.tar` 使用刚才打包的文件
 
 `docker logs -f nginx`持续查看日志-用于调试
 
+## 镜像
 
-
-###命令别名
-
-```PowerShell
-# 修改/root/.bashrc文件
-vi /root/.bashrc
-或vi ~/.bashrc
-内容如下：
-# .bashrc
-
-# User specific aliases and functions
-
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
-alias dps='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}\t{{.Names}}"'
-alias dis='docker images'
-
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-        . /etc/bashrc
-fi
-```
-
-生效:
-
-```PowerShell
-source /root/.bashrc
-```
-
-##数据卷
-
-### 案例一
-
-创建nginx容器，修改nginx容器内html目录下index.html文件,查看变化
-
-将静态资源部署到nginx的html目录
-
-* 找到index.html文件在哪里
-
-* * 看官网
-  * <img src="./images/Docker.assets/image-20240107101415047-1740972279877-357.png" alt="image-20240107101415047" style="zoom:33%;" />
-
-* ~~~powershell
-  docker exec -it nginx bash
-  cd /usr/share/nginx/html
-  vi index.html #没有命令vi 文件内修改资源很困难
-  ~~~
-
-**数据卷（volume）**是一个虚拟目录，是容器内目录与宿主机目录之间映射的桥梁。
-
-<img src="./images/Docker.assets/image-20240107101910600-1740972330679-360.png" alt="image-20240107101910600" style="zoom: 33%;" />
-
-一旦绑定,一着变则全变
-
-/var/lib/docker/volumes`这个目录就是默认的存放所有容器数据卷的目录，其下再根据数据卷名称创建新目录，格式为`/数据卷名/_data
-
-docker volume --help
-
-| **命令**                                                 | **说明**             | **文档地址**                                                 |
-| :------------------------------------------------------- | :------------------- | :----------------------------------------------------------- |
-| docker volume create(不用自己创建-v挂载的时候会自动创建) | 创建数据卷           | [docker volume create](https://docs.docker.com/engine/reference/commandline/volume_create/) |
-| docker volume ls                                         | 查看所有数据卷       | [docs.docker.com](https://docs.docker.com/engine/reference/commandline/volume_ls/) |
-| docker volume rm                                         | 删除指定数据卷       | [docs.docker.com](https://docs.docker.com/engine/reference/commandline/volume_prune/) |
-| docker volume inspect                                    | 查看某个数据卷的详情 | [docs.docker.com](https://docs.docker.com/engine/reference/commandline/volume_inspect/) |
-| docker volume prune                                      | 清除数据卷           | [docker volume prune](https://docs.docker.com/engine/reference/commandline/volume_prune/) |
-
-```PowerShell
-# 1.首先创建容器并指定数据卷，注意通过 -v 参数来指定数据卷
-docker run -d --name nginx -p 80:80 -v html:/usr/share/nginx/html nginx #先把原来的删除了 docker rm -f nginx
-
-# 2.然后查看数据卷
-docker volume ls
-# 结果
-DRIVER    VOLUME NAME
-local     29524ff09715d3688eae3f99803a2796558dbd00ca584a25a4bbc193ca82459f
-local     html
-
-# 3.查看数据卷详情
-docker volume inspect html
-# 结果
-[
-    {
-        "CreatedAt": "2024-05-17T19:57:08+08:00",
-        "Driver": "local",
-        "Labels": null,
-        "Mountpoint": "/var/lib/docker/volumes/html/_data",
-        "Name": "html",
-        "Options": null,
-        "Scope": "local"
-    }
-]
-
-# 4.查看/var/lib/docker/volumes/html/_data目录
-ll /var/lib/docker/volumes/html/_data
-# 可以看到与nginx的html目录内容一样，结果如下：
-总用量 8
--rw-r--r--. 1 root root 497 12月 28 2021 50x.html
--rw-r--r--. 1 root root 615 12月 28 2021 index.html
-
-# 5.进入该目录，并随意修改index.html内容
-cd /var/lib/docker/volumes/html/_data
-vi index.html
-
-# 6.打开页面，查看效果
-
-# 7.进入容器内部，查看/usr/share/nginx/html目录内的文件是否变化
-docker exec -it nginx bash
-```
-
-改完访问ip可以看到改完的网页,也可以在这个目录下再上传更多的静态资源 通过/访问
-
-###MySQL容器的数据挂载(匿名卷)
-
-教学**演示环节**：演示一下MySQL的匿名数据卷
-
-```PowerShell
-# 1.查看MySQL容器详细信息
-docker inspect mysql
-# 关注其中.Config.Volumes部分和.Mounts部分
-```
-
-我们关注两部分内容，第一是`.Config.Volumes`部分：
-
-```JSON
-{
-  "Config": {
-    // ... 略
-    "Volumes": {
-      "/var/lib/mysql": {}
-    }
-    // ... 略
-  }
-}
-```
-
-可以发现这个容器声明了一个本地目录，需要挂载数据卷，但是**数据卷未定义**。这就是匿名卷。
-
-然后，我们再看结果中的`.Mounts`部分：
-
-```JSON
-{
-  "Mounts": [
-    {
-      "Type": "volume",
-      "Name": "29524ff09715d3688eae3f99803a2796558dbd00ca584a25a4bbc193ca82459f",
-      "Source": "/var/lib/docker/volumes/29524ff09715d3688eae3f99803a2796558dbd00ca584a25a4bbc193ca82459f/_data",
-      "Destination": "/var/lib/mysql",
-      "Driver": "local",
-    }
-  ]
-}
-```
-
-可以发现，其中有几个关键属性：
-
-- Name：数据卷名称。由于定义容器未设置容器名，这里的就是匿名卷自动生成的名字，一串hash值。
-- Source：宿主机目录
-- Destination : 容器内的目录
-
-上述配置是将容器内的`/var/lib/mysql`这个目录，与数据卷`29524ff09715d3688eae3f99803a2796558dbd00ca584a25a4bbc193ca82459f`挂载。于是在宿主机中就有了`/var/lib/docker/volumes/29524ff09715d3688eae3f99803a2796558dbd00ca584a25a4bbc193ca82459f/_data`这个目录。这就是匿名数据卷对应的目录，其使用方式与普通数据卷没有差别。
-
-接下来，可以查看该目录下的MySQL的data文件：
-
-```Bash
-ls -l /var/lib/docker/volumes/29524ff09715d3688eae3f99803a2796558dbd00ca584a25a4bbc193ca82459f/_data
-```
-
-这个匿名卷挂的是数据库存储的信息(数据库-表等,便于迁移数据)
-
-注意：每一个不同的镜像，将来创建容器后内部有哪些目录可以挂载，可以参考DockerHub对应的页面
-
-删除容器-卷还在-数据也还在-使用新的容器后想要迁移过去比较麻烦-一般自己做一个挂载-且不挂在valume下
-
-### 挂载本地目录或文件
-
-可以发现，数据卷的目录结构较深，如果我们去操作数据卷目录会不太方便。在很多情况下，我们会直接将容器目录与宿主机指定目录挂载。挂载语法与数据卷类似：
-
-```Bash
-# 挂载本地目录
--v 本地目录:容器内目录
-# 挂载本地文件
--v 本地文件:容器内文件
-```
-
-**注意**：本地目录或文件必须以 `/` 或 `./`开头，如果直接以名字开头，会被识别为数据卷名而非本地目录名。
-
-例如：
-
-```Bash
--v mysql:/var/lib/mysql # 会被识别为一个数据卷叫mysql，运行时会自动创建这个数据卷
--v ./mysql:/var/lib/mysql # 会被识别为当前目录下的mysql目录，运行时如果不存在会创建目录
-```
-
-**教学演示**，删除并重新创建mysql容器，并完成本地目录挂载：(查官方文档)(先创建好本地目录)
-
-- 挂载`/root/mysql/data`到容器内的`/var/lib/mysql`目录
-- 挂载`/root/mysql/init`到容器内的`/docker-entrypoint-initdb.d`目录（初始化的SQL脚本目录(初始化一些要用到数据库)）
-- 挂载`/root/mysql/conf`到容器内的`/etc/mysql/conf.d`目录（这个是MySQL配置文件目录）(配置成utf-8)
-
-在课前资料中已经准备好了mysql的`init`目录和`conf`目录：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=YzBkNWI1NzMzNTc5MzlmZTA0YjE3NGM3YjY0NWU5NzRfem45R1JBU0dTWDIzVlpseWlYSVNXcmEzSWRYdG9qY3NfVG9rZW46S1BENWJ0SlExb1lOSjB4NERxbmM3QWpDbjdnXzE3MDQ1OTU4NDU6MTcwNDU5OTQ0NV9WNA)
-
-以及对应的初始化SQL脚本和配置文件：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=ZGYyMWMwOTBlMzQ0MGYzZTdlOWZiNWZmMDg4Nzc1NzNfYWlrajJSSVY3cGtPQjJzOHlPM0RkTEo1Wm9ueGFwRVFfVG9rZW46TUMzWGI3Z2NZbzNJQWl4NXdITWNmZEltbktkXzE3MDQ1OTU4NDU6MTcwNDU5OTQ0NV9WNA)
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=MTE5YTdmZDMxMzRiY2ZkNmRlZGExZmRmZThkMjBlNjlfNDZlQ2xYd2Jwd0R2b2JoN3RlaEg1eFJoUUY4TG1MOWZfVG9rZW46VFdwUWJYbDZ3b2Q5cFZ4YzBpUmN0cENpblVoXzE3MDQ1OTU4NDU6MTcwNDU5OTQ0NV9WNA)
-
-其中，hm.cnf主要是配置了MySQL的默认编码，改为utf8mb4；而hmall.sql则是后面我们要用到的黑马商城项目的初始化SQL脚本。
-
-我们直接将整个mysql目录上传至虚拟机的`/root`目录下：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=M2I4MTVkYWEyZDQwYzA0YmRlNzMwMzNlNTI2OGJmNzVfVk13MkE4TGxabDU5aU5rQmJGbVNqSzFFcUxFUTNCY1dfVG9rZW46UFpOQmJicERFb0sxZkN4STB5Z2NYYlVmbkdiXzE3MDQ1OTU4NDU6MTcwNDU5OTQ0NV9WNA)
-
-接下来，我们演示本地目录挂载：
-
-```Bash
-# 1.删除原来的MySQL容器
-docker rm -f mysql
-
-# 2.进入root目录
-cd ~
-
-# 3.创建并运行新mysql容器，挂载本地目录
-docker run -d \
-  --name mysql \
-  -p 3306:3306 \
-  -e TZ=Asia/Shanghai \
-  -e MYSQL_ROOT_PASSWORD=123 \
-  -v ./mysql/data:/var/lib/mysql \
-  -v ./mysql/conf:/etc/mysql/conf.d \
-  -v ./mysql/init:/docker-entrypoint-initdb.d \
-  mysql
-
-# 4.查看root目录，可以发现~/mysql/data目录已经自动创建好了
-ls -l mysql
-# 结果：
-总用量 4
-drwxr-xr-x. 2 root    root   20 5月  19 15:11 conf
-drwxr-xr-x. 7 polkitd root 4096 5月  19 15:11 data
-drwxr-xr-x. 2 root    root   23 5月  19 15:11 init
-
-# 查看data目录，会发现里面有大量数据库数据，说明数据库完成了初始化
-ls -l data
-
-# 5.查看MySQL容器内数据
-# 5.1.进入MySQL
-docker exec -it mysql mysql -uroot -p123
-# 5.2.查看编码表
-show variables like "%char%";
-# 5.3.结果，发现编码是utf8mb4没有问题
-+--------------------------+--------------------------------+
-| Variable_name            | Value                          |
-+--------------------------+--------------------------------+
-| character_set_client     | utf8mb4                        |
-| character_set_connection | utf8mb4                        |
-| character_set_database   | utf8mb4                        |
-| character_set_filesystem | binary                         |
-| character_set_results    | utf8mb4                        |
-| character_set_server     | utf8mb4                        |
-| character_set_system     | utf8mb3                        |
-| character_sets_dir       | /usr/share/mysql-8.0/charsets/ |
-+--------------------------+--------------------------------+
-
-# 6.查看数据
-# 6.1.查看数据库
-show databases;
-# 结果，hmall是黑马商城数据库
-+--------------------+
-| Database           |
-+--------------------+
-| hmall              |
-| information_schema |
-| mysql              |
-| performance_schema |
-| sys                |
-+--------------------+
-5 rows in set (0.00 sec)
-# 6.2.切换到hmall数据库
-use hmall;
-# 6.3.查看表
-show tables;
-# 结果：
-+-----------------+
-| Tables_in_hmall |
-+-----------------+
-| address         |
-| cart            |
-| item            |
-| order           |
-| order_detail    |
-| order_logistics |
-| pay_order       |
-| user            |
-+-----------------+
-# 6.4.查看address表数据
-+----+---------+----------+--------+----------+-------------+---------------+-----------+------------+-------+
-| id | user_id | province | city   | town     | mobile      | street        | contact   | is_default | notes |
-+----+---------+----------+--------+----------+-------------+---------------+-----------+------------+-------+
-| 59 |       1 | 北京     | 北京   | 朝阳区    | 13900112222 | 金燕龙办公楼   | 李佳诚    | 0          | NULL  |
-| 60 |       1 | 北京     | 北京   | 朝阳区    | 13700221122 | 修正大厦       | 李佳红    | 0          | NULL  |
-| 61 |       1 | 上海     | 上海   | 浦东新区  | 13301212233 | 航头镇航头路   | 李佳星    | 1          | NULL  |
-| 63 |       1 | 广东     | 佛山   | 永春      | 13301212233 | 永春武馆       | 李晓龙    | 0          | NULL  |
-+----+---------+----------+--------+----------+-------------+---------------+-----------+------------+-------+
-4 rows in set (0.00 sec)
-```
-
-##镜像
-
-前面我们一直在使用别人准备好的镜像，那如果我要部署一个Java项目，把它打包为一个镜像该怎么做呢？
+前面我们一直在使用别人准备好的镜像，那如果我要部署一个项目，把它打包为一个镜像该怎么做呢？
 
 ### 镜像结构
 
 镜像中包含了程序运行需要的系统函数库、环境、配置、依赖。
-
-依次准备好程序运行的基础环境、依赖、应用本身、运行配置等文件，并且打包而成。
 
 举个例子，我们要从0部署一个Java应用，大概流程是这样：
 
@@ -565,9 +183,7 @@ show tables;
 
 但需要注意的是，镜像文件不是随意堆放的，而是按照操作的步骤分层叠加而成，每一层形成的文件都会单独打包并标记一个唯一id，称为**Layer**（**层**）。这样，如果我们构建时用到的某些层其他人已经制作过，就可以直接拷贝使用这些层，而不用重复制作。
 
-例如，第一步中需要的Linux运行环境，通用性就很强，所以Docker官方就制作了这样的只包含Linux运行环境的镜像。我们在制作java镜像时，就无需重复制作，直接使用Docker官方提供的CentOS或Ubuntu镜像作为基础镜像。然后再搭建其它层即可，这样逐层搭建，最终整个Java项目的镜像结构如图所示：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=NzEwNjNlMDhiOTBmOGVlM2UwYWE5ZDZiNDBlMDYyM2FfQkFwRlNucDdJMlJ1OERSbzdDWTNTWkFtcDhxSUhnT09fVG9rZW46SE1Fa2JYTVJ5b1ZDWTl4azdLZWMzUXF1bk9kXzE3MDQ1OTcxMTI6MTcwNDYwMDcxMl9WNA)
+例如，第一步中需要的Linux运行环境，通用性就很强，所以Docker官方就制作了这样的只包含Linux运行环境的镜像。我们在制作java镜像时，就无需重复制作，直接使用Docker官方提供的CentOS或Ubuntu镜像作为基础镜像。然后再搭建其它层即可，这样逐层搭建
 
 ### Dockerfile
 
@@ -636,13 +252,7 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 
 在课前资料中，我们准备好了一个demo项目及对应的Dockerfile：
 
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTgzMGNhZmEyMTU1MzFmMjAyYzkyMWU3OGZjMGE3MjFfbW1aRGVNc2VXa0VEZ05CNWI3dWhjTDhBOFh6a0oxM1ZfVG9rZW46SWFYWGJSeXJ1b2ZzeXF4a1h5M2N1SkJpbnVmXzE3MDQ1OTcxMTI6MTcwNDYwMDcxMl9WNA)
-
-首先，我们将课前资料提供的`docker-demo.jar`包以及`Dockerfile`拷贝到虚拟机的`/root/demo`目录：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=ZjExNGY3NGIyM2JiMmFmMDM3MTBiOWU3OTIyMTMxNGZfWHk1dXBHUzR0S0ZoR0doUkRoZXBkM3lFV25VODVkM1RfVG9rZW46RGFOeGJ3Tjg0bzdtRWx4N3A0OGNRU1NTbnJlXzE3MDQ1OTcxMTI6MTcwNDYwMDcxMl9WNA)
-
-然后，执行命令，构建镜像：
+首先，我们将`docker-demo.jar`包以及`Dockerfile`拷贝到虚拟机的`/root/demo`目录：
 
 ```Bash
 # 进入镜像目录
@@ -660,10 +270,6 @@ docker build -t docker-demo:1.0 .
     # 直接指定Dockerfile目录
     docker build -t docker-demo:1.0 /root/demo
     ```
-
-结果：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=MjY1NmI2ZDgxN2ZhNTg3ODk1MjIwYTZhOGUwMWZlZDRfZVRraWJRTWhJRmxpbmVxY3NTdklVa1MzcDRiU0RLNFVfVG9rZW46R0RqMmJzeDFzb0Q0eXV4N3hLWmNXcHoxbmhlXzE3MDQ1OTcxMTI6MTcwNDYwMDcxMl9WNA)
 
 查看镜像列表：
 
@@ -698,8 +304,6 @@ curl localhost:8080/hello/count
 ## 网络
 
 项目往往需要访问其它各种中间件，例如MySQL、Redis等。现在，我们的容器之间能否互相访问呢？
-
-首先，我们查看下MySQL容器的详细信息，重点关注其中的网络IP地址：
 
 ```Bash
 # 1.用基本命令，寻找Networks.bridge.IPAddress属性
@@ -770,8 +374,6 @@ PING mysql (172.18.0.2) 56(84) bytes of data.
 64 bytes from mysql.hmall (172.18.0.2): icmp_seq=2 ttl=64 time=0.054 ms
 ```
 
-OK，现在无需记住IP地址也可以实现容器互联了。
-
 **总结**：
 
 - 在自定义网络中，可以给容器起多个别名，默认的别名是容器名本身
@@ -780,124 +382,6 @@ OK，现在无需记住IP地址也可以实现容器互联了。
 
 
 ip addr 可以看到虚拟机的网卡默认只有l0 ens(虚拟机真实ip) docker0 多一个我们设置的新的网桥
-
-# 项目部署
-
-在课前资料中已经提供了一个黑马商城项目给大家，如图：
-
-项目说明：
-
-- hmall：商城的后端代码
-- hmall-portal：商城用户端的前端代码
-- hmall-admin：商城管理端的前端代码
-
-部署的容器及端口说明：
-
-| **项目**     | **容器名** | **端口**           | **备注**            |
-| :----------- | :--------- | :----------------- | :------------------ |
-| hmall        | hmall      | 8080               | 黑马商城后端API入口 |
-| hmall-portal | nginx      | 18080              | 黑马商城用户端入口  |
-| hmall-admin  | 18081      | 黑马商城管理端入口 |                     |
-| mysql        | mysql      | 3306               | 数据库              |
-
-mysql容器中已经准备好了商城的数据，所以就不再删除了。
-
-## 部署Java项目
-
-`hmall`项目是一个maven聚合项目，使用IDEA打开`hmall`项目，查看项目结构如图：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=NmNiOTQ4ZTNmMzYxYWY1YWJmZTYzNmUwM2M1MmRiZmNfeUVqc3JqUVA1Vm5udkRXdFlnYm5rMVVOZ2JhSGpmMDRfVG9rZW46VjdNeWJ1YUhpb2pMT1d4c2xnSGNvS0xVbjVnXzE3MDQ2MDQ1NTQ6MTcwNDYwODE1NF9WNA)
-
-我们要部署的就是其中的`hm-service`，其中的配置文件采用了多环境的方式：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=MmEwYjI3YWE0NTE1MGUzYmI4NDRmZjJkMmRlMDZmNThfVlNFN05GRnVlSzdxYVMyc0RWVE9QT2JEMXZXTGNWQk1fVG9rZW46Vk5UOGIzNUZQb0xUUkR4VVZDQ2NuYWpJbnFnXzE3MDQ2MDQ1NTQ6MTcwNDYwODE1NF9WNA)
-
-其中的`application-dev.yaml`是部署到开发环境的配置，`application-local.yaml`是本地运行时的配置。
-
-查看application.yaml，你会发现其中的JDBC地址并未写死，而是读取变量：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=MjQ4MjNkZmViNDVhNThlMDM2ZjQ0NTllZmUxNDk2NmZfUjRMMHpucFF0OEc2ckQxeklpMXNMY1NFTjJmeExFRnFfVG9rZW46SXlCZ2JFYWFjb1VmTml4RXlGMWM1anJGbnZiXzE3MDQ2MDQ1NTQ6MTcwNDYwODE1NF9WNA)
-
-这两个变量在`application-dev.yaml`和`application-local.yaml`中并不相同：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=MWJhYTgyOTI2MDJlNWM2MDIwZDM1ZTRkNWI5MDdkMzZfVHRMV0V2cGJjREVwSEF1U2dJU3g4a0szbjhZWUJhZG5fVG9rZW46T3RlaGJCQXpXb3FibUx4YTFHM2NIUjBablplXzE3MDQ2MDQ1NTQ6MTcwNDYwODE1NF9WNA)
-
-在dev开发环境（也就是Docker部署时）采用了mysql作为地址，刚好是我们的mysql容器名，只要两者在一个网络，就一定能互相访问。
-
-我们将项目打包：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=OWUxYWFiZmU1ZjljYmIxNzY3Njk0YThhMDU1MmJjYTVfc25tWHFIc04yam9ZZzNGek1EVUFzTDFQQldVZHlCd1hfVG9rZW46THhtS2JLRlFTb2EyTFB4bHpzcGNCVnlsbmVkXzE3MDQ2MDQ1NTQ6MTcwNDYwODE1NF9WNA)
-
-结果：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=NGE1ZDUzY2Q3ZGNmOTc4OGI1NzE1NGNiOTQwNTkyODlfb3dZSGY3SWJmZmhJOFE2S05rb2pNcDRQU0FKUEV0OU5fVG9rZW46QVhCRmJZWEJCb0FVcXN4cDBRRWNUckh5bllnXzE3MDQ2MDQ1NTQ6MTcwNDYwODE1NF9WNA)
-
-将`hm-service`目录下的`Dockerfile`和`hm-service/target`目录下的`hm-service.jar`一起上传到虚拟机的`root`目录：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=Y2Y0OTkxMzcxZjM0ODEyZDk4YmJiY2Y2ZWViMjQzM2NfOWQ4d2Y3VThzb2RjZTZFbVhKS2RQY0hXN3BLek5IQjNfVG9rZW46UGNnTGIzMWZBbzRxb254aTJ3SmNJaTZwbkVjXzE3MDQ2MDQ1NTQ6MTcwNDYwODE1NF9WNA)
-
-部署项目：
-
-```Bash
-# 1.构建项目镜像，不指定tag，则默认为latest
-docker build -t hmall .
-
-# 2.查看镜像
-docker images
-# 结果
-REPOSITORY    TAG       IMAGE ID       CREATED          SIZE
-hmall         latest    0bb07b2c34b9   43 seconds ago   362MB
-docker-demo   1.0       49743484da68   24 hours ago     327MB
-nginx         latest    605c77e624dd   16 months ago    141MB
-mysql         latest    3218b38490ce   17 months ago    516MB
-
-# 3.创建并运行容器，并通过--network将其加入hmall网络，这样才能通过容器名访问mysql
-docker run -d --name hmall --network hmall -p 8080:8080 hmall
-```
-
-测试，通过浏览器访问：http://你的虚拟机地址:8080/search/list
-
-## 部署前端
-
-`hmall-portal`和`hmall-admin`是前端代码，需要基于nginx部署。在课前资料中已经给大家提供了nginx的部署目录：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=ODMyNTdiYTEzN2UzMzBhY2U0ZGZjNGNiOWY0NTc0ZmJfNzM2Q2ljN2R4RzN1RDNSQVR3MFZHckdacVVOYUJQZGFfVG9rZW46WFRuUGJ5T0RabzdDOER4TXI5Y2N3Qkdnbk9oXzE3MDQ2MDQ1NTQ6MTcwNDYwODE1NF9WNA)
-
-其中：
-
-- `html`是静态资源目录，我们需要把`hmall-portal`以及`hmall-admin`都复制进去
-- `nginx.conf`是nginx的配置文件，主要是完成对`html`下的两个静态资源目录做代理
-
-我们现在要做的就是把整个nginx目录上传到虚拟机的`/root`目录下：
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=OTIwZjg3NDBjOThjNTU2MjhjYjljYWY0ZmIxYTMwZWRfWDVkTE1XQXJDelBwNm1MVnZGbnlpYnFjenphbGY0ZFhfVG9rZW46V0dMbmJQSWtKb0hOc2x4NnRuRGN0QXZLbnBmXzE3MDQ2MDQ1NTQ6MTcwNDYwODE1NF9WNA)
-
-然后创建nginx容器并完成两个挂载：
-
-- 把`/root/nginx/nginx.conf`挂载到`/etc/nginx/nginx.conf`
-- 把`/root/nginx/html`挂载到`/usr/share/nginx/html`
-
-由于需要让nginx同时代理hmall-portal和hmall-admin两套前端资源，因此我们需要暴露两个端口：
-
-- 18080：对应hmall-portal
-- 18081：对应hmall-admin
-
-命令如下：
-
-```Bash
-docker run -d \
-  --name nginx \
-  -p 18080:18080 \
-  -p 18081:18081 \
-  -v /root/nginx/html:/usr/share/nginx/html \
-  -v /root/nginx/nginx.conf:/etc/nginx/nginx.conf \
-  --network hmall \
-  nginx
-```
-
-测试，通过浏览器访问：http://你的虚拟机ip:18080
-
-![img](https://b11et3un53m.feishu.cn/space/api/box/stream/download/asynccode/?code=NTMwYzRiNDI0ZTZhM2M4ZjQ2YTk4MWYxZmJiYjdhNTVfNWROT29yUVNNNDdWNHlyMThRVDJ5U1VCR29IWDIwb2tfVG9rZW46VG5tU2JlZEZnb2o0SzJ4VVI0UmNma0libm9mXzE3MDQ2MDQ1NTQ6MTcwNDYwODE1NF9WNA)
 
 ## DockerCompose
 
