@@ -43,6 +43,10 @@ podman machine start
 
 # 镜像-暂时无用
 
+可用镜像汇总：https://www.coderjia.cn/archives/dba3f94c-a021-468a-8ac6-e840f85867ea
+
+镜像源：https://1ms.run/
+
 ## Linux
 
 ```sh
@@ -75,6 +79,37 @@ podman machine stop
 podman machine start
 
 ```
+
+## mac
+
+https://juejin.cn/post/7530868895767920675
+
+1. 改配置文件
+
+```
+{
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "20GB",
+      "enabled": true
+    }
+  },
+  "dns": ["8.8.8.8", "1.1.1.1"],
+  "experimental": false,
+  "features": {
+    "buildkit": true
+  },
+  "registry-mirrors": [
+    "https://dockerpull.com",
+    "https://docker.1ms.run"
+  ]
+}
+```
+
+2. 添加代理
+
+**Docker Desktop → Settings → Resources → Proxies**
+勾选 **Manual proxy configuration** 并填写
 
 # 使用
 
@@ -126,6 +161,15 @@ podman restart postgres
 # 测试新用户登录
 psql -h localhost -p 5432 -U spark_user -d spark
 ```
+
+```sql
+select current_user; --查询当前角色
+SELECT current_database(); --查询当前数据库
+\conninfo --数据库 用户 ip port
+\c 目标数据库名 -- 切换数据库
+```
+
+
 
 ## ankane/pgvector
 

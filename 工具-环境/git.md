@@ -107,6 +107,7 @@ git branch -d xjz 删除分支xjz
 ```sh
 git reset --hard <id>
 git checkout -- .
+git push -f origin <分支名>
 ```
 
 ## 删除历史-压缩体积
