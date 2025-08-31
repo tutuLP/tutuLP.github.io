@@ -34,7 +34,7 @@
   <!-- feed -->
   <!-- 页面元数据 -->
   <title>使用hexo构建博客网站 - tutulp's blog</title>
-  <meta name="keywords" content="Node.js,hexo,null">
+  <meta name="keywords" content="hexo,null">
   <meta desc name="description" content="tutulp的博客网站 - tutulp - tutulp's blog">
   
 <meta property="og:type" content="article">
@@ -45,9 +45,8 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2025-03-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-11T14:51:50.712Z">
+<meta property="article:modified_time" content="2025-08-31T08:06:09.544Z">
 <meta property="article:author" content="tutulp">
-<meta property="article:tag" content="Node.js">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -1793,7 +1792,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1741749556008),
+    lastupdate: new Date(1756629935836),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2595,10 +2594,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
   <div class='new-meta-item category'>
     <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>
-    <a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/">工具-环境</a>
+    <a class="category-link" href="/categories/utils/">utils</a>
     
       <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-        <a href="/categories/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/" itemprop="url"><span itemprop="name">工具-环境</span></a>
+        <a href="/categories/utils/" itemprop="url"><span itemprop="name">utils</span></a>
       </span>
     
   </div>
@@ -2650,11 +2649,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:你的用户名/你的用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 
-<p>这里可以使用ssh也可以使用http 使用ssh要先配置密钥<br>我的ssh地址：<a href="mailto:&#x67;&#105;&#x74;&#x40;&#103;&#x69;&#x74;&#104;&#117;&#98;&#46;&#x63;&#111;&#109;">git@github.com</a>:tutuLP&#x2F;tutuLP.github.io.git  </p>
+<p>这里可以使用ssh也可以使用http 使用ssh要先配置密钥<br>我的ssh地址：<a href="mailto:&#x67;&#105;&#x74;&#64;&#x67;&#105;&#116;&#104;&#117;&#98;&#46;&#x63;&#111;&#109;">git@github.com</a>:tutuLP&#x2F;tutuLP.github.io.git  </p>
 <ul>
 <li>配置git用户信息</li>
 </ul>
-<p>git config –global user.email <a href="mailto:&#116;&#x75;&#x74;&#117;&#50;&#48;&#x36;&#x31;&#x38;&#54;&#55;&#x39;&#48;&#51;&#x40;&#103;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">tutu2061867903@gmail.com</a><br>git config –global user.name tutuLP</p>
+<p>git config –global user.email <a href="mailto:&#x74;&#x75;&#x74;&#117;&#x32;&#x30;&#54;&#x31;&#56;&#x36;&#55;&#x39;&#48;&#x33;&#64;&#x67;&#109;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#x6d;">tutu2061867903@gmail.com</a><br>git config –global user.name tutuLP</p>
 <p>可能需要打开端口22 9418</p>
 <ul>
 <li>修改仓库配置</li>
@@ -2707,6 +2706,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">layout: tag</span><br><span class="line">index: true</span><br><span class="line">title: 所有标签</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
 <p>fonts存放字体文件，在yml配置文件中使用eg：&#x2F;fonts&#x2F;JetBrainsMono-Bold.ttf<br>需要使用图片的时候也可以这样放和引用</p>
+<h2 id="正确显示md中的图片"><a href="#正确显示md中的图片" class="headerlink" title="正确显示md中的图片"></a>正确显示md中的图片</h2><p>typora中采取图片复制规则为：.&#x2F;images&#x2F;${filename}.assets<br>_config.yml中设值post_asset_folder: true<br>source文件夹新建images文件夹，然后将所有资源目录下的.assets文件夹都复制到其中，这里采用脚本复制</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义源目录，这里假设当前目录为搜索起始点</span></span><br><span class="line">source_dir=<span class="string">&quot;.&quot;</span></span><br><span class="line"><span class="comment"># 定义目标目录</span></span><br><span class="line">target_dir=<span class="string">&quot;/root/blog/blog/source/images/&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查目标目录是否存在，如果不存在则创建</span></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="string">&quot;<span class="variable">$target_dir</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$target_dir</span>&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 find 命令查找所有 .assets 后缀的文件夹</span></span><br><span class="line">find <span class="string">&quot;<span class="variable">$source_dir</span>&quot;</span> -<span class="built_in">type</span> d -name <span class="string">&quot;*.assets&quot;</span> | <span class="keyword">while</span> <span class="built_in">read</span> -r asset_folder; <span class="keyword">do</span></span><br><span class="line">    <span class="comment"># 获取 .assets 文件夹的名称</span></span><br><span class="line">    folder_name=$(<span class="built_in">basename</span> <span class="string">&quot;<span class="variable">$asset_folder</span>&quot;</span>)</span><br><span class="line">    <span class="comment"># 复制 .assets 文件夹到目标目录</span></span><br><span class="line">    <span class="built_in">cp</span> -r <span class="string">&quot;<span class="variable">$asset_folder</span>&quot;</span> <span class="string">&quot;<span class="variable">$target_dir</span>/<span class="variable">$folder_name</span>&quot;</span></span><br><span class="line">    <span class="comment"># 输出复制信息</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Copied <span class="variable">$asset_folder</span> to <span class="variable">$target_dir</span>/<span class="variable">$folder_name</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p>主题volantis：<a target="_blank" rel="noopener" href="https://volantis.js.org/v6/getting-started/">https://volantis.js.org/v6/getting-started/</a></p>
 <p>ImgURL免费图床：<a target="_blank" rel="noopener" href="https://www.imgurl.org/vip/manage">https://www.imgurl.org/vip/manage</a></p>
 <p>评论系统：<a target="_blank" rel="noopener" href="https://artalk.js.org/">https://artalk.js.org/</a> </p>
@@ -2738,10 +2742,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-11T22:51:50+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-08-31T16:06:09+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2025年3月11日</p>
+    <p>更新于：2025年8月31日</p>
   </a>
 </div>
 
@@ -2750,8 +2754,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Node-js/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>Node.js</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/hexo/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>hexo</p></a></div>
-  <span hidden itemprop="keywords">Node.js hexo</span>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/hexo/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>hexo</p></a></div>
+  <span hidden itemprop="keywords">hexo</span>
 
 
         
@@ -2831,10 +2835,11 @@ std::move是...</p>
         </a>
       
       
-        <a class='next' href='/2025/03/02/source/%E5%A4%A7%E4%BD%9C%E4%B8%9A/'>
-          <p class='title'>大作业<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>决策树
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051...</p>
+        <a class='next' href='/2025/03/02/source/%E5%88%B7%E9%A2%98/LeetCode%E4%B8%93%E9%A2%98/'>
+          <p class='title'>LeetCode算法总结<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>链表总结递归
+链表方向转换+nullptr不断向前+尾节点成为头节点
+123456789101112class Solution &#123;    public:    ListNode* r...</p>
         </a>
       
     </div>
@@ -2892,7 +2897,7 @@ std::move是...</p>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDNode-js"><span class="toc-text">下载Node.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDhexo"><span class="toc-text">下载hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%92%8C%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="toc-text">目录结构和使用说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD%E6%9B%B4%E6%96%B0%E5%8D%9A%E5%AE%A2"><span class="toc-text">后续更新博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">自定义域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">修改配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#source%E9%9C%80%E8%A6%81%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-text">source需要的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDNode-js"><span class="toc-text">下载Node.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDhexo"><span class="toc-text">下载hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%92%8C%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="toc-text">目录结构和使用说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD%E6%9B%B4%E6%96%B0%E5%8D%9A%E5%AE%A2"><span class="toc-text">后续更新博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">自定义域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">修改配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#source%E9%9C%80%E8%A6%81%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-text">source需要的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E7%A1%AE%E6%98%BE%E7%A4%BAmd%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87"><span class="toc-text">正确显示md中的图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
     </div>
   </section>
 
@@ -3552,7 +3557,7 @@ window.matchMedia('(prefers-color-scheme: light)').addListener(darkModelListener
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/工具-环境/","name":"工具-环境"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2025/03/04/source/工具-环境/hexo/","name":"使用hexo构建博客网站"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"使用hexo构建博客网站","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2025/03/04/source/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/hexo/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2025/03/04/source/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/hexo/","wordCount":0,"datePublished":"2025-03-03T16:00:00.000Z","dateModified":"2025-03-11T14:51:50.712Z","articleSection":"工具-环境","keywords":"Node.js,hexo","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"tutulp的博客网站"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"tutulp's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/utils/","name":"utils"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2025/03/04/source/工具-环境/hexo/","name":"使用hexo构建博客网站"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"tutulp's blog","url":"http://example.com/","keywords":null,"description":"tutulp的博客网站","author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"tutulp的博客网站"},"publisher":{"@type":"Organization","name":"tutulp's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"使用hexo构建博客网站","description":"tutulp的博客网站","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2025/03/04/source/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/hexo/"},"author":{"@type":"Person","name":"tutulp","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"tutulp's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2025/03/04/source/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/hexo/","wordCount":0,"datePublished":"2025-03-03T16:00:00.000Z","dateModified":"2025-08-31T08:06:09.544Z","articleSection":"utils","keywords":"hexo","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
