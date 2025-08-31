@@ -2,7 +2,7 @@
 title: "HTML+CSS"
 date: 2024-06-09
 categories:
-  - 开发
+  - 前端
 tags:
   - HTML
   - CSS

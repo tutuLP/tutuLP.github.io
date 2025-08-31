@@ -1,3 +1,10 @@
+---
+title: rust基础
+date: 2025-08-04
+categories:
+  - rust
+---
+
 # 环境
 
 下载rustup

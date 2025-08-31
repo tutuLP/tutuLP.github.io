@@ -1,3 +1,12 @@
+---
+title: "Podman"
+date: 2025-08-04
+categories:
+  - utils
+tags:
+  - Podman
+---
+
 # 下载
 
 ## mac
@@ -12,6 +21,7 @@
 ```sh
 sudo dnf -y update
 sudo dnf -y install podman
+sudo dnf install -y postgresql
 ```
 
 ## win
@@ -55,7 +65,9 @@ unqualified-search-registries = ["docker.io"]
 
 [[registry]]
 prefix = "docker.io"
-location = "mirror.ccs.tencentyun.com"
+location = "docker.1ms.run"
+
+sudo systemctl restart podman
 ```
 
 ```sh
@@ -115,11 +127,13 @@ https://juejin.cn/post/7530868895767920675
 ```sh
 # macos Podman Machine 进入之后才能访问 ping docker.io
 podman machine ssh
-
+# pull
 podman pull docker.io/library/postgres:latest # 暂时没有找到镜像，直接全局代理拉
+
+podman pull docker.1ms.run/postgres:latest
 # 查看版本 17.5
 podman run --rm postgres:latest postgres -V
-
+# run
 mkdir -p ~/pgdata
 
 podman run -d \
@@ -172,6 +186,7 @@ SELECT current_database(); --查询当前数据库
 
 ```sh
 podman pull docker.io/ankane/pgvector:latest
+podman pull docker.1ms.run/pgvector:latest
 
 podman run -d \
   --name postgresvec \

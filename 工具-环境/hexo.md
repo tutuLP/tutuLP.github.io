@@ -2,9 +2,8 @@
 title: "使用hexo构建博客网站"
 date: 2025-03-4
 categories:
-  - 工具-环境
+  - utils
 tags:
-  - Node.js
   - hexo
 ---
 
