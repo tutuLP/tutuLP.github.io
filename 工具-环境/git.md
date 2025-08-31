@@ -2,7 +2,7 @@
 title: "git"
 date: 2024-03-25
 categories:
-  - 工具-环境
+  - utils
 tags:
   - git 
 ---

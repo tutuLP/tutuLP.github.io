@@ -2,10 +2,9 @@
 title: "vscode"
 date: 2024-03-25
 categories:
-  - 工具
+  - utils
 tags:
-  - ssh
-  - c
+  - vscode
 ---
 
 ## ssh远程连接错误

@@ -1,3 +1,12 @@
+---
+title: "mysql"
+date: 2025-08-05
+categories:
+  - utils
+tags:
+  - mysql
+---
+
 # docker/podman中找回密码
 
 podman inspect mysql

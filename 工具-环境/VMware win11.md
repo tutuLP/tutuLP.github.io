@@ -1,10 +1,10 @@
 ---
-title: "windows虚拟机"
+title: "vmware"
 date: 2024-06-09
 categories:
-  - 虚拟机
+  - utils
 tags:
-  - win+vmware
+  - 虚拟机
 ---
 
 开始-搜索“启用或关闭windows功能”-勾选“windows虚拟机监控程序平台”和“虚拟机平台”

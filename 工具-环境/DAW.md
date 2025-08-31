@@ -1,3 +1,12 @@
+---
+title: "DAW音乐编辑"
+date: 2025-08-19
+categories:
+  - utils
+tags:
+  - DAW
+---
+
 # DAW选择
 
 * cakewalk

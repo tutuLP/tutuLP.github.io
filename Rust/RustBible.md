@@ -1,3 +1,10 @@
+---
+title: "rust圣经"
+date: 2025-08-04
+categories:
+  - rust
+---
+
 # Rust语言圣经(读书笔记)
 
 ## 基础入门

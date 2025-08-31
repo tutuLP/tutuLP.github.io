@@ -2,7 +2,7 @@
 title: "LeetCode算法总结"
 date: 2025-03-02
 categories:
-  - 面试
+  - 刷题
 tags:
   - 面试
 ---

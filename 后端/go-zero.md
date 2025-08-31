@@ -1,3 +1,12 @@
+---
+title: "go-zero"
+date: 2025-08-26
+categories:
+  - 后端
+tags:
+  - go-zero
+---
+
 # go-zero 
 
 文档：https://go-zero.dev/docs/tutorials

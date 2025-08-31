@@ -2,7 +2,7 @@
 title: "shell脚本"
 date: 2025-03-02
 categories:
-  - 工具
+  - utils
 tags:
   - shell
 ---
