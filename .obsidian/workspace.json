@@ -1,0 +1,204 @@
+{
+  "main": {
+    "id": "5257a73453c4d361",
+    "type": "split",
+    "children": [
+      {
+        "id": "8a0c9cc3e071fc66",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "28960551d4525df5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "PM/入门.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "入门"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "cf5e4bbcb63c1996",
+    "type": "split",
+    "children": [
+      {
+        "id": "e19fb2d40c406fca",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6230e4cce08c649a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "4b79b2ebbe450d64",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "faaf814a639b75c6",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "a62dd5b74eaea8ab",
+    "type": "split",
+    "children": [
+      {
+        "id": "8d4a99c7616d3ec7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "dbd3f3a1f1906c96",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "PM/入门.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "入门 的反向链接列表"
+            }
+          },
+          {
+            "id": "403e0f98ff4af819",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "PM/入门.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "入门 的出链列表"
+            }
+          },
+          {
+            "id": "ed09e1cfee78e7ef",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "de8fce01adc9c3f5",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "PM/入门.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "入门 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:创建新数据库": false
+    }
+  },
+  "active": "28960551d4525df5",
+  "lastOpenFiles": [
+    "Linux/oatpp+nginx.md",
+    "PM/入门.md",
+    "工具-环境/Docker.md",
+    "Pasted image 20250831153506.png",
+    "PM/入门~.md",
+    "PM/images/入门.assets/image-20250829095014458-6625484-6625632.png",
+    "PM/images/入门.assets/image-20250829104225470-6625484-6625632.png",
+    "PM/images/入门.assets/image-20250829104314071-6625484-6625632.png",
+    "PM/images/入门.assets/image-20250827175906180-6625484-6625632.png",
+    "PM/images/入门.assets/image-20250827173516278-6625484-6625632.png",
+    "PM/images/入门.assets/image-20250830095805303-6625484-6625632.png",
+    "PM/images/入门.assets/image-20250829143112864-6625484-6625632.png",
+    "PM/images/入门.assets/image-20250829142847626-6625484-6625632.png",
+    "PM/images/入门.assets/image-20250827173748962-6625484-6625632.png",
+    "工具-环境/VMware win11.md",
+    "工具-环境/mysql.md",
+    "工具-环境/hexo.md",
+    "PM/images/入门.assets",
+    "PM/images",
+    "Linux/Linux高性能服务器编程.md",
+    "PM/Untitled.md",
+    "PM",
+    "Untitled Folder",
+    "大作业.md",
+    "闭关一年.md",
+    "未命名.base",
+    "未命名 1.base",
+    "C++/设计模式.md",
+    "工具-环境/工具.md"
+  ]
+}
