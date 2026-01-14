@@ -201,3 +201,20 @@ git push -u origin main
 git push origin --delete master
 ```
 
+# 错误
+
+* Connection closed by 198.18.0.8 port 22 fatal: Could not read from remote repository.
+
+1. SSH 连接被中间网络设备 / 代理 / VPN / 防火墙劫持并主动断开了
+2. port 22 被关闭
+
+解决方案：
+1. 使用https，git remote set-url origin https://github.com/xxx/yyy.git
+2. 编辑~/.ssh/config或C:\Users\{username}\.ssh\config
+
+```
+Host github.com
+  Hostname ssh.github.com
+  Port 443
+  User git
+```
