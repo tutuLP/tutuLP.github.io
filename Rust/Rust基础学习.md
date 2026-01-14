@@ -448,3 +448,105 @@ assert_eq!(a, b);
 
 
 
+# clippy
+
+> 代码规范检查
+
+```shell
+# 验证是否安装，和rustup一起提供的
+cargo clippy -V
+
+# 运行检查
+cargo clippy --all-targets --all-features -- \
+  --deny warnings \
+  --deny clippy::unwrap_used \
+  --deny clippy::expect_used \
+  --deny clippy::let_underscore_must_use
+  
+# 需要跳过检查的部分
+#[allow(clippy::expect_used)]
+```
+
+
+
+# anyhow
+
+```rust
+use anyhow::{Result, anyhow};
+
+fn foo() -> Result<()> {
+    Ok(())
+}
+```
+
+## 使用
+
+### contex/with_context
+
+错误向上传播并且用contex说明该错误，会保留原有错误链
+
+```rust
+let content = std::fs::read_to_string("config.toml")
+    .context("failed to read config.toml")?;
+
+// 使用变量
+let content = std::fs::read_to_string(&path)
+    .with_context(|| format!("failed to read file: {}", path))?;
+```
+
+效果：
+
+
+```
+Error: init global resources failed # 最外层context
+
+Caused by:
+    0: failed to create mysql pool # 内层context
+    1: pool timed out while waiting for an open connection # 原始错误
+```
+
+### map_err
+
+丢弃原有错误链
+
+```rust
+// 丢弃原错误
+let n: i32 = s.parse()
+    .map_err(|_| anyhow!("invalid number: {}", s))?;
+
+let n: i32 = s.parse()
+    .map_err(|e| anyhow!("parse int failed: {}, err={}", s, e))?;
+
+```
+
+### ok_or / ok_or_else
+
+处理Option
+
+```rust
+// None
+let user = users.get(&uid)
+    .ok_or_else(|| anyhow!("user not found: {}", uid))?;
+```
+
+### return Err
+
+手动返回错误
+
+```rust
+if config.redis_url.is_empty() {
+    return Err(anyhow!("redis_url is empty"));
+}
+```
+
+
+
+# warn
+
+* the following packages contain code that will be rejected by a future version of Rust: redis v0.25.4
+
+升级依赖redis的版本
+
+* warning: `/Users/xzmini11/.cargo/config` is deprecated in favor of `config.toml`
+
+mv ~/.cargo/config ~/.cargo/config.toml

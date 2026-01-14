@@ -35,13 +35,54 @@ cd C:\app\nginx-1.24.0\nginx-1.24.0
 
 ## centos
 
-~~~
+~~~shell
 yum install nginx
-
 nginx
-
 nginx -s stop
+# 或者 https://blog.csdn.net/a_2373179473/article/details/145887848
+# 官网上下载最新版
+wget https://nginx.org/download/nginx-1.26.3.tar.gz
+wget https://github.com/openresty/echo-nginx-module/archive/refs/tags/v0.63.tar.gz
+tar xzf v0.63.tar.gz
+tar xzf nginx-1.26.3.tar.gz
+
+cd nginx-1.26.3/
+
+./configure --prefix=/usr/local/nginx --user=nginx --group=nginx --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_stub_status_module --with-http_gzip_static_module --with-pcre --with-stream --with-stream_ssl_module --add-module=/root/echo-nginx-module-0.63
+
+make install
+echo 'export PATH=$PATH:/usr/local/nginx/sbin' >> ~/.bashrc
+source ~/.bashrc
 ~~~
+
+Centos-9-stream 上安装nginx最新稳定版
+
+```shell
+# 添加官方仓库
+sudo tee /etc/yum.repos.d/nginx.repo << 'EOF'
+[nginx-stable]
+name=nginx stable repo
+baseurl=https://nginx.org/packages/centos/9/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://nginx.org/keys/nginx_signing.key
+module_hotfixes=true
+EOF
+
+sudo dnf install -y nginx
+
+# 启动并设置开机自启
+sudo systemctl enable nginx --now
+
+nginx -v
+systemctl status nginx
+
+# 禁用dnf module管理nginx版本
+sudo dnf module disable nginx -y
+```
+
+
+
 ## 常用指令
 
 ~~~shell
@@ -55,7 +96,53 @@ nginx -s stop     # 快速停⽌Nginx
 nginx -s reload   # 重新加载配置⽂件
 nginx -s reopen   # 重新打开⽇志⽂件
 ~~~
+# 部署
+
+```shell
+# 源码安装和自动安装安装位置不同，自动安装应该在/etc/nginx/ 
+# 查看 nginx 配置文件位置
+nginx -t
+# 配置文件位置
+/usr/local/nginx/conf/nginx.conf
+```
+
+* 配置systemctl启动nginx，通过源码安装的不会自动配置
+
+sudo vim /etc/systemd/system/nginx.service
+
+```shell
+[Unit]
+Description=The NGINX HTTP and reverse proxy server
+After=syslog.target network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+PIDFile=/usr/local/nginx/logs/nginx.pid
+ExecStartPre=/usr/local/nginx/sbin/nginx -t
+ExecStart=/usr/local/nginx/sbin/nginx
+ExecReload=/usr/local/nginx/sbin/nginx -s reload
+ExecStop=/usr/local/nginx/sbin/nginx -s stop
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```shell
+sudo systemctl daemon-reload
+sudo systemctl start nginx
+sudo systemctl status nginx 
+
+
+sudo firewall-cmd --permanent --add-service=http #80
+sudo firewall-cmd --permanent --add-service=https #443
+sudo firewall-cmd --reload
+```
+
+
+
 # 建议
+
 1. worker_processes 1 
    ps -ef |grep nginx 可以看进程的数量 设置成和服务器内核数量相同比较合适设置成auto自动设置
 

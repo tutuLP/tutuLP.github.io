@@ -15,28 +15,77 @@ tags:
 windows  https://git-scm.com/  无脑下一步
 yum install git
 
-# SSH
+# SSH密钥
 
-生成SSH key
-ssh-keygen -t ed25519 -C "Gitee SSH Key"   #三次回车，注释可改或者不要注释
-查看生成的公钥和私钥
-ls ~/.ssh/ # id_ed25519  id_ed25519.pub
-读取公钥文件
+选择 ED25519 SSH 密钥
+
+> 综合安全，性能，密钥长度综合考虑的行业首选密钥
+
+```shell
+# 生成密钥 -t指定密钥类型 -C添加注释
+ssh-keygen -t ed25519 -C "your_email@example.com"
+# 选择密钥保存位置和两次密钥密码-无特殊需求直接三个回车
+
 cat ~/.ssh/id_ed25519.pub
-复制公钥到所需账户中
+```
 
 # Git使用
 
+## 基础命令
+
+```shell
+# 放弃没有 add 的修改
+git checkout -- sh/dump_etf_weight.sh
+
+# 修改最近一次提交的描述-未push
+git commit --amend
+```
+
+
+
+### git设置用户信息
+
+```sh
+# 设置全局用户名
+git config --global user.name "Your Global Username"
+# 设置全局邮箱
+git config --global user.email "your-global-email@example.com"
+
+# 设置当前仓库的用户名
+git config user.name "Repository Specific Username"
+# 设置当前仓库的邮箱
+git config user.email "repository-specific-email@example.com"
+```
+
+### 切换关联的远程仓库
+
+```sh
+# 查看当前远程仓库链接
+git remote -v
+
+# 移除原有远程仓库链接（通常名为origin）
+git remote remove origin
+
+# 添加新的远程仓库链接
+git remote add origin https://github.com/your-username/your-new-repo.git
+
+# 验证新的远程仓库链接
+git remote -v
+```
+
+
+
 ## 新建仓库并关联远程仓库
 
-git init #在需要管理的项目的根目录
+```shell
+git init --initial-branch=main
+git remote add origin <url>
 git add .
-git commit -m 'xxxx'
-git remote add origin xxx(仓库网址)  # 关联远端仓库
-git push -u origin main   # 第一次推送关联分支
+git commit -m "Initial commit"
+git push -u origin main
+```
 
-或者
-git push -f origin master  # 强制覆盖远端参股
+
 
 ## 父仓库版本更高
 
@@ -137,5 +186,18 @@ git remote add origin git@gitee.com:tutuLP/titus_utils.git
 git push -f origin master  # 或 main，看你原来是哪个分支
 git push --set-upstream origin master
 
+```
+
+## 将master分支修改为main
+
+```sh
+# 重命名本地分支
+git branch -m master main
+
+# 推送新分支并设置为远程默认
+git push -u origin main
+
+# 如果需要，删除远程旧分支
+git push origin --delete master
 ```
 

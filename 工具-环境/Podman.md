@@ -19,9 +19,14 @@ tags:
 ## LInux-Centos
 
 ```sh
-sudo dnf -y update
-sudo dnf -y install podman
-sudo dnf install -y postgresql
+# 更新包列表数据
+sudo dnf makecache
+
+# 下载
+sudo dnf install -y podman
+
+# 验证，不需要启动与docker不一样
+podman info
 ```
 
 ## win
@@ -122,6 +127,15 @@ https://juejin.cn/post/7530868895767920675
 
 # 使用
 
+```shell
+# 删除容器
+podman rm
+# 删除镜像
+podman rmi
+```
+
+
+
 ## PostgreSQL
 
 ```sh
@@ -134,7 +148,7 @@ podman pull docker.1ms.run/postgres:latest
 # 查看版本 17.5
 podman run --rm postgres:latest postgres -V
 # run
-mkdir -p ~/pgdata
+mkdir -p ~/pgdata   
 
 podman run -d \
   --name postgres \
@@ -149,33 +163,11 @@ podman exec -it postgres psql -U postgres
 podman exec -t postgres pg_dumpall -U postgres > ~/all_databases.sql
 # 导入sql
 podman exec -i postgres psql -U postgres < ~/all_databases.sql
+
 # macos 连接测试
 brew install libpq
 brew link --force libpq
 psql -h localhost -p 5432 -U postgres
-
-# 创建远程连接账户
-psql -U postgres
-CREATE ROLE spark_user WITH LOGIN PASSWORD 'strong_password';
-# 创建数据库-指定用户权限
-CREATE DATABASE spark OWNER spark_user;
-# 修改配置文件允许远程访问 postgresql.conf
-# /var/lib/postgresql/data/postgresql.conf
-# /etc/postgresql/<version>/main/postgresql.conf
-listen_addresses = '*'
-# pg_hba.conf
-host    all             spark_user     0.0.0.0/0          md5
-
-podman restart postgres
-# 测试新用户登录
-psql -h localhost -p 5432 -U spark_user -d spark
-```
-
-```sql
-select current_user; --查询当前角色
-SELECT current_database(); --查询当前数据库
-\conninfo --数据库 用户 ip port
-\c 目标数据库名 -- 切换数据库
 ```
 
 
@@ -196,7 +188,12 @@ podman run -d \
   docker.io/ankane/pgvector
   
 podman machine ssh
-podman exec -i postgresvec psql -U postgres < ~/all_databases.sql
+
+podman exec -t postgresvec pg_dumpall -U postgres > ~/all_databases.sql
+
+podman exec -i postgresvec psql -U postgres < all_databases.sql
+ 
+psql -h localhost -p 5432 -U postgres # mysecretpassword
  
 psql -h localhost -p 5432 -U postgres -d spark # mysecretpassword  -d指定启用扩展的数据库
 CREATE EXTENSION IF NOT EXISTS vector;
