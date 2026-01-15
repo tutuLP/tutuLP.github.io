@@ -114,11 +114,11 @@ git push origin v1.0
 
 ## 新建分支
 
-~~~sh
+```sh
 git checkout -b 新分支名 或  git switch -c  新分支名
 git push -u origin 新分支名
 git branch -a
-~~~
+```
 
 ## 合并分支
 

@@ -67,7 +67,7 @@ C/C++ Chinese(可选)两个插件
 
 我已经加上了注释，可以根据自己喜好配置
 
-~~~json
+```json
 //launch.json
 {
     // 使用 IntelliSense 了解相关属性。 
@@ -103,9 +103,9 @@ C/C++ Chinese(可选)两个插件
         }
     ]
 }
-~~~
+```
 
-~~~json
+```json
 //tasks.json
 {
     "tasks": [
@@ -136,7 +136,7 @@ C/C++ Chinese(可选)两个插件
     ],
     "version": "2.0.0"
 }
-~~~
+```
 
 ####建立a.exe
 

@@ -2654,7 +2654,7 @@ fn main() {
 
 在存在多个引用时，编译器有时会无法自动推导生命周期，此时就需要我们手动去标注，通过为参数标注合适的生命周期来帮助编译器进行借用检查的分析。
 
-~~~rust
+```rust
 fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() {
         x
@@ -2662,7 +2662,7 @@ fn longest(x: &str, y: &str) -> &str {
         y
     }
 }
-~~~
+```
 
 程序报错
 
@@ -2707,9 +2707,9 @@ fn main() {
 
 #### 生命周期消除
 
-~~~rsut
+```rsut
 fn first_word(s: &str) -> &str //编译通过
-~~~
+```
 
 实际上，对于编译器来说，每一个引用类型都有一个生命周期，尽管没有显式的为其标注生命周期，编译依然可以通过。其实原因不复杂，编译器为了简化用户的使用，消除了生命周期
 
@@ -3604,7 +3604,7 @@ for (name, score) in get_scores() {
 
 ### 深入生命周期
 
-~~~rust
+```rust
 #[derive(Debug)]
 struct Foo;
 impl Foo {
@@ -3619,12 +3619,12 @@ fn main() {
     foo.share();
     println!("{:?}", loan);
 }
-~~~
+```
 
 * 可变借用仅在 `mutate_and_share` 方法内部有效，出了该方法后，就只有返回的不可变借用，理论上可变借用不应该在main范围内
 * &mut foo 和 loan 的生命周期相同，由于生命周期消除规则第三条：参数&mut self和返回值&self生命周期相同，所以返回值的周期在mian中有效，那么参数的生命周期也在main中有效，导致无法出现更多的可变生命周期，也就是函数share()的参数
 
-~~~rust
+```rust
 #![allow(unused)]
 fn main() {
     use std::collections::HashMap;
@@ -3643,7 +3643,7 @@ fn main() {
         }
     }
 }
-~~~
+```
 
 这段代码不能通过编译的原因是编译器未能精确地判断出某个可变借用不再需要，反而谨慎的给该借用安排了一个很大的作用域，结果导致后续的借用失败。分析代码可知在 `match map.get_mut(&key)` 方法调用完成后，对 `map` 的可变借用就可以结束了。但从报错看来，编译器不太聪明，它认为该借用会持续到整个 `match` 语句块的结束(第 16 行处)，这便造成了后续借用的失败。
 
@@ -3651,16 +3651,16 @@ fn main() {
 
 `'a:'b`，表示 `'a` 至少要活得跟 `'b` 一样久
 
-~~~rust
+```rust
 struct DoubleRef<'a,'b:'a, T> {
     r: &'a T,
     s: &'b T
 }
-~~~
+```
 
 T: 'a 表示类型 `T` 必须比 `'a` 活得要久：
 
-~~~rust
+```rust
 struct Ref<'a, T: 'a> {
     r: &'a T
 }//因此 r 的生命周期 'a 必须要比 T 的生命周期更短，被引用者的生命周期必须要比引用长	
@@ -3668,14 +3668,14 @@ struct Ref<'a, T: 'a> {
 struct Ref<'a, T> {
     r: &'a T
 }
-~~~
+```
 
 #### 闭包函数的消除规则
 
-~~~rust
+```rust
 fn fn_elision(x: &i32) -> &i32 { x }
 let closure_slision = |x: &i32| -> &i32 { x };
-~~~
+```
 
 闭包和函数不同，不适用函数的生命周期消除
 
@@ -3685,11 +3685,11 @@ let closure_slision = |x: &i32| -> &i32 { x };
 
 #### Reborrow再借用
 
-~~~rust
+```rust
 let r = &mut p;
 // reborrow! 此时对`r`的再借用不会导致跟上面的借用冲突
 let rr: &Point = &*r;
-~~~
+```
 
 但是不能在rr的生命周期内再使用原来的借用 r
 

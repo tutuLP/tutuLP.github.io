@@ -15,7 +15,7 @@ tags:
 
 链表方向转换+nullptr不断向前+尾节点成为头节点
 
-~~~c++
+```c++
 class Solution {
     public:
     ListNode* reverseList(ListNode* head) {
@@ -28,7 +28,7 @@ class Solution {
         return newHead;
     }
 };
-~~~
+```
 
 栈(vector+rbegin+rend    或   stack)
 
@@ -40,7 +40,7 @@ class Solution {
 
 第一遍自解 耗时0ms
 
-~~~c++
+```c++
 class Solution {
     public:
     ListNode* reverseList(ListNode* head) {
@@ -62,7 +62,7 @@ class Solution {
     }
 };
  
-~~~
+```
 
 这里使用satck是一样的效果   
 
@@ -82,7 +82,7 @@ st.pop();
 
 递归到最深处返回的head(链表的尾节点)就是反转完的链表的头节点，作为newhead返回，递归回来的时候，指针方向不断反转，nullptr被不断往前移动，最终移动到反转前的头节点的下一位
 
-~~~c++
+```c++
 class Solution {
     public:
     ListNode* reverseList(ListNode* head) {
@@ -96,7 +96,7 @@ class Solution {
         return newHead;
     }
 };
-~~~
+```
 
 * 终止条件只看一次，返回值返回后就不会变一直传递到最后  作为最终的返回
 * 执行逻辑 最后一个节点触发终止条件返回，执行逻辑则从第四个节点开始到第一个节点
@@ -105,7 +105,7 @@ class Solution {
 
 也就是声明三个变量，当前遍历的节点，上一个和下一个节点?
 
-~~~c++
+```c++
 class Solution {
     public:
     ListNode* reverseList(ListNode* head) {
@@ -124,7 +124,7 @@ class Solution {
         return cur;
     }
 };
-~~~
+```
 
 ###92 反转链表
 
@@ -132,7 +132,7 @@ class Solution {
 
 我的思路：找到区间起点记录指针到终点依次压栈然后再拿出来
 
-~~~c++
+```c++
 class Solution {
     public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
@@ -166,13 +166,13 @@ class Solution {
         return head;
     }
 };
-~~~
+```
 
 ####递归实现
 
 双递归 思路：为了简化递归操作，反转a，b之间的节点修改为反转1到b-a+1之间的节点，对应递归起点后移多少位
 
-~~~c++
+```c++
 class Solution {
     public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
@@ -195,7 +195,7 @@ class Solution {
         head->next->next = head;
     }
 };
-~~~
+```
 
 ###25 k个一组翻转链表
 
@@ -203,7 +203,7 @@ class Solution {
 
 设置一个循环，终止条件是到达末尾，每次指针往后移动，对k取模，为0则传入当前指针和k进行反转(压栈)，反转时只对节点的值进行操作指针结构没有破坏
 
-~~~c++
+```c++
 class Solution {
     public:
     ListNode* reverseKGroup(ListNode* head, int k) {
@@ -248,13 +248,13 @@ class Solution {
         }
     }
 };
-~~~
+```
 
 一开始我用压栈的方式只是改变了值，但是定眼一看题目要求是改变指针的指向，那就要修改一下了
 
 真正反转�?
 
-~~~c++
+```c++
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
@@ -311,7 +311,7 @@ private:
         return {tail, head};
     }
 };
-~~~
+```
 
 ####递归
 
@@ -321,7 +321,7 @@ reverse传入 1->2->3->null  反转后 null<-1<-2<-3   newhead移动到最后 nu
 
 reverse传入 1(head)->2->3(cur)->tail  tail<-1(head)<-2<-3(cur)  3->2->1->tail
 
-~~~c++
+```c++
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
@@ -352,7 +352,7 @@ public:
     }
 };
 
-~~~
+```
 
 ###24 两两交换链表中的节点
 
@@ -364,7 +364,7 @@ public:
 
 > 返回的是当前区域的最后一个节点也就是反转之后的头节点，反转之后head变成了最后一个节点，所以head->next=递归函数的返回值,不满足条件的都会在反转之前返回head
 
-~~~c++
+```c++
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
@@ -388,7 +388,7 @@ public:
         return temphead;
     }
 };
-~~~
+```
 
 ## 删除链表元素
 
@@ -396,7 +396,7 @@ public:
 
 常规遍历思路
 
-~~~c++
+```c++
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
@@ -419,7 +419,7 @@ public:
         return head;
     }
 };
-~~~
+```
 
 可以用两个节点遍历不用辅助变量来减少代码量
 
@@ -431,7 +431,7 @@ public:
 
 注意虚拟的节点用new
 
-~~~c++
+```c++
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
@@ -460,7 +460,7 @@ public:
     }
 };
 
-~~~
+```
 
 ### 19 删除链表的倒数第N个节点
 
@@ -468,7 +468,7 @@ public:
 全部压栈，然后取出n+1个执行
 双指针(只用遍历一遍)：两个间隔为n，当前面的到头删除第一个指针的下一个节点
 
-~~~c++
+```c++
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
@@ -498,7 +498,7 @@ public:
         return result;
     }
 };
-~~~
+```
 
 ## 合并链表
 
@@ -508,7 +508,7 @@ public:
 
 使用优先队列，最小值优先，这里是存储的节点值，可以直接改为存储节点
 
-~~~c++
+```c++
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
@@ -531,11 +531,11 @@ public:
         return tempHead->next;
     }
 };
-~~~
+```
 
 改为存储节点 3ms
 
-~~~c++
+```c++
 class Solution {
 public:
     struct CompareMyClass {  
@@ -570,7 +570,7 @@ public:
     }
 };
 
-~~~
+```
 
 
 
@@ -586,7 +586,7 @@ public:
 
 关键是nums要声明在外面
 
-~~~c++
+```c++
 class Solution {
 private:
     vector<int> nums;
@@ -599,13 +599,13 @@ public:
         return nums;
     }
 };
-~~~
+```
 
 #### 非递归实现
 
 根节点入栈-循环遍历栈-栈非空，取出节点-取出节点值-压入右节点-压入左节点
 
-~~~c++
+```c++
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
@@ -626,7 +626,7 @@ public:
         return ans;
     }
 };
-~~~
+```
 
 ### 112 路径总和
 
@@ -634,7 +634,7 @@ public:
 
 用两个栈，一个栈压入节点 另一个栈压入节点和 比如1 2 3 节点压入1 取出1 压入3，2 值压入1 取出1 压入1+3，1+2
 
-~~~c++
+```c++
 class Solution {
 public:
     bool hasPathSum(TreeNode* root, int targetSum) {
@@ -663,7 +663,7 @@ public:
         return false;
     }
 };
-~~~
+```
 
 ### 113 路径总和Ⅱ
 
@@ -671,7 +671,7 @@ public:
 
 17ms 
 
-~~~c++
+```c++
 class Solution {
 public:
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
@@ -724,13 +724,13 @@ public:
         return vv;
     }
 };
-~~~
+```
 
 没有递归的效率高，优化：使用一个栈，减少赋值操作等
 
 优化后的版本，仍然不是0ms，可见手动建栈效率不如递归栈的效率
 
-~~~c++
+```c++
 class Solution {
 public:
     vector<int> tempPath;
@@ -766,13 +766,13 @@ public:
         return result;
     }
 };
-~~~
+```
 
 
 
 #### 递归
 
-~~~c++
+```c++
 class Solution {
 public:
     vector<vector<int>> res;
@@ -803,13 +803,13 @@ public:
         }
     }
 };
-~~~
+```
 
 更好理解的递归：
 
 accumulate函数计算vector的和
 
-~~~c++
+```c++
 class Solution {
 public:
     void dfs(TreeNode* root, int targetSum, vector<int>& currentPath, vector<vector<int>>& result) {
@@ -839,7 +839,7 @@ public:
         return result;
     }
 };
-~~~
+```
 
 ###437 路径总和 III
 
@@ -851,7 +851,7 @@ public:
 
 以每个节点为根节点分别遍历
 
-~~~c++
+```c++
 class Solution {
 public:
     int pathSum(TreeNode* root, int targetSum) {
@@ -868,7 +868,7 @@ public:
         return res;
     }
 };
-~~~
+```
 
 这样达不到0ms，因为有很多重复的遍历。所以使用前缀和
 
@@ -876,7 +876,7 @@ public:
 
 前缀和是从根节点到当前节点的路径和。用哈希表记录前缀和出现的次数，当当前节点的路径和减去targetSum的结果在哈希表中存在这个键则结果加上其对应的值
 
-~~~c++
+```c++
 class Solution {
 public:
     unordered_map<long long, int> umap = {{0,1}}; //前缀和 出现的次数
@@ -898,11 +898,11 @@ public:
         return res;
     }
 };
-~~~
+```
 
 ###226 翻转二叉树
 
-~~~c++
+```c++
 class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
@@ -916,7 +916,7 @@ public:
         return root;
     }
 };
-~~~
+```
 
 ### 257 二叉树的所有路径(就看这个)
 
@@ -924,7 +924,7 @@ public:
 
 0ms
 
-~~~c++
+```c++
 class Solution {
 public:
     vector<string> result;
@@ -960,7 +960,7 @@ public:
     }
 };
 
-~~~
+```
 
 1. 使用全局的变量，减少递归时每次创建副本 从3ms优化到0ms
 
@@ -968,7 +968,7 @@ public:
 
 0ms
 
-~~~c++
+```c++
 class Solution {
 public:
     vector<string> result;
@@ -1001,11 +1001,11 @@ public:
         return result;
     }
 };
-~~~
+```
 
 # 动态规划
 
-~~~
+```
 # 自顶向下递归的动态规划
 def dp(状态1, 状态2, ...):
     for 选择 in 所有可能的选择:
@@ -1021,7 +1021,7 @@ for 状态1 in 状态1的所有取值：
     for 状态2 in 状态2的所有取值：
         for ...
             dp[状态1][状态2][...] = 求最值(选择1，选择2...)
-~~~
+```
 
 ## 64最小路径和
 
@@ -1033,7 +1033,7 @@ dp\[i][j] = min(dp\[i - 1][j], dp\[i][j - 1]) + grid[i][j\]
 
 创建二维向量->初始化第一个元素->初始化第一行和第一列->公式推导
 
-~~~c++
+```c++
 class Solution {
 public:
     int minPathSum(vector<vector<int>>& grid) {
@@ -1058,7 +1058,7 @@ public:
         return dp[m - 1][n - 1];
     }
 };
-~~~
+```
 
 ##647回文子串
 
@@ -1066,7 +1066,7 @@ public:
 
 遍历每个可能为中心的位置，一个为中心+两个为中心
 
-~~~c++
+```c++
 class Solution {
 public:
     int countSubstrings(std::string s) {
@@ -1096,7 +1096,7 @@ public:
         return count;
     }
 };
-~~~
+```
 
 
 
@@ -1110,7 +1110,7 @@ dp\[i][j] 表示字符串从索引 i 到索引 j 的子串是否为回文串
 2. j-1=i 如果s\[i]==s\[j] 
 3. j-1>i s\[i]=\=s\[j] 且 dp\[i+1]\[j-1]==true
 
-~~~c++
+```c++
 class Solution {
 public:
     int countSubstrings(std::string s) {
@@ -1139,7 +1139,7 @@ public:
         return count;
     }
 };
-~~~
+```
 
 ##518 零钱兑换Ⅱ
 
@@ -1149,7 +1149,7 @@ valid[i]表示是否可以使用给定的硬币面额组合出金额   dp[i]表�
 
 计算组合数：dp[i] += dp[i - coin];
 
-~~~c++
+```c++
 class Solution {
 public:
     int change(int amount, vector<int>& coins) {
@@ -1171,9 +1171,9 @@ public:
         return dp[amount];
     }
 };
-~~~
+```
 
-~~~c++
+```c++
 class Solution {
 public:
     int change(int amount, vector<int>& coins) {
@@ -1187,7 +1187,7 @@ public:
         return dp[amount];
     }
 };
-~~~
+```
 
 #二分查找
 
@@ -1203,7 +1203,7 @@ left = mid + 1;
 
 right = mid - 1; 
 
-~~~c++
+```c++
 int binary_search(vector<int>& nums, int target) {
     int left = 0, right = nums.size() - 1; 
     while(left <= right) {
@@ -1259,11 +1259,11 @@ int right_bound(vector<int>& nums, int target) {
     // 判断一下 nums[left] 是不是 target
     return nums[left - 1] == target ? (left - 1) : -1;
 }
-~~~
+```
 
 排除不在区间
 
-~~~c++
+```c++
 class Solution {
 public:
     int searchInsert(vector<int>& nums, target) {
@@ -1278,13 +1278,13 @@ public:
         return nums[l] == target ? nums[l] : -1;	// 退出循环，要么找到，要么没找到，如果找到的话，left和right都指向它了
     }
 };
-~~~
+```
 
 # 回溯 DFS BFS
 
 ## 695 岛屿的最大面积
 
-~~~c++
+```c++
 class Solution {
 public:
     int ans, cur;
@@ -1311,5 +1311,5 @@ public:
         }
     }
 };
-~~~
+```
 

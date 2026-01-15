@@ -61,7 +61,7 @@ c8ab1db06cc555dd1085e8f461da0e7c728ebb04a485e124a5aa840d6338ee9c:/var/lib/mysql
 
 ## 跳过权限验证
 
-~~~
+```
 podman stop mysql
 
 #跳过权限验证
@@ -81,7 +81,7 @@ podman stop mysql-recovery
 podman rm mysql-recovery
 
 podman start mysql
-~~~
+```
 
 
 

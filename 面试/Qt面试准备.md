@@ -25,22 +25,22 @@ tags:
 
 1. QThread 最方便 可开启事件循环 可信号
 
-~~~c++
+```c++
 QThread *t=new QThread;
 server * worker=new server;
 worker->moveToThread(t);
-~~~
+```
 
 新建一个类继承自Qthread 这样可以通过构造函数传递参数
 
-~~~c++
+```c++
 server *serverthread=new server(seed,myserver->nextPendingConnection());
 serverthread->start();
-~~~
+```
 
 2. QtConcurrent::run() 在单独的线程中异步处理事务 更简洁方便
 
-~~~c++
+```c++
 QT += core gui concurrent
     
 QFuture<void> future = QtConcurrent::run([this]() {   //或调用一个函数
@@ -49,11 +49,11 @@ QFuture<void> future = QtConcurrent::run([this]() {   //或调用一个函数
             // Update the label text (this part runs in the main thread)
             QMetaObject::invokeMethod(this, "updateLabel", Qt::QueuedConnection);
         });
-~~~
+```
 
 3. QThreadPool 和 QRunnable 适合多个对象和复杂情况
 
-~~~c++
+```c++
 MyTask *task = new MyTask(label);
 QThreadPool::globalInstance()->start(task);
 class MyTask : public QRunnable {
@@ -67,7 +67,7 @@ public:
 private:
     QLabel *m_label;
 };
-~~~
+```
 
 ## 信号与槽
 
@@ -75,7 +75,7 @@ private:
 
 对象间传递消息：回调函数 MFC就是使用这个 使用函数指针 不保证类型安全
 
-~~~c++
+```c++
 void printWelcome(int len){printf("欢迎欢迎 -- %d/n", len);}
 void printGoodbye(int len){printf("送客送客 -- %d/n", len);}
 void callback(int times, void(*print)(int)){
@@ -86,11 +86,11 @@ void callback(int times, void(*print)(int)){
 void main(void){
 	callback(2, printWelcome); callback(2, printGoodbye);
 }
-~~~
+```
 
 对象树：自动有效管理继承自QObject的Qt对象 父对象被析构时子对象也析构 避免内存泄漏
 
-~~~c++
+```c++
 signals
 emit
 slots 可以不用声明这个关键字，但是一般需要
@@ -108,7 +108,7 @@ connect(anysocket, &QTcpSocket::disconnected, this, [=]()
 connect(this, &A::sig_hello, []{
     qDebug() << "hello world!";
 });
-~~~
+```
 
 可通过ui界面绑定信号与槽
 
@@ -126,7 +126,7 @@ QSignalMapper 绑定对象数据一并传递
 
 给QApplication安装，实现全局
 
-~~~c++
+```c++
 bool eventFilter(QObject *watched, QEvent *event) override {
         if (event->type() == QEvent::MouseButtonPress) {
             qDebug() << "Button clicked";
@@ -140,7 +140,7 @@ bool eventFilter(QObject *watched, QEvent *event) override {
 MyEventFilter *eventFilter = new MyEventFilter();
 // 在按钮上安装事件过滤器
 button->installEventFilter(eventFilter);
-~~~
+```
 
 ## 保证线程安全
 

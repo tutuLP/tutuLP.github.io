@@ -27,7 +27,7 @@ categories:
 
 判断机器字节序
 
-~~~c
+```c
 #include<stdio.h>
 void byteorder(){
     union{
@@ -51,7 +51,7 @@ int main(){
 	byteorder();
 	return 0;
 }
-~~~
+```
 
 我在linux上运行是little endian
 
@@ -66,19 +66,19 @@ int main(){
 
 Linux提供了如下4个函数来完成主机字节序和网络字节序之间的转换
 
-~~~c
+```c
 #include＜netinet/in.h＞
 unsigned long int htonl(unsigned long int hostlong);  //无符号长整型 主机->网络
 unsigned short int htons(unsigned short int hostshort);//无符号短整型
 unsigned long int ntohl(unsigned long int netlong);  //网络->主机
 unsigned short int ntohs(unsigned short int netshort);
-~~~
+```
 
 长整型（32 bit）常用来转换IP地址，短整型(16位)用来转换端口号
 
 这里的类型都是可以换的，比如我转换一个short类型为大端序
 
-~~~c++
+```c++
 #include<netinet/in.h>
 #include <stdio.h> 
 #include <iostream>
@@ -90,19 +90,19 @@ int main() {
     cout << net_short << endl; //13330的十六进制3421
 	return 0;
 }
-~~~
+```
 
 #### 通用socket地址
 
 socket网络编程接口中表示socket地址的是结构体sockaddr，其定义如下
 
-~~~c
+```c
 #include＜bits/socket.h＞
 struct sockaddr{
 	sa_family_t sa_family; //地址族类型
 	char sa_data[14];
 }
-~~~
+```
 
 * 地址族类型通常与协议族类型对应  常见的协议族（protocol family，也称domain)
 
@@ -116,14 +116,14 @@ struct sockaddr{
 
 可见14的大小完全不够，linux定义了新的结构
 
-~~~c
+```c
 #include＜bits/socket.h＞
 struct sockaddr_storage{
 	sa_family_t sa_family; 
 	unsigned long int__ss_align;
 	char__ss_padding[128-sizeof(__ss_align)];
 }
-~~~
+```
 
 __ss_align成员使内存对齐
 
@@ -133,17 +133,17 @@ __ss_align成员使内存对齐
 
 * UNIX本地域协议族
 
-~~~c
+```c
 #include＜sys/un.h＞
 struct sockaddr_un{
 	sa_family_t sin_family;/*地址族：AF_UNIX*/
 	char sun_path[108];/*文件路径名*/
 };
-~~~
+```
 
 * TCP/IP协议族有sockaddr_in和sockaddr_in6两个专用socket地址结构体，它们分别用于IPv4和IPv6：
 
-~~~c
+```c
 struct sockaddr_in{
 	sa_family_t sin_family;/*地址族：AF_INET*/
 	u_int16_t sin_port;/*端口号，要用网络字节序表示*/
@@ -163,7 +163,7 @@ struct sockaddr_in6{
 struct in6_addr{
 	unsigned char sa_addr[16];/*IPv6地址，要用网络字节序表示*/
 };
-~~~
+```
 
 所有专用socket地址（以及sockaddr_storage）类型的变量在实际使用时都需要转化为通用socket地址类型sockaddr（强制转换即可），因为所有socket编程接口使用的地址参数的类型都是sockaddr。
 
@@ -176,12 +176,12 @@ struct in6_addr{
 
 下面3个函数可用于用*点分十进制字符串表示的IPv4地址*和用*网络字节序整数表示的IPv4地址*之间的转换：
 
-~~~c
+```c
 #include＜arpa/inet.h＞
 in_addr_t inet_addr(const char*strptr);
 int inet_aton(const char*cp,struct in_addr*inp);
 char*inet_ntoa(struct in_addr in);
-~~~
+```
 
 * inet_addr IPv4地址转化为用网络字节序它  失败时返回INADDR_NONE。
 
@@ -189,11 +189,11 @@ char*inet_ntoa(struct in_addr in);
 
 * inet_ntoa  网络字节序转化为用点分十进制  但需要注意的是，该函数内部用一个静态变量存储转化结果，函数的返回值指向该静态内存，因此inet_ntoa是不可重入的。(意思是连续调用两个这个函数 后一个的结果会把前一个覆盖)
 
-~~~c
+```c
 #include＜arpa/inet.h＞
 int inet_pton(int af,const char*src,void*dst);
 const char*inet_ntop(int af,const void*src,char*dst,socklen_tcnt);
-~~~
+```
 
 适用于ipv4和ipv6
 
@@ -209,7 +209,7 @@ const char*inet_ntop(int af,const void*src,char*dst,socklen_tcnt);
 
 **使用示例**
 
-~~~c++
+```c++
 #include <stdio.h> 
 #include <iostream>
 #include <arpa/inet.h>//ip地址转换
@@ -241,17 +241,17 @@ int main() {
     char* ip2=inet_ntoa(ip_addr.sin_addr);
     cout<<ip2<<endl;
 }
-~~~
+```
 
 ### 创建socket
 
 UNIX/Linux的一个哲学是：所有东西都是文件。socket也不例外，它就是可读、可写、可控制、可关闭的文件描述符。下面的socket系统调用可创建一个socket：
 
-~~~c
+```c
 #include＜sys/types.h＞
 #include＜sys/socket.h＞
 int socket(int domain,int type,int protocol);
-~~~
+```
 
 * domain参数告诉系统使用哪个底层协议族。PF_INET（Protocol Family of Internet，用于IPv4）或PF_INET6（用于IPv6）；对于UNIX本地域协议族而言，该参数应该设置为PF_UNIX。
 
@@ -267,11 +267,11 @@ socket系统调用成功时返回一个socket文件描述符，失败则返回-1
 
 将一个socket与socket地址绑定称为给socket命名。在服务器程序中，我们通常要命名socket，因为只有命名后客户端才能知道该如何连接它。客户端则通常不需要命名socket，而是采用匿名方式，即使用操作系统自动分配的socket地址。命名socket的系统调用是bind，其定义如下：
 
-~~~c
+```c
 #include＜sys/types.h＞
 #include＜sys/socket.h＞
 int bind(int sockfd,const struct sockaddr*my_addr,socklen_t addrlen);
-~~~
+```
 
 * bind将my_addr所指的socket地址分配给未命名的sockfd文件描述符，addrlen参数指出该socket地址的长度。bind成功时返回0，失败则返回-1并设置errno。其中两种常见的errno是EACCES和EADDRINUSE，它们的含义分别是：
 
@@ -282,10 +282,10 @@ int bind(int sockfd,const struct sockaddr*my_addr,socklen_t addrlen);
 
 socket被命名之后，还不能马上接受客户连接，我们需要使用如下系统调用来创建一个监听队列以存放待处理的客户连接：
 
-~~~c
+```c
 #include＜sys/socket.h＞
 int listen(int sockfd,int backlog);
-~~~
+```
 
 * sockfd参数指定被监听的socket。
 * backlog参数提示内核监听队列的最大长度。监听队列的长度如果超过backlog，服务器将不受理新的客户连接，客户端也将收到ECONNREFUSED错误信息。在内核版本2.2之前的Linux中，backlog参数是指所有处于半连接状态（SYN_RCVD）和完全连接状态（ESTABLISHED）的socket的上限。但自内核版本2.2之后，它只表示处于完全连接状态的socket的上限，处于半连接状态的socket的上限则由/proc/sys/net/ipv4/tcp_max_syn_backlog内核参数定义。backlog参数的典型值是5。
@@ -294,7 +294,7 @@ listen成功时返回0，失败则返回-1并设置errno
 
 **研究backlog参数对listen系统调用的实际影响**
 
-~~~c++
+```c++
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -343,11 +343,11 @@ int main(int argc, char *argv[])
     close(sock);
     return 0;
 }
-~~~
+```
 
 我写的：
 
-~~~c++
+```c++
 #include<netinet/in.h>//转换大端小端
 #include <stdio.h> 
 #include <iostream>
@@ -381,19 +381,19 @@ int main() {
     ret = listen(pre_name_socket, 5);//监听
     return 0;
 }
-~~~
+```
 
 该服务器程序（名为testlisten）接收3个参数：IP地址、端口号和backlog值。我们在Kongming20上运行该服务器程序，并在ernestlaptop上多次执行telnet命令来连接该服务器程序。同时，每使用telnet命令建立一个连接，就执行一次netstat命令来查看服务器上连接的状态。具体操作过程如下：
 
-~~~
+```
 $./testlisten 192.168.1.109 12345 5 #运行代码 监听12345端口，给backlog传递典型值5
 $telnet 192.168.1.109 12345#多次执行之
 $netstat-nt|grep 12345#多次执行之
-~~~
+```
 
 是netstat命令某次输出的内容，它显示了这一时刻listen监听队列的内容。
 
-~~~
+```
 Proto Recv-Q Send-Q Local Address Foreign Address Statetcp
 tcp 0 0 192.168.1.109:12345 192.168.1.108:2240 SYN_RECV
 tcp 0 0 192.168.1.109:12345 192.168.1.108:2228 SYN_RECV[1]
@@ -406,7 +406,7 @@ tcp 0 0 192.168.1.109:12345 192.168.1.108:2224 ESTABLISHED
 tcp 0 0 192.168.1.109:12345 192.168.1.108:2212 ESTABLISHED
 tcp 0 0 192.168.1.109:12345 192.168.1.108:2220 ESTABLISHED
 tcp 0 0 192.168.1.109:12345 192.168.1.108:2222 ESTABLISHED
-~~~
+```
 
 可见，在监听队列中，处于ESTABLISHED状态的连接只有6个（backlog值加1），其他的连接都处于SYN_RCVD状态(TCP状态转移)。我们改变服务器程序的第3个参数并重新运行之，能发现同样的规律，即完整连接最多有（backlog+1）个。在不同的系统上，运行结果会有些差别，不过监听队列中完整连接的上限通常比backlog值略大。
 
@@ -414,11 +414,11 @@ tcp 0 0 192.168.1.109:12345 192.168.1.108:2222 ESTABLISHED
 
 ### 接受连接
 
-~~~c
+```c
 #include＜sys/types.h＞
 #include＜sys/socket.h＞
 int accept(int sockfd,struct sockaddr*addr,socklen_t*addrlen);
-~~~
+```
 
 * sockfd参数是执行过listen系统调用的监听socket。
 * addr参数用来获取被接受连接的远端socket地址，该socket地址的长度由addrlen参数指出。
@@ -427,7 +427,7 @@ int accept(int sockfd,struct sockaddr*addr,socklen_t*addrlen);
 
 现在考虑如下情况：如果监听队列中处于ESTABLISHED状态的连接对应的客户端出现网络异常（比如掉线），或者提前退出，那么服务器对这个连接执行的accept调用是否成功？我们编写一个简单的服务器程序来测试之
 
-~~~c++
+```c++
 #include <sys/socket.h>
 #include <netinet/in.h>//用于inet_ntop函数使用宏
 #include <arpa/inet.h>
@@ -480,7 +480,7 @@ int main(int argc, char *argv[])
     close(sock);//关闭服务器监听socket
     return 0;
 }
-~~~
+```
 
 $./testaccept 192.168.1.109 54321#监听54321端口
 
@@ -508,11 +508,11 @@ netstat命令的输出说明，accept调用对于客户端网络断开毫不知�
 
 如果说服务器通过listen调用来被动接受连接，那么客户端需要通过如下系统调用来主动与服务器建立连接
 
-~~~c
+```c
 #include＜sys/types.h＞
 #include＜sys/socket.h＞
 int connect(int sockfd,const struct sockaddr*serv_addr,socklen_t addrlen);
-~~~
+```
 
 * sockfd参数由socket系统调用返回一个socket。serv_addr参数是服务器监听的socket地址，addrlen参数则指定这个地址的长度
 
@@ -524,19 +524,19 @@ int connect(int sockfd,const struct sockaddr*serv_addr,socklen_t addrlen);
 
 关闭一个连接实际上就是关闭该连接对应的socket，这可以通过如下关闭普通文件描述符的系统调用来完成
 
-~~~c
+```c
 #include＜unistd.h＞
 int close(int fd);
-~~~
+```
 
 fd参数是待关闭的socket。不过，close系统调用并非总是立即关闭一个连接，而是将fd的引用计数减1。只有当fd的引用计数为0时，才真正关闭连接。多进程程序中，一次fork系统调用默认将使父进程中打开的socket的引用计数加1，因此我们必须在父进程和子进程中都对该socket执行close调用才能将连接关闭。
 
 如果无论如何都要立即终止连接（而不是将socket的引用计数减1），可以使用如下的shutdown系统调用（相对于close来说，它是专门为网络编程设计的）
 
-~~~c
+```c
 #include＜sys/socket.h＞
 int shutdown(int sockfd,int howto);
-~~~
+```
 
 sockfd参数是待关闭的socket。howto参数决定了shutdown的行为，它可取表的某个值
 
@@ -552,12 +552,12 @@ shutdown成功时返回0，失败则返回-1并设置errno。
 
 对文件的读写操作read和write同样适用于socket。但是socket编程接口提供了几个专门用于socket数据读写的系统调用，它们增加了对数据读写的控制。其中用于TCP流数据读写的系统调用是：
 
-~~~c
+```c
 #include＜sys/types.h＞
 #include＜sys/socket.h＞
 ssize_t recv(int sockfd,void*buf,size_t len,int flags);
 ssize_t send(int sockfd,const void*buf,size_t len,int flags);
-~~~
+```
 
 recv读取sockfd上的数据，buf和len参数分别指定读缓冲区的位置和大小，flags参数的含义见后文，通常设置为0即可。recv成功时返回实际读取到的数据的长度，它可能小于我们期望的长度len。因此我们可能要多次调用recv，才能读取到完整的数据。recv可能返回0，这意味着通信对方已经关闭连接了。recv出错时返回-1并设置errno。
 
@@ -571,7 +571,7 @@ send往sockfd上写入数据，buf和len参数分别指定写缓冲区的位置�
 
 * 客户端
 
-~~~c++
+```c++
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -614,11 +614,11 @@ int main(int argc, char *argv[])
     close(sockfd);
     return 0;
 }
-~~~
+```
 
 * 服务器
 
-~~~c++
+```c++
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -680,15 +680,15 @@ int main(int argc, char *argv[])
     close(sock);
     return 0;
 }
-~~~
+```
 
 * 运行并tcpdump抓取这一过程中客户端和服务器交换的TCP报文段
 
-~~~
+```
 $./testoobrecv 192.168.1.109 54321  #在Kongming20上执行服务器程序，监听54321端口
 $./testoobsend 192.168.1.109 54321  #在ernest-laptop上执行客户端程序
 $sudo tcpdump-ntx-i eth0 port 54321
-~~~
+```
 
 * 服务器输出
 
@@ -702,10 +702,10 @@ got 3 bytes of normal data'123'
 
 * 含带外数据的TCP报文段
 
-~~~
+```
 IP 192.168.1.108.60460＞192.168.1.109.54321:Flags[P.U],seq 4:7,ack 1,win 92,urg 3,options[nop,nop,TS val 102794322 ecr
 154703423],length 3
-~~~
+```
 
 这里我们第一次看到tcpdump输出标志U，这表示该TCP报文段的头部被设置了紧急标志。
 
@@ -717,12 +717,12 @@ IP 192.168.1.108.60460＞192.168.1.109.54321:Flags[P.U],seq 4:7,ack 1,win 92,urg
 
 #### UDP数据读写
 
-~~~c++
+```c++
 #include＜sys/types.h＞
 #include＜sys/socket.h＞
 ssize_t recvfrom(int sockfd,void*buf,size_t len,int flags,struct sockaddr*src_addr,socklen_t*addrlen);
 ssize_t sendto(int sockfd,const void*buf,size_t len,int flags,const struct sockaddr*dest_addr,socklen_t addrlen);
-~~~
+```
 
 * recvfrom读取sockfd上的数据，buf和len参数分别指定读缓冲区的位置和大小。因为UDP通信没有连接的概念，所以我们每次读取数据都需要获取发送端的socket地址，即参数src_addr所指的内容，addrlen参数则指定该地址的长度
 
@@ -734,15 +734,15 @@ ssize_t sendto(int sockfd,const void*buf,size_t len,int flags,const struct socka
 
 适用tcp和udp
 
-~~~c
+```c
 #include＜sys/socket.h＞
 ssize_t recvmsg(int sockfd,struct msghdr*msg,int flags);
 ssize_t sendmsg(int sockfd,struct msghdr*msg,int flags);
-~~~
+```
 
 * sockfd参数指定被操作的目标socket。msg参数是msghdr结构体类型的指针，msghdr结构体的定义如下：
 
-~~~c
+```c
 struct msghdr
 {
     void*msg_name;/*socket地址*/
@@ -753,17 +753,17 @@ struct msghdr
     socklen_t msg_controllen;/*辅助数据的大小*/
     int msg_flags;/*复制函数中的flags参数，并在调用过程中更新*/
 };
-~~~
+```
 
 msg_name成员指向一个socket地址结构变量。它指定通信对方的socket地址。对于面向连接的TCP协议，该成员没有意义，必须被设置为NULL。这是因为对数据流socket而言，对方的地址已经知道。msg_namelen成员则指定了msg_name所指socket地址的长度。msg_iov成员是iovec结构体类型的指针，iovec结构体的定义如下
 
-~~~c
+```c
 struct iovec
 {
 void*iov_base;/*内存起始地址*/
 size_t iov_len;/*这块内存的长度*/
 };
-~~~
+```
 
 由上可见，iovec结构体封装了一块内存的起始位置和长度。msg_iovlen指定这样的iovec结构对象有多少个。对于recvmsg而言，数据将被读取并存放在msg_iovlen块分散的内存中，这些内存的位置和长度则由msg_iov指向的数组指定，这称为分散读（scatter read）；对于sendmsg而言，msg_iovlen块分散内存中的数据将被一并发送，这称为集中写（gather write）
 
@@ -862,7 +862,7 @@ Linux提供一个守护进程来处理系统日志——syslogd的升级版rsysl
 
 该函数采用可变参数（第二个参数message和第三个参数…）来结构化输出。priority参数是所谓的设施值与日志级别的按位或。设施值的默认值是LOG_USER，我们下面的讨论也只限于这一种设施值。日志级别有如下几个：
 
-~~~c
+```c
 #include＜syslog.h＞
 #define LOG_EMERG 0/*系统不可用*/
 #define LOG_ALERT 1/*报警，需要立即采取动作*/
@@ -872,7 +872,7 @@ Linux提供一个守护进程来处理系统日志——syslogd的升级版rsysl
 #define LOG_NOTICE 5/*通知*/
 #define LOG_INFO 6/*信息*/
 #define LOG_DEBUG 7/*调试*/
-~~~
+```
 
 下面这个函数可以改变syslog的默认输出方式，进一步结构化日志内容：
 
@@ -880,12 +880,12 @@ Linux提供一个守护进程来处理系统日志——syslogd的升级版rsysl
 
 ident参数指定的字符串将被添加到日志消息的日期和时间之后，它通常被设置为程序的名字。logopt参数对后续syslog调用的行为进行配置，它可取下列值的按位或：
 
-~~~c
+```c
 #define LOG_PID 0x01/*在日志消息中包含程序PID*/
 #define LOG_CONS 0x02/*如果消息不能记录到日志文件，则打印至终端*/
 #define LOG_ODELAY 0x04/*延迟打开日志功能直到第一次调用syslog*/
 #define LOG_NDELAY 0x08/*不延迟打开日志功能*/
-~~~
+```
 
 facility参数可用来修改syslog函数中的默认设施值。
 
@@ -1103,7 +1103,7 @@ socket在创建的时候默认是阻塞的。我们可以给socket系统调用�
 
 有的应用层协议头部包含数据包类型字段，每种类型可以映射为逻辑单元的一种执行状态，服务器可以根据它来编写相应的处理逻辑
 
-~~~c
+```c
 STATE_MACHINE(Package_pack){
 	PackageType_type=_pack.GetType();
 	switch(_type){
@@ -1115,11 +1115,11 @@ STATE_MACHINE(Package_pack){
 			break;
 	}
 }
-~~~
+```
 
 该状态机的每个状态都是相互独立的，即状态之间没有相互转移。状态之间的转移是需要状态机内部驱动的
 
-~~~~c
+```~c
 STATE_MACHINE(){
 	State cur_State=type_A;
 	while(cur_State!=type_C){
@@ -1136,7 +1136,7 @@ STATE_MACHINE(){
 		}
 	}
 }
-~~~~
+```~
 
 该状态机包含三种状态：type_A、type_B和type_C，其中type_A是状态机的开始状态，type_C是状态机的结束状态。状态机的当前状态记录在cur_State变量中。在一趟循环过程中，状态机先通过getNewPackage方法获得一个新的数据包，然后根据cur_State变量的值判断如何处理该数据包。数据包处理完之后，状态机通过给cur_State变量传递目标状态值来实现状态转移。那么当状态机进入下一趟循环时，它将执行新的状态对应的逻辑。
 
@@ -1144,7 +1144,7 @@ STATE_MACHINE(){
 
 我们判断HTTP头部结束的依据是遇到一个空行，该空行仅包含一对回车换行符（＜CR＞＜LF＞）。如果一次读操作没有读入HTTP请求的整个头部，即没有遇到空行，那么我们必须等待客户继续写数据并再次读入。因此，我们每完成一次读操作，就要分析新读入的数据中是否有空行。不过在寻找空行的过程中，我们可以同时完成对整个HTTP请求头部的分析（记住，空行前面还有请求行和头部域），以提高解析HTTP请求的效率。代码清单8-3使用主、从两个有限状态机实现了最简单的HTTP请求的读取和分析。为了使表述简洁，我们约定，直接称HTTP请求的一行（包括请求行和头部字段）为行
 
-~~~c++
+```c++
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -1424,7 +1424,7 @@ int main(int argc, char *argv[])
     close(listenfd);
     return 0;
 }
-~~~
+```
 
 我们将代码清单中的两个有限状态机分别称为主状态机和从状态机，这体现了它们之间的关系：主状态机在内部调用从状态机。下面先分析从状态机，即parse_line函数，它从buffer中解析出一个行。图8-15描述了其可能的状态及状态转移过程
 
@@ -1489,17 +1489,17 @@ select系统调用的用途是：在一段指定时间内，监听用户感兴�
 
 #### select API
 
-~~~c
+```c
 #include＜sys/select.h＞
 int select(int nfds,fd_set* readfds,fd_set* writefds,fd_set* exceptfds,struct timeval*timeout);
-~~~
+```
 
 * nfds参数指定被监听的文件描述符的总数。它通常被设置为select监听的所有文件描述符中的最大值加1，因为文件描述符是从0开始计数的
 * readfds、writefds和exceptfds参数分别指向**可读**、**可写**和**异常**等事件对应的文件描述符集合。应用程序调用select函数时，通过这3个参数传入自己感兴趣的文件描述符。select调用返回时，内核将修改它们来通知应用程序哪些文件描述符已经就绪。
 
 fd_set结构体
 
-~~~c
+```c
 #include＜typesizes.h＞
 #define__FD_SETSIZE 1024
 #include＜sys/select.h＞
@@ -1516,28 +1516,28 @@ __fd_mask__fds_bits[__FD_SETSIZE/__NFDBITS];
 #define__FDS_BITS(set)((set)-＞__fds_bits)
 #endif
 }fd_set;
-~~~
+```
 
 由以上定义可见，fd_set结构体仅包含一个整型数组，该数组的每个元素的每一位（bit）标记一个文件描述符。fd_set能容纳的文件描述符数量由FD_SETSIZE指定，这就限制了select能同时处理的文件描述符的总量。
 
 由于位操作过于烦琐，我们应该使用下面的一系列宏来访问fd_set结构体中的位：
 
-~~~c
+```c
 #include＜sys/select.h＞
 FD_ZERO(fd_set*fdset);/*清除fdset的所有位*/
 FD_SET(int fd,fd_set*fdset);/*设置fdset的位fd*/
 FD_CLR(int fd,fd_set*fdset);/*清除fdset的位fd*/
 int FD_ISSET(int fd,fd_set*fdset);/*测试fdset的位fd是否被设置*/
-~~~
+```
 
 * timeout参数用来设置select函数的超时时间。它是一个timeval结构类型的指针，采用指针参数是因为内核将修改它以告诉应用程序select等待了多久。不过我们不能完全信任select调用返回后的timeout值，比如调用失败时timeout值是不确定的。timeval结构体的定义如下：
 
-~~~c
+```c
 struct timeval{
 long tv_sec;/*秒数*/
 long tv_usec;/*微秒数*/
 };
-~~~
+```
 
 由以上定义可见，select给我们提供了一个微秒级的定时方式。如果给timeout变量的tv_sec成员和tv_usec成员都传递0，则select将立即返回。如果给timeout传递NULL，则select将一直阻塞，直到某个文件描述符就绪。select成功时返回就绪（可读、可写和异常）文件描述符的总数。如果在超时时间内没有任何文件描述符就绪，select将返回0。select失败时返回-1并设置errno。如果在select等待期间，程序接收到信号，则select立即返回-1，并设置errno为EINTR
 
@@ -1564,7 +1564,7 @@ socket上接收到普通数据和带外数据都将使select返回，但socket�
 
 同时接收普通数据和带外数据
 
-~~~c++
+```c++
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -1647,26 +1647,26 @@ int main(int argc, char *argv[])
     close(listenfd);
     return 0;
 }
-~~~
+```
 
 ### poll系统调用
 
 poll系统调用和select类似，也是在指定时间内轮询一定数量的文件描述符，以测试其中是否有就绪者
 
-~~~c
+```c
 #include＜poll.h＞
 int poll(struct pollfd*fds,nfds_t nfds,int timeout);
-~~~
+```
 
 * fds参数是一个pollfd结构类型的数组，它指定所有我们感兴趣的文件描述符上发生的可读、可写和异常等事件。pollfd结构体的定义如下：
 
-~~~c
+```c
 struct pollfd{
 	int fd;/*文件描述符*/
 	short events;/*注册的事件*/ //告诉poll监听哪些事件
 	short revents;/*实际发生的事件，由内核填充*/
 };
-~~~
+```
 
 <img src="./images/Linux高性能服务器编程.assets/image-20240903181311707-1740971827555-95.png" alt="image-20240903181311707" style="zoom:50%;" />
 
@@ -1685,10 +1685,10 @@ typedef unsigned long int nfds_t;
 
 epoll是Linux特有的I/O复用函数。它在实现和使用上与select、poll有很大差异。首先，epoll使用一组函数来完成任务，而不是单个函数。其次，epoll把用户关心的文件描述符上的事件放在内核里的一个事件表中，从而无须像select和poll那样每次调用都要重复传入文件描述符集或事件集。但epoll需要使用一个额外的文件描述符，来唯一标识内核中的这个事件表。这个文件描述符使用如下epoll_create函数来创建：
 
-~~~c
+```c
 #include＜sys/epoll.h＞
 int epoll_create(int size)
-~~~
+```
 
 size参数现在并不起作用，只是给内核一个提示，告诉它事件表需要多大。该函数返回的文件描述符将用作其他所有epoll系统调用的第一个参数，以指定要访问的内核事件表。
 
@@ -1706,25 +1706,25 @@ int epoll_ctl(int epfd,int op,int fd,struct epoll_event*event)
 
 * event参数指定事件，它是epoll_event结构指针类型。epoll_event的定义如下
 
-* * ~~~c
+* * ```c
     struct epoll_event{
     __uint32_t events;/*epoll事件*/
     epoll_data_t data;/*用户数据*/
     };
-    ~~~
+    ```
 
   * 其中events成员描述事件类型。epoll支持的事件类型和poll基本相同。表示epoll事件类型的宏是在poll对应的宏前加上“E”，比如epoll的数据可读事件是EPOLLIN。但epoll有两个额外的事件类型——EPOLLET和EPOLLONESHOT。它们对于epoll的高效运作非常关键
 
   * data成员用于存储用户数据，其类型epoll_data_t的定义如下：
 
-  * * ~~~c
+  * * ```c
       typedef union epoll_data{
       void*ptr;
       int fd;
       uint32_t u32;
       uint64_t u64;
       }epoll_data_t;
-      ~~~
+      ```
 
     * epoll_data_t是一个联合体，其4个成员中使用最多的是fd，它指定事件所从属的目标文件描述符。ptr成员可用来指定与fd相关的用户数据。但由于epoll_data_t是一个联合体，我们不能同时使用其ptr成员和fd成员，因此，如果要将文件描述符和用户数据关联起来（正如8.5.2小节讨论的将句柄和事件处理器绑定一样），以实现快速的数据访问，只能使用其他手段，比如放弃使用epoll_data_t的fd成员，而在ptr指向的用户数据中包含fd。
 
@@ -1734,10 +1734,10 @@ int epoll_ctl(int epfd,int op,int fd,struct epoll_event*event)
 
 epoll系列系统调用，它在一段超时时间内等待一组文件描述符上的事件
 
-~~~c
+```c
 #include＜sys/epoll.h＞
 int epoll_wait(int epfd,struct epoll_event*events,int maxevents,int timeout);
-~~~
+```
 
 * 该函数成功时返回就绪的文件描述符的个数，失败时返回-1并设置errno。
 
@@ -1748,7 +1748,7 @@ epoll_wait函数如果检测到事件，就将所有就绪的事件从内核事�
 
 poll和epoll在使用上的差别
 
-~~~c++
+```c++
 /*如何索引poll返回的就绪文件描述符*/
 int ret=poll(fds,MAX_EVENT_NUMBER,-1);
 /*必须遍历所有已注册文件描述符并找到其中的就绪者（当然，可以利用ret来稍做优化）*/
@@ -1765,7 +1765,7 @@ for(int i=0;i＜ret;i++){
 	int sockfd=events[i].data.fd;
 /*sockfd肯定就绪，直接处理*/
 }
-~~~
+```
 
 #### LT和ET模式
 
@@ -1777,7 +1777,7 @@ epoll对文件描述符的操作有两种模式：LT（Level Trigger，电平触
 
 LT和ET模式
 
-~~~c++
+```c++
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -1939,7 +1939,7 @@ int main(int argc, char *argv[])
     close(listenfd);
     return 0;
 }
-~~~
+```
 
 运行一下这段代码，然后telnet到这个服务器程序上并一次传输超过10字节（BUFFER_SIZE的大小）的数据，然后比较LT模式和ET模式的异同。你会发现，正如我们预期的，ET模式下事件被触发的次数要比LT模式下少很多
 
@@ -1951,7 +1951,7 @@ int main(int argc, char *argv[])
 
 对于注册了EPOLLONESHOT事件的文件描述符，操作系统最多触发其上注册的一个可读、可写或者异常事件，且只触发一次，除非我们使用epoll_ctl函数重置该文件描述符上注册的EPOLLONESHOT事件。这样，当一个线程在处理某个socket时，其他线程是不可能有机会操作该socket的。但反过来思考，注册了EPOLLONESHOT事件的socket一旦被某个线程处理完毕，该线程就应该立即重置这个socket上的EPOLLONESHOT事件
 
-~~~c++
+```c++
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -2104,7 +2104,7 @@ int main(int argc, char *argv[])
     close(listenfd);
     return 0;
 }
-~~~
+```
 
 从工作线程函数worker来看，如果一个工作线程处理完某个socket上的一次请求（我们用休眠5 s来模拟这个过程）之后，又接收到该socket上新的客户请求，则该线程将继续为这个socket服务。并且因为该socket上注册了EPOLLONESHOT事件，其他线程没有机会接触这个socket，如果工作线程等待5 s后仍然没收到该socket上的下一批客户数据，则它将放弃为该socket服务。同时，它调用reset_oneshot函数来重置该socket上的注册事件，这将使epoll有机会再次检测到该socket上的EPOLLIN事件，进而使得其他线程有机会为该socket服务。
 
@@ -2139,7 +2139,7 @@ select和poll采用的都是轮询的方式，即每次调用都要扫描整个�
 
 通过上面描述的非阻塞connect方式，我们就能同时发起多个连接并一起等待
 
-~~~c++
+```c++
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -2247,7 +2247,7 @@ int main(int argc, char *argv[])
     close(sockfd);
     return 0;
 }
-~~~
+```
 
 但遗憾的是，这种方法存在几处移植性问题。首先，非阻塞的socket可能导致connect始终失败。其次，select对处于EINPROGRESS状态下的socket可能不起作用。最后，对于出错的socket，getsockopt在有些系统（比如Linux）上返回-1（正如代码清单9-5所期望的），而在有些系统（比如源自伯克利的UNIX）上则返回0。这些问题没有一个统一的解决方法
 
@@ -2265,7 +2265,7 @@ int main(int argc, char *argv[])
 
 客户端程序使用poll同时监听用户输入和网络连接，并利用splice函数将用户输入内容直接定向到网络连接上以发送之，从而实现数据零拷贝，提高了程序执行效率。
 
-~~~c++
+```c++
 #define _GNU_SOURCE 1 //为了使用POLLRDHUP事件
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -2342,7 +2342,7 @@ int main(int argc, char *argv[])
     close(sockfd);
     return 0;
 }
-~~~
+```
 
 哪里写数据？？？
 
@@ -2350,7 +2350,7 @@ int main(int argc, char *argv[])
 
 使用poll同时管理监听socket和连接socket，并且使用牺牲空间换取时间的策略来提高服务器性能
 
-~~~c++
+```c++
 #define _GNU_SOURCE 1
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -2535,7 +2535,7 @@ int main(int argc, char *argv[])
     close(listenfd);
     return 0;
 }
-~~~
+```
 
 ###I/O复用的高级应用三：同时处理TCP和UDP服务
 
@@ -2558,11 +2558,11 @@ int main(int argc, char *argv[])
 
 Linux下，一个进程给其他进程发送信号的API是kill函数。
 
-~~~c
+```c
 #include＜sys/types.h＞
 #include＜signal.h＞
 int kill(pid_t pid,int sig);
-~~~
+```
 
 该函数把信号sig发送给目标进程；目标进程由pid参数指定，其可能的取值及含义如表所示。
 
@@ -2578,19 +2578,19 @@ int kill(pid_t pid,int sig);
 
 目标进程在收到信号时，需要定义一个接收函数来处理之。信号处理函数的原型如下
 
-~~~c
+```c
 #include＜signal.h＞
 typedef void(*__sighandler_t)(int);
-~~~
+```
 
 信号处理函数只带有一个整型参数，该参数用来指示信号类型。信号处理函数应该是可重入的，否则很容易引发一些竞态条件。所以在信号处理函数中严禁调用一些不安全的函数。除了用户自定义信号处理函数外，bits/signum.h头文件中还定义了信号的两种其他处理方式——SIG_IGN和SIG_DEL：
 
-~~~c
+```c
 #include＜bits/signum.h＞
 #define SIG_DFL((__sighandler_t)0)
 #define SIG_IGN((__sighandler_t)1)
 //SIG_IGN表示忽略目标信号，SIG_DFL表示使用信号的默认处理方式。信号的默认处理方式有如下几种：结束进程（Term）、忽略信号（Ign）、结束进程并生成核心转储文件（Core）、暂停进程（Stop），以及继续进程（Cont）。
-~~~
+```
 
 #### 中断系统调用
 
@@ -2604,10 +2604,10 @@ typedef void(*__sighandler_t)(int);
 
 为一个信号设置处理函数
 
-~~~c
+```c
 #include＜signal.h＞
 _sighandler_t signal(int sig,_sighandler_t_handler)
-~~~
+```
 
 * sig参数指出要捕获的信号类型。\_handler参数是_sighandler_t类型的函数指针，用于指定信号sig的处理函数。
 * signal函数成功时返回一个函数指针，该函数指针的类型也是_sighandler_t。这个返回值是前一次调用signal函数时传入的函数指针，或者是信号sig对应的默认处理函数指针SIG_DEF（如果是第一次调用signal的话）。
@@ -2617,14 +2617,14 @@ _sighandler_t signal(int sig,_sighandler_t_handler)
 
 设置信号处理函数更好的版本
 
-~~~c
+```c
 #include＜signal.h＞
 int sigaction(int sig,const struct sigaction*act,struct sigaction*oact);
-~~~
+```
 
 * sig参数指出要捕获的信号类型，act参数指定新的信号处理方式，oact参数则输出信号先前的处理方式（如果不为NULL的话）。act和oact都是sigaction结构体类型的指针，sigaction结构体描述了信号处理的细节，其定义如下：
 
-~~~c
+```c
 struct sigaction{
 	#ifdef__USE_POSIX199309
 	union{
@@ -2641,7 +2641,7 @@ struct sigaction{
 	int sa_flags;
 	void(*sa_restorer)(void);
 };
-~~~
+```
 
 该结构体中的sa_hander成员指定信号处理函数。sa_mask成员设置进程的信号掩码（确切地说是在进程原有信号掩码的基础上增加信号掩码），以指定哪些信号不能发送给本进程。sa_mask是信号集sigset_t（_sigset_t的同义词）类型，该类型指定一组信号。关于信号集，我们将在后面介绍。sa_flags成员用于设置程序收到信号时的行为，其可选值如表10-4所示。
 
@@ -2653,13 +2653,13 @@ sa_restorer成员已经过时，最好不要使用。sigaction成功时返回0�
 
 Linux使用数据结构sigset_t来表示一组信号。其定义如下：
 
-~~~c
+```c
 #include＜bits/sigset.h＞
 #define_SIGSET_NWORDS(1024/(8*sizeof(unsigned long int)))
 typedef struct{
 	unsigned long int__val[_SIGSET_NWORDS];
 }__sigset_t;
-~~~
+```
 
 由该定义可见，sigset_t实际上是一个长整型数组，数组的每个元素的每个位表示一个信号。这种定义方式和文件描述符集fd_set类似。Linux提供了如下一组函数来设置、修改、删除和查询信号集： 
 
@@ -2701,7 +2701,7 @@ linux三种定时方法
 
 connect为例，说明程序中如何使用SO_SNDTIMEO选项来定时
 
-~~~c++
+```c++
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -2763,7 +2763,7 @@ int main(int argc, char *argv[])
     }
     return 0;
 }
-~~~
+```
 
 ### SIGALRM信号
 
@@ -2862,10 +2862,10 @@ NPTL 2.28
 
 **pthread_create**
 
-~~~c++
+```c++
 #include＜pthread.h＞
 int pthread_create(pthread_t* thread,const pthread_attr_t* attr,void*(*start_routine)(void*),void*arg);
-~~~
+```
 
 * thread参数是新线程的标识符 类型pthread_t的定义如下：
 
@@ -2881,10 +2881,10 @@ typedef unsigned long int pthread_t;
 
 线程一旦被创建好，内核就可以调度内核线程来执行start_routine函数指针所指向的函数了。线程函数在结束时最好调用如下函数，以确保安全、干净地退出：
 
-~~~c
+```c
 #include＜pthread.h＞
 void pthread_exit(void*retval);
-~~~
+```
 
 pthread_exit函数通过retval参数向线程的回收者传递其退出信息。它执行完之后不会返回到调用者，而且永远不会失败。
 
@@ -2892,10 +2892,10 @@ pthread_exit函数通过retval参数向线程的回收者传递其退出信息�
 
 一个进程中的所有线程都可以调用pthread_join函数来回收其他线程（前提是目标线程是可回收的），即等待其他线程结束，这类似于回收进程的wait和waitpid系统调用。pthread_join的定义如下：
 
-~~~c
+```c
 #include＜pthread.h＞
 int pthread_join(pthread_t thread,void**retval);
-~~~
+```
 
 thread参数是目标线程的标识符，retval参数则是目标线程返回的退出信息。该函数会一直阻塞，直到被回收的线程结束为止。该函数成功时返回0，失败则返回错误码。
 
@@ -2911,11 +2911,11 @@ int pthread_cancel(pthread_t thread);
 
 接收到取消请求的目标线程可以决定是否允许被取消以及如何取消，这分别由如下两个函数完成
 
-~~~c
+```c
 #include＜pthread.h＞
 int pthread_setcancelstate(int state,int*oldstate);
 int pthread_setcanceltype(int type,int*oldtype);
-~~~
+```
 
 这两个函数的第一个参数分别用于设置线程的取消状态（是否允许取消）和取消类型（如何取消），第二个参数则分别记录线程原来的取消状态和取消类型。
 
@@ -2933,18 +2933,18 @@ type参数也有两个可选值
 
 ### 线程属性
 
-~~~c
+```c
 #include＜bits/pthreadtypes.h＞
 #define__SIZEOF_PTHREAD_ATTR_T 36
 typedef union{
 	char__size[__SIZEOF_PTHREAD_ATTR_T];
 	long int__align;
 }pthread_attr_t;
-~~~
+```
 
 各种线程属性全部包含在一个字符数组中。
 
-~~~c
+```c
 #include＜pthread.h＞
 /*初始化线程属性对象*/
 int pthread_attr_init(pthread_attr_t*attr);
@@ -2969,7 +2969,7 @@ int pthread_attr_getinheritsched(const pthread_attr_t*attr,int*inherit);
 int pthread_attr_setinheritsched(pthread_attr_t*attr,int inherit);
 int pthread_attr_getscope(const pthread_attr_t*attr,int*scope);
 int pthread_attr_setscope(pthread_attr_t*attr,int scope);
-~~~
+```
 
 * detachstate，线程的脱离状态。它有PTHREAD_CREATE_JOINABLE和PTHREAD_CREATE_DETACH两个可选值。前者指定线程是可以被回收的，后者使调用线程脱离与进程中其他线程的同步。脱离了与其他线程同步的线程称为“脱离线程”。脱离线程在退出时将自行释放其占用的系统资源。线程创建时该属性的默认值是PTHREAD_CREATE_JOINABLE。此外，我们也可以使用pthread_detach函数直接将线程设置为脱离线程。
 * stackaddr和stacksize，线程堆栈的起始地址和大小
@@ -2985,14 +2985,14 @@ int pthread_attr_setscope(pthread_attr_t*attr,int scope);
 
 信号量API有两组。一组是讨论过的System VIPC信号量，另外一组是POSIX信号量 原理语义相同
 
-~~~c
+```c
 #include＜semaphore.h＞
 int sem_init(sem_t*sem,int pshared,unsigned int value);
 int sem_destroy(sem_t*sem);
 int sem_wait(sem_t*sem);
 int sem_trywait(sem_t*sem);
 int sem_post(sem_t*sem);
-~~~
+```
 
 * sem指向被操作的信号量
 * sem_init函数用于初始化一个未命名的信号量（POSIX信号量API支持命名信号量）。pshared参数指定信号量的类型。如果其值为0，就表示这个信号量是当前进程的局部信号量，否则该信号量就可以在多个进程之间共享。value参数指定信号量的初始值。此外，初始化一个已经被初始化的信号量将导致不可预期的结果。
@@ -3008,14 +3008,14 @@ int sem_post(sem_t*sem);
 
 ####互斥锁基础API
 
-~~~c
+```c
 #include＜pthread.h＞
 int pthread_mutex_init(pthread_mutex_t*mutex,const pthread_mutexattr_t*mutexattr);
 int pthread_mutex_destroy(pthread_mutex_t*mutex);
 int pthread_mutex_lock(pthread_mutex_t*mutex);
 int pthread_mutex_trylock(pthread_mutex_t*mutex);
 int pthread_mutex_unlock(pthread_mutex_t*mutex);
-~~~
+```
 
 * mutex指向要操作的目标互斥锁，互斥锁的类型是pthread_mutex_t结构体。
 * pthread_mutex_init函数用于初始化互斥锁。mutexattr参数指定互斥锁的属性。如果将它设置为NULL，则表示使用默认属性。
@@ -3033,7 +3033,7 @@ int pthread_mutex_unlock(pthread_mutex_t*mutex);
 
 pthread_mutexattr_t结构体定义了一套完整的互斥锁属性。线程库提供了一系列函数来操作pthread_mutexattr_t类型的变量，以方便我们获取和设置互斥锁属性。这里我们列出其中一些主要的函数：
 
-~~~c
+```c
 #include＜pthread.h＞
 /*初始化互斥锁属性对象*/
 int pthread_mutexattr_init(pthread_mutexattr_t*attr);
@@ -3045,7 +3045,7 @@ int pthread_mutexattr_setpshared(pthread_mutexattr_t*attr,int pshared);
 /*获取和设置互斥锁的type属性*/
 int pthread_mutexattr_gettype(const pthread_mutexattr_t*attr,int*type);
 int pthread_mutexattr_settype(pthread_mutexattr_t*attr,int type);
-~~~
+```
 
 两种常用属性:pshared和type。
 
@@ -3065,7 +3065,7 @@ type指定互斥锁的类型
 
 死锁使得一个或多个线程被挂起而无法继续执行，而且这种情况还不容易被发现。前文提到，在一个线程中对一个已经加锁的普通锁再次加锁，将导致死锁。这种情况可能出现在设计得不够仔细的递归函数中。另外，如果两个线程按照不同的顺序来申请两个互斥锁，也容易产生死锁
 
-~~~c++
+```c++
 #include <pthread.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -3104,7 +3104,7 @@ int main()
     pthread_mutex_destroy(&mutex_b);
     return 0;
 }
-~~~
+```
 
 主线程试图先占有互斥锁mutex_a，然后操作被该锁保护的变量a，但操作完毕之后，主线程并没有立即释放互斥锁mutex_a，而是又申请互斥锁mutex_b，并在两个互斥锁的保护下，操作变量a和b，最后才一起释放这两个互斥锁；
 
@@ -3118,14 +3118,14 @@ int main()
 
 如果说互斥锁是用于同步线程对共享数据的访问的话，那么条件变量则是用于在线程之间同步共享数据的值。条件变量提供了一种线程间的通知机制：当某个共享数据达到某个值的时候，唤醒等待这个共享数据的线程
 
-~~~c
+```c
 #include＜pthread.h＞
 int pthread_cond_init(pthread_cond_t*cond,const pthread_condattr_t* cond_attr);
 int pthread_cond_destroy(pthread_cond_t*cond);
 int pthread_cond_broadcast(pthread_cond_t*cond);
 int pthread_cond_signal(pthread_cond_t*cond);
 int pthread_cond_wait(pthread_cond_t*cond,pthread_mutex_t*mutex);
-~~~
+```
 
 这些函数的第一个参数cond指向要操作的目标条件变量，条件变量的类型是pthread_cond_t结构体
 
@@ -3146,7 +3146,7 @@ pthread_cond_t cond=PTHREAD_COND_INITIALIZER;  是把条件变量的各个字段
 
 为了充分复用代码，同时由于后文的需要，我们将前面讨论的3种线程同步机制分别封装成3个类，实现在locker.h文件中
 
-~~~cpp
+```cpp
 #ifndef LOCKER_H
 #define LOCKER_H
 #include <exception>
@@ -3259,7 +3259,7 @@ private:
     pthread_cond_t m_cond;
 };
 #endif
-~~~
+```
 
 ### 多线程环境
 
@@ -3271,7 +3271,7 @@ private:
 
 思考这样一个问题：如果一个多线程程序的某个线程调用了fork函数，那么新创建的子进程是否将自动创建和父进程相同数量的线程呢？答案是“否”，正如我们期望的那样。子进程只拥有一个执行线程，它是调用fork的那个线程的完整复制。并且子进程将自动继承父进程中互斥锁（条件变量与之类似）的状态。这就引起了一个问题：子进程可能不清楚从父进程继承而来的互斥锁的具体状态（是加锁状态还是解锁状态）。这个互斥锁可能被加锁了，但并不是由调用fork函数的那个线程锁住的，而是由其他线程锁住的。如果是这种情况，则子进程若再次对该互斥锁执行加锁操作就会导致死锁，如代码清单所示。
 
-~~~cpp
+```cpp
 #include <pthread.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -3320,19 +3320,19 @@ int main()
     pthread_mutex_destroy(&mutex);
     return 0;
 }
-~~~
+```
 
 pthread提供了一个专门的函数pthread_atfork，以确保fork调用后父进程和子进程都拥有一个清楚的锁状态。该函数的定义如下：
 
-~~~c
+```c
 int pthread_atfork(void(*prepare)(void),void(*parent)(void),void(*child)(void));
-~~~
+```
 
 该函数将建立3个fork句柄来帮助我们清理互斥锁的状态。prepare句柄将在fork调用创建出子进程之前被执行。它可以用来锁住所有父进程中的互斥锁。parent句柄则是fork调用创建出子进程之后，而fork返回之前，在父进程中被执行。它的作用是释放所有在prepare句柄中被锁住的互斥锁。child句柄是fork返回之前，在子进程中被执行。和parent句柄一样，child句柄也是用于释放所有在prepare句柄中被锁住的互斥锁。该函数成功时返回0，失败则返回错误码
 
 fork调用前加入代码
 
-~~~c
+```c
 void prepare(){
 	pthread_mutex_lock(＆mutex);
 }
@@ -3340,17 +3340,17 @@ void infork(){
 	pthread_mutex_unlock(＆mutex);
 }
 pthread_atfork(prepare,infork,infork);
-~~~
+```
 
 #### 线程和信号
 
 每个线程都可以独立地设置信号掩码。我们讨论过设置进程信号掩码的函数sigprocmask，但在多线程环境下我们应该使用如下所示的pthread版本的sigprocmask函数来设置线程信号掩码：
 
-~~~c
+```c
 #include＜pthread.h＞
 #include＜signal.h＞
 int pthread_sigmask(int how,const sigset_t*newmask,sigset_t*oldmask);
-~~~
+```
 
 该函数的参数的含义与sigprocmask的参数完全相同，因此不再赘述。pthread_sigmask成功时返回0，失败则返回错误码。
 
@@ -3359,16 +3359,16 @@ int pthread_sigmask(int how,const sigset_t*newmask,sigset_t*oldmask);
 * 在主线程创建出其他子线程之前就调用pthread_sigmask来设置好信号掩码，所有新创建的子线程都将自动继承这个信号掩码。这样做之后，实际上所有线程都不会响应被屏蔽的信号了
 * 在某个线程中调用如下函数来等待信号并处理之
 
-~~~c
+```c
 #include＜signal.h＞
 int sigwait(const sigset_t*set,int*sig);
-~~~
+```
 
 set参数指定需要等待的信号的集合。我们可以简单地将其指定为在第1步中创建的信号掩码，表示在该线程中等待所有被屏蔽的信号。参数sig指向的整数用于存储该函数返回的信号值。sigwait成功时返回0，失败则返回错误码。一旦sigwait正确返回，我们就可以对接收到的信号做处理了。很显然，如果我们使用了sigwait，就不应该再为信号设置信号处理函数了。这是因为当程序接收到信号时，二者中只能有一个起作用。
 
 代码取自pthread_sigmask函数的man手册。它展示了如何通过上述两个步骤实现在一个线程中统一处理所有信号。
 
-~~~c++
+```c++
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -3412,7 +3412,7 @@ int main(int argc, char *argv[])
         handle_error_en(s, "pthread_create");
     pause();
 }
-~~~
+```
 
 最后，pthread还提供了下面的方法，使得我们可以明确地将一个信号发送给指定的线程
 
@@ -3468,7 +3468,7 @@ int pthread_kill(pthread_t thread,int sig);
 
 为了避免在父、子进程之间传递文件描述符，我们将接受新连接的操作放到子进程中。很显然，对于这种模式而言，一个客户连接上的所有任务始终是由一个子进程来处理的。
 
-~~~c++
+```c++
 // filename:processpool.h
 #ifndef PROCESSPOOL_H
 #define PROCESSPOOL_H
@@ -3892,7 +3892,7 @@ void processpool<T>::run_parent()
     close(m_epollfd);
 }
 #endif
-~~~
+```
 
 ### 用进程池实现的简单CGI服务器
 

@@ -26,14 +26,14 @@ ss -tuln 查看所有端口
 
 ss -tuln | grep :80
 
-~~~pwd 显示当前目录
+```pwd 显示当前目录
 ls -a 查看包括隐藏文件
 mkdir 新建文件夹		touch 新建文件
 rm 删除		rm -rf 删除文件夹 -r
 history 查看历史命令	
 mv a b a重命名为b或移动
 reboot 重启
-~~~
+```
 
 # 系统编程
 
@@ -41,7 +41,7 @@ reboot 重启
 
 使用#include <cstdlib>  的system()函数 调用成功返回0
 
-~~~c++
+```c++
 #include <cstdlib>  
 #include <iostream>  
 using namespace std;
@@ -54,11 +54,11 @@ int main() {
     }
     return 0;  
 }
-~~~
+```
 
 \#include <cstdio>  c的用法FILE结构体类型
 
-~~~c++
+```c++
 #include <cstdio>  
 #include <iostream>  
 int main() {  
@@ -74,7 +74,7 @@ int main() {
     pclose(fp);  
     return 0;  
 }
-~~~
+```
 
 ## 文件编程
 
@@ -84,7 +84,7 @@ int main() {
 
 同时读写模式时  先读后写，写会失败 不知道原因？？？
 
-~~~c++
+```c++
 #include <iostream>  
 #include <fstream>  
 #include <string> 
@@ -131,7 +131,7 @@ int main() {
     file.close(); // 关闭文件  
     return 0;  
 }
-~~~
+```
 
 ## 进程编程
 
@@ -158,7 +158,7 @@ int main() {
   - 服务器编程：常用于创建子进程处理客户端请求，父进程监听新的连接。
   - 并行编程：通过fork()可以创建多个进程并行执行任务，实现并行计算。
 
-~~~c++
+```c++
 #include <unistd.h>  
 #include <sys/types.h>  
 #include <iostream>  
@@ -177,7 +177,7 @@ int main() {
     }  
     return 0;  
 }
-~~~
+```
 
 ### 进程间通信IPC
 
@@ -187,7 +187,7 @@ int main() {
 
 父进程首先创建了一个管道，并通过fork()创建了一个子进程。然后，父进程关闭了管道的读端（fd[0]），而子进程关闭了管道的写端（fd[1]）。父进程通过管道的写端向子进程发送了一条消息，而子进程通过管道的读端接收这条消息。
 
-~~~c++
+```c++
 #include <unistd.h>  
 #include <sys/wait.h>  
 #include <iostream>  
@@ -226,7 +226,7 @@ int main() {
     }  
     return 0;  
 }
-~~~
+```
 
 ### 进程同步
 
@@ -278,16 +278,16 @@ thread线程会调用fn函数并将参数传递给这个函数
 
 *std::thread t4(std::move(t3));*
 
-* ~~~c++
+* ```c++
   thread t([]() {  
           cout << "Hello from lambda thread!" << endl;  
       });  
       t.join();
-  ~~~
+  ```
 
 *注意：可被joinable的std::thread对象必须在他们销毁之前被主线程join或者将其设置为detached   空对象和被移动的对象不用*
 
-~~~c++
+```c++
 #include <iostream>
 #include <utility>
 #include <thread>
@@ -320,7 +320,7 @@ int main()
     t4.join();
     std::cout << "Final value of n is " << n << '\n';
 }
-~~~
+```
 
 **thread执行带有引用参数的函数** 
 
@@ -337,7 +337,7 @@ thread& operator=(thread&& rhs) noexcept;
 
 当前对象不可 joinable，需要传递一个右值引用(rhs)给 move 赋值操作；如果当前对象可被 joinable，则会调用 terminate() 报错。
 
-~~~c++
+```c++
 #include <stdio.h>
 #include <stdlib.h>
 #include <chrono>    // std::chrono::seconds
@@ -363,7 +363,7 @@ int main(int argc, const char *argv[])
     std::cout << "All threads joined.\n";
     return EXIT_SUCCESS;
 }
-~~~
+```
 
 #### 其他成员函数
 
@@ -373,10 +373,10 @@ int main(int argc, const char *argv[])
 
 * get_id 线程ID
 
-~~~
+```
   std::thread t1(foo);
   std::thread::id t1_id = t1.get_id();
-~~~
+```
 
 * joinable  检查是否能被join 
 
@@ -392,7 +392,7 @@ t.joinable() 能返回1 不能返回0
 
 失去对这个线程的仍和控制权，也无法访问到
 
-~~~c++
+```c++
 #include <iostream>
 #include <chrono>
 #include <thread>
@@ -415,7 +415,7 @@ int main()
     threadCaller();
     std::this_thread::sleep_for(std::chrono::seconds(5));
 }
-~~~
+```
 
 上面这段函数如果没有t.detach(); 当threadCaller函数结束之后会销毁t，但是这个线程还在运行，所以要等待运行完成使用t.join()
 
@@ -428,7 +428,7 @@ t1.swap(t2);
 
 thread是包装过的，这里返回后可以使用怕pthread库中的函数，如改变线程优先级，设置线程属性等
 
-~~~c++
+```c++
 #include <thread>
 #include <iostream>
 #include <chrono>
@@ -457,13 +457,13 @@ int main(){
   t1.join();
   t2.join();
 }
-~~~
+```
 
 * std::this_thread 命名空间中相关辅助函数
 
 **get_id**: 获取线程 ID。
 
-~~~c++
+```c++
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -482,11 +482,11 @@ int main(){
   t1.join();
   t2.join();
 }
-~~~
+```
 
 **yield**: 当前线程放弃执行，操作系统调度另一线程继续执行。
 
-~~~c++
+```c++
 #include <iostream>
 #include <chrono>
 #include <thread>
@@ -507,7 +507,7 @@ int main(){
             << std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count()
             << " microseconds\n";
 }
-~~~
+```
 
 **sleep_until**: 线程休眠至某个指定的时刻(time point)，该线程才被重新唤醒。
 
@@ -516,7 +516,7 @@ void sleep_until( const std::chrono::time_point<Clock,Duration>& sleep_time );
 
 **sleep_for**: 线程休眠某个指定的时间片(time span)，该线程才被重新唤醒，不过由于线程调度等原因，实际休眠时间可能比 sleep_duration 所表示的时间片更长。
 
-~~~c++
+```c++
 #include <iostream>
 #include <chrono>
 #include <thread>
@@ -526,13 +526,13 @@ int main(){
   std::this_thread::sleep_for( dura );
   std::cout << "Waited 2000 ms\n";
 }
-~~~
+```
 
 ####多个线程操作同一变量
 
 `std::atomic`和`std::mutex`
 
-~~~c++
+```c++
 #include <iostream>
 #include <thread>
 using namespace std;
@@ -551,13 +551,13 @@ int main() {
 	cout << n << endl;
 	return 0;
 }
-~~~
+```
 
 这里我输出989816，理论上应该是1000000，因为多个线程同时访问n
 
 一个线程将mutex锁住时，其它的线程就不能操作mutex，直到这个线程将mutex解锁
 
-~~~c++
+```c++
 #include <iostream>
 #include <thread>
 #include <mutex>
@@ -580,7 +580,7 @@ int main() {
 	cout << n << endl;
 	return 0;
 }
-~~~
+```
 
 mutex还有一个函数bool try_lock() 尝试上锁，没有被锁则锁返回true，否则false
 
@@ -601,7 +601,7 @@ async是一个函数
 
 <future>
 
-~~~c++
+```c++
 #include <iostream>
 #include <thread>
 #include <future>
@@ -613,7 +613,7 @@ int main() {
 	cout << "World!" << endl;
 	return 0;
 }
-~~~
+```
 
 *  template <class Fn, class… Args>
    future<typename result_of<Fn(Args…)>::type>
@@ -626,7 +626,7 @@ int main() {
 
 ####使用std::future获取线程的返回值
 
-~~~c++
+```c++
 #include <iostream>
 #include <future> // std::async std::future
 using namespace std;
@@ -642,7 +642,7 @@ int main() {
 	cout << val.get() << endl;
 	return 0;
 }
-~~~
+```
 
 linux下报错，win下可以运行
 
@@ -659,7 +659,7 @@ linux下报错，win下可以运行
 若在这段时间内线程结束则返回`future_status::ready`若没结束则返回`future_status::timeout`
 若async是以`launch::deferred`启动的，则**不会阻塞**并立即返回`future_status::deferred`
 
-~~~~c++
+```~c++
 #include <iostream>
 #include <future>
 using namespace std;
@@ -676,7 +676,7 @@ int main() {
 	cout << endl << "Finished!" << endl;
 	return 0;
 }
-~~~~
+```~
 
 搞懂这个就知道软件的加载画面怎么实现的了
 
@@ -695,7 +695,7 @@ promise实际上是std::future的一个包装，在讲解future时，我们并�
 
 
 
-~~~c++
+```c++
 #include <iostream>
 #include <thread>
 #include <future> // std::promise std::future
@@ -714,7 +714,7 @@ int main() {
 	return 0;
 }
 //111
-~~~
+```
 
 - 使用 `std::promise` 和 `std::future` 时，应确保在调用 `get()` 方法之前，`set_value()` 或 `set_exception()` 已经被调用，否则 `get()` 方法将阻塞等待值的到来。
 
@@ -729,7 +729,7 @@ c++11 <thread>的一个命名空间 实现线程对自己的控制
 | template<class Rep, class Period><br/>void sleep_for( const std::chrono::duration<Rep, Period>& sleep_duration ) | 等待sleep_duration 一段时间              |
 | void yield() noexcept                                        | 暂时放弃线程的执行，将主动权交给其他线程 |
 
-~~~c++
+```c++
 #include <iostream>
 #include <thread>
 #include <atomic>
@@ -756,7 +756,7 @@ int main() {
 		th[i].join();
 	return 0;
 }
-~~~
+```
 
 c++20 std::jthread
 
@@ -832,7 +832,7 @@ std::atomic<int> atomicCounter(0);
 
 条件变量的使用可以帮助线程之间进行高效的同步和通信，避免了轮询等低效的等待方式。它常用于生产者-消费者模型、读者-写者模型等多线程编程场景中。
 
-~~~c++
+```c++
 #include <iostream>
 #include <thread>
 #include <mutex>
@@ -889,7 +889,7 @@ int main() {
 
     return 0;
 }
-~~~
+```
 
 ####信号量
 
@@ -897,7 +897,7 @@ int main() {
 
 生产者线程在每次生产数据后，调用 `semProducer.wait()` 等待生产者信号量，然后将数据放入队列并通知消费者信号量。消费者线程在每次消费数据前，调用 `semConsumer.wait()` 等待消费者信号量，然后从队列中取出数据并通知生产者信号量。
 
-~~~c++
+```c++
 #include <iostream>
 #include <thread>
 #include <mutex>
@@ -956,11 +956,11 @@ int main() {
 
     return 0;
 }
-~~~
+```
 
 ####读写锁
 
-~~~c++
+```c++
 #include <iostream>
 #include <thread>
 #include <mutex>
@@ -1039,7 +1039,7 @@ int main() {
     }
     return 0;
 }
-~~~
+```
 
 在这个示例中，使用了 `RWLock` 类来实现读写锁的功能。`RWLock` 类包含了 `lockRead()`、`unlockRead()`、`lockWrite()` 和 `unlockWrite()` 方法，分别用于读锁的加锁、读锁的解锁、写锁的加锁和写锁的解锁。
 
@@ -1055,7 +1055,7 @@ int main() {
 
 但是自C++11起，标准库提供了一个名为`std::thread_local`的关键字，可以轻松实现线程局部存储。
 
-~~~c++
+```c++
 #include <iostream>
 #include <thread>
 
@@ -1077,7 +1077,7 @@ int main() {
 
     return 0;
 }
-~~~
+```
 
 `tls_variable`是一个线程局部变量，每个线程都有自己独立的副本。在`threadFunction()`函数中，每个线程都会递增自己的`tls_variable`副本，并打印出当前线程的ID和TLS变量的值。因为每个线程都有自己的副本，所以输出的结果会显示不同的线程ID和不同的TLS变量值。
 

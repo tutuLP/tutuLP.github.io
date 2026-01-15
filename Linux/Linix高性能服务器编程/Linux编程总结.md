@@ -50,12 +50,12 @@ I/O复用技术,来实现对监听socket（`listenfd`）和连接socket（客户
 
 * 异步IO：只发出IO指令，并不等待IO结果，然后就去执行其他代码了。一段时间后，当IO返回结果时，再通知CPU进行处理。异步IO模型下，一个线程就可以同时处理多个IO请求，并且没有切换线程的操作异步IO模型需要一个消息循环，在消息循环中，主线程不断地重复“读取消息-处理消息”这一过程：
 
-~~~
+```
 loop = get_event_loop()
 while True:
     event = loop.get_event()
     process_event(event)
-~~~
+```
 
 #####事件处理模式
 
@@ -223,7 +223,7 @@ Leader线程 负责等待和接收新的事件，当事件到达时开始处理�
 
 # socket
 
-~~~c++
+```c++
 #include<netinet/in.h>//转换大端小端
 #include <stdio.h> 
 #include <iostream>
@@ -257,7 +257,7 @@ int main() {
     ret = listen(pre_name_socket, 5);//监听
     return 0;
 }
-~~~
+```
 
 
 
@@ -275,7 +275,7 @@ LT 水平触发 符合状态就会(持续)通知
 
 机器：centos 9
 
-~~~
+```
 yum install docker
 docker pull dockerpull.org/mysql:latest
 docker tag dockerpull.org/mysql:latest mysql:latest
@@ -301,13 +301,13 @@ CREATE TABLE user(
 
 // 添加数据
 INSERT INTO user(username, passwd) VALUES('name', 'passwd');
-~~~
+```
 
 * 修改main.cpp , 如果实在docker中运行的mysql webserver.cpp 文件中 "localhost" 修改为 "127.0.0.1"
 
 * 安装mysql编译包
 
-~~~
+```
 sudo dnf install https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
 
 sudo dnf install mysql-devel --nogpgcheck
@@ -320,7 +320,7 @@ sudo ldconfig
 MYSQL_LIBS = -L/usr/lib64/mysql -lmysqlclient
 server:$(MYSQL_LIBS)
 //难道是没有安装mysql的原因？因为我是在docker中运行的mysql
-~~~
+```
 
 * 关闭centos防火墙
 

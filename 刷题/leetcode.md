@@ -20,7 +20,7 @@ categories:
 
 我的：先nums2中插入到nums1中0的位置 然后使用选择排序
 
-~~~~c++
+```~c++
 class Solution { //排序
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
@@ -39,13 +39,13 @@ public:
         }
     }
 };
-~~~~
+```~
 
 双指针
 
 利用两个数组已经有序，创建一个新的数组，每次取两个数组中的最小放进去
 
-~~~c++
+```c++
 class Solution {
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
@@ -69,13 +69,13 @@ public:
         }
     }
 };
-~~~
+```
 
 逆向双指针 0ms
 
 避免使用临时变量创建一个新的数组，不用担心覆盖nums1的问题
 
-~~~c++
+```c++
 //我的
 class Solution {
 public:
@@ -128,20 +128,20 @@ public:
             nums1[cur--] = nums2[right--];        
     }
 };
-~~~
+```
 
 ### 27 移除元素
 
 返回剩下的元素个数
 
-~~~
+```
 输入：nums = [0,1,2,2,3,0,4,2], val = 2
 输出：5, nums = [0,1,4,0,3]
-~~~
+```
 
 0ms
 
-~~~c++
+```c++
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
@@ -155,7 +155,7 @@ public:
         return nums.size();
     }
 };
-~~~
+```
 
 或 使用双指针
 
@@ -163,7 +163,7 @@ public:
 
 给你一个 **升序排列** 的数组 `nums` ，请你**[ 原地](http://baike.baidu.com/item/原地算法)** 删除重复出现的元素，使每个元素 **只出现一次** ，返回删除后数组的新长度。元素的 **相对顺序** 应该保持 **一致** 。然后返回 `nums` 中唯一元素的个数。
 
-~~~c++
+```c++
 //484ms 迭代器
 class Solution {
 public:
@@ -180,11 +180,11 @@ public:
         return nums.size();
     }
 };
-~~~
+```
 
 因为是有序的，所以只需要从头到尾连续的两个进行比较，至少剩一个
 
-~~~c++
+```c++
 //540ms
 class Solution {
 public:
@@ -199,13 +199,13 @@ public:
         return nums.size();
     }
 };
-~~~
+```
 
 it--==???==
 
 双指针 将有序的排在前面， p前q后 q外层遍历 q找到和q不一样的复制到p的下一位
 
-~~~c++
+```c++
 //12ms
 class Solution{
 public:
@@ -225,11 +225,11 @@ public:
         return p + 1;
     }
 };
-~~~
+```
 
 ### 80 删除有序数组中的重复项Ⅱ
 
-~~~c++
+```c++
 //8ms
 class Solution {
 public:
@@ -247,11 +247,11 @@ public:
         return nums.size();
     }
 };
-~~~
+```
 
 双指针 slow表示处理出的数组长度 fast表示已经检查过的长度
 
-~~~c++
+```c++
 //0ms
 class Solution {
 public:
@@ -271,11 +271,11 @@ public:
         return slow;
     }
 };
-~~~
+```
 
 删除重复项的通解==？？？==
 
-~~~c++
+```c++
 //4ms
 class Solution {
 public:
@@ -290,7 +290,7 @@ public:
         return work(nums, 2);
     }
 };
-~~~
+```
 
 ### 169 多数元素
 
@@ -298,7 +298,7 @@ public:
 
 利用两个循环 时间复杂度O² 会超时
 
-~~~c++
+```c++
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
@@ -316,13 +316,13 @@ public:
         return 0;
     }
 };
-~~~
+```
 
 哈希表
 
 我们使用哈希映射（HashMap）来存储每个元素以及出现的次数。对于哈希映射中的每个键值对，键表示一个元素，值表示该元素出现的次数。我们同样也可以在遍历数组 nums 时候使用打擂台的方法，维护最大的值，这样省去了最后对哈希映射的遍历。==？？？==
 
-~~~~c++
+```~c++
 //24ms n n	
 class Solution {
 public:
@@ -339,13 +339,13 @@ public:
         return majority;
     }
 };
-~~~~
+```~
 
 排序
 
 从小到大排序 下标n/2处一定为次数多的
 
-~~~c++
+```c++
 //20ms nlogn  logn  自己编写堆排序O1
 class Solution {
 public:
@@ -354,11 +354,11 @@ public:
         return nums[nums.size() / 2];
     }
 };
-~~~
+```
 
 随机化
 
-~~~c++
+```c++
 //8ms 期望n 1
 class Solution {
 public:
@@ -375,7 +375,7 @@ public:
         return -1;
     }
 };
-~~~
+```
 
 分治
 
@@ -391,7 +391,7 @@ public:
 
 我们使用经典的分治算法递归求解，直到所有的子问题都是长度为 1 的数组。长度为 1 的子数组中唯一的数显然是众数，直接返回即可。如果回溯后某区间的长度大于 1，我们必须将左右子区间的值合并。如果它们的众数相同，那么显然这一段区间的众数是它们相同的值。否则，我们需要比较两个众数在整个区间内出现的次数来决定该区间的众数。
 
-~~~c++
+```c++
 // 40ms nlogn logn
 class Solution {
     int count_in_range(vector<int>& nums, int target, int lo, int hi) {
@@ -418,7 +418,7 @@ public:
         return majority_element_rec(nums, 0, nums.size() - 1);
     }
 };
-~~~
+```
 
 boyer-moore 投票算法
 
@@ -430,7 +430,7 @@ boyer-moore 投票算法
 
 在遍历完成后，candidate 即为整个数组的众数。
 
-~~~c++
+```c++
 //16 n 1
 class Solution {
 public:
@@ -443,7 +443,7 @@ public:
         return x;
     }
 };
-~~~
+```
 
 ### 189 轮转数组
 
@@ -451,7 +451,7 @@ public:
 
 使用另一个数组辅助
 
-~~~c++
+```c++
 //28ms
 class Solution {
 public:
@@ -465,13 +465,13 @@ public:
         nums=nums2;
     }
 };
-~~~
+```
 
 环状替换
 
 一个临时变量x  x保存0+k位 0+k位=0位  0位=x  x保存(0+2k)%n位 (0+2k)%n位=0位  一直循环，回到0位，但不能保证全部都轮了，要有一个计数器计数没有完下一轮从1位开始 ==？？？==
 
-~~~c++
+```c++
 //40ms
 class Solution {
 public:
@@ -490,13 +490,13 @@ public:
         }
     }
 };
-~~~
+```
 
 数组翻转
 
 我们可以先将所有元素翻转，这样尾部的 k%n个元素就被移至数组头部，然后我们再翻转 \[0,k%n−1] 区间的元素和 \[k%n,n−1] 区间的元素即能得到最后的答案。
 
-~~~c++
+```c++
 //28ms
 class Solution {
 public:
@@ -515,7 +515,7 @@ public:
         reverse(nums, k, nums.size() - 1);
     }
 };
-~~~
+```
 
 ### 121 买卖股票的最佳时机
 
@@ -527,7 +527,7 @@ public:
 
 要在一条线上找跨度最大的，直接用后面数字-前面的看谁最大n^2 直接超时
 
-~~~c++
+```c++
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
@@ -546,11 +546,11 @@ public:
         }
     }
 };
-~~~
+```
 
 n 动态规划
 
-~~~c++
+```c++
 //96ms
 class Solution {
 public:
@@ -572,7 +572,7 @@ public:
         return maxProfit;
     }
 };
-~~~
+```
 
 
 
@@ -598,7 +598,7 @@ for(i:)中i是一个什么对象？
 
 相当于就是求所有能的利润
 
-~~~c++
+```c++
 0ms
 class Solution {
 public:
@@ -617,7 +617,7 @@ public:
         return sum;
     }
 };
-~~~
+```
 
 ###55 跳跃游戏
 
@@ -641,7 +641,7 @@ public:
 解释：无论怎样，总会到达下标为 3 的位置。但该下标的最大跳跃长度是 0 ， 所以永远不可能到达最后一个下标。
 ```
 
-~~~c++
+```c++
 //60ms
 class Solution {
 public:
@@ -654,7 +654,7 @@ public:
         return true;
     }
 };
-~~~
+```
 
 ###45 跳跃游戏Ⅱ
 
@@ -664,7 +664,7 @@ public:
 
 代码表示
 
-~~~c++
+```c++
     int j = start + nums[start];
     for (int i = start + 1; i <= j && i <= end; i++) {
     	if ((nums[i] + i) > Dmax) {
@@ -673,11 +673,11 @@ public:
     	}
     }
         count++;
-~~~
+```
 
 算法写好了，那么我们的程序应该是：把算法放进while循环中，结束条件是其距离能到达最后一位
 
-~~~c++
+```c++
 //12ms
 int jump(vector<int>& nums) {
     int end = nums.size() - 1;
@@ -697,7 +697,7 @@ int jump(vector<int>& nums) {
     }
     return count+1;
 }
-~~~
+```
 
 ###274 H 指数
 
@@ -723,7 +723,7 @@ int jump(vector<int>& nums) {
 
 从大到小遍历，H指数从大到小判断，内层遍历如果不满足指数的数目过多则H--重新判断
 
-~~~c++
+```c++
 //32ms
 class Solution {
 public:
@@ -741,11 +741,11 @@ public:
         return 0;
     }
 };
-~~~
+```
 
 官方：先排序 h和i向中间靠拢，一次循环意味着一篇文章h++次，最后至少h篇h次
 
-~~~c++
+```c++
 class Solution {
 public:
     int hIndex(vector<int>& citations) {
@@ -758,13 +758,13 @@ public:
         return h;
     }
 };
-~~~
+```
 
 二分==？？？==
 
 首先，定义左右两个指针，分别指向数组的首尾，然后取中间值，并计算大于或等于中间值的元素个数。如果这个数大于或等于中间值，那么将左指针移动到中间值，反之，将右指针移动到中间值减1。这样，每次循环后，搜索区间就会减半，最终会找到H指数。
 
-~~~c++
+```c++
 class Solution {
 public:
     int hIndex(vector<int>& citations) {
@@ -790,7 +790,7 @@ public:
         return left;
     }
 };
-~~~
+```
 
 ###238 除自身以外数组的乘积
 
@@ -800,7 +800,7 @@ public:
 
 请 **不要使用除法，**且在 `O(*n*)` 时间复杂度内完成此题。
 
-~~~c++
+```c++
 //超时
 class Solution {
 public:
@@ -823,7 +823,7 @@ public:
     }
 };
 //改进:可以额外开辟一个数组,先记录左边每一位累乘的,再记录右边每一位累乘的s,这样就不会超时了
-~~~
+```
 
 上三角下三角法
 
@@ -841,7 +841,7 @@ for (int i = 1; i < len; i++) {
 
 ans *=(temp\*nums)
 
-~~~c++
+```c++
 //20ms
 class Solution {
 public:
@@ -861,7 +861,7 @@ public:
         return ans;
     }
 };
-~~~
+```
 
 ### 134 加油站
 
@@ -886,7 +886,7 @@ public:
 因此，3 可为起始索引。
 ```
 
-~~~c++
+```c++
 //112ms
 class Solution {
 public:
@@ -914,9 +914,9 @@ public:
 
     }
 };
-~~~
+```
 
-~~~c++
+```c++
 //简化，但是耗时更多？
 class Solution {
 public:
@@ -939,7 +939,7 @@ public:
 
     }
 };
-~~~
+```
 
 ### 135 分发糖果
 
@@ -960,7 +960,7 @@ public:
 解释：你可以分别给第一个、第二个、第三个孩子分发 1、2、1 颗糖果。第三个孩子只得到 1 颗糖果，这满足题面中的两个条件。
 ```
 
-~~~c++
+```c++
 //840ms 每次两个遍历
 int candy(vector<int>& ratings) {
     int all = 0;
@@ -1008,9 +1008,9 @@ int candy(vector<int>& ratings) {
     }
     return all;
 }
-~~~
+```
 
-~~~c++
+```c++
 //优化版本16ms
 class Solution {
 public:
@@ -1037,9 +1037,9 @@ public:
     return total;  
 }  
 };
-~~~
+```
 
-~~~c++
+```c++
 //12ms ,不好想
 class Solution {
 public:
@@ -1065,7 +1065,7 @@ public:
         return ret;
     }
 };
-~~~
+```
 
 # 双指针
 
@@ -1094,7 +1094,7 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 
 难点：去除重复 -1 0 1 和 0 1 -1 属于重复的 所以先排序再去除重复遍历
 
-~~~c++
+```c++
 //108ms
 class Solution {
 public:
@@ -1133,7 +1133,7 @@ public:
         return ans;
     }
 };
-~~~
+```
 
 ##滑动窗口
 
@@ -1159,7 +1159,7 @@ public:
 
 还有一种：遍历每一个元素，每个元素在其基础上从1开始
 
-~~~c++
+```c++
 //超时
 int minSubArrayLen(int target, vector<int>& nums) {
     int n = nums.size();
@@ -1183,13 +1183,13 @@ int minSubArrayLen(int target, vector<int>& nums) {
     }
     return 0;
 }
-~~~
+```
 
 滑动窗口法：定义两个指针，和一个临时变量用来保存最小的子数组长度
 
 开始l和r两个指针指向开头，区间内和小于指定值则r右移，区间和大于指定值则保存长度且l左移，寻找后面是否有更短的数组
 
-~~~c++
+```c++
 class Solution {
 public:
     int minSubArrayLen(int s, vector<int>& nums) {
@@ -1212,9 +1212,9 @@ public:
         return ans == INT_MAX ? 0 : ans;
     }
 };
-~~~
+```
 
-~~~c++
+```c++
 //12ms
 class Solution {
 public:
@@ -1239,7 +1239,7 @@ public:
         
     }
 };
-~~~
+```
 
 # 矩阵
 
@@ -1251,7 +1251,7 @@ public:
 2. 数字 `1-9` 在每一列只能出现一次。
 3. 数字 `1-9` 在每一个以粗实线分隔的 `3x3` 宫内只能出现一次。（请参考示例图）
 
-~~~c++
+```c++
 //20ms
 class Solution {
 public:
@@ -1296,11 +1296,11 @@ public:
         return true;
     }
 };
-~~~
+```
 
 因为都是数字，用数组代替哈希表记录每个数字出现的次数，可以建立三个数组也可以用一个数组
 
-~~~c++
+```c++
 //0ms
 class Solution {
 public:
@@ -1320,7 +1320,7 @@ public:
     return true;
         }
 };
-~~~
+```
 
 # 哈希表
 
@@ -1328,7 +1328,7 @@ public:
 
 ### 205同构字符串
 
-~~~c++
+```c++
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
@@ -1346,7 +1346,7 @@ public:
         return true;
     }
 };
-~~~
+```
 
 
 
@@ -1362,7 +1362,7 @@ public:
 
 只需要统计每一个字符出现的次数，ransomNote里面的都要<=magazine
 
-~~~c++
+```c++
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
@@ -1382,7 +1382,7 @@ public:
         return true;
     }
 };
-~~~
+```
 
 ###128 最长连续序列
 
@@ -1418,7 +1418,7 @@ stk
 
 myidea：用二维数组存储映射关系，下标为数字
 
-~~~c++
+```c++
 class Solution {
 public:
     vector<string> letterCombinations(string digits) {
@@ -1455,9 +1455,9 @@ public:
         }
     }
 };
-~~~
+```
 
-~~~c++
+```c++
 class Solution {
     string MAPPING[10] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
 public:
@@ -1480,7 +1480,7 @@ public:
         return ans;
     }
 };
-~~~
+```
 
 - `function<void(int)> dfs = [&](int i)`：定义了一个名为 `dfs` 的函数对象，其参数类型为 `int`，返回类型为 `void`。它使用了 Lambda 表达式 `&` 捕获了当前作用域内的所有变量，这样可以访问外部的变量。
 
@@ -1505,7 +1505,7 @@ public:
 ]
 ```
 
-~~~c++
+```c++
 class Solution {
 public:
     vector<vector<int>> combine(int n, int k) {
@@ -1531,7 +1531,7 @@ public:
     }
 };
 
-~~~
+```
 
 
 
@@ -1539,7 +1539,7 @@ public:
 
 传统回溯会有重复情况,用一个数组来标记是否已经被标记，递归完后要回溯标记为false
 
-~~~c++
+```c++
 class Solution {
 public:
     vector<vector<int>> permute(vector<int>& nums) {
@@ -1566,5 +1566,5 @@ public:
         return ans;
     }
 };
-~~~
+```
 

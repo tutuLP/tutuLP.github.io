@@ -20,14 +20,14 @@ tags:
 
 而后我尝试进行下载，第一次我忽略了下方的cmake参数，下面我整理了完整指令，在想要安装oatpp的地方cmd输入指令
 
-~~~cmd
+```cmd
 git clone https://github.com/oatpp/oatpp.git
 cd oatpp
 MD build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=OFF ..#更多参数可选项根据需求，我觉得这两个是必须的
 cmake --build . --target INSTALL
-~~~
+```
 
 此处建议直接跳转到**链接方法**
 
@@ -76,7 +76,7 @@ ws2_32.lib`
 
 顶层cmake文件，执行全局配置
 
-~~~cmake
+```cmake
 cmake_minimum_required (VERSION 3.8)
 project ("cmake-oatpp-nginx")
 set (CMAKE_CXX_STANDARD 17)
@@ -127,11 +127,11 @@ ENDMACRO(ADD_MSVC_PRECOMPILED_HEADER)
 add_subdirectory ("lib-oatpp")
 
 add_subdirectory ("test")
-~~~
+```
 
 test目录下cmakelists
 
-~~~cmake
+```cmake
 cmake_minimum_required (VERSION 3.8)
 set (appName test)
 include_directories ("./")
@@ -197,7 +197,7 @@ install (TARGETS ${appName} RUNTIME DESTINATION ${appName})
 if(WIN32)
 	install (DIRECTORY "conf" DESTINATION ${appName})
 endif()
-~~~
+```
 
 
 
@@ -219,7 +219,7 @@ endif()
 
 
 
-~~~
+```
 // main.cpp
 
 #include "oatpp/web/server/HttpConnectionHandler.hpp"
@@ -282,7 +282,7 @@ int main() {
 
   return 0;
 }
-~~~
+```
 
 在这个示例中，我们创建了一个名为 `MyController` 的类，用于处理 HTTP 请求，并返回 "Hello, World!" 消息。然后，我们定义了一个 HTTP 路由，将 `/api/hello` 路径映射到 `MyController` 类。最后，我们创建了一个 HTTP 服务器，监听在 8080 端口上，并将路由和连接提供器与之关联。
 
@@ -305,7 +305,7 @@ nginxCopy codeserver {
 
 # Step by Step
 
-~~~c++
+```c++
 #include "oatpp/web/server/HttpConnectionHandler.hpp"
 
 #include "oatpp/network/Server.hpp"
@@ -341,7 +341,7 @@ int main() {
 	return 0;
 
 }
-~~~
+```
 
 ###添加请求处理程序
 
@@ -349,7 +349,7 @@ int main() {
 
 访问http:/localhost:8000/hello 返回hello world消息
 
-~~~c++
+```c++
 class Handler : public oatpp::web::server::HttpRequestHandler {
 public:
   std::shared_ptr<OutgoingResponse> handle(const std::shared_ptr<IncomingRequest>& request) override {
@@ -360,13 +360,13 @@ public:
 void run(){
 	router->route("GET", "/hello", std::make_shared<Handler>());
 }
-~~~
+```
 
 ### 使用JSON对象进行响应
 
 为了序列化/反序列化对象，oatpp 使用特殊的[数据传输对象(DTO)和ObjectMappers
 
-~~~c++
+```c++
 #include "oatpp/parser/json/mapping/ObjectMapper.hpp"
 #include "oatpp/core/macro/codegen.hpp"
 
@@ -424,7 +424,7 @@ void run() {
   /* Route GET - "/hello" requests to Handler */
   router->route("GET", "/hello", std::make_shared<Handler>(objectMapper /* json object mapper */ ));
   }
-~~~
+```
 
 ## oatpp的结构
 
@@ -444,7 +444,7 @@ App.cpp main 路由器(请求) 获取上述组件中的路由-获取controller�
 
 DTOs.hpp
 
-~~~c++
+```c++
 #ifndef DTOs_hpp
 #define DTOs_hpp
 
@@ -478,11 +478,11 @@ class MessageDto : public oatpp::DTO {
 #include OATPP_CODEGEN_END(DTO)
 
 #endif /* DTOs_hpp */
-~~~
+```
 
 MyController.hpp
 
-~~~c++
+```c++
 #ifndef MyController_hpp
 #define MyController_hpp
 
@@ -522,11 +522,11 @@ public:
 #include OATPP_CODEGEN_END(ApiController) ///< End Codegen
 
 #endif /* MyController_hpp */
-~~~
+```
 
 AppComponent.hpp
 
-~~~cpp
+```cpp
 #ifndef AppComponent_hpp
 #define AppComponent_hpp
 
@@ -573,11 +573,11 @@ public:
 };
 
 #endif /* AppComponent_hpp */
-~~~
+```
 
 App.cpp
 
-~~~cpp
+```cpp
 #include "controller/MyController.hpp"
 #include "AppComponent.hpp"
 #include "oatpp/network/Server.hpp"
@@ -624,11 +624,11 @@ int main(int argc, const char* argv[]) {
 
 	return 0;
 }
-~~~
+```
 
 
 
-~~~cpp
+```cpp
 #ifndef MyController_hpp
 #define MyController_hpp
 
@@ -681,5 +681,5 @@ public:
 
 #endif /* MyController_hpp */
 
-~~~
+```
 

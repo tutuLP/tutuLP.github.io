@@ -111,7 +111,7 @@ crepe的可用方法console.log("Crepe 可用方法:", Object.getOwnPropertyName
     "on"
 ]
 
-~~~vue
+```vue
 <template>
   <div class="add-page">
     <div class="editor-container">
@@ -180,7 +180,7 @@ onUnmounted(() => {
 }
 </style>
 
-~~~
+```
 
 # 插件
 
