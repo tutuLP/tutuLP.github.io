@@ -1,3 +1,19 @@
+# pnpm
+
+## 配置全局目录
+
+### windows
+
+```shell
+# 设置用户的 PNPM_HOME 变量
+pnpm setup
+# 保证path变量中存在PNPM_HOME的路径：C:\Users\tutu\AppData\Local\pnpm
+pnpm config set global-bin-dir "C:\Users\tutu\AppData\Local\pnpm"
+# 如果还是没有成功，使用临时变量
+$env:PATH = "C:\Users\tutu\AppData\Local\pnpm;$env:PATH"
+```
+windows
+
 ## pnpm换源
 
 ```shell
@@ -25,4 +41,3 @@ pnpm install
 # 删除未使用的依赖缓存
 pnpm store prune
 ```
-

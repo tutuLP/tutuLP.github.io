@@ -201,6 +201,17 @@ git push -u origin main
 git push origin --delete master
 ```
 
+## 删除分支
+
+```shell
+# 删除本地分支
+git branch -d <branch_name>
+# 强制删除未合并分支
+git branch -D <branch_name>
+# 删除远程分支
+git push origin --delete <branch_name>
+```
+
 # 错误
 
 * Connection closed by 198.18.0.8 port 22 fatal: Could not read from remote repository.
