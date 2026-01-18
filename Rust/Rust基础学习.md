@@ -36,11 +36,11 @@ rust插件：https://plugins.jetbrains.com/plugin/8182--deprecated-rust
 
 main.rs
 
-~~~rust
+```rust
 fn main() {
     println!("Hello, world!");
 }
-~~~
+```
 
 ## 格式化输出
 
@@ -73,19 +73,19 @@ println!("{number:>width\$}", number=1, width=6);   //指定宽度对齐 左对�
 
 ### 调式debug
 
-~~~~rust
+```~rust
 struct UnPrintable(i32); //不能直接使用`fmt::Display` 或 `fmt::Debug` 来进行打印
 
 #[derive(Debug)] 
 struct DebugPrintable(i32);//`derive` 属性会自动创建所需的实现，使这个 `struct` 能使用 `fmt::Debug` 打印
-~~~~
+```~
 
 用{:?}打印
 使用和{}一样：{1:?} {0:?} {actor:?}
 
 美化打印 {:#?}
 
-~~~rust
+```rust
 #[derive(Debug)]
 struct Person<'a> {
     name: &'a str,
@@ -102,13 +102,13 @@ fn main() {
 //    name: "Peter",
 //    age: 27,
 //}
-~~~
+```
 
 ### 显示Display
 
 display不像debug声明#[derive(Debug)]后就会自动提供实现，display必须手动为类型实现 fmt::Display trait，display更简洁，导致Vec<T> 或其他任意泛型容器用用 fmt::Debug 而不用Display，因为输出样式不同
 
-~~~rust
+```rust
 use std::fmt;  //导入模块使`fmt::Display` 可用
 struct Structure(i32);  
 impl fmt::Display for Structure {  //impl：为 Structure 结构体实现 fmt::Display trait
@@ -118,11 +118,11 @@ impl fmt::Display for Structure {  //impl：为 Structure 结构体实现 fmt::D
         write!(f, "{}", self.0)
     }
 }
-~~~
+```
 
 对比Display和debug
 
-~~~rust
+```rust
 use std::fmt; 
 #[derive(Debug)]  //Debug
 struct MinMax(i64, i64);
@@ -170,13 +170,13 @@ fn main() {
     println!("Debug: {:?}", point);
     println!("What does Point2D look like in binary: {:b}?", point);
 }
-~~~
+```
 
 ### 测试实例List
 
 write!配合?操作符实现复杂的拼接，因为使用write都会生成一个Resualt，这里使用?就如果成功就继续，是被则从fmt返回错误，减少了if的判断
 
-~~~rust
+```rust
 use std::fmt; // 导入 `fmt` 模块。
 
 // 定义一个包含单个 `Vec` 的结构体 `List`。
@@ -206,17 +206,17 @@ fn main() {
     let v = List(vec![1, 2, 3]);
     println!("{}", v);
 }
-~~~
+```
 
 ### 格式化
 
-~~~
+```
 - `format!("{}", foo)` -> `"3735928559"`
 - `format!("0x{:X}", foo)` -> [`"0xDEADBEEF"`](https://en.wikipedia.org/wiki/Deadbeef#Magic_debug_values)
 - `format!("0o{:o}", foo)` -> `"0o33653337357"`
-~~~
+```
 
-~~~rust
+```rust
 use std::fmt::{self, Formatter, Display};
 
 struct City {
@@ -265,7 +265,7 @@ fn main() {
         println!("Red: {}, Green: {}, Blue: {}", color.red, color.green, color.blue);
     }
 }
-~~~
+```
 
 # 原生类型
 
@@ -290,19 +290,19 @@ bool：ture/false
 整型默认为 `i32` 类型，浮点型默认为 `f64`类型。
 根据上下文环境自动推断：未声明类型整数+i64，该整数会自动推断为i64，无法推断时按默认值处理
 
-~~~rust
+```rust
 let logical: bool = true; //常规说明
 let an_integer   = 5i32; //后缀说明
 let default_float   = 3.0;//默认
 let mut mutable = 12;//可变值，但是变量的类型不能改变
-~~~
+```
 
 ## 字面量和运算符
 
 通过加前缀 `0x`、`0o`、`0b`，数字可以用十六进制、八进制或二进制记法表示。
 可以在数值字面量中插入下划线，比如：`1_000` 等同于 `1000`，`0.000_001` 等同于 `0.000001`。
 
-~~~rust
+```rust
 fn main() {
     // 整数相加
     println!("1 + 2 = {}", 1u32 + 2);
@@ -326,13 +326,13 @@ fn main() {
     // 使用下划线改善数字的可读性！
     println!("One million is written as {}", 1_000_000u32);
 }
-~~~
+```
 
 ## 元组
 
 元组是一个可以包含各种类型值的组合，可以拥有任意个值
 
-~~~rust
+```rust
 fn reverse(pair: (i32, bool)) -> (bool, i32) { //参数：pair元组，返回值也是元组
     let (integer, boolean) = pair;//赋值
     (boolean, integer)//返回值
@@ -374,7 +374,7 @@ fn main() {
     println!("{:?}", matrix)//打印会打印出结构体的名字
 
 }
-~~~
+```
 
 ## 数组和切片
 
@@ -383,7 +383,7 @@ fn main() {
 
 slice 可以用来借用数组的一部分。slice 的类型标记为 `&[T]`。
 
-~~~rust
+```rust
 use std::mem;//获取字节数
 // 此函数借用一个 slice
 fn analyze_slice(slice: &[i32]) {
@@ -416,7 +416,7 @@ fn main() {
     //println!("{}", xs[5]);
 }
 
-~~~
+```
 
 
 

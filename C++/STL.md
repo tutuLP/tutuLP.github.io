@@ -29,7 +29,7 @@ C++标准库 / STL 标准模板库
 
 * 初始化
 
-~~~c++
+```c++
 //默认构造
 vector<int> vec; //空
 vector<int> vec(10); //10个值为0的int           默认构造
@@ -43,13 +43,13 @@ vector<int> copy2 = original;
 vector<int> moved(move(original)); //original的资源交给moved  c++11 original为空且未定义状态
 //列表初始化 c++11
 vector<int> vec = {1, 2, 3, 4, 5};
-~~~
+```
 
-~~~c++
+```c++
 array<int,5> ia;  赋随机数?
 array<int,5> ia{1,2,3,41,1};  {0} 全为0 {2}第一个是2其余为0
 int ia(5); 不能拷贝或赋值
-~~~
+```
 
 * 容器操作
 * * size
@@ -73,7 +73,7 @@ int ia(5); 不能拷贝或赋值
 
 ### vector
 
-~~~c++
+```c++
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -123,7 +123,7 @@ int main() {
 
     return 0;
 }
-~~~
+```
 
 
 
@@ -150,7 +150,7 @@ string s2=s1+","+"world"; 正确 s1放最后不对
 
 ### 使用
 
-~~~c++
+```c++
 //默认初始化
 map<int, string> myMap;
 set<int> mySet;
@@ -165,7 +165,7 @@ map<int, string> myMap(myVectorPairs.begin(), myVectorPairs.end());
 //列表初始化 c++11
 map<int, string> myMap = { {1, "One"}, {2, "Two"} };
 set<int> mySet = {1, 2, 3, 4, 5};
-~~~
+```
 
 * 插入
 * * insert
@@ -185,7 +185,7 @@ set<int> mySet = {1, 2, 3, 4, 5};
   * empty
 * 有序关联容器（如set和map）允许通过传递自定义的比较函数或函数对象来定义元素之间的比较方式。
 
-~~~c++
+```c++
 #include <iostream>  
 #include <map>  
 #include <string>   
@@ -206,13 +206,13 @@ int main() {
     }  
     return 0;  
 }
-~~~
+```
 
 * 无序关联容器（如unordered_set和unordered_map）允许通过传递自定义的哈希函数和比较函数来定义元素的存储和比较方式。
 
 ### unordered_map
 
-~~~c++
+```c++
 #include <iostream>
 #include <unordered_map>
 #include <string>
@@ -250,7 +250,7 @@ int main() {
 
     return 0;
 }
-~~~
+```
 
 
 
@@ -291,7 +291,7 @@ priority_queue 优先队列
 * **emplace**() 底层容器上创建新元素，避免额外复制和移动
 * 自定义比较函数
 
-~~~c++
+```c++
 #include <iostream>  
 #include <queue>  
 #include <vector>  
@@ -331,7 +331,7 @@ struct CompareStr {
         return lhs > rhs;   //小的优先
     }  
 }; 
-~~~
+```
 
 #迭代器
 
@@ -365,11 +365,11 @@ cbegin cend          方便不是常量的容器也能返回const迭代器
 c.rbegin() c.rend()   反向迭代器，rbegin是最后一个元素的迭代器，rend是第一个元素之前的迭代器
 c.crbegin() c.crend() const反向迭代器
 
-~~~c++
+```c++
 
 for(auto it=v.cbegin();it!=v.cend() && !it->empty();++it)
 	cout<<*it<<endl;
-~~~
+```
 
 
 
@@ -385,7 +385,7 @@ for(auto it=v.cbegin();it!=v.cend() && !it->empty();++it)
 
 #仿函数
 
-~~~c++
+```c++
 #include <iostream>  
 #include <algorithm> // std::sort  
 #include <vector>  
@@ -413,7 +413,7 @@ int main() {
   
     return 0;  
 }
-~~~
+```
 
 
 
@@ -444,7 +444,7 @@ delete []arrPtr
 
 STL容器默认使用的内存分配器
 
-~~~c++
+```c++
 #include <iostream>
 #include <memory>
 
@@ -470,7 +470,7 @@ int main() {
     alloc.deallocate(ptr, 5);
     return 0;
 }
-~~~
+```
 
 
 

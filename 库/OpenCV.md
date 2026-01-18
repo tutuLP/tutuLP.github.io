@@ -29,16 +29,16 @@ https://github.com/huihut/OpenCV-MinGW-Build 下载
 
 * pro文件写入内容
 
-~~~
+```
 INCLUDEPATH+= C:\APP\OpenCV-MinGW-Build\include\
               C:\APP\OpenCV-MinGW-Build\include\opencv2
 
 LIBS+=C:\APP\OpenCV-MinGW-Build\x64\mingw\bin\libopencv_*.dll
-~~~
+```
 
 * 测试
 
-~~~
+```
 #include <QCoreApplication>
 #include "opencv2/opencv.hpp"
 int main(int argc, char *argv[])
@@ -50,11 +50,11 @@ int main(int argc, char *argv[])
     imshow("Output",image);
     return a.exec();
 }
-~~~
+```
 
 * MSVC编译器则为
 
-~~~
+```
 INCLUDEPATH +=C:\OpenCV_s\opencv_vc\opencv\build\include\
               C:\OpenCV_s\opencv_vc\opencv\build\include\opencv\
               C:\OpenCV_s\opencv_vc\opencv\build\include\opencv2
@@ -62,7 +62,7 @@ INCLUDEPATH +=C:\OpenCV_s\opencv_vc\opencv\build\include\
 LIBS +=C:\OpenCV_s\opencv_vc\opencv\build\x64\vc15\lib\opencv_world3414.lib 
 或 C:\OpenCV_s\opencv_vc\opencv\build\x64\vc15\lib\opencv_world3414d.lib
 注意: opencv_world3414d.lib 为debug版,opencv_world3414.lib为release版
-~~~
+```
 
 
 

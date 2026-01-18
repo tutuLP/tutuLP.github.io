@@ -162,7 +162,7 @@ LD_LIBRARY_PATH=src ./dyna_main 在指定文件中搜索
 
 <img src="./images/Linux系统安装.assets/image-20230912193610332-1740971902830-260.png" alt="image-20230912193610332" style="zoom:33%;" />
 
-~~~
+```
 ## 以下命令后括号内为命令的简化使用，比如run（r），直接输入命令 r 就代表命令run
 $(gdb)help(h)        # 查看命令帮助，具体命令查询在gdb中输入help + 命令 
 $(gdb)run(r)         # 重新开始运行文件（run-text：加载文本文件，run-bin：加载二进制文件）
@@ -189,7 +189,7 @@ $(gdb)enable breakpoints           # 启用断点
 $(gdb)disable breakpoints          # 禁用断点
 $(gdb)x                            # 查看内存x/20xw 显示20个单元，16进制，4字节每单元
 $(gdb)run argv[1] argv[2]          # 调试时命令行传参$(gdb)set follow-fork-mode child   # Makefile项目管理：选择跟踪父子进程（fork()）
-~~~
+```
 
 1. 编译程序时需要加上-g，之后才能用gdb进行调试：gcc -g main.c -o main
 2. 回车键：重复上一命令
@@ -210,11 +210,11 @@ cmake：不用手动配置makefile
 
 编译运行单个文件
 
-~~~cmake
+```cmake
 cmake_minimum_required(VERSION 3.10)    //要求cmake的最低版本
 project(Example)   //指定工程名字，也是生成的可执行文件的名字
 add_executable(Example test.cpp)  //表示我们需要构建一个可执行文件由test.cpp编译而成
-~~~
+```
 
 #####配置(configure) 
 
@@ -250,7 +250,7 @@ https://subingwen.cn/cmake/CMake-primer/ 详细文档  BV14s4y1g7Zj 视频解析
 
 
 
-~~~cmake
+```cmake
 cmake_minimum_required(VERSION 3.10)  
 project(Example)
 
@@ -274,11 +274,11 @@ add_custom_command(
         "$<PROJECT_FILE_DIR:${CMAKE_PROJECT_NAME}>/assets")
 
 
-~~~
+```
 
 运行多文件
 
-~~~cmake
+```cmake
 cmake_minimum_required(VERSION 3.10) 
 project(CALC)
 set(CMAKE_CXX_STANDARD 11)  #使用c++ 11
@@ -287,7 +287,7 @@ set(EXECUTABLE_OUTPUT_PATH ${HOME}/bin/)
 include_directories(${PROJECT_SOURCE_DIR})  #包含头文件 不要也可以（有时出错？）
 file(GLOB SRC_LIST ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)  #文件下的源文件/str/*.cpp
 add_executable(app  ${SRC_LIST})
-~~~
+```
 
 ## cmake linux
 
@@ -486,14 +486,14 @@ CMake目录结构：项目主目录存在一个CMakeLists.txt文件
 
 - 执行命令`make` 进行编译。
 
-- ~~~
+- ```
   important tips
   .          # 表示当前目录
   ./         # 表示当前目录
   
   ..      # 表示上级目录
   ../     # 表示上级目录
-  ~~~
+  ```
 
   #### 两种构建方式
 
@@ -545,13 +545,13 @@ CMake目录结构：项目主目录存在一个CMakeLists.txt文件
 
   如果头文件和源文件放到同一个目录下则不需要-Iinclude
   
-  ~~~cmake
+  ```cmake
   cmake_minimum_required(VERSION 3.0)
   project(Solidefire)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O2 -Wall")  //设置g++编译选项
   include_directories(include)
   add_executable(main_cmake main.cpp src/Gun.cpp src/Soldier.cpp)
-  ~~~
+  ```
   
   include_directories(include) 可以写成 include_directories(${CMAKE_SOURCE_DIR}/include) 变量CMAKE_SOURCE_DIR是cmakelists所在文件夹路径
   
@@ -577,7 +577,7 @@ CMake目录结构：项目主目录存在一个CMakeLists.txt文件
   
   一样是进入build文件夹 cmake .. make ./mian_cmake
   
-  ~~~cmake
+  ```cmake
   cmake_minimum_required(VERSION 3.0)
   
   project(Solidefire)
@@ -595,7 +595,7 @@ CMake目录结构：项目主目录存在一个CMakeLists.txt文件
   set(CMAKE_CXX_STANDARD 11) #使用c++11标准 或cmake .. -DCMAKE_CXX_STANDARD=11
   
   add_executable(main_cmake ${SRC})
-  ~~~
+  ```
   
   后续链接库等看BV14s4y1g7Zj?p
   
@@ -613,7 +613,7 @@ CMake目录结构：项目主目录存在一个CMakeLists.txt文件
 
 .json文件如下
 
-~~~json
+```json
 {
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
@@ -650,7 +650,7 @@ CMake目录结构：项目主目录存在一个CMakeLists.txt文件
 
     ]
 }
-~~~
+```
 
 
 
@@ -668,7 +668,7 @@ f5进入调试 f10单步 f11进入 f5结束
 
 随便点击一个
 
-~~~json
+```json
 {
     "version": "2.0.0",
     "options": {
@@ -702,7 +702,7 @@ f5进入调试 f10单步 f11进入 f5结束
         }
     ],
 }
-~~~
+```
 
 这样直接f5就可以调试了运行了，不用再cmake和make了
 
@@ -854,7 +854,7 @@ NAT网络
 
 4. 按 i 进入编辑
 
-5. ~~~
+5. ```
    TYPE=Ethernet        #网络类型:Ethernet以太网
    PROXY_METHOD=none    #代理方式：关闭状态
    BROWSER_ONLY=no	     # 只是浏览器：否
@@ -876,7 +876,7 @@ NAT网络
    PREFIX=24
    DNS1=114.114.114.114
    DNS2=8.8.8.8
-   ~~~
+   ```
 
 6. 编写完成后按esc进入选择模式
 
@@ -935,11 +935,11 @@ systemctl start sshd 启用
 
 配置config文件
 
-~~~
+```
 Host 192.168.6.208  //主机ip
   HostName 192.168.6.208
   User tutu
-~~~
+```
 
 ssh tutu@192.168.6.208   tutu
 
@@ -1002,7 +1002,7 @@ GSSAPIAuthentication no
 
 407 行 pClient->GetBuffer(0); max,0   HandleRead RecvData  GetMessage
 
-~~~
+```
 TcpClientPtr构造
 	m_maxBufSize = 8 * 1024 * 1024;
 	m_offset = 0;//总消息长度
@@ -1032,16 +1032,16 @@ GetMessage（0）
 	pBuf=
 	
 	msgSize 数据部分长度经过减去头部数据4
-~~~
+```
 
 # 配置静态网络
 
-~~~
+```
 cd /etc/sysconfig/network-scripts/
 vi ifcfg-ens33 (替换成对应网卡名称)
-~~~
+```
 
-~~~
+```
 TYPE=Ethernet
 PROXY_METHOD=none
 BROWSER_ONLY=no
@@ -1063,22 +1063,22 @@ GATEWAY=192.168.248.2
 PREFIX=24
 DNS1=114.114.114.114
 DNS2=8.8.8.8
-~~~
+```
 
-~~~
+```
 nmcli c reload                   
 nmcli c up ens160                   
-~~~
+```
 
 3. 配置yum源
 
-~~~
+```
 备份
 cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 vi /etc/yum.repos.d/CentOS-Base.repo
-~~~
+```
 
-~~~
+```
 # CentOS-Base.repo
 #
 # The mirror system uses the connecting IP address of the client and the
@@ -1132,10 +1132,10 @@ baseurl=http://mirrors.cloud.tencent.com/centos/$releasever/fasttrack/$basearch/
 enabled=0
 gpgcheck=1
 gpgkey=http://mirrors.cloud.tencent.com/centos/RPM-GPG-KEY-CentOS-7
-~~~
+```
 
-~~~
+```
 yum clean all   
 yum makecache    
-~~~
+```
 

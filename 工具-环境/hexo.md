@@ -13,16 +13,16 @@ tags:
 
 使用nvm安装Node.js
 
-~~~shell
+```shell
 curl -o- https://gitee.com/mirrors/nvm/raw/v0.39.3/install.sh | bash #使用镜像源安装nvm
 source ~/.bashrc
 nvm --version
 nvm install --lts  #安装Node
-~~~
+```
 
 ## 下载hexo
 
-~~~shell
+```shell
 npm install hexo-cli -g
 hexo init blog  #用hexo搭建一个文件夹
 cd blog   
@@ -31,7 +31,7 @@ npm i hexo-theme-volantis --save #下载主题volantis
 npm i hexo-generator-json-content --save  #搜索功能
 npm i giscus --save #下载评论系统
 npm install hexo-deployer-git --save #git推送
-~~~
+```
 
 ## 目录结构和使用说明
 
@@ -59,12 +59,12 @@ cp -rf * /usr/share/nginx/html
 
 * 编辑_config.yml
 
-~~~
+```
 deploy:
   type: git
   repo: git@github.com:你的用户名/你的用户名.github.io.git
   branch: master
-~~~
+```
 
 这里可以使用ssh也可以使用http 使用ssh要先配置密钥
 我的ssh地址：git@github.com:tutuLP/tutuLP.github.io.git  
@@ -109,7 +109,7 @@ https://tutulp.github.io/
 
 /root下新建blog.sh
 
-~~~
+```
 #!/bin/bash  
 cd /root/hexo/blog_new/source/_posts/tutuLP.github.io || exit  
 git pull  
@@ -118,7 +118,7 @@ cd ..
 hexo generate  
 hexo deploy  
 echo "博客部署完成！"
-~~~
+```
 
 bash blog.sh
 
@@ -129,7 +129,7 @@ bash blog.sh
 ## 修改配置文件
 
 \_config.yml
-~~~yml
+```yml
 title: tutulp's blog
 description: 'tutulp的博客网站'
 author: tutulp
@@ -139,10 +139,10 @@ deploy:
   type: git
   repo: git@github.com:tutuLP/tutuLP.github.io.git  
   branch: master
-~~~
+```
 
 _config.volantis.yml
-~~~yml
+```yml
 # 平滑滚动效果
 scroll_smooth: true
 #作者
@@ -278,11 +278,11 @@ custom_css:
       fontfamily: 'JetBrainsMono-Bold'
       name: 'JetBrainsMono-Bold'
       url: /fonts/JetBrainsMono-Bold.ttf
-~~~
+```
 
 ## source需要的文件
 
-~~~
+```
 ├── about
 │   └── index.md
 ├── categories
@@ -295,13 +295,13 @@ custom_css:
 │   └── source
 └── tags
     └── index.md
-~~~
+```
 
 新建上述目录结构
 
 about/index.md
 
-~~~md
+```md
 ---
 layout: docs
 seo_title: 关于
@@ -323,27 +323,27 @@ twikoo:
 QQ：2061867903
 github：https://github.com/tutuLP
 gitee：https://gitee.com/tutuLP
-~~~
+```
 
 categories/index.md
 
-~~~
+```
 ---
 layout: category
 index: true
 title: 所有分类
 ---
-~~~
+```
 
 tags/index.md
 
-~~~
+```
 ---
 layout: tag
 index: true
 title: 所有标签
 ---
-~~~
+```
 
 fonts存放字体文件，在yml配置文件中使用eg：/fonts/JetBrainsMono-Bold.ttf
 需要使用图片的时候也可以这样放和引用
@@ -354,7 +354,7 @@ typora中采取图片复制规则为：./images/${filename}.assets
 _config.yml中设值post_asset_folder: true
 source文件夹新建images文件夹，然后将所有资源目录下的.assets文件夹都复制到其中，这里采用脚本复制
 
-~~~sh
+```sh
 #!/bin/bash
 
 # 定义源目录，这里假设当前目录为搜索起始点
@@ -376,7 +376,7 @@ find "$source_dir" -type d -name "*.assets" | while read -r asset_folder; do
     # 输出复制信息
     echo "Copied $asset_folder to $target_dir/$folder_name"
 done
-~~~
+```
 
 
 

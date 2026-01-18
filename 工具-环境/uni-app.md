@@ -43,7 +43,7 @@ pages.json 中写 页面路由和tabBar
 
 使用 uni 提供的接口
 
-~~~vue
+```vue
 try {
   // 获取微信登录code
   const loginRes = await uni.login({
@@ -61,17 +61,17 @@ try {
     icon: 'none'
   })
 }
-~~~
+```
 
 ### 后端 code2Session
 
 传入： 小程序 appId， 小程序 appSecret， code， grant_type
 返回： session_key，unionid(同个微信账号在不同平台的unionid 都是相同的)，openid
 
-~~~
+```
 示例返回：
 {\"session_key\":\"7htQvdCCVR2eRgMFj/SneQ==\",\"openid\":\"o1Gqe6DPXUnYqa3MdNMyOlwFJ22w\"}","level":"info","span":"f6af84092c254d93","trace":"0f3cfd7df0efe9e7d88212c8779fc838"}
-~~~
+```
 
 https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/user-login/code2Session.html
 
@@ -81,12 +81,12 @@ https://developers.weixin.qq.com/miniprogram/dev/api/open-api/user-info/wx.getUs
 
 直接获取用户的相关信息
 
-~~~
+```
 # res.userInfo
 {"nickName":"微信用户","gender":0,"language":"","city":"","province":"","country":"","avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132","is_demote":true}
-~~~
+```
 
-~~~
+```
 wx.getUserProfile({
   desc: '用于完善用户资料', // 声明获取用户个人信息后的用途
   success: (res) => {
@@ -105,7 +105,7 @@ wx.getUserProfile({
     })
   }
 })
-~~~
+```
 
 
 

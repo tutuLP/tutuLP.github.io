@@ -16,17 +16,17 @@ vscode 安装插件 open in browser
 
 标签
 
-~~~html
+```html
 <strong>内容</strong>
 <br> <!-- 换行 --> 注释：ctrl+/
 <hr> <!-- 水平线 -->
-~~~
+```
 
 右键open in browser或者alt+b
 
 ###html骨架
 
-~~~html
+```html
 <html>
     <head>
         <title>网页标题</title>
@@ -35,11 +35,11 @@ vscode 安装插件 open in browser
         网页主体
     </body>
 </html>
-~~~
+```
 
 在vscode中 !+enter/tab自动生成骨架
 
-~~~html
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +51,7 @@ vscode 安装插件 open in browser
     
 </body>
 </html>
-~~~
+```
 
 标签的关系：父子集，平行
 
@@ -87,10 +87,10 @@ p 双 段落之间有空隙
 
 ###超链接
 
-~~~html
+```html
 <a href="#">空链接</a>
 <a href="" target="_blank">text</a> 新窗口打开
-~~~
+```
 
 ###音频标签
 
@@ -204,9 +204,9 @@ css写在style标签里面
 
 配合Javascript使用
 
-~~~html
+```html
 <div style="color: blueviolet;font-size: 30px;">
         test2
     </div>
-~~~
+```
 

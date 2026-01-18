@@ -32,7 +32,7 @@ int&& rvalueRef = 5; // 右值引用绑定到临时对象 5
 
 * 完美转发：std::forward()：在函数模板中保持参数的类型和值类别（左值或右值）不变
 
-  ~~~c++
+  ```c++
   #include <iostream>
   #include <utility>
   void print(int& x) {std::cout << "Lvalue: " << x << std::endl;}
@@ -43,7 +43,7 @@ int&& rvalueRef = 5; // 右值引用绑定到临时对象 5
       forwardPrint(a);  // 转发左值
       forwardPrint(20); // 转发右值
       return 0;}
-  ~~~
+  ```
 
 引用折叠规则：参数为左值/左值引用，T&&将转化为int&；参数为右值/右值引用，T&&将转化为int&&
 
@@ -55,51 +55,51 @@ int&& rvalueRef = 5; // 右值引用绑定到临时对象 5
 
 * 创建
 
-~~~c++
+```c++
 auto t1 = make_tuple(1, 3.14, 'a'); // 使用 make_tuple  
 tuple<int, double, char> t2(1, 3.14, 'a'); // 直接初始化
-~~~
+```
 
 * 访问
 
-~~~c++
+```c++
 // 使用 std::get  
 int first = get<0>(t1);  
 double second = sget<1>(t1);  
 char third = get<2>(t1);  
 // C++17 结构化绑定  
 auto [i, d, c] = t1;
-~~~
+```
 
 * 大小和类型
 
-~~~c++
+```c++
 static_assert(tuple_size<decltype(t1)>::value == 3, "Tuple size is 3");  
 static_assert(is_same<tuple_element<1, decltype(t1)>::type, double>::value, "Second element is double");
-~~~
+```
 
 * 修改值
 
-~~~c++
+```c++
 tuple<int, double, char> mutableTuple(1, 3.14, 'a');  
 get<0>(mutableTuple) = 2; // 修改第一个元素
-~~~
+```
 
 * 比较
 
-~~~c++
+```c++
 auto t3 = make_tuple(1, 2.0, 'b');  
 if (t1 < t3) {  
     // t1 在字典序上小于 t3  
 }
-~~~
+```
 
 * 结构与合并 c++17
 
-~~~c++
+```c++
 auto [a, b, c] = t1; // 解构  
 auto combined = tuple_cat(t1, make_tuple(42)); // 合并
-~~~
+```
 
 * 使用场景
 
@@ -127,7 +127,7 @@ auto combined = tuple_cat(t1, make_tuple(42)); // 合并
 
 可变lambda：一般捕获的变量不能修改要修改需要使用**mutable**    auto lambda = \[num]() mutable {
 
-~~~c++
+```c++
 #include <iostream>
 int main() {
     // 定义一个 lambda 表达式，接受两个参数并返回它们的和
@@ -140,9 +140,9 @@ int main() {
 
     return 0;
 }
-~~~
+```
 
-~~~c++
+```c++
 #include <iostream>
 int main() {
     int x = 3;
@@ -156,13 +156,13 @@ int main() {
     std::cout << "Sum: " << result << std::endl;
     return 0;
 }
-~~~
+```
 
 ## for each
 
 对容器中的元素执行指定的操作,接受一个范围（通常是一个容器的迭代器对）和一个函数对象（函数指针、函数或者 Lambda 表达式），并将该函数对象应用于范围内的每个元素
 
-~~~c++
+```c++
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -186,7 +186,7 @@ int main() {
 
     return 0;
 }
-~~~
+```
 
 ## 智能指针-RALL机制
 
@@ -217,7 +217,7 @@ std::unique_ptr<int> ptr(new int(42));
 auto ptr = std::make_unique<int>(42);
 ```
 
-~~~c++
+```c++
 unique_ptr / shared_ptr
 auto ptr1 = std::make_unique<Resource>("Resource1");
 std::unique_ptr<Resource> ptr2(new Resource("Resource2"));
@@ -225,7 +225,7 @@ std::unique_ptr<Resource> ptr2(new Resource("Resource2"));
 weak_ptr
 std::weak_ptr<Resource> ptr5 = ptr3;  //*从shared_ptr创建weak_ptr*
  if (auto shared_ptr = ptr5.lock()) {}  //通过lock使用
-~~~
+```
 
 ## 线程安全
 
@@ -277,7 +277,7 @@ mesa语义：`while (!condition) {wait(cv);}` 防止虚假唤醒，即使被虚�
 
 c++11的wait带谓词(返回bool的判断条件)版本`cv.wait(lock, [this]{ return condition; });`
 
-~~~c++
+```c++
 mutable std::mutex mtx; 
 std::condition_variable cv;
 
@@ -292,7 +292,7 @@ while (!condition) {
     cv.wait(lock);
 }
 ...
-~~~
+```
 
 notify_one
 
@@ -304,7 +304,7 @@ wait_for 等待一段时间
 
 wait_until 等待到一个时间点
 
-~~~c++
+```c++
 while (queue.empty()) { 
     not_empty.wait(lock);
 }
@@ -316,7 +316,7 @@ bool success = not_empty.wait_for(lock, timeout, [this]() {
 bool success = not_empty.wait_until(lock, deadline, [this]() {
     return !queue.empty();
 });
-~~~
+```
 
 防止被继承 final
 
@@ -330,7 +330,7 @@ bool success = not_empty.wait_until(lock, deadline, [this]() {
 
 变量模板
 
-~~~c++
+```c++
 #include <iostream>
 
 template <typename T>
@@ -340,16 +340,16 @@ int main() {
     std::cout << pi<double> << std::endl; 
     return 0;
 }
-~~~
+```
 
 二进制字面量和单引号作数字分隔符
 
 使用 0b或 0B 前缀表示二进制数
 
-~~~c++
+```c++
 int binary = 0b1010; 
 long long largeNumber = 1'000'000'000; 
-~~~
+```
 
 # c++17
 
@@ -359,7 +359,7 @@ long long largeNumber = 1'000'000'000;
 
 ## 结构化绑定
 
-~~~c++
+```c++
 #include <iostream>
 #include <tuple>
 
@@ -372,13 +372,13 @@ int main() {
     std::cout << a << " " << b << std::endl; 
     return 0;
 }
-~~~
+```
 
 ## std::optional
 
 std::optional 表示一个可能存在的值，它可以包含一个值或者为空，避免了使用指针和空指针检查
 
-~~~c++
+```c++
 #include <iostream>
 #include <optional>
 
@@ -396,5 +396,5 @@ int main() {
     }
     return 0;
 }
-~~~
+```
 

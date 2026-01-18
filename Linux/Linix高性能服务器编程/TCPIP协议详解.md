@@ -168,10 +168,10 @@ ARP请求/应答报文的长度为28字节。如果再加上以太网帧头部�
 
 Linux下可以使用arp命令来查看和修改ARP高速缓存。比如在某一时刻（注意，ARP高速缓存是动态变化的）的ARP缓存内容使用**arp-a**
 
-~~~powershell
+```powershell
 $sudo arp-d 192.168.1.109 #删除对应的ARP缓存项
 $sudo arp-s 192.168.1.109 08:00:27:53:10:67 #添加对应的ARP缓存项
-~~~
+```
 
 #### 使用tcpdump观察ARP通信过程
 
@@ -179,7 +179,7 @@ $sudo arp-s 192.168.1.109 08:00:27:53:10:67 #添加对应的ARP缓存项
 
 为了清楚地了解ARP的运作过程，我们从ernest-laptop上执行telnet命令登录Kongming20的echo服务（已经开启），并用tcpdump抓取这个过程中两台测试机器之间交换的以太网帧。具体的操作过程如下：
 
-~~~
+```
 $sudo arp-d 192.168.1.109#清除ARP缓存中Kongming20对应的项
 $sudo tcpdump-i eth0-ent'(dst 192.168.1.109 and src 192.168.1.108)or
 (dst 192.168.1.108 and src 192.168.1.109)'#如无特殊声明，抓包都在机器ernest-laptop上执行
@@ -190,13 +190,13 @@ Escape character is'^]'.
 ^]（回车）#输入Ctrl+]并回车
 telnet＞quit（回车）
 Connection closed.
-~~~
+```
 
 应先清除ARP缓存中与Kongming20对应的项，否则ARP通信不被执行
 
 当执行telnet命令并在两台通信主机之间建立TCP连接后（telnet输出“Connected to 192.168.1.109”），输入Ctrl+]以调出telnet程序的命令提示符，然后在telnet命令提示符后输入quit，退出telnet客户端程序（因为ARP通信在TCP连接建立之前就已经完成，故我们不关心后续内容）。tcpdump抓取到的众多数据包中，只有最靠前的两个和ARP通信有关系，现在将它们列出（数据包前面的编号是笔者加入的，后同）：
 
-~~~
+```
 1. 00:16:d3:5c:b9:e3＞ff:ff:ff:ff:ff:ff,ethertype
 ARP(0x0806),length 42:Request who-has 192.168.1.109 tell
 192.168.1.108,length 28
@@ -204,7 +204,7 @@ ARP(0x0806),length 42:Request who-has 192.168.1.109 tell
 2. 08:00:27:53:10:67＞00:16:d3:5c:b9:e3,ethertype
 ARP(0x0806),length 60:Reply 192.168.1.109 is-at
 08:00:27:53:10:67,length 46
-~~~
+```
 
 由tcpdump抓取的数据包本质上是以太网帧，我们通过该命令的众多选项来控制帧的过滤（比如用dst和src指定通信的目的端IP地址和源端IP地址）和显示（比如用-e选项开启以太网帧头部信息的显示）。
 
@@ -269,12 +269,12 @@ nameserver 219.239.26.42  nameserver 124.207.160.106
 
 Linux下一个常用的访问DNS服务器的客户端程序是host ？？？，比如下面的命令是向首选DNS服务器219.239.26.42查询机器www.baidu.com的IP地址：
 
-~~~powershell
+```powershell
 $host -t A www.baidu.com
 www.baidu.com is an alias for www.a.shifen.com.
 www.a.shifen.com has address 119.75.217.56
 www.a.shifen.com has address 119.75.218.77
-~~~
+```
 
 host命令的输出告诉我们，机器名www.baidu.com是www.a.shifen.com.的别名，并且该机器名对应两个IP地址。host命令使用DNS协议和DNS服务器通信，其-t选项告诉DNS协议使用哪种查询类型。我们这里使用的是A类型，即通过机器的域名获得其IP地址（但实际上返回的资源记录中还包含机器的别名）。
 
@@ -288,12 +288,12 @@ $host-t A www.baidu.com
 
 这一次执行tcpdump抓包时，我们使用“port domain”来过滤数据包，表示只抓取使用domain（域名）服务的数据包，即DNS查询和应答报文。tcpdump的输出如下：
 
-~~~powe
+```powe
 1. IP 192.168.1.108.34319＞219.239.26.42.53 :57428+A?www.baidu.com.
 (31)
 2. IP 219.239.26.42.53＞192.168.1.108.34319 :57428 3/4/4 CNAME
 www.a.shifen.com.,A 119.75.218.77,A 119.75.217.56(226)
-~~~
+```
 
 tcpdump以“IP地址.端口号”的形式来描述通信的某一端  第一个是DNS查询报文第二个是应答报文
 
@@ -408,14 +408,14 @@ IP协议是TCP/IP协议族的动力，它为上层协议提供无状态、无连
 
 #### 使用tcpdump观察TCP头部信息
 
-~~~
+```
 IP 127.0.0.1.41621＞127.0.0.1.23 :Flags[S],seq 3499745539,win 32792,
 options[mss 16396,sackOK,TS val 40781017 ecr 0,nop,wscale 6],length 0
 0x0000:4510 003c a5da 4000 4006 96cf 7f00 0001
 0x0010:7f00 0001 a295 0017 d099 e103 0000 0000
 0x0020:a002 8018 fe30 0000 0204 400c 0402 080a
 0x0030:026e 44d9 0000 0000 0103 0306
-~~~
+```
 
 * tcpdump输出Flags[S]，表示该TCP报文段包含SYN标志，因此它是一个同步报文段。
 * seq是序号值。第一个tcp报文是初始的ISN值，且没有确认号
@@ -433,7 +433,7 @@ options[mss 16396,sackOK,TS val 40781017 ecr 0,nop,wscale 6],length 0
 
   从ernest-laptop上执行telnet命令登录Kongming20的80端口，然后抓取这一过程中客户端和服务器交换的TCP报文段。
 
-  ~~~
+  ```
 $sudo tcpdump-i eth0-nt '(src 192.168.1.109 and dst 192.168.1.108)or(src 192.168.1.108 and dst 192.168.1.109)'
 //新开一个终端
 $telnet 192.168.1.109 80
@@ -443,9 +443,9 @@ Connected to 192.168.1.109.
 Escape character is'^]'.      #输入ctrl+]并回车
 telnet＞quit					#结束tcp连接
 Connection closed.
-  ~~~
+  ```
 
-  ~~~
+  ```
 1.IP 192.168.1.108.60871＞192.168.1.109.80:Flags[S],seq 535734930,win 5840,length 0
 2.IP 192.168.1.109.80＞192.168.1.108.60871:Flags[S.],seq 2159701207,ack 535734931,win 5792,length 0
 3.IP 192.168.1.108.60871＞192.168.1.109.80:Flags[.],ack 1,win 92,length 0
@@ -454,7 +454,7 @@ Connection closed.
 5.IP 192.168.1.109.80＞192.168.1.108.60871:Flags[.],ack 2,win 91,length 0
 6.IP 192.168.1.109.80＞192.168.1.108.60871:Flags[F.],seq 1,ack 2,win 91,length 0
 7.IP 192.168.1.108.60871＞192.168.1.109.80:Flags[.],ack 2,win 92,length 0
-  ~~~
+  ```
 
 * length 0 没有应用层数据
 
@@ -483,7 +483,7 @@ Connection closed.
 
   tcpdump -i ens160 '(src 192.168.6.208 and dst 192.168.6.131)or(src 192.168.6.131 and dst 192.168.6.208)'
 
-  ~~~
+  ```
 [root@localhost ~]# telnet 192.168.6.131 80
 Trying 192.168.6.131...
 telnet: connect to address 192.168.6.131: Connection refused
@@ -491,10 +491,10 @@ telnet: connect to address 192.168.6.131: Connection refused
 [root@localhost ~]# telnet 192.168.6.131 80
 Trying 192.168.6.131...
 telnet: connect to address 192.168.6.131: No route to host
-  ~~~
+  ```
 
 
-~~~
+```
 [root@localhost .ssh]# tcpdump -i ens160 '(src 192.168.6.208 and dst 192.168.6.131)or(src 192.168.6.131 and dst 192.168.6.208)'
 
 22:27:14.825789 IP localhost.localdomain.58904 > 192.168.6.131.http: Flags [S], seq 865449386, win 64240, options [mss 1460,sackOK,TS val 1199749114 ecr 0,nop,wscale 7], length 0
@@ -504,7 +504,7 @@ telnet: connect to address 192.168.6.131: No route to host
 22:27:20.093275 ARP, Reply localhost.localdomain is-at 00:0c:29:a0:76:f3 (oui Unknown), length 28
 22:27:20.196832 ARP, Request who-has 192.168.6.131 tell localhost.localdomain, length 28
 22:27:20.197899 ARP, Reply 192.168.6.131 is-at 00:0c:29:1f:61:5b (oui Unknown), length 46
-~~~
+```
 
 #### 半关闭状态
 
@@ -526,18 +526,18 @@ $sudo iptables-I INPUT-p tcp--syn-i eth0-j DROP
 
 iptable命令用于过滤数据包，这里我们利用它来丢弃所有接收到的连接请求（丢弃所有同步报文段，这样客户端就无法得到任何确认报文段）。
 
-~~~
+```
 $sudo tcpdump-n-i eth0 port 23		#仅抓取telnet客户端和服务器交换的数据包
 $date;telnet 192.168.1.108;date		#在telnet命令前后都执行date命令，以计算超时时间
 Mon Jun 11 21:23:35 CST 2012
 Trying 192.168.1.108...
 telnet:connect to address 192.168.1.108:Connection timed out
 Mon Jun 11 21:24:38 CST 2012
-~~~
+```
 
 建立TCP连接的超时时间是63s
 
-~~~
+```
 1.21:23:35.612136 IP 192.168.1.109.39385＞
 192.168.1.108.telnet:Flags[S],seq 1355982096，length 0
 2.21:23:36.613146 IP 192.168.1.109.39385＞
@@ -550,7 +550,7 @@ Mon Jun 11 21:24:38 CST 2012
 192.168.1.108.telnet:Flags[S],seq 1355982096,length 0
 6.21:24:06.673331 IP 192.168.1.109.39385＞
 192.168.1.108.telnet:Flags[S],seq 1355982096,length 0
-~~~
+```
 
 保留了tcpdump输出的时间戳 不使用-t
 
@@ -610,7 +610,7 @@ connect调用失败将使连接立即返回到初始的CLOSED状态。如果客�
 
 有时候我们希望**避免TIME_WAIT状态**，因为当程序退出后，我们希望能够立即重启它。但由于处在TIME_WAIT状态的连接还占用着端口，程序将无法启动（直到2MSL超时时间结束）。考虑一个例子：在测试机器ernest-laptop上以客户端方式运行nc（用于创建网络连接的工具，见第17章）命令，登录本机的Web服务，且明确指定客户端使用12345端口与服务器通信。然后从终端输入Ctrl+C终止客户端程序，接着又立即重启nc程序，以完全相同的方式再次连接本机的Web服务。具体操作如下：
 
-~~~
+```
 $nc-p 12345 192.168.1.108 80
 ctrl+C#中断客户端程序
 $nc-p 12345 192.168.1.108 80#重启客户端程序，重新建立连接
@@ -619,7 +619,7 @@ nc:bind failed:Address already in use#输出显示连接失败，因为12345端�
 $netstat-nat#用netstat命令查看连接状态
 Proto Recv-Q Send-Q Local Address Foreign Address State
 tcp 0 0 192.168.1.108:12345 192.168.1.108:80 TIME_WAIT
-~~~
+```
 
 * 一般客户端使用系统自动分配的随机端口，我们强制使用12345号端口才会有这样的问题
 * 但如果是服务器主动关闭连接后异常终止，则因为它总是使用同一个知名服务端口号，所以连接的TIME_WAIT状态将导致它不能立即重启。不过，我们可以通过socket选项SO_REUSEADDR来强制进程立即使用处于TIME_WAIT状态的连接占用的端口    一个服务器可以接收多少tcp连接？
@@ -632,7 +632,7 @@ TCP连接的一端会向另一端发送携带RST标志的报文段，即复位�
 
 会发送复位报文段
 
-~~~
+```
 $sudo tcpdump-nt-i eth0 port 54321#仅抓取发送至和来自54321端口的TCP
 报文段
 $telnet 192.168.1.108 54321
@@ -641,7 +641,7 @@ telnet:connect to address 192.168.1.108:Connection refused
 
 1.IP 192.168.1.109.42001＞192.168.1.108.54321:Flags[S],seq 21621375,win 14600,length 0
 2.IP 192.168.1.108.54321＞192.168.1.109.42001:Flags[R.],seq 0,ack 21621376,win 0,length 0
-~~~
+```
 
 回复一个复位报文段R 接收通告窗口为0，所以收到复位的一方不能回应并且应该关闭或重新连接
 
@@ -659,7 +659,7 @@ TCP提供了异常终止一个连接的方法，即给对方发送一个复位�
 
 举例来说，我们在Kongming20上使用nc命令模拟一个服务器程序，使之监听12345端口，然后从ernest-laptop运行telnet命令登录到该端口上，接着拔掉ernest-laptop的网线，并在Kongming20上中断服务器程序。显然，此时ernest-laptop上运行的telnet客户端程序维持着一个半打开连接。然后接上ernest-laptop的网线，并从客户端程序往半打开连接写入1字节的数据“a”。同时，运行tcpdump程序抓取整个过程中telnet客户端和nc服务器交换的TCP报文段。具体操作过程如下：
 
-~~~
+```
 $nc-l 12345#在Kongming20上运行服务器程序
 $sudo tcpdump-nt-i eth0 port 12345
 $telnet 192.168.1.109 12345#在ernest-laptop上运行客户端程序
@@ -674,7 +674,7 @@ Connection closed by foreign host.
 3.IP 192.168.1.108.55100＞192.168.1.109.12345:Flags[.],ack 1,length 0
 4.IP 192.168.1.108.55100＞192.168.1.109.12345:Flags[P.],seq 1:4,ack 1,length 3
 5.IP 192.168.1.109.12345＞192.168.1.108.55100:Flags[R],seq 1495337792,length 0
-~~~
+```
 
 该输出内容中，前3个TCP报文段是正常建立TCP连接的3次握手的过程。
 
@@ -690,7 +690,7 @@ TCP报文段所携带的应用程序数据按照长度分为两种：**交互数
 
 考虑如下情况：在ernest-laptop上执行telnet命令登录到本机，然后在shell命令提示符后执行ls命令，同时用tcpdump抓取这一过程中telnet客户端和telnet服务器交换的TCP报文段。具体操作过程如下：
 
-~~~
+```
 $tcpdump-nt-i lo port 23
 $telnet 127.0.0.1
 Trying 127.0.0.1...
@@ -712,7 +712,7 @@ ernest@ernest-laptop:～$ls（回车）
 9.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[.],ack 176,win 630,length 0
 10.IP 127.0.0.1.23＞127.0.0.1.58130:Flags[P.],seq 176:228,ack 4,win 512,length 52
 11.IP 127.0.0.1.58130＞127.0.0.1.23:Flags[.],ack 228,win 630,length 0
-~~~
+```
 
 TCP报文段1由客户端发送给服务器，它携带1个字节的应用程序数据，即字母“l”。TCP报文段2是服务器对TCP报文段1的确认，同时回显字母“l”。TCP报文段3是客户端对TCP报文段2的确认。第4～6个TCP报文段是针对字母“s”的上述过程。TCP报文段7传送的2字节数据分别是：客户端键入的回车符和流结束符（EOF，本例中是0x00）。TCP报文段8携带服务器返回的客户查询的目录的内容（ls命令的输出），包括该目录下文件的文件名及其显示控制参数。TCP报文段9是客户端对TCP报文段8的确认。TCP报文段10携带的也是服务器返回给客户端的数据，包括一个回车符、一个换行符、客户端登录用户的PS1环境变量（第一级命令提示符）。TCP报文段11是客户端对TCP报文段10的确认。
 
@@ -724,7 +724,7 @@ TCP报文段1由客户端发送给服务器，它携带1个字节的应用程序
 
 下面考虑用FTP协议传输一个大文件。在ernest-laptop上启动一个vsftpd服务器程序（升级的、安全版的ftp服务器程序），并执行ftp命令登录该服务器上，然后在ftp命令提示符后输入get命令，从服务器下载一个几百兆的大文件。同时用tcpdump抓取这一个过程中ftp客户端和vsftpd服务器交换的TCP报文段。具体操作过程如下：
 
-~~~
+```
 $sudo tcpdump-nt-i eth0 port 20#vsftpd服务器程序使用端口号20
 $ftp 127.0.0.1
 Connected to 127.0.0.1.
@@ -755,7 +755,7 @@ ftp＞get bigfile（回车）		#获取大文件bigfile
 16.IP 127.0.0.1.20＞127.0.0.1.39651:Flags[P.],seq 206028801:206045185,ack 1,win 513,length 16384
 17.IP 127.0.0.1.39651＞127.0.0.1.20:Flags[.],ack 205815809,win 30084,length 0
 18.IP 127.0.0.1.39651＞127.0.0.1.20:Flags[.],ack 206045185,win 27317,length 0
-~~~
+```
 
 注意，客户端发送的最后两个TCP报文段17和18，它们分别是对TCP报文段2和16的确认（从序号值和确认值来判断）。由此可见，当传输大量大块数据的时候，发送方会连续发送多个TCP报文段，接收方可以一次确认所有这些报文段。那么发送方在收到上一次确认后，能连续发送多少个TCP报文段呢？这是由接收通告窗口（还需要考虑拥塞窗口，见后文）的大小决定的。TCP报文段17说明客户端还能接收30 084×64字节（本例中窗口扩大因子为6），即1 925 376字节的数据。而在TCP报文段18中，接收通告窗口大小为1 748 288字节，即客户端能接收的数据量变小了。这表明客户端的TCP接收缓冲区有更多的数据未被应用程序读取而停留在其中，这些数据都来自TCP报文段3～16中的一部分。服务器收到TCP报文段18后，它至少（因为接收通告窗口可能扩大）还能连续发送的未被确认的报文段数量是1 748288/16 384个，即106个（但一般不会连续发送这么多）。其中，16384是成块数据的长度（见TCP报文段1～16的length值），很显然它小于但接近MSS规定的16 396字节。
 
@@ -763,13 +763,13 @@ ftp＞get bigfile（回车）		#获取大文件bigfile
 
 下面我们修改系统的TCP接收缓冲区和TCP发送缓冲区的大小，使之都为4096字节，然后重启vsftpd服务器，并再次执行上述操作。
 
-~~~
+```
 1.IP 127.0.0.1.20＞127.0.0.1.45227:Flags[.],seq 5195777:5197313,ack 1,win 3072,length 1536
 2.IP 127.0.0.1.20＞127.0.0.1.45227:Flags[.],seq 5197313:5198849,ack 1,win 3072,length 1536
 3.IP 127.0.0.1.45227＞127.0.0.1.20:Flags[.],ack 5198849,win 3072,length 0
 4.IP 127.0.0.1.20＞127.0.0.1.45227:Flags[P.],seq 5198849:5200385,ack 1,win 3072,length 1536
 5.IP 127.0.0.1.45227＞127.0.0.1.20:Flags[.],ack 5200385,win 3072,length 0
-~~~
+```
 
 从同步报文段（未在代码中列出）得知在这次通信过程中，客户端和服务器的窗口扩大因子都为0，因而客户端和服务器每次通告的窗口大小都是3072字节（没超过4096字节，预料之中）。因为每个成块数据的长度为1536字节，所以服务器在收到上一个TCP报文段的确认之前最多还能再发送1个TCP报文段，这正是TCP报文段1～3描述的情形。
 
@@ -785,7 +785,7 @@ TCP服务必须能够重传超时时间内未收到确认的TCP报文段。为�
 
 我们通过实例来研究Linux下TCP的超时重传策略。在ernest-laptop上启动iperf服务器程序，然后从Kongming20上执行telnet命令登录该服务器程序。接下来，从telnet客户端发送一些数据（此处是“1234”）给服务器，然后断开服务器的网线并再次从客户端发送一些数据给服务器（此处是“12”）。同时，用tcpdump抓取这一过程中客户端和服务器交换的TCP报文段。具体操作过程如下：
 
-~~~
+```
 $sudo tcpdump-n-i eth0 port 5001
 $iperf-s					  #在ernest-laptop上执行
 $telnet 192.168.1.108 5001		#在Kongming20上执行
@@ -795,7 +795,7 @@ Escape character is'^]'.
 1234#发送完之后断开服务器网线
 12
 Connection closed by foreign host
-~~~
+```
 
 iperf是一个测量网络状况的工具，-s选项表示将其作为服务器运行。iperf默认监听5001端口，并丢弃该端口上接收到的所有数据，相当于一个discard服务器。
 
@@ -857,10 +857,10 @@ squid代理服务器接收到wget客户端的HTTP请求之后，将简单地修�
 
 * 修改squid服务器的配置文件/etc/squid3/squid.conf
 
-~~~
+```
 acl localnet src 192.168.1.0/24
 http_access allow localnet
-~~~
+```
 
 这两行代码的含义是：允许网络192.168.1.0上的所有机器通过该代理服务器来访问Web服务器。
 
@@ -876,7 +876,7 @@ service是一个脚本程序（/usr/sbin/service），它为/etc/init.d/目录�
 
 在执行wget命令前，我们首先应删除ernest-laptop的ARP高速缓存中路由器对应的项，以便观察TCP/IP通信过程中ARP协议何时起作用。然后，使用tcpdump命令抓取整个通信过程中传输的数据包。
 
-~~~
+```
 $sudo arp-d 192.168.1.1
 $sudo tcpdump-s 2000-i eth0-ntX'(src 192.168.1.108)or(dst 192.168.1.108)or(arp)'
 $wget--header="Connection:close"http://www.baidu.com/index.html
@@ -888,7 +888,7 @@ Length:8024(7.8K)[text/html]
 Saving to:“index.html”
 100%[=======================＞]8,024--.-K/s in 0.001s
 2012-07-03 00:51:12(8.76 MB/s)-“index.html”saved[8024/8024]
-~~~
+```
 
 wget命令的输出显示，HTTP请求确实是先被送至代理服务器的3128端口，并且代理服务器正确地返回了文件index.html的内容。
 
@@ -917,11 +917,11 @@ IP模块则将UDP数据报封装成IP数据报，并把源端IP地址（192.168.
 
 一般来说，通过域名来访问时，需要使用DNS服务来获取IP地址。但如果我们通过主机名来访问本地局域网上的机器，则可通过本地的静态文件来获得该机器的IP地址。Linux将目标主机名及其对应的IP地址存储在/etc/hosts配置文件中。当需要查询某个主机名对应的IP地址时，程序将首先检查这个文件。Kongming20上/etc/hosts文件的内容如下（笔者手动修改过）：
 
-~~~
+```
 127.0.0.1 localhost
 192.168.1.109 Kongming20
 192.168.1.108 ernest-laptop
-~~~
+```
 
 其中第一项指出本地回路地址127.0.0.1的名称是localhost，第二项和第三项则分别描述了Kongming20和ernest-laptop的IP地址及对应的主
 
@@ -945,12 +945,12 @@ TCP连接从建立到关闭的过程中，客户端仅给服务器发送了一�
 
 #### HTTP请求
 
-~~~
+```
 GET http://www.baidu.com/index.html HTTP/1.0
 User-Agent:Wget/1.12(linux-gnu)
 Host:www.baidu.com
 Connection:close
-~~~
+```
 
 GET请求方法，只读 的方式请求
 
@@ -978,7 +978,7 @@ Linux上提供了几个命令：HEAD、GET和POST。其含义基本与HTTP协议
 
 #### HTTP应答
 
-~~~
+```
 HTTP/1.0 200 OK
 Server:BWS/1.0
 Content-Length:8024
@@ -986,7 +986,7 @@ Content-Type:text/html;charset=gbk
 SetCookie:BAIDUID=A5B6C72D68CF639CE8896FD79A03FBD8:FG=1;expires=Wed,04-
 Jul-42 00:10:47 GMT;path=/;domain=.baidu.com
 Via:1.0 localhost(squid/3.0 STABLE18)
-~~~
+```
 
 * 第一行是状态行。“HTTP/1.0”是服务器使用的HTTP协议的版本号。通常，服务器需要使用和客户端相同的HTTP协议版本。“200 OK”是状态码和状态信息。
 

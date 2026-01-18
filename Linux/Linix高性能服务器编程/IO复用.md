@@ -21,7 +21,7 @@ std::vector<struct epoll_event> events_;  wait的时候存储监听到的事件
 
 监听事件：
 
-~~~
+```
 基础事件
 EPOLLIN: 可读事件
 EPOLLOUT: 可写事件
@@ -40,11 +40,11 @@ EPOLLEXCLUSIVE: 对于同一个文件描述符，在多个 epoll 实例中只有
 EPOLLIN | EPOLLET: 边缘触发的读事件
 EPOLLIN | EPOLLOUT | EPOLLET: 边缘触发的读写事件
 EPOLLIN | EPOLLRDHUP: 用于检测对端关闭
-~~~
+```
 
 
 
-~~~c
+```c
 struct epoll_event
 {
   uint32_t events;
@@ -58,11 +58,11 @@ typedef union epoll_data
   uint32_t u32;
   uint64_t u64;
 } epoll_data_t;
-~~~
+```
 
 ### epoller.h
 
-~~~c++
+```c++
 #ifndef EPOLLER_H
 #define EPOLLER_H
 
@@ -90,11 +90,11 @@ private:
 };
 
 #endif //EPOLLER_H
-~~~
+```
 
 ### epoller.cpp
 
-~~~c++
+```c++
 #include "epoller.h"
 
 Epoller::Epoller(int maxEvent):epollFd_(epoll_create(512)), events_(maxEvent){
@@ -142,11 +142,11 @@ uint32_t Epoller::GetEvents(size_t i) const {
     assert(i < events_.size() && i >= 0);
     return events_[i].events;
 }
-~~~
+```
 
 ###main.cpp
 
-~~~cpp
+```cpp
 #include "epoller.h"
 #include <iostream>
 #include <cstring>
@@ -214,7 +214,7 @@ int main() {
 
     return 0;
 }
-~~~
+```
 
 这里是使用的管道来使用的epoll
 
@@ -232,7 +232,7 @@ int main() {
 
 如何使用ET
 
-~~~c++
+```c++
 #include "epoller.h"
 #include <iostream>
 #include <cstring>
@@ -322,7 +322,7 @@ int main() {
 
     return 0;
 }
-~~~
+```
 
 ## tcp
 
@@ -358,7 +358,7 @@ read() 返回 0 表示对端关闭
 
 ## select、poll 和 epoll 区别
 
-~~~
+```
                 select          poll            epoll
 -----------------------------------------------------------------
 操作方式        遍历            遍历            回调
@@ -369,7 +369,7 @@ fd拷贝          每次都需要      每次都需要      只需一次
 遍历复杂度      O(n)			  O(n)           O(1)
 设置ET		 否			   否			是
 平台            多平台          多平台          Linux
-~~~
+```
 
 fd 拷贝指的是文件描述符从用户空间拷贝到内核空间的过程
 

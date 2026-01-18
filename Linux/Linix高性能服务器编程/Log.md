@@ -9,7 +9,7 @@ categories:
 
 mian.cpp
 
-~~~cpp
+```cpp
 #include <syslog.h>  
 #include <iostream>  
 #include <string>  
@@ -66,7 +66,7 @@ int main() {
   
     return 0;  
 }
-~~~
+```
 
 优先级：
 
@@ -75,7 +75,7 @@ int main() {
 * RAII模式管理日志资源（构造函数打开，析构函数关闭）
 * 支持日志级别过滤 
 
-> ~~~
+> ```
 > LOG_EMERG   (0) // 系统不可用（最高优先级）
 > LOG_ALERT   (1) // 必须立即采取行动
 > LOG_CRIT    (2) // 严重错误
@@ -84,7 +84,7 @@ int main() {
 > LOG_NOTICE  (5) // 正常但重要的情况
 > LOG_INFO    (6) // 信息性消息
 > LOG_DEBUG   (7) // 调试信息（最低优先级）
-> ~~~
+> ```
 >
 > LOG_UPTO(pri): 记录优先级等于或高于 pri 的所有消息
 
@@ -120,7 +120,7 @@ https://blog.csdn.net/weixin_51322383/article/details/130474753
 
 ### blockqueue.h
 
-~~~cpp
+```cpp
 # ifndef BLOCKQUEUE_H
 # define BLOCKQUEUE_H
 
@@ -282,13 +282,13 @@ void BlockQueue<T>::flush() {
     condConsumer_.notify_one();
 }
 # endif
-~~~
+```
 
 ## 缓冲区
 
 ###buffer.h
 
-~~~c++
+```c++
 #ifndef BUFFER_H
 #define BUFFER_H
 #include <cstring>   //perror
@@ -339,11 +339,11 @@ private:
 };
 
 #endif //BUFFER_H
-~~~
+```
 
 ### buffer.cpp
 
-~~~c++
+```c++
 #include "buffer.h"
 
 // 读写下标初始化，vector<char>初始化
@@ -490,7 +490,7 @@ void Buffer::MakeSpace_(size_t len) {
         assert(readable == ReadableBytes());
     }
 }
-~~~
+```
 
 
 
@@ -500,7 +500,7 @@ void Buffer::MakeSpace_(size_t len) {
 
 这里我们需要传入初始化参数所以选择懒汉模式将类的静态对象放到函数静态函数中。
 
-~~~c++
+```c++
 public:
 	static Log* Instance(){static Log log;return &log;}
 	void init(...);
@@ -508,11 +508,11 @@ private:
 	 Log();
 
 Log::Instance()->init(0, "./log", ".log", 1024);
-~~~
+```
 
 ### log.h
 
-~~~cpp
+```cpp
 #ifndef LOG_H
 #define LOG_H
 
@@ -594,11 +594,11 @@ private:
 
 #endif //LOG_H
 
-~~~
+```
 
 ### log.cpp
 
-~~~cpp
+```cpp
 #include "log.h"
 #include <errno.h>
 #include <unistd.h>
@@ -808,13 +808,13 @@ void Log::SetLevel(int level) {
     lock_guard<mutex> locker(mtx_);
     level_ = level;
 }
-~~~
+```
 
 ## 测试
 
 main.cpp
 
-~~~c++
+```c++
 #include <iostream>
 #include <thread>
 #include <string>
@@ -857,7 +857,7 @@ int main() {
     // SyncLog();
     return 0;
 }
-~~~
+```
 
 
 
@@ -874,7 +874,7 @@ int main() {
 
 block_queue.hpp
 
-~~~c++
+```c++
 /*
  * @file block_queue.hpp
  * @brief 阻塞队列的模板类实现
@@ -932,13 +932,13 @@ T BlockQueue<T>::pop(){
 }
 
 #endif
-~~~
+```
 
 ###测试
 
 main.cpp
 
-~~~c++
+```c++
 #include "block_queue.hpp"
 #include <thread>
 #include <chrono>
@@ -985,7 +985,7 @@ int main() {
     }
     return 0;
 }
-~~~
+```
 
 ## 缓冲区
 

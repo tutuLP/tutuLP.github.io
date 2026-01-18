@@ -79,7 +79,7 @@ Qt的编译不能使用普通的make，先qmake预编译
 
 .pro文件是工程文件，qmake自动生成的用于生产makefile的配置文件
 
-~~~c++
+```c++
 #include <QApplication> 
 #include <QLabel>  //头文件名也是类名
 
@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
         label->show(); //使这个label可见，可以制定避免闪烁
         return app.exec(); //将应用程序的控制权移交给Qt
 }
-~~~
+```
 
 Qt的编译不能使用普通的make，先qmake预编译
 
@@ -108,7 +108,7 @@ Qt也是支持HTML解析的
 
 ## 信号槽
 
-~~~c++
+```c++
 #include <QtGui/QApplication> 
 #include <QtGui/QPushButton> 
 int main(int argc, char *argv[]) 
@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
         button->show(); 
         return a.exec(); 
 }
-~~~
+```
 
 \#include <QtWidgets/QApplication>
 \#include <QtWidgets/QPushButton> 替换开头的头文件才能用
@@ -134,7 +134,7 @@ clicked()就是一个信号，而 quit()就是槽
 
 QSpinBox 是一个有上下箭头的微调器，QSlider 是一个滑动杆
 
-~~~c++
+```c++
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QSpinBox>
@@ -165,7 +165,7 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
-~~~
+```
 
 Qt 一共有三种主要的 layout，分别是：
 
@@ -185,7 +185,7 @@ QGridLayout- 在一个网格中进行布局，类似于 HTML 的 table。
 
 头文件
 
-~~~c++
+```c++
 #ifndef FINDDIALOG_H 
 #define FINDDIALOG_H 
 
@@ -219,11 +219,11 @@ private:
 }; 
 
 #endif // FINDDIALOG_H
-~~~
+```
 
 源代码
 
-~~~c++
+```c++
 #include <QtWidGets> 
 #include "finddialog.h" 
 
@@ -289,11 +289,11 @@ void FindDialog::enableFindButton(const QString &text)
 { 
         findButton->setEnabled(!text.isEmpty()); 
 }
-~~~
+```
 
 main.cpp
 
-~~~c++
+```c++
 #include <QApplication>
 
 #include "widget.h"
@@ -305,7 +305,7 @@ int main(int argc, char *argv[])
     dialog->show();
     return app.exec();
 }
-~~~
+```
 
 
 
@@ -343,7 +343,7 @@ button->setFixedSize(100,50);//大小
 
 信号与槽
 
-~~~c++
+```c++
 //信号发出者，信号，信号接收者，接收信号后执行的任务（槽函数）
 connect(button,&QPushButton::clicked,this,&Widget::close);//点击关闭，自带的关闭和点击函数
 
@@ -384,7 +384,7 @@ void(Student::*b)(QString)=&Student::treat;
 connect(tea,a,stu,b);
 ClassOver();
 //Qstring输出带有""转化为不带 <<str.toUtf8().data();有空格,qDebug().nospace()<< 没有
-~~~
+```
 
 自定义信号与槽 新建类继承于QObejct(槽函数全局,lambda除外)
 
@@ -394,13 +394,13 @@ ClassOver();
 
 lambda表达式 ()里面可以写参数,省去写函数的部分,节省时间
 
-~~~c++
+```c++
 QPushButton * b1=new QPushButton ("点击",this);
     connect(b1,&QPushButton::clicked,this,[=](){
     qDebug()<<"按钮被按下";
     }
             );
-~~~
+```
 
 
 
@@ -412,13 +412,13 @@ ctrl+n  Qt-Qt source file-前缀/-添加图片
 
 可以起别名
 
-~~~c++
+```c++
 	QPixmap pix=QPixmap(":/image/d2.png").scaled(this->size());//设置大小
     //pix.load(":/image/d2.png");//没有设置大小
     QPalette palette;
     palette.setBrush(QPalette::Window,QBrush(pix));//QPalette::Background
     this->setPalette(palette);
-~~~
+```
 
 给菜单项增加图片
 
@@ -440,7 +440,7 @@ ui
 
 对话框
 
-~~~c++
+```c++
     QDialog dialog;
     dialog.setWindowTitle(tr("Hello"));
     dialog.exec();//模态对话框（只能操作对话框）
@@ -450,17 +450,17 @@ ui
     dialog->setAttribute(Qt::WA_DeleteOnClose);//自动销毁，不占用内存
     dialog->setWindowTitle(tr("Hello"));
     dialog->show();
-~~~
+```
 
 标准对话框（内置）
 
-~~~
+```
 QColorDialog 选择颜色
 QFileDialog 选择文件/目录
 QFontDialog 选择字体
 QInputDialog 允许用户输入一个值，并且返回
 QMessageBox 模态对话框，用于显示信息，询问问题等
-~~~
+```
 
 按钮pushbutton
 
@@ -468,7 +468,7 @@ QMessageBox 模态对话框，用于显示信息，询问问题等
 
 plain text edit 文本编辑器
 
-~~~c++
+```c++
 //选择文件，并且输出文件地址
 void MainWindow::on_pushButton_clicked()
 {
@@ -477,7 +477,7 @@ void MainWindow::on_pushButton_clicked()
         ui->plainTextEdit->appendPlainText(fileName);
     }
 }
-~~~
+```
 
 
 
@@ -485,7 +485,7 @@ void MainWindow::on_pushButton_clicked()
 
 颜色对话框
 
-~~~c++
+```c++
 void MainWindow::on_pushButton_2_clicked()
 {
     QPalette pal=ui->plainTextEdit->palette();//获取现有palette
@@ -496,7 +496,7 @@ void MainWindow::on_pushButton_2_clicked()
         ui->plainTextEdit->setPalette(pal);//设置编辑器文字颜色
     }
 }
-~~~
+```
 
 选择字体对话框
 
@@ -535,17 +535,17 @@ wiget.h中包含新界面的头文件
 
 private中新建  LogIn *new_window;
 
-~~~c++
+```c++
 this->new_window=new LogIn();
     connect(ui->pushButton,&QPushButton::clicked,this,[=](){
         this->hide();
         this->new_window->show();//想要登录后释放之前的界面？
     });
-~~~
+```
 
 新界面返回主界面
 
-~~~c++
+```c++
 //LogIn.h
 signals:
     void back(void);
@@ -556,18 +556,18 @@ connect(this->new_window,&LogIn::back,this,[=](){
         this->new_window->hide();
         this->show();
     });
-~~~
+```
 
 ##标签
 
 \#include<Qlabel>
 
-~~~c++
+```c++
     QLabel *l=new QLabel(this);
     l->setText("这是OpenChatroom");
-~~~
+```
 
-~~~c++
+```c++
 #include <QLineEdit>
     QLineEdit *e=new QLineEdit(this);
     e->setText("请输入6位数字");
@@ -583,7 +583,7 @@ connect(this->new_window,&LogIn::back,this,[=](){
     PasswordEchoEdit//正在输入时显示，输完不显示
 //设置输出左，上，右，下的距离
         e->setTextMargins(0,0,0,0);
-~~~
+```
 
 自定义控件-经常用到的页面进行展示
 

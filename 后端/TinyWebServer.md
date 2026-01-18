@@ -9,7 +9,7 @@ git clone https://github.com/qinguoyi/TinyWebServer.git
 
 准备mysql数据库 目前是在docker 容器mysql8 root 123456
 
-~~~mysql
+```mysql
 create database tynywebserver;
 USE tynywebserver;
 CREATE TABLE user(
@@ -17,7 +17,7 @@ CREATE TABLE user(
     passwd char(50) NULL
 )ENGINE=InnoDB;
 INSERT INTO user(username, passwd) VALUES('name', 'passwd');
-~~~
+```
 
 sudo yum install mysql-devel
 

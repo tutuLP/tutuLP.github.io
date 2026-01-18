@@ -23,7 +23,7 @@ sudo nginx
 
 ## windows
 
-~~~sh
+```sh
 # 下载地址 https://nginx.org/en/download.html
 
 # 在安装目录中执行 C:\APP\nginx-1.24.0\nginx-1.24.0
@@ -31,11 +31,11 @@ sudo nginx
 cd C:\app\nginx-1.24.0\nginx-1.24.0
 .\nginx.exe -s reload
 
-~~~
+```
 
 ## centos
 
-~~~shell
+```shell
 yum install nginx
 nginx
 nginx -s stop
@@ -53,7 +53,7 @@ cd nginx-1.26.3/
 make install
 echo 'export PATH=$PATH:/usr/local/nginx/sbin' >> ~/.bashrc
 source ~/.bashrc
-~~~
+```
 
 Centos-9-stream 上安装nginx最新稳定版
 
@@ -85,7 +85,7 @@ sudo dnf module disable nginx -y
 
 ## 常用指令
 
-~~~shell
+```shell
 nginx             # 启动Nginx
 nginx -c filename # 指定配置⽂件
 nginx -V          # 查看Nginx的版本和编译参数等信息
@@ -95,7 +95,7 @@ nginx -s quit     # 优雅停⽌Nginx
 nginx -s stop     # 快速停⽌Nginx
 nginx -s reload   # 重新加载配置⽂件
 nginx -s reopen   # 重新打开⽇志⽂件
-~~~
+```
 # 部署
 
 ```shell
@@ -150,33 +150,33 @@ sudo firewall-cmd --reload
 
 在server块上方添加反向代理配置
 
-~~~
+```
 upstream backend{
 	server 47.115.215.143:8000;
 	server 47.115.215.143:8001;
 	server 47.115.215.143:8002;
 }
-~~~
+```
 
 在server中添加location配置
 
-~~~
+```
 location{
 	proxy_pass http://backend; #与上方反向代理一致
 }
-~~~
+```
 
 nginx -s reload
 访问47.115.215.143/app 默认轮询访问，可以设置权重也就是访问到的概率，修改配置
 
-~~~
+```
 upstream backend{
 	ip_hash; #根据客户端的ip地址进行哈希，同一个客户端的请求会分配到同一个服务器
 	server 47.115.215.143:8000 weight=3;
 	server 47.115.215.143:8001;
 	server 47.115.215.143:8002;
 }
-~~~
+```
 
 # 配置demo
 
