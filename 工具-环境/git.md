@@ -73,7 +73,9 @@ git remote add origin https://github.com/your-username/your-new-repo.git
 git remote -v
 ```
 
+### 停止追踪
 
+`git rm -r --cached static`
 
 ## 新建仓库并关联远程仓库
 

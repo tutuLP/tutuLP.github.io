@@ -439,3 +439,14 @@ Centos Podman Nginx PostgreSQL Go
 
 环境隔离与依赖，升级，回滚，迁徙，CI/CD等方面更加方便
 
+
+
+# 向量选择
+
+https://huggingface.co/spaces/mteb/leaderboard
+
+排行第一的：Kingsoft-LLM/QZhou-Embedding-Zh
+
+
+
+`HF_ENDPOINT=https://hf-mirror.com python export_model.py`
