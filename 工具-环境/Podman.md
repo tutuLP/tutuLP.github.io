@@ -31,9 +31,11 @@ podman info
 
 ## win
 
-https://blog.csdn.net/qq_43072399/article/details/134076856
+> 在windows中使用podman,选用的是cli的模式而不是 Desktop
 
-* 启用wsl
+**安装步骤**
+1. 配置wsl环境
+教程:https://blog.csdn.net/qq_43072399/article/details/134076856
 
 ```
 ctrl+r control
@@ -46,14 +48,28 @@ ctrl+r control
 wsl --set-default-version 2
 wsl --update
 wsl --install
-# https://github.com/containers/podman/tree/main
-# 我下载的是podman-installer-windows-amd64.exe  双击安装
-podman --version   # podman version 5.5.2
-podman machine init
-podman machine start
 ```
 
+2. wsl使用指南
+`wsl --list --verbose`查看wsl的机器
 
+  NAME                      STATE           VERSION
+* Ubuntu                    Stopped         2
+  podman-machine-default    Stopped         2
+
+`wsl -d Ubuntu` 进入wsl
+
+3. 下载podman cli
+进入官网 https://podman.io/ 下载podman cli for win
+安装完成后可以直接打开使用指导: file:///C:/Program%20Files/RedHat/Podman/podman-for-windows.html
+```shell
+# 启动podman机器
+podman machine start
+# 开机自启
+podman machine set --rootful=false 
+# 测试-输出linux中的时间
+podman run ubi8-micro date
+```
 
 # 镜像-暂时无用
 
