@@ -12,8 +12,31 @@ tags:
 ## mac
 
 ```shell
- https://podman.io/ #下载 desktop 
+https://podman.io/ #根据需求选择可视化版本或cli版本
   # Create a Podman machine 2核4G
+
+# 验证是否安装成功
+podman --version
+
+# 初始化 podman 虚拟机
+podman machine init \
+  --cpus 4 \
+  --memory 4096 \
+  --disk-size 50
+
+# 启动
+podman machine start
+
+# 查看虚拟机状态
+podman machine list
+
+# 关闭虚拟机
+podman machine stop
+
+# 验证连接
+podman system connection list
+
+podman run --rm hello-world
 ```
 
 ## LInux-Centos

@@ -529,7 +529,7 @@ let user = users.get(&uid)
     .ok_or_else(|| anyhow!("user not found: {}", uid))?;
 ```
 
-### return Err
+### return Err/bail!
 
 手动返回错误
 
@@ -537,7 +537,42 @@ let user = users.get(&uid)
 if config.redis_url.is_empty() {
     return Err(anyhow!("redis_url is empty"));
 }
+// 等价
+if config.redis_url.is_empty() {
+    bail!("redis_url is empty");
+}
 ```
+
+## 调用处理
+
+1. 使用?传递
+2. 返回值为Result<()>,直接使用`if let Err(e) =`
+3. 使用默认值
+
+* unwrap_or() 慎用会跳过错误处理
+
+* unwrap_or_else 可以使用,但是也要错误处理
+
+```
+unwrap_or_else(|e| {
+    log::warn!("A failed: {}", e);
+    0
+});
+```
+
+* match 匹配
+
+```
+let v = match A() {
+    Ok(v) => v,
+    Err(e) => {
+        log::error!("A error: {}", e);
+        return Err(e);
+    }
+};
+```
+
+
 
 
 

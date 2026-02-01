@@ -201,11 +201,18 @@ pub async fn create_postgres_pool(pg_config: &PostgresConfig) -> Result<Pool<Pos
 使用：同样建议放在AppState结构体中
 
 ```toml
-redis = { version = "0.25", features = ["tokio-comp"] }
-deadpool-redis = "0.15"
+redis = { version = "0.32", features = ["tokio-comp"] }
+deadpool-redis = { version = "0.22.0", features = ["rt_tokio_1"] }
 ```
 
-
+```toml
+[redis]
+url = "redis://:password@ft11:6379/0"
+max_size = 16
+wait_timeout = 3
+create_timeout = 3
+recycle_timeout = 3
+```
 
 ```rust
 use std::time::Duration;
@@ -234,17 +241,19 @@ pub struct RedisConfig {
 /// * Ok(Pool) - 创建成功的连接池
 /// * Err(anyhow::Error) - 创建失败原因
 pub fn create_redis_pool(redis_config: &RedisConfig) -> Result<Pool> {
-    let mut cfg = Config::default();
-    cfg.url = Some(redis_config.url.clone());
-    cfg.pool = Some(PoolConfig {
-        max_size: redis_config.max_size,
-        timeouts: Timeouts {
-            wait: Some(Duration::from_secs(redis_config.wait_timeout)),
-            create: Some(Duration::from_secs(redis_config.create_timeout)),
-            recycle: Some(Duration::from_secs(redis_config.recycle_timeout)),
-        },
+    let cfg = Config {
+        url: Some(redis_config.url.clone()),
+        pool: Some(PoolConfig {
+            max_size: redis_config.max_size,
+            timeouts: Timeouts {
+                wait: Some(Duration::from_secs(redis_config.wait_timeout)),
+                create: Some(Duration::from_secs(redis_config.create_timeout)),
+                recycle: Some(Duration::from_secs(redis_config.recycle_timeout)),
+            },
+            ..Default::default()
+        }),
         ..Default::default()
-    });
+    };
 
     cfg.create_pool(Some(Runtime::Tokio1))
         .context("failed to create redis connection pool")

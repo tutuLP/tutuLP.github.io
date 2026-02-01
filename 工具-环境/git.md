@@ -212,7 +212,55 @@ git branch -d <branch_name>
 git branch -D <branch_name>
 # 删除远程分支
 git push origin --delete <branch_name>
+# 删除当前分支以外的所有本地分支
+git branch | grep -v "\*" | xargs git branch -D
 ```
+
+## rebase
+
+场景:当基于分支A的状态a1新建一个分支B,然后分支A新增了提交到达了分支a2,现在将B合入A如果发生冲突,需要在分支B进行rebase,将基于a1的状态修改为基于a2的状态,以此进行安全的合并
+
+> rebase是一个过程,需要将所有的冲突点合并
+
+```shell
+# 确认自己在分支B
+
+# 拉取远端所有最新的分支
+git fetch origin
+
+# 开始rebase
+git rebase origin/B
+
+# 解决有冲突的文件
+
+# 标记冲突解决
+git add 冲突文件
+
+# 继续 rebase
+git rebase --continue
+
+# 强制重写提交
+git push --force-with-lease origin B
+```
+
+放弃rebase:`git rebase --abort`
+
+## 回滚revert
+
+> 这是回滚,是有记录的安全操作而不是使用reset强制回到之前的状态-会导致记录丢失
+
+```shell
+# 回滚一个提交
+git revert <commit id>
+
+
+# 回滚一段提交
+git revert <commit id>..HEAD
+
+# commit之后直接push即可
+```
+
+比如提交A->B->C-D,想要回到C的状态就revert D 然后提交推送,如果想回到B就revert C..HEAD
 
 # 错误
 
