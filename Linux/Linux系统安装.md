@@ -7,6 +7,14 @@ categories:
 
 # 安装虚拟机
 
+## vm-ware windows
+
+下载：
+https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion
+https://support.broadcom.com/group/ecx/free-downloads
+VMware Workstation Pro
+选择最新的25H2
+
 ## 前置准备
 
 1. bios里修改设置：开启虚拟化设备支持   【上网搜索（系统默认开启）】
@@ -25,6 +33,60 @@ Anolis8.6 GA 下载地址：https://mirrors.openanolis.cn/anolis/8.6/isos/GA/x86
 ## CentOS7
 
 下载地址：https://mirrors.aliyun.com/centos/7/isos/x86_64/  CentOS-7-x86_64-Minimal-2009.iso
+
+## debian
+下载地址：
+https://www.debian.org/download.zh-cn.html
+或 https://developer.aliyun.com/mirror/debian
+
+禁用语音播报：
+systemctl stop espeakup
+systemctl disable espeakup
+
+开启ssh
+```shell
+sudo apt update
+sudo apt install -y openssh-server
+sudo systemctl start ssh
+sudo systemctl enable ssh
+sudo apt install -y ufw
+sudo ufw allow 22/tcp
+sudo ufw reload
+sudo ufw status
+sudo apt install -y vim
+vim /etc/ssh/sshd_config
+# 确保
+PermitRootLogin yes
+PasswordAuthentication yes
+sudo systemctl restart ssh
+```
+删除旧的连接记录指纹
+ssh-keygen -R 192.168.248.129
+
+### 静态ip
+
+1. 确定管理方式
+systemctl status NetworkManager
+或
+networkctl 可以查看管理状态，显示网卡比如ens33为unmanaged 则可能为 NetworkManager 管理，当前不是
+
+
+新建文件：/etc/systemd/network/20-ens33-static.network
+
+```
+[Match]
+Name=ens33
+
+[Network]
+Address=192.168.248.147/24
+Gateway=192.168.248.2
+DNS=8.8.8.8
+DNS=8.8.4.4
+```
+
+systemctl restart systemd-networkd
+
+
 
 ## Ubuntu安装g++
 
