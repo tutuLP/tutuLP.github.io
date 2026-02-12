@@ -229,7 +229,7 @@ git branch | grep -v "\*" | xargs git branch -D
 git fetch origin
 
 # 开始rebase
-git rebase origin/B
+git rebase origin/A
 
 # 解决有冲突的文件
 
