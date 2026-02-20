@@ -39,6 +39,11 @@ Anolis8.6 GA 下载地址：https://mirrors.openanolis.cn/anolis/8.6/isos/GA/x86
 https://www.debian.org/download.zh-cn.html
 或 https://developer.aliyun.com/mirror/debian
 
+安装指南：
+https://chanchifeng.com/linux/init/debian13-x86-64-desktop
+https://zhuanlan.zhihu.com/p/1964014710648203138
+https://ruohai.wang/202410/debian-config-static-ip/
+
 禁用语音播报：
 systemctl stop espeakup
 systemctl disable espeakup
@@ -86,6 +91,25 @@ DNS=8.8.4.4
 
 systemctl restart systemd-networkd
 
+### 重新启动发现无法ssh
+
+* ip a 发现静态ip没有配置成功
+`systemctl is-enabled systemd-networkd` 发现没有设置开启自动启动
+
+* ssh无法连接
+检查sshd服务正在运行，并且已经设置了开机自动启动
+`ufw status | grep 22` 发现并没有放行22端口
+
+ufw allow ssh
+ufw allow 22/tcp
+ufw enable
+ufw reload
+
+type $env:USERPROFILE\.ssh\id_ed25519.pub
+
+type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh root@192.168.248.147 `
+"mkdir -p ~/.ssh && chmod 700 ~/.ssh && `
+cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
 
 
 ## Ubuntu安装g++

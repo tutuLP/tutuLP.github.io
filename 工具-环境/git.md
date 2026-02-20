@@ -218,7 +218,9 @@ git branch | grep -v "\*" | xargs git branch -D
 
 ## rebase
 
-场景:当基于分支A的状态a1新建一个分支B,然后分支A新增了提交到达了分支a2,现在将B合入A如果发生冲突,需要在分支B进行rebase,将基于a1的状态修改为基于a2的状态,以此进行安全的合并
+### 场景1（不同分支）
+
+当基于分支A的状态a1新建一个分支B,然后分支A新增了提交到达了分支a2,现在将B合入A如果发生冲突,需要在分支B进行rebase,将基于a1的状态修改为基于a2的状态,以此进行安全的合并
 
 > rebase是一个过程,需要将所有的冲突点合并
 
@@ -244,6 +246,13 @@ git push --force-with-lease origin B
 ```
 
 放弃rebase:`git rebase --abort`
+
+### 场景2（相同分支）
+
+远端:   A --- B --- C
+本地:   A --- B --- D
+
+git pull --rebase
 
 ## 回滚revert
 
