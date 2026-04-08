@@ -39,17 +39,21 @@ podman system connection list
 podman run --rm hello-world
 ```
 
-## LInux-Centos
+## LInux
 
 ```sh
+# centos
 # 更新包列表数据
 sudo dnf makecache
-
 # 下载
 sudo dnf install -y podman
-
 # 验证，不需要启动与docker不一样
 podman info
+
+# debian
+apt update
+apt upgrade -y
+apt install -y podman
 ```
 
 ## win
@@ -111,6 +115,7 @@ unqualified-search-registries = ["docker.io"]
 prefix = "docker.io"
 location = "docker.1ms.run"
 
+# centos 先查看状态确定是否需要重启，debian不用
 sudo systemctl restart podman
 ```
 
@@ -184,16 +189,28 @@ podman machine ssh
 podman pull docker.io/library/postgres:latest # 暂时没有找到镜像，直接全局代理拉
 
 podman pull docker.1ms.run/postgres:latest
-# 查看版本 17.5
-podman run --rm postgres:latest postgres -V
-# run
-mkdir -p ~/pgdata   
 
+podman pull postgres:latest
+
+# 查看版本 18.3
+podman run --rm postgres:latest postgres -V
+
+# run 并将数据挂载到宿主机的 ~/pgdata 目录
 podman run -d \
   --name postgres \
   -e POSTGRES_PASSWORD=mysecretpassword \
-  -v ~/pgdata:/var/lib/postgresql/data:Z \
+  -v $HOME/pgdata:/var/lib/postgresql/data:Z \
   -p 5432:5432 \
+  --restart=always \
+  postgres:latest
+
+# 18+
+podman run -d \
+  --name postgres \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -v $HOME/pgdata:/var/lib/postgresql:Z \
+  -p 5432:5432 \
+  --restart=always \
   postgres:latest
 
 # 内部登录
@@ -207,6 +224,38 @@ podman exec -i postgres psql -U postgres < ~/all_databases.sql
 brew install libpq
 brew link --force libpq
 psql -h localhost -p 5432 -U postgres
+```
+
+```
+apt install postgresql-client -y
+psql -h 127.0.0.1 -p 5432 -U postgres
+mysecretpassword
+SELECT version();
+\q
+
+podman exec -it postgres bash
+psql -U postgres
+SHOW listen_addresses; # 显示为*不用修改
+
+podman exec -it postgres bash
+find / -name postgresql.conf
+# /var/lib/postgresql/18/docker/postgresql.conf
+
+find / -name pg_hba.conf
+vi /var/lib/postgresql/18/docker/pg_hba.conf
+host all all 0.0.0.0/0 md5
+host all all 192.168.0.0/16 md5
+
+ss -lntp | grep 5432
+# 0.0.0.0:5432
+exit
+podman restart postgres
+
+ufw allow 5432/tcp
+ufw status
+
+psql -h 192.168.248.200 -U postgres
+mysecretpassword
 ```
 
 
@@ -240,10 +289,42 @@ CREATE EXTENSION IF NOT EXISTS vector;
 
 ## Redis
 
-```
-podman pull redis
-podman run -d --name redis -p 6379:6379  redis
-# windows 安装 Redis CLI
-podman exec -it redis redis-cli
+```shell
+podman pull redis:latest
+
+podman run -d \
+--name redis \
+-p 6379:6379 \
+-v ~/redis/data:/data:Z \
+-v ~/redis/redis.conf:/usr/local/etc/redis/redis.conf:Z \
+redis \
+redis-server /usr/local/etc/redis/redis.conf
 ```
 
+* 数据目录
+
+`mkdir -p ~/redis/data`
+
+* 配置文件
+
+`vim ~/redis/redis.conf`
+
+```
+#允许远程连接
+bind 0.0.0.0
+port 6379
+
+protected-mode yes
+# 设置密码
+requirepass myredispassword
+
+# 开启持久化
+appendonly yes
+dir /data
+```
+
+ufw allow 6379
+
+apt install -y redis-tools
+
+redis-cli -h 192.168.248.200 -p 6379 -a myredispassword

@@ -585,3 +585,53 @@ let v = match A() {
 * warning: `/Users/xzmini11/.cargo/config` is deprecated in favor of `config.toml`
 
 mv ~/.cargo/config ~/.cargo/config.toml
+
+# 多项目-creat管理
+
+方法一
+
+```
+workspace-root/
+├── project/        
+│   ├── Cargo.toml
+│   └── src/
+│
+├── embedding-lib/    ← crate
+│   ├── Cargo.toml
+│   └── src/
+
+[dependencies]
+embedding-lib = { path = "../embedding-lib" } #在 project 里直接引用
+```
+
+方法二-workspace
+
+```
+project/
+├── Cargo.toml          ← workspace
+├── embedding-lib/    
+│   ├── Cargo.toml
+│   └── src/
+│       ├── lib.rs
+│       └── embedding.rs
+│
+├── app/                ← 原来的项目
+│   ├── Cargo.toml
+│   └── src/
+│       ├── api/
+│       ├── dao/
+│       ├── domain/
+│       ├── dto/
+│       ├── infra/
+│       ├── service/
+│       └── main.rs
+
+[workspace]
+members = [
+    "app",
+    "embedding-lib"
+]
+[dependencies]
+embedding-lib = { path = "../embedding-lib" }
+```
+

@@ -111,8 +111,66 @@ type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh root@192.168.248.147 `
 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && `
 cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
 
+## Ubuntu
 
-## Ubuntu安装g++
+https://ubuntu.com/download/server#manual-install-tab
+
+### 配置静态ip
+1. 禁用 cloud-init 网络配置
+`sudo vim /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg`
+写入 network: {config: disabled}
+
+2. 新建 Netplan 配置
+`sudo vim /etc/netplan/01-static-ip.yaml`
+```yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens33:
+      dhcp4: no
+      addresses:
+        - 192.168.248.200/24
+      routes:
+        - to: default
+          via: 192.168.248.2
+      nameservers:
+        addresses:
+          - 8.8.8.8
+          - 1.1.1.1
+```
+并且修改权限：`sudo chmod 600 /etc/netplan/01-static-ip.yaml`
+
+3. 删除原来的配置文件
+
+`ls /etc/netplan` 发现多出一个50-cloud-init.yaml
+`sudo rm /etc/netplan/50-cloud-init.yaml`
+
+4. 重启配置
+`sudo netplan apply`
+
+### 设置root权限并配置ssh
+1. 设置root密码，设置之后可以使用root登录
+`sudo passwd root`
+
+`sudo -i`
+
+2. 允许root登录ssh
+`sudo vim /etc/ssh/sshd_config`
+PermitRootLogin yes
+PasswordAuthentication yes # 允许密码登录
+
+`sudo systemctl restart ssh`
+
+> 配置好密钥登录并取消密码登录之后发现还能使用密码登录，ubuntu允许分文件配置
+* 确认是否能使用密码登录
+`sshd -T | grep password`
+
+* 配置被覆盖了，目录为：/etc/ssh/sshd_config.d
+修改配置文件
+`sudo vim /etc/ssh/sshd_config.d/50-cloud-init.conf`
+
+## Ubuntu 安装g++
 
 sudo apt update
 
