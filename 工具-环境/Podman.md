@@ -113,6 +113,9 @@ unqualified-search-registries = ["docker.io"]
 
 [[registry]]
 prefix = "docker.io"
+location = "docker.io"
+
+[[registry.mirror]]
 location = "docker.1ms.run"
 
 # centos 先查看状态确定是否需要重启，debian不用
@@ -254,7 +257,7 @@ podman restart postgres
 ufw allow 5432/tcp
 ufw status
 
-psql -h 192.168.248.200 -U postgres
+psql -h 192.168.248.201 -U postgres
 mysecretpassword
 ```
 
@@ -297,6 +300,7 @@ podman run -d \
 -p 6379:6379 \
 -v ~/redis/data:/data:Z \
 -v ~/redis/redis.conf:/usr/local/etc/redis/redis.conf:Z \
+--restart=always \
 redis \
 redis-server /usr/local/etc/redis/redis.conf
 ```
@@ -327,4 +331,4 @@ ufw allow 6379
 
 apt install -y redis-tools
 
-redis-cli -h 192.168.248.200 -p 6379 -a myredispassword
+redis-cli -h 192.168.248.201 -p 6379 -a myredispassword

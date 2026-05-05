@@ -130,7 +130,7 @@ network:
     ens33:
       dhcp4: no
       addresses:
-        - 192.168.248.200/24
+        - 192.168.248.201/24
       routes:
         - to: default
           via: 192.168.248.2

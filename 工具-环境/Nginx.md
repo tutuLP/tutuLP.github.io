@@ -206,7 +206,11 @@ sudo nginx
 https://127.0.0.1:1003/home
 ```
 
-nginx.conf
+nginx.conf C:\APP\nginx-1.24.0\nginx-1.24.0\conf
+前端服务：http://localhost:8848/
+后端服务：http://localhost:8888/api/
+WebSocket 服务：localhost:3001
+访问路径：https://app.test:1003
 
 ```
 worker_processes  1;
@@ -280,6 +284,8 @@ http {
     }
 }
 ```
+
+
 
 
 
