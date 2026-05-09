@@ -12,7 +12,7 @@ Security → Secure Boot -> Disabled
 快速按F12进入启动菜单：
 Boot Menu -> USB HDD / U盘名字
 5. 安装系统
-Ventory选择normal1模式安装
+Ventory 选择normal1模式安装
 
 ## Fedora bilibili
 
