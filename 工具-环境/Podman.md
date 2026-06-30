@@ -332,3 +332,30 @@ ufw allow 6379
 apt install -y redis-tools
 
 redis-cli -h 192.168.248.201 -p 6379 -a myredispassword
+
+
+
+## 操作
+
+### 删除
+
+* 删除容器
+
+`podman rm 容器ID/容器名`
+
+* 强制删除正确运行的容器
+
+`podman rm -f 容器ID/容器名`
+
+* 删除容器和挂载的卷
+
+`podman rm -v 容器ID/名称`
+
+* 删除所有未被使用的卷
+
+`podman volume prune -f`
+
+* 删除镜像
+
+`podman rmi 镜像ID/镜像名:标签`
+

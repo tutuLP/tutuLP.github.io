@@ -20,7 +20,27 @@ https://www.rust-lang.org/zh-CN/learn/get-started
 - cargo --version   cargo是rust的包管理工具，类似python的pip
 - rustc --version
 
+将vs中c++的环境添加到环境变量
 
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\bin\Hostx64\x64
+
+
+
+
+
+'static 生命周期
+
+1. 字符串字面值就具有 'static 生命周期
+   函数参数类型：&'static str ，传入参数类型&str
+2. 特征对象的生命周期
+
+
+
+```
+assert_eq!(a, b);
+```
+
+基本类型已经实现了`Debug` trait和Display trait所以可以直接使用{:?} {}
 
 ## 编辑器
 
@@ -376,75 +396,217 @@ fn main() {
 }
 ```
 
-## 数组和切片
+## 数组/向量/切片
 
-数组：[T; length] 类型和大小，相同类型，连续存储
-切片：和数组类似，但是大小在编译时不确定，双字对象，指向数据的指针+切片长度，字大小是usize，处理器架构决定
+> 切片可以切数组、向量、String
 
-slice 可以用来借用数组的一部分。slice 的类型标记为 `&[T]`。
+### 初始化
 
 ```rust
-use std::mem;//获取字节数
-// 此函数借用一个 slice
-fn analyze_slice(slice: &[i32]) {
-    println!("first element of the slice: {}", slice[0]);
-    println!("the slice has {} elements", slice.len());
+//数组初始化 - 必须在编译时确定长度
+let arr = [10, 20, 30, 40, 50];
+let arr: [u8; 256] = [0; 256];
+
+// 向量初始化
+let mut vec: Vec<i32> = Vec::new();
+let vec = vec![0; 100]; 
+let mut rows = vec![String::new(); 3];
+
+// 切片，表示截取arr下标从1到3
+let slice = &arr[1..4];
+```
+
+### 向量操作
+
+```rust
+// 遍历
+for (idx, word) in words.iter().enumerate() {}
+```
+
+
+
+## 字符串String/&str
+
+* 遍历
+
+```rust
+for ch in s.chars() {
+    println!("{}", ch);
 }
 
-fn main() {
-    // 定长数组（类型标记是多余的）
-    let xs: [i32; 5] = [1, 2, 3, 4, 5];
-    // 所有元素可以初始化成相同的值
-    let ys: [i32; 500] = [0; 500];
-    // 下标从 0 开始
-    println!("first element of the array: {}", xs[0]);
-
-    // `len` 返回数组的大小
-    println!("array size: {}", xs.len());
-    // 数组是在栈中分配的
-    println!("array occupies {} bytes", mem::size_of_val(&xs));
-
-    // 数组可以自动被借用成为 slice
-    println!("borrow the whole array as a slice");
-    analyze_slice(&xs);
-
-    // slice 可以指向数组的一部分
-    println!("borrow a section of the array as a slice");
-    analyze_slice(&ys[1 .. 4]);
-
-    // 越界的下标会引发致命错误（panic）
-    //println!("{}", xs[5]);
+for (i, ch) in s.chars().enumerate() {
+    println!("{} {}", i, ch);
 }
 
+// 遍历ASCLL字符串，性能最高
+for b in s.as_bytes() {
+    println!("{}", *b as char);
+}
+
+// 需要访问
+for i in 0..s.len(){
+
+}
 ```
 
 
 
-将vs中c++的环境添加到环境变量
+### 字符数组-Vec<char>
 
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\bin\Hostx64\x64
+* 初始化
 
+```rust
+let chars = vec!['a', 'b', 'c'];
 
+// String转化为Vec<char>
+let chars: Vec<char> = s.chars().collect();
+// 无法直接对String进行下标访问，需要先转化为定长字符数组
 
+// String转化为ASCII字符数组
+let bytes = s.as_bytes(); 
 
-
-
-
-
-
-'static 生命周期
-
-1. 字符串字面值就具有 'static 生命周期
-   函数参数类型：&'static str ，传入参数类型&str
-2. 特征对象的生命周期
-
-
-
-```
-assert_eq!(a, b);
+// vec转化为String
+let str = result.into_iter().collect();
 ```
 
-基本类型已经实现了`Debug` trait和Display trait所以可以直接使用{:?} {}
+
+
+* 遍历
+
+```rust
+for ch in &chars {
+    println!("{}", ch);
+}
+
+//需要索引
+for (i, ch) in chars.iter().enumerate() {
+    println!("{} {}", i, ch);
+}
+
+// 频繁下标访问
+for i in 0..chars.len() {
+    println!("{}", chars[i]);
+}
+```
+
+### 字符串操作
+
+* 去除空格，获取每个单词
+
+```rust
+for (idx, word) in s.split_whitespace().enumerate() {} //word的类型为&str
+
+// 如果不需要索引
+ for word in s.split_whitespace() {}
+
+// 收集到向量
+let words: Vec<&str> = s.split_whitespace().collect(); 
+for (idx, word) in words.iter().enumerate() {} //word 的类型为&&str，需要*解引用访问
+```
+
+
+
+### 字符操作
+
+* 转化为字面量（ASCLL）
+  `b'A'`
+  `'A' as u8`
+* 字面量转化为字符
+  `s[i] as char`
+
+* 将字符串去除标点并转化为小写
+
+对&str和String的操作相同，操作String会自动解引用
+
+is_ascii_punctuation 判断是否属于 ASCII 标点
+is_alphanumeric 判断是否为字母或数字
+
+法一性能更好，虽然理论上法二只产生一个新的String，但是多出了很多迭代器并且频繁push，并且rust内部优化很好
+
+```rust
+// 法一
+let str = input.to_lowercase().chars().filter(|c| c.is_alphanumeric()).collect();
+// to_lowercase 产生新 String
+// collect 产生新 String
+
+// 法二
+fn normalize(input: &str) -> String {
+    let mut out = String::with_capacity(input.len()); //申请一段堆内存
+
+    for c in input.chars().flat_map(|c| c.to_lowercase()) {
+        if c.is_alphanumeric() {
+            out.push(c);
+        }
+    }
+
+    out
+}
+```
+
+## 哈希表
+
+### 初始化
+
+`use std::collections::HashMap;`
+
+```rust
+// 初始化一个空的map
+let mut map: HashMap<u8, &str> = HashMap::new();
+
+// 直接初始化
+let roman = HashMap::from([
+    (b'I', 1),
+    (b'V', 5),
+    (b'X', 10),
+    (b'L', 50),
+    (b'C', 100),
+    (b'D', 500),
+    (b'M', 1000),
+]);
+// 访问
+let p = b'I';
+let x = roman[&p];
+
+// use rustc_hash::FxHashMap;
+let roman: FxHashMap<u8, i32> = FxHashMap::from_iter([
+    (b'I', 1),
+    (b'V', 5),
+    (b'X', 10),
+    (b'L', 50),
+    (b'C', 100),
+    (b'D', 500),
+    (b'M', 1000),
+]);
+
+if let Some(&x) = roman.get(&b'X') {
+    println!("{x}");
+} else {
+    eprintln!("Roman numeral 'X' not found");
+}
+
+let x = *roman.get(&b'X').ok_or_else(|| anyhow!("Roman numeral 'X' not found"))?;
+```
+
+### 操作
+
+```rust
+// 访问-注意访问不到可能unwrap
+let x = roman[&p];
+
+if let Some(&x) = roman.get(&b'X') {
+    println!("{x}");
+} else {
+    eprintln!("Roman numeral 'X' not found");
+}
+
+// 查看某个key是否存在
+if map.contains_key(&pat[idx]) {}
+
+//判断某个value是否存在
+if !map.values().any(|&v| v == *word) { 
+    map.insert(pat[idx],word);
+}
+```
 
 
 
@@ -588,6 +750,8 @@ mv ~/.cargo/config ~/.cargo/config.toml
 
 # 多项目-creat管理
 
+cargo new my_lib --lib
+
 方法一
 
 ```
@@ -635,3 +799,110 @@ members = [
 embedding-lib = { path = "../embedding-lib" }
 ```
 
+
+
+## impl
+
+给类型添加方法
+
+可以应用于struct，enum，泛型类型
+
+* 使用
+
+```rust
+struct User {
+    name: String,
+    age: u32,
+}
+
+impl User {
+    // 函数参数不带self
+    fn new(name: String, age: u32) -> Self {
+        Self { name, age }
+    }
+	// 只读借用
+    fn greet(&self) {
+        println!("hello {}", self.name);
+    }
+    // 修改自身
+    fn birthday(&mut self) {
+        self.age += 1;
+    }
+    // 获得所有权
+    fn consume(self) {
+        println!("{}", self.name);
+    }
+}
+
+let mut user = User::new("Tom".to_string(), 18);
+
+user.greet();
+
+// 应用于泛型类型
+struct Boxed<T> {
+    value: T,
+}
+
+impl<T> Boxed<T> {
+    fn get(&self) -> &T {
+        &self.value
+    }
+}
+```
+
+
+
+## trait 
+
+类似class，但更关心具体做什么
+
+让不同类型共享同一套行为接口
+
+* 定义trait 
+
+```rust
+trait Speak {
+    fn speak(&self);
+}
+```
+
+* 为类型实现 trait
+
+```rust
+struct Dog;
+
+impl Speak for Dog {
+    fn speak(&self) {
+        println!("woof");
+    }
+}
+
+struct Cat;
+
+impl Speak for Cat {
+    fn speak(&self) {
+        println!("meow");
+    }
+}
+```
+
+* use
+
+```rust
+// 直接使用
+let d = Dog;
+d.speak();
+
+// 作为函数参数，代表不同的类型有不同的行为-动态写法
+fn make_speak(item: &impl Speak) {
+    item.speak();
+}
+// trait bound（约束）
+let d = Dog;
+make_speak(&d);
+
+// 泛型写法-编译时确定类型，性能高
+fn make_speak<T: Speak>(item: &T) {
+    item.speak();
+}
+```

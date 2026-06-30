@@ -177,3 +177,37 @@ system("pause");
 # vscode占用过大
 
 pkill -f vscode rm -rf ~/.vscode-server
+
+
+
+
+
+Ctrl + Shift + P → Open Keyboard Shortcuts (JSON)
+
+```
+[
+	{
+        "key": "alt+,",
+        "command": "editor.action.codeAction",
+        "args": {
+        "kind": "quickfix"
+        },
+        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+.",
+        "command": "editor.action.quickFix",
+        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+    }
+]
+```
+
+  {
+
+​    "key": "alt+.",
+
+​    "command": "editor.action.quickFix",
+
+​    "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+
+  }

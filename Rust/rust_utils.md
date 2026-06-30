@@ -1,13 +1,15 @@
 
 
-# Mysql
+# Rust使用示例
+
+## Mysql
 
 ```toml
 anyhow = "1.0"
 sqlx = { version = "0.7", features = ["mysql", "runtime-tokio-native-tls", "chrono", "rust_decimal"] }
 ```
 
-## Mysql 连接池
+### Mysql 连接池
 
 ```rust
 use anyhow::Result;
@@ -54,20 +56,17 @@ pub async fn create_mysql_pool(
 }
 ```
 
-## 一次性连接
+### 一次性连接
+
+使用场景
+- CLI工具
+- 一次性脚本
+- 事务
+> 不要在 Web / 长期运行服务中使用
 
 ```rust
 use sqlx::{Connection, MySqlConnection};
 
-/// 创建一次性 MySQL 连接
-///
-/// # 使用场景
-/// - CLI 工具
-/// - 一次性脚本
-/// - 事务
-///
-/// # 注意
-/// - 不要在 Web / 长期运行服务中使用
 pub async fn create_mysql_connection(mysql_url: &str) -> Result<MySqlConnection> {
     let mut conn = MySqlConnection::connect(mysql_url).await?;
 
@@ -80,7 +79,7 @@ pub async fn create_mysql_connection(mysql_url: &str) -> Result<MySqlConnection>
 }
 ```
 
-## 使用
+### 使用
 
 #### create_mysql_pool
 
@@ -124,11 +123,12 @@ pub async fn mysql_pool() -> &'static Pool<MySql> {
 ```
 
 #### create_mysql_connection
+
 适合CLI，脚本等
 适合事务使用
 使用std::thread
 
-# PG
+## PG
 
 ```toml
 [postgres]
@@ -192,9 +192,7 @@ pub async fn create_postgres_pool(pg_config: &PostgresConfig) -> Result<Pool<Pos
 
 ```
 
-
-
-# Redis
+## Redis
 
 返回redis连接池，封装队列的操作方法，并且一般只有长服务呀，异步，并发，web等才使用并且也是需要redis_pool的场景所以就不提供获取单连接的方法了
 
@@ -339,7 +337,7 @@ impl QueueRepo {
 }
 ```
 
-# Ftlog
+## Ftlog
 
 ```toml
 ftlog = "0.2.12"
@@ -392,9 +390,9 @@ logger().flush();
 thread::sleep(std::time::Duration::from_secs(3));
 ```
 
-# 全局消息实现
+## 全局消息实现
 
-## 多线程版本
+### 多线程版本
 
 ```toml
 once_cell = "1.19"
@@ -440,7 +438,7 @@ pub fn len() -> usize {
 
 ```
 
-## 单文件使用
+### 单文件使用
 
 thread_local：一个“只能通过共享引用 &T 访问”的线程本地静态变量
 
@@ -486,7 +484,7 @@ pub fn len() -> usize {
 
 ```
 
-## 使用
+### 使用
 
 两者使用相同
 
@@ -499,7 +497,7 @@ println!("{}", get_message());
 clear_message();
 ```
 
-# 项目依赖检查
+## 项目依赖检查
 
 ```shell
 # 下载 cargo-udeps
@@ -511,7 +509,7 @@ cargo +nightly udeps
 cargo +nightly udeps --workspace --all-targets
 ```
 
-# Tokio Runtime Handle
+## Tokio Runtime Handle
 
 全局Tokio Runtime Handle应用场景：
 
@@ -598,5 +596,118 @@ where
 {
     Ok(get_runtime_handle()?.spawn(future))
 }
+```
+
+## 自定义线程池
+
+```
+# 阻塞队列
+crossbeam = "0.8.0"
+```
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Arc, Mutex};
+
+trait FnBox {
+    fn call_box(self: Box<Self>);
+}
+
+impl<F: FnOnce()> FnBox for F {
+    fn call_box(self: Box<F>) {
+        (*self)()
+    }
+}
+
+type Thunk<'a> = Box<dyn FnBox + Send + 'a>;
+
+pub struct ThreadPool {
+    sender: crossbeam::channel::Sender<Thunk<'static>>,
+    active_count: Arc<AtomicUsize>,
+    size: usize,
+}
+impl ThreadPool {
+    pub fn new(size: usize, name: &str) -> ThreadPool {
+        let active_count = Arc::new(AtomicUsize::new(0));
+        let (sender, receiver) = crossbeam::channel::unbounded::<Thunk<'static>>();
+        for i in 1..=size {
+            let receiver = receiver.clone();
+            let active_count = active_count.clone();
+            std::thread::Builder::new()
+                .name(format!("threadpool-{}-{}", name, i))
+                .spawn(move || {
+                    while let Ok(f) = receiver.recv() {
+                        active_count.fetch_add(1, Ordering::SeqCst);
+                        f.call_box();
+                        active_count.fetch_sub(1, Ordering::SeqCst);
+                    }
+                })
+                .unwrap();
+        }
+        ThreadPool {
+            sender,
+            active_count,
+            size,
+        }
+    }
+
+    pub fn execute<F>(&self, job: F)
+        where
+            F: FnOnce() + Send + 'static,
+    {
+        self.sender
+            .send(Box::new(job))
+            .unwrap()
+    }
+
+    pub fn active_count(&self) -> usize {
+        self.active_count.load(Ordering::SeqCst)
+    }
+
+    pub fn queued_count(&self) -> usize {
+        self.sender.len()
+    }
+
+    pub fn max_count(&self) -> usize {
+        self.size
+    }
+
+    pub fn join(&self) {
+        loop {
+            if self.sender.is_empty() {
+                break;
+            }
+            std::thread::sleep(std::time::Duration::from_millis(50))
+        }
+    }
+}
+impl Clone for ThreadPool {
+    fn clone(&self) -> Self {
+        ThreadPool {
+            sender: self.sender.clone(),
+            active_count: Arc::clone(&self.active_count),
+            size: self.size
+        }
+    }
+}
+```
+
+使用
+
+```rust
+use alpha_common::threadpool::ThreadPool;
+
+static THREAD_POOL: Lazy<ThreadPool> = Lazy::new(|| ThreadPool::new(10, "core"));
+
+pub fn pool() -> &'static ThreadPool {
+    &THREAD_POOL
+}
+
+pub fn do_something() {
+  alpha_service::online::utils::core::pool().execute(move|| {
+    let _ = builder.create();
+  });
+}
+
 ```
 

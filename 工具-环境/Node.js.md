@@ -1,6 +1,6 @@
-# 下载
+## 下载
 
-## Mac/Linux
+### Mac/Linux
 
 ```shell
 #使用镜像源安装 nvm
@@ -18,7 +18,7 @@ export NVM_DIR="$HOME/.nvm"
 source ~/.zshrc
 ```
 
-## windows
+### windows
 
 ```shell
 https://github.com/coreybutler/nvm-windows/releases
@@ -33,3 +33,8 @@ node -v
 npm -v
 ```
 
+## 项目构建
+
+pnpm create vite my-react-app --template react-ts
+
+pnpm create next-app my-next-app
